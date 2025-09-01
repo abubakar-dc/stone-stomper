@@ -1,0 +1,50 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "basethemepack/render-php",
+	"version": "0.1.0",
+	"title": "Render PHP",
+	"category": "theme-blocks",
+	"description": " ",
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"heading": {
+			"type": "string",
+			"default": ""
+		},
+		"description": {
+			"type": "string",
+			"default": ""
+		},
+		"preview": {
+			"type": "boolean",
+			"default": false
+		},
+		"elevateIds": {
+			"type": "array",
+			"default": []
+		},
+		"stayIds": {
+			"type": "array",
+			"default": []
+		},
+		"linkData": {
+			"type": "object",
+			"default": {
+				"url": "",
+				"title": "",
+				"target": false
+			}
+		}
+	},
+	"example": {
+		"attributes": {
+			"preview": true
+		}
+	},
+	"textdomain": "basetheme_td",
+	"editorScript": "file:./block-render-php.js",
+	"render": "file:./render.php"
+}

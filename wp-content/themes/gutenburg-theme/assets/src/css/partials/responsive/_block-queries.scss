@@ -1,0 +1,77 @@
+@media only screen and (min-width: 1180px) and (max-width: 1345px) {
+	// code will be starts from here
+}
+
+@media only screen and (min-width: 1004px) and (max-width: 1179px) {
+	// code will be starts from here
+}
+
+@media only screen and (max-width: 1003px) {
+	// code will be starts from here
+}
+
+@media only screen and (min-width: 748px) and (max-width: 1003px) {
+	// code will be starts from here
+}
+
+@media only screen and (max-width: 747px) {
+	.hero-default {
+		&.with-image {
+
+			.hero-default-content,
+			.hero-default-image {
+				width: 100%;
+			}
+		}
+
+	}
+
+	// at block
+	.iat-image.column {
+		margin-top: 30px;
+	}
+
+	// lists
+	ul.children,
+	ol.children {
+
+		li {
+
+			&.depth-2,
+			&.depth-3,
+			&.depth-4,
+			&.depth-5 {
+				margin: 0 0 30px 20px !important;
+			}
+		}
+	}
+
+	// forms styling
+	.gfield.half-input-field,
+	.ginput_left,
+	.name_first,
+	.ginput_right,
+	.name_last {
+		width: 100%;
+		margin-right: 0;
+		display: block;
+	}
+
+	// Wp Table Block
+	figure {
+		overflow-x: scroll;
+
+		td,
+		th {
+			width: 140px;
+		}
+	}
+}
+
+@media only screen and (min-width: 460px) and (max-width: 747px) {
+	// code will be starts from here
+}
+
+@media only screen and (max-width: 459px) {
+	// code will be starts from here
+}

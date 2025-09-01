@@ -1,0 +1,87 @@
+/* -------------------------------------------------
+>> Project Styles
+---------------------------------------------------
+>> Edit these styles as required
+------------------------------------------------- */
+
+.hs-form {
+	text-align: left;
+
+	fieldset {
+		margin: 0;
+	}
+
+	ul {
+		margin: 0;
+		padding: 0;
+		list-style-type: none;
+
+		li {
+			margin: 0;
+			padding-left: 0;
+
+			label {
+				margin: 0;
+			}
+
+			&::before {
+				display: none;
+			}
+		}
+	}
+
+	ul.hs-error-msgs {
+		li {
+			padding-left: 0;
+			color: var(--gb_hubspot_error_label_color);
+			font-size: var(--gb_font_size_16);
+			margin: 0;
+		}
+	}
+
+	.error {
+		text-align: left;
+	}
+
+	.hs-fieldtype-checkbox,
+	.hs-fieldtype-booleancheckbox,
+	.hs-fieldtype-radio {
+		ul.hs-error-msgs {
+			li {
+				margin: -6px 0 8px;
+			}
+		}
+	}
+
+	.hs_error_rollup {
+		ul {
+			li {
+				background-color: var(--gb_valiation_error_bg_color);
+				margin: 10px 0 30px;
+				padding: 7px 14px;
+				font-weight: 700;
+				font-size: 105%;
+			}
+		}
+	}
+
+	.hs-form-required {
+		color: var(--gb_hubspot_required_color);
+	}
+}
+
+.hs-form-field {
+	position: relative;
+}
+
+.form-columns-2 {
+	.hs-form-field {
+		display: inline-block;
+		width: 49%;
+		margin-right: calc(2% - 5px);
+
+		&:nth-child(2n + 2) {
+			margin-right: 0;
+		}
+	}
+}

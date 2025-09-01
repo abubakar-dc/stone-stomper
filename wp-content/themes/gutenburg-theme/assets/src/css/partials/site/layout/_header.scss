@@ -1,0 +1,152 @@
+.slide-thumb img,
+.burger-single,
+.post-tags,
+.post-content-des p,
+.post-meta,
+.search-button,
+.single-blog-post,
+.wpcf7-submit,
+a,
+a:visited,
+button,
+input[type="submit"],
+.home-hero,
+header {
+	@include transition(all, 0.3s, ease-in-out);
+}
+
+.top-bar {
+	padding: 10px 0;
+	background-color: var(--gb_topbar_bgcolor);
+	color: var(--gb_topbar_color);
+	transition: all 0.4s ease-in-out;
+}
+
+.top-bar-text {
+	font-size: var(--gb_font_size_16);
+	padding: 0 20px 0 0;
+
+	&:focus-visible {
+		outline-color: var(--gb_white) !important;
+	}
+
+	a,
+	a:visited {
+		font-size: var(--gb_font_size_16);
+		color: var(--gb_topbar_color);
+		display: inline-block;
+
+		&:focus-visible {
+			outline-color: var(--gb_white) !important;
+		}
+
+		&::after {
+			content: "";
+			position: absolute;
+			width: 100%;
+			height: 1px;
+			bottom: 0px;
+			left: 0;
+			background-color: var(--gb_white);
+			transition: all 0.3s ease-in-out;
+		}
+
+		&:hover,
+		&:focus-visible {
+			&::after {
+				opacity: 0.8;
+			}
+		}
+	}
+}
+
+.top-bar-cross {
+	position: absolute;
+	top: 14px;
+	right: 20px;
+	line-height: 0.65;
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
+
+	&:hover,
+	&:focus-visible {
+		transform: scale(1.1);
+	}
+
+	&:focus-visible {
+		outline-color: var(--gb_white) !important;
+	}
+
+	img {
+		width: 14px;
+		filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(220deg) brightness(102%) contrast(103%);
+	}
+}
+
+.nav-container {
+	display: flex;
+	align-items: center;
+	margin-top: 8px;
+}
+
+.header-logo a {
+	display: inline-block;
+}
+
+.no-overflow {
+	overflow: hidden;
+}
+
+.logo {
+	position: relative;
+	z-index: 9;
+	line-height: 0;
+	width: 230px;
+	transition: all 0.2s ease-in-out;
+}
+
+.header-inner {
+	padding: 20px 0;
+	box-sizing: border-box;
+
+	@include transition(all, 0.3s, ease-in-out);
+}
+
+.header-section {
+	background-color: var(--gb_header_bgcolor);
+	z-index: 9;
+	width: 100%;
+	position: fixed;
+	transition: all 0.3s ease-in-out;
+	top: var(--gb_header-top-default);
+
+	&.shrink {
+		background-color: var(--gb_header_bgcolor_sticky);
+		box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.05);
+	}
+}
+
+.header-wrapper {
+	box-sizing: border-box;
+	width: 90%;
+	max-width: 1300px;
+	margin: 0 auto;
+}
+
+.header-btns {
+	margin-top: 0;
+	z-index: 1;
+	display: flex;
+	align-items: center;
+}
+
+
+.hide-topbar {
+	header {
+		top: var(--gb_header-top);
+	}
+}
+
+.desktop-hide {
+	display: none;
+}

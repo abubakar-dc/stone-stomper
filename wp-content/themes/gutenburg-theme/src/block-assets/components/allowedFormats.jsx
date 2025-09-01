@@ -1,0 +1,28 @@
+const allowedFormats = [
+	'core/bold',
+	'core/italic',
+	'core/underline',
+	'core/strikethrough',
+	'core/code',
+	'core/link',
+	'core/subscript',
+	'core/superscript',
+	'core/text-color',
+	'core/background-color',
+	'core/font-size',
+	'core/heading',
+	'core/image',
+	'core/gallery',
+	'core/quote',
+	'core/audio',
+	'core/video',
+	'core/table',
+	'core/verse',
+	'core/list',
+	'core/indent',
+	'core/outdent',
+	'core/code-block',
+	'core/custom',
+];
+
+export default allowedFormats;

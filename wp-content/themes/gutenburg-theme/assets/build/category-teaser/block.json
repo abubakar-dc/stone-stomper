@@ -1,0 +1,35 @@
+{
+  "$schema": "https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json",
+  "apiVersion": 3,
+  "name": "stayeditspack/category-teaser",
+  "version": "1.0.0",
+  "title": "Category Teaser",
+  "category": "theme-blocks",
+  "icon": "align-center",
+  "description": "",
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "preview": {
+      "type": "boolean",
+      "default": false
+    },
+    "postIds": {
+      "type": "array",
+      "default": []
+    }
+  },
+  "example": {
+    "attributes": {
+      "preview": true
+    }
+  },
+  "textdomain": "stayedits_td",
+  "editorScript": "file:./block-category-teaser.js",
+  "render": "file:./block-category-teaser.php"
+}

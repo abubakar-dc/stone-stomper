@@ -1,0 +1,29 @@
+.image-box {
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	height: 100%;
+
+	.components-button {
+		margin: 0 0 0 20px;
+		border-radius: 8px;
+		z-index: 9999;
+	}
+
+	.open-btn {
+		background-color: #69d169;
+		svg {
+			color: white;
+		}
+	}
+
+	.delete-btn,
+	.delete-btn-video,
+	.is-destructive {
+		background-color: red !important;
+		height: 36px !important;
+		svg {
+			color: white !important;
+		}
+	}
+}

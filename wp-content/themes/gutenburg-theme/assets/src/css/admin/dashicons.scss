@@ -1,0 +1,28 @@
+@font-face {
+	font-family: "flaticon_basetheme";
+	src: url("../fonts/flaticon.woff2") format("woff2");
+}
+
+.dashicons:not(.dashicons-edit, .dashicons-welcome-view-site) {
+	font-family: "flaticon_basetheme" !important;
+}
+
+.dashicons-faqs:before {
+	content: "\f101";
+}
+
+.dashicons-iat:before {
+	content: "\f102";
+}
+
+.dashicons-jumplink:before {
+	content: "\f103";
+}
+
+.dashicons-smiley:before {
+	content: "\f104";
+}
+
+.dashicons-container:before {
+	content: "\f105";
+}

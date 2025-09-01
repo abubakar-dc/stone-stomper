@@ -1,0 +1,216 @@
+.team-members {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: stretch;
+}
+
+.single-member {
+	position: relative;
+	margin-bottom: 40px;
+
+	.t-detail {
+		margin-top: 20px;
+	}
+
+	.sm-inner {
+		display: inline-block;
+		box-sizing: border-box;
+		width: 100%;
+		height: 100%;
+		border-bottom: none;
+		position: relative;
+	}
+
+	.member-image {
+
+		@include background-image("/admin/defaults/default-image.webp", center, cover, no-repeat, 310px, 100%);
+	}
+
+	.member-name {
+
+		@include font(axi, bold);
+		margin-bottom: 8px;
+	}
+
+	.designation {
+
+		@include font(axi, reg);
+
+		font-size: var(--gb_font_size_18);
+		margin-bottom: 0;
+	}
+}
+
+.black-container {
+
+	* {
+		color: var(--gb_white);
+	}
+}
+
+.section-team-variation {
+	max-width: 1064px;
+	margin: 0 auto;
+}
+
+.single-member-detail {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	column-gap: 2%;
+	justify-content: space-between;
+	padding: 16px 0 21px;
+	color: var(--wp--preset--color--black80);
+	border-bottom: 1px solid var(--wp--preset--color--regular_text);
+
+	&:first-child {
+		border-top: 1px solid var(--wp--preset--color--regular_text);
+	}
+
+	h6 {
+		letter-spacing: -0.15px;
+		color: var(--wp--preset--color--black80);
+	}
+
+	h6,
+	p {
+		margin-bottom: 0;
+	}
+
+	.name {
+		flex: 4;
+	}
+
+	.description {
+		flex: 5;
+	}
+
+	.title {
+		flex: 2;
+	}
+}
+
+.team-detail {
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	max-width: 639px;
+	max-height: 70vh;
+	width: 100%;
+	transition: all 0.5s ease-in-out;
+	display: inline-block;
+	margin: 0 auto;
+	position: relative;
+	overflow: hidden;
+
+	.team-detail-inner {
+		padding-right: 6px;
+		height: 100%;
+		overflow: auto;
+
+		&::-webkit-scrollbar {
+			display: none;
+		}
+
+		&.scroll {
+			padding-right: 0;
+
+			&::-webkit-scrollbar {
+				display: block;
+			}
+		}
+	}
+
+	.mfp-close {
+		position: absolute;
+		top: 7px;
+		right: 5px;
+		width: 16px;
+		height: 16px;
+		transition: all 200ms;
+		background-position: top right;
+		background-repeat: no-repeat;
+		background-size: contain;
+
+		&:hover,
+		&:focus-visible {
+			background-color: transparent;
+			cursor: pointer;
+		}
+	}
+}
+
+.team-detail-inner::-webkit-scrollbar {
+	width: 6px;
+	height: 100%;
+}
+
+.team-detail-inner::-webkit-scrollbar-track {
+	background-color: var(--wp--preset--color--regular_text);
+}
+
+.team-detail-inner::-webkit-scrollbar-thumb {
+	background: var(--gb_yellow);
+}
+
+.single-team {
+	text-align: left;
+
+	.single-team-head {
+		background-color: var(--wp--preset--color--mgray);
+		position: relative;
+		padding-right: 35px;
+	}
+
+	.member-image-popup {
+		width: 30%;
+		height: 185px;
+	}
+
+	.member-detail-popup {
+		width: 64%;
+	}
+
+	.member-name-popup {
+
+		@include font(axi, bold);
+
+		color: var(--wp--preset--color--dark_text);
+		margin-bottom: 5px;
+	}
+
+	.member-designation {
+
+		@include font(axi, reg);
+
+		color: var(--wp--preset--color--lblack);
+		margin-bottom: 0;
+		font-size: var(--gb_font_size_16);
+		letter-spacing: -0.6px;
+	}
+
+	.single-team-content * {
+		color: black !important;
+	}
+
+	.single-team-content {
+		overflow: auto;
+		background-color: var(--gb_white);
+		padding: 41px 60px 50px 50px;
+		font-size: var(--gb_font_size_18);
+		line-height: 1.65;
+
+		p {
+			margin-bottom: 0;
+		}
+	}
+}
+
+
+.mfp-content {
+	text-align: center;
+}
+
+.mfp-wrap {
+	z-index: 999999 !important;
+}

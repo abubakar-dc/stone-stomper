@@ -1,0 +1,163 @@
+@use "sass:math";
+
+
+/*
+Rem output with px fallback with !important
+*/
+@mixin font-size-imp($sizeValue: 1) {
+	font-size: ($sizeValue * 10) * 1px !important;
+	font-size: $sizeValue * 10px !important;
+}
+
+/*
+Column width with margin
+*/
+
+
+/*
+Column width with margin
+*/
+@mixin fluidColumns($numberColumns, $minWidth, $gap, $rowGap: 0) {
+	$noOfColumns: 100% / $numberColumns;
+	$minWidthCalc: min(clamp($minWidth, #{$noOfColumns} - #{$gap}, 100%), 100%);
+
+	grid-template-columns: repeat(auto-fit, minmax($minWidthCalc, 1fr));
+
+	@if $rowGap !=0 {
+		row-gap: $rowGap;
+		column-gap: $gap;
+	}
+
+	@else {
+		gap: $gap;
+	}
+}
+
+@mixin column($numberColumns, $gap) {
+	width: math.div(100%, $numberColumns) - math.div(($gap * ($numberColumns - 1)), $numberColumns);
+	margin-right: $gap;
+
+
+	@if $numberColumns ==2 {
+
+		&:nth-child(even) {
+			margin-right: 0;
+		}
+	}
+
+	@else {
+		&:nth-child(#{$numberColumns}n + #{$numberColumns}) {
+			margin-right: 0;
+		}
+	}
+}
+
+/*
+Mixin for transition
+*/
+@mixin transition($property, $duration, $animation) {
+	transition: $property $duration $animation;
+}
+
+@mixin background-image($image, $background_position, $background_size, $background_repeat, $background_height, $background_width) {
+
+	@if $image !="" {
+		background-image: url("../images/#{$image}");
+	}
+
+	background-repeat: $background_repeat;
+	background-position: $background_position;
+	background-size: $background_size;
+	height: $background_height;
+	width: $background_width;
+}
+
+
+// PX to Rem
+
+@mixin font-size($value) {
+	$baseFontSize: 16; // Set your base font size here
+	$remValue: math.div($value , $baseFontSize);
+
+	font-size: #{$remValue}rem;
+}
+
+@mixin responsive($minBreakpoint: null, $maxBreakpoint: null) {
+
+
+	@if $minBreakpoint !=null and $maxBreakpoint !=null {
+		@media (min-width: $minBreakpoint) and (max-width: $maxBreakpoint) {
+			@content;
+		}
+	}
+
+	@else if $maxBreakpoint ==null {
+		@media (min-width: $minBreakpoint) {
+			@content;
+		}
+	}
+
+	@else if $minBreakpoint ==null {
+		@media (max-width: $maxBreakpoint) {
+			@content;
+		}
+	}
+}
+
+
+@mixin font_size($var-name, $max-font-size, $min-font-size, $min-vw: 474, $max-vw: 1280) {
+
+	#{$var-name}: clamp(calc(#{$min-font-size} * 1px),
+		calc(calc(#{$max-font-size - $min-font-size} / #{$max-vw - $min-vw}) * (100vw - calc(#{$min-vw} * 1px)) + calc(#{$min-font-size} * 1px)),
+		calc(#{$max-font-size} * 1px));
+}
+
+@mixin spacing($var-name, $max-space, $min-space, $min-vw: 474, $max-vw: 1280) {
+
+	#{$var-name}: clamp(calc(#{$min-space} * 1px),
+		calc(calc(#{$max-space - $min-space} / #{$max-vw - $min-vw}) * (100vw - calc(#{$min-vw} * 1px)) + calc(#{$min-space} * 1px)),
+		calc(#{$max-space} * 1px));
+}
+
+
+// @mixin calculate-font-size($min-font-size, $max-font-size, $min-vw, $max-vw) {
+// 	/* Calculate the slope (rise over run) */
+// 	--slope: calc(#{$max-font-size - $min-font-size} / #{$max-vw - $min-vw});
+
+// 	/* Convert min values to pixels */
+// 	--min-vw-px: calc(#{$min-vw} * 1px);
+// 	--min-font-size-px: calc(#{$min-font-size} * 1px);
+
+// 	/* Convert max font size to pixels */
+// 	--max-font-size-px: calc(#{$max-font-size} * 1px);
+
+// 	/* Calculate the fluid font size */
+// 	--fluid-font-size-px: calc(var(--slope) * (100vw - var(--min-vw-px)) + var(--min-font-size-px));
+// }
+
+// @mixin font_size($var-name, $min-font-size, $max-font-size, $min-vw: 474, $max-vw: 1280) {
+// 	/* Run the core calculation mixin */
+// 	@include calculate-font-size($min-font-size, $max-font-size, $min-vw, $max-vw);
+
+// 	/* Assign the calculated fluid font size to the specified CSS variable */
+// 	#{$var-name}: clamp(var(--min-font-size-px),
+// 			var(--fluid-font-size-px),
+// 			var(--max-font-size-px));
+// }
+
+// @mixin spacing($var-name, $max-space, $min-space, $min-vw: 474, $max-vw: 1280) {
+
+// 	--slope: calc(#{$max-space - $min-space} / #{$max-vw - $min-vw});
+
+// 	// Getting Sizes in PX
+// 	--min-vw-px: calc(#{$min-vw} * 1px);
+// 	--max-space-px: calc(#{$max-space} * 1px);
+// 	--min-space-px: calc(#{$min-space} * 1px);
+
+// 	/* Calculating fluid font sizes */
+// 	--fluid-space-px: calc(var(--slope) * (100vw - var(--min-vw-px)) + var(--min-space-px));
+
+// 	#{$var-name}: clamp(var(--min-space-px),
+// 			var(--fluid-space-px),
+// 			var(--max-space-px));
+// }

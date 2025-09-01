@@ -1,0 +1,361 @@
+:root {
+
+	/*-------------------------------------------------
+	>> Variables for Spaces
+	-------------------------------------------------*/
+	@include spacing(--gb_space_2, 2, 2);
+	@include spacing(--gb_space_4, 4, 4);
+	@include spacing(--gb_space_6, 6, 6);
+	@include spacing(--gb_space_8, 8, 8);
+	@include spacing(--gb_space_12, 12, 10);
+	@include spacing(--gb_space_16, 16, 12);
+	@include spacing(--gb_space_20, 20, 16);
+	@include spacing(--gb_space_24, 24, 20);
+	@include spacing(--gb_space_30, 30, 24);
+	@include spacing(--gb_space_36, 36, 30);
+	@include spacing(--gb_space_48, 48, 36);
+	@include spacing(--gb_space_72, 72, 44);
+	@include spacing(--gb_space_96, 96, 52);
+	@include spacing(--gb_space_128, 128, 64);
+	@include spacing(--gb_space_156, 156, 72);
+	@include spacing(--gb_space_200, 200, 84);
+	@include spacing(--gb_space_236, 236, 98);
+
+	/* -------------------------------------------------
+	>> Variables for Font Sizes
+	------------------------------------------------- */
+
+	@include font_size(--gb_font_size_12, 12, 11);
+	@include font_size(--gb_font_size_14, 14, 13);
+	@include font_size(--gb_font_size_16, 16, 15);
+	@include font_size(--gb_font_size_18, 18, 17);
+	@include font_size(--gb_font_size_20, 20, 18);
+	@include font_size(--gb_font_size_22, 22, 20);
+	@include font_size(--gb_font_size_24, 24, 20);
+	@include font_size(--gb_font_size_26, 26, 22);
+	@include font_size(--gb_font_size_32, 32, 24);
+	@include font_size(--gb_font_size_40, 40, 26);
+	@include font_size(--gb_font_size_48, 48, 30);
+	@include font_size(--gb_font_size_60, 60, 45);
+	@include font_size(--gb_font_size_68, 68, 55);
+
+
+	/* -------------------------------------------------
+	>> Color variables
+	------------------------------------------------- */
+
+	/*
+	>> Base Colors
+	*/
+
+	// Theme Primary
+	--gb_color_primary: #00a4eb;
+	--gb_color_on_primary: #ffffff;
+
+	// Theme Secondary
+	--gb_color_secondary: #0013ff;
+
+	// Theme Dark
+	--gb_black: #000000;
+	--gb_black_1: #14191f;
+	--gb_black_2: #606364;
+
+	// Theme Light
+	--gb_white: #ffffff;
+	--gb_white_1: #f1f1f1;
+	--gb_white_2: #f1e9e9;
+
+	// Theme Colors
+	--gb_gray: #e0e0e0;
+	--gb_gray_1: #e6e6e6;
+	--gb_gray_2: #eee;
+
+	--gb_blue: #0013ff;
+	--gb_blue_1: #00a4eb;
+	--gb_blue_2: #2ca8dd;
+
+	--gb_navy: #091a17;
+	--gb_navy_1: #15332e;
+	--gb_navy_2: #2f655c;
+
+	--gb_red: #ff0000;
+	--gb_sea_green: #04c3b4;
+
+	--gb_transparent: transparent;
+
+	// Text Variations
+	--gb_regular_text: #14191f;
+	--gb_dark_text: #14191f;
+	--gb_white_text: #f7f7f7;
+	--gb_light_text: #606364;
+
+	// fixed variable Colors
+
+	--gb_success: #198754;
+	--gb_info: #0dcaf0;
+	--gb_warning: #ffc107;
+	--gb_danger: #dc3545;
+	--gb_light: #f8f9fa;
+	--gb_dark: #212529;
+
+
+	--gb_signal: #d14b3c;
+	--gb_signal_bg: #fbede9;
+
+
+	--gb_color_background: #ffffff;
+	--gb_color_on_background: #14191f;
+
+	// Borders
+	--gb_border: #30353c;
+	--gb_border_1: #545454;
+	--gb_border_2: #adadad;
+	--gb_border_3: #e0e0e0;
+	--gb_border_4: #14191f;
+
+
+	/* -------------------------------------------------
+	>> Base Colors
+	>> Base colors are used for essential elements
+	such as the logo, tables, links, blockquote,
+	default buttons styling and this should't conflict
+	with theme colors
+	------------------------------------------------- */
+
+	// text Colors
+	--gb_body_color: var(--gb_color_on_background);
+	--gb_body_bg: var(--gb_color_background);
+	--gb_text_strong: var(--gb_black);
+
+	--gb_dark_text: var(--gb_black);
+	--gb_white_text: var(--gb_white);
+
+	--gb_highlight_color: var(--gb_color_on_primary);
+	--gb_highlight_bg: var(--gb_color_primary);
+
+	--gb_caption: var(--gb_black_2);
+
+	// Headings
+
+	--gb_heading_color: inherit;
+	--gb_heading_link_color: var(--gb_dark_text);
+	--gb_heading_link_color_hover: var(--gb_dark_text);
+
+	// link colors
+	--gb_link_color: var(--gb_color_primary);
+	--gb_link_color_hover: var(--gb_color_primary);
+	--gb_link_border_color: var(--gb_color_primary);
+	--gb_link_border_color_hover: transparent;
+
+	// lists Colors
+	--gb_list_ul_marker_color: var(--gb_color_primary);
+	--gb_list_ol_marker_color: var(--gb_color_primary);
+	--gb_list_marker_bgcolor: var(--gb_border_4);
+
+
+	// Blockquote Colors
+	--gb_blockquote_color: var(--gb_regular_text);
+	--gb_blockquote_border_color: var(--gb_regular_text);
+	--gb_quote_color: var(--gb_regular_text);
+	--gb_blockqoute_cite_color: var(--gb_light_text);
+
+	// Tables Colors
+	--gb_table_border_color: var(--gb_border);
+	--gb_table_head_border_color: var(--gb_dark_text);
+	--gb_table_foot_border_color: var(--gb_dark_text);
+
+	// Formating
+	--gb_strong_color: var(--gb_regular_text);
+	--gb_underline_border_color: var(--gb_regular_text);
+	--gb_abbr_border_color: var(--gb_regular_text);
+	--gb_delete_color: var(--gb_danger);
+	--gb_insert_color: var(--gb_success);
+	--gb_insert_border_color: var(--gb_success);
+
+	// Code
+	--gb_code_color: var(--gb_white_text);
+	--gb_code_bgcolor: var(--gb_dark_text);
+	--gb_pre_color: var(--gb_white_text);
+	--gb_pre_bgcolor: var(--gb_dark_text);
+	--gb_mark_bgcolor: var(--gb_dark_text);
+	--gb_mark_color: var(--gb_white_text);
+
+	// Graphical elements
+	--gb_hr_color: var(--gb_border_2);
+
+	// Form Fields
+
+	--gb_input_color: var(--gb_regular_text);
+	--gb_input_bg: var(--gb_light_field_bg);
+	--gb_input_border_color: var(--gb_border);
+
+	--gb_input_focus_color: var(--gb_black);
+	--gb_input_focus_bgcolor: var(--gb_white);
+	--gb_input_focus_border_color: var(--gb_border_2);
+
+	--gb_disabled_input_bgcolor: var(--gb_field_bg);
+	--gb_disabled_input_border_color: var(--gb_border_1);
+
+	--gb_placeholder_color: var(--gb_light_text);
+	--gb_range_track_bgcolor: var(--gb_field_bg);
+	--gb_range_thumb_bgcolor: var(--gb_color_primary);
+	--gb_color_field_border_color: var(--gb_border);
+	--gb_color_field_bgcolor: var(--gb_field_bg);
+	--gb_radio_color: var(--gb_regular_text);
+	--gb_radio_border_color: var(--gb_border);
+	--gb_radio_bgcolor: var(--gb_field_bg);
+	--gb_radio_after_bgcolor: var(--gb_color_primary);
+	--gb_checkbox_color: var(--gb_regular_text);
+	--gb_checkbox_border_color: var(--gb_border);
+	--gb_checkbox_bgcolor: var(--gb_field_bg);
+	--gb_checkbox_after_bgcolor: var(--gb_color_primary);
+	--gb_progress_bgcolor: var(--gb_field_bg);
+	--gb_progress_value_bgcolor: var(--gb_color_primary);
+	--gb_meter_bgcolor: var(--gb_field_bg);
+	--gb_meter_value_bgcolor: var(--gb_color_primary);
+
+	// Button
+	--gb_button_color: var(--gb_white_text);
+	--gb_button_bgcolor: var(--gb_color_primary);
+	--gb_button_color_hover: var(--gb_dark_text);
+	--gb_button_bgcolor_hover: var(--gb_transparent);
+	--gb_button_border_color: var(--gb_color_primary);
+	--gb_button_border_color_hover: var(--gb_border);
+
+	--gb_reset_button_bgcolor: var(--gb_button_bgcolor);
+	--gb_reset_button_color: var(--gb_white_text);
+
+	// Buttons layer
+	--gb_theme_btn_color: var(--gb_button_color);
+	--gb_theme_btn_bgcolor: var(--gb_button_bgcolor);
+	--gb_theme_btn_color_hover: var(--gb_button_color_hover);
+	--gb_theme_btn_bgcolor_hover: var(--gb_button_bgcolor_hover);
+	--gb_theme_btn_border_color: var(--gb_button_border_color);
+	--gb_theme_btn_border_color_hover: var(--gb_button_border_color_hover);
+
+	// --gb_wp_btn_color: var(--gb_white_text);
+	// --gb_wp_btn_bgcolor: var(--gb_button_bg);
+
+	// --gb_wp_outline_btn_color: var(--gb_white_text);
+	// --gb_wp_outline_btn_border_color: var(--gb_dark_text);
+	// --gb_wp_outline_btn_bgcolor: var(--gb_dark_text);
+
+	// Date Picker
+	--gb_datepicker_bg_color: var(--gb_gray);
+	--gb_datepicker_select_bgcolor: var(--gb_white);
+	--gb_datepicker_link_color: var(--gb_color_secondary);
+	--gb_datepicker_link_active_color: var(--gb_color_primary);
+	--gb_datepicker_calendar: var(--gb_white_text);
+	--gb_datepicker_th_bgcolor: var(--gb_border_1);
+	--gb_datepicker_even_tr_td_bgcolor: var(--gb_border_1);
+	--gb_datepicker_border_color: var(--gb_border_1);
+	--gb_datepicker_date_color: var(--gb_dark_text);
+
+	// Errors & Confirmation
+	--gb_valiation_error_bg_color: var(--gb_danger_bg);
+	--gb_valiation_message_color: var(--gb_danger);
+	--gb_error_field_border_color: var(--gb_danger);
+	--gb_valiation_error_color: var(--gb_danger);
+	--gb_confirmation_message_bgcolor: var(--gb_success_bg);
+	--gb_confirmation_message_color: var(--gb_dark_text);
+	--gb_confirmation_message_border_color: var(--gb_danger);
+	--gb_required_text_color: var(--gb_danger);
+	--gb_invalid_error_border_color: var(--gb_danger);
+	--gb_hubspot_error_label_color: var(--gb_danger);
+	--gb_hubspot_required_color: var(--gb_danger);
+	--gb_fileupload_rule_color: var(--gb_light_text);
+	--gb_error_menu_color: var(--gb_dark_text);
+
+	// Accessibility
+	--gb_acc_btn_color: var(--gb_white_text);
+	--gb_acc_btn_bgcolor: var(--gb_button_bg);
+	--gb_acc_btn_shadow: var(--gb_danger);
+	--gb_acc_outline: var(--gb_black);
+
+	// Comments Box
+	--gb_comments_reply_btn_bgcolor: var(--gb_button_bg);
+	--gb_comments_reply_btn_color: var(--gb_white_text);
+	--gb_comments_reply_btn_bgcolor_hover: var(--gb_button_bg_hover);
+	--gb_comments_reply_btn_color_hover: var(--gb_white_text);
+	--gb_comment_meta_color: var(--gb_dark_text);
+	--gb_comment_metadata_color: var(--gb_light_text);
+	--gb_comments_list_border_color: var(--gb_border);
+	--gb_widget_comments_meta_color: var(--gb_light_text);
+
+	// Pagination
+	--gb_pagination_bgcolor: var(--gb_blue_1);
+	--gb_pagination_color: var(--gb_white);
+	--gb_pagination_color_hover: var(--gb_white);
+	--gb_pagination_bgcolor_hover: var(--gb_border_1);
+	--gb_pagination_bgcolor_current: var(--gb_border_1);
+	--gb_pagination_color_current: var(--gb_white);
+	--gb_pagination_first_bgcolor: var(--gb_border_1);
+	--gb_pagination_first_color: var(--gb_dark_text);
+	--gb_pagination_border: var(--gb_transparent);
+
+	// Widgets
+	--gb_widget_latest_post_meta_color: var(--gb_danger);
+	--gb_widget_rss_feed_meta_color: var(--gb_danger);
+	--gb_widget_search_button_color: var(--gb_pure_black);
+	--gb_wp_table_block_stripe_bg_color: var(--gb_gray);
+
+	// Breadcrumbs
+	--gb_breadcrumb_color: var(--gb_pure_black);
+	--gb_breadcrumb_link_color: var(--gb_pure_black);
+	--gb_breadcrumb_border_color: transparent;
+	--gb_breadcrumb_border_color_hover: var(--gb_pure_black);
+	--gb_breadcrumb_span_color: var(--gb_pure_black);
+
+	// Header
+	--gb_header_bgcolor: var(--gb_transparent);
+	--gb_header_color: var(--gb_black);
+	--gb_header_color_hover: var(--gb_black);
+	--gb_header_bgcolor_sticky: var(--gb_white);
+	--gb_header_nav_border_color: var(--gb_dark_text);
+
+	--gb_header_submenu_bgcolor: var(--gb_gray);
+	--gb_header_submenu_color: var(--gb_header_color);
+	--gb_header_submenu_color_hover: var(--gb_header_color_hover);
+
+	--gb_header_mobile_color: var(--gb_dark_text);
+	--gb_header_mobile_submenu_color: var(--gb_dark_text);
+
+	--gb_nav_overlay_bgcolor: var(--gb_white);
+	--gb_mobile_nav_icon_bgcolor: var(--gb_dark_text);
+	--gb_abbr_border: var(--gb_dark_text);
+
+	// Top Bar
+	--gb_topbar_bgcolor: var(--gb_color_primary);
+	--gb_topbar_color: var(--gb_white);
+	--gb_topbar_link_color: var(--gb_white);
+
+
+	// Footer
+	--gb_footer_bgcolor: var(--gb_dark_text);
+	--gb_footer_color: var(--gb_white_text);
+
+	--gb_footer_color_hover: var(--gb_white_text);
+
+	--gb_f_nav_color: var(--gb_footer_color);
+	--gb_f_nav_color_hover: var(--gb_footer_color_hover);
+	--gb_f_nav_border_color: var(--gb_footer_color);
+	--gb_f_nav_border_color_hover: var(--gb_footer_color_hover);
+
+	--gb_copyright_color: var(--gb_white_text);
+	--gb_legal_nav_color: var(--gb_white_text);
+	--gb_legal_nav_border_color: var(--gb_white_text);
+	--gb_legal_nav_border_color_hover: var(--gb_white_text);
+	--gb_legal_text_color: var(--gb_white_text);
+
+	// Containers
+	--gb_ctn_red: var(--gb_red);
+	--gb_ctn_black: var(--gb_black);
+	--gb_ctn_sea_green: var(--gb_sea_green);
+
+	// style variations
+
+	--gb_style_bg: #821212;
+	--gb_style_text: #000000;
+	--gb_style_link: #000000;
+	--gb_style_button: #00a4eb;
+}
