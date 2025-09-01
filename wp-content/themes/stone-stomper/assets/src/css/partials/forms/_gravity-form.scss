@@ -1,0 +1,290 @@
+/* -------------------------------------------------
+>> Project Styles
+---------------------------------------------------
+>> Edit these styles as required
+------------------------------------------------- */
+
+.gfields {
+	margin: 0;
+}
+
+.gf_clear {
+	clear: both;
+}
+
+.gfield_time_hour,
+.gfield_time_minute,
+.gfield_time_ampm {
+	width: calc(33.33% - 3px);
+	display: inline-block;
+}
+
+.gfield_time_minute {
+	margin: 0 10px;
+	width: calc(33.33% - 23px);
+}
+
+.below.hour_minute_colon {
+	display: none;
+}
+
+.gfield_post_tags_hint {
+	margin-top: 0;
+	font-size: 0.875rem;
+}
+
+.gfield.half-input-field {
+	width: 48%;
+	margin-right: calc(4% - 5px);
+	display: inline-block;
+	vertical-align: top;
+
+	&.last {
+		margin-right: 0;
+	}
+}
+
+.gfield_list_group {
+	margin-bottom: 20px;
+}
+
+button {
+	&.add_list_item,
+	&.delete_list_item {
+		margin: 0 10px 10px 0;
+		padding: 4px 11px;
+		font-size: 90%;
+		height: 37px;
+		position: relative;
+	}
+
+	&.delete_list_item {
+		background-color: var(--ss_reset_button_bgcolor);
+		color: var(--ss_reset_button_color);
+		border: 2px solid transparent;
+
+		&:hover,
+		&:focus-visible {
+			background-color: transparent;
+			border: 2px solid var(--ss_reset-button-border-color-hover);
+		}
+	}
+}
+
+.gform_fileupload_rules {
+	font-size: 90%;
+	color: var(--ss_fileupload_rule_color);
+	margin-bottom: 10px;
+	display: inline-block;
+	position: relative;
+	top: 0;
+}
+
+/* =============================================
+= Style For Date Picker for gravity form  =
+============================================= */
+
+#ui-datepicker-div {
+	border: none;
+	width: 100%;
+	max-width: 480px;
+	background-color: var(--ss_datepicker_bg_color);
+}
+
+.ui-datepicker-header.ui-widget-header.ui-helper-clearfix.ui-corner-all {
+	background-color: var(--ss_datepicker_bg_color);
+	padding: 10px 12px;
+}
+
+.ui-datepicker-title select {
+	width: 49%;
+	margin-bottom: 0;
+	margin-right: 2%;
+	height: 46px;
+	padding: 0 35px 0 18px;
+	background-color: var(--ss_datepicker_select_bgcolor);
+	border: 2px solid var(--ss_datepicker_border_color);
+}
+
+.ui-state-default {
+	color: var(--ss_datepicker_link_color);
+
+	&.ui-state-active {
+		color: var(--ss_datepicker_link_active_color);
+	}
+}
+
+.ui-state-disabled {
+	color: var(--ss_datepicker_date_color);
+}
+
+a.ui-datepicker-prev.ui-corner-all,
+a.ui-datepicker-next.ui-corner-all {
+	position: relative;
+}
+
+a.ui-datepicker-next.ui-corner-all {
+	float: right;
+}
+
+.ui-datepicker-header {
+	a,
+	a:visited {
+		font-size: var(--ss_font_size_16);
+		cursor: pointer;
+		margin-bottom: 10px;
+		display: inline-block;
+	}
+}
+
+select.ui-datepicker-year {
+	margin-right: 0;
+}
+
+#ui-datepicker-div table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	margin: 0 0 10px;
+	font-size: var(--ss_font_size_16);
+}
+
+.ui-datepicker_calendar a {
+	font-size: var(--ss_font_size_16);
+	color: var(--ss_datepicker_date_color);
+}
+
+.ginput_container_date {
+	position: relative;
+
+	img.ui-datepicker-trigger {
+		position: absolute;
+		right: 10px;
+		top: 15px;
+		bottom: 0;
+	}
+}
+
+.gfield_radio {
+	.gchoice {
+		display: inline-block;
+	}
+}
+
+table.ui-datepicker_calendar {
+	max-width: 410px;
+	background-color: var(--ss_datepicker_calendar);
+}
+
+/* =====  End of Date Picker Style for Gravity Form ====== */
+
+.validation_error {
+	background-color: var(--ss_valiation_error_bg_color);
+	font-size: var(--ss_font_size_14);
+	color: var(--ss_valiation_error_color);
+	padding: 2px 10px 6px;
+	margin-bottom: 20px;
+	text-align: center;
+}
+
+.validation_message {
+	font-size: var(--ss_font_size_14);
+	text-align: center;
+	display: inline-block;
+	color: var(--ss_valiation_message_color);
+	position: absolute;
+	bottom: -20px;
+}
+
+.gform_validation_error_link {
+	font-size: 0.875rem;
+}
+
+.gfield_error {
+	input {
+		border-color: var(--ss_error_field_border_color);
+	}
+}
+
+.gform_confirmation_message {
+	background-color: var(--ss_confirmation_message_bgcolor);
+	padding: 20px;
+	text-align: center;
+	color: var(--ss_confirmation_message_color);
+	border: 1px solid var(--ss_confirmation_message_border_color);
+}
+
+.gform_validation_errors {
+	background-color: var(--ss_valiation_error_bg_color);
+	margin: 10px 0 30px;
+	padding: 7px 14px;
+	font-weight: 700;
+	font-size: 105%;
+
+	h2 {
+		color: var(--ss_valiation_error_color);
+		border: 2px solid var(--ss_confirmation_message_border_color);
+		margin-bottom: 0;
+		font-size: 24px;
+		font-size: 105%;
+		padding: 20px;
+	}
+
+	ol {
+		margin-top: 20px;
+	}
+}
+
+.gfield_required_text {
+	color: var(--ss_required_text_color);
+	position: relative;
+	margin-left: 5px;
+	font-size: 0.875rem;
+}
+
+/**
+ *
+ * Style for hidden field in gravity form
+ *
+ */
+
+.gfield_visibility_hidden {
+	display: none !important;
+}
+
+/**
+ *
+ * Spinner
+ *
+ */
+
+.gform_ajax_spinner,
+.gform-loader {
+	margin-top: 0;
+	margin-left: 0;
+	position: absolute;
+	width: 12px;
+	height: 12px;
+	border: 3px solid rgb(115 115 115 / 30%);
+	border-radius: 50%;
+	border-top-color: #fff;
+	animation: spin 1s ease-in-out infinite;
+	-webkit-animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+	to {
+		-webkit-transform: rotate(360deg);
+	}
+}
+
+@-webkit-keyframes spin {
+	to {
+		-webkit-transform: rotate(360deg);
+	}
+}
+
+.hidden_label {
+	label {
+		display: none;
+	}
+}

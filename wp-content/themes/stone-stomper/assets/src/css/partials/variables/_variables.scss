@@ -1,0 +1,354 @@
+:root {
+	/*-------------------------------------------------
+	>> Variables for Spaces
+	-------------------------------------------------*/
+	@include spacing(--ss_space_2, 2, 2);
+	@include spacing(--ss_space_4, 4, 4);
+	@include spacing(--ss_space_6, 6, 6);
+	@include spacing(--ss_space_8, 8, 8);
+	@include spacing(--ss_space_12, 12, 10);
+	@include spacing(--ss_space_16, 16, 12);
+	@include spacing(--ss_space_20, 20, 16);
+	@include spacing(--ss_space_24, 24, 20);
+	@include spacing(--ss_space_30, 30, 24);
+	@include spacing(--ss_space_36, 36, 30);
+	@include spacing(--ss_space_48, 48, 36);
+	@include spacing(--ss_space_72, 72, 44);
+	@include spacing(--ss_space_96, 96, 52);
+	@include spacing(--ss_space_128, 128, 64);
+	@include spacing(--ss_space_156, 156, 72);
+	@include spacing(--ss_space_200, 200, 84);
+	@include spacing(--ss_space_236, 236, 98);
+
+	/* -------------------------------------------------
+	>> Variables for Font Sizes
+	------------------------------------------------- */
+
+	@include font_size(--ss_font_size_12, 12, 11);
+	@include font_size(--ss_font_size_14, 14, 13);
+	@include font_size(--ss_font_size_16, 16, 15);
+	@include font_size(--ss_font_size_18, 18, 17);
+	@include font_size(--ss_font_size_20, 20, 18);
+	@include font_size(--ss_font_size_22, 22, 20);
+	@include font_size(--ss_font_size_24, 24, 20);
+	@include font_size(--ss_font_size_26, 26, 22);
+	@include font_size(--ss_font_size_32, 32, 24);
+	@include font_size(--ss_font_size_40, 40, 26);
+	@include font_size(--ss_font_size_48, 48, 30);
+	@include font_size(--ss_font_size_60, 60, 45);
+	@include font_size(--ss_font_size_68, 68, 55);
+
+	/* -------------------------------------------------
+	>> Color variables
+	------------------------------------------------- */
+
+	/*
+	>> Base Colors
+	*/
+
+	// Theme Primary
+	--ss_color_primary: #00a4eb;
+	--ss_color_on_primary: #ffffff;
+
+	// Theme Secondary
+	--ss_color_secondary: #0013ff;
+
+	// Theme Dark
+	--ss_black: #000000;
+	--ss_black_1: #14191f;
+	--ss_black_2: #606364;
+
+	// Theme Light
+	--ss_white: #ffffff;
+	--ss_white_1: #f1f1f1;
+	--ss_white_2: #f1e9e9;
+
+	// Theme Colors
+	--ss_gray: #e0e0e0;
+	--ss_gray_1: #e6e6e6;
+	--ss_gray_2: #eee;
+
+	--ss_blue: #0013ff;
+	--ss_blue_1: #00a4eb;
+	--ss_blue_2: #2ca8dd;
+
+	--ss_navy: #091a17;
+	--ss_navy_1: #15332e;
+	--ss_navy_2: #2f655c;
+
+	--ss_red: #ff0000;
+	--ss_sea_green: #04c3b4;
+
+	--ss_transparent: transparent;
+
+	// Text Variations
+	--ss_regular_text: #14191f;
+	--ss_dark_text: #14191f;
+	--ss_white_text: #f7f7f7;
+	--ss_light_text: #606364;
+
+	// fixed variable Colors
+
+	--ss_success: #198754;
+	--ss_info: #0dcaf0;
+	--ss_warning: #ffc107;
+	--ss_danger: #dc3545;
+	--ss_light: #f8f9fa;
+	--ss_dark: #212529;
+
+	--ss_signal: #d14b3c;
+	--ss_signal_bg: #fbede9;
+
+	--ss_color_background: #ffffff;
+	--ss_color_on_background: #14191f;
+
+	// Borders
+	--ss_border: #30353c;
+	--ss_border_1: #545454;
+	--ss_border_2: #adadad;
+	--ss_border_3: #e0e0e0;
+	--ss_border_4: #14191f;
+
+	/* -------------------------------------------------
+	>> Base Colors
+	>> Base colors are used for essential elements
+	such as the logo, tables, links, blockquote,
+	default buttons styling and this should't conflict
+	with theme colors
+	------------------------------------------------- */
+
+	// text Colors
+	--ss_body_color: var(--ss_color_on_background);
+	--ss_body_bg: var(--ss_color_background);
+	--ss_text_strong: var(--ss_black);
+
+	--ss_dark_text: var(--ss_black);
+	--ss_white_text: var(--ss_white);
+
+	--ss_highlight_color: var(--ss_color_on_primary);
+	--ss_highlight_bg: var(--ss_color_primary);
+
+	--ss_caption: var(--ss_black_2);
+
+	// Headings
+
+	--ss_heading_color: inherit;
+	--ss_heading_link_color: var(--ss_dark_text);
+	--ss_heading_link_color_hover: var(--ss_dark_text);
+
+	// link colors
+	--ss_link_color: var(--ss_color_primary);
+	--ss_link_color_hover: var(--ss_color_primary);
+	--ss_link_border_color: var(--ss_color_primary);
+	--ss_link_border_color_hover: transparent;
+
+	// lists Colors
+	--ss_list_ul_marker_color: var(--ss_color_primary);
+	--ss_list_ol_marker_color: var(--ss_color_primary);
+	--ss_list_marker_bgcolor: var(--ss_border_4);
+
+	// Blockquote Colors
+	--ss_blockquote_color: var(--ss_regular_text);
+	--ss_blockquote_border_color: var(--ss_regular_text);
+	--ss_quote_color: var(--ss_regular_text);
+	--ss_blockqoute_cite_color: var(--ss_light_text);
+
+	// Tables Colors
+	--ss_table_border_color: var(--ss_border);
+	--ss_table_head_border_color: var(--ss_dark_text);
+	--ss_table_foot_border_color: var(--ss_dark_text);
+
+	// Formating
+	--ss_strong_color: var(--ss_regular_text);
+	--ss_underline_border_color: var(--ss_regular_text);
+	--ss_abbr_border_color: var(--ss_regular_text);
+	--ss_delete_color: var(--ss_danger);
+	--ss_insert_color: var(--ss_success);
+	--ss_insert_border_color: var(--ss_success);
+
+	// Code
+	--ss_code_color: var(--ss_white_text);
+	--ss_code_bgcolor: var(--ss_dark_text);
+	--ss_pre_color: var(--ss_white_text);
+	--ss_pre_bgcolor: var(--ss_dark_text);
+	--ss_mark_bgcolor: var(--ss_dark_text);
+	--ss_mark_color: var(--ss_white_text);
+
+	// Graphical elements
+	--ss_hr_color: var(--ss_border_2);
+
+	// Form Fields
+
+	--ss_input_color: var(--ss_regular_text);
+	--ss_input_bg: var(--ss_light_field_bg);
+	--ss_input_border_color: var(--ss_border);
+
+	--ss_input_focus_color: var(--ss_black);
+	--ss_input_focus_bgcolor: var(--ss_white);
+	--ss_input_focus_border_color: var(--ss_border_2);
+
+	--ss_disabled_input_bgcolor: var(--ss_field_bg);
+	--ss_disabled_input_border_color: var(--ss_border_1);
+
+	--ss_placeholder_color: var(--ss_light_text);
+	--ss_range_track_bgcolor: var(--ss_field_bg);
+	--ss_range_thumb_bgcolor: var(--ss_color_primary);
+	--ss_color_field_border_color: var(--ss_border);
+	--ss_color_field_bgcolor: var(--ss_field_bg);
+	--ss_radio_color: var(--ss_regular_text);
+	--ss_radio_border_color: var(--ss_border);
+	--ss_radio_bgcolor: var(--ss_field_bg);
+	--ss_radio_after_bgcolor: var(--ss_color_primary);
+	--ss_checkbox_color: var(--ss_regular_text);
+	--ss_checkbox_border_color: var(--ss_border);
+	--ss_checkbox_bgcolor: var(--ss_field_bg);
+	--ss_checkbox_after_bgcolor: var(--ss_color_primary);
+	--ss_progress_bgcolor: var(--ss_field_bg);
+	--ss_progress_value_bgcolor: var(--ss_color_primary);
+	--ss_meter_bgcolor: var(--ss_field_bg);
+	--ss_meter_value_bgcolor: var(--ss_color_primary);
+
+	// Button
+	--ss_button_color: var(--ss_white_text);
+	--ss_button_bgcolor: var(--ss_color_primary);
+	--ss_button_color_hover: var(--ss_dark_text);
+	--ss_button_bgcolor_hover: var(--ss_transparent);
+	--ss_button_border_color: var(--ss_color_primary);
+	--ss_button_border_color_hover: var(--ss_border);
+
+	--ss_reset_button_bgcolor: var(--ss_button_bgcolor);
+	--ss_reset_button_color: var(--ss_white_text);
+
+	// Buttons layer
+	--ss_theme_btn_color: var(--ss_button_color);
+	--ss_theme_btn_bgcolor: var(--ss_button_bgcolor);
+	--ss_theme_btn_color_hover: var(--ss_button_color_hover);
+	--ss_theme_btn_bgcolor_hover: var(--ss_button_bgcolor_hover);
+	--ss_theme_btn_border_color: var(--ss_button_border_color);
+	--ss_theme_btn_border_color_hover: var(--ss_button_border_color_hover);
+
+	// --ss_wp_btn_color: var(--ss_white_text);
+	// --ss_wp_btn_bgcolor: var(--ss_button_bg);
+
+	// --ss_wp_outline_btn_color: var(--ss_white_text);
+	// --ss_wp_outline_btn_border_color: var(--ss_dark_text);
+	// --ss_wp_outline_btn_bgcolor: var(--ss_dark_text);
+
+	// Date Picker
+	--ss_datepicker_bg_color: var(--ss_gray);
+	--ss_datepicker_select_bgcolor: var(--ss_white);
+	--ss_datepicker_link_color: var(--ss_color_secondary);
+	--ss_datepicker_link_active_color: var(--ss_color_primary);
+	--ss_datepicker_calendar: var(--ss_white_text);
+	--ss_datepicker_th_bgcolor: var(--ss_border_1);
+	--ss_datepicker_even_tr_td_bgcolor: var(--ss_border_1);
+	--ss_datepicker_border_color: var(--ss_border_1);
+	--ss_datepicker_date_color: var(--ss_dark_text);
+
+	// Errors & Confirmation
+	--ss_valiation_error_bg_color: var(--ss_danger_bg);
+	--ss_valiation_message_color: var(--ss_danger);
+	--ss_error_field_border_color: var(--ss_danger);
+	--ss_valiation_error_color: var(--ss_danger);
+	--ss_confirmation_message_bgcolor: var(--ss_success_bg);
+	--ss_confirmation_message_color: var(--ss_dark_text);
+	--ss_confirmation_message_border_color: var(--ss_danger);
+	--ss_required_text_color: var(--ss_danger);
+	--ss_invalid_error_border_color: var(--ss_danger);
+	--ss_hubspot_error_label_color: var(--ss_danger);
+	--ss_hubspot_required_color: var(--ss_danger);
+	--ss_fileupload_rule_color: var(--ss_light_text);
+	--ss_error_menu_color: var(--ss_dark_text);
+
+	// Accessibility
+	--ss_acc_btn_color: var(--ss_white_text);
+	--ss_acc_btn_bgcolor: var(--ss_button_bg);
+	--ss_acc_btn_shadow: var(--ss_danger);
+	--ss_acc_outline: var(--ss_black);
+
+	// Comments Box
+	--ss_comments_reply_btn_bgcolor: var(--ss_button_bg);
+	--ss_comments_reply_btn_color: var(--ss_white_text);
+	--ss_comments_reply_btn_bgcolor_hover: var(--ss_button_bg_hover);
+	--ss_comments_reply_btn_color_hover: var(--ss_white_text);
+	--ss_comment_meta_color: var(--ss_dark_text);
+	--ss_comment_metadata_color: var(--ss_light_text);
+	--ss_comments_list_border_color: var(--ss_border);
+	--ss_widget_comments_meta_color: var(--ss_light_text);
+
+	// Pagination
+	--ss_pagination_bgcolor: var(--ss_blue_1);
+	--ss_pagination_color: var(--ss_white);
+	--ss_pagination_color_hover: var(--ss_white);
+	--ss_pagination_bgcolor_hover: var(--ss_border_1);
+	--ss_pagination_bgcolor_current: var(--ss_border_1);
+	--ss_pagination_color_current: var(--ss_white);
+	--ss_pagination_first_bgcolor: var(--ss_border_1);
+	--ss_pagination_first_color: var(--ss_dark_text);
+	--ss_pagination_border: var(--ss_transparent);
+
+	// Widgets
+	--ss_widget_latest_post_meta_color: var(--ss_danger);
+	--ss_widget_rss_feed_meta_color: var(--ss_danger);
+	--ss_widget_search_button_color: var(--ss_pure_black);
+	--ss_wp_table_block_stripe_bg_color: var(--ss_gray);
+
+	// Breadcrumbs
+	--ss_breadcrumb_color: var(--ss_pure_black);
+	--ss_breadcrumb_link_color: var(--ss_pure_black);
+	--ss_breadcrumb_border_color: transparent;
+	--ss_breadcrumb_border_color_hover: var(--ss_pure_black);
+	--ss_breadcrumb_span_color: var(--ss_pure_black);
+
+	// Header
+	--ss_header_bgcolor: var(--ss_transparent);
+	--ss_header_color: var(--ss_black);
+	--ss_header_color_hover: var(--ss_black);
+	--ss_header_bgcolor_sticky: var(--ss_white);
+	--ss_header_nav_border_color: var(--ss_dark_text);
+
+	--ss_header_submenu_bgcolor: var(--ss_gray);
+	--ss_header_submenu_color: var(--ss_header_color);
+	--ss_header_submenu_color_hover: var(--ss_header_color_hover);
+
+	--ss_header_mobile_color: var(--ss_dark_text);
+	--ss_header_mobile_submenu_color: var(--ss_dark_text);
+
+	--ss_nav_overlay_bgcolor: var(--ss_white);
+	--ss_mobile_nav_icon_bgcolor: var(--ss_dark_text);
+	--ss_abbr_border: var(--ss_dark_text);
+
+	// Top Bar
+	--ss_topbar_bgcolor: var(--ss_color_primary);
+	--ss_topbar_color: var(--ss_white);
+	--ss_topbar_link_color: var(--ss_white);
+
+	// Footer
+	--ss_footer_bgcolor: var(--ss_dark_text);
+	--ss_footer_color: var(--ss_white_text);
+
+	--ss_footer_color_hover: var(--ss_white_text);
+
+	--ss_f_nav_color: var(--ss_footer_color);
+	--ss_f_nav_color_hover: var(--ss_footer_color_hover);
+	--ss_f_nav_border_color: var(--ss_footer_color);
+	--ss_f_nav_border_color_hover: var(--ss_footer_color_hover);
+
+	--ss_copyright_color: var(--ss_white_text);
+	--ss_legal_nav_color: var(--ss_white_text);
+	--ss_legal_nav_border_color: var(--ss_white_text);
+	--ss_legal_nav_border_color_hover: var(--ss_white_text);
+	--ss_legal_text_color: var(--ss_white_text);
+
+	// Containers
+	--ss_ctn_red: var(--ss_red);
+	--ss_ctn_black: var(--ss_black);
+	--ss_ctn_sea_green: var(--ss_sea_green);
+
+	// style variations
+
+	--ss_style_bg: #821212;
+	--ss_style_text: #000000;
+	--ss_style_link: #000000;
+	--ss_style_button: #00a4eb;
+}

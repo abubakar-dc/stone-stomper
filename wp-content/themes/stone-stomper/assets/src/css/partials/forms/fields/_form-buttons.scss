@@ -1,0 +1,59 @@
+/* -------------------------------------------------
+>> Project Styles
+---------------------------------------------------
+>> Edit these styles as required
+------------------------------------------------- */
+
+input[type="image"] {
+	margin: 0 10px 0 0;
+}
+
+input[type="submit"],
+button,
+input[type="button"],
+input[type="reset"] {
+	padding: 0 30px;
+	display: inline-block;
+	line-height: 1;
+	box-sizing: border-box;
+
+	@include transition(all, 0.4s, ease-in-out);
+
+	background-color: var(--ss_button_bgcolor);
+	border: 1px solid var(--ss_button_bgcolor);
+	color: var(--ss_button_color);
+	outline: none;
+
+	@include font(axi, bold);
+
+	font-size: var(--ss_font_size_16);
+	height: 50px;
+	outline: none;
+	cursor: pointer;
+	margin: 0 10px 10px 0;
+}
+
+input[type="submit"]:hover,
+button:hover,
+input[type="button"]:hover {
+	color: var(--ss_button_color_hover);
+	background-color: var(--ss_button_bgcolor_hover);
+}
+
+input[type="submit"]:focus-visible,
+button:focus-visible,
+input[type="button"]:focus-visible {
+	color: var(--ss_button_color_hover);
+	background-color: var(--ss_button_bgcolor_hover);
+}
+
+input[type="reset"] {
+	background-color: var(--ss_theme_btn_bgcolor);
+	color: var(--ss_theme_btn_color);
+
+	&:hover,
+	&:focus-visible {
+		color: var(--ss_theme_btn_color);
+		background-color: var(--ss_theme_btn_bgcolor_hover);
+	}
+}

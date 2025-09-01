@@ -1,0 +1,43 @@
+{
+	"name": "stonestomperpack",
+	"version": "1.0.0",
+	"theme-version": "2.2.3",
+	"class-prefix": "StoneStomper",
+	"description": "A wordpress custom theme",
+	"scripts": {
+		"build": "bash nvm.sh && wp-scripts build",
+		"start": "bash nvm.sh && wp-scripts start",
+		"setup": "bash nvm.sh && npm i && composer install",
+		"build:blocks": "bash nvm.sh && wp-scripts build --config ./webpack.config.blocks.js",
+		"start:blocks": "bash nvm.sh && wp-scripts start --config ./webpack.config.blocks.js",
+		"phpcs:report": "./vendor/bin/phpcs --report=summary",
+		"npm:install": "bash nvm.sh && npm i",
+		"composer:clean": "composer install --no-dev",
+		"lint:css": "bash nvm.sh && wp-scripts lint-style",
+		"lint:js": "bash nvm.sh && wp-scripts lint-js",
+		"format:css": "bash nvm.sh && npm run lint:css -- --fix",
+		"format:js": "bash nvm.sh && npm run lint:js -- --fix"
+	},
+	"devDependencies": {
+		"@wordpress/compose": "^7.0.0",
+		"@wordpress/dom-ready": "^4.0.0",
+		"@wordpress/icons": "^10.0.0",
+		"@wordpress/scripts": "^28.0.0",
+		"copy-webpack-plugin": "^12.0.2",
+		"eslint-plugin-html": "^8.1.1",
+		"html-loader": "^5.0.0",
+		"imagemin-webp-webpack-plugin": "^3.3.6",
+		"imagemin-webpack-plugin": "^2.4.2",
+		"mini-css-extract-plugin": "^2.9.0",
+		"remove-files-webpack-plugin": "^1.5.0",
+		"webpack-fix-style-only-entries": "^0.6.1"
+	},
+	"engines": {
+		"node": "=20.14.0"
+	},
+	"author": "Abubakar",
+	"license": "GNU GPL",
+	"dependencies": {
+		"react-select": "^5.10.2"
+	}
+}

@@ -1,0 +1,17 @@
+input[type="search"].wp-block-search__input {
+	background-image: unset;
+	padding: 0 12px;
+	margin-bottom: 0;
+}
+
+.wp-block-search__button {
+	border: none;
+	margin-right: 0;
+	padding: 0 20px;
+
+	&:hover,
+	&:focus-visible {
+		border: none;
+		background-color: var(--ss_white);
+	}
+}

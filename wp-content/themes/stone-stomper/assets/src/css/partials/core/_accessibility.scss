@@ -1,0 +1,70 @@
+/* -------------------------------------------------
+>> Base Styles
+---------------------------------------------------
+>> Edit these styles as required
+------------------------------------------------- */
+
+.screen-reader-text {
+	margin: 0px;
+	overflow: hidden;
+	width: 1px;
+	position: absolute !important;
+	word-wrap: normal !important;
+	color: var(--ss_acc_btn_color);
+	background-color: var(--ss_acc_btn_bgcolor);
+	clip: auto !important;
+	border: unset !important;
+	border-radius: 0;
+	left: -100%;
+	font-size: var(--ss_font_size_14);
+
+	clip-path: none;
+	font-weight: 700;
+	height: auto;
+	line-height: normal;
+	padding: 8px 12px;
+	text-decoration: none;
+	top: 8px;
+
+	&:hover,
+	&:active,
+	&:focus {
+		display: block;
+		width: auto;
+		z-index: 100000;
+		left: 8px;
+	}
+}
+
+#page-section[tabindex="-1"]:focus {
+	outline: 0;
+}
+
+a,
+button,
+input[type="submit"],
+[tabindex="0"] {
+	outline: 2px dotted transparent;
+	outline-offset: 5px;
+
+	&:focus-visible {
+		outline-color: var(--ss_acc_outline) !important;
+	}
+}
+
+.contact-details {
+	a {
+		outline-offset: 0;
+	}
+}
+
+.header-logo,
+.red-ctn,
+.black-ctn,
+.hero-ctn,
+.topbar,
+.header-nav ul li {
+	a:focus-visible {
+		outline-color: var(--ss_acc_outline);
+	}
+}
