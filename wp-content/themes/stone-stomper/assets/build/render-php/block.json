@@ -1,9 +1,9 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "stonestomperpack/elevate-teaser",
+  "name": "stonestomperpack/render-php",
   "version": "0.1.0",
-  "title": "Elevate Teaser",
+  "title": "Render PHP",
   "category": "theme-blocks",
   "description": " ",
   "supports": {
@@ -45,6 +45,6 @@
     }
   },
   "textdomain": "basetheme_td",
-  "editorScript": "file:./block-elevate-teaser.js",
+  "editorScript": "file:./block-render-php.js",
   "render": "file:./render.php"
 }

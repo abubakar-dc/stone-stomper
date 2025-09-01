@@ -166,7 +166,7 @@ get_header();
 								<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/src/images/site-logo-white.svg" alt="Logo">
 							</a>
 						</div>
-						<h5> Wordpress theme by Glide Design.</h5>
+						<h5> Wordpress theme by DevCause.</h5>
 						<div class="address">
 							<p>501 Congress Avenue, Suite 150, Austin, Texas 78701<br> Call <a
 									href="tel:512.215.4236">512.215.4236</a></p>
@@ -231,7 +231,7 @@ get_header();
 				</div>
 				<div class="gl-s72"></div>
 				<div class="footer-bottom d-flex align-items-center justify-content-between">
-					<div class="copy-right">Copyright © 2024 By Glidedesign</div>
+					<div class="copy-right">Copyright © 2024 By DevCause</div>
 					<div class="legal-nav">
 						<div class="menu-legal-nav-container">
 							<ul id="menu-legal-nav" class="menu">

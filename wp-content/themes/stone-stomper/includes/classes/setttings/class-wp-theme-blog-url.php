@@ -27,7 +27,7 @@ class WP_Theme_Blog_Url {
 		$post_custom_permalink = get_option( 'post_custom_permalink' );
 		if ( '' !== $post_custom_permalink ) {
 
-			add_action( 'generate_rewrite_rules', array( $this, 'glide_posts_add_rewrite_rules' ) );
+			add_action( 'generate_rewrite_rules', array( $this, 'dc_posts_add_rewrite_rules' ) );
 			add_filter( 'post_link', array( $this, 'posts_change_blog_links' ), 1, 3 );
 			add_action( 'template_redirect', array( $this, 'custom_redirect_dynamic_slug' ) );
 		}
@@ -42,7 +42,7 @@ class WP_Theme_Blog_Url {
 	 *
 	 * @return array $wp_rewrite
 	 */
-	public function glide_posts_add_rewrite_rules( $wp_rewrite ) {
+	public function dc_posts_add_rewrite_rules( $wp_rewrite ) {
 		$post_custom_permalink = get_option( 'post_custom_permalink' );
 		$new_rules             = array(
 			$post_custom_permalink . '/page/([0-9]{1,})/?$' => 'index.php?post_type=post&paged=' . $wp_rewrite->preg_index( 1 ),

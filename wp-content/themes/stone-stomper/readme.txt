@@ -1,6 +1,6 @@
 === Stone Stomper ===
 
-Contributors: Glide Design
+Contributors: DevCause
 Tags: one-column, two-columns, custom-menu, full-width-template,  theme-options, translation-ready
 Requires at least: 5.3
 Tested up to: 5.6
@@ -10,4 +10,4 @@ A Stone Stomper WordPress theme
 
 == Description ==
 
-Stone Stomper custom WordPress theme by GlideDesign.
+Stone Stomper custom WordPress theme by DevCause.

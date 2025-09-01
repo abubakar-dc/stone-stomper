@@ -1,9 +1,9 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "stonestomperpack/page-hero",
+  "name": "stonestomperpack/design-var",
   "version": "0.1.0",
-  "title": "Page Hero",
+  "title": "Design Var",
   "category": "theme-blocks",
   "description": "A custom page hero block.",
   "supports": {
@@ -25,7 +25,5 @@
     }
   },
   "textdomain": "duxtonwater_td",
-  "editorScript": "file:./index.js",
-  "editorStyle": "file:./index.css",
-  "style": "file:./style-index.css"
+  "editorScript": "file:./block-design-var.js"
 }
