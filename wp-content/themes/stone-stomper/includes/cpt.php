@@ -13,67 +13,66 @@ use StoneStomper\CPT\WP_Theme_CPT;
 new WP_Theme_CPT(
 	array(
 		'labels'       => array(
-			'singular_capital'   => 'Testimonial',
-			'plural_capital'     => 'Testimonials',
-			'singular_lowercase' => 'testimonial',
-			'plural_lowercase'   => 'testimonials',
+			'singular_capital'   => 'Caravan',
+			'plural_capital'     => 'Caravans',
+			'singular_lowercase' => 'caravan',
+			'plural_lowercase'   => 'caravans',
 			// CPT Slug & Name.
-			'register_key'       => 'testimonial',
-			'slug'               => 'testimonial',
+			'register_key'       => 'caravan',
+			'slug'               => 'caravan',
 		),
-		'supports'     => array( 'title', 'editor', 'thumbnail', 'author', 'excerpt' ),
-		'menu_icon'    => 'dashicons-format-quote',
+		'supports'     => array( 'title', 'thumbnail', 'author' ),
+		'menu_icon'    => 'dashicons-columns',
 		'public'       => false,
 		'show_in_menu' => true,
 		'show_ui'      => true,
-		'taxonomies'   => array(
-			array(
-				'slug'          => 'testimonials',
-				'register_key'  => 'testimonials', // if not given default is slug value.
-				'name'          => 'Category',
-				'singular_name' => 'Category',
-				'plural_name'   => 'Categories',
-			),
-			array(
-				'slug'          => 'types',
-				// 'register_key'  => 'types', // if not given default is slug value.
-				'name'          => 'Type',
-				'singular_name' => 'Type',
-				'plural_name'   => 'Types',
-				// 'include_cpt'   => 'team',
-			),
-		),
 	)
 );
 new WP_Theme_CPT(
 	array(
 		'labels'    => array(
-			'singular_capital'   => 'Team Member',
-			'plural_capital'     => 'Team Members',
-			'singular_lowercase' => 'team member',
-			'plural_lowercase'   => 'team members',
+			'singular_capital'   => 'Car',
+			'plural_capital'     => 'Cars',
+			'singular_lowercase' => 'car',
+			'plural_lowercase'   => 'cars',
 			// CPT Slug & Name.
-			'register_key'       => 'team',
-			'slug'               => 'team',
+			'register_key'       => 'car',
+			'slug'               => 'car',
 		),
-		'supports'  => array( 'title', 'editor', 'thumbnail', 'author', 'excerpt' ),
-		'menu_icon' => 'dashicons-businessperson',
+		'supports'  => array( 'title', 'thumbnail', 'author' ),
+		'menu_icon' => 'dashicons-car',
 		'public'    => false,
 	)
 );
 new WP_Theme_CPT(
 	array(
 		'labels'    => array(
-			'singular_capital'   => 'Resource',
-			'plural_capital'     => 'Resources',
-			'singular_lowercase' => 'resource',
-			'plural_lowercase'   => 'resources',
+			'singular_capital'   => 'Customers',
+			'plural_capital'     => 'Customers',
+			'singular_lowercase' => 'customer',
+			'plural_lowercase'   => 'customers',
 			// CPT Slug & Name.
-			'register_key'       => 'resource',
-			'slug'               => 'resource',
+			'register_key'       => 'customer',
+			'slug'               => 'customer',
 		),
-		'supports'  => array( 'title', 'editor', 'thumbnail', 'author', 'excerpt' ),
+		'supports'  => array( 'title', 'editor', 'thumbnail' ),
 		'menu_icon' => 'dashicons-groups',
-		'public'    => true,
+		'public'    => false,
+	)
+);
+new WP_Theme_CPT(
+	array(
+		'labels'    => array(
+			'singular_capital'   => 'Tow Hitch',
+			'plural_capital'     => 'Tow Hitches',
+			'singular_lowercase' => 'Tow hitch',
+			'plural_lowercase'   => 'Tow hitches',
+			// CPT Slug & Name.
+			'register_key'       => 'tow-hitch',
+			'slug'               => 'tow-hitch',
+		),
+		'supports'  => array( 'title', 'thumbnail'   ),
+		'menu_icon' => 'dashicons-admin-links',
+		'public'    => false,
 	)
 );

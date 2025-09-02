@@ -1,71 +1,77 @@
 {
-    "key": "group_64f86ab6dc224",
-    "title": "Template - Default Options",
+    "key": "group_68b5d303399bc",
+    "title": "Single Car - Options",
     "fields": [
         {
-            "key": "field_64f86ab6e0cd6",
-            "label": "Title",
-            "name": "sts_var_tmp_def_title",
+            "key": "field_68b5d3033c82f",
+            "label": "Model",
+            "name": "sts_var_car_model",
             "aria-label": "",
             "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "33",
                 "class": "",
                 "id": ""
             },
             "default_value": "",
             "maxlength": "",
+            "allow_in_bindings": 1,
             "placeholder": "",
             "prepend": "",
             "append": ""
         },
         {
-            "key": "field_64f86b3a9ed57",
-            "label": "Text",
-            "name": "sts_var_tmp_def_text",
+            "key": "field_68b5d43eab053",
+            "label": "Year",
+            "name": "sts_var_car_year",
             "aria-label": "",
-            "type": "wysiwyg",
+            "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "34",
                 "class": "",
                 "id": ""
             },
             "default_value": "",
-            "wysiwyg_height": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 0,
-            "delay": 0
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
-            "key": "field_64f86bc59ed58",
-            "label": "Button",
-            "name": "sts_var_tmp_def_button",
+            "key": "field_68b5d3a7ab052",
+            "label": "Car Barwidth",
+            "name": "sts_var_car_barwidth",
             "aria-label": "",
-            "type": "link",
+            "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "33",
                 "class": "",
                 "id": ""
             },
-            "return_format": "array"
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         }
     ],
     "location": [
         [
             {
-                "param": "page_template",
+                "param": "post_type",
                 "operator": "==",
-                "value": "default"
+                "value": "car"
             }
         ]
     ],
@@ -78,5 +84,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1694002138
+    "modified": 1756746885
 }
