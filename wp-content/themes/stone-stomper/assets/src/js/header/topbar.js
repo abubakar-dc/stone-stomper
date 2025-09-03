@@ -17,23 +17,23 @@ jQuery.fn.topBar = function() {
 			);
 		}
 
-		jQuery( 'body' ).css( '--gb_header-height', element.outerHeight() + 'px' );
+		jQuery( 'body' ).css( '--ss_header-height', element.outerHeight() + 'px' );
 		if ( jQuery( 'body' ).hasClass( 'logged-in' ) ) {
-			jQuery( 'body' ).css( '--gb_header-top', ( parseFloat( element.outerHeight() ) - parseFloat( jQuery( '#wpadminbar' ).innerHeight() ) ) * -1 + 'px' );
-			jQuery( 'body' ).css( '--gb_header-top-default', jQuery( '#wpadminbar' ).innerHeight() + 'px' );
+			jQuery( 'body' ).css( '--ss_header-top', ( parseFloat( element.outerHeight() ) - parseFloat( jQuery( '#wpadminbar' ).innerHeight() ) ) * -1 + 'px' );
+			jQuery( 'body' ).css( '--ss_header-top-default', jQuery( '#wpadminbar' ).innerHeight() + 'px' );
 		} else {
-			jQuery( 'body' ).css( '--gb_header-top', '-' + element.outerHeight() + 'px' );
-			jQuery( 'body' ).css( '--gb_header-top-default', '0px' );
+			jQuery( 'body' ).css( '--ss_header-top', '-' + element.outerHeight() + 'px' );
+			jQuery( 'body' ).css( '--ss_header-top-default', '0px' );
 		}
 
 		jQuery( window ).resize( function() {
-			jQuery( 'body' ).css( '--gb_header-height', element.outerHeight() + 'px' );
+			jQuery( 'body' ).css( '--ss_header-height', element.outerHeight() + 'px' );
 			if ( jQuery( 'body' ).hasClass( 'logged-in' ) ) {
-				jQuery( 'body' ).css( '--gb_header-top', ( parseFloat( element.outerHeight() ) - parseFloat( jQuery( '#wpadminbar' ).innerHeight() ) ) * -1 + 'px' );
-				jQuery( 'body' ).css( '--gb_header-top-default', jQuery( '#wpadminbar' ).innerHeight() + 'px' );
+				jQuery( 'body' ).css( '--ss_header-top', ( parseFloat( element.outerHeight() ) - parseFloat( jQuery( '#wpadminbar' ).innerHeight() ) ) * -1 + 'px' );
+				jQuery( 'body' ).css( '--ss_header-top-default', jQuery( '#wpadminbar' ).innerHeight() + 'px' );
 			} else {
-				jQuery( 'body' ).css( '--gb_header-top', '-' + element.outerHeight() + 'px' );
-				jQuery( 'body' ).css( '--gb_header-top-default', '0px' );
+				jQuery( 'body' ).css( '--ss_header-top', '-' + element.outerHeight() + 'px' );
+				jQuery( 'body' ).css( '--ss_header-top-default', '0px' );
 			}
 		} );
 		const toggleTopbar = () => {

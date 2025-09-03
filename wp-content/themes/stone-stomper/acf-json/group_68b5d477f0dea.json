@@ -5,7 +5,7 @@
         {
             "key": "field_68b5d477f3e59",
             "label": "Model",
-            "name": "sts_var_car_model",
+            "name": "sts_var_caravan_model",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -25,8 +25,8 @@
         },
         {
             "key": "field_68b5d477f3e65",
-            "label": "Year",
-            "name": "sts_var_car_year",
+            "label": "Vinyl Insert (Width * Length mm)",
+            "name": "sts_var_caravan_vinyl_insert",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -47,7 +47,7 @@
         {
             "key": "field_68b5d477f3e7a",
             "label": "Caravan Barwidth",
-            "name": "sts_var_car_barwidth",
+            "name": "sts_var_caravan_barwidth",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -71,7 +71,7 @@
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "car"
+                "value": "caravan"
             }
         ]
     ],
@@ -84,5 +84,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1756746971
+    "modified": 1756829073
 }

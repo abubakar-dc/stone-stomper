@@ -4312,6 +4312,10 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   border-color: var(--ss_black_1) !important;
 }
 
+.hidden {
+  display: none;
+}
+
 /*-------------------------------------------------
 >> Basic styles for Blog post
 -------------------------------------------------*/

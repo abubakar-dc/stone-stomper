@@ -2724,6 +2724,9 @@ Mixin for transition
 .acf-block-preview body #daextlwcnf-cookie-settings-button-2:hover {
   border-color: var(--ss_black_1) !important;
 }
+.acf-block-preview .hidden {
+  display: none;
+}
 .acf-block-preview .two-columns {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(clamp(350px, 50% - 2%, 100%), 100%), 1fr));

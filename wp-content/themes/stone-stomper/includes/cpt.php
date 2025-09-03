@@ -26,6 +26,15 @@ new WP_Theme_CPT(
 		'public'       => false,
 		'show_in_menu' => true,
 		'show_ui'      => true,
+		'taxonomies' => array(
+			array(
+				'slug'          => 'caravan-category',
+				'register_key'  => 'caravan-category', // if not given default is slug value.
+				'name'          => 'Category',
+				'singular_name' => 'Category',
+				'plural_name'   => 'Categories',
+			)
+		 ),
 	)
 );
 new WP_Theme_CPT(
@@ -42,6 +51,15 @@ new WP_Theme_CPT(
 		'supports'  => array( 'title', 'thumbnail', 'author' ),
 		'menu_icon' => 'dashicons-car',
 		'public'    => false,
+		'taxonomies' => array(
+			array(
+				'slug'          => 'car-category',
+				'register_key'  => 'car-category', // if not given default is slug value.
+				'name'          => 'Category',
+				'singular_name' => 'Category',
+				'plural_name'   => 'Categories',
+			)
+		 ),
 	)
 );
 new WP_Theme_CPT(

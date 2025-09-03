@@ -61,3 +61,52 @@ function sts_includes( $directory ) {
 
 	return $folders;
 }
+add_action('woocommerce_before_calculate_totals', function($cart) {
+    if (is_admin() && !defined('DOING_AJAX')) {
+        return;
+    }
+
+    $chosen = WC()->session->get('chosen_shipping_method');
+
+    if ($chosen) {
+        // WooCommerce expects an array of chosen shipping methods
+        WC()->session->set('chosen_shipping_methods', [$chosen]);
+    }
+});
+add_filter('woocommerce_get_item_data', function($item_data, $cart_item) {
+    $fields = [
+        'barwidth_mm'              => 'Towing Vehicle Barwidth',
+        'caravan_width_mm'         => 'Caravan Width',
+        'caravan_clearance_gap_mm' => 'Caravan Clearance Gap',
+        'vinyl_inserts'            => 'Vinyl Inserts',
+        'support_pockets'          => 'Support Pockets',
+    ];
+
+    foreach ($fields as $key => $label) {
+        if (!empty($cart_item[$key])) {
+            $item_data[] = [
+                'key'   => $label,
+                'value' => wc_clean($cart_item[$key]),
+            ];
+        }
+    }
+
+    return $item_data;
+}, 10, 2);
+
+// Save to order items
+add_action('woocommerce_checkout_create_order_line_item', function($item, $cart_item_key, $values, $order) {
+    $fields = [
+        'barwidth_mm'              => 'Towing Vehicle Barwidth',
+        'caravan_width_mm'         => 'Caravan Width',
+        'caravan_clearance_gap_mm' => 'Caravan Clearance Gap',
+        'vinyl_inserts'            => 'Vinyl Inserts',
+    ];
+
+    foreach ($fields as $key => $label) {
+        if (!empty($values[$key])) {
+            $item->add_meta_data($label, $values[$key], true);
+        }
+    }
+}, 10, 4);
+

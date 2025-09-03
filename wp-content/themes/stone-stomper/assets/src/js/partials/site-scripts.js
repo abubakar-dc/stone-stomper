@@ -13,6 +13,19 @@ jQuery( document ).on( 'scroll', function() {
 	}
 } );
 
+jQuery( document ).ready( function() {
+	jQuery( '#veh_make' ).on( 'change', function() {
+		if ( jQuery( this ).val() === 'other' ) {
+			jQuery( '#veh_make_other_wrap' ).removeClass( 'hidden' );
+		} else {
+			jQuery( '#veh_make_other_wrap' ).addClass( 'hidden' );
+		}
+	} );
+
+	// Optional: trigger on page load in case "Other" is pre-selected
+	jQuery( '#veh_make' ).trigger( 'change' );
+} );
+
 jQuery( function() {
 	/**
 	 * Header Wrapper Height Calculation for Navigation Overlay
@@ -21,7 +34,7 @@ jQuery( function() {
 	if ( jQuery( '.header-wrapper' ).length > 0 ) {
 		function updateHeaderHeight() {
 			jQuery( '.header-wrapper' ).each( function() {
-				jQuery( this ).css( '--gb_header-wrapper-default', jQuery( this ).outerHeight() + 'px' );
+				jQuery( this ).css( '--ss_header-wrapper-default', jQuery( this ).outerHeight() + 'px' );
 			} );
 		}
 		updateHeaderHeight();
@@ -129,3 +142,71 @@ jQuery( function() {
 	}
 } );
 
+function setupImageUpload( inputId, listId ) {
+	const input = document.getElementById( inputId );
+	const list = document.getElementById( listId );
+
+	input.addEventListener( 'change', function() {
+		showFiles( Array.from( input.files ), input, list );
+	} );
+
+	function showFiles( files, input, list ) {
+		list.innerHTML = ''; // clear old list
+
+		files.forEach( ( file, index ) => {
+			// ✅ validate image type
+			if ( ! file.type.startsWith( 'image/' ) ) {
+				alert( file.name + ' is not an image file!' );
+				return;
+			}
+
+			const li = document.createElement( 'li' );
+			li.style.display = 'flex';
+			li.style.alignItems = 'center';
+			li.style.marginBottom = '8px';
+
+			// preview
+			const img = document.createElement( 'img' );
+			img.src = URL.createObjectURL( file );
+			img.style.width = '80px';
+			img.style.height = '80px';
+			img.style.objectFit = 'cover';
+			img.style.marginRight = '10px';
+			img.style.border = '1px solid #ccc';
+			img.style.borderRadius = '6px';
+
+			// file name
+			const span = document.createElement( 'span' );
+			span.textContent = file.name;
+
+			// delete button
+			const delBtn = document.createElement( 'button' );
+			delBtn.type = 'button';
+			delBtn.textContent = '❌';
+			delBtn.style.marginLeft = '10px';
+			delBtn.addEventListener( 'click', () => {
+				removeFile( index, input, list );
+			} );
+
+			li.appendChild( img );
+			li.appendChild( span );
+			li.appendChild( delBtn );
+			list.appendChild( li );
+		} );
+	}
+
+	function removeFile( index, input, list ) {
+		const dt = new DataTransfer();
+		const files = Array.from( input.files );
+
+		files.splice( index, 1 ); // remove selected file
+		files.forEach( ( file ) => dt.items.add( file ) );
+
+		input.files = dt.files;
+		showFiles( Array.from( input.files ), input, list ); // refresh preview
+	}
+}
+
+setupImageUpload( 'photo_hitch', 'list_hitch' );
+setupImageUpload( 'photo_rear', 'list_rear' );
+setupImageUpload( 'photo_front', 'list_front' );
