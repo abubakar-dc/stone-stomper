@@ -4,7 +4,6 @@
 	"settings": {
 		"appearanceTools": true,
 		"useRootPaddingAwareAlignments": true,
-			"style": false,
 		"color": {
 			"palette": [
 				{
