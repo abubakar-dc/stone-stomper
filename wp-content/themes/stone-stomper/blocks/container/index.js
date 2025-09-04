@@ -130,64 +130,64 @@ const ContainerBlock = ({
                   value: ''
                 }, {
                   label: '2px',
-                  value: 'gl-s2'
+                  value: 'st-s2'
                 }, {
                   label: '4px',
-                  value: 'gl-s4'
+                  value: 'st-s4'
                 }, {
                   label: '6px',
-                  value: 'gl-s6'
+                  value: 'st-s6'
                 }, {
                   label: '8px',
-                  value: 'gl-s8'
+                  value: 'st-s8'
                 }, {
                   label: '12px',
-                  value: 'gl-s12'
+                  value: 'st-s12'
                 }, {
                   label: '16px',
-                  value: 'gl-s16'
+                  value: 'st-s16'
                 }, {
                   label: '20px',
-                  value: 'gl-s20'
+                  value: 'st-s20'
                 }, {
                   label: '24px',
-                  value: 'gl-s24'
+                  value: 'st-s24'
                 }, {
                   label: '30px',
-                  value: 'gl-s30'
+                  value: 'st-s30'
                 }, {
                   label: '36px',
-                  value: 'gl-s36'
+                  value: 'st-s36'
                 }, {
                   label: '48px',
-                  value: 'gl-s48'
+                  value: 'st-s48'
                 }, {
                   label: '56px',
-                  value: 'gl-s56'
+                  value: 'st-s56'
                 }, {
                   label: '60px',
-                  value: 'gl-s60'
+                  value: 'st-s60'
                 }, {
                   label: '72px',
-                  value: 'gl-s72'
+                  value: 'st-s72'
                 }, {
                   label: '80px',
-                  value: 'gl-s80'
+                  value: 'st-s80'
                 }, {
                   label: '120px',
-                  value: 'gl-s120'
+                  value: 'st-s120'
                 }, {
                   label: '128px',
-                  value: 'gl-s128'
+                  value: 'st-s128'
                 }, {
                   label: '156px',
-                  value: 'gl-s156'
+                  value: 'st-s156'
                 }, {
                   label: '200px',
-                  value: 'gl-s200'
+                  value: 'st-s200'
                 }, {
                   label: '240px',
-                  value: 'gl-s240'
+                  value: 'st-s240'
                 }],
                 onChange: value => setAttributes({
                   marginTop: value
@@ -203,64 +203,64 @@ const ContainerBlock = ({
                   value: ''
                 }, {
                   label: '2px',
-                  value: 'gl-s2'
+                  value: 'st-s2'
                 }, {
                   label: '4px',
-                  value: 'gl-s4'
+                  value: 'st-s4'
                 }, {
                   label: '6px',
-                  value: 'gl-s6'
+                  value: 'st-s6'
                 }, {
                   label: '8px',
-                  value: 'gl-s8'
+                  value: 'st-s8'
                 }, {
                   label: '12px',
-                  value: 'gl-s12'
+                  value: 'st-s12'
                 }, {
                   label: '16px',
-                  value: 'gl-s16'
+                  value: 'st-s16'
                 }, {
                   label: '20px',
-                  value: 'gl-s20'
+                  value: 'st-s20'
                 }, {
                   label: '24px',
-                  value: 'gl-s24'
+                  value: 'st-s24'
                 }, {
                   label: '30px',
-                  value: 'gl-s30'
+                  value: 'st-s30'
                 }, {
                   label: '36px',
-                  value: 'gl-s36'
+                  value: 'st-s36'
                 }, {
                   label: '48px',
-                  value: 'gl-s48'
+                  value: 'st-s48'
                 }, {
                   label: '56px',
-                  value: 'gl-s56'
+                  value: 'st-s56'
                 }, {
                   label: '60px',
-                  value: 'gl-s60'
+                  value: 'st-s60'
                 }, {
                   label: '72px',
-                  value: 'gl-s72'
+                  value: 'st-s72'
                 }, {
                   label: '80px',
-                  value: 'gl-s80'
+                  value: 'st-s80'
                 }, {
                   label: '120px',
-                  value: 'gl-s120'
+                  value: 'st-s120'
                 }, {
                   label: '128px',
-                  value: 'gl-s128'
+                  value: 'st-s128'
                 }, {
                   label: '156px',
-                  value: 'gl-s156'
+                  value: 'st-s156'
                 }, {
                   label: '200px',
-                  value: 'gl-s200'
+                  value: 'st-s200'
                 }, {
                   label: '240px',
-                  value: 'gl-s240'
+                  value: 'st-s240'
                 }],
                 onChange: value => setAttributes({
                   marginBottom: value
