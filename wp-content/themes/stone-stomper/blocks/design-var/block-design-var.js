@@ -162,20 +162,17 @@ const ContainerBlock = ({
                   label: '48px',
                   value: 'gl-s48'
                 }, {
-                  label: '56px',
-                  value: 'gl-s56'
-                }, {
-                  label: '60px',
-                  value: 'gl-s60'
+                  label: '64px',
+                  value: 'gl-s64'
                 }, {
                   label: '72px',
                   value: 'gl-s72'
                 }, {
-                  label: '80px',
-                  value: 'gl-s80'
+                  label: '96px',
+                  value: 'gl-s96'
                 }, {
-                  label: '120px',
-                  value: 'gl-s120'
+                  label: '110px',
+                  value: 'gl-s110'
                 }, {
                   label: '128px',
                   value: 'gl-s128'
@@ -183,11 +180,14 @@ const ContainerBlock = ({
                   label: '156px',
                   value: 'gl-s156'
                 }, {
+                  label: '196px',
+                  value: 'gl-s196'
+                }, {
                   label: '200px',
                   value: 'gl-s200'
                 }, {
-                  label: '240px',
-                  value: 'gl-s240'
+                  label: '236px',
+                  value: 'gl-s236'
                 }],
                 onChange: value => setAttributes({
                   marginTop: value
@@ -235,20 +235,17 @@ const ContainerBlock = ({
                   label: '48px',
                   value: 'gl-s48'
                 }, {
-                  label: '56px',
-                  value: 'gl-s56'
-                }, {
-                  label: '60px',
-                  value: 'gl-s60'
+                  label: '64px',
+                  value: 'gl-s64'
                 }, {
                   label: '72px',
                   value: 'gl-s72'
                 }, {
-                  label: '80px',
-                  value: 'gl-s80'
+                  label: '96px',
+                  value: 'gl-s96'
                 }, {
-                  label: '120px',
-                  value: 'gl-s120'
+                  label: '110px',
+                  value: 'gl-s110'
                 }, {
                   label: '128px',
                   value: 'gl-s128'
@@ -256,11 +253,14 @@ const ContainerBlock = ({
                   label: '156px',
                   value: 'gl-s156'
                 }, {
+                  label: '196px',
+                  value: 'gl-s196'
+                }, {
                   label: '200px',
                   value: 'gl-s200'
                 }, {
-                  label: '240px',
-                  value: 'gl-s240'
+                  label: '236px',
+                  value: 'gl-s236'
                 }],
                 onChange: value => setAttributes({
                   marginBottom: value

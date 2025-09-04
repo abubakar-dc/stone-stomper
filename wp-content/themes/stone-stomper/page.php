@@ -18,11 +18,10 @@ $sts_var_tmp_def_title  = $sts_fields['sts_var_tmp_def_title'] ?? get_the_title(
 $sts_var_tmp_def_text   = $sts_fields['sts_var_tmp_def_text'] ?? null;
 $sts_var_tmp_def_button = $sts_fields['sts_var_tmp_def_button'] ?? null;
 
+if(has_blocks( $post->post_content )){
 ?>
-
-<section id="hero-section" class="hero-section hero-section-default">
+<section id="hero-section" class="hero-section hero-section-default" style="display:none;">
 	<!-- Hero Start -->
-
 	<div class="hero-ctn">
 		<div class="wrapper">
 			<h1><?php echo html_entity_decode( $sts_var_tmp_def_title ); ?></h1>
@@ -30,6 +29,20 @@ $sts_var_tmp_def_button = $sts_fields['sts_var_tmp_def_button'] ?? null;
 	</div>
 	<!-- Hero End -->
 </section>
+<?php
+} else { ?>
+<section id="hero-section" class="hero-section hero-section-default">
+	<!-- Hero Start -->
+	<div class="hero-ctn">
+		<div class="wrapper">
+			<h1><?php echo html_entity_decode( $sts_var_tmp_def_title ); ?></h1>
+		</div>
+	</div>
+	<!-- Hero End -->
+</section>
+
+<?php }
+	?>
 
 <section id="page-section" class="page-section">
 	<!-- Content Start -->

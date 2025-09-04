@@ -47,37 +47,7 @@ $sts_var_social_profiles = $sts_option_fields['sts_var_social_profiles'] ?? null
 	<!-- Footer Start -->
 	<div class="footer-ctn">
 		<div class="wrapper">
-
 			<div class="footer-widgets d-flex justify-content-between flex-wrap">
-				<div class="single-widget">
-					<div class="footer-logo">
-						<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
-							<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/build/images/site-logo-white.svg"
-								alt="Logo" />
-						</a>
-					</div>
-					<?php if ( $sts_var_ftrop_title ) { ?>
-					<h5><?php echo html_entity_decode( $sts_var_ftrop_title ); ?></h5>
-					<?php } ?>
-					<?php if ( $sts_var_ftrop_text ) { ?>
-					<div class="address"><?php echo html_entity_decode( $sts_var_ftrop_text ); ?></div>
-					<?php } ?>
-					<div class="social-icons d-flex">
-						<?php StoneStomper::the_social_icons( $sts_var_social_profiles ); ?>
-					</div>
-				</div>
-				<div class="single-widget">
-					<div class="footer-nav">
-						<?php
-							wp_nav_menu(
-								array(
-									'theme_location' => 'footer-nav-one',
-									'fallback_cb'    => 'StoneStomper::nav_fallback',
-								)
-							);
-							?>
-					</div>
-				</div>
 				<div class="single-widget">
 					<div class="footer-nav">
 						<?php
