@@ -186,6 +186,7 @@ get_header();
 										<input id="photo_hitch" name="photo_hitch" type="file" accept="image/*"
 											multiple />
 										<ul class="uploads" id="list_hitch"></ul>
+										<input type="hidden" id="hitch_ids" name="hitch_ids" value="[]">
 									</div>
 									<div class="field">
 										<label class="req" for="photo_rear">Towing Vehicle Rear
@@ -193,12 +194,14 @@ get_header();
 										<input id="photo_rear" name="photo_rear" type="file" accept="image/*"
 											multiple />
 										<ul class="uploads" id="list_rear"></ul>
+										<input type="hidden" id="rear_ids"  name="rear_ids"  value="[]">
 									</div>
 									<div class="field">
 										<label class="req" for="photo_front">Front of Caravan Photograph</label>
 										<input id="photo_front" name="photo_front" type="file" accept="image/*"
 											multiple />
 										<ul class="uploads" id="list_front"></ul>
+										<input type="hidden" id="front_ids" name="front_ids" value="[]">
 									</div>
 								</div>
 								<p class="note">Provide several clear photos and multiple angles to ensure a
