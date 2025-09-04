@@ -161,20 +161,22 @@ $sts_var_tbar_btn      = $sts_option_fields['sts_var_tbar_btn'] ?? null;
 							);
 							?>
 						</div>
-						<?php if ( $sts_var_tohdr_btn || $sts_var_tohdr_btn_two ) { ?>
 						<div class="header-btns desktop-hide">
-							<?php
-							if ( $sts_var_tohdr_btn ) {
-								echo StoneStomper::button( $sts_var_tohdr_btn, 'button' );
+							<?php echo do_shortcode('[whmc_mini_cart]');
+							if ( function_exists( 'wc_get_page_id' ) ) {
+								$account_page_url = get_permalink( wc_get_page_id( 'myaccount' ) );
+								?>
+								<a href="<?php echo esc_url( $account_page_url ); ?>" class="account-icon">
+									<!-- Example SVG icon (user/account) -->
+									<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 24 24">
+										<path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
+									</svg>
+								</a>
+								<?php
 							}
 
-							if ( $sts_var_tohdr_btn_two ) {
-								echo StoneStomper::button( $sts_var_tohdr_btn_two, 'button' );
-							}
 							?>
-
 						</div>
-						<?php } ?>
 					</div>
 				</div>
 				<div class="menu-btn">
@@ -183,19 +185,23 @@ $sts_var_tbar_btn      = $sts_option_fields['sts_var_tbar_btn'] ?? null;
 					<span class="bottom"></span>
 				</div>
 			</div>
-			<?php if ( $sts_var_tohdr_btn || $sts_var_tohdr_btn_two ) { ?>
 			<div class="header-btns">
-				<?php
-				if ( $sts_var_tohdr_btn ) {
-					echo StoneStomper::button( $sts_var_tohdr_btn, 'button' );
-				}
 
-				if ( $sts_var_tohdr_btn_two ) {
-					echo StoneStomper::button( $sts_var_tohdr_btn_two, 'button' );
+				<?php echo do_shortcode('[whmc_mini_cart]');
+				if ( function_exists( 'wc_get_page_id' ) ) {
+				$account_page_url = get_permalink( wc_get_page_id( 'myaccount' ) );
+				?>
+				<a href="<?php echo esc_url( $account_page_url ); ?>" class="account-icon">
+					<!-- Example SVG icon (user/account) -->
+					<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 24 24">
+						<path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
+					</svg>
+				</a>
+				<?php
 				}
 				?>
+
 			</div>
-			<?php } ?>
 			<!-- header buttons -->
 		</div>
 		<!-- Header End -->

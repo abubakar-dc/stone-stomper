@@ -141,20 +141,35 @@ jQuery( function() {
 		}
 	}
 } );
+// helpers to read/write hidden ids (JSON array in a hidden input)
+function getIdsField( slot ) {
+	const map = { hitch: 'hitch_ids', rear: 'rear_ids', front: 'front_ids' };
+	return document.getElementById( map[ slot ] );
+}
+function readIds( slot ) {
+	try {
+		return JSON.parse( getIdsField( slot ).value || '[]' );
+	} catch ( e ) {
+		return [];
+	}
+}
+function writeIds( slot, ids ) {
+	getIdsField( slot ).value = JSON.stringify( ids );
+}
 
-function setupImageUpload( inputId, listId ) {
+function setupImageUpload( inputId, listId, slot ) {
 	const input = document.getElementById( inputId );
 	const list = document.getElementById( listId );
 
 	input.addEventListener( 'change', function() {
-		showFiles( Array.from( input.files ), input, list );
+		const files = Array.from( input.files );
+		showFiles( files, input, list, slot ); // preview
+		autoUpload( files, slot, list ); // 🔥 upload immediately
 	} );
 
-	function showFiles( files, input, list ) {
-		list.innerHTML = ''; // clear old list
-
+	function showFiles( files, input, list, slot ) {
+		list.innerHTML = '';
 		files.forEach( ( file, index ) => {
-			// ✅ validate image type
 			if ( ! file.type.startsWith( 'image/' ) ) {
 				alert( file.name + ' is not an image file!' );
 				return;
@@ -165,48 +180,90 @@ function setupImageUpload( inputId, listId ) {
 			li.style.alignItems = 'center';
 			li.style.marginBottom = '8px';
 
-			// preview
 			const img = document.createElement( 'img' );
 			img.src = URL.createObjectURL( file );
-			img.style.width = '80px';
-			img.style.height = '80px';
-			img.style.objectFit = 'cover';
-			img.style.marginRight = '10px';
-			img.style.border = '1px solid #ccc';
-			img.style.borderRadius = '6px';
+			img.style.width = '80px'; img.style.height = '80px'; img.style.objectFit = 'cover';
+			img.style.marginRight = '10px'; img.style.border = '1px solid #ccc'; img.style.borderRadius = '6px';
 
-			// file name
 			const span = document.createElement( 'span' );
 			span.textContent = file.name;
 
-			// delete button
+			const status = document.createElement( 'em' ); // upload status
+			status.style.marginLeft = '8px';
+			status.textContent = ' – pending…';
+
 			const delBtn = document.createElement( 'button' );
-			delBtn.type = 'button';
-			delBtn.textContent = '❌';
-			delBtn.style.marginLeft = '10px';
+			delBtn.type = 'button'; delBtn.textContent = '❌'; delBtn.style.marginLeft = '10px';
 			delBtn.addEventListener( 'click', () => {
-				removeFile( index, input, list );
+				removeFile( index, input, list, slot );
 			} );
 
-			li.appendChild( img );
-			li.appendChild( span );
-			li.appendChild( delBtn );
+			li.appendChild( img ); li.appendChild( span ); li.appendChild( status ); li.appendChild( delBtn );
 			list.appendChild( li );
 		} );
 	}
 
-	function removeFile( index, input, list ) {
+	function removeFile( index, input, list, slot ) {
 		const dt = new DataTransfer();
 		const files = Array.from( input.files );
-
-		files.splice( index, 1 ); // remove selected file
-		files.forEach( ( file ) => dt.items.add( file ) );
-
+		files.splice( index, 1 );
+		files.forEach( ( f ) => dt.items.add( f ) );
 		input.files = dt.files;
-		showFiles( Array.from( input.files ), input, list ); // refresh preview
+		showFiles( Array.from( input.files ), input, list, slot );
+		// NOTE: We’re not deleting uploaded media from the server here (needs auth/cap).
+		// If you want to also remove uploaded IDs when removing from preview, clear the hidden field and re-upload remaining files:
+		writeIds( slot, [] );
+		autoUpload( Array.from( input.files ), slot, list );
+	}
+
+	function autoUpload( files, slot, list ) {
+		if ( ! files.length ) {
+			list.querySelectorAll( 'em' ).forEach( ( e ) => e.textContent = '' ); return;
+		}
+
+		const fd = new FormData();
+		fd.append( 'action', 'bst_handle_upload_order_photos' );
+		// fd.append( '_ajax_nonce', bstUpload.nonce );
+		// send only this slot’s files so PHP can bucket them correctly
+		files.forEach( ( file ) => fd.append( slot + '[]', file, file.name ) );
+
+		jQuery.ajax( {
+			url: localVars.ajax_url,
+			method: 'POST',
+			data: fd,
+			processData: false,
+			contentType: false,
+			xhr() {
+				const xhr = new window.XMLHttpRequest();
+				xhr.upload.addEventListener( 'progress', function( e ) {
+					if ( e.lengthComputable ) {
+						const pct = Math.round( ( e.loaded / e.total ) * 100 );
+						list.querySelectorAll( 'em' ).forEach( ( e ) => e.textContent = ' – uploading ' + pct + '%' );
+					}
+				} );
+				return xhr;
+			},
+			success( resp ) {
+				if ( resp && resp.success ) {
+					// resp.data[slot] => array of {id, url}
+					const ids = ( resp.data && resp.data[ slot ] ) ? resp.data[ slot ].map( ( x ) => x.id ) : [];
+					writeIds( slot, ids );
+					list.querySelectorAll( 'em' ).forEach( ( e ) => e.textContent = ' – uploaded' );
+				} else {
+					const msg = ( resp && resp.data && resp.data.message ) ? resp.data.message : 'Upload failed.';
+					list.querySelectorAll( 'em' ).forEach( ( e ) => e.textContent = ' – ' + msg );
+					alert( msg );
+				}
+			},
+			error() {
+				list.querySelectorAll( 'em' ).forEach( ( e ) => e.textContent = ' – network error' );
+				alert( 'Network error during upload.' );
+			},
+		} );
 	}
 }
 
-setupImageUpload( 'photo_hitch', 'list_hitch' );
-setupImageUpload( 'photo_rear', 'list_rear' );
-setupImageUpload( 'photo_front', 'list_front' );
+// init (note the added 3rd arg = slot key)
+setupImageUpload( 'photo_hitch', 'list_hitch', 'hitch' );
+setupImageUpload( 'photo_rear', 'list_rear', 'rear' );
+setupImageUpload( 'photo_front', 'list_front', 'front' );
