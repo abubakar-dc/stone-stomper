@@ -4,20 +4,7 @@
 	"settings": {
 		"appearanceTools": true,
 		"useRootPaddingAwareAlignments": true,
-		"border": {
-			"color": false,
-			"radius": false,
-			"style": false,
-			"width": false
-		},
 		"color": {
-			"custom": false,
-			"defaultPalette": false,
-			"defaultGradients": false,
-			"defaultDuotone": false,
-			"customGradient": false,
-			"customDuotone": false,
-
 			"palette": [
 				{
 					"slug": "white",
@@ -205,6 +192,11 @@
 					"slug": "48-pixels"
 				},
 				{
+					"name": "64 Pixels",
+					"size": "var(--ss_space_64)",
+					"slug": "64-pixels"
+				},
+				{
 					"name": "72 Pixels",
 					"size": "var(--ss_space_72)",
 					"slug": "72-pixels"
@@ -215,6 +207,11 @@
 					"slug": "96-pixels"
 				},
 				{
+					"name": "110 Pixels",
+					"size": "var(--ss_space_110)",
+					"slug": "110-pixels"
+				},
+				{
 					"name": "128 Pixels",
 					"size": "var(--ss_space_128)",
 					"slug": "128-pixels"
@@ -223,6 +220,11 @@
 					"name": "156 Pixels",
 					"size": "var(--ss_space_156)",
 					"slug": "156-pixels"
+				},
+				{
+					"name": "196 Pixels",
+					"size": "var(--ss_space_196)",
+					"slug": "196-pixels"
 				},
 				{
 					"name": "200 Pixels",
@@ -237,15 +239,6 @@
 			]
 		},
 		"typography": {
-			"customFontSize": false,
-			"fontStyle": false,
-			"fontWeight": false,
-			"letterSpacing": false,
-			"lineHeight": false,
-			"textDecoration": false,
-			"textTransform": false,
-			"dropCap": false,
-			"fontFamilies": [],
 			"fontSizes": [
 				{
 					"slug": "font-size-1",
@@ -294,27 +287,6 @@
 				}
 			]
 		},
-		"blocks": {
-			"core/button": {
-				"color": {
-					"text": false,
-					"background": false,
-					"customDuotone": false,
-					"customGradient": false,
-					"defaultDuotone": false,
-					"defaultGradients": false,
-					"duotone": [],
-					"gradients": []
-				},
-				"typography": {
-					"customFontSize": false,
-					"fontSizes": []
-				},
 
-				"border": {
-					"radius": false
-				}
-			}
-		}
 	}
 }
