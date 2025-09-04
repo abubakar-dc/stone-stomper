@@ -5,7 +5,7 @@
 ------------------------------------------------- */
 
 body {
-	@include font(axi, reg, family weight);
+	@include font(inter, reg, family weight);
 	transition: all 0.3s ease-in-out;
 	position: relative;
 	font-size: var(--ss_font_size_16);

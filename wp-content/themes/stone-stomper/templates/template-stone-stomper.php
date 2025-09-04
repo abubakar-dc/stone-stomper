@@ -17,7 +17,7 @@ get_header();
 ?>
 <section id="page-section" class="page-section">
 	<!-- Content Start -->
-	<div class="gl-s200"></div>
+	<div class="st-s200"></div>
 	<section>
 		<div class="wrapper">
 			<div class="order-section two-columns justify-content-between align-items-center image-at-left">
@@ -315,7 +315,7 @@ get_header();
 	?>
 	<div class="ts-80"></div>
 	<!-- Content End -->
-	<div class="gl-s200"></div>
+	<div class="st-s200"></div>
 
 </section>
 <?php get_footer(); ?>

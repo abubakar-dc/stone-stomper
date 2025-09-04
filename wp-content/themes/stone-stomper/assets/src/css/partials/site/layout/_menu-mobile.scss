@@ -23,6 +23,7 @@
 				display: block;
 				opacity: 1;
 				line-height: 1;
+
 				&.menu-item-has-children {
 					display: flex;
 					flex-wrap: wrap;
@@ -37,8 +38,8 @@
 					position: relative;
 				}
 
-				&.current-menu-item > a,
-				&.current-menu-parent > a,
+				&.current-menu-item>a,
+				&.current-menu-parent>a,
 				a:hover {
 					border-bottom: none;
 				}
@@ -68,11 +69,11 @@
 						padding: initial;
 						text-transform: inherit;
 
-						@include font(axi, reg);
+						@include font(inter, reg);
 					}
 
-					&.current-menu-item > a,
-					&.current-menu-parent > a {
+					&.current-menu-item>a,
+					&.current-menu-parent>a {
 						color: var(--ss_header_mobile_submenu_color);
 					}
 				}
@@ -84,7 +85,7 @@
 		}
 	}
 
-	.header-nav ul li.menu-item-has-children > a {
+	.header-nav ul li.menu-item-has-children>a {
 		background-image: none;
 		padding-right: 0;
 	}
@@ -111,9 +112,7 @@
 
 	body.have-topbar {
 		.nav-overlay {
-			top: calc(
-				var(--ss_header-height) + var(--ss_header-wrapper-default)
-			);
+			top: calc(var(--ss_header-height) + var(--ss_header-wrapper-default));
 		}
 	}
 
@@ -221,13 +220,11 @@
 
 		&.active span {
 			&:first-child {
-				transform: translateY(math.div($menu_height, 2) - 1)
-					translateX(0) rotate(-45deg);
+				transform: translateY(math.div($menu_height, 2) - 1) translateX(0) rotate(-45deg);
 			}
 
 			&:last-child {
-				transform: translateY(math.div(-$menu_height, 2) + 1)
-					translateX(0) rotate(45deg);
+				transform: translateY(math.div(-$menu_height, 2) + 1) translateX(0) rotate(45deg);
 			}
 
 			&.middle {
@@ -254,7 +251,7 @@
 		}
 	}
 
-	li.menu-item-has-children.active > .submenu-icon::before {
+	li.menu-item-has-children.active>.submenu-icon::before {
 		height: 0;
 		top: 18px;
 	}
@@ -262,22 +259,13 @@
 	.no-overflow .logged-in.admin-bar {
 		&.have-topbar {
 			.nav-overlay {
-				top: calc(
-					var(--wp-admin--admin-bar--height) + var(--ss_header-height) +
-						var(--ss_header-wrapper-default)
-				);
-				height: calc(
-					100vh - var(--wp-admin--admin-bar--height) -
-						var(--ss_header-height)
-				);
+				top: calc(var(--wp-admin--admin-bar--height) + var(--ss_header-height) + var(--ss_header-wrapper-default));
+				height: calc(100vh - var(--wp-admin--admin-bar--height) - var(--ss_header-height));
 			}
 		}
 
 		.nav-overlay {
-			top: calc(
-				var(--wp-admin--admin-bar--height) +
-					var(--ss_header-wrapper-default)
-			);
+			top: calc(var(--wp-admin--admin-bar--height) + var(--ss_header-wrapper-default));
 			height: calc(100vh - var(--wp-admin--admin-bar--height));
 		}
 	}
@@ -291,22 +279,25 @@
 	#wpadminbar {
 		position: fixed !important;
 	}
-	#wpadminbar #wp-admin-bar-customize > .ab-item:before,
-	#wpadminbar #wp-admin-bar-edit > .ab-item:before,
-	#wpadminbar #wp-admin-bar-my-account > .ab-item:before,
-	#wpadminbar #wp-admin-bar-my-sites > .ab-item:before,
-	#wpadminbar #wp-admin-bar-site-editor > .ab-item:before,
-	#wpadminbar #wp-admin-bar-site-name > .ab-item:before {
+
+	#wpadminbar #wp-admin-bar-customize>.ab-item:before,
+	#wpadminbar #wp-admin-bar-edit>.ab-item:before,
+	#wpadminbar #wp-admin-bar-my-account>.ab-item:before,
+	#wpadminbar #wp-admin-bar-my-sites>.ab-item:before,
+	#wpadminbar #wp-admin-bar-site-editor>.ab-item:before,
+	#wpadminbar #wp-admin-bar-site-name>.ab-item:before {
 		width: 46px !important;
 	}
-	#wpadminbar #wp-admin-bar-customize > .ab-item,
-	#wpadminbar #wp-admin-bar-edit > .ab-item,
-	#wpadminbar #wp-admin-bar-my-account > .ab-item,
-	#wpadminbar #wp-admin-bar-my-sites > .ab-item,
-	#wpadminbar #wp-admin-bar-site-editor > .ab-item,
-	#wpadminbar #wp-admin-bar-site-name > .ab-item {
+
+	#wpadminbar #wp-admin-bar-customize>.ab-item,
+	#wpadminbar #wp-admin-bar-edit>.ab-item,
+	#wpadminbar #wp-admin-bar-my-account>.ab-item,
+	#wpadminbar #wp-admin-bar-my-sites>.ab-item,
+	#wpadminbar #wp-admin-bar-site-editor>.ab-item,
+	#wpadminbar #wp-admin-bar-site-name>.ab-item {
 		width: 46px !important;
 	}
+
 	#wp-toolbar,
 	#wpadminbar ul {
 		display: flex;

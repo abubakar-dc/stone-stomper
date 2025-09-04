@@ -112,7 +112,7 @@
 }
 
 .editor-styles-wrapper {
-	@include font(axi, reg, family weight);
+	@include font(inter, reg, family weight);
 	font-size: var(--ss_font_size_20);
 	color: var(--ss_body_color);
 	line-height: 1.5;
@@ -230,6 +230,7 @@
 }
 
 .components-tab-panel__tab-content {
+
 	.acf-field-block-title,
 	.acf-field-spacers {
 		padding: 0px !important;
@@ -255,6 +256,7 @@
 }
 
 .interface-interface-skeleton__sidebar {
+
 	.acf-field-block-title,
 	.acf-field-spacers {
 		padding: 0px !important;

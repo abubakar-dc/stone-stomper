@@ -29,7 +29,7 @@ $sts_var_post_catagories = get_categories( $sts_var_post_id );
 		<div class="banner-content">
 			<h1><?php echo esc_html( $sts_var_pagetitle ); ?></h1>
 		</div>
-		<div class="gl-s9"></div>
+		<div class="st-s9"></div>
 		<div class="blog-nav">
 			<div class="nav-ctn d-flex justify-content-center flex-wrap">
 				<?php if ( $sts_var_post_catagories ) { ?>
@@ -62,7 +62,7 @@ $sts_var_post_catagories = get_categories( $sts_var_post_id );
 				</div>
 			</div> -->
 		</div>
-		<div class="gl-s11"></div>
+		<div class="st-s11"></div>
 		<?php
 		if ( $sts_var_tblgho_feature_post ) {
 			?>

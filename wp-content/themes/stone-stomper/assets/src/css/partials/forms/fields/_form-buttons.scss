@@ -24,7 +24,7 @@ input[type="reset"] {
 	color: var(--ss_button_color);
 	outline: none;
 
-	@include font(axi, bold);
+	@include font(inter, bold);
 
 	font-size: var(--ss_font_size_16);
 	height: 50px;

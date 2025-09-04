@@ -278,7 +278,7 @@ ul.list-none li {
 .learn-more {
 	color: var(--wp--preset--color--black);
 
-	@include font(axi, bold);
+	@include font(inter, bold);
 }
 
 /****
@@ -304,7 +304,7 @@ span.button,
 	text-align: center;
 	border-radius: 0;
 	line-height: 1.5;
-	@include font(axi, bold);
+	@include font(inter, bold);
 	font-size: var(--ss_font_size_16);
 
 	&:last-child {
@@ -430,6 +430,7 @@ button[disabled]:hover {
 	}
 
 	.select-dropdown__button {
+
 		&:focus,
 		&:focus-visible {
 			outline-color: black !important;
@@ -488,6 +489,7 @@ body {
 		}
 	}
 }
+
 .hidden {
 	display: none;
 }

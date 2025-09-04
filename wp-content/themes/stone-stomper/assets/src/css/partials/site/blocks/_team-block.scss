@@ -22,23 +22,21 @@
 	}
 
 	.member-image {
-		@include background-image(
-			"/admin/defaults/default-image.webp",
+		@include background-image("/admin/defaults/default-image.webp",
 			center,
 			cover,
 			no-repeat,
 			310px,
-			100%
-		);
+			100%);
 	}
 
 	.member-name {
-		@include font(axi, bold);
+		@include font(inter, bold);
 		margin-bottom: 8px;
 	}
 
 	.designation {
-		@include font(axi, reg);
+		@include font(inter, reg);
 
 		font-size: var(--ss_font_size_18);
 		margin-bottom: 0;
@@ -175,14 +173,14 @@
 	}
 
 	.member-name-popup {
-		@include font(axi, bold);
+		@include font(inter, bold);
 
 		color: var(--wp--preset--color--dark_text);
 		margin-bottom: 5px;
 	}
 
 	.member-designation {
-		@include font(axi, reg);
+		@include font(inter, reg);
 
 		color: var(--wp--preset--color--lblack);
 		margin-bottom: 0;

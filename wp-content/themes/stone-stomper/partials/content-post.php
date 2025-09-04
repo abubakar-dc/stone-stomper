@@ -30,7 +30,7 @@ $sts_var_posttitle = $sts_fields['sts_var_posttitle'] ?? get_the_title();
 <section id="page-section" class="page-section">
 	<div class="wrapper">
 		<div class="wrapper">
-			<div class="gl-s60"></div>
+			<div class="st-s60"></div>
 			<div class="post-box-img post-image">
 				<a href="<?php the_permalink(); ?>">
 					<?php

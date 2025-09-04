@@ -104,10 +104,13 @@ Mixin for transition
   --ss_space_30: clamp(24 * 1px, 6 / 806 * (100vw - 474 * 1px) + 24 * 1px, 30 * 1px);
   --ss_space_36: clamp(30 * 1px, 6 / 806 * (100vw - 474 * 1px) + 30 * 1px, 36 * 1px);
   --ss_space_48: clamp(36 * 1px, 12 / 806 * (100vw - 474 * 1px) + 36 * 1px, 48 * 1px);
+  --ss_space_64: clamp(44 * 1px, 20 / 806 * (100vw - 474 * 1px) + 44 * 1px, 64 * 1px);
   --ss_space_72: clamp(44 * 1px, 28 / 806 * (100vw - 474 * 1px) + 44 * 1px, 72 * 1px);
   --ss_space_96: clamp(52 * 1px, 44 / 806 * (100vw - 474 * 1px) + 52 * 1px, 96 * 1px);
+  --ss_space_110: clamp(52 * 1px, 58 / 806 * (100vw - 474 * 1px) + 52 * 1px, 110 * 1px);
   --ss_space_128: clamp(64 * 1px, 64 / 806 * (100vw - 474 * 1px) + 64 * 1px, 128 * 1px);
   --ss_space_156: clamp(72 * 1px, 84 / 806 * (100vw - 474 * 1px) + 72 * 1px, 156 * 1px);
+  --ss_space_196: clamp(72 * 1px, 124 / 806 * (100vw - 474 * 1px) + 72 * 1px, 196 * 1px);
   --ss_space_200: clamp(84 * 1px, 116 / 806 * (100vw - 474 * 1px) + 84 * 1px, 200 * 1px);
   --ss_space_236: clamp(98 * 1px, 138 / 806 * (100vw - 474 * 1px) + 98 * 1px, 236 * 1px);
   /* -------------------------------------------------
@@ -119,24 +122,29 @@ Mixin for transition
   --ss_font_size_18: clamp(17 * 1px, 1 / 806 * (100vw - 474 * 1px) + 17 * 1px, 18 * 1px);
   --ss_font_size_20: clamp(18 * 1px, 2 / 806 * (100vw - 474 * 1px) + 18 * 1px, 20 * 1px);
   --ss_font_size_22: clamp(20 * 1px, 2 / 806 * (100vw - 474 * 1px) + 20 * 1px, 22 * 1px);
-  --ss_font_size_24: clamp(20 * 1px, 4 / 806 * (100vw - 474 * 1px) + 20 * 1px, 24 * 1px);
-  --ss_font_size_26: clamp(22 * 1px, 4 / 806 * (100vw - 474 * 1px) + 22 * 1px, 26 * 1px);
+  --ss_font_size_25: clamp(20 * 1px, 4 / 806 * (100vw - 474 * 1px) + 20 * 1px, 24 * 1px);
+  --ss_font_size_27: clamp(22 * 1px, 5 / 806 * (100vw - 474 * 1px) + 22 * 1px, 27 * 1px);
+  --ss_font_size_29: clamp(22 * 1px, 7 / 806 * (100vw - 474 * 1px) + 22 * 1px, 29 * 1px);
   --ss_font_size_32: clamp(24 * 1px, 8 / 806 * (100vw - 474 * 1px) + 24 * 1px, 32 * 1px);
   --ss_font_size_40: clamp(26 * 1px, 14 / 806 * (100vw - 474 * 1px) + 26 * 1px, 40 * 1px);
-  --ss_font_size_48: clamp(30 * 1px, 18 / 806 * (100vw - 474 * 1px) + 30 * 1px, 48 * 1px);
+  --ss_font_size_47: clamp(30 * 1px, 17 / 806 * (100vw - 474 * 1px) + 30 * 1px, 47 * 1px);
+  --ss_font_size_51: clamp(30 * 1px, 21 / 806 * (100vw - 474 * 1px) + 30 * 1px, 51 * 1px);
   --ss_font_size_60: clamp(45 * 1px, 15 / 806 * (100vw - 474 * 1px) + 45 * 1px, 60 * 1px);
-  --ss_font_size_68: clamp(55 * 1px, 13 / 806 * (100vw - 474 * 1px) + 55 * 1px, 68 * 1px);
+  --ss_font_size_65: clamp(55 * 1px, 13 / 806 * (100vw - 474 * 1px) + 55 * 1px, 68 * 1px);
+  --ss_font_size_80: clamp(55 * 1px, 25 / 806 * (100vw - 474 * 1px) + 55 * 1px, 80 * 1px);
+  --ss_font_size_86: clamp(55 * 1px, 31 / 806 * (100vw - 474 * 1px) + 55 * 1px, 86 * 1px);
+  --ss_font_size_107: clamp(55 * 1px, 52 / 806 * (100vw - 474 * 1px) + 55 * 1px, 107 * 1px);
   /* -------------------------------------------------
   >> Color variables
   ------------------------------------------------- */
   /*
   >> Base Colors
   */
-  --ss_color_primary: #00a4eb;
+  --ss_color_primary: #FA3232;
   --ss_color_on_primary: #ffffff;
-  --ss_color_secondary: #0013ff;
+  --ss_color_secondary: #000000;
   --ss_black: #000000;
-  --ss_black_1: #14191f;
+  --ss_black_1: #2C2A2A;
   --ss_black_2: #606364;
   --ss_white: #ffffff;
   --ss_white_1: #f1f1f1;
@@ -145,7 +153,7 @@ Mixin for transition
   --ss_gray_1: #e6e6e6;
   --ss_gray_2: #eee;
   --ss_blue: #0013ff;
-  --ss_blue_1: #00a4eb;
+  --ss_blue_1: #FA3232;
   --ss_blue_2: #2ca8dd;
   --ss_navy: #091a17;
   --ss_navy_1: #15332e;
@@ -342,7 +350,7 @@ Mixin for transition
   --ss_style_bg: #821212;
   --ss_style_text: #000000;
   --ss_style_link: #000000;
-  --ss_style_button: #00a4eb;
+  --ss_style_button: #FA3232;
 }
 
 /* ------------------------------------------------------------------
@@ -531,7 +539,7 @@ h5,
 .heading-5,
 h6,
 .heading-6 {
-  font-family: "Axiforma-Bold", arial, sans-serif;
+  font-family: "Inter 18pt", arial, sans-serif;
   font-weight: 700;
   font-style: normal;
   margin: 0 0 20px;
@@ -592,12 +600,12 @@ h2,
 
 h3,
 .heading-3 {
-  font-size: var(--ss_font_size_26);
+  font-size: var(--ss_font_size_27);
 }
 
 h4,
 .heading-4 {
-  font-size: var(--ss_font_size_24);
+  font-size: var(--ss_font_size_25);
 }
 
 h5,
@@ -756,7 +764,7 @@ video {
 >> Edit these styles as required
 ------------------------------------------------- */
 body {
-  font-family: "Axiforma-Regular", arial, sans-serif;
+  font-family: "Inter 18pt", arial, sans-serif;
   font-weight: 400;
   transition: all 0.3s ease-in-out;
   position: relative;
@@ -975,7 +983,7 @@ ol ul {
 }
 .page-section ol > li::before {
   color: var(--ss_ol_list_marker_color);
-  font-family: "Axiforma-Regular", arial, sans-serif;
+  font-family: "Inter 18pt", arial, sans-serif;
   font-weight: 400;
   font-style: normal;
   content: counters(list, ".") ".";
@@ -1257,7 +1265,7 @@ input[type=string],
 select,
 textarea,
 .gform-text-input-reset {
-  font-family: "Axiforma-Regular", arial, sans-serif;
+  font-family: "Inter 18pt", arial, sans-serif;
   font-weight: 400;
   font-style: normal;
   font-size: var(--ss_font_size_18);
@@ -1441,7 +1449,7 @@ input[type=reset] {
   border: 1px solid var(--ss_button_bgcolor);
   color: var(--ss_button_color);
   outline: none;
-  font-family: "Axiforma-Bold", arial, sans-serif;
+  font-family: "Inter 18pt", arial, sans-serif;
   font-weight: 700;
   font-style: normal;
   font-size: var(--ss_font_size_16);
@@ -2254,7 +2262,7 @@ table.ui-datepicker_calendar {
   text-align: left;
 }
 .wp-caption p.wp-caption-text {
-  font-family: "Axiforma-Regular", arial, sans-serif;
+  font-family: "Inter 18pt", arial, sans-serif;
   font-weight: 400;
   font-style: normal;
   font-size: var(--ss_font_size_18);
@@ -2508,7 +2516,7 @@ a img.aligncenter {
   font-size: var(--ss_font_size_20);
   line-height: 20px;
   cursor: pointer;
-  font-family: "Axiforma-Regular", arial, sans-serif;
+  font-family: "Inter 18pt", arial, sans-serif;
   font-weight: 400;
   font-style: normal;
   width: 40px;
@@ -2610,7 +2618,7 @@ a img.aligncenter {
   border-bottom: none;
 }
 .comment-author.vcard span {
-  font-family: "Axiforma-Regular", arial, sans-serif;
+  font-family: "Inter 18pt", arial, sans-serif;
   font-weight: 400;
   font-style: normal;
 }
@@ -3075,7 +3083,7 @@ header {
   display: inline-block;
   position: relative;
   line-height: 1;
-  font-family: "Axiforma-Regular", arial, sans-serif;
+  font-family: "Inter 18pt", arial, sans-serif;
   font-weight: 400;
   font-style: normal;
 }
@@ -3089,7 +3097,7 @@ header {
   position: relative;
   color: var(--ss_header_color);
   font-size: 15px;
-  font-family: "Axiforma-Regular", arial, sans-serif;
+  font-family: "Inter 18pt", arial, sans-serif;
   font-weight: 400;
   font-style: normal;
 }
@@ -3167,7 +3175,7 @@ header {
   position: relative;
   color: var(--ss_header_submenu_color);
   transition: all 0.3s ease-in-out;
-  font-family: "Axiforma-Regular", arial, sans-serif;
+  font-family: "Inter 18pt", arial, sans-serif;
   font-weight: 400;
   font-style: normal;
 }
@@ -3271,7 +3279,7 @@ header {
   .nav-overlay .header-nav ul ul li a:visited {
     padding: initial;
     text-transform: inherit;
-    font-family: "Axiforma-Regular", arial, sans-serif;
+    font-family: "Inter 18pt", arial, sans-serif;
     font-weight: 400;
     font-style: normal;
   }
@@ -3513,6 +3521,20 @@ header {
 /*-------------------------------------------------
 >> Styles for Home
 -------------------------------------------------*/
+.hero-home-section {
+  padding: 230px 0 100px;
+}
+.hero-home-section .wp-block-cover {
+  position: initial;
+}
+.hero-home-section .wp-block-cover img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 /*-------------------------------------------------
 >> Styles for footer
 -------------------------------------------------*/
@@ -3638,7 +3660,7 @@ header {
   margin-bottom: 0;
   margin-left: 30px;
   font-size: 14px;
-  font-family: "Axiforma-Regular", arial, sans-serif;
+  font-family: "Inter 18pt", arial, sans-serif;
   font-weight: 400;
   font-style: normal;
 }
@@ -3680,7 +3702,7 @@ header {
 .legal-text {
   font-size: 15px;
   color: var(--ss_legal_text_color);
-  font-family: "Axiforma-Regular", arial, sans-serif;
+  font-family: "Inter 18pt", arial, sans-serif;
   font-weight: 400;
   font-style: normal;
   margin-right: 30px;
@@ -3723,9 +3745,8 @@ header {
   max-width: 760px;
 }
 
-.ctn-full-width .wrapper {
-  max-width: 100%;
-  width: 100%;
+.ctn-full-width {
+  position: relative;
 }
 
 .ctn-navy {
@@ -3790,6 +3811,11 @@ header {
   height: var(--ss_space_48) !important;
 }
 
+.is-style-gl-s64,
+.gl-s64 {
+  height: var(--ss_space_64) !important;
+}
+
 .is-style-gl-s72,
 .gl-s72 {
   height: var(--ss_space_72) !important;
@@ -3800,6 +3826,11 @@ header {
   height: var(--ss_space_96) !important;
 }
 
+.is-style-gl-s110,
+.gl-s110 {
+  height: var(--ss_space_110) !important;
+}
+
 .is-style-gl-s128,
 .gl-s128 {
   height: var(--ss_space_128) !important;
@@ -3808,6 +3839,11 @@ header {
 .is-style-gl-s156,
 .gl-s156 {
   height: var(--ss_space_156) !important;
+}
+
+.is-style-gl-s196,
+.gl-s196 {
+  height: var(--ss_space_196) !important;
 }
 
 .is-style-gl-s200,
@@ -4120,7 +4156,7 @@ ul.list-none li::before {
 ****/
 .learn-more {
   color: var(--wp--preset--color--black);
-  font-family: "Axiforma-Bold", arial, sans-serif;
+  font-family: "Inter 18pt", arial, sans-serif;
   font-weight: 700;
   font-style: normal;
 }
@@ -4148,7 +4184,7 @@ span.button,
   text-align: center;
   border-radius: 0;
   line-height: 1.5;
-  font-family: "Axiforma-Bold", arial, sans-serif;
+  font-family: "Inter 18pt", arial, sans-serif;
   font-weight: 700;
   font-style: normal;
   font-size: var(--ss_font_size_16);
@@ -4427,7 +4463,7 @@ body #daextlwcnf-cookie-settings-button-2:hover {
 }
 
 .post-tag a {
-  font-family: "Axiforma-Regular", arial, sans-serif;
+  font-family: "Inter 18pt", arial, sans-serif;
   font-weight: 400;
   font-style: normal;
   margin-bottom: 8px;
@@ -4556,7 +4592,7 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   display: block;
   font-size: 24px;
   line-height: 30px;
-  font-family: "Axiforma-Regular", arial, sans-serif;
+  font-family: "Inter 18pt", arial, sans-serif;
   font-weight: 400;
   font-style: normal;
   cursor: pointer;
@@ -4608,7 +4644,7 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   text-transform: uppercase;
   font-size: var(--ss_font_size_16);
   line-height: 22px;
-  font-family: "Axiforma-Regular", arial, sans-serif;
+  font-family: "Inter 18pt", arial, sans-serif;
   font-weight: 400;
   font-style: normal;
   padding: 10px;
@@ -4634,7 +4670,7 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   background-color: rgba(40, 28, 60, 0.04);
   font-size: 15px;
   line-height: 20px;
-  font-family: "Axiforma-Regular", arial, sans-serif;
+  font-family: "Inter 18pt", arial, sans-serif;
   font-weight: 400;
   font-style: normal;
 }
@@ -4680,13 +4716,13 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   width: 100%;
 }
 .single-member .member-name {
-  font-family: "Axiforma-Bold", arial, sans-serif;
+  font-family: "Inter 18pt", arial, sans-serif;
   font-weight: 700;
   font-style: normal;
   margin-bottom: 8px;
 }
 .single-member .designation {
-  font-family: "Axiforma-Regular", arial, sans-serif;
+  font-family: "Inter 18pt", arial, sans-serif;
   font-weight: 400;
   font-style: normal;
   font-size: var(--ss_font_size_18);
@@ -4806,14 +4842,14 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   width: 64%;
 }
 .single-team .member-name-popup {
-  font-family: "Axiforma-Bold", arial, sans-serif;
+  font-family: "Inter 18pt", arial, sans-serif;
   font-weight: 700;
   font-style: normal;
   color: var(--wp--preset--color--dark_text);
   margin-bottom: 5px;
 }
 .single-team .member-designation {
-  font-family: "Axiforma-Regular", arial, sans-serif;
+  font-family: "Inter 18pt", arial, sans-serif;
   font-weight: 400;
   font-style: normal;
   color: var(--wp--preset--color--lblack);
@@ -4870,7 +4906,7 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   border: 2px solid var(--ss_theme_btn_border_color);
   transition: all 0.35s ease-in-out;
   border-radius: 0;
-  font-family: "Axiforma-Bold", arial, sans-serif;
+  font-family: "Inter 18pt", arial, sans-serif;
   font-weight: 700;
   font-style: normal;
   font-size: var(--ss_font_size_16);
@@ -5033,16 +5069,16 @@ body #daextlwcnf-cookie-settings-button-2:hover {
 > Import Fonts
 ------------------------------------------------------------------ */
 @font-face {
-  font-family: "axiforma-bold";
+  font-family: "Inter18pt-Bold";
   font-style: normal;
   font-weight: 700;
-  src: url(fonts/axiforma-bold.woff2) format("woff2");
+  src: url(fonts/Inter18pt-Bold.woff2) format("woff2");
 }
 @font-face {
-  font-family: "axiforma-regular";
+  font-family: "Inter18pt-Regular";
   font-style: normal;
   font-weight: 400;
-  src: url(fonts/axiforma-regular.woff2) format("woff2");
+  src: url(fonts/Inter18pt-Regular.woff2) format("woff2");
 }
 /* ------------------------------------------------------------------
 > Vendors CSS Starts Here

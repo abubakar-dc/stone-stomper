@@ -30,7 +30,7 @@
 	}
 
 	p.wp-caption-text {
-		@include font(axi, reg);
+		@include font(inter, reg);
 
 		font-size: var(--ss_font_size_18);
 		margin: 0;

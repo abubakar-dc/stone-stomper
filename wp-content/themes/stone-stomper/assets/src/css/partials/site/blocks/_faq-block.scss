@@ -4,12 +4,12 @@
 }
 
 .faq {
-	> a {
+	>a {
 		border: none;
 		display: block;
 		font-size: 24px;
 		line-height: 30px;
-		@include font(axi, reg);
+		@include font(inter, reg);
 
 		cursor: pointer;
 		position: relative;
@@ -70,6 +70,7 @@
 }
 
 .top-latters-area {
+
 	a,
 	a:visited {
 		display: inline-block;
@@ -82,7 +83,7 @@
 		font-size: var(--ss_font_size_16);
 		line-height: 22px;
 
-		@include font(axi, reg);
+		@include font(inter, reg);
 
 		padding: 10px;
 		color: var(--wp--preset--color--black);
@@ -109,7 +110,7 @@
 	font-size: 15px;
 	line-height: 20px;
 
-	@include font(axi, reg);
+	@include font(inter, reg);
 }
 
 .glossary-content {

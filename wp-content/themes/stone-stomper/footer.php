@@ -103,7 +103,7 @@ $sts_var_social_profiles = $sts_option_fields['sts_var_social_profiles'] ?? null
 					</div>
 				</div>
 			</div>
-			<div class="gl-s72"></div>
+			<div class="st-s72"></div>
 			<div class="footer-bottom d-flex align-items-center justify-content-between">
 				<?php if ( $sts_var_ftrop_copyright ) { ?>
 				<div class="copy-right"><?php echo esc_html( $sts_var_ftrop_copyright ); ?></div>

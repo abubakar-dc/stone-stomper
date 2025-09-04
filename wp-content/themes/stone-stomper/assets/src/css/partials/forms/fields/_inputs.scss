@@ -43,7 +43,7 @@ input[type="string"],
 select,
 textarea,
 .gform-text-input-reset {
-	@include font(axi, reg);
+	@include font(inter, reg);
 
 	font-size: var(--ss_font_size_18);
 	height: 50px;

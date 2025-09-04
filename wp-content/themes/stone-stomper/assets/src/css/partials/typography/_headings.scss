@@ -16,7 +16,7 @@ h5,
 .heading-5,
 h6,
 .heading-6 {
-	@include font(axi, bold);
+	@include font(inter, bold);
 	margin: 0 0 20px;
 	color: var(--ss_heading_color);
 	line-height: 1.3;
@@ -45,12 +45,12 @@ h2,
 
 h3,
 .heading-3 {
-	font-size: var(--ss_font_size_26);
+	font-size: var(--ss_font_size_27);
 }
 
 h4,
 .heading-4 {
-	font-size: var(--ss_font_size_24);
+	font-size: var(--ss_font_size_25);
 }
 
 h5,

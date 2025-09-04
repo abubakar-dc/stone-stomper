@@ -259,12 +259,12 @@
 				},
 				{
 					"slug": "font-size-3",
-					"size": "var(--ss_font_size_26)",
+					"size": "var(--ss_font_size_27)",
 					"name": "Heading 3"
 				},
 				{
 					"slug": "font-size-4",
-					"size": "var(--ss_font_size_24)",
+					"size": "var(--ss_font_size_25)",
 					"name": "Heading 4"
 				},
 				{

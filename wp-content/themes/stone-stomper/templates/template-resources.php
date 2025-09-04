@@ -28,7 +28,7 @@ $sts_var_trcho_feature_post = $sts_fields['sts_var_trcho_feature_post'] ?? null;
 			<div class="banner-content">
 				<h1><?php echo esc_html( $sts_var_pagetitle ); ?></h1>
 			</div>
-			<div class="gl-s72"></div>
+			<div class="st-s72"></div>
 			<?php
 			if ( $sts_var_trcho_feature_post ) {
 				?>

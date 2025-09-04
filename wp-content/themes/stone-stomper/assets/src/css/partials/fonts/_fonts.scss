@@ -2,52 +2,76 @@ $base-url: "../";
 $used-fonts: (
 );
 $base-font-stack: (
-	axi: (reg: (family: ("Axiforma-Regular",
+	inter: (light: (family: ("Inter 18pt",
+				arial,
+				sans-serif,
+			),
+			weight: 300,
+			style: normal,
+			font-display: swap,
+			font-face: (family: "Inter18pt-Light",
+				path: "Inter18pt-Light",
+				formats: (woff2, woff),
+			),
+		),
+		reg: (family: ("Inter 18pt",
 				arial,
 				sans-serif,
 			),
 			weight: 400,
 			style: normal,
-			font-face: (family: "axiforma-regular",
-				path: "axiforma-regular",
-				formats: (woff2,
-				),
+			font-display: swap,
+			font-face: (family: "Inter18pt-Regular",
+				path: "Inter18pt-Regular",
+				formats: (woff2, woff),
 			),
 		),
-		med: (family: ("Axiforma-Medium",
+		med: (family: ("Inter 18pt",
 				arial,
 				sans-serif,
 			),
 			weight: 500,
 			style: normal,
-			font-face: (family: "axiforma-medium",
-				path: "axiforma-medium",
-				formats: (woff2,
-				),
+			font-display: swap,
+			font-face: (family: "Inter18pt-Medium",
+				path: "Inter18pt-Medium",
+				formats: (woff2, woff),
 			),
 		),
-		sbold: (family: ("Axiforma-SemiBold",
+		sbold: (family: ("Inter 18pt",
+				arial,
+				sans-serif,
+			),
+			weight: 600,
+			style: normal,
+			font-display: swap,
+			font-face: (family: "Inter18pt-SemiBold",
+				path: "Inter18pt-SemiBold",
+				formats: (woff2, woff),
+			),
+		),
+		bold: (family: ("Inter 18pt",
 				arial,
 				sans-serif,
 			),
 			weight: 700,
 			style: normal,
-			font-face: (family: "axiforma-semibold",
-				path: "axiforma-semibold",
-				formats: (woff2,
-				),
+			font-display: swap,
+			font-face: (family: "Inter18pt-Bold",
+				path: "Inter18pt-Bold",
+				formats: (woff2, woff),
 			),
 		),
-		bold: (family: ("Axiforma-Bold",
+		black: (family: ("Inter 18pt",
 				arial,
 				sans-serif,
 			),
-			weight: 700,
+			weight: 900,
 			style: normal,
-			font-face: (family: "axiforma-bold",
-				path: "axiforma-bold",
-				formats: (woff2,
-				),
+			font-display: swap,
+			font-face: (family: "Inter18pt-Black",
+				path: "Inter18pt-Black",
+				formats: (woff2, woff),
 			),
 		),
 	),
@@ -55,11 +79,8 @@ $base-font-stack: (
 
 // Fetch nested keys
 @function map-deep-get($map, $keys...) {
-
 	@each $key in $keys {
-
 		@if type-of($map) !="map" {
-
 			// @warn "`#{$map}` is not a map.";
 			@return false;
 		}
@@ -72,11 +93,8 @@ $base-font-stack: (
 
 // Checks if a list contains a value(s).
 @function contains($list, $values...) {
-
 	@each $value in $values {
-
 		@if type-of(index($list, $value)) !="number" {
-
 			@return false;
 		}
 	}
@@ -96,16 +114,16 @@ $base-font-stack: (
 }
 
 // Font styling shorthand
-@mixin font($group, $variant: reguopen, $properties: family weight style, $font-stack: $base-font-stack) {
+@mixin font($group,
+	$variant: reguopen,
+	$properties: family weight style,
+	$font-stack: $base-font-stack) {
 	$font-properties: map-deep-get($font-stack, $group, $variant);
 
 	@if $font-properties {
-
 		@include track-fonts($group, $variant);
 
-		@each $key,
-		$value in $font-properties {
-
+		@each $key, $value in $font-properties {
 			@if contains($properties, $key) {
 				font-#{$key}: $value;
 			}
@@ -122,7 +140,8 @@ $base-font-stack: (
 	@if map-has-key($used-fonts, $group)==false {
 		// Font-family isn't in the map yet, so add it.
 		// The key for the nested map is the font name:
-		$used-fonts: map-merge($used-fonts, ($group: (
+		$used-fonts: map-merge($used-fonts,
+				($group: (
 				),
 			)) !global;
 	}
@@ -134,17 +153,15 @@ $base-font-stack: (
 @if index($font-map, $variant)==null {
 	// Variation isn't in the map yet, so add it:
 	$variations: append($font-map, $variant);
-	$used-fonts: map-merge($used-fonts, ($group: $variations,
+	$used-fonts: map-merge($used-fonts,
+			($group: $variations,
 			)) !global;
 }
 }
 
 // Add the font-face rules for all used fonts
 @mixin import-fonts($font-stack: $base-font-stack) {
-
-	@each $group,
-	$variations in $used-fonts {
-
+	@each $group, $variations in $used-fonts {
 		@each $variant in $variations {
 			$font-properties: map-deep-get($font-stack, $group, $variant);
 
@@ -160,13 +177,18 @@ $base-font-stack: (
 					$font-style: map-get($font-properties, style);
 
 					@if $file-formats {
-
-						@include font-face($font-family, $file-path, $font-weight, $font-style, $file-formats);
+						@include font-face($font-family,
+							$file-path,
+							$font-weight,
+							$font-style,
+							$file-formats);
 					}
 
 					@else {
-
-						@include font-face($font-family, $file-path, $font-weight, $font-style);
+						@include font-face($font-family,
+							$file-path,
+							$font-weight,
+							$font-style);
 					}
 				}
 			}
@@ -198,7 +220,11 @@ $base-font-stack: (
 }
 
 // Add a font-face rule
-@mixin font-face($font-family, $file-path, $font-weight: 400, $font-style: normal, $file-formats: eot woff2 woff ttf svg) {
+@mixin font-face($font-family,
+	$file-path,
+	$font-weight: 400,
+	$font-style: normal,
+	$file-formats: eot woff2 woff ttf svg) {
 	@if $file-path !="" {
 		@font-face {
 			font-family: $font-family;

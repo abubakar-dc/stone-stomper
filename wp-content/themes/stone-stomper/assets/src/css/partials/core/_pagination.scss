@@ -27,7 +27,7 @@
 		font-size: var(--ss_font_size_20);
 		line-height: 20px;
 		cursor: pointer;
-		@include font(axi, reg);
+		@include font(inter, reg);
 		width: 40px;
 		height: 40px;
 		@include transition(all, 0.4s, ease-in-out);
@@ -50,7 +50,7 @@
 		}
 	}
 
-	> span.current {
+	>span.current {
 		border: none;
 
 		&:hover,

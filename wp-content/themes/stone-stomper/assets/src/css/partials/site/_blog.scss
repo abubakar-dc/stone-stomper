@@ -43,6 +43,7 @@
 }
 
 .post-box-title {
+
 	h2 a,
 	h4 a {
 		display: -webkit-box;
@@ -134,7 +135,7 @@
 
 .post-tag {
 	a {
-		@include font(axi, reg);
+		@include font(inter, reg);
 
 		margin-bottom: 8px;
 		border-bottom: none;

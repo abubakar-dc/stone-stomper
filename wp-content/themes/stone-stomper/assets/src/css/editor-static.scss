@@ -124,7 +124,7 @@
 				font-size: var(--ss_font_size_22);
 				margin: 8px 0;
 				text-align: center;
-				@include font(axi, bold);
+				@include font(inter, bold);
 			}
 		}
 	}
@@ -140,7 +140,7 @@
 			font-size: var(--ss_font_size_22);
 			margin: 8px 0;
 			text-align: center;
-			@include font(axi, bold);
+			@include font(inter, bold);
 		}
 	}
 }

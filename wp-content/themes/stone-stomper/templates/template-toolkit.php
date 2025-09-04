@@ -114,7 +114,7 @@ get_header();
 		<section id="" class="page-section">
 
 
-			<div class="gl-s72"></div>
+			<div class="st-s72"></div>
 			<!-- image-at-right variation -->
 			<section>
 				<div class="wrapper">
@@ -133,7 +133,7 @@ get_header();
 					</div>
 				</div>
 			</section>
-			<div class="gl-s96"></div>
+			<div class="st-s96"></div>
 			<!-- image-at-left variation-->
 			<section>
 				<div class="wrapper">
@@ -151,7 +151,7 @@ get_header();
 					</div>
 				</div>
 			</section>
-			<div class="gl-s60"></div>
+			<div class="st-s60"></div>
 
 		</section>
 	</main>
@@ -229,7 +229,7 @@ get_header();
 						</div>
 					</div>
 				</div>
-				<div class="gl-s72"></div>
+				<div class="st-s72"></div>
 				<div class="footer-bottom d-flex align-items-center justify-content-between">
 					<div class="copy-right">Copyright © 2024 By DevCause</div>
 					<div class="legal-nav">
