@@ -3,6 +3,186 @@
     "title": "Single Caravan - Options",
     "fields": [
         {
+            "key": "field_68befac890dcf",
+            "label": "Vinyl Insert (Width * Height mm)",
+            "name": "sts_var_caravan_vinyl_insert_width",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_68b5d477f3e65",
+                    "label": "Vinyl Insert (Width mm)",
+                    "name": "width",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_68bef9e890dce",
+                    "label": "Vinyl Insert (Height mm)",
+                    "name": "hieght",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                }
+            ]
+        },
+        {
+            "key": "field_68befb56274c2",
+            "label": "SS Measurement (Width * Height mm)",
+            "name": "sts_var_caravan_ss_mesurements",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_68befb56274c3",
+                    "label": "Width",
+                    "name": "width",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_68befb56274c4",
+                    "label": "Height",
+                    "name": "hieght",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                }
+            ]
+        },
+        {
+            "key": "field_68befbc7274c6",
+            "label": "Factory Stoneguard (Width * Height mm)",
+            "name": "sts_var_caravan_factory",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_68befbc7274c7",
+                    "label": "Width",
+                    "name": "width",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_68befbc7274c8",
+                    "label": "Height",
+                    "name": "hieght",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                }
+            ]
+        },
+        {
             "key": "field_68b5d477f3e59",
             "label": "Model",
             "name": "sts_var_caravan_model",
@@ -12,7 +192,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "33",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -24,46 +204,32 @@
             "append": ""
         },
         {
-            "key": "field_68b5d477f3e65",
-            "label": "Vinyl Insert (Width * Length mm)",
-            "name": "sts_var_caravan_vinyl_insert",
+            "key": "field_68bf03afedeb0",
+            "label": "Support Pockets",
+            "name": "sts_var_caravan_model_copy",
             "aria-label": "",
-            "type": "text",
+            "type": "checkbox",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "34",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "maxlength": "",
-            "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_68b5d477f3e7a",
-            "label": "Caravan Barwidth",
-            "name": "sts_var_caravan_barwidth",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "33",
-                "class": "",
-                "id": ""
+            "choices": {
+                "yes": "Yes"
             },
-            "default_value": "",
-            "maxlength": "",
+            "default_value": [
+                "yes"
+            ],
+            "return_format": "value",
+            "allow_custom": 0,
             "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
+            "layout": "vertical",
+            "toggle": 0,
+            "save_custom": 0,
+            "custom_choice_button_text": "Add new choice"
         }
     ],
     "location": [
@@ -84,5 +250,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1756829073
+    "modified": 1757348951
 }
