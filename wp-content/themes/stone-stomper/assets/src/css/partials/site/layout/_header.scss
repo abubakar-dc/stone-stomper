@@ -79,8 +79,7 @@ header {
 
 	img {
 		width: 14px;
-		filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(220deg)
-			brightness(102%) contrast(103%);
+		filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(220deg) brightness(102%) contrast(103%);
 	}
 }
 
@@ -102,7 +101,7 @@ header {
 	position: relative;
 	z-index: 9;
 	line-height: 0;
-	width: 230px;
+	width: 156px;
 	transition: all 0.2s ease-in-out;
 }
 
@@ -129,8 +128,8 @@ header {
 
 .header-wrapper {
 	box-sizing: border-box;
-	width: 90%;
-	max-width: 1300px;
+	width: 92%;
+	max-width: 1905px;
 	margin: 0 auto;
 }
 
@@ -149,4 +148,15 @@ header {
 
 .desktop-hide {
 	display: none;
+}
+
+
+.header-btns {
+	.account-icon {
+		margin-left: 10px;
+
+		svg {
+			margin-bottom: 0;
+		}
+	}
 }

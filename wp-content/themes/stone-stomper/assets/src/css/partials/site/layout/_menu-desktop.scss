@@ -34,20 +34,20 @@
 			position: relative;
 			line-height: 1;
 
-			@include font(inter, reg);
+			@include font(inter, bold);
 
 			a,
 			a:visited,
 			span.menu-link {
 				padding: 0 0 10px;
 				display: inline-block;
-				line-height: 1;
+				line-height: 1.5;
 				border: 0;
 				position: relative;
 				color: var(--ss_header_color);
-				font-size: 15px;
-
-				@include font(inter, reg);
+				font-size: var(--ss-font_size_27);
+				@include font(inter, bold);
+				text-transform: uppercase;
 
 				&::after {
 					content: "";
