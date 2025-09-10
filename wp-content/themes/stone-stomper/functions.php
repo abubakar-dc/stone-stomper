@@ -199,4 +199,25 @@ add_action('woocommerce_checkout_create_order_line_item', function($item, $cart_
     }
 }, 10, 4);
 
+add_filter( 'use_block_editor_for_post', function( $use_block_editor, $post ) {
 
+    if ( $post && 'templates/template-stone-stomper.php' === get_page_template_slug( $post->ID ) ) {
+        return false; // Disable Gutenberg for this template
+    }
+    return $use_block_editor;
+}, 10, 2 );
+add_action( 'admin_init', function() {
+    $post_id = isset( $_GET['post'] ) ? (int) $_GET['post'] : 0;
+    if ( ! $post_id ) {
+        return;
+    }
+
+    // Check if current post uses your custom template
+    if ( 'templates/template-stone-stomper.php' === get_page_template_slug( $post_id ) ) {
+        // Disable Gutenberg
+        add_filter( 'use_block_editor_for_post', '__return_false', 10 );
+
+        // Disable Classic (WYSIWYG) editor
+        remove_post_type_support( 'page', 'editor' );
+    }
+});

@@ -13,45 +13,69 @@
 
 // Include header.
 get_header();
+list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaults();
+
+$sts_var_section_head           = $sts_fields['sts_var_section_head'] ?? null;
+if($sts_var_section_head){
+	$sts_var_section_headline = $sts_var_section_head['headline']??null;
+	$sts_var_section_head_text = $sts_var_section_head['text']??null;
+	$sts_var_section_head_image = $sts_var_section_head['image']??null;
+}
+$sts_var_section_head_notices           = $sts_fields['sts_var_section_head_notices'] ?? null;
 
 ?>
 <section id="page-section" class="page-section">
 	<!-- Content Start -->
+	 <section>
+		<div class="image-cover" >
+		<?php if(has_post_thumbnail($sts_var_post_id)){
+			StoneStomper::the_featured_image($sts_var_post_id,2000);
+		}  ?>
+			<div class="image-overlay">
+				<h1><?php echo esc_html(get_the_title($sts_var_post_id)); ?></h1>
+			</div>
+		</div>
+	 </section>
 	<div class="st-s200"></div>
 	<section>
 		<div class="wrapper">
 			<div class="order-section two-columns justify-content-between align-items-center image-at-left">
-				<div class="iat-form-image column" tabindex="0" role="img"
-					aria-label="Image illustrating the content of this block">
-					<img src="../assets/src/images/admin/defaults/default-image.webp" alt="">
+				<?php if($sts_var_section_head_image){
+					?>
+				<div class="iat-form-image column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
+					<?php StoneStomper::the_attachment_image($sts_var_section_head_image,800 ); ?>
 				</div>
+				<?php } ?>
 				<div class="iat-form-content column">
 					<div class="content-head">
-
-						<h2>C U S T O M I S E Y O U R
-							STONE STOMPER ®</h2>
-						<p>Stone Stomper’s® reinforced one piece Truck Mesh trapeze style stone
-							guard protects your car and recreational vehicle from stones, rocks, bitumen
-							and road splatter. Each order is custom made to your measurements and
-							attaches easily with no drilling to the vehicle.</p>
+						<?php if($sts_var_section_headline){ ?>
+						<h2><?php echo esc_html($sts_var_section_headline); ?></h2>
+						<?php }
+						if($sts_var_section_head_text){
+							echo html_entity_decode($sts_var_section_head_text);
+						}
+						?>
 					</div>
-					<!-- i need order form with your detail section - detail section will include following details -->
-					<!-- name, delivery address, subrub, state, email address -->
-					<!-- Then another section will be towing vehicle details
-						vehicle make, vehicle model, year of manufacture
-						then another section will be carvan details
-						carvan make, carvan model, checkboxes( factory stone gaurd, Toolbox, spare tyres, other A frame accessories)
-						then another section will be upload photographs
-						hitch, towing vehicle rear photograph, carvan front photograph
-						then another section will be Final mesurments (Towing Vehicle Barwidth, Caravan Width, Caravan Clearance Gap,Vinyl Insert/s (based on Jayco CrossTrail)
-						then another section will be Final Details (delivery address, accossories checkboxes, shiping cost, and then order summary)
-						then finally a add to cart button and save order button
-						-->
 					<form id="orderForm" novalidate>
 						<div id="form-all">
 							<!-- Your Details -->
 							<div class="block" id="blk-details">
-								<h3>Your Details</h3>
+								<?php if($sts_var_section_head_notices){
+									foreach($sts_var_section_head_notices as $sts_key => $notice){
+									$sts_var_headline = $notice['headline']??null;
+									$sts_var_text = $notice['text']??null;
+									if($sts_key === 0){ ?>
+										<?php if ( $sts_var_headline ) {
+											?>
+										<h3><?php echo esc_html($sts_var_headline); ?></h3>
+										<?php }
+										if($sts_var_text){ ?>
+											<p><?php echo html_entity_decode($sts_var_text); ?></p>
+										<?php } ?>
+									<?php
+									}
+										}
+								} ?>
 								<div class="grid cols-2">
 									<div class="field">
 										<label class="req" for="cust_name">Name</label>
@@ -86,7 +110,19 @@ get_header();
 											</select>
 										</div>
 									</div>
-
+									 <?php
+									 	if($sts_var_section_head_notices){
+											foreach($sts_var_section_head_notices as $sts_key => $notice) {
+											$sts_var_notice = $notice['notice']??null;
+											if($sts_key === 0){ ?>
+											<?php if ( $sts_var_notice ) { ?>
+													<p class="note"><?php echo html_entity_decode($sts_var_notice); ?></p>
+												<?php } ?>
+											<?php
+											}
+												}
+											}
+										?>
 								</div>
 							</div>
 
@@ -96,7 +132,22 @@ get_header();
 								 <div class="vehicle-image" id="towing-vehicle-image" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
 								</div>
 								 <div class="block" id="blk-vehicle">
-									 <h3>Towing Vehicle Details</h3>
+								<?php if($sts_var_section_head_notices){
+									foreach($sts_var_section_head_notices as $sts_key => $notice){
+									$sts_var_headline = $notice['headline']??null;
+									$sts_var_text = $notice['text']??null;
+									if($sts_key === 1){ ?>
+										<?php if ( $sts_var_headline ) {
+											?>
+										<h3><?php echo esc_html($sts_var_headline); ?></h3>
+										<?php }
+										if($sts_var_text){ ?>
+											<p><?php echo html_entity_decode($sts_var_text); ?></p>
+										<?php } ?>
+									<?php
+									}
+										}
+									} ?>
 									 <div class="grid cols-2">
 										 <div class="field">
 											 <label class="req" for="veh_make">Vehicle Make</label>
@@ -132,7 +183,19 @@ get_header();
 											 </select>
 										 </div>
 									 </div>
-									 <p class="note">If your vehicle isn’t listed, choose “Other” and specify.</p>
+									 <?php
+									 	if($sts_var_section_head_notices){
+											foreach($sts_var_section_head_notices as $sts_key => $notice) {
+											$sts_var_notice = $notice['notice']??null;
+											if($sts_key === 1){ ?>
+											<?php if ( $sts_var_notice ) { ?>
+													<p class="note"><?php echo html_entity_decode($sts_var_notice); ?></p>
+												<?php } ?>
+											<?php
+											}
+												}
+											}
+										?>
 								 </div>
 							 </div>
 							 </div>
@@ -144,7 +207,22 @@ get_header();
 									</div>
 								</div>
 								<div class="block" id="blk-caravan">
-								<h3>Caravan Details</h3>
+								<?php if($sts_var_section_head_notices){
+									foreach($sts_var_section_head_notices as $sts_key => $notice){
+									$sts_var_headline = $notice['headline']??null;
+									$sts_var_text = $notice['text']??null;
+									if($sts_key === 2){ ?>
+										<?php if ( $sts_var_headline ) {
+											?>
+										<h3><?php echo esc_html($sts_var_headline); ?></h3>
+										<?php }
+										if($sts_var_text){ ?>
+											<p><?php echo html_entity_decode($sts_var_text); ?></p>
+										<?php } ?>
+									<?php
+									}
+										}
+									} ?>
 								<div class="grid cols-2">
 									<div class="field">
 										<label class="req" for="van_make">Caravan Make</label>
@@ -170,7 +248,6 @@ get_header();
 									</div>
 								</div>
 								<fieldset>
-									<legend class="gfield_label gform-field-label gfield_label_before_complex">Checkboxes</legend>
 									<div class="ginput_container ginput_container_checkbox">
 										<div class="gchoice">
 											<input class="gfield-choice-input" name="input_1.2" type="checkbox" value="toolbox" id="toolbox">
@@ -186,29 +263,44 @@ get_header();
 								</fieldset>
 								<div class="checkboxes">
 									<label>
-										<input  id="opt_guard" type="checkbox" name="factory_stoneguard" />
-										Factory Stoneguard
-									</label>
-									<label>
-										<input id="opt_toolbox" type="checkbox" name="toolbox" />
-										Toolbox
-									</label>
-									<label>
-										<input id="opt_other_access" placeholder="Other Information" type="text" name="other_a_frame" />
 										Other Information
+										<input id="opt_other_access" placeholder="Other Information" type="text" name="other_a_frame" />
 									</label>
 								</div>
-								<div class="field hidden" id="other_access_wrap">
-									<label for="other_access_text">Please specify accessories</label>
-									<input id="other_access_text" name="other_accessories_text" type="text"
-										placeholder="e.g. Gas bottles and jockey wheel" />
-								</div>
+								<?php
+								if($sts_var_section_head_notices){
+									foreach($sts_var_section_head_notices as $sts_key => $notice) {
+									$sts_var_notice = $notice['notice']??null;
+									if($sts_key === 2){ ?>
+									<?php if ( $sts_var_notice ) { ?>
+											<p class="note"><?php echo html_entity_decode($sts_var_notice); ?></p>
+										<?php } ?>
+									<?php
+									}
+										}
+									}
+								?>
 							</div>
 							</div>
 
 							<!-- Photographs -->
 							<div class="block" id="blk-photos">
-								<h3>Photographs</h3>
+								<?php if($sts_var_section_head_notices){
+									foreach($sts_var_section_head_notices as $sts_key => $notice){
+									$sts_var_headline = $notice['headline']??null;
+									$sts_var_text = $notice['text']??null;
+									if($sts_key === 3){ ?>
+										<?php if ( $sts_var_headline ) {
+											?>
+										<h3><?php echo esc_html($sts_var_headline); ?></h3>
+										<?php }
+										if($sts_var_text){ ?>
+											<p><?php echo html_entity_decode($sts_var_text); ?></p>
+										<?php } ?>
+									<?php
+									}
+										}
+									} ?>
 								<div class="grid cols-2">
 									<div class="field">
 										<label class="req" for="photo_hitch">Hitch Photograph</label>
@@ -233,14 +325,42 @@ get_header();
 										<input type="hidden" id="front_ids" name="front_ids" value="[]">
 									</div>
 								</div>
-								<p class="note">Provide several clear photos and multiple angles to ensure a
-									perfect fit.</p>
+								<?php
+								if($sts_var_section_head_notices){
+									foreach($sts_var_section_head_notices as $sts_key => $notice) {
+									$sts_var_notice = $notice['notice']??null;
+									if($sts_key === 3){ ?>
+									<?php if ( $sts_var_notice ) { ?>
+											<p class="note"><?php echo html_entity_decode($sts_var_notice); ?></p>
+										<?php } ?>
+									<?php
+									}
+										}
+									}
+								?>
+								<div class="example-images">
+
+								</div>
 							</div>
 
 							<!-- Final Measurements -->
 							<div class="block" id="blk-measure">
-								<h3>Final Measurements</h3>
-								<p>Based on the details you have provided, we have automatically generated the final dimensions for your Stone Stomper®. You can review and edit these measurements if needed. We recommend measuring both your towing vehicle and caravan to confirm accuracy and ensure the perfect fit.</p>
+								<?php if($sts_var_section_head_notices){
+									foreach($sts_var_section_head_notices as $sts_key => $notice){
+									$sts_var_headline = $notice['headline']??null;
+									$sts_var_text = $notice['text']??null;
+									if($sts_key === 4){ ?>
+										<?php if ( $sts_var_headline ) {
+											?>
+										<h3><?php echo esc_html($sts_var_headline); ?></h3>
+										<?php }
+										if($sts_var_text){ ?>
+											<p><?php echo html_entity_decode($sts_var_text); ?></p>
+										<?php } ?>
+									<?php
+									}
+										}
+									} ?>
 								<div class="grid cols-2">
 									<div class="field">
 										<label class="req" for="barwidth">Towing Vehicle Barwidth</label>
@@ -299,7 +419,22 @@ get_header();
 
 							<!-- Final Details & Summary -->
 							<div class="block" id="blk-final">
-								<h3>Final Details</h3>
+								<?php if($sts_var_section_head_notices){
+									foreach($sts_var_section_head_notices as $sts_key => $notice){
+									$sts_var_headline = $notice['headline']??null;
+									$sts_var_text = $notice['text']??null;
+									if($sts_key === 5){ ?>
+										<?php if ( $sts_var_headline ) {
+											?>
+										<h3><?php echo esc_html($sts_var_headline); ?></h3>
+										<?php }
+										if($sts_var_text){ ?>
+											<p><?php echo html_entity_decode($sts_var_text); ?></p>
+										<?php } ?>
+									<?php
+									}
+										}
+									} ?>
 								<div class="grid cols-2">
 									<div class="field">
 										<label class="req" for="final_address">Delivery Address</label>
@@ -338,11 +473,18 @@ get_header();
 
 										$price = $upsell->get_price();
 										$title = $upsell->get_name();
-
+										echo '<div class="checkbox-item">';
+										if( has_post_thumbnail( $upsell_id ) ) {
+										echo '<div class="thumb">';
+										echo '<img src="' . esc_url( get_the_post_thumbnail_url( $upsell_id, 'thumbnail' ) ) . '" alt="' . esc_attr( $title ) . '" />';
+										echo '<p>' . esc_html( $title ) . '</p>';
+										echo '</div>';
+										}
 										echo '<label>';
 										echo '<input type="checkbox" class="acc-upsell" data-product-id="' . esc_attr( $upsell_id ) . '" data-price-value="' . esc_attr( $price ) . '" />';
 										echo ' ' . esc_html( $title ) . ' for ' . wc_price( $price );
 										echo '</label>';
+										echo '</div>';
 									}
 
 									echo '</div>';
