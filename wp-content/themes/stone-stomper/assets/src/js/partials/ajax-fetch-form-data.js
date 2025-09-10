@@ -28,6 +28,7 @@ jQuery( document ).ready( function( $ ) {
 		carMake = jQuery( this ).val();
 		console.log( 'Selected Car Make:', carMake );
 		yearRequested = true;
+		postID = '';
 		// Call your function to fetch form data
 		fetchFormData();
 	} );
@@ -64,6 +65,11 @@ jQuery( document ).ready( function( $ ) {
 						jQuery( '#barwidth' ).val( response.barwidth + ' mm' );
 					}
 					jQuery( '#veh_year' ).html( response.year );
+					if ( response.vehicleImage ) {
+						jQuery( '#towing-vehicle-image' ).html( response.vehicleImage );
+					} else {
+						jQuery( '#towing-vehicle-image' ).html( '<p>No image available</p>' );
+					}
 					jQuery( '.loader-container' ).hide();
 				}
 				// selectModel();
@@ -94,8 +100,33 @@ jQuery( document ).ready( function( $ ) {
 					if ( caravan ) {
 						jQuery( '#van_model' ).html( response.html );
 					}
-					jQuery( '#vanwidth' ).val( response.caravanbarwidth + ' mm' );
-					jQuery( '#vinyl' ).val( response.vinylinsert + ' mm' );
+					if ( response.barwidth ) {
+						jQuery( '#vanwidth' ).val( response.barwidth + ' mm' );
+					}
+					if ( response.barheight ) {
+						jQuery( '#a_frame_length' ).val( response.barheight + ' mm' );
+					}
+					if ( response.stoneguard_width ) {
+						jQuery( '#stoneguard_width' ).val( response.stoneguard_width + ' mm' );
+					}
+					if ( response.stoneguard_height ) {
+						jQuery( '#stoneguard_length' ).val( response.stoneguard_height + ' mm' );
+					}
+					if ( response.toolbox_width ) {
+						jQuery( '#toolbox_width' ).val( response.toolbox_width + ' mm' );
+					}
+					if ( response.toolbox_height ) {
+						jQuery( '#toolbox_length' ).val( response.toolbox_height + ' mm' );
+					}
+					if ( response.vinyl_insert_width ) {
+						jQuery( '#vinyl_width' ).val( response.vinyl_insert_width + ' mm' );
+					}
+					if ( response.vinyl_insert_height ) {
+						jQuery( '#vinyl_length' ).val( response.vinyl_insert_height + ' mm' );
+					}
+
+					jQuery( '#caravan-images' ).append( response.stoneguard_image );
+					jQuery( '#caravan-images' ).append( response.toolbox_image );
 					jQuery( '.loader-container' ).hide();
 				}
 				// selectModel();

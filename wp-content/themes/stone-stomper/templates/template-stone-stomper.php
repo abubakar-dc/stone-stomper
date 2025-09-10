@@ -86,52 +86,64 @@ get_header();
 											</select>
 										</div>
 									</div>
+
 								</div>
 							</div>
 
 							<!-- Towing Vehicle Details -->
-							<div class="block" id="blk-vehicle">
-								<h3>Towing Vehicle Details</h3>
-								<div class="grid cols-2">
-									<div class="field">
-										<label class="req" for="veh_make">Vehicle Make</label>
-										<select id="veh_make" name="vehicle_make" required>
-											<?php
-												$parent_terms = get_terms([
-													'taxonomy'   => 'car-category', // Replace with your taxonomy slug
-													'parent'     => 0,                    // Only top-level terms
-													'hide_empty' => false                 // Include terms even if they have no posts
-												]);
-											?>
-											<option value="">Select Vehicle Make</option>
-											<?php foreach ($parent_terms as $term) : ?>
-												<option class="ajax-car-make" value="<?php echo esc_attr($term->slug); ?>"><?php echo esc_html($term->name); ?></option>
-											<?php endforeach; ?>
-											<option value="other">Other</option>
-										</select>
-									</div>
-									<div class="field hidden" id="veh_make_other_wrap">
-										<label class="req" for="veh_make_other">Other Make</label>
-										<input id="veh_make_other" name="vehicle_make_other" type="text" />
-									</div>
-									<div class="field">
-										<label class="req" for="veh_model">Vehicle Model</label>
-										<select id="veh_model" name="vehicle_model" required >
-
-										</select>
-									</div>
-									<div class="field">
-										<label class="req" for="veh_year">Year of Manufacture</label>
-										<select id="veh_year" name="vehicle_year" required>
-											<option value="">Select…</option>
-										</select>
-									</div>
+							 <div class="full-width d-flex" >
+								<div class="grid cols-2 vehicle-images ">
+								 <div class="vehicle-image" id="towing-vehicle-image" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
 								</div>
-								<p class="note">If your vehicle isn’t listed, choose “Other” and specify.</p>
-							</div>
+								 <div class="block" id="blk-vehicle">
+									 <h3>Towing Vehicle Details</h3>
+									 <div class="grid cols-2">
+										 <div class="field">
+											 <label class="req" for="veh_make">Vehicle Make</label>
+											 <select id="veh_make" name="vehicle_make" required>
+												 <?php
+													 $parent_terms = get_terms([
+														 'taxonomy'   => 'car-category', // Replace with your taxonomy slug
+														 'parent'     => 0,                    // Only top-level terms
+														 'hide_empty' => false                 // Include terms even if they have no posts
+													 ]);
+												 ?>
+												 <option value="">Select Vehicle Make</option>
+												 <?php foreach ($parent_terms as $term) : ?>
+													 <option class="ajax-car-make" value="<?php echo esc_attr($term->slug); ?>"><?php echo esc_html($term->name); ?></option>
+												 <?php endforeach; ?>
+												 <option value="other">Other</option>
+											 </select>
+										 </div>
+										 <div class="field hidden" id="veh_make_other_wrap">
+											 <label class="req" for="veh_make_other">Other Make</label>
+											 <input id="veh_make_other" name="vehicle_make_other" type="text" />
+										 </div>
+										 <div class="field">
+											 <label class="req" for="veh_model">Vehicle Model</label>
+											 <select id="veh_model" name="vehicle_model" required >
+
+											 </select>
+										 </div>
+										 <div class="field">
+											 <label class="req" for="veh_year">Year of Manufacture</label>
+											 <select id="veh_year" name="vehicle_year" required>
+												 <option value="">Select…</option>
+											 </select>
+										 </div>
+									 </div>
+									 <p class="note">If your vehicle isn’t listed, choose “Other” and specify.</p>
+								 </div>
+							 </div>
+							 </div>
 
 							<!-- Caravan Details -->
-							<div class="block" id="blk-caravan">
+							 <div>
+								<div class="grid cols-2 vehicle-images ">
+									<div class="vehicle-image" id="caravan-images" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
+									</div>
+								</div>
+								<div class="block" id="blk-caravan">
 								<h3>Caravan Details</h3>
 								<div class="grid cols-2">
 									<div class="field">
@@ -157,24 +169,41 @@ get_header();
 										</select>
 									</div>
 								</div>
+								<fieldset>
+									<legend class="gfield_label gform-field-label gfield_label_before_complex">Checkboxes</legend>
+									<div class="ginput_container ginput_container_checkbox">
+										<div class="gchoice">
+											<input class="gfield-choice-input" name="input_1.2" type="checkbox" value="toolbox" id="toolbox">
+											<label for="toolbox" id="label_4_1_2">Toolbox</label>
+										</div>
+										<div class="gchoice">
+											<input class="gfield-choice-input" name="input_1.1" type="checkbox" value="factory-stoneguard" id="factory_stoneguard">
+											<label for="factory_stoneguard" id="label_4_1_1">Factory Stoneguard
+											</label>
+										</div>
 
+									</div>
+								</fieldset>
 								<div class="checkboxes">
-									<label><input  id="opt_guard" type="checkbox" name="factory_stoneguard" />
-										Factory Stoneguard</label>
-									<label><input id="opt_toolbox" type="checkbox" name="toolbox" />
-										Toolbox</label>
-									<label><input id="opt_spare" type="checkbox" name="spare_tyre" /> Spare
-										Tyre</label>
-									<label><input id="opt_other_access" type="checkbox" name="other_a_frame" />
-										Other A-frame
-										Accessories</label>
+									<label>
+										<input  id="opt_guard" type="checkbox" name="factory_stoneguard" />
+										Factory Stoneguard
+									</label>
+									<label>
+										<input id="opt_toolbox" type="checkbox" name="toolbox" />
+										Toolbox
+									</label>
+									<label>
+										<input id="opt_other_access" placeholder="Other Information" type="text" name="other_a_frame" />
+										Other Information
+									</label>
 								</div>
-
 								<div class="field hidden" id="other_access_wrap">
 									<label for="other_access_text">Please specify accessories</label>
 									<input id="other_access_text" name="other_accessories_text" type="text"
 										placeholder="e.g. Gas bottles and jockey wheel" />
 								</div>
+							</div>
 							</div>
 
 							<!-- Photographs -->
@@ -211,6 +240,7 @@ get_header();
 							<!-- Final Measurements -->
 							<div class="block" id="blk-measure">
 								<h3>Final Measurements</h3>
+								<p>Based on the details you have provided, we have automatically generated the final dimensions for your Stone Stomper®. You can review and edit these measurements if needed. We recommend measuring both your towing vehicle and caravan to confirm accuracy and ensure the perfect fit.</p>
 								<div class="grid cols-2">
 									<div class="field">
 										<label class="req" for="barwidth">Towing Vehicle Barwidth</label>
@@ -218,20 +248,46 @@ get_header();
 											placeholder="e.g. 1800 mm" required />
 									</div>
 									<div class="field">
+										<label class="req" for="toolbox_width">Toolbox Width</label>
+										<input id="toolbox_width" name="toolbox_width_mm" type="text"
+											placeholder="e.g. 900 mm" required />
+									</div>
+									<div class="field">
+										<label class="req" for="toolbox_length">Toolbox Length</label>
+										<input id="toolbox_length" name="toolbox_length_mm" type="text"
+											placeholder="e.g. 900 mm" required />
+									</div>
+									<div class="field">
 										<label class="req" for="vanwidth">Caravan Width</label>
 										<input id="vanwidth" name="caravan_width_mm" type="text"
 											placeholder="e.g. 2260 mm" required />
 									</div>
 									<div class="field">
-										<label class="req" for="cleargap">Caravan Clearance Gap</label>
-										<input id="cleargap" name="caravan_clearance_gap_mm" type="text"
-											placeholder="e.g. 1820 mm" required />
+										<label class="req" for="a_frame_length">A-Frame Length</label>
+										<input id="a_frame_length" name="a_frame_length_mm" type="text"
+											placeholder="e.g. 2260 mm" required />
 									</div>
 									<div class="field">
-										<label for="vinyl">Vinyl Insert/s (based on Jayco CrossTrail)</label>
-										<input id="vinyl" name="vinyl_inserts" type="text"
-											placeholder="e.g. 600 × 600 mm" />
+										<label class="req" for="stoneguard_length">Stoneguard Length</label>
+										<input id="stoneguard_length" name="stoneguard_length_mm" type="text"
+											placeholder="e.g.600 mm" required />
 									</div>
+									<div class="field">
+										<label class="req" for="stoneguard_width">Stoneguard Width</label>
+										<input id="stoneguard_width" name="stoneguard_width_mm" type="text"
+											placeholder="e.g.600 mm" required />
+									</div>
+									<div class="field">
+										<label class="req" for="vinyl_width">Vinyl Insert Width</label>
+										<input id="vinyl_width" name="vinyl_width_mm" type="text"
+											placeholder="e.g.600 mm" required />
+									</div>
+									<div class="field">
+										<label class="req" for="vinyl_length">Vinyl Insert Length</label>
+										<input id="vinyl_length" name="vinyl_length_mm" type="text"
+											placeholder="e.g.600 mm" required />
+									</div>
+
 									<label class="row"><input id="support_pockets" type="checkbox"
 											name="support_pockets" /> Support
 										Pockets</label>
@@ -265,18 +321,33 @@ get_header();
 									</div>
 								</div>
 
-								<div class="checkboxes" style="margin-top:8px">
-									<strong>Accessories</strong>
-									<label><input id="acc_sleeve" type="checkbox" data-price="95" /> Add Stone
-										Stomper® Bar Sleeve for
-										$95</label>
-									<label class="muted"><input id="acc_extra1" type="checkbox" data-price="0"
-											disabled /> Add another
-										accessory in here</label>
-									<label class="muted"><input id="acc_extra2" type="checkbox" data-price="0"
-											disabled /> Add another
-										accessory in here</label>
-								</div>
+							<?php
+								global $product;
+								$p = wc_get_product( 62 );
+								$upsell_ids = $p ? $p->get_upsell_ids() : [];
+
+								if ( $upsell_ids ) {
+									echo '<div class="checkboxes" style="margin-top:8px">';
+									echo '<strong>Accessories</strong>';
+
+									foreach ( $upsell_ids as $upsell_id ) {
+										$upsell = wc_get_product( $upsell_id );
+										if ( ! $upsell ) {
+											continue;
+										}
+
+										$price = $upsell->get_price();
+										$title = $upsell->get_name();
+
+										echo '<label>';
+										echo '<input type="checkbox" class="acc-upsell" data-product-id="' . esc_attr( $upsell_id ) . '" data-price-value="' . esc_attr( $price ) . '" />';
+										echo ' ' . esc_html( $title ) . ' for ' . wc_price( $price );
+										echo '</label>';
+									}
+
+									echo '</div>';
+								}
+								?>
 
 								<div class="summary" id="order_summary">
 									<div class="line"><span>Stone Stomper®</span><strong>$<span

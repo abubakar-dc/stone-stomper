@@ -131,60 +131,57 @@ public function  bst_reformat_files_array( $file_post ) {
 	return $files;
 }
 public function woocommerce_ajax_add_to_cart() {
-	$product_id = isset($_POST['product_id']) ? intval($_POST['product_id']) : 0;
-	$quantity   = isset($_POST['quantity']) ? intval($_POST['quantity']) : 1;
-	$shipping   = isset($_POST['shipping']) ? $_POST['shipping'] : '';
+    $raw_ids  = $_POST['ids'] ?? [];
+    $quantity = isset($_POST['quantity']) ? max(1, intval($_POST['quantity'])) : 1;
+    $shipping = sanitize_text_field($_POST['shipping'] ?? '');
 
-	if ($product_id <= 0 || $quantity <= 0) {
-		wp_send_json_error(['message' => 'Invalid product or quantity']);
-	}
+    $parse_ids = static function($raw) {
+        if (is_array($raw)) {
+            return array_values(array_filter(array_map('intval', $raw)));
+        }
+        if (is_string($raw)) {
+            $raw = trim($raw);
+            if ($raw === '') return [];
+            if (strpos($raw, '[') === 0) {
+                $decoded = json_decode($raw, true);
+                if (is_array($decoded)) {
+                    return array_values(array_filter(array_map('intval', $decoded)));
+                }
+            }
+            $parts = preg_split('/[\s,|]+/', $raw);
+            return array_values(array_filter(array_map('intval', $parts)));
+        }
+        return [];
+    };
 
-	$measurements = [
-		'barwidth_mm'              => sanitize_text_field($_POST['barwidth_mm'] ?? ''),
-		'caravan_width_mm'         => sanitize_text_field($_POST['caravan_width_mm'] ?? ''),
-		'caravan_clearance_gap_mm' => sanitize_text_field($_POST['caravan_clearance_gap_mm'] ?? ''),
-		'vinyl_inserts'            => sanitize_text_field($_POST['vinyl_inserts'] ?? ''),
-	];
+    $product_ids = $parse_ids($raw_ids);
 
-	$parse_ids = static function($raw) {
-		if (is_array($raw)) {
-			return array_values(array_filter(array_map('intval', $raw)));
-		}
-		if (is_string($raw)) {
-			$raw = trim($raw);
-			if ($raw === '') return [];
-			if (strpos($raw, '[') === 0) {
-				$decoded = json_decode($raw, true);
-				if (is_array($decoded)) {
-					return array_values(array_filter(array_map('intval', $decoded)));
-				}
-			}
-			$parts = preg_split('/[\s,|]+/', $raw);
-			return array_values(array_filter(array_map('intval', $parts)));
-		}
-		return [];
-	};
+    if (empty($product_ids)) {
+        wp_send_json_error(['message' => 'No valid product IDs provided']);
+    }
 
-	$attachments = [
-		'hitch_attachment_ids' => $parse_ids($_POST['hitch_attachment_ids'] ?? []),
-		'rear_attachment_ids'  => $parse_ids($_POST['rear_attachment_ids'] ?? []),
-		'front_attachment_ids' => $parse_ids($_POST['front_attachment_ids'] ?? []),
-	];
+    $added_any = false;
 
-	$cart_item_data = array_merge($measurements, $attachments);
+    foreach ($product_ids as $product_id) {
+        if ($product_id > 0) {
+            $added = WC()->cart->add_to_cart($product_id, $quantity);
+            if ($added) {
+                $added_any = true;
+            }
+        }
+    }
 
-	$added = WC()->cart->add_to_cart($product_id, $quantity, 0, [], $cart_item_data);
+    if ($added_any) {
+        WC()->session->set('chosen_shipping_methods', [$shipping]);
+        wp_send_json_success([
+            'added'    => true,
+            'redirect' => '/cart',
+        ]);
+    } else {
+        wp_send_json_error(['message' => 'Failed to add products to cart']);
+    }
 
-	if ($added) {
-		WC()->session->set('chosen_shipping_methods', [ $shipping ]);
-		// Correct Woo key expects an array
-	}
-
-	wp_send_json_success([
-		'added'      => (bool) $added,
-		'redirect'   => '/cart',
-	]);
-	wp_die();
+    wp_die();
 }
 
 
@@ -193,13 +190,11 @@ public function woocommerce_ajax_add_to_cart() {
 	 **/
 	public function fetch_form_data() {
 
-
 		$post_id = $_POST['postID'] ?? null;
-		$sts_var_car_year = get_field('sts_var_car_year', $post_id);
-		$barwidth = get_field('sts_var_car_barwidth', $post_id);
-		$year    = '<option>Select Model Year</option>';
-		$year .= '<option value="'.esc_attr($sts_var_car_year).'">'.esc_html($sts_var_car_year).'</option>';
-		if(isset($_POST['carMake'])){
+
+		//Getting Models
+
+		if(isset($_POST['carMake'])) {
 			$carMake = $_POST['carMake'] ?? null;
 			$html    = '<option>Select Model Make</option>';
 			$posts   = array();
@@ -239,28 +234,48 @@ public function woocommerce_ajax_add_to_cart() {
 				}
 			}
 			}
-			wp_send_json(
-			array(
-				'args'  => $child_terms,
-				'models'  => $html,
-				'year'  => $year,
-				'barwidth'  => $barwidth,
-				'posts' => $posts,
-				'post'  => $_POST,
-			)
-			);
-	}
+		}
+		//Getting Year
+		if($post_id){
+			$sts_var_car_year = get_field('sts_var_car_year', $post_id);
+			$year    = '<option>Select Model Year</option>';
+			$year .= '<option value="'.esc_attr($sts_var_car_year).'">'.esc_html($sts_var_car_year).'</option>';
+		}
+
+		//Getting Vehicle Image
+		if($post_id && has_post_thumbnail( $post_id )){
+
+			$vehicleImage = '<img src="'.get_the_post_thumbnail_url( $post_id, 'medium' ).'" alt="'.get_the_title($post_id).'" />';
+		} else {
+			$vehicleImage = '';
+		}
+
+		//Getting Bar Width
+		if($post_id){
+			$barwidth = get_field('sts_var_car_barwidth', $post_id);
+		} else {
+			$barwidth = '';
+		}
+
+		wp_send_json(
+		array(
+			'args'  => $child_terms,
+			'models'  => $html,
+			'vehicleImage'  => $vehicleImage,
+			'year'  => $year,
+			'barwidth'  => $barwidth,
+			'posts' => $posts,
+			'post'  => $_POST,
+		)
+		);
 		wp_die();
 	}
 
 
-		public function fetch_caravan_data() {
+public function fetch_caravan_data() {
 
 		$caravanMake = $_POST['caravanMake'] ?? null;
 		$caravanPostID = $_POST['caravanPostID'] ?? null;
-
-		$sts_var_caravan_barwidth = get_field('sts_var_caravan_barwidth', $caravanPostID);
-		$sts_var_caravan_vinyl_insert = get_field('sts_var_caravan_vinyl_insert', $caravanPostID);
 
 		$html    = '<option>Select Caravan Model</option>';
 
@@ -284,13 +299,89 @@ public function woocommerce_ajax_add_to_cart() {
 						}
 						wp_reset_postdata();
 					}
+		if($caravanPostID){
+		$sts_var_caravan_ss_mesurements = get_field('sts_var_caravan_ss_mesurements', $caravanPostID);
+		if($sts_var_caravan_ss_mesurements){
+			$sts_var_caravan_barwidth = $sts_var_caravan_ss_mesurements['width'] ?? '';
+			$sts_var_caravan_barheight = $sts_var_caravan_ss_mesurements['height'] ?? '';
+		} else {
+			$sts_var_caravan_barwidth = '';
+			$sts_var_caravan_barheight = '';
+		}
+
+		$sts_var_caravan_factory = get_field('sts_var_caravan_factory', $caravanPostID);
+		if($sts_var_caravan_factory){
+			$sts_var_caravan_factory_width = $sts_var_caravan_factory['width'] ?? '';
+			$sts_var_caravan_factory_height = $sts_var_caravan_factory['height'] ?? '';
+		} else {
+			$sts_var_caravan_factory_width = '';
+			$sts_var_caravan_factory_height = '';
+		}
+		$sts_var_caravan_vinyl_insert = get_field('sts_var_caravan_vinyl_insert', $caravanPostID);
+		if($sts_var_caravan_vinyl_insert ){
+			$sts_var_caravan_vinyl_insert_width = $sts_var_caravan_vinyl_insert['width'] ?? '';
+			$sts_var_caravan_vinyl_insert_height = $sts_var_caravan_vinyl_insert['height'] ?? '';
+		} else {
+			$sts_var_caravan_vinyl_insert_width = '';
+			$sts_var_caravan_vinyl_insert_height = '';
+		}
+		$sts_var_caravan_toolbox = get_field('sts_var_caravan_toolbox', $caravanPostID);
+		if($sts_var_caravan_toolbox ){
+			$sts_var_caravan_toolbox_width = $sts_var_caravan_toolbox['width'] ?? '';
+			$sts_var_caravan_toolbox_height = $sts_var_caravan_toolbox['height'] ?? '';
+		} else {
+			$sts_var_caravan_toolbox_width = '';
+			$sts_var_caravan_toolbox_height = '';
+		}
+
+
+
+
+		$sts_var_caravan_images = get_field('sts_var_caravan_images', $caravanPostID);
+		if($sts_var_caravan_images){
+			$sts_var_factory_stoneguard_image_id = $sts_var_caravan_images['factory_stoneguard_image'] ?? '';
+			$sts_var_toolbox_image_id = $sts_var_caravan_images['toolbox_image'] ?? '';
+		} else {
+			$sts_var_factory_stoneguard_image_id = '';
+			$sts_var_toolbox_image_id = '';
+		}
+
+
+		} else {
+			$sts_var_caravan_barwidth = '';
+			$sts_var_caravan_barheight = '';
+			$sts_var_caravan_factory_width = '';
+			$sts_var_caravan_factory_height = '';
+			$sts_var_caravan_vinyl_insert_width = '';
+			$sts_var_caravan_vinyl_insert_height = '';
+			$sts_var_toolbox_image_id = '';
+		}
+
+		if($sts_var_factory_stoneguard_image_id){
+			$stoneguard_image = '<img src="'.wp_get_attachment_url($sts_var_factory_stoneguard_image_id).'" alt="'.get_the_title($caravanPostID).'" />';
+		} else {
+			$stoneguard_image = '';
+		}
+		if($sts_var_toolbox_image_id){
+			$toolbox_image = '<img src="'.wp_get_attachment_url($sts_var_toolbox_image_id).'" alt="'.get_the_title($caravanPostID).'" />';
+		} else {
+			$toolbox_image = '';
+		}
 
 
 		wp_send_json(
 			array(
 				'html'  => $html,
-				'caravanbarwidth'  => $sts_var_caravan_barwidth,
-				'vinylinsert'  => $sts_var_caravan_vinyl_insert,
+				'barwidth'  => $sts_var_caravan_barwidth,
+				'barheight'  => $sts_var_caravan_barheight,
+				'stoneguard_width'  => $sts_var_caravan_factory_width,
+				'stoneguard_height'  => $sts_var_caravan_factory_height,
+				'toolbox_width'  => $sts_var_caravan_toolbox_width,
+				'toolbox_height'  => $sts_var_caravan_toolbox_height,
+				'vinyl_insert_width'  => $sts_var_caravan_vinyl_insert_width,
+				'vinyl_insert_height'  => $sts_var_caravan_vinyl_insert_height,
+				'stoneguard_image'  => $stoneguard_image,
+				'toolbox_image'  => $toolbox_image,
 				'post'  => $_POST,
 			)
 		);
