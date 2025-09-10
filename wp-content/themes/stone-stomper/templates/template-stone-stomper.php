@@ -22,6 +22,8 @@ if($sts_var_section_head){
 	$sts_var_section_head_image = $sts_var_section_head['image']??null;
 }
 $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_notices'] ?? null;
+$sts_var_example_photographs           = $sts_fields['sts_var_example_photographs'] ?? null;
+$sts_var_measurements_images           = $sts_fields['sts_var_measurements_images'] ?? null;
 
 ?>
 <section id="page-section" class="page-section">
@@ -339,6 +341,13 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 									}
 								?>
 								<div class="example-images">
+									<?php
+									if($sts_var_example_photographs){
+										foreach($sts_var_example_photographs as $sts_key => $photo){
+											StoneStomper::the_attachment_image($photo,300 );
+										}
+									}
+									?>
 
 								</div>
 							</div>
@@ -412,9 +421,26 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 											name="support_pockets" /> Support
 										Pockets</label>
 								</div>
-								<p class="note">Need help measuring? See our <a href="#" target="_blank"
-										rel="noopener">Measuring Guide</a>.
-								</p>
+								<?php
+								if($sts_var_section_head_notices){
+									foreach($sts_var_section_head_notices as $sts_key => $notice) {
+									$sts_var_notice = $notice['notice']??null;
+									if($sts_key === 4){ ?>
+									<?php if ( $sts_var_notice ) { ?>
+											<p class="note"><?php echo html_entity_decode($sts_var_notice); ?></p>
+										<?php } ?>
+									<?php
+									}
+										}
+									}
+								?>
+								<div class="measurements-example">
+									<?php
+									if($sts_var_measurements_images){
+										StoneStomper::the_attachment_image($sts_var_measurements_images,300 );
+									}
+									?>
+								</div>
 							</div>
 
 							<!-- Final Details & Summary -->
