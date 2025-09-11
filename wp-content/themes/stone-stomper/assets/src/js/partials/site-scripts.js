@@ -4,7 +4,9 @@
  */
 import magnificPopup from '../vendors/jquery-magnificpopup';
 import organicTabs from '../vendors/organic-tab';
+import swiper from '../vendors/swiper-bundle.min';
 import slick from '../vendors/slick.min';
+
 jQuery( document ).on( 'scroll', function() {
 	if ( jQuery( document ).scrollTop() > 0 ) {
 		jQuery( 'header, body' ).addClass( 'shrink' );
@@ -140,6 +142,22 @@ jQuery( function() {
 			$text.css( 'min-height', $text[ 0 ].scrollHeight + 'px' );
 		}
 	}
+
+
+	// Slider
+
+		if ( jQuery( '.form-image-slider' ).length ) {
+			jQuery( '.form-image-slider' ).each( function() {
+				const $slider = jQuery( this );
+				$slider.slick( {
+					slidesToShow: 1,
+					slidesToScroll: 1,
+					arrows: true,
+					dots: true,
+			} );
+		} );
+	}
+
 } );
 // helpers to read/write hidden ids (JSON array in a hidden input)
 function getIdsField( slot ) {

@@ -183,3 +183,19 @@ textarea {
 .gfield_list_icons {
 	margin-top: 20px;
 }
+
+.two-columns-fields {
+	display: flex;
+	justify-content: space-between;
+
+	.field {
+		width: 49%;
+	}
+}
+
+#orderForm {
+
+	.field {
+		margin-bottom: 10px;
+	}
+}

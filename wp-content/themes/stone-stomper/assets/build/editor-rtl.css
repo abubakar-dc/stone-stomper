@@ -1193,6 +1193,9 @@ Mixin for transition
 .editor-styles-wrapper .heading-6 {
   font-size: var(--ss_font_size_16);
 }
+.editor-styles-wrapper .large-heading {
+  font-size: var(--ss_font_size_51);
+}
 .editor-styles-wrapper i,
 .editor-styles-wrapper em,
 .editor-styles-wrapper var,
@@ -2747,6 +2750,12 @@ Mixin for transition
 .acf-block-preview .hidden {
   display: none;
 }
+.acf-block-preview .form-image-slider .slider-image img {
+  width: 100%;
+  aspect-ratio: 4/2.5;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
 .acf-block-preview .two-columns {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(clamp(350px, 50% - 2%, 100%), 100%), 1fr));
@@ -3220,6 +3229,16 @@ Mixin for transition
 }
 .acf-block-preview .gfield_list_icons {
   margin-top: 20px;
+}
+.acf-block-preview .two-columns-fields {
+  display: flex;
+  justify-content: space-between;
+}
+.acf-block-preview .two-columns-fields .field {
+  width: 49%;
+}
+.acf-block-preview #orderForm .field {
+  margin-bottom: 10px;
 }
 .acf-block-preview input[type=image] {
   margin: 0 0 0 10px;

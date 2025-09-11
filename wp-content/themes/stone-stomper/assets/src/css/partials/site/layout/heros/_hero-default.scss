@@ -1,7 +1,12 @@
 .hero-section {
 	transition: all 0.3s ease-in-out;
 	background-color: var(--ss_white_1);
-	padding-top: var(--ss_space_128);
+	// padding-top: var(--ss_space_128);
+
+	.wp-block-cover {
+		height: 55vh;
+
+	}
 }
 
 .hero-ctn {
@@ -11,8 +16,8 @@
 // Hero default & with image
 
 .hero-default {
-	padding: var(--ss_space_72) 0 var(--ss_space_96);
-	text-align: center;
+	// padding: var(--ss_space_72) 0 var(--ss_space_96);
+	// text-align: center;
 
 	&.with-image {
 		text-align: left;

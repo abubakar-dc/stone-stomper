@@ -67,8 +67,6 @@ jQuery( document ).ready( function( $ ) {
 					jQuery( '#veh_year' ).html( response.year );
 					if ( response.vehicleImage ) {
 						jQuery( '#towing-vehicle-image' ).html( response.vehicleImage );
-					} else {
-						jQuery( '#towing-vehicle-image' ).html( '<p>No image available</p>' );
 					}
 					jQuery( '.loader-container' ).hide();
 				}
