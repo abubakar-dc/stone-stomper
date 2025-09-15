@@ -49,7 +49,7 @@ class Acf_Field_Headings extends \acf_field {
 		 *
 		 * For public-facing UI. May contain spaces.
 		 */
-		$this->label = __( 'Headings', 'basetheme_td' );
+		$this->label = __( 'Headings', 'stonestomper_td' );
 
 		/**
 		 * The category the field appears within in the field type picker.
@@ -70,7 +70,7 @@ class Acf_Field_Headings extends \acf_field {
 		 * const errorMessage = acf._e("headings", "error");
 		 * ```
 		 */
-		$this->l10n = array( 'error' => __( 'Error! Please enter a higher value', 'basetheme_td' ) );
+		$this->l10n = array( 'error' => __( 'Error! Please enter a higher value', 'stonestomper_td' ) );
 
 		$this->env = array(
 			'url'     => site_url( str_replace( ABSPATH, '', __DIR__ ) ), // URL to the acf-FIELD-NAME directory.

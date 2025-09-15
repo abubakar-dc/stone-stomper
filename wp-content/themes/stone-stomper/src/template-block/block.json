@@ -26,6 +26,6 @@
 			"preview": true
 		}
 	},
-	"textdomain": "basetheme_td",
+	"textdomain": "stonestomper_td",
 	"editorScript": "file:./block-template-block.js"
 }

@@ -27,6 +27,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 		<div class="post-box-excerpt">
 			<p><?php echo StoneStomper::excerpt_nomore( 130 ); ?> </p>
 		</div>
-		<a href="<?php echo esc_url( get_the_permalink() ); ?>" class="learn-more"><?php esc_html_e( 'Learn More', 'basetheme_td' ); ?></a>
+		<a href="<?php echo esc_url( get_the_permalink() ); ?>" class="learn-more"><?php esc_html_e( 'Learn More', 'stonestomper_td' ); ?></a>
 	</div>
 </article><!-- #post-<?php the_ID(); ?> -->

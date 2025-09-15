@@ -388,3 +388,57 @@ add_action( 'woocommerce_new_order', function( $order_id ) {
 		}
 	}
 }, 10, 1 );
+
+
+
+add_filter( 'block_categories_all', function( $categories, $post ) {
+    // Add your custom category on top
+    $custom_category = array(
+        'slug'  => 'theme-blocks',
+        'title' => __( 'Theme Blocks', 'sample_td' ),
+    );
+
+    // Prepend it to the existing categories
+    array_unshift( $categories, $custom_category );
+
+    return $categories;
+}, 10, 2 );
+
+function allowed_block_types( $allowed_blocks, $editor_context ) {
+
+    // Always allow these core blocks
+    $core_blocks = array(
+        'core/paragraph',
+        'core/heading',
+        'core/list',
+        'core/table',
+        'core/image',
+        'core/cover',
+        'core/buttons',
+        'core/button',
+        'core/group',
+        'core/columns',
+        'core/seperator',
+        'core/column',
+        'core/html',
+        'core/spacer',
+        'core/separator',
+        'core/shortcode',
+        'gravityforms/form',
+		'samplepack/ingredients',
+		'samplepack/ingredients-item',
+    );
+
+    // Get all registered blocks
+    $all_blocks = WP_Block_Type_Registry::get_instance()->get_all_registered();
+
+    // Allow all blocks from category 'theme-blocks'
+    foreach ( $all_blocks as $block_name => $block_data ) {
+        if ( isset( $block_data->category ) && $block_data->category === 'theme-blocks' ) {
+            $core_blocks[] = $block_name;
+        }
+    }
+
+    return $core_blocks;
+}
+// add_filter( 'allowed_block_types_all', 'allowed_block_types', 10, 2 );

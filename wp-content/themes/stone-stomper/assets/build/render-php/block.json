@@ -44,7 +44,7 @@
       "preview": true
     }
   },
-  "textdomain": "basetheme_td",
+  "textdomain": "stonestomper_td",
   "editorScript": "file:./block-render-php.js",
   "render": "file:./render.php"
 }

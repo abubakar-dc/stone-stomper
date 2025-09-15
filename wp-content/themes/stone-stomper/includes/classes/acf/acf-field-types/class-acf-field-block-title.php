@@ -49,7 +49,7 @@ class Acf_Field_Block_Title extends \acf_field {
 		 *
 		 * For public-facing UI. May contain spaces.
 		 */
-		$this->label = __( 'Block Title', 'basetheme_td' );
+		$this->label = __( 'Block Title', 'stonestomper_td' );
 
 		/**
 		 * The category the field appears within in the field type picker.
@@ -60,7 +60,7 @@ class Acf_Field_Block_Title extends \acf_field {
 			'instructions_title_tag' => '',
 			'is_h1'                  => 'no',
 		);
-		$this->l10n     = array( 'error' => __( 'Error! Please enter a higher value', 'basetheme_td' ) );
+		$this->l10n     = array( 'error' => __( 'Error! Please enter a higher value', 'stonestomper_td' ) );
 
 		$this->env = array(
 			'url'     => site_url( str_replace( ABSPATH, '', __DIR__ ) ), // URL to the acf-FIELD-NAME directory.
@@ -85,8 +85,8 @@ class Acf_Field_Block_Title extends \acf_field {
 		acf_render_field_setting(
 			$field,
 			array(
-				'label'        => __( 'Instructions (Block Title)', 'basetheme_td' ),
-				'instructions' => __( 'Customize the Block Title input instructions', 'basetheme_td' ),
+				'label'        => __( 'Instructions (Block Title)', 'stonestomper_td' ),
+				'instructions' => __( 'Customize the Block Title input instructions', 'stonestomper_td' ),
 				'type'         => 'text',
 				'name'         => 'instructions_title',
 				'append'       => '',
@@ -96,8 +96,8 @@ class Acf_Field_Block_Title extends \acf_field {
 		acf_render_field_setting(
 			$field,
 			array(
-				'label'        => __( 'Instructions ( HTML Tag)', 'basetheme_td' ),
-				'instructions' => __( 'Customize the HTML tag input instructions', 'basetheme_td' ),
+				'label'        => __( 'Instructions ( HTML Tag)', 'stonestomper_td' ),
+				'instructions' => __( 'Customize the HTML tag input instructions', 'stonestomper_td' ),
 				'type'         => 'text',
 				'name'         => 'instructions_title_tag',
 				'append'       => '',
@@ -143,7 +143,7 @@ class Acf_Field_Block_Title extends \acf_field {
 			<div class="acf-clone-fields acf-fields">
 				<div class="acf-field acf-field-text -r0" style="width: 70%; min-height: 113px;" data-name="title" data-width="70">
 					<div class="acf-label">
-						<label for=""><?php esc_html_e( 'Block Title', 'basetheme_td' ); ?></label>
+						<label for=""><?php esc_html_e( 'Block Title', 'stonestomper_td' ); ?></label>
 						<?php if ( $instructions_title ) { ?>
 							<p class="description"><?php echo html_entity_decode( $instructions_title ); ?></p>
 						<?php } ?>
@@ -154,7 +154,7 @@ class Acf_Field_Block_Title extends \acf_field {
 				</div>
 				<div class="acf-field acf-field-headings is-padding -r0" style="width: 30%; min-height: 113px;" data-name="title_tag"  data-width="30">
 					<div class="acf-label">
-						<label for=""><?php esc_html_e( 'HTML Tag', 'basetheme_td' ); ?></label>
+						<label for=""><?php esc_html_e( 'HTML Tag', 'stonestomper_td' ); ?></label>
 						<?php if ( $instructions_title_tag ) { ?>
 							<p class="description"><?php echo html_entity_decode( $instructions_title ); ?></p>
 						<?php } ?>
@@ -162,13 +162,13 @@ class Acf_Field_Block_Title extends \acf_field {
 					<div class="acf-input">
 						<select name="<?php echo esc_html( $field_save_name . '[title_tag]' ); ?>">
 						<?php if ( 'yes' === $is_h1 ) { ?>
-							<option <?php echo html_entity_decode( ( 'h1' === $field_title_tag ? 'selected="selected"' : '' ) ); ?> value="h1"><?php esc_html_e( 'h1', 'basetheme_td' ); ?></option>
+							<option <?php echo html_entity_decode( ( 'h1' === $field_title_tag ? 'selected="selected"' : '' ) ); ?> value="h1"><?php esc_html_e( 'h1', 'stonestomper_td' ); ?></option>
 						<?php } ?>
-						<option <?php echo html_entity_decode( ( 'h2' === $field_title_tag ) ? 'selected="selected"' : '' ); ?> value="h2"><?php esc_html_e( 'h2', 'basetheme_td' ); ?></option>
-						<option <?php echo html_entity_decode( ( 'h3' === $field_title_tag ) ? 'selected="selected"' : '' ); ?> value="h3"><?php esc_html_e( 'h3', 'basetheme_td' ); ?></option>
-						<option <?php echo html_entity_decode( ( 'h4' === $field_title_tag ) ? 'selected="selected"' : '' ); ?> value="h4"><?php esc_html_e( 'h4', 'basetheme_td' ); ?></option>
-						<option <?php echo html_entity_decode( ( 'h5' === $field_title_tag ) ? 'selected="selected"' : '' ); ?> value="h5"><?php esc_html_e( 'h5', 'basetheme_td' ); ?></option>
-						<option <?php echo html_entity_decode( ( 'h6' === $field_title_tag ) ? 'selected="selected"' : '' ); ?> value="h6"><?php esc_html_e( 'h6', 'basetheme_td' ); ?></option>
+						<option <?php echo html_entity_decode( ( 'h2' === $field_title_tag ) ? 'selected="selected"' : '' ); ?> value="h2"><?php esc_html_e( 'h2', 'stonestomper_td' ); ?></option>
+						<option <?php echo html_entity_decode( ( 'h3' === $field_title_tag ) ? 'selected="selected"' : '' ); ?> value="h3"><?php esc_html_e( 'h3', 'stonestomper_td' ); ?></option>
+						<option <?php echo html_entity_decode( ( 'h4' === $field_title_tag ) ? 'selected="selected"' : '' ); ?> value="h4"><?php esc_html_e( 'h4', 'stonestomper_td' ); ?></option>
+						<option <?php echo html_entity_decode( ( 'h5' === $field_title_tag ) ? 'selected="selected"' : '' ); ?> value="h5"><?php esc_html_e( 'h5', 'stonestomper_td' ); ?></option>
+						<option <?php echo html_entity_decode( ( 'h6' === $field_title_tag ) ? 'selected="selected"' : '' ); ?> value="h6"><?php esc_html_e( 'h6', 'stonestomper_td' ); ?></option>
 						</select>
 					</div>
 				</div>

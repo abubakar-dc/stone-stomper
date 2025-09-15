@@ -22,10 +22,10 @@
  */
 
 if ( ! empty( $_SERVER['SCRIPT_FILENAME'] ) && 'comments.php' === basename( esc_url_raw( wp_unslash( $_SERVER['SCRIPT_FILENAME'] ) ) ) ) { /*1*/
-		die( esc_html__( 'Please do not load this page directly. Thanks!', 'basetheme_td' ) );
+		die( esc_html__( 'Please do not load this page directly. Thanks!', 'stonestomper_td' ) );
 }
 if ( post_password_required() ) {
-	esc_html__( 'This post is password protected. Enter the password to view comments.', 'basetheme_td' );
+	esc_html__( 'This post is password protected. Enter the password to view comments.', 'stonestomper_td' );
 	return;
 }
 
@@ -44,13 +44,13 @@ if ( post_password_required() ) {
 			if ( '1' === $sts_var_comment_count ) {
 				printf(
 					/* translators: 1: title. */
-					esc_html__( 'One Response', 'basetheme_td' ),
+					esc_html__( 'One Response', 'stonestomper_td' ),
 					'<span>' . esc_html( get_the_title() ) . '</span>'
 				);
 			} else {
 				printf(
 					/* translators: 1: comment count number, 2: title. */
-					esc_html( _nx( '%1$s Response', '%1$s Response', $theme_comment_count, 'comments title', 'basetheme_td' ) ),
+					esc_html( _nx( '%1$s Response', '%1$s Response', $theme_comment_count, 'comments title', 'stonestomper_td' ) ),
 					esc_html( number_format_i18n( $theme_comment_count ) ),
 					'<span>' . esc_html( get_the_title() ) . '</span>'
 				);
@@ -82,7 +82,7 @@ if ( post_password_required() ) {
 			// If comments are closed and there are comments, let's leave a little note, shall we?
 			if ( ! comments_open() ) {
 				?>
-					<p class="no-comments"><?php esc_html__( 'Comments are closed.', 'basetheme_td' ); ?></p>
+					<p class="no-comments"><?php esc_html__( 'Comments are closed.', 'stonestomper_td' ); ?></p>
 				<?php
 			}
 		}// Check for have_comments().

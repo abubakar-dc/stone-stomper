@@ -31,14 +31,14 @@
 	"Translation function": {
 		"prefix": "translationFun",
 		"body": [
-			"esc_html_e( '${1:String to translate}', 'basetheme_td' );"
+			"esc_html_e( '${1:String to translate}', 'stonestomper_td' );"
 		],
 		"description": "inserts code for WordPress translation in HTML document."
 	},
 	"Translation function for HTML": {
 		"prefix": "phpTranslationFun",
 		"body": [
-			"<?php esc_html_e( '${1:String to translate}', 'basetheme_td' ); ?>"
+			"<?php esc_html_e( '${1:String to translate}', 'stonestomper_td' ); ?>"
 		],
 		"description": "inserts code for WordPress translation in HTML document."
 	},

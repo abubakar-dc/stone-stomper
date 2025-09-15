@@ -9,7 +9,7 @@
 		display: block;
 		font-size: 24px;
 		line-height: 30px;
-		@include font(inter, reg);
+		@include font(open, reg);
 
 		cursor: pointer;
 		position: relative;
@@ -83,7 +83,7 @@
 		font-size: var(--ss_font_size_16);
 		line-height: 22px;
 
-		@include font(inter, reg);
+		@include font(open, reg);
 
 		padding: 10px;
 		color: var(--wp--preset--color--black);
@@ -110,7 +110,7 @@
 	font-size: 15px;
 	line-height: 20px;
 
-	@include font(inter, reg);
+	@include font(open, reg);
 }
 
 .glossary-content {

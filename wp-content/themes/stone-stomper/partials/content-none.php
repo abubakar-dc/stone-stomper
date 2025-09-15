@@ -12,7 +12,7 @@
 
 <section class="no-results not-found">
 	<div class="page-header">
-		<h2 class="page-title"><?php echo esc_html__( 'Nothing Found', 'basetheme_td' ); ?></h2>
+		<h2 class="page-title"><?php echo esc_html__( 'Nothing Found', 'stonestomper_td' ); ?></h2>
 	</div><!-- .page-header -->
 	<div class="page-content">
 		<?php
@@ -20,7 +20,7 @@
 				printf(
 					'<p>' . wp_kses(
 						/* translators: 1: link to WP admin new post page. */
-						__( 'Ready to publish your first post? <a href="%1$s">Get started here</a>.', 'basetheme_td' ),
+						__( 'Ready to publish your first post? <a href="%1$s">Get started here</a>.', 'stonestomper_td' ),
 						array(
 							'a' => array(
 								'href' => array(),
@@ -31,10 +31,10 @@
 				);
 			?>
 		<?php } elseif ( is_search() ) { ?>
-			<p><?php echo esc_html__( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'basetheme_td' ); ?></p>
+			<p><?php echo esc_html__( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'stonestomper_td' ); ?></p>
 			<?php get_search_form(); ?>
 		<?php } else { ?>
-			<p><?php echo esc_html__( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'basetheme_td' ); ?></p>
+			<p><?php echo esc_html__( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'stonestomper_td' ); ?></p>
 			<?php get_search_form(); ?>
 		<?php } ?>
 	</div><!-- .page-section -->

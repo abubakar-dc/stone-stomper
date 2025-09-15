@@ -62,7 +62,7 @@ const ContainerBlock = ({
                 value: attributes.bgWidth,
                 className: "dc-sidebar-select",
                 options: [{
-                  label: '1410px (Default)',
+                  label: '1390px (Default)',
                   value: 'ctn'
                 }, {
                   label: '1920px',
@@ -2034,7 +2034,7 @@ module.exports = window["wp"]["i18n"];
   \**********************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json","apiVersion":3,"name":"bivinsagencypack/hero-home","version":"1.0.0","title":"Hero Home","category":"theme-blocks","icon":"align-center","description":"","supports":{"html":false,"align":["wide","full"]},"attributes":{"preview":{"type":"boolean","default":false},"blocktext":{"type":"string","default":"default"}},"example":{"attributes":{"preview":true}},"textdomain":"bivins_td","editorScript":"file:./block-hero-home.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json","apiVersion":3,"name":"bivinsagencypack/hero-home","version":"1.0.0","title":"Hero Home","category":"theme-blocks","icon":"align-center","description":"","supports":{"html":false,"align":["wide","full"]},"attributes":{"preview":{"type":"boolean","default":false},"blocktext":{"type":"string","default":"default"}},"example":{"attributes":{"preview":true}},"textdomain":"stonestomper_td","editorScript":"file:./block-hero-home.js"}');
 
 /***/ })
 
@@ -2199,14 +2199,16 @@ function Edit(props) {
     placeholder: 'Kicker Text...'
   }], ['core/heading', {
     level: 1
-  }], ['core/paragraph', {
+  }], ['core/group', {
+    className: 'hero-content-inner'
+  }, [['core/paragraph', {
     className: '',
     content: '',
     placeholder: 'Hero Content...'
   }], ['core/buttons', {}, [['core/button', {
     text: '',
     className: ''
-  }]]]]]]]];
+  }]]]]]]]]]];
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.useBlockProps)();
   const innerBlocksProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.useInnerBlocksProps)(blockProps, {
     template: TEMPLATE,

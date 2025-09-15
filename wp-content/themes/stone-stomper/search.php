@@ -18,12 +18,12 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 	<!-- Hero Start -->
 	<div class="hero-single search-hero">
 		<div class="wrapper">
-			<h1><?php echo esc_html_e( 'Search Results', 'basetheme_td' ); ?></h1>
+			<h1><?php echo esc_html_e( 'Search Results', 'stonestomper_td' ); ?></h1>
 			<p>
 			<?php
 				printf(
 					/* translators: %s: search term. */
-					esc_html__( 'Results for "%s"', 'basetheme_td' ),
+					esc_html__( 'Results for "%s"', 'stonestomper_td' ),
 					'<span class="search-term">' . esc_html( get_search_query() ) . '</span>'
 				);
 				?>

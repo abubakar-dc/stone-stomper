@@ -113,7 +113,7 @@ $sts_var_tbar_btn      = $sts_option_fields['sts_var_tbar_btn'] ?? null;
 	?>
 
 	<a class="skip-link screen-reader-text"
-		href="#page-section"><?php esc_html_e( 'Skip to content', 'basetheme_td' ); ?></a>
+		href="#page-section"><?php esc_html_e( 'Skip to content', 'stonestomper_td' ); ?></a>
 	<header id="header-section" class="header-section">
 		<!-- Header Start -->
 		<?php if ( $sts_var_tbar_vsblty ) { ?>
@@ -135,7 +135,7 @@ $sts_var_tbar_btn      = $sts_option_fields['sts_var_tbar_btn'] ?? null;
 				<div class="top-bar-cross">
 					<span>
 						<img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/build/images/topbar-cross-icon.svg"
-							width="16" height="16" alt="<?php esc_attr_e( 'Top bar', 'basetheme_td' ); ?>">
+							width="16" height="16" alt="<?php esc_attr_e( 'Top bar', 'stonestomper_td' ); ?>">
 					</span>
 				</div>
 			</div>

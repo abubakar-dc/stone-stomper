@@ -248,7 +248,7 @@ class WP_Theme_Custom extends \Boilerplate {
 		if ( is_user_logged_in() ) {
 			?>
 			<ul>
-				<li> <?php echo esc_html__( 'Go to admin area to create navigation menu', 'basetheme_td' ); ?></li>
+				<li> <?php echo esc_html__( 'Go to admin area to create navigation menu', 'stonestomper_td' ); ?></li>
 			</ul>
 			<?php
 		}

@@ -26,6 +26,6 @@
 			"preview": true
 		}
 	},
-	"textdomain": "bivins_td",
+	"textdomain": "stonestomper_td",
 	"editorScript": "file:./block-image-with-text.js"
 }

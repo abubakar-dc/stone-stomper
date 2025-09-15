@@ -22,7 +22,7 @@
 			"preview": true
 		}
 	},
-	"textdomain": "stayedits_td",
+	"textdomain": "stonestomper_td",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css"

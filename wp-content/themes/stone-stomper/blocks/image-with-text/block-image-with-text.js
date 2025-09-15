@@ -62,7 +62,7 @@ const ContainerBlock = ({
                 value: attributes.bgWidth,
                 className: "dc-sidebar-select",
                 options: [{
-                  label: '1410px (Default)',
+                  label: '1390px (Default)',
                   value: 'ctn'
                 }, {
                   label: '1920px',
@@ -2034,7 +2034,7 @@ module.exports = window["wp"]["i18n"];
   \****************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json","apiVersion":3,"name":"bivinsagencypack/image-alongside-text","version":"1.0.0","title":"Image Alongside Text","category":"theme-blocks","icon":"align-center","description":"","supports":{"html":false,"align":["wide","full"]},"attributes":{"preview":{"type":"boolean","default":false},"selected":{"type":"string","default":""}},"example":{"attributes":{"preview":true}},"textdomain":"bivins_td","editorScript":"file:./block-image-with-text.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json","apiVersion":3,"name":"bivinsagencypack/image-alongside-text","version":"1.0.0","title":"Image Alongside Text","category":"theme-blocks","icon":"align-center","description":"","supports":{"html":false,"align":["wide","full"]},"attributes":{"preview":{"type":"boolean","default":false},"selected":{"type":"string","default":""}},"example":{"attributes":{"preview":true}},"textdomain":"stonestomper_td","editorScript":"file:./block-image-with-text.js"}');
 
 /***/ })
 

@@ -1,16 +1,33 @@
 .hero-home-section {
-	padding: 230px 0 100px;
 
 	.wp-block-cover {
 		position: initial;
+		padding: 230px 0 100px;
+
+		.wp-block-cover__inner-container {
+			max-width: 1750px;
+			width: 92%;
+			margin: 0 auto;
+		}
 
 		img {
-
 			position: absolute;
 			top: 0;
 			left: 0;
 			width: 100%;
 			height: 100%;
 		}
+	}
+}
+
+.hero-content {
+	max-width: 600px;
+
+	.kicker-text {
+		text-transform: uppercase;
+	}
+
+	.hero-content-inner {
+		margin-left: 28%;
 	}
 }

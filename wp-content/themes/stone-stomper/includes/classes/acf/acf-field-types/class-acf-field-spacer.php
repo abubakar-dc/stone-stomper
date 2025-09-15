@@ -49,7 +49,7 @@ class Acf_Field_Spacer extends \acf_field {
 		 *
 		 * For public-facing UI. May contain spaces.
 		 */
-		$this->label = __( 'Spacer', 'basetheme_td' );
+		$this->label = __( 'Spacer', 'stonestomper_td' );
 
 		/**
 		 * The category the field appears within in the field type picker.
@@ -70,7 +70,7 @@ class Acf_Field_Spacer extends \acf_field {
 		 * const errorMessage = acf._e("spacer", "error");
 		 * ```
 		 */
-		$this->l10n = array( 'error' => __( 'Error! Please enter a higher value', 'basetheme_td' ) );
+		$this->l10n = array( 'error' => __( 'Error! Please enter a higher value', 'stonestomper_td' ) );
 
 		$this->env = array(
 			'url'     => site_url( str_replace( ABSPATH, '', __DIR__ ) ), // URL to the acf-FIELD-NAME directory.
@@ -94,8 +94,8 @@ class Acf_Field_Spacer extends \acf_field {
 		acf_render_field_setting(
 			$field,
 			array(
-				'label'        => __( 'Default Value', 'basetheme_td' ),
-				'instructions' => __( 'Customize the input default Value', 'basetheme_td' ),
+				'label'        => __( 'Default Value', 'stonestomper_td' ),
+				'instructions' => __( 'Customize the input default Value', 'stonestomper_td' ),
 				'type'         => 'text',
 				'name'         => 'default_value',
 				'append'       => '',

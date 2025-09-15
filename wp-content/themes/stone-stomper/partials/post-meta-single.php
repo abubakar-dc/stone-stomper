@@ -24,7 +24,7 @@ $sts_var_post_categories = get_categories( $sts_var_post_id );
 			<?php } ?>
 			<div class="author-meta">
 				<?php if ( $sts_var_author_name ) { ?>
-					<div class="post-author-name"><?php esc_html_e( 'By:', 'basetheme_td' ); ?> <?php echo esc_html( $sts_var_author_name ); ?></div>
+					<div class="post-author-name"><?php esc_html_e( 'By:', 'stonestomper_td' ); ?> <?php echo esc_html( $sts_var_author_name ); ?></div>
 				<?php } ?>
 				<div class="post-meta-date"><?php the_time( BASETHEME_PROJECT_DTFORMAT ); ?></div>
 			</div>

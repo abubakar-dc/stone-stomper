@@ -30,8 +30,8 @@ class WP_Theme_Acf {
 		if ( function_exists( 'acf_add_options_page' ) ) {
 			$option_page = acf_add_options_page(
 				array(
-					'page_title' => __( 'Theme Options', 'basetheme_td' ),
-					'menu_title' => __( 'Theme Options', 'basetheme_td' ),
+					'page_title' => __( 'Theme Options', 'stonestomper_td' ),
+					'menu_title' => __( 'Theme Options', 'stonestomper_td' ),
 					'menu_slug'  => 'acf-options',
 					'capability' => 'edit_posts',
 					'redirect'   => false,
@@ -60,7 +60,7 @@ class WP_Theme_Acf {
 	public function blocks_category( $categories ) {
 		$custom_block = array(
 			'slug'  => 'theme-blocks',
-			'title' => __( 'Theme Blocks', 'basetheme_td' ),
+			'title' => __( 'Theme Blocks', 'stonestomper_td' ),
 			'icon'  => 'theme-blocks',
 		);
 
@@ -167,8 +167,8 @@ class WP_Theme_Acf {
 		acf_render_field_setting(
 			$field,
 			array(
-				'label'        => __( 'Height of Editor', 'basetheme_td' ),
-				'instructions' => __( 'Height of Editor after Init', 'basetheme_td' ),
+				'label'        => __( 'Height of Editor', 'stonestomper_td' ),
+				'instructions' => __( 'Height of Editor after Init', 'stonestomper_td' ),
 				'name'         => 'wysiwyg_height',
 				'type'         => 'number',
 			)

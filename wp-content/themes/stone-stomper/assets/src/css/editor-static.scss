@@ -44,7 +44,7 @@
 	border: 3px dashed #575757;
 	margin-bottom: 40px !important;
 
-	.wp-block {
+	&>.wp-block {
 		margin-left: auto;
 		margin-right: auto;
 	}
@@ -56,25 +56,25 @@
 }
 
 .editor-ctn-full-width {
-	.wp-block {
+	&>.wp-block {
 		max-width: 1800px !important;
 	}
 }
 
 .editor-ctn {
-	.wp-block {
+	&>.wp-block {
 		max-width: 1180px !important;
 	}
 }
 
 .editor-ctn-980 {
-	.wp-block {
+	&>.wp-block {
 		max-width: 980px !important;
 	}
 }
 
 .editor-ctn-760 {
-	.wp-block {
+	&>.wp-block {
 		max-width: 760px !important;
 	}
 }
@@ -124,7 +124,7 @@
 				font-size: var(--ss_font_size_22);
 				margin: 8px 0;
 				text-align: center;
-				@include font(inter, bold);
+				@include font(open, bold);
 			}
 		}
 	}
@@ -140,7 +140,7 @@
 			font-size: var(--ss_font_size_22);
 			margin: 8px 0;
 			text-align: center;
-			@include font(inter, bold);
+			@include font(open, bold);
 		}
 	}
 }

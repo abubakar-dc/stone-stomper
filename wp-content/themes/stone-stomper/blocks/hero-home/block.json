@@ -29,6 +29,6 @@
       "preview": true
     }
   },
-  "textdomain": "bivins_td",
+  "textdomain": "stonestomper_td",
   "editorScript": "file:./block-hero-home.js"
 }

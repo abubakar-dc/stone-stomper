@@ -34,7 +34,7 @@
 			position: relative;
 			line-height: 1;
 
-			@include font(inter, bold);
+			@include font(open, bold);
 
 			a,
 			a:visited,
@@ -46,7 +46,7 @@
 				position: relative;
 				color: var(--ss_header_color);
 				font-size: var(--ss-font_size_27);
-				@include font(inter, bold);
+				@include font(open, bold);
 				text-transform: uppercase;
 
 				&::after {
@@ -132,7 +132,7 @@
 					color: var(--ss_header_submenu_color);
 
 					@include transition(all, 0.3s, ease-in-out);
-					@include font(inter, reg);
+					@include font(open, reg);
 
 					&::after {
 						bottom: -4px;

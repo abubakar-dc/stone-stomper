@@ -58,7 +58,7 @@ const ContainerBlock = ( {
 									className="dc-sidebar-select"
 									options={ [
 										{
-											label: '1410px (Default)',
+											label: '1390px (Default)',
 											value: 'ctn',
 										},
 										{ label: '1920px', value: 'ctn-1920' },

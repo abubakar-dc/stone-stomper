@@ -62,7 +62,7 @@ const ContainerBlock = ({
                 value: attributes.bgWidth,
                 className: "dc-sidebar-select",
                 options: [{
-                  label: '1410px (Default)',
+                  label: '1390px (Default)',
                   value: 'ctn'
                 }, {
                   label: '1920px',
@@ -2024,7 +2024,7 @@ module.exports = window["wp"]["i18n"];
   \***************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json","apiVersion":3,"name":"stonestomperpack/template-block","version":"1.0.0","title":"Template Block","category":"theme-blocks","icon":"align-center","description":"","supports":{"html":false,"align":["wide","full"]},"attributes":{"preview":{"type":"boolean","default":false},"blocktext":{"type":"string","default":"default"}},"example":{"attributes":{"preview":true}},"textdomain":"basetheme_td","editorScript":"file:./block-template-block.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json","apiVersion":3,"name":"stonestomperpack/template-block","version":"1.0.0","title":"Template Block","category":"theme-blocks","icon":"align-center","description":"","supports":{"html":false,"align":["wide","full"]},"attributes":{"preview":{"type":"boolean","default":false},"blocktext":{"type":"string","default":"default"}},"example":{"attributes":{"preview":true}},"textdomain":"stonestomper_td","editorScript":"file:./block-template-block.js"}');
 
 /***/ })
 

@@ -31,12 +31,12 @@
 	}
 
 	.member-name {
-		@include font(inter, bold);
+		@include font(open, bold);
 		margin-bottom: 8px;
 	}
 
 	.designation {
-		@include font(inter, reg);
+		@include font(open, reg);
 
 		font-size: var(--ss_font_size_18);
 		margin-bottom: 0;
@@ -173,14 +173,14 @@
 	}
 
 	.member-name-popup {
-		@include font(inter, bold);
+		@include font(open, bold);
 
 		color: var(--wp--preset--color--dark_text);
 		margin-bottom: 5px;
 	}
 
 	.member-designation {
-		@include font(inter, reg);
+		@include font(open, reg);
 
 		color: var(--wp--preset--color--lblack);
 		margin-bottom: 0;

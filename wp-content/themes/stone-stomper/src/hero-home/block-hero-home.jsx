@@ -37,10 +37,14 @@ function Edit( props ) {
 			[ 'core/group', { className: 'hero-content' }, [
 				[ 'core/paragraph', { className: 'kicker-text', content: '', placeholder: 'Kicker Text...' } ],
 				[ 'core/heading', { level: 1 } ],
-				[ 'core/paragraph', { className: '', content: '', placeholder: 'Hero Content...' } ],
-				[ 'core/buttons', {}, [
-					[ 'core/button', { text: '', className: '' } ],
+
+				[ 'core/group', { className: 'hero-content-inner' }, [
+					[ 'core/paragraph', { className: '', content: '', placeholder: 'Hero Content...' } ],
+					[ 'core/buttons', {}, [
+						[ 'core/button', { text: '', className: '' } ],
+					] ],
 				] ],
+
 			] ],
 		] ],
 	];

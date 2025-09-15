@@ -2,7 +2,7 @@
 	"Wrap in translate html": {
 		"prefix": "wrapDomain",
 		"body": [
-			"<?php esc_html_e( '${TM_SELECTED_TEXT}', 'basetheme_td' ); ?>"
+			"<?php esc_html_e( '${TM_SELECTED_TEXT}', 'stonestomper_td' ); ?>"
 		],
 		"description": "Wrap selected text in a set value"
 	},

@@ -13,8 +13,13 @@
 				},
 				{
 					"slug": "black",
-					"color": "var(--ss_black1)",
+					"color": "var(--ss_black)",
 					"name": "Black"
+				},
+				{
+					"slug": "black-100",
+					"color": "var(--ss_black_1)",
+					"name": "Black 100"
 				},
 				{
 					"slug": "primary",
@@ -124,11 +129,6 @@
 					"name": "Diagonal Blue to Light Blue"
 				}
 			]
-		},
-
-		"layout": {
-			"contentSize": "1180px",
-			"wideSize": "1380px"
 		},
 		"spacing": {
 			"margin": false,
@@ -286,7 +286,6 @@
 					"name": "Regular Text"
 				}
 			]
-		},
-
+		}
 	}
 }

@@ -214,8 +214,8 @@ class Acf_Field_Spacers extends \acf_field {
 		acf_render_field_setting(
 			$field,
 			array(
-				'label'        => __( 'Instructions (Margin From Top)', 'basetheme_td' ),
-				'instructions' => __( 'Customize the Margin From Top input instructions', 'basetheme_td' ),
+				'label'        => __( 'Instructions (Margin From Top)', 'stonestomper_td' ),
+				'instructions' => __( 'Customize the Margin From Top input instructions', 'stonestomper_td' ),
 				'type'         => 'text',
 				'name'         => 'instructions_top',
 				'append'       => '',
@@ -225,8 +225,8 @@ class Acf_Field_Spacers extends \acf_field {
 		acf_render_field_setting(
 			$field,
 			array(
-				'label'        => __( 'Instructions ( Margin From Bottom)', 'basetheme_td' ),
-				'instructions' => __( 'Customize the Margin From Bottom input instructions', 'basetheme_td' ),
+				'label'        => __( 'Instructions ( Margin From Bottom)', 'stonestomper_td' ),
+				'instructions' => __( 'Customize the Margin From Bottom input instructions', 'stonestomper_td' ),
 				'type'         => 'text',
 				'name'         => 'instructions_bottom',
 				'append'       => '',

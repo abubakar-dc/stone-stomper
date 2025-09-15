@@ -49,7 +49,7 @@ class Acf_Media_Box extends \acf_field {
 		 *
 		 * For public-facing UI. May contain spaces.
 		 */
-		$this->label = __( 'Media Box', 'basetheme_td' );
+		$this->label = __( 'Media Box', 'stonestomper_td' );
 
 		/**
 		 * The category the field appears within in the field type picker.
@@ -70,7 +70,7 @@ class Acf_Media_Box extends \acf_field {
 		 * const errorMessage = acf._e("headings", "error");
 		 * ```
 		 */
-		$this->l10n = array( 'error' => __( 'Error! Please enter a higher value', 'basetheme_td' ) );
+		$this->l10n = array( 'error' => __( 'Error! Please enter a higher value', 'stonestomper_td' ) );
 
 		$this->env = array(
 			'url'     => site_url( str_replace( ABSPATH, '', __DIR__ ) ), // URL to the acf-FIELD-NAME directory.
@@ -137,7 +137,7 @@ class Acf_Media_Box extends \acf_field {
 		<div class="acf-fields -top -border">
 			<div class="acf-field acf-field-button-group -r0" style="width: 50%; min-height: 92px;" data-name="media_option" data-type="button_group" data-key="" data-width="50">
 				<div class="acf-label">
-				<label for=""><?php esc_html_e( 'Media Option', 'basetheme_td' ); ?></label>
+				<label for=""><?php esc_html_e( 'Media Option', 'stonestomper_td' ); ?></label>
 				</div>
 				<div class="acf-input">
 					<div class="acf-button-group">
@@ -148,7 +148,7 @@ class Acf_Media_Box extends \acf_field {
 			</div>
 			<div class="acf-field acf-field-inner acf-field-image -r0" style="width: 50%; min-height: 92px;<?php echo ( 'image' === $field_media_option ) ? '' : 'display:none;'; ?>" data-name="image" data-width="50">
 				<div class="acf-label">
-					<label for=""><?php esc_html_e( 'Image', 'basetheme_td' ); ?></label>
+					<label for=""><?php esc_html_e( 'Image', 'stonestomper_td' ); ?></label>
 				</div>
 				<div class="acf-input">
 					<div class="acf-image-uploader <?php echo ( '' !== $field_media_image ) ? 'has-value' : ''; ?>">
@@ -161,7 +161,7 @@ class Acf_Media_Box extends \acf_field {
 							</div>
 						</div>
 						<div class="hide-if-value">
-							<p><?php esc_html_e( 'No image selected ', 'basetheme_td' ); ?> <a data-name="add" class="acf-button button" href="#"><?php esc_html_e( 'Add Image', 'basetheme_td' ); ?></a></p>
+							<p><?php esc_html_e( 'No image selected ', 'stonestomper_td' ); ?> <a data-name="add" class="acf-button button" href="#"><?php esc_html_e( 'Add Image', 'stonestomper_td' ); ?></a></p>
 						</div>
 					</div>
 				</div>
@@ -169,7 +169,7 @@ class Acf_Media_Box extends \acf_field {
 
 			<div class="acf-field acf-field-inner acf-field-file -r0" style="width:50%;<?php echo ( 'video' === $field_media_option ) ? '' : 'display:none;'; ?>" data-name="video" data-width="50">
 				<div class="acf-label">
-				<label for=""><?php esc_html_e( 'Video', 'basetheme_td' ); ?></label>
+				<label for=""><?php esc_html_e( 'Video', 'stonestomper_td' ); ?></label>
 				</div>
 				<div class="acf-input">
 				<div class="acf-file-uploader <?php echo ( '' !== $field_media_video ) ? 'has-value' : ''; ?>">
@@ -183,11 +183,11 @@ class Acf_Media_Box extends \acf_field {
 							<strong data-name="title"><?php echo esc_html( $field_media_video_data['file_label'] ?? '' ); ?></strong>
 							</p>
 							<p>
-							<strong><?php esc_html_e( 'File name:', 'basetheme_td' ); ?></strong>
+							<strong><?php esc_html_e( 'File name:', 'stonestomper_td' ); ?></strong>
 							<a data-name="filename" href="<?php echo esc_url( $field_media_video_data['url'] ?? '' ); ?>" target="_blank"><?php echo esc_html( $field_media_video_data['file_name'] ?? '' ); ?></a>
 							</p>
 							<p>
-							<strong><?php esc_html_e( 'File size:', 'basetheme_td' ); ?></strong>
+							<strong><?php esc_html_e( 'File size:', 'stonestomper_td' ); ?></strong>
 							<span data-name="filesize"><?php echo esc_html( $field_media_video_data['file_size'] ?? '' ); ?></span>
 							</p>
 						</div>
@@ -197,7 +197,7 @@ class Acf_Media_Box extends \acf_field {
 						</div>
 					</div>
 					<div class="hide-if-value">
-						<p><?php esc_html_e( 'No video selected', 'basetheme_td' ); ?> <a data-name="add" class="acf-button button" href="#"><?php esc_html_e( 'Add Video', 'basetheme_td' ); ?></a></p>
+						<p><?php esc_html_e( 'No video selected', 'stonestomper_td' ); ?> <a data-name="add" class="acf-button button" href="#"><?php esc_html_e( 'Add Video', 'stonestomper_td' ); ?></a></p>
 					</div>
 				</div>
 				</div>

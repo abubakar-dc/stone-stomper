@@ -49,7 +49,7 @@ class Acf_Field_Advance_Form extends \acf_field {
 		 *
 		 * For public-facing UI. May contain spaces.
 		 */
-		$this->label = __( 'Advance Form', 'basetheme_td' );
+		$this->label = __( 'Advance Form', 'stonestomper_td' );
 
 		/**
 		 * The category the field appears within in the field type picker.
@@ -60,7 +60,7 @@ class Acf_Field_Advance_Form extends \acf_field {
 			'instructions_title_tag' => '',
 			'is_h1'                  => 'no',
 		);
-		$this->l10n     = array( 'error' => __( 'Error! Please enter a higher value', 'basetheme_td' ) );
+		$this->l10n     = array( 'error' => __( 'Error! Please enter a higher value', 'stonestomper_td' ) );
 
 		$this->env = array(
 			'url'     => site_url( str_replace( ABSPATH, '', __DIR__ ) ), // URL to the acf-FIELD-NAME directory.
@@ -92,24 +92,24 @@ class Acf_Field_Advance_Form extends \acf_field {
 			<div class="acf-clone-fields acf-fields">
 				<div class="acf-field acf-field-button-group -r0" style="width: 40%;" data-name="option" data-width="40">
 					<div class="acf-label">
-						<label for=""><?php esc_html_e( 'Form Provider', 'basetheme_td' ); ?></label>
-						<p class="description"><?php esc_html_e( 'Select From Provider', 'basetheme_td' ); ?></p>
+						<label for=""><?php esc_html_e( 'Form Provider', 'stonestomper_td' ); ?></label>
+						<p class="description"><?php esc_html_e( 'Select From Provider', 'stonestomper_td' ); ?></p>
 					</div>
 					<div class="acf-input">
 
 						<div class="acf-button-group">
-						<label <?php echo ( 'gform' === $field_form_provider ) ? 'class="selected"' : ''; ?>><input type="radio" name="<?php echo esc_html( $field_save_name . '[form_provider]' ); ?>" value="gform" checked="checked"> <?php esc_html_e( 'Gravity Form', 'basetheme_td' ); ?></label>
-						<label <?php echo ( 'hubspot' === $field_form_provider ) ? 'class="selected"' : ''; ?>><input type="radio" name="<?php echo esc_html( $field_save_name . '[form_provider]' ); ?>" value="hubspot"> <?php esc_html_e( 'Hubspot Form', 'basetheme_td' ); ?></label></div>
+						<label <?php echo ( 'gform' === $field_form_provider ) ? 'class="selected"' : ''; ?>><input type="radio" name="<?php echo esc_html( $field_save_name . '[form_provider]' ); ?>" value="gform" checked="checked"> <?php esc_html_e( 'Gravity Form', 'stonestomper_td' ); ?></label>
+						<label <?php echo ( 'hubspot' === $field_form_provider ) ? 'class="selected"' : ''; ?>><input type="radio" name="<?php echo esc_html( $field_save_name . '[form_provider]' ); ?>" value="hubspot"> <?php esc_html_e( 'Hubspot Form', 'stonestomper_td' ); ?></label></div>
 					</div>
 				</div>
 				<div class="acf-field acf-field-inner acf-field-forms -r0" style="width: 60%;<?php echo ( 'gform' === $field_form_provider ) ? '' : 'display:none;'; ?>" data-name="gform" data-width="60">
 					<div class="acf-label">
-						<label for=""><?php esc_html_e( 'Gravity Form', 'basetheme_td' ); ?></label>
-						<p class="description"><?php esc_html_e( 'Select gravity form', 'basetheme_td' ); ?></p>
+						<label for=""><?php esc_html_e( 'Gravity Form', 'stonestomper_td' ); ?></label>
+						<p class="description"><?php esc_html_e( 'Select gravity form', 'stonestomper_td' ); ?></p>
 					</div>
 					<div class="acf-input">
 						<select id="" name="<?php echo esc_html( $field_save_name . '[gform]' ); ?>">
-						<option value=""><?php esc_html_e( '- Select a form -', 'basetheme_td' ); ?></option>
+						<option value=""><?php esc_html_e( '- Select a form -', 'stonestomper_td' ); ?></option>
 						<?php
 						foreach ( $forms as $form ) {
 							echo html_entity_decode( '<option ' . ( (int) $field_gform === $form['id'] ? 'selected="selected"' : '' ) . ' value="' . $form['id'] . '">' . $form['title'] . '</option>' );
@@ -120,8 +120,8 @@ class Acf_Field_Advance_Form extends \acf_field {
 				</div>
 				<div class="acf-field acf-field-inner acf-field-textarea -r0" style="width: 60%;<?php echo ( 'hubspot' === $field_form_provider ) ? '' : 'display:none;'; ?>" data-name="hubspot" data-width="60">
 					<div class="acf-label">
-						<label for=""><?php esc_html_e( 'Hubspot Form', 'basetheme_td' ); ?></label>
-						<p class="description"><?php esc_html_e( 'Add your hubspot code here', 'basetheme_td' ); ?></p>
+						<label for=""><?php esc_html_e( 'Hubspot Form', 'stonestomper_td' ); ?></label>
+						<p class="description"><?php esc_html_e( 'Add your hubspot code here', 'stonestomper_td' ); ?></p>
 					</div>
 					<div class="acf-input">
 						<textarea id="" name="<?php echo esc_html( $field_save_name . '[hubspot]' ); ?>" rows="8"><?php echo esc_html( $field_hubspot ); ?></textarea>

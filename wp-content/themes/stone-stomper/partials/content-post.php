@@ -123,7 +123,7 @@ $sts_var_posttitle = $sts_fields['sts_var_posttitle'] ?? get_the_title();
 
 						?>
 					<div class="related-posts ">
-					<h3><?php esc_html__( 'Related Posts', 'basetheme_td' ); ?></h3>
+					<h3><?php esc_html__( 'Related Posts', 'stonestomper_td' ); ?></h3>
 						<?php
 						foreach ( $sts_var_selected_posts as $sts_var_post ) {
 							setup_postdata( $post );

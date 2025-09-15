@@ -31,7 +31,7 @@ class WP_Theme_Setup {
 	 */
 	public function setup_function() {
 		// Make theme available for translation.
-		load_theme_textdomain( 'basetheme_td' );
+		load_theme_textdomain( 'stonestomper_td' );
 
 		// Let WordPress manage the document title.
 		add_theme_support( 'title-tag' );
@@ -68,11 +68,11 @@ class WP_Theme_Setup {
 		// Register wp_nav_menu() menus.
 		register_nav_menus(
 			array(
-				'header-nav'       => __( 'Header Nav', 'basetheme_td' ),
-				'footer-nav-one'   => __( 'Footer Nav One', 'basetheme_td' ),
-				'footer-nav-two'   => __( 'Footer Nav Two', 'basetheme_td' ),
-				'footer-nav-three' => __( 'Footer Nav Three', 'basetheme_td' ),
-				'legal-nav'        => __( 'Legal Nav', 'basetheme_td' ),
+				'header-nav'       => __( 'Header Nav', 'stonestomper_td' ),
+				'footer-nav-one'   => __( 'Footer Nav One', 'stonestomper_td' ),
+				'footer-nav-two'   => __( 'Footer Nav Two', 'stonestomper_td' ),
+				'footer-nav-three' => __( 'Footer Nav Three', 'stonestomper_td' ),
+				'legal-nav'        => __( 'Legal Nav', 'stonestomper_td' ),
 			)
 		);
 

@@ -69,7 +69,7 @@
 						padding: initial;
 						text-transform: inherit;
 
-						@include font(inter, reg);
+						@include font(open, reg);
 					}
 
 					&.current-menu-item>a,
