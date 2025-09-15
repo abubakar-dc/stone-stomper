@@ -73,7 +73,7 @@ new WP_Theme_CPT(
 			'register_key'       => 'customer',
 			'slug'               => 'customer',
 		),
-		'supports'  => array( 'title', 'editor', 'thumbnail' ),
+		'supports'  => array( 'title', 'thumbnail' ),
 		'menu_icon' => 'dashicons-groups',
 		'public'    => false,
 	)

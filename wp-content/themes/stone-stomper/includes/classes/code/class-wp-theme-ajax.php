@@ -32,11 +32,26 @@ class WP_Theme_Ajax {
 		add_action( 'wp_ajax_woocommerce_ajax_add_to_cart', array( $this, 'woocommerce_ajax_add_to_cart' ) );
 		add_action( 'wp_ajax_nopriv_bst_handle_upload_order_photos', array( $this, 'bst_handle_upload_order_photos' ) );
 		add_action( 'wp_ajax_bst_handle_upload_order_photos', array( $this, 'bst_handle_upload_order_photos' ) );
+		add_action( 'wp_ajax_nopriv_save_order_form_cookie', array( $this, 'save_order_form_cookie' ) );
+		add_action( 'wp_ajax_save_order_form_cookie', array( $this, 'save_order_form_cookie' ) );
 
 	}
 
 
-	public function bst_handle_upload_order_photos() {
+public function save_order_form_cookie() {
+		error_log('save_order_form_cookie called');
+		if ( isset( $_POST['formData'] ) ) {
+			$form_data = wp_unslash( $_POST['formData'] );
+			setcookie( 'orderFormData', $form_data, time() + ( 30 * 24 * 60 * 60 ), COOKIEPATH, COOKIE_DOMAIN, is_ssl(), true );
+			wp_send_json_success( array( 'message' => 'Form data saved in cookie.' ) );
+		} else {
+			wp_send_json_error( array( 'message' => 'No form data received.' ) );
+		}
+		wp_die();
+	}
+
+
+public function bst_handle_upload_order_photos() {
 	// Nonce check
 
 	$slots  = array( 'hitch', 'rear', 'front' ); // MUST match your JS "slot" keys

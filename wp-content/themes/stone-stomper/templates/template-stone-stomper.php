@@ -122,7 +122,12 @@ $sts_var_measurements_images           = $sts_fields['sts_var_measurements_image
 										<div class="field">
 											<input id="cust_email" placeholder="Email Address" name="customer_email" type="email" required />
 										</div>
-
+										<div class="field">
+											<select id="product_type" placeholder="Product Type" name="product_type" required>
+												<option value="stone-stomper">Stone Stomper</option>
+												<option value="mesh" >Mesh</option>
+											</select>
+										</div>
 
 										<?php
 											if($sts_var_section_head_notices){

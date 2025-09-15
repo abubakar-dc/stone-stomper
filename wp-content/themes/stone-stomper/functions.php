@@ -221,3 +221,170 @@ add_action( 'admin_init', function() {
         remove_post_type_support( 'page', 'editor' );
     }
 });
+
+
+
+
+
+/**
+ * Read the large JSON saved across cookies:
+ * - order_form            (single)
+ * - order_form_parts      (count)
+ * - order_form_0..N       (chunks)
+ */
+function sts_read_order_form_cookie() {
+	$prefix = 'order_form';
+
+	if ( isset( $_COOKIE[ $prefix ] ) && $_COOKIE[ $prefix ] !== '' ) {
+		$json = wp_unslash( $_COOKIE[ $prefix ] );
+	}
+	// } else {
+	// 	$count = isset( $_COOKIE[ $prefix . '_parts' ] ) ? intval( $_COOKIE[ $prefix . '_parts' ] ) : 0;
+	// 	$json  = '';
+	// 	if ( $count > 0 ) {
+	// 		for ( $i = 0; $i < $count; $i++ ) {
+	// 			if ( isset( $_COOKIE[ "{$prefix}_{$i}" ] ) ) {
+	// 				$json .= wp_unslash( $_COOKIE[ "{$prefix}_{$i}" ] );
+	// 			}
+	// 		}
+	// 	}
+	// }
+
+	if ( ! $json ) return null;
+	$decoded = json_decode( $json, true );
+	return is_array( $decoded ) ? $decoded : null;
+}
+
+/**
+ * Helper: normalize checkbox truthy values
+ */
+function sts_bool( $v ) {
+	return ($v === '1' || $v === 1 || $v === true || $v === 'true' || $v === 'on' );
+}
+
+/**
+ * Helper: ensure int array from mixed/stringified JSON
+ */
+function sts_to_int_array( $v ) {
+	if ( is_string( $v ) ) {
+		$maybe = json_decode( $v, true );
+		if ( is_array( $maybe ) ) $v = $maybe;
+	}
+	if ( ! is_array( $v ) ) return array();
+	return array_values( array_filter( array_map( 'intval', $v ) ) );
+}
+
+/**
+ * Create/update a Customer CPT when an order is placed
+ */
+add_action( 'woocommerce_new_order', function( $order_id ) {
+	$order = wc_get_order( $order_id );
+	error_log('checked order');
+	$data = sts_read_order_form_cookie();
+
+
+	error_log(print_r($data,true));
+
+	$cust_name    = isset( $data['customer_name'] )   ? sanitize_text_field( $data['customer_name'] )   : '';
+	$cust_email   = isset( $data['customer_email'] )  ? sanitize_email( $data['customer_email'] )       : '';
+	$cust_address = isset( $data['customer_address'] )? sanitize_text_field( $data['customer_address'] ): '';
+	$cust_suburb  = isset( $data['customer_suburb'] ) ? sanitize_text_field( $data['customer_suburb'] ) : '';
+	$cust_state   = isset( $data['customer_state'] )  ? sanitize_text_field( $data['customer_state'] )  : '';
+	$product_type = isset( $data['product_type'] )    ? sanitize_text_field( $data['product_type'] )    : '';
+
+	$vehicle = array(
+		'make'  => isset( $data['vehicle_make'] )  ? sanitize_text_field( $data['vehicle_make'] )  : ( isset( $data['veh_make'] ) ? sanitize_text_field( $data['veh_make'] ) : '' ),
+		'model' => isset( $data['vehicle_model'] ) ? sanitize_text_field( $data['vehicle_model'] ) : ( isset( $data['veh_model'] ) ? sanitize_text_field( $data['veh_model'] ) : '' ),
+		'year'  => isset( $data['vehicle_year'] )  ? sanitize_text_field( $data['vehicle_year'] )  : ( isset( $data['veh_year'] ) ? sanitize_text_field( $data['veh_year'] ) : '' ),
+	);
+
+	$caravan = array(
+		'make'  => isset( $data['caravan_make'] )  ? sanitize_text_field( $data['caravan_make'] )  : ( isset( $data['caravan_make'] ) ? sanitize_text_field( $data['caravan_make'] ) : ( isset( $data['van_make'] ) ? sanitize_text_field( $data['van_make'] ) : '' ) ),
+		'model' => isset( $data['caravan_model'] ) ? sanitize_text_field( $data['caravan_model'] ) : ( isset( $data['van_model'] ) ? sanitize_text_field( $data['van_model'] ) : '' ),
+	);
+
+	// Accessories: check Gravity-like names and "other"
+	$accessories = array();
+	if ( ! empty( $data['input_1.2'] ) || ! empty( $data['toolbox'] ) ) $accessories[] = 'toolbox';
+	if ( ! empty( $data['input_1.1'] ) || ! empty( $data['factory_stoneguard'] ) ) $accessories[] = 'factory-stoneguard';
+	if ( ! empty( $data['other_a_frame'] ) ) $accessories[] = sanitize_text_field( $data['other_a_frame'] );
+
+	// Measurements
+	$measure = array(
+		'barwidth_mm'         => isset( $data['barwidth_mm'] ) ? sanitize_text_field( $data['barwidth_mm'] ) : '',
+		'toolbox_width_mm'    => isset( $data['toolbox_width_mm'] ) ? sanitize_text_field( $data['toolbox_width_mm'] ) : '',
+		'toolbox_length_mm'   => isset( $data['toolbox_length_mm'] ) ? sanitize_text_field( $data['toolbox_length_mm'] ) : '',
+		'caravan_width_mm'    => isset( $data['caravan_width_mm'] ) ? sanitize_text_field( $data['caravan_width_mm'] ) : '',
+		'a_frame_length_mm'   => isset( $data['a_frame_length_mm'] ) ? sanitize_text_field( $data['a_frame_length_mm'] ) : '',
+		'stoneguard_length_mm'=> isset( $data['stoneguard_length_mm'] ) ? sanitize_text_field( $data['stoneguard_length_mm'] ) : '',
+		'stoneguard_width_mm' => isset( $data['stoneguard_width_mm'] ) ? sanitize_text_field( $data['stoneguard_width_mm'] ) : '',
+		'vinyl_width_mm'      => isset( $data['vinyl_width_mm'] ) ? sanitize_text_field( $data['vinyl_width_mm'] ) : '',
+		'vinyl_length_mm'     => isset( $data['vinyl_length_mm'] ) ? sanitize_text_field( $data['vinyl_length_mm'] ) : '',
+		'support_pockets'     => sts_bool( $data['support_pockets'] ?? '' ) ? 'yes' : 'no',
+	);
+
+	// Photos (hidden inputs hold JSON arrays of IDs)
+	$photos = array(
+		'hitch_ids' => sts_to_int_array( $data['hitch_ids'] ?? array() ),
+		'rear_ids'  => sts_to_int_array( $data['rear_ids'] ?? array() ),
+		'front_ids' => sts_to_int_array( $data['front_ids'] ?? array() ),
+	);
+
+	// Final details
+	$final = array(
+		'final_delivery'  => isset( $data['final_delivery'] ) ? sanitize_text_field( $data['final_delivery'] ) : ( isset( $data['final_address'] ) ? sanitize_text_field( $data['final_address'] ) : '' ),
+		'shipping_method' => isset( $data['shipping_method'] ) ? sanitize_text_field( $data['shipping_method'] ) : ( isset( $data['shipping'] ) ? sanitize_text_field( $data['shipping'] ) : '' ),
+		'acc_upsells'     => array_values( array_unique( array_map( 'intval', $data['acc_upsells'] ?? array() ) ) ),
+	);
+
+	// Create the CPT entry
+	$title_bits = array_filter( array( $cust_name, $cust_email, 'Order #' . $order_id ) );
+	$post_id = wp_insert_post( array(
+		'post_type'   => 'customer',
+		'post_status' => 'publish',
+		'post_title'  => $cust_name,
+	) );
+
+	if ( is_wp_error( $post_id ) ) return;
+
+	// Link to order + basic fields
+	update_post_meta( $post_id, 'name', $order_id );
+	// update_post_meta( $post_id, 'customer_name', $cust_name );
+	// update_post_meta( $post_id, 'customer_email', $cust_email );
+	// update_post_meta( $post_id, 'customer_address', $cust_address );
+	// update_post_meta( $post_id, 'customer_suburb', $cust_suburb );
+	// update_post_meta( $post_id, 'customer_state', $cust_state );
+	// update_post_meta( $post_id, 'product_type', $product_type );
+
+	// update_post_meta( $post_id, 'vehicle', $vehicle );
+	// update_post_meta( $post_id, 'caravan', $caravan );
+	// update_post_meta( $post_id, 'accessories', $accessories );
+	// update_post_meta( $post_id, 'measurements', $measure );
+	// update_post_meta( $post_id, 'photos', $photos );
+	// update_post_meta( $post_id, 'final_details', $final );
+
+	// Optionally set a featured image from the first uploaded photo if any
+	$first_img = 0;
+	foreach ( array( 'hitch_ids','rear_ids','front_ids' ) as $k ) {
+		if ( ! empty( $photos[ $k ] ) ) { $first_img = intval( $photos[ $k ][0] ); break; }
+	}
+	if ( $first_img > 0 ) {
+		set_post_thumbnail( $post_id, $first_img );
+	}
+
+	// Optional: associate CPT with logged-in user
+	if ( $order && $order->get_user_id() ) {
+		update_post_meta( $post_id, '_customer_user_id', $order->get_user_id() );
+	}
+
+	// Clear the cookies after saving
+	$expire = time() - 3600;
+	setcookie( 'order_form', '', $expire, '/' );
+	if ( isset( $_COOKIE['order_form_parts'] ) ) {
+		$count = intval( $_COOKIE['order_form_parts'] );
+		setcookie( 'order_form_parts', '', $expire, '/' );
+		for ( $i = 0; $i < $count; $i++ ) {
+			setcookie( "order_form_{$i}", '', $expire, '/' );
+		}
+	}
+}, 10, 1 );
