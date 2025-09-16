@@ -75,8 +75,10 @@ function Edit( props ) {
 	const { children } = useInnerBlocksProps( blockProps, {
 		allowedBlocks: [ 'core/columns', 'core/paragraph', 'core/spacer', 'core/heading', 'core/list', 'core/buttons' ],
 		template: [
-			[ 'core/paragraph', { content: '', className: 'kicker-text' } ],
-			[ 'core/heading', { level: 2, content: '', className:'' } ],
+			[ 'core/group', { className: 'section-head center-align' }, [
+				[ 'core/paragraph', { content: '', className: 'kicker-text' } ],
+				[ 'core/heading', { level: 2, content: '', className:'' } ],
+			]],
 			[ 'stonestomperpack/videos', {} ],
 		],
 	} );
