@@ -1,0 +1,41 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "stonestomperpack/products",
+  "version": "0.1.0",
+  "title": "Products",
+  "category": "theme-blocks",
+  "parent": [
+    "products-teaser"
+  ],
+  "description": " ",
+  "supports": {
+    "html": false
+  },
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "default": ""
+    },
+    "description": {
+      "type": "string",
+      "default": ""
+    },
+    "preview": {
+      "type": "boolean",
+      "default": false
+    },
+    "productIds": {
+      "type": "array",
+      "default": []
+    }
+  },
+  "example": {
+    "attributes": {
+      "preview": true
+    }
+  },
+  "textdomain": "stonestomper_td",
+  "editorScript": "file:./block-products.js",
+  "render": "file:./render.php"
+}

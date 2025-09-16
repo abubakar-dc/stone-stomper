@@ -1,42 +1,24 @@
 {
-	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"$schema": "https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json",
 	"apiVersion": 3,
-	"name": "stonestomperpack/render-php",
-	"version": "0.1.0",
-	"title": "Render PHP",
+	"name": "stonestomperpack/products-teaser",
+	"version": "1.0.0",
+	"title": "Products Teaser",
 	"category": "theme-blocks",
-	"description": " ",
+	"icon": "align-center",
+	"description": "",
 	"supports": {
-		"html": false
+		"html": false,
+		"align": ["wide", "full"]
 	},
 	"attributes": {
-		"heading": {
-			"type": "string",
-			"default": ""
-		},
-		"description": {
-			"type": "string",
-			"default": ""
-		},
 		"preview": {
 			"type": "boolean",
 			"default": false
 		},
-		"elevateIds": {
-			"type": "array",
-			"default": []
-		},
-		"stayIds": {
-			"type": "array",
-			"default": []
-		},
-		"linkData": {
-			"type": "object",
-			"default": {
-				"url": "",
-				"title": "",
-				"target": false
-			}
+		"selected": {
+			"type": "string",
+			"default": ""
 		}
 	},
 	"example": {
@@ -45,6 +27,5 @@
 		}
 	},
 	"textdomain": "stonestomper_td",
-	"editorScript": "file:./block-render-php.js",
-	"render": "file:./render.php"
+	"editorScript": "file:./block-products-teaser.js"
 }

@@ -16,9 +16,9 @@ const PlaceholderVideo = ({ props, valueVideoInline, attrVideoInline, valueVideo
 						multiple={false}
 						gallery={false}
 						addToGallery={false}
-						value={valueVideoInline.id}
+						value={valueVideoInline?.id}
 						render={({ open }) => {
-							if (valueVideoInline.url) {
+							if (valueVideoInline?.url) {
 								return (
 									<>
 										<video

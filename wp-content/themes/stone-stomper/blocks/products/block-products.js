@@ -12614,13 +12614,13 @@ function combine (array, callback) {
 
 /***/ }),
 
-/***/ "./src/products-teaser/block.json":
-/*!****************************************!*\
-  !*** ./src/products-teaser/block.json ***!
-  \****************************************/
+/***/ "./src/products/block.json":
+/*!*********************************!*\
+  !*** ./src/products/block.json ***!
+  \*********************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"stonestomperpack/render-php","version":"0.1.0","title":"Render PHP","category":"theme-blocks","description":" ","supports":{"html":false},"attributes":{"heading":{"type":"string","default":""},"description":{"type":"string","default":""},"preview":{"type":"boolean","default":false},"elevateIds":{"type":"array","default":[]},"stayIds":{"type":"array","default":[]},"linkData":{"type":"object","default":{"url":"","title":"","target":false}}},"example":{"attributes":{"preview":true}},"textdomain":"stonestomper_td","editorScript":"file:./block-render-php.js","render":"file:./render.php"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"stonestomperpack/products","version":"0.1.0","title":"Products","category":"theme-blocks","parent":["products-teaser"],"description":" ","supports":{"html":false},"attributes":{"heading":{"type":"string","default":""},"description":{"type":"string","default":""},"preview":{"type":"boolean","default":false},"productIds":{"type":"array","default":[]}},"example":{"attributes":{"preview":true}},"textdomain":"stonestomper_td","editorScript":"file:./block-products.js","render":"file:./render.php"}');
 
 /***/ })
 
@@ -12705,15 +12705,15 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/tru
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-/*!**************************************************!*\
-  !*** ./src/products-teaser/block-render-php.jsx ***!
-  \**************************************************/
+/*!*****************************************!*\
+  !*** ./src/products/block-products.jsx ***!
+  \*****************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./block.json */ "./src/products-teaser/block.json");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./block.json */ "./src/products/block.json");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
@@ -12745,7 +12745,7 @@ __webpack_require__.r(__webpack_exports__);
 // Register block
 
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_2__.name, {
-  icon: _block_assets_icons_Icons_jsx__WEBPACK_IMPORTED_MODULE_9__["default"].elevateTeaser,
+  icon: _block_assets_icons_Icons_jsx__WEBPACK_IMPORTED_MODULE_9__["default"].products,
   edit(props) {
     const {
       attributes,
@@ -12755,16 +12755,15 @@ __webpack_require__.r(__webpack_exports__);
       preview,
       className,
       selectionMode = 'recent',
-      elevateIds,
-      stayIds
+      productIds
     } = attributes;
-    const elevateOptions = [];
+    const productOptions = [];
     _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_7___default()({
-      path: '/wp/v2/post?per_page=50'
+      path: '/wp/v2/product?per_page=50'
     }).then(posts => {
       for (const key in posts) {
         const element = posts[key];
-        elevateOptions.push({
+        productOptions.push({
           value: element.id,
           label: element.title.rendered
         });
@@ -12784,62 +12783,136 @@ __webpack_require__.r(__webpack_exports__);
         })
       });
     }
+    const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.useBlockProps)();
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.Fragment, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+        ...blockProps,
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Panel, {
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
-              title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Elevates Settings'),
+              title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Settings'),
               initialOpen: true,
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ButtonGroup, {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
+                    isPrimary: selectionMode === 'recent',
+                    isSecondary: selectionMode !== 'recent',
+                    onClick: () => setAttributes({
+                      selectionMode: 'recent'
+                    }),
+                    children: "Recent"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
+                    isPrimary: selectionMode === 'manual',
+                    isSecondary: selectionMode !== 'manual',
+                    onClick: () => setAttributes({
+                      selectionMode: 'manual'
+                    }),
+                    children: "Manual"
+                  })]
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
                 className: "dc-s20"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, {
+              }), selectionMode === 'manual' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, {
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
                   className: "dp-s30"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_select__WEBPACK_IMPORTED_MODULE_11__["default"], {
                   className: "select-post-type",
-                  value: attributes.elevateIds,
+                  value: attributes.productIds,
                   onChange: value => setAttributes({
-                    elevateIds: value
+                    productIds: value
                   }),
-                  options: elevateOptions,
+                  options: productOptions,
                   isMulti: "true"
                 })]
               })]
             })
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
-          className: "section-head",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
-            className: "section-head-left",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.RichText, {
-              tagName: "h2",
-              value: attributes.heading,
-              onChange: value => setAttributes({
-                heading: value
-              }),
-              placeholder: "Heading",
-              className: "section-heading"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.RichText, {
-              tagName: "p",
-              value: attributes.description,
-              onChange: value => setAttributes({
-                description: value
-              }),
-              placeholder: "Description",
-              className: "section-description"
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
-            className: "section-head-right",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_block_assets_components_ButtonComponent_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
-              props: props,
-              value: attributes.linkData,
-              attr: "linkData"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+          className: "post-selection-message",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+            className: "components-notice-list components-editor-notices__dismissible",
+            style: {
+              marginBottom: '40px',
+              border: '0px solid'
+            },
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+              className: "components-notice is-warning is-dismissible",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+                className: "components-notice__content",
+                style: {
+                  marginTop: '15px'
+                },
+                children: ["This is a dynamic block automatically displays Testimonials. To edit events content ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("a", {
+                  href: "/wp-admin/edit.php?post_type=testimonial",
+                  target: "_blank",
+                  rel: "noopener noreferrer",
+                  children: " Click Here "
+                })]
+              })
             })
-          })]
+          })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)((_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_6___default()), {
           block: _block_json__WEBPACK_IMPORTED_MODULE_2__.name,
           attributes: attributes
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+          className: "slider-buttons flex",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+            className: "slider-button flex-center blog-button--prev",
+            "aria-label": "Previous Slide",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("svg", {
+              className: "w-6 h-6 text-gray-800 dark:text-white",
+              "aria-hidden": "true",
+              xmlns: "http://www.w3.org/2000/svg",
+              width: "24",
+              height: "24",
+              fill: "none",
+              viewBox: "0 0 24 24",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("path", {
+                stroke: "currentColor",
+                strokeLinecap: "round",
+                strokeLinejoin: "round",
+                strokeWidth: "2",
+                d: "m15 19-7-7 7-7"
+              })
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+            className: "slider-button flex-center blog-button--next",
+            "aria-label": "Next Slide",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("svg", {
+              className: "w-6 h-6 text-gray-800 dark:text-white",
+              "aria-hidden": "true",
+              xmlns: "http://www.w3.org/2000/svg",
+              width: "24",
+              height: "24",
+              fill: "none",
+              viewBox: "0 0 24 24",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("path", {
+                stroke: "currentColor",
+                strokeLinecap: "round",
+                strokeLinejoin: "round",
+                strokeWidth: "2",
+                d: "m9 5 7 7-7 7"
+              })
+            })
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+          className: "post-selection-message",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+            className: "components-notice-list components-editor-notices__dismissible",
+            style: {
+              margintop: '40px'
+            },
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+              className: "components-notice is-warning is-dismissible",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+                className: "components-notice__content",
+                style: {
+                  marginTop: '15px'
+                },
+                children: "Scroll right and left to see selected posts"
+              })
+            })
+          })
         })]
       })
     });
@@ -12847,4 +12920,4 @@ __webpack_require__.r(__webpack_exports__);
 });
 /******/ })()
 ;
-//# sourceMappingURL=block-render-php.js.map
+//# sourceMappingURL=block-products.js.map

@@ -1,0 +1,33 @@
+{
+	"$schema": "https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json",
+	"apiVersion": 3,
+	"name": "stonestomperpack/video-columns",
+	"version": "1.0.0",
+	"title": "Video Columns",
+	"category": "theme-blocks",
+	"icon": "align-center",
+	"description": "",
+	"supports": {
+		"html": false,
+		"align": ["wide", "full"]
+	},
+	"attributes": {
+		"preview": {
+			"type": "boolean",
+			"default": false
+		},
+		"selected": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"example": {
+		"attributes": {
+			"preview": true
+		}
+	},
+	"textdomain": "stonestomper_td",
+	"editorScript": "file:./video-columns.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

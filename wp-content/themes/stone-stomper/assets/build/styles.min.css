@@ -4889,6 +4889,13 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   row-gap: var(--ss_space_30);
 }
 
+.video-three-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(clamp(309px, 33.3333333333% - 2%, 100%), 100%), 1fr));
+  gap: 2%;
+  row-gap: var(--ss_space_30);
+}
+
 .four-columns {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(clamp(250px, 25% - 2%, 100%), 100%), 1fr));
@@ -5228,6 +5235,17 @@ body #daextlwcnf-cookie-settings-button-2:hover {
 
 .stone-stomper-features .features-image figure {
   height: 100%;
+}
+
+/*-------------------------------------------------
+>> Basic styles for Image Alongside Text Block
+-------------------------------------------------*/
+.products-teaser-slider {
+  width: calc(100% + 20px);
+  left: -10px;
+}
+.products-teaser-slider .slick-slide {
+  margin: 0 10px;
 }
 
 /*-------------------------------------------------

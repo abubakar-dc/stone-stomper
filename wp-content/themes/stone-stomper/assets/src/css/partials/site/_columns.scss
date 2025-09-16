@@ -10,6 +10,12 @@
 	row-gap: var(--ss_space_30);
 }
 
+.video-three-columns {
+	display: grid;
+	@include fluidColumns(3, 309px, 2%, 0);
+	row-gap: var(--ss_space_30);
+}
+
 .four-columns {
 	display: grid;
 	@include fluidColumns(4, 250px, 2%);

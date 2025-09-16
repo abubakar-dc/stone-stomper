@@ -148,17 +148,31 @@ jQuery( function() {
 
 		if ( jQuery( '.form-image-slider' ).length ) {
 			jQuery( '.form-image-slider' ).each( function() {
+					const $slider = jQuery( this );
+					$slider.slick( {
+						slidesToShow: 1,
+						slidesToScroll: 1,
+						arrows: true,
+						dots: true,
+				} );
+			} );
+		}
+
+		if ( jQuery( '.products-teaser-slider' ).length ) {
+			jQuery( '.products-teaser-slider' ).each( function() {
 				const $slider = jQuery( this );
 				$slider.slick( {
-					slidesToShow: 1,
+					slidesToShow: 4,
 					slidesToScroll: 1,
 					arrows: true,
 					dots: true,
+					touchThreshold: 200,
+				} );
 			} );
-		} );
-	}
+		}
 
 } );
+
 // helpers to read/write hidden ids (JSON array in a hidden input)
 function getIdsField( slot ) {
 	const map = { hitch: 'hitch_ids', rear: 'rear_ids', front: 'front_ids' };
