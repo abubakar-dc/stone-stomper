@@ -34,8 +34,49 @@ class WP_Theme_Ajax {
 		add_action( 'wp_ajax_bst_handle_upload_order_photos', array( $this, 'bst_handle_upload_order_photos' ) );
 		add_action( 'wp_ajax_nopriv_save_order_form_cookie', array( $this, 'save_order_form_cookie' ) );
 		add_action( 'wp_ajax_save_order_form_cookie', array( $this, 'save_order_form_cookie' ) );
+		add_action( 'wp_ajax_nopriv_mytheme_add_upsell_products', array( $this, 'mytheme_add_upsell_products' ) );
+		add_action( 'wp_ajax_mytheme_add_upsell_products', array( $this, 'mytheme_add_upsell_products' ) );
 
 	}
+	public function  mytheme_add_upsell_products() {
+		if ( empty( $_POST['main_id'] ) ) {
+			wp_send_json_error( [ 'message' => 'Missing main product ID' ] );
+		}
+
+		$main_id    = absint( $_POST['main_id'] );
+		$upsell_ids = ! empty( $_POST['upsells'] ) ? array_map( 'absint', $_POST['upsells'] ) : [];
+
+		// Add main product
+		WC()->cart->add_to_cart( $main_id );
+
+		// Add upsells
+		foreach ( $upsell_ids as $upsell_id ) {
+			WC()->cart->add_to_cart( $upsell_id );
+		}
+		wp_send_json_success([
+            'added'    => true,
+            'redirect' => '/cart',
+        ]);
+
+
+		wp_die();
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 public function save_order_form_cookie() {

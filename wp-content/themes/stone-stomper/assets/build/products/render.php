@@ -23,30 +23,16 @@ $heading = $attributes['heading'] ?? '';
 			$product_id = $post_data['value']; // Extract the post ID
 			list($product_id, $sts_fields, $sts_perks_fields) = StoneStomper::defaults($product_id);
 			$product = wc_get_product( $product_id );
-
-			$sts_var_product_title     = get_the_title($product_id);
-			$sts_var_product_permalink = get_permalink($product_id);
-			$sts_var_product_description = $product->get_description();
-			$sts_var_product_price = $product->get_price();
+			$upsells = $product->get_upsell_ids();
 			?>
 				<div class="slick-slide">
-					<div class="product-item">
-						<div class="product-image">
-							<?php StoneStomper::the_attachment_image( get_post_thumbnail_id( $product_id ), 500 ); ?>
-						</div>
-						<div class="product-title">
-							<h3>
-								<?php echo html_entity_decode($sts_var_product_title); ?>
-							</h3>
-						</div>
-						<div class="product-description">
-							<?php echo html_entity_decode($sts_var_product_description); ?>
-						</div>
-						<div class="product-price">
-							<?php echo html_entity_decode($sts_var_product_price); ?>
-						</div>
-						<a href="#" class="add-to-cart">Add to Cart</a>
-					</div>
+					<?php
+					get_template_part(
+						'partials/content',
+						'archive-product',
+						array( 'sts_var_product_id' => $product_id )
+					);
+?>
 				</div>
 		<?php } ?>
 	</div>

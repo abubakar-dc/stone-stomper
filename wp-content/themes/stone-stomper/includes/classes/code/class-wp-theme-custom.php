@@ -28,6 +28,39 @@ class WP_Theme_Custom extends \Boilerplate {
 	public function __construct() {
 
 	}
+	public static function  show_product_with_upsells( $main_product_id, $upsell_ids = [] ) {
+		// If no upsells, return nothing
+		if ( empty( $upsell_ids ) ) {
+			return '';
+		}
+
+		$output = '';
+
+		// Get main product
+		$main_product = wc_get_product( $main_product_id );
+		if ( ! $main_product ) {
+			return '';
+		}
+
+		// Main product title + price
+		$output .= '<span class="main-product">';
+		$output .= $main_product->get_price_html();
+		$output .= '</span>';
+
+		// Upsells
+		foreach ( $upsell_ids as $upsell_id ) {
+			$upsell_product = wc_get_product( $upsell_id );
+			if ( $upsell_product ) {
+				$output .= ' + <span class="upsell-product">';
+				$output .= $upsell_product->get_price_html() . ' ' . esc_html( $upsell_product->get_name() );
+				$output .= '</span>';
+			}
+		}
+
+		return $output;
+	}
+
+
 
 
 

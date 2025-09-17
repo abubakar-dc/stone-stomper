@@ -442,3 +442,31 @@ function allowed_block_types( $allowed_blocks, $editor_context ) {
     return $core_blocks;
 }
 // add_filter( 'allowed_block_types_all', 'allowed_block_types', 10, 2 );
+
+
+// 🔹 Add WooCommerce support in your theme
+function mytheme_add_woocommerce_support() {
+	add_theme_support( 'woocommerce' );
+}
+add_action( 'after_setup_theme', 'mytheme_add_woocommerce_support' );
+
+
+// Handle upsell + main product add to cart
+add_action( 'template_redirect', function() {
+	if ( isset( $_POST['main_product_id'] ) && isset( $_POST['upsell_ids'] ) ) {
+		$main_id   = absint( $_POST['main_product_id'] );
+		$upsell_ids = array_map( 'absint', $_POST['upsell_ids'] );
+
+		// Add main product
+		WC()->cart->add_to_cart( $main_id );
+
+		// Add upsells
+		foreach ( $upsell_ids as $upsell_id ) {
+			WC()->cart->add_to_cart( $upsell_id );
+		}
+
+		// Redirect to cart
+		// wp_safe_redirect( wc_get_cart_url() );
+		exit;
+	}
+});
