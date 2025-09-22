@@ -2875,7 +2875,6 @@ Mixin for transition
 }
 .editor-styles-wrapper .footer-ctn {
   background-color: var(--ss_footer_bgcolor);
-  padding: 80px 0 0;
   box-sizing: border-box;
 }
 .editor-styles-wrapper .footer-ctn h1,
@@ -2965,15 +2964,14 @@ Mixin for transition
 }
 .editor-styles-wrapper .footer-bottom {
   padding: 30px 0 40px;
-  border-top: 1px solid var(--ss_border_3);
 }
 .editor-styles-wrapper .copy-right {
-  width: 45%;
+  width: 50%;
   color: var(--ss_copyright_color);
   font-size: 14px;
 }
 .editor-styles-wrapper .legal-nav {
-  width: 55%;
+  width: 40%;
 }
 .editor-styles-wrapper .legal-nav ul {
   margin: 0;

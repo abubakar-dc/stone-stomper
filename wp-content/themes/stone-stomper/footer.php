@@ -47,33 +47,6 @@ $sts_var_social_profiles = $sts_option_fields['sts_var_social_profiles'] ?? null
 	<!-- Footer Start -->
 	<div class="footer-ctn">
 		<div class="wrapper">
-			<div class="footer-widgets d-flex justify-content-between flex-wrap">
-				<div class="single-widget">
-					<div class="footer-nav">
-						<?php
-							wp_nav_menu(
-								array(
-									'theme_location' => 'footer-nav-two',
-									'fallback_cb'    => 'StoneStomper::nav_fallback',
-								)
-							);
-							?>
-					</div>
-				</div>
-				<div class="single-widget">
-					<div class="footer-nav">
-						<?php
-							wp_nav_menu(
-								array(
-									'theme_location' => 'footer-nav-three',
-									'fallback_cb'    => 'StoneStomper::nav_fallback',
-								)
-							);
-							?>
-					</div>
-				</div>
-			</div>
-			<div class="st-s72"></div>
 			<div class="footer-bottom d-flex align-items-center justify-content-between">
 				<?php if ( $sts_var_ftrop_copyright ) { ?>
 				<div class="copy-right"><?php echo esc_html( $sts_var_ftrop_copyright ); ?></div>

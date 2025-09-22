@@ -3857,7 +3857,6 @@ header {
 -------------------------------------------------*/
 .footer-ctn {
   background-color: var(--ss_footer_bgcolor);
-  padding: 80px 0 0;
   box-sizing: border-box;
 }
 .footer-ctn h1,
@@ -3951,17 +3950,16 @@ header {
 
 .footer-bottom {
   padding: 30px 0 40px;
-  border-top: 1px solid var(--ss_border_3);
 }
 
 .copy-right {
-  width: 45%;
+  width: 50%;
   color: var(--ss_copyright_color);
   font-size: 14px;
 }
 
 .legal-nav {
-  width: 55%;
+  width: 40%;
 }
 .legal-nav ul {
   margin: 0;
