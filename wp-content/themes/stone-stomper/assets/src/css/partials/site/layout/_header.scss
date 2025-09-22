@@ -79,8 +79,7 @@ header {
 
 	img {
 		width: 14px;
-		filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(220deg)
-			brightness(102%) contrast(103%);
+		filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(220deg) brightness(102%) contrast(103%);
 	}
 }
 
@@ -139,7 +138,7 @@ header {
 	z-index: 1;
 	display: flex;
 	align-items: center;
-	width: 5.8%;
+	width: 4.8%;
 	justify-content: flex-end;
 }
 

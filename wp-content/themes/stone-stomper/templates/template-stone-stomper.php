@@ -400,7 +400,6 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 								</div>
 							</div>
 
-
 							<!-- Final Measurements -->
 							<div class="section-disable order-form-section-inner form-measurements-section two-columns justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">

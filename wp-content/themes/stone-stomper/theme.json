@@ -242,47 +242,47 @@
 			"fontSizes": [
 				{
 					"slug": "font-size-1",
-					"size": "var(--ss_font_size_60)",
+					"size": "var(--ss_font_size_58)",
 					"name": "Heading 1"
 				},
 				{
 					"slug": "font-size-2",
-					"size": "var(--ss_font_size_32)",
+					"size": "var(--ss_font_size_44)",
 					"name": "Heading 2"
 				},
 				{
 					"slug": "font-size-3",
-					"size": "var(--ss_font_size_27)",
+					"size": "var(--ss_font_size_32)",
 					"name": "Heading 3"
 				},
 				{
 					"slug": "font-size-4",
-					"size": "var(--ss_font_size_25)",
+					"size": "var(--ss_font_size_28)",
 					"name": "Heading 4"
 				},
 				{
 					"slug": "font-size-5",
-					"size": "var(--ss_font_size_20)",
+					"size": "var(--ss_font_size_24)",
 					"name": "Heading 5"
 				},
 				{
 					"slug": "font-size-6",
-					"size": "var(--ss_font_size_16)",
+					"size": "var(--ss_font_size_22)",
 					"name": "Heading 6"
 				},
 				{
 					"slug": "font-size-7",
-					"size": "var(--ss_font_size_40)",
+					"size": "var(--ss_font_size_16)",
 					"name": "Large Text"
 				},
 				{
 					"slug": "font-size-8",
-					"size": "var(--ss_font_size_16)",
+					"size": "var(--ss_font_size_14)",
 					"name": "Small Text"
 				},
 				{
 					"slug": "font-size-9",
-					"size": "var(--ss_font_size_18)",
+					"size": "var(--ss_font_size_15)",
 					"name": "Regular Text"
 				}
 			]

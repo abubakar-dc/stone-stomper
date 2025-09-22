@@ -3329,7 +3329,7 @@ header {
   z-index: 1;
   display: flex;
   align-items: center;
-  width: 5.8%;
+  width: 4.8%;
   justify-content: flex-end;
 }
 
@@ -3820,9 +3820,21 @@ header {
 /*-------------------------------------------------
 >> Styles for Home
 -------------------------------------------------*/
+.hero-home-section .wp-block-heading {
+  line-height: 1.19;
+  letter-spacing: 14px;
+  margin-top: 13px;
+}
+.hero-home-section .hero-content-inner p {
+  letter-spacing: 0.7px;
+}
+.hero-home-section .wp-block-buttons {
+  margin-top: 33px;
+}
 .hero-home-section .wp-block-cover {
   position: initial;
   padding: 302px 0 100px;
+  min-height: 100vh;
 }
 .hero-home-section .wp-block-cover .wp-block-cover__inner-container {
   max-width: 1750px;
@@ -3837,8 +3849,29 @@ header {
   height: 100%;
 }
 
+.image-alongside-text-ctn {
+  justify-content: space-between;
+  -moz-column-gap: 70px;
+       column-gap: 70px;
+}
+.image-alongside-text-ctn .wp-block-column.iat-content {
+  flex-basis: 40.7%;
+}
+.image-alongside-text-ctn .wp-block-column.iat-image {
+  flex-basis: 54.3%;
+}
+.image-alongside-text-ctn .wp-block-heading {
+  letter-spacing: 0.3px;
+  line-height: 1.23;
+}
+.image-alongside-text-ctn p {
+  margin-top: 13px;
+  letter-spacing: 0.25px;
+  line-height: 1.45;
+}
+
 .hero-content {
-  max-width: 600px;
+  max-width: 630px;
 }
 .hero-content .kicker-text {
   text-transform: uppercase;
@@ -3849,7 +3882,8 @@ header {
   letter-spacing: 2.9px;
 }
 .hero-content .hero-content-inner {
-  margin-left: 28%;
+  margin-left: 27%;
+  margin-top: 22px;
 }
 
 /*-------------------------------------------------
@@ -4495,7 +4529,9 @@ span.button,
   position: relative;
   display: inline-block;
   overflow: hidden;
-  padding: 8px 22px;
+  padding: 20px 75px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
   text-decoration: none;
   color: var(--ss_theme_btn_color);
   background-color: var(--ss_theme_btn_bgcolor);
@@ -5279,7 +5315,9 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   position: relative;
   display: inline-block;
   overflow: hidden;
-  padding: 11px 30px;
+  padding: 20px 75px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
   text-decoration: none;
   color: var(--ss_theme_btn_color);
   background-color: var(--ss_theme_btn_bgcolor);

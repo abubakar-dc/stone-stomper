@@ -294,7 +294,9 @@ span.button,
 	position: relative;
 	display: inline-block;
 	overflow: hidden;
-	padding: 8px 22px;
+	padding: 20px 75px;
+	text-transform: uppercase;
+	letter-spacing: 3px;
 	text-decoration: none;
 	color: var(--ss_theme_btn_color);
 	background-color: var(--ss_theme_btn_bgcolor);
@@ -430,6 +432,7 @@ button[disabled]:hover {
 	}
 
 	.select-dropdown__button {
+
 		&:focus,
 		&:focus-visible {
 			outline-color: black !important;
@@ -507,6 +510,7 @@ body {
 
 .vehicle-image {
 	display: flex;
+
 	img {
 		width: 50%;
 	}
