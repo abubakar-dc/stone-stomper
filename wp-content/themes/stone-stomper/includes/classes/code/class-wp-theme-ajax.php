@@ -37,6 +37,10 @@ class WP_Theme_Ajax {
 		add_action( 'wp_ajax_nopriv_mytheme_add_upsell_products', array( $this, 'mytheme_add_upsell_products' ) );
 		add_action( 'wp_ajax_mytheme_add_upsell_products', array( $this, 'mytheme_add_upsell_products' ) );
 
+
+		add_action( 'wp_ajax_nopriv_woocommerce_ajax_update_summary', array( $this, 'woocommerce_ajax_update_summary' ) );
+		add_action( 'wp_ajax_woocommerce_ajax_update_summary', array( $this, 'woocommerce_ajax_update_summary' ) );
+
 	}
 	public function  mytheme_add_upsell_products() {
 		if ( empty( $_POST['main_id'] ) ) {
@@ -79,7 +83,7 @@ class WP_Theme_Ajax {
 
 
 
-public function save_order_form_cookie() {
+	public function save_order_form_cookie() {
 		error_log('save_order_form_cookie called');
 		if ( isset( $_POST['formData'] ) ) {
 			$form_data = wp_unslash( $_POST['formData'] );
@@ -92,153 +96,220 @@ public function save_order_form_cookie() {
 	}
 
 
-public function bst_handle_upload_order_photos() {
-	// Nonce check
+	public function bst_handle_upload_order_photos() {
+		// Nonce check
 
-	$slots  = array( 'hitch', 'rear', 'front' ); // MUST match your JS "slot" keys
-	$result = array( 'hitch' => array(), 'rear' => array(), 'front' => array() );
+		$slots  = array( 'hitch', 'rear', 'front' ); // MUST match your JS "slot" keys
+		$result = array( 'hitch' => array(), 'rear' => array(), 'front' => array() );
 
-	// WordPress upload helpers
-	require_once ABSPATH . 'wp-admin/includes/file.php';
-	require_once ABSPATH . 'wp-admin/includes/image.php';
-	require_once ABSPATH . 'wp-admin/includes/media.php';
+		// WordPress upload helpers
+		require_once ABSPATH . 'wp-admin/includes/file.php';
+		require_once ABSPATH . 'wp-admin/includes/image.php';
+		require_once ABSPATH . 'wp-admin/includes/media.php';
 
-	// Optional: size/type limits
-	$overrides = array(
-		'test_form' => false,
-		'mimes'     => array(
-			'jpg|jpeg' => 'image/jpeg',
-			'png'      => 'image/png',
-			'gif'      => 'image/gif',
-			'webp'     => 'image/webp',
-			'heic'     => 'image/heic',
-		),
-		// 'unique_filename_callback' => 'your_custom_filename_cb', // optional
-	);
+		// Optional: size/type limits
+		$overrides = array(
+			'test_form' => false,
+			'mimes'     => array(
+				'jpg|jpeg' => 'image/jpeg',
+				'png'      => 'image/png',
+				'gif'      => 'image/gif',
+				'webp'     => 'image/webp',
+				'heic'     => 'image/heic',
+			),
+			// 'unique_filename_callback' => 'your_custom_filename_cb', // optional
+		);
 
-	foreach ( $slots as $slot ) {
-		if ( empty( $_FILES[ $slot ] ) ) {
-			continue;
-		}
-
-		$files = self::bst_reformat_files_array( $_FILES[ $slot ] );
-		if ( empty( $files ) ) {
-			continue;
-		}
-
-		foreach ( $files as $file ) {
-			// Optional: block too-large files (e.g., > 15MB)
-			// if ( (int) $file['size'] > 15 * 1024 * 1024 ) { continue; }
-
-			$uploaded = wp_handle_upload( $file, $overrides );
-			if ( isset( $uploaded['error'] ) ) {
-				// You can collect per-file errors if desired
+		foreach ( $slots as $slot ) {
+			if ( empty( $_FILES[ $slot ] ) ) {
 				continue;
 			}
 
-			$attachment = array(
-				'post_mime_type' => $uploaded['type'],
-				'post_title'     => sanitize_file_name( wp_basename( $uploaded['file'] ) ),
-				'post_content'   => '',
-				'post_status'    => 'inherit',
-			);
-
-			$attach_id = wp_insert_attachment( $attachment, $uploaded['file'] );
-			if ( is_wp_error( $attach_id ) ) {
+			$files = self::bst_reformat_files_array( $_FILES[ $slot ] );
+			if ( empty( $files ) ) {
 				continue;
 			}
 
-			$attach_data = wp_generate_attachment_metadata( $attach_id, $uploaded['file'] );
-			wp_update_attachment_metadata( $attach_id, $attach_data );
+			foreach ( $files as $file ) {
+				// Optional: block too-large files (e.g., > 15MB)
+				// if ( (int) $file['size'] > 15 * 1024 * 1024 ) { continue; }
 
-			$result[ $slot ][] = array(
-				'id'  => $attach_id,
-				'url' => wp_get_attachment_url( $attach_id ),
-			);
+				$uploaded = wp_handle_upload( $file, $overrides );
+				if ( isset( $uploaded['error'] ) ) {
+					// You can collect per-file errors if desired
+					continue;
+				}
+
+				$attachment = array(
+					'post_mime_type' => $uploaded['type'],
+					'post_title'     => sanitize_file_name( wp_basename( $uploaded['file'] ) ),
+					'post_content'   => '',
+					'post_status'    => 'inherit',
+				);
+
+				$attach_id = wp_insert_attachment( $attachment, $uploaded['file'] );
+				if ( is_wp_error( $attach_id ) ) {
+					continue;
+				}
+
+				$attach_data = wp_generate_attachment_metadata( $attach_id, $uploaded['file'] );
+				wp_update_attachment_metadata( $attach_id, $attach_data );
+
+				$result[ $slot ][] = array(
+					'id'  => $attach_id,
+					'url' => wp_get_attachment_url( $attach_id ),
+				);
+			}
 		}
+
+		wp_send_json_success( $result );
+	}
+	/**
+	 * Define ajax filter
+	 **/
+	public function  bst_reformat_files_array( $file_post ) {
+		$files = array();
+
+		// Multiple files
+		if ( is_array( $file_post['name'] ?? null ) ) {
+			$count = count( $file_post['name'] );
+			for ( $i = 0; $i < $count; $i++ ) {
+				if ( empty( $file_post['name'][ $i ] ) ) {
+					continue;
+				}
+				$files[] = array(
+					'name'     => $file_post['name'][ $i ],
+					'type'     => $file_post['type'][ $i ],
+					'tmp_name' => $file_post['tmp_name'][ $i ],
+					'error'    => $file_post['error'][ $i ],
+					'size'     => $file_post['size'][ $i ],
+				);
+			}
+		} else { // Single file
+			if ( ! empty( $file_post['name'] ?? '' ) ) {
+				$files[] = $file_post;
+			}
+		}
+
+		return $files;
 	}
 
-	wp_send_json_success( $result );
-}
-public function  bst_reformat_files_array( $file_post ) {
-	$files = array();
 
-	// Multiple files
-	if ( is_array( $file_post['name'] ?? null ) ) {
-		$count = count( $file_post['name'] );
-		for ( $i = 0; $i < $count; $i++ ) {
-			if ( empty( $file_post['name'][ $i ] ) ) {
-				continue;
+
+
+
+	/**
+	 * Define ajax filter
+	 **/
+	public function woocommerce_ajax_add_to_cart() {
+		$raw_ids  = $_POST['ids'] ?? [];
+		$quantity = 1;
+		$shipping = sanitize_text_field($_POST['shipping'] ?? '');
+
+		$parse_ids = static function($raw) {
+			if (is_array($raw)) {
+				return array_values(array_filter(array_map('intval', $raw)));
 			}
-			$files[] = array(
-				'name'     => $file_post['name'][ $i ],
-				'type'     => $file_post['type'][ $i ],
-				'tmp_name' => $file_post['tmp_name'][ $i ],
-				'error'    => $file_post['error'][ $i ],
-				'size'     => $file_post['size'][ $i ],
-			);
+			if (is_string($raw)) {
+				$raw = trim($raw);
+				if ($raw === '') return [];
+				if (strpos($raw, '[') === 0) {
+					$decoded = json_decode($raw, true);
+					if (is_array($decoded)) {
+						return array_values(array_filter(array_map('intval', $decoded)));
+					}
+				}
+				$parts = preg_split('/[\s,|]+/', $raw);
+				return array_values(array_filter(array_map('intval', $parts)));
+			}
+			return [];
+		};
+
+		$product_ids = $parse_ids($raw_ids);
+
+		if (empty($product_ids)) {
+			wp_send_json_error(['message' => 'No valid product IDs provided']);
 		}
-	} else { // Single file
-		if ( ! empty( $file_post['name'] ?? '' ) ) {
-			$files[] = $file_post;
+
+		$added_any = false;
+
+		foreach ($product_ids as $product_id) {
+			if ($product_id > 0) {
+				$added = WC()->cart->add_to_cart($product_id, $quantity);
+				if ($added) {
+					$added_any = true;
+				}
+			}
 		}
+
+		if ($added_any) {
+			WC()->session->set('chosen_shipping_methods', [$shipping]);
+			wp_send_json_success([
+				'added'    => true,
+				'redirect' => '/cart',
+			]);
+		} else {
+			wp_send_json_error(['message' => 'Failed to add products to cart']);
+		}
+
+		wp_die();
 	}
+	/**
+	 * Stone Stomper Update Summary
+	 **/
 
-	return $files;
-}
-public function woocommerce_ajax_add_to_cart() {
-    $raw_ids  = $_POST['ids'] ?? [];
-    $quantity = isset($_POST['quantity']) ? max(1, intval($_POST['quantity'])) : 1;
-    $shipping = sanitize_text_field($_POST['shipping'] ?? '');
+	public function woocommerce_ajax_update_summary() {
+		$product_ids  = $_POST['ids'] ?? [];
+		$quantity = 1;
+		$shipping = sanitize_text_field($_POST['shipping'] ?? '');
 
-    $parse_ids = static function($raw) {
-        if (is_array($raw)) {
-            return array_values(array_filter(array_map('intval', $raw)));
-        }
-        if (is_string($raw)) {
-            $raw = trim($raw);
-            if ($raw === '') return [];
-            if (strpos($raw, '[') === 0) {
-                $decoded = json_decode($raw, true);
-                if (is_array($decoded)) {
-                    return array_values(array_filter(array_map('intval', $decoded)));
-                }
-            }
-            $parts = preg_split('/[\s,|]+/', $raw);
-            return array_values(array_filter(array_map('intval', $parts)));
-        }
-        return [];
-    };
+		$added_any = false;
 
-    $product_ids = $parse_ids($raw_ids);
+		$total_price = 0;
+		$html_output = '';
 
-    if (empty($product_ids)) {
-        wp_send_json_error(['message' => 'No valid product IDs provided']);
-    }
+		foreach ($product_ids as $product_id) {
+			if ($product_id > 0) {
+				$product = wc_get_product($product_id);
+				if ($product) {
+					$added_any = true;
+					$title = $product->get_name();
+					$price = $product->get_price();
 
-    $added_any = false;
+					$total_price += $price;
 
-    foreach ($product_ids as $product_id) {
-        if ($product_id > 0) {
-            $added = WC()->cart->add_to_cart($product_id, $quantity);
-            if ($added) {
-                $added_any = true;
-            }
-        }
-    }
+					$html_output .= '<div class="line">';
+					$html_output .= '<span>' . esc_html($title) . '</span>';
+					$html_output .= '<strong tabindex="0">$<span>' . number_format($price, 2) . '</span></strong>';
+					$html_output .= '</div>';
+				}
+			}
+		}
+		$shipping = 75.00;
+		$total_price += $shipping;
 
-    if ($added_any) {
-        WC()->session->set('chosen_shipping_methods', [$shipping]);
-        wp_send_json_success([
-            'added'    => true,
-            'redirect' => '/cart',
-        ]);
-    } else {
-        wp_send_json_error(['message' => 'Failed to add products to cart']);
-    }
+		$html_output .= '<div class="line"><span>Shipping</span><strong tabindex="0">$<span data-id="shipping">' . number_format($shipping, 2) . '</span></strong></div>';
 
-    wp_die();
-}
+		// Optionally, show total as well
+		$html_output .= '<div class="line total"><span>Total</span><strong tabindex="0">$<span data-id="total">' . number_format($total_price, 2) . '</span></strong></div>';
+
+
+		if ($added_any) {
+			WC()->session->set('chosen_shipping_methods', [$shipping]);
+			wp_send_json_success([
+				'html'   => $html_output,
+				'added'    => true,
+			]);
+		} else {
+			wp_send_json_success([
+				'html'   => $html_output,
+				'added'    => false,
+			]);
+
+		}
+
+		wp_die();
+	}
 
 
 	/**

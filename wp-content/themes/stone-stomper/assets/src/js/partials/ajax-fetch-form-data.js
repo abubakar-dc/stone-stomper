@@ -6,7 +6,7 @@ jQuery( document ).ready( function( $ ) {
 	let caravan = true;
 	let caravanMake = '';
 
-	jQuery( document ).on( 'change', '#van_make', function() {
+	jQuery( '#van_make' ).on( 'change', function() {
 		caravanMake = jQuery( this ).val();
 		console.log( 'Selected Caravan Make:', caravanMake );
 		caravan = true;
@@ -14,7 +14,7 @@ jQuery( document ).ready( function( $ ) {
 		fetchCaravanData();
 	} );
 
-	jQuery( document ).on( 'change', '#van_model', function() {
+	jQuery( '#van_model' )( 'change', function() {
 		const selectedOption = jQuery( this ).find( ':selected' );
 		caravanPostID = selectedOption.data( 'post-id' );
 		console.log( 'Selected Caravan Model ID:', caravanPostID );
@@ -24,7 +24,7 @@ jQuery( document ).ready( function( $ ) {
 	} );
 
 	// Get Category Slug on Click Start.
-	jQuery( document ).on( 'change', '#veh_make', function() {
+	jQuery().on( '#veh_make', function() {
 		carMake = jQuery( this ).val();
 		console.log( 'Selected Car Make:', carMake );
 		yearRequested = true;
@@ -122,9 +122,12 @@ jQuery( document ).ready( function( $ ) {
 					if ( response.vinyl_insert_height ) {
 						jQuery( '#vinyl_length' ).val( response.vinyl_insert_height + ' mm' );
 					}
-
-					jQuery( '#caravan-images' ).append( response.stoneguard_image );
-					jQuery( '#caravan-images' ).append( response.toolbox_image );
+					if ( response.stoneguard_image ) {
+						jQuery( '#caravan-images' ).html( response.stoneguard_image );
+					}
+					if ( response.toolbox_image ) {
+						jQuery( '#caravan-images' ).html( response.toolbox_image );
+					}
 					jQuery( '.loader-container' ).hide();
 				}
 				// selectModel();
