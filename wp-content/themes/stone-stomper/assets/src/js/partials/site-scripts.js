@@ -6,6 +6,8 @@ import magnificPopup from '../vendors/jquery-magnificpopup';
 import organicTabs from '../vendors/organic-tab';
 import swiper from '../vendors/swiper-bundle.min';
 import slick from '../vendors/slick.min';
+import Lity from '../vendors/lity.js';
+
 
 jQuery( document ).on( 'scroll', function() {
 	if ( jQuery( document ).scrollTop() > 0 ) {

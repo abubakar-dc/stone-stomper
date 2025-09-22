@@ -120,7 +120,29 @@ registerBlockType(metadata.name + '-item', {
     parent: [metadata.name],
     category: 'theme-blocks',
     icon: icons.item,
-    attributes: { },
+    attributes: {
+		imageUrl: { type: "string" },
+		imageAlt: { type: "string", default: "" },
+		videoUrl: { type: "string" },
+		description: { type: "string" },
+		image: { type: 'object', default: {} },
+		video: {
+			type: 'object',
+			default: {},
+		},
+		videoInline: {
+			type: 'object',
+			default: {},
+		},
+		title: {
+			type: 'string',
+			default: '',
+		},
+			selectionMode: {
+			type: 'string',
+			default: 'url',
+		},
+  	},
 
     edit(props) {
         const { attributes, setAttributes } = props;
@@ -139,71 +161,71 @@ registerBlockType(metadata.name + '-item', {
 			<>
 			<div { ...blockProps }>
 
-				<InspectorControls>
-					<Panel>
-						<PanelBody title="Video Settings" initialOpen={ true }>
-							<PanelRow>
-								<ButtonGroup>
-									<Button
-										isPrimary={ selectionMode === 'url' }
-										isSecondary={ selectionMode !== 'url' }
-										onClick={ () => setAttributes( { selectionMode: 'url' } ) }
-									>
-										Video Url
-									</Button>
-									<Button
-										isPrimary={ selectionMode === 'upload' }
-										isSecondary={ selectionMode !== 'upload' }
-										onClick={ () => setAttributes( { selectionMode: 'upload' } ) }
-									>
-										Upload
-									</Button>
-
-								</ButtonGroup>
-							</PanelRow>
-							{ selectionMode === 'url' && (
+				<div className="video-item">
+					<InspectorControls>
+						<Panel>
+							<PanelBody title="Video Settings" initialOpen={ true }>
 								<PanelRow>
-									<TextControl
-										label="Video URL(Youtube/Vimeo)"
-										value={ title }
-										onChange={(value) => setAttributes({ title: value })}
-									/>
+									<ButtonGroup>
+										<Button
+											isPrimary={ selectionMode === 'url' }
+											isSecondary={ selectionMode !== 'url' }
+											onClick={ () => setAttributes( { selectionMode: 'url' } ) }
+										>
+											Video Url
+										</Button>
+										<Button
+											isPrimary={ selectionMode === 'upload' }
+											isSecondary={ selectionMode !== 'upload' }
+											onClick={ () => setAttributes( { selectionMode: 'upload' } ) }
+										>
+											Upload
+										</Button>
+
+									</ButtonGroup>
 								</PanelRow>
-							) }
+								{ selectionMode === 'url' && (
+									<PanelRow>
+										<TextControl
+											label="Video URL(Youtube/Vimeo)"
+											value={ title }
+											onChange={(value) => setAttributes({ title: value })}
+										/>
+									</PanelRow>
+								) }
 
-							{ selectionMode === 'upload' && (
-								<PanelRow>
-									<PlaceholderVideo
-										props={ props }
-										valueVideoInline={ attributes.videoInline }
-										attrVideoInline="videoInline"
-										valueVideo={ attributes.video }
-										attrVideo="video"
-									/>
-								</PanelRow>
+								{ selectionMode === 'upload' && (
+									<PanelRow>
+										<PlaceholderVideo
+											props={ props }
+											valueVideoInline={ attributes.videoInline }
+											attrVideoInline="videoInline"
+											valueVideo={ attributes.video }
+											attrVideo="video"
+										/>
+									</PanelRow>
 
-							) }
-						</PanelBody>
-					</Panel>
-				</InspectorControls>
+								) }
+							</PanelBody>
+						</Panel>
+					</InspectorControls>
 
-				<div className="video-section image-cover">
-					{ selectionMode === 'url' || selectionMode === 'upload' && (
-						<div className="play-icon">
-							<a href="#" data-lity className="play-btn-icon">
-							</a>
-						</div>
-					) }
-					<PlaceholderImage props={props} valueImage={attributes.image} attrImage="image" />
-				</div>
-
-				<div className="video-description">
-					{ children }
+					<div className="video-section image-cover">
+						{ selectionMode === 'url' || selectionMode === 'upload' && (
+							<div className="play-icon">
+								<a href="#" data-lity className="play-btn-icon">
+								</a>
+							</div>
+						) }
+						<PlaceholderImage props={props} valueImage={attributes.image} attrImage="image" />
+					</div>
+					<div className="video-description">
+						{ children }
+					</div>
 				</div>
 			</div>
 
 			</>
-
         );
     },
 
@@ -214,25 +236,25 @@ registerBlockType(metadata.name + '-item', {
 
         return (
 			<>
-				<div className="video-section image-cover">
-					{image?.source_url && (
-						<img src={image.source_url} alt={image.alt || 'Stat Background'} />
-					)}
-					{ selectionMode === 'url' && title &&  (
-						<div className="play-icon">
-							<a href={title} data-lity className="play-btn-icon">
-							</a>
-						</div>
-					) }
-					{ selectionMode === 'upload' && videoInline?.url && (
-						<div className="play-icon">
-							<a href={videoInline.url.replace(/^http:/, 'https:')} data-lity className="play-btn-icon"></a>
-						</div>
-					) }
-
-				</div>
-				<div className="video-description">
-					<InnerBlocks.Content />
+				<div className="video-item">
+					<div className="video-section image-cover">
+						{image?.source_url && (
+							<img src={image.source_url} alt={image.alt || 'Stat Background'} />
+						)}
+							{ selectionMode === 'url' && title &&  (
+							<div className="play-icon">
+								<a href={title} data-lity="true" className="play-btn-icon"></a>
+							</div>
+							) }
+							{ selectionMode === 'upload' && videoInline?.url && (
+							<div className="play-icon">
+								<a href={videoInline.url.replace(/^http:/, 'https:')} data-lity="true" className="play-btn-icon"></a>
+							</div>
+							) }
+					</div>
+					<div className="video-description">
+						<InnerBlocks.Content />
+					</div>
 				</div>
 			</>
         );

@@ -1,16 +1,38 @@
 // image positions
 
-.features-inner-cotnent {
+.features-inner-content {
 	margin-top: 0;
-	padding: 30px;
+	padding: 35px 31px 35px 40px;
 	box-sizing: border-box;
-	border-radius: 0 0 5px 5px;
+	border-radius: 0;
+
+	.heading-4 {
+		font-size: 15px !important;
+		text-transform: uppercase;
+		letter-spacing: 3.7px;
+		word-spacing: 0;
+		line-height: 1.45;
+	}
+
+	p {
+		@include font(open, sbold);
+		line-height: 1.4;
+	}
 }
 
 .stone-stomper-features {
+
 	.features-image {
+		align-self: initial;
+
 		figure {
+			aspect-ratio: 919/485;
 			height: 100%;
 		}
 	}
+}
+
+.stone-stomper-features {
+	justify-content: space-between;
+	align-self: initial;
 }

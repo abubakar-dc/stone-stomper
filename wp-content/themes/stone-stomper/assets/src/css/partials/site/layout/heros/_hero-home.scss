@@ -1,7 +1,23 @@
 .hero-home-section {
+
+	.wp-block-heading {
+		line-height: 1.19;
+		letter-spacing: 14px;
+		margin-top: 13px;
+	}
+
+	.hero-content-inner p {
+		letter-spacing: 0.7px;
+	}
+
+	.wp-block-buttons {
+		margin-top: 33px;
+	}
+
 	.wp-block-cover {
 		position: initial;
 		padding: 302px 0 100px;
+		min-height: 100vh;
 
 		.wp-block-cover__inner-container {
 			max-width: 1750px;
@@ -19,8 +35,33 @@
 	}
 }
 
+.image-alongside-text-ctn {
+	justify-content: space-between;
+	column-gap: 70px;
+
+	.wp-block-column.iat-content {
+		flex-basis: 40.7%;
+	}
+
+	.wp-block-column.iat-image {
+		flex-basis: 54.3%;
+	}
+
+	.wp-block-heading {
+		letter-spacing: 0.3px;
+		line-height: 1.23;
+	}
+
+	p {
+		margin-top: 13px;
+		letter-spacing: 0.25px;
+		line-height: 1.45;
+
+	}
+}
+
 .hero-content {
-	max-width: 600px;
+	max-width: 630px;
 
 	.kicker-text {
 		text-transform: uppercase;
@@ -30,6 +71,7 @@
 	}
 
 	.hero-content-inner {
-		margin-left: 28%;
+		margin-left: 27%;
+		margin-top: 22px;
 	}
 }

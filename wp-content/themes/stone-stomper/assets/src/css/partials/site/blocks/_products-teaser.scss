@@ -1,8 +1,138 @@
 .products-teaser-slider {
-	width: calc(100% + 20px);
-	left: -10px;
+	width: calc(100% + 26px);
+	left: -13px;
+	padding-bottom: 50px;
+	box-sizing: border-box;
+	margin: var(--ss_space_64) 0 0 !important;
+	cursor: grab;
+
+	&::after {
+		content: "";
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 9px;
+		width: 86.6%;
+		margin: 0 auto;
+		background-color: rgba(0, 0, 0, 0.09);
+		height: 1px;
+		z-index: -1;
+	}
 
 	.slick-slide {
-		margin: 0 10px;
+		margin: 0 13px;
+
+		.add_to_cart_inline {
+			margin: 15px 0 0;
+			border: none !important;
+			padding: 0 !important;
+
+			a,
+			a:visited {
+				background-color: var(--ss_transparent);
+				color: var(--ss_link_color);
+				border: none;
+				border-bottom: 1px solid var(--ss_link_border_color);
+				padding: 0;
+				padding-bottom: 2px;
+				letter-spacing: 3.4px;
+				border-color: transparent;
+				border-radius: 0;
+
+				&:hover,
+				&:focus-visible {
+					border-color: var(--ss_link_border_color);
+				}
+			}
+		}
 	}
+
+	.slick-prev {
+		background-image: url("../images/arrow-left.svg");
+		left: 10px;
+	}
+
+	.slick-next {
+		background-image: url("../images/arrow-right.svg");
+		right: 10px;
+	}
+
+	.slick-prev,
+	.slick-next {
+		top: auto;
+		bottom: 0px;
+		margin: 0;
+		transform: initial;
+		background-repeat: no-repeat;
+		background-size: 32px;
+		background-position: center;
+
+		&::before {
+			display: none;
+		}
+	}
+
+	.slick-dots {
+		width: max-content;
+		margin: 0 auto;
+		left: 0;
+		right: 0;
+		bottom: 0px;
+		padding: 0 30px;
+		box-sizing: border-box;
+		background-color: var(--ss_white);
+
+		li {
+			padding: 0;
+
+			&.slick-active {
+				button {
+					background-color: var(--ss_black);
+				}
+			}
+
+			button {
+				background-color: transparent;
+				border: 2px solid var(--ss_black);
+				margin: 0;
+				border-radius: 100px;
+
+				&::before {
+					display: none;
+				}
+			}
+
+			&::before {
+				display: none;
+			}
+		}
+	}
+}
+
+.product-teaser-section {
+	.has-font-size-4-font-size {
+		letter-spacing: 0.2px;
+		margin-bottom: 0;
+	}
+}
+
+.product-title {
+	margin-top: 31px;
+
+	h3 {
+		font-size: 27px;
+		margin-bottom: 11px;
+	}
+}
+
+.product-description {
+	letter-spacing: 0.3px;
+	line-height: 1.46;
+}
+
+.product-price {
+	font-size: 29px;
+	margin-top: 16px;
+	@include font(jost, med);
+	letter-spacing: -1.2px;
 }

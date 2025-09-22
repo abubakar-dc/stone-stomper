@@ -22,9 +22,32 @@
       "type": "boolean",
       "default": false
     },
-    "selected": {
+    "className": {
+      "type": "string"
+    },
+    "image": {
+      "type": "object",
+      "default": {}
+    },
+    "video": {
+      "type": "object",
+      "default": {}
+    },
+    "videoInline": {
+      "type": "object",
+      "default": {}
+    },
+    "videoUrl": {
       "type": "string",
       "default": ""
+    },
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "selectionMode": {
+      "type": "string",
+      "default": "url"
     }
   },
   "example": {
