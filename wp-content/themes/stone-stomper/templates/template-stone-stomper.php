@@ -46,7 +46,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 
 				<span aria-hidden="true" class="wp-block-cover__background has-background-dim" style="background-color:#645641"></span>
 				<div class="wp-block-cover__inner-container is-layout-constrained wp-block-cover-is-layout-constrained">
-					<p class="has-text-align-center has-large-font-size" tabindex="0"><?php echo esc_html(get_the_title($sts_var_post_id)); ?></p>
+					<h1 class="" tabindex="0"><?php echo esc_html(get_the_title($sts_var_post_id)); ?></h1>
 				</div>
 			</div>
 		</div>
@@ -60,19 +60,11 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 
 
 				<div class="iat-form-content">
-					<div class="content-head">
-						<?php if($sts_var_section_headline){ ?>
-						<h2 class="large-heading"><?php echo esc_html($sts_var_section_headline); ?></h2>
-						<?php }
-						if($sts_var_section_head_text){
-							echo html_entity_decode($sts_var_section_head_text);
-						}
-						?>
-					</div>
+
 					<form id="orderForm" novalidate>
 						<div id="form-all">
 							<!-- Your Details -->
-							 <div class="order-form-section-inner form-detail-section two-columns justify-content-between align-items-start image-at-left">
+							 <div class="order-form-section-inner form-detail-section d-flex justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<?php if($sts_var_section_head_image){ ?>
 										<?php StoneStomper::the_attachment_image($sts_var_section_head_image,1200 ); ?>
@@ -80,6 +72,15 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 								</div>
 
 								<div class="form-section-right column" id="details-section">
+									<div class="content-head">
+										<?php if($sts_var_section_headline){ ?>
+											<h2 class=""><?php echo esc_html($sts_var_section_headline); ?></h2>
+										<?php }
+											if($sts_var_section_head_text){
+												echo html_entity_decode($sts_var_section_head_text);
+											}
+										?>
+									</div>
 									<?php if($sts_var_section_head_notices){
 										foreach($sts_var_section_head_notices as $sts_key => $notice){
 										$sts_var_headline = $notice['headline']??null;
@@ -146,7 +147,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 												$sts_var_notice = $notice['notice']??null;
 												if($sts_key === 0){ ?>
 												<?php if ( $sts_var_notice ) { ?>
-														<p class="note"><?php echo html_entity_decode($sts_var_notice); ?></p>
+														<div class="note notice-bar"><?php echo html_entity_decode($sts_var_notice); ?></div>
 													<?php } ?>
 												<?php
 												}
@@ -158,10 +159,10 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 							</div>
 
 							<!-- Towing Vehicle Details -->
-							<div id="vehicle-details" class="section-disable order-form-section-inner form-vehicle-section two-columns justify-content-between align-items-start image-at-left">
+							<div id="vehicle-details" class="asad order-form-section-inner d-flex form-vehicle-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 vehicle-images ">
-										<div class="vehicle-image" id="towing-vehicle-image" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
+										<div class="towing-vehicle-image" id="towing-vehicle-image" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
 												<?php
 													if($sts_var_vichle_detail_image ){
 													 StoneStomper::the_attachment_image($sts_var_vichle_detail_image,1200 );
@@ -226,7 +227,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 											$sts_var_notice = $notice['notice']??null;
 											if($sts_key === 1){ ?>
 											<?php if ( $sts_var_notice ) { ?>
-												<p class="note"><?php echo html_entity_decode($sts_var_notice); ?></p>
+												<div class="note notice-bar"><?php echo html_entity_decode($sts_var_notice); ?></div>
 												<?php } ?>
 											<?php
 											}
@@ -237,7 +238,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 							</div>
 
 							<!-- Caravan Details -->
-							<div id="caravan-details" class="section-disable order-form-section-inner form-carvan-section two-columns justify-content-between align-items-start image-at-left">
+							<div id="caravan-details" class="asad order-form-section-inner d-flex form-carvan-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 vehicle-images ">
 										<div class="vehicle-image" id="caravan-images" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
@@ -320,7 +321,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 										$sts_var_notice = $notice['notice']??null;
 										if($sts_key === 2){ ?>
 										<?php if ( $sts_var_notice ) { ?>
-												<p class="note"><?php echo html_entity_decode($sts_var_notice); ?></p>
+												<div class="note notice-bar"><?php echo html_entity_decode($sts_var_notice); ?></div>
 											<?php } ?>
 										<?php
 										}
@@ -331,7 +332,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 							</div>
 
 							<!-- Photographs -->
-							<div id="photographs-details" class="section-disable order-form-section-inner form-carvan-section two-columns justify-content-between align-items-start image-at-left">
+							<div id="photographs-details" class="asad order-form-section-inner d-flex form-carvan-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="form-image-slider">
 										<?php if($sts_var_example_photographs){ ?>
@@ -393,7 +394,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 										$sts_var_notice = $notice['notice']??null;
 										if($sts_key === 3){ ?>
 										<?php if ( $sts_var_notice ) { ?>
-												<p class="note"><?php echo html_entity_decode($sts_var_notice); ?></p>
+												<div class="note notice-bar"><?php echo html_entity_decode($sts_var_notice); ?></div>
 											<?php } ?>
 										<?php
 										}
@@ -405,7 +406,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 							</div>
 
 							<!-- Final Measurements -->
-							<div id="final-measurements" class=" order-form-section-inner form-measurements-section two-columns justify-content-between align-items-start image-at-left">
+							<div id="final-measurements" class="asad order-form-section-inner d-flex form-measurements-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 measurements-images ">
 										<?php
@@ -489,7 +490,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 										$sts_var_notice = $notice['notice']??null;
 										if($sts_key === 4){ ?>
 										<?php if ( $sts_var_notice ) { ?>
-												<p class="note"><?php echo html_entity_decode($sts_var_notice); ?></p>
+												<div class="note notice-bar"><?php echo html_entity_decode($sts_var_notice); ?></div>
 											<?php } ?>
 										<?php
 										}
@@ -501,7 +502,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 							</div>
 
 							<!-- Final Details & Summary -->
-							<div id="final-summary" class=" order-form-section-inner form-details-section two-columns justify-content-between align-items-start image-at-left">
+							<div id="final-summary" class="asad order-form-section-inner d-flex form-details-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 details-images ">
 										<?php

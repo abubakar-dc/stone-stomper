@@ -5,7 +5,13 @@
 
 	.wp-block-cover {
 		height: 55vh;
+		padding: 60px 0;
 
+		&__inner-container {
+			max-width: 1750px;
+			width: 90% !important;
+			margin: 0 auto !important;
+		}
 	}
 }
 

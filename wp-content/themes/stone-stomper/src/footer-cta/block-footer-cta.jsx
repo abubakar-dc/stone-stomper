@@ -37,11 +37,11 @@ function Edit( props ) {
 	const TEMPLATE = [
 		[
 			'core/columns', { className: 'footer-cta-section' }, [
-				[ 'core/column', { className: 'cta-image image-cover', style: { flexBasis: '65%' }, width:'65%', verticalAlignment: 'center' }, [
+				[ 'core/column', { className: 'cta-image image-cover', style: { flexBasis: '60%' }, width:'60%', verticalAlignment: 'center' }, [
 						[ 'core/image', { className: 'size-full' }],
 					],
 				],
-				[ 'core/column', { className: 'cta-content', style: { flexBasis: '35%' }, width:'35%', verticalAlignment: 'stretch', backgroundColor: 'black-100', textColor: 'white' }, [
+				[ 'core/column', { className: 'cta-content', style: { flexBasis: '40%' }, width:'40%', verticalAlignment: 'stretch', backgroundColor: 'black-100', textColor: 'white' }, [
 						[
 							'core/heading',
 							{ placeholder: 'Enter heading…', textAlign:'center', className: '', level: 2 },

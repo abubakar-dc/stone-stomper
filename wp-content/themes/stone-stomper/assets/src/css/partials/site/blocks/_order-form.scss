@@ -1,0 +1,103 @@
+.form-image-slider {
+	.slider-image {
+		img {
+			width: 100%;
+			aspect-ratio: 4 / 2.5;
+			object-fit: cover;
+		}
+	}
+}
+
+.vehicle-image {
+	display: flex;
+
+	img {
+		width: 50%;
+	}
+}
+
+.form-measurements-section {
+	.measurements-images img {
+		width: 100%;
+	}
+}
+
+.form-details-section {
+	.details-images img {
+		width: 100%;
+	}
+}
+
+.section-disable {
+	pointer-events: none !important;
+	opacity: 0.2;
+}
+
+
+.form-detail-section {
+
+	a,
+	a:visited {
+		border-color: var(--ss_black_1);
+		color: var(--ss_black_1);
+	}
+
+	.content-head {
+		border-bottom: 1px solid;
+		margin-bottom: 30px;
+
+		h2 {
+			text-transform: uppercase;
+			letter-spacing: 10px;
+		}
+	}
+}
+
+.order-form-section-inner {
+	column-gap: 40px;
+	flex-wrap: wrap;
+}
+
+.form-section-left {
+	width: 55.2%;
+}
+
+.form-section-right {
+	width: 41.5%;
+	border-bottom: 1px solid;
+	padding-bottom: 20px;
+	margin-bottom: 40px;
+
+	.content-head {
+		h3 {
+			margin-bottom: 10px;
+		}
+	}
+}
+
+.notice-bar {
+	background-color: var(--ss_gray);
+	color: var(--ss_pure_black);
+	padding: 20px 30px 20px 70px;
+	border-radius: 5px;
+	margin-bottom: 20px;
+	position: relative;
+	margin-top: 30px;
+
+	p {
+		margin-bottom: 0;
+	}
+
+	&::before {
+		content: "";
+		background-image: url("../images/info-icon.svg");
+		background-size: contain;
+		background-repeat: no-repeat;
+		width: 24px;
+		height: 24px;
+		display: inline-block;
+		position: absolute;
+		left: 32px;
+		top: 20px;
+	}
+}

@@ -104,11 +104,9 @@ function Save( props ) {
 
 	return (
 		<>
-			<ContainerBlockContent props={ props } customClass={ `${classes}` }>
-				<div className="video-grid video-three-columns">
-					<InnerBlocks.Content />
-				</div>
-			</ContainerBlockContent>
+			<div className="video-grid video-three-columns">
+				<InnerBlocks.Content />
+			</div>
 		</>
 	);
 }
