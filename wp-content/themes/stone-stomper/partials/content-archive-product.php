@@ -18,7 +18,7 @@ $upsells = $product->get_upsell_ids();
 
 $sts_var_product_title     = get_the_title($sts_var_product_id);
 $sts_var_product_permalink = get_permalink($sts_var_product_id);
-$sts_var_product_description = $product->get_description();
+$sts_var_product_description = $product->get_short_description();
 $sts_var_product_price = $product->get_price();
 ?>
 

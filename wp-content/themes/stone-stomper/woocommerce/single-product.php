@@ -14,6 +14,17 @@ get_header(); ?>
 		<div class="product-image">
 			<?php echo $product->get_image(); ?>
 		</div>
+		<div class="product-image-gallery">
+			<?php
+			if($product){
+				$attachment_ids = $product->get_gallery_image_ids();
+					foreach ( $attachment_ids as $attachment_id ) {
+						StoneStomper::the_attachment_image($attachment_id, 1000);
+
+					}
+			}
+			?>
+		</div>
 
 		<div class="product-summary">
 			<h1><?php the_title(); ?></h1>

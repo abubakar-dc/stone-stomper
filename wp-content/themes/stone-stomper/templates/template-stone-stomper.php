@@ -21,9 +21,16 @@ if($sts_var_section_head){
 	$sts_var_section_head_text = $sts_var_section_head['text']??null;
 	$sts_var_section_head_image = $sts_var_section_head['image']??null;
 }
-$sts_var_section_head_notices           = $sts_fields['sts_var_section_head_notices'] ?? null;
+$sts_var_vichle_detail_image           = $sts_fields['sts_var_vichle_detail_image'] ?? null;
 $sts_var_example_photographs           = $sts_fields['sts_var_example_photographs'] ?? null;
-$sts_var_measurements_images           = $sts_fields['sts_var_measurements_images'] ?? null;
+$sts_var_caravan_detail_images           = $sts_fields['sts_var_caravan_detail_images'] ?? null;
+if($sts_var_caravan_detail_images ){
+	$sts_var_caravan_detail_factory_stoneguard = $sts_var_caravan_detail_images['factory_stoneguard']??null;
+	$sts_var_caravan_detail_toolbox = $sts_var_caravan_detail_images['toolbox']??null;
+
+}
+$sts_var_measurements_image           = $sts_fields['sts_var_measurements_image'] ?? null;
+$sts_var_section_head_notices           = $sts_fields['sts_var_section_head_notices'] ?? null;
 
 ?>
 <section id="page-section" class="page-section">
@@ -150,7 +157,13 @@ $sts_var_measurements_images           = $sts_fields['sts_var_measurements_image
 							 <div class="order-form-section-inner form-vehicle-section two-columns justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 vehicle-images ">
-										<div class="vehicle-image" id="towing-vehicle-image" tabindex="0" role="img"  aria-label="Image illustrating the content of this block"></div>
+										<div class="vehicle-image" id="towing-vehicle-image" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
+												<?php
+													if($sts_var_vichle_detail_image ){
+													 StoneStomper::the_attachment_image($sts_var_vichle_detail_image,800 );
+													}
+												?>
+										</div>
 									</div>
 								</div>
 								<div class="form-section-right column" id="blk-vehicle">
@@ -223,7 +236,17 @@ $sts_var_measurements_images           = $sts_fields['sts_var_measurements_image
 							<div class="order-form-section-inner form-carvan-section two-columns justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 vehicle-images ">
-										<div class="vehicle-image" id="caravan-images" tabindex="0" role="img"  aria-label="Image illustrating the content of this block"></div>
+										<div class="vehicle-image" id="caravan-images" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
+												<?php
+													if($sts_var_caravan_detail_factory_stoneguard ){
+													 StoneStomper::the_attachment_image($sts_var_caravan_detail_factory_stoneguard,800 );
+													}
+													if($sts_var_caravan_detail_toolbox ){
+													 StoneStomper::the_attachment_image($sts_var_caravan_detail_toolbox,800 );
+													}
+												?>
+
+										</div>
 									</div>
 								</div>
 								<div class="form-section-right column" id="blk-caravan">
@@ -383,8 +406,8 @@ $sts_var_measurements_images           = $sts_fields['sts_var_measurements_image
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 vehicle-images ">
 										<?php
-											if($sts_var_measurements_images){
-												StoneStomper::the_attachment_image($sts_var_measurements_images,300 );
+											if($sts_var_measurements_image){
+												StoneStomper::the_attachment_image($sts_var_measurements_image,300 );
 											}
 										?>
 									</div>
@@ -479,10 +502,31 @@ $sts_var_measurements_images           = $sts_fields['sts_var_measurements_image
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 vehicle-images ">
 										<?php
-											if($sts_var_measurements_images){
-												StoneStomper::the_attachment_image($sts_var_measurements_images,300 );
+											global $product;
+											$p = wc_get_product( 545 );
+											$upsell_ids = $p ? $p->get_upsell_ids() : [];
+
+											if ( $upsell_ids ) {
+												foreach ( $upsell_ids as $upsell_id ) {
+													$upsell = wc_get_product( $upsell_id );
+													if ( ! $upsell ) {
+														continue;
+													}
+
+													$price = $upsell->get_price();
+													$title = $upsell->get_name();
+													echo '<div class="checkbox-item">';
+													if( has_post_thumbnail( $upsell_id ) ) {
+													echo '<div class="thumb">';
+													echo '<img src="' . esc_url( get_the_post_thumbnail_url( $upsell_id, 'thumbnail' ) ) . '" alt="' . esc_attr( $title ) . '" />';
+													echo '<p>' . esc_html( $title ) . '</p>';
+													echo '</div>';
+													}
+												}
+
+												echo '</div>';
 											}
-										?>
+											?>
 									</div>
 								</div>
 								<div class="form-section-right column" id="blk-final">
@@ -525,7 +569,7 @@ $sts_var_measurements_images           = $sts_fields['sts_var_measurements_image
 
 									<?php
 									global $product;
-									$p = wc_get_product( 62 );
+									$p = wc_get_product( 545 );
 									$upsell_ids = $p ? $p->get_upsell_ids() : [];
 
 									if ( $upsell_ids ) {
@@ -541,12 +585,6 @@ $sts_var_measurements_images           = $sts_fields['sts_var_measurements_image
 											$price = $upsell->get_price();
 											$title = $upsell->get_name();
 											echo '<div class="checkbox-item">';
-											if( has_post_thumbnail( $upsell_id ) ) {
-											echo '<div class="thumb">';
-											echo '<img src="' . esc_url( get_the_post_thumbnail_url( $upsell_id, 'thumbnail' ) ) . '" alt="' . esc_attr( $title ) . '" />';
-											echo '<p>' . esc_html( $title ) . '</p>';
-											echo '</div>';
-											}
 											echo '<label>';
 											echo '<input type="checkbox" class="acc-upsell" data-product-id="' . esc_attr( $upsell_id ) . '" data-price-value="' . esc_attr( $price ) . '" />';
 											echo ' ' . esc_html( $title ) . ' for ' . wc_price( $price );

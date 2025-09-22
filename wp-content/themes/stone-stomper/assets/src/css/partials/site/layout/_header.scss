@@ -79,7 +79,8 @@ header {
 
 	img {
 		width: 14px;
-		filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(220deg) brightness(102%) contrast(103%);
+		filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(220deg)
+			brightness(102%) contrast(103%);
 	}
 }
 
@@ -129,7 +130,7 @@ header {
 .header-wrapper {
 	box-sizing: border-box;
 	width: 92%;
-	max-width: 1905px;
+	max-width: 1750px;
 	margin: 0 auto;
 }
 
@@ -149,7 +150,6 @@ header {
 .desktop-hide {
 	display: none;
 }
-
 
 .header-btns {
 	.account-icon {

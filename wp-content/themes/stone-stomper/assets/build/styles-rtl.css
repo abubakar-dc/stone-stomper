@@ -401,31 +401,28 @@ Mixin for transition
   --ss_font_size_14: clamp(13 * 1px, 1 / 806 * (100vw - 474 * 1px) + 13 * 1px, 14 * 1px);
   --ss_font_size_16: clamp(15 * 1px, 1 / 806 * (100vw - 474 * 1px) + 15 * 1px, 16 * 1px);
   --ss_font_size_18: clamp(17 * 1px, 1 / 806 * (100vw - 474 * 1px) + 17 * 1px, 18 * 1px);
+  --ss_font_size_19: clamp(17 * 1px, 2 / 806 * (100vw - 474 * 1px) + 17 * 1px, 19 * 1px);
   --ss_font_size_20: clamp(18 * 1px, 2 / 806 * (100vw - 474 * 1px) + 18 * 1px, 20 * 1px);
   --ss_font_size_22: clamp(20 * 1px, 2 / 806 * (100vw - 474 * 1px) + 20 * 1px, 22 * 1px);
-  --ss_font_size_25: clamp(20 * 1px, 4 / 806 * (100vw - 474 * 1px) + 20 * 1px, 24 * 1px);
   --ss_font_size_27: clamp(22 * 1px, 5 / 806 * (100vw - 474 * 1px) + 22 * 1px, 27 * 1px);
-  --ss_font_size_29: clamp(22 * 1px, 7 / 806 * (100vw - 474 * 1px) + 22 * 1px, 29 * 1px);
   --ss_font_size_32: clamp(24 * 1px, 8 / 806 * (100vw - 474 * 1px) + 24 * 1px, 32 * 1px);
+  --ss_font_size_37: clamp(24 * 1px, 13 / 806 * (100vw - 474 * 1px) + 24 * 1px, 37 * 1px);
   --ss_font_size_40: clamp(26 * 1px, 14 / 806 * (100vw - 474 * 1px) + 26 * 1px, 40 * 1px);
-  --ss_font_size_47: clamp(30 * 1px, 17 / 806 * (100vw - 474 * 1px) + 30 * 1px, 47 * 1px);
-  --ss_font_size_51: clamp(30 * 1px, 21 / 806 * (100vw - 474 * 1px) + 30 * 1px, 51 * 1px);
-  --ss_font_size_60: clamp(45 * 1px, 15 / 806 * (100vw - 474 * 1px) + 45 * 1px, 60 * 1px);
-  --ss_font_size_65: clamp(55 * 1px, 13 / 806 * (100vw - 474 * 1px) + 55 * 1px, 68 * 1px);
-  --ss_font_size_80: clamp(55 * 1px, 25 / 806 * (100vw - 474 * 1px) + 55 * 1px, 80 * 1px);
+  --ss_font_size_48: clamp(30 * 1px, 18 / 806 * (100vw - 474 * 1px) + 30 * 1px, 48 * 1px);
+  --ss_font_size_59: clamp(45 * 1px, 14 / 806 * (100vw - 474 * 1px) + 45 * 1px, 59 * 1px);
+  --ss_font_size_77: clamp(55 * 1px, 22 / 806 * (100vw - 474 * 1px) + 55 * 1px, 77 * 1px);
   --ss_font_size_86: clamp(55 * 1px, 31 / 806 * (100vw - 474 * 1px) + 55 * 1px, 86 * 1px);
-  --ss_font_size_107: clamp(55 * 1px, 52 / 806 * (100vw - 474 * 1px) + 55 * 1px, 107 * 1px);
   /* -------------------------------------------------
   >> Color variables
   ------------------------------------------------- */
   /*
   >> Base Colors
   */
-  --ss_color_primary: #FA3232;
+  --ss_color_primary: #fa3232;
   --ss_color_on_primary: #ffffff;
   --ss_color_secondary: #000000;
   --ss_black: #000000;
-  --ss_black_1: #2C2A2A;
+  --ss_black_1: #2c2a2a;
   --ss_black_2: #606364;
   --ss_white: #ffffff;
   --ss_white_1: #f1f1f1;
@@ -434,7 +431,7 @@ Mixin for transition
   --ss_gray_1: #e6e6e6;
   --ss_gray_2: #eee;
   --ss_blue: #0013ff;
-  --ss_blue_1: #FA3232;
+  --ss_blue_1: #fa3232;
   --ss_blue_2: #2ca8dd;
   --ss_navy: #091a17;
   --ss_navy_1: #15332e;
@@ -631,7 +628,7 @@ Mixin for transition
   --ss_style_bg: #821212;
   --ss_style_text: #000000;
   --ss_style_link: #000000;
-  --ss_style_button: #FA3232;
+  --ss_style_button: #fa3232;
 }
 
 /* ------------------------------------------------------------------
@@ -871,37 +868,37 @@ h6 a:focus-visible,
 
 h1,
 .heading-1 {
-  font-size: var(--ss_font_size_60);
+  font-size: var(--ss_font_size_77);
 }
 
 h2,
 .heading-2 {
-  font-size: var(--ss_font_size_32);
+  font-size: var(--ss_font_size_59);
 }
 
 h3,
 .heading-3 {
-  font-size: var(--ss_font_size_27);
+  font-size: var(--ss_font_size_40);
   letter-spacing: 0.2px;
 }
 
 h4,
 .heading-4 {
-  font-size: var(--ss_font_size_25);
+  font-size: var(--ss_font_size_37);
 }
 
 h5,
 .heading-5 {
-  font-size: var(--ss_font_size_20);
+  font-size: var(--ss_font_size_32);
 }
 
 h6,
 .heading-6 {
-  font-size: var(--ss_font_size_16);
+  font-size: var(--ss_font_size_27);
 }
 
 .large-heading {
-  font-size: var(--ss_font_size_51);
+  font-size: var(--ss_font_size_86);
 }
 
 /*-------------------------------------------------
@@ -3328,7 +3325,7 @@ header {
 .header-wrapper {
   box-sizing: border-box;
   width: 92%;
-  max-width: 1905px;
+  max-width: 1750px;
   margin: 0 auto;
 }
 
