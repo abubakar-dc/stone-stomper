@@ -2191,18 +2191,18 @@ function Edit(props) {
   }, [['core/column', {
     className: 'cta-image image-cover',
     style: {
-      flexBasis: '65%'
+      flexBasis: '60%'
     },
-    width: '65%',
+    width: '60%',
     verticalAlignment: 'center'
   }, [['core/image', {
     className: 'size-full'
   }]]], ['core/column', {
     className: 'cta-content',
     style: {
-      flexBasis: '35%'
+      flexBasis: '40%'
     },
-    width: '35%',
+    width: '40%',
     verticalAlignment: 'stretch',
     backgroundColor: 'black-100',
     textColor: 'white'

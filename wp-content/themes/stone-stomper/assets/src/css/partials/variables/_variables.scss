@@ -305,7 +305,7 @@
 	--ss_header_bgcolor: var(--ss_transparent);
 	--ss_header_color: var(--ss_white);
 	--ss_header_color_hover: var(--ss_white);
-	--ss_header_bgcolor_sticky: var(--ss_black);
+	--ss_header_bgcolor_sticky: var(--ss_black_1);
 	--ss_header_nav_border_color: var(--ss_white);
 
 	--ss_header_submenu_bgcolor: var(--ss_gray);
@@ -325,7 +325,7 @@
 	--ss_topbar_link_color: var(--ss_white);
 
 	// Footer
-	--ss_footer_bgcolor: var(--ss_dark_text);
+	--ss_footer_bgcolor: var(--ss_black_1);
 	--ss_footer_color: var(--ss_white_text);
 
 	--ss_footer_color_hover: var(--ss_white_text);
