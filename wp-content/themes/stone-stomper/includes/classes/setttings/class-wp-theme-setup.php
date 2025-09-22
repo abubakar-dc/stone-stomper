@@ -69,9 +69,6 @@ class WP_Theme_Setup {
 		register_nav_menus(
 			array(
 				'header-nav'       => __( 'Header Nav', 'stonestomper_td' ),
-				'footer-nav-one'   => __( 'Footer Nav One', 'stonestomper_td' ),
-				'footer-nav-two'   => __( 'Footer Nav Two', 'stonestomper_td' ),
-				'footer-nav-three' => __( 'Footer Nav Three', 'stonestomper_td' ),
 				'legal-nav'        => __( 'Legal Nav', 'stonestomper_td' ),
 			)
 		);

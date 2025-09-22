@@ -107,7 +107,7 @@ header {
 }
 
 .header-inner {
-	padding: 20px 0;
+	padding: 26px 0;
 	box-sizing: border-box;
 
 	@include transition(all, 0.3s, ease-in-out);
@@ -139,6 +139,8 @@ header {
 	z-index: 1;
 	display: flex;
 	align-items: center;
+	width: 5.8%;
+	justify-content: flex-end;
 }
 
 .hide-topbar {

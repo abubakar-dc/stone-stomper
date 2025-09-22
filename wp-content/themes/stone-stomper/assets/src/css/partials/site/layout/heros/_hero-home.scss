@@ -1,8 +1,7 @@
 .hero-home-section {
-
 	.wp-block-cover {
 		position: initial;
-		padding: 230px 0 100px;
+		padding: 302px 0 100px;
 
 		.wp-block-cover__inner-container {
 			max-width: 1750px;
@@ -25,6 +24,9 @@
 
 	.kicker-text {
 		text-transform: uppercase;
+		font-size: var(--ss_font_size_14);
+		@include font(open, sbold);
+		letter-spacing: 2.9px;
 	}
 
 	.hero-content-inner {

@@ -516,21 +516,16 @@ Mixin for transition
   /* -------------------------------------------------
   >> Variables for Font Sizes
   ------------------------------------------------- */
-  --ss_font_size_12: clamp(11 * 1px, 1 / 806 * (100vw - 474 * 1px) + 11 * 1px, 12 * 1px);
   --ss_font_size_14: clamp(13 * 1px, 1 / 806 * (100vw - 474 * 1px) + 13 * 1px, 14 * 1px);
+  --ss_font_size_15: clamp(15 * 1px, 0 / 806 * (100vw - 474 * 1px) + 15 * 1px, 15 * 1px);
   --ss_font_size_16: clamp(15 * 1px, 1 / 806 * (100vw - 474 * 1px) + 15 * 1px, 16 * 1px);
-  --ss_font_size_18: clamp(17 * 1px, 1 / 806 * (100vw - 474 * 1px) + 17 * 1px, 18 * 1px);
-  --ss_font_size_19: clamp(17 * 1px, 2 / 806 * (100vw - 474 * 1px) + 17 * 1px, 19 * 1px);
-  --ss_font_size_20: clamp(18 * 1px, 2 / 806 * (100vw - 474 * 1px) + 18 * 1px, 20 * 1px);
   --ss_font_size_22: clamp(20 * 1px, 2 / 806 * (100vw - 474 * 1px) + 20 * 1px, 22 * 1px);
-  --ss_font_size_27: clamp(22 * 1px, 5 / 806 * (100vw - 474 * 1px) + 22 * 1px, 27 * 1px);
+  --ss_font_size_24: clamp(20 * 1px, 4 / 806 * (100vw - 474 * 1px) + 20 * 1px, 24 * 1px);
+  --ss_font_size_28: clamp(22 * 1px, 5 / 806 * (100vw - 474 * 1px) + 22 * 1px, 27 * 1px);
   --ss_font_size_32: clamp(24 * 1px, 8 / 806 * (100vw - 474 * 1px) + 24 * 1px, 32 * 1px);
-  --ss_font_size_37: clamp(24 * 1px, 13 / 806 * (100vw - 474 * 1px) + 24 * 1px, 37 * 1px);
-  --ss_font_size_40: clamp(26 * 1px, 14 / 806 * (100vw - 474 * 1px) + 26 * 1px, 40 * 1px);
-  --ss_font_size_48: clamp(30 * 1px, 18 / 806 * (100vw - 474 * 1px) + 30 * 1px, 48 * 1px);
-  --ss_font_size_59: clamp(45 * 1px, 14 / 806 * (100vw - 474 * 1px) + 45 * 1px, 59 * 1px);
-  --ss_font_size_77: clamp(55 * 1px, 22 / 806 * (100vw - 474 * 1px) + 55 * 1px, 77 * 1px);
-  --ss_font_size_86: clamp(55 * 1px, 31 / 806 * (100vw - 474 * 1px) + 55 * 1px, 86 * 1px);
+  --ss_font_size_44: clamp(30 * 1px, 18 / 806 * (100vw - 474 * 1px) + 30 * 1px, 48 * 1px);
+  --ss_font_size_58: clamp(45 * 1px, 13 / 806 * (100vw - 474 * 1px) + 45 * 1px, 58 * 1px);
+  --ss_font_size_77: clamp(45 * 1px, 32 / 806 * (100vw - 474 * 1px) + 45 * 1px, 77 * 1px);
   /* -------------------------------------------------
   >> Color variables
   ------------------------------------------------- */
@@ -1328,31 +1323,31 @@ Mixin for transition
 }
 .editor-styles-wrapper h1,
 .editor-styles-wrapper .heading-1 {
-  font-size: var(--ss_font_size_77);
+  font-size: var(--ss_font_size_58);
 }
 .editor-styles-wrapper h2,
 .editor-styles-wrapper .heading-2 {
-  font-size: var(--ss_font_size_59);
+  font-size: var(--ss_font_size_44);
 }
 .editor-styles-wrapper h3,
 .editor-styles-wrapper .heading-3 {
-  font-size: var(--ss_font_size_40);
+  font-size: var(--ss_font_size_32);
   letter-spacing: 0.2px;
 }
 .editor-styles-wrapper h4,
 .editor-styles-wrapper .heading-4 {
-  font-size: var(--ss_font_size_37);
+  font-size: var(--ss_font_size_28);
 }
 .editor-styles-wrapper h5,
 .editor-styles-wrapper .heading-5 {
-  font-size: var(--ss_font_size_32);
+  font-size: var(--ss_font_size_24);
 }
 .editor-styles-wrapper h6,
 .editor-styles-wrapper .heading-6 {
-  font-size: var(--ss_font_size_27);
+  font-size: var(--ss_font_size_22);
 }
 .editor-styles-wrapper .large-heading {
-  font-size: var(--ss_font_size_86);
+  font-size: var(--ss_font_size_77);
 }
 .editor-styles-wrapper i,
 .editor-styles-wrapper em,
@@ -2355,7 +2350,7 @@ Mixin for transition
   transition: all 0.2s ease-in-out;
 }
 .editor-styles-wrapper .header-inner {
-  padding: 20px 0;
+  padding: 26px 0;
   box-sizing: border-box;
   transition: all 0.3s ease-in-out;
 }
@@ -2382,6 +2377,8 @@ Mixin for transition
   z-index: 1;
   display: flex;
   align-items: center;
+  width: 5.8%;
+  justify-content: flex-end;
 }
 .editor-styles-wrapper .hide-topbar header {
   top: var(--ss_header-top);
@@ -2421,7 +2418,7 @@ Mixin for transition
   position: relative;
 }
 .editor-styles-wrapper .header-nav ul li {
-  margin: 0 14px;
+  margin: 0 16px;
   padding: 0;
   display: inline-block;
   position: relative;
@@ -2439,11 +2436,12 @@ Mixin for transition
   border: 0;
   position: relative;
   color: var(--ss_header_color);
-  font-size: var(--ss-font_size_27);
+  font-size: var(--ss_font_size_15);
   font-family: "Open Sans", arial, sans-serif;
-  font-weight: 700;
+  font-weight: 600;
   font-style: normal;
   text-transform: uppercase;
+  letter-spacing: 3.8px;
 }
 .editor-styles-wrapper .header-nav ul li a::after,
 .editor-styles-wrapper .header-nav ul li a:visited::after,
@@ -2847,7 +2845,7 @@ Mixin for transition
 }
 .editor-styles-wrapper .hero-home-section .wp-block-cover {
   position: initial;
-  padding: 230px 0 100px;
+  padding: 302px 0 100px;
 }
 .editor-styles-wrapper .hero-home-section .wp-block-cover .wp-block-cover__inner-container {
   max-width: 1750px;
@@ -2866,13 +2864,17 @@ Mixin for transition
 }
 .editor-styles-wrapper .hero-content .kicker-text {
   text-transform: uppercase;
+  font-size: var(--ss_font_size_14);
+  font-family: "Open Sans", arial, sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  letter-spacing: 2.9px;
 }
 .editor-styles-wrapper .hero-content .hero-content-inner {
   margin-right: 28%;
 }
 .editor-styles-wrapper .footer-ctn {
   background-color: var(--ss_footer_bgcolor);
-  padding: 80px 0 0;
   box-sizing: border-box;
 }
 .editor-styles-wrapper .footer-ctn h1,
@@ -2962,15 +2964,14 @@ Mixin for transition
 }
 .editor-styles-wrapper .footer-bottom {
   padding: 30px 0 40px;
-  border-top: 1px solid var(--ss_border_3);
 }
 .editor-styles-wrapper .copy-right {
-  width: 45%;
+  width: 50%;
   color: var(--ss_copyright_color);
   font-size: 14px;
 }
 .editor-styles-wrapper .legal-nav {
-  width: 55%;
+  width: 40%;
 }
 .editor-styles-wrapper .legal-nav ul {
   margin: 0;

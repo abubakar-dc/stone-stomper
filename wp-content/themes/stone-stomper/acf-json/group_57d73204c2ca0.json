@@ -3,24 +3,6 @@
     "title": "Theme Options",
     "fields": [
         {
-            "key": "field_57d84a448fe10",
-            "label": "Header",
-            "name": "",
-            "aria-label": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "left",
-            "endpoint": 0,
-            "selected": 0
-        },
-        {
             "key": "field_5ed4d0274548d",
             "label": "Footer",
             "name": "",
@@ -55,47 +37,6 @@
             "message": "",
             "new_lines": "wpautop",
             "esc_html": 0
-        },
-        {
-            "key": "field_6231ae11e61b4",
-            "label": "Title",
-            "name": "sts_var_ftrop_title",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        {
-            "key": "field_62669b7be5b29",
-            "label": "Text",
-            "name": "sts_var_ftrop_text",
-            "aria-label": "",
-            "type": "wysiwyg",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 0,
-            "delay": 0,
-            "wysiwyg_height": ""
         },
         {
             "key": "field_62683b44efa45",
@@ -1135,5 +1076,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1756999505
+    "modified": 1758546222
 }

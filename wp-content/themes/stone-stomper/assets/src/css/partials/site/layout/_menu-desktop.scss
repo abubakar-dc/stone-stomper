@@ -1,8 +1,7 @@
 @media (min-width: 1024px) {
-
-	.header-nav ul li:hover>ul,
+	.header-nav ul li:hover > ul,
 	.menu-item-has-children ul.focused,
-	.header-nav ul li a:focus-visible+ul {
+	.header-nav ul li a:focus-visible + ul {
 		opacity: 1;
 		visibility: visible;
 		overflow: visible;
@@ -28,7 +27,7 @@
 		position: relative;
 
 		li {
-			margin: 0 14px;
+			margin: 0 16px;
 			padding: 0;
 			display: inline-block;
 			position: relative;
@@ -45,9 +44,10 @@
 				border: 0;
 				position: relative;
 				color: var(--ss_header_color);
-				font-size: var(--ss-font_size_27);
-				@include font(open, bold);
+				font-size: var(--ss_font_size_15);
+				@include font(open, sbold);
 				text-transform: uppercase;
+				letter-spacing: 3.8px;
 
 				&::after {
 					content: "";
@@ -68,7 +68,7 @@
 				cursor: pointer;
 			}
 
-			&.menu-item-has-children>a {
+			&.menu-item-has-children > a {
 				padding-right: 15px;
 				background-position: top 6px right;
 				background-repeat: no-repeat;
@@ -80,8 +80,8 @@
 				}
 			}
 
-			&.current-menu-item>a,
-			&.current-menu-parent>a,
+			&.current-menu-item > a,
+			&.current-menu-parent > a,
 			a:hover,
 			span.menu-link:hover {
 				border: 0;
@@ -148,8 +148,8 @@
 					color: var(--ss_header_submenu_color_hover);
 				}
 
-				&.current-menu-item>a,
-				&.current-menu-parent>a,
+				&.current-menu-item > a,
+				&.current-menu-parent > a,
 				a:hover,
 				span.menu-link:hover {
 					border: 0;

@@ -8,7 +8,7 @@ body {
 	@include font(open, reg, family weight);
 	transition: all 0.3s ease-in-out;
 	position: relative;
-	font-size: var(--ss_font_size_16);
+	font-size: var(--ss_font_size_15);
 	color: var(--ss_body_color);
 	background-color: var(--ss_body_bg);
 	line-height: 1.5;

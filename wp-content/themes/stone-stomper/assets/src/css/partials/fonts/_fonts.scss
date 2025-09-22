@@ -1,54 +1,79 @@
 $base-url: "../";
-$used-fonts: (
-);
+$used-fonts: ();
 $base-font-stack: (
-	jost: (med: (family: ("Jost",
+	jost: (
+		med: (
+			family: (
+				"Jost",
 				arial,
 				sans-serif,
 			),
 			weight: 500,
 			style: normal,
 			font-display: swap,
-			font-face: (family: "Jost",
+			font-face: (
+				family: "Jost",
 				path: "Jost-Medium",
-				formats: (woff2, woff),
+				formats: (
+					woff2,
+					woff,
+				),
 			),
 		),
 	),
-	open: (reg: (family: ("Open Sans",
+	open: (
+		reg: (
+			family: (
+				"Open Sans",
 				arial,
 				sans-serif,
 			),
 			weight: 400,
 			style: normal,
 			font-display: swap,
-			font-face: (family: "Open Sans",
+			font-face: (
+				family: "Open Sans",
 				path: "OpenSans-Regular",
-				formats: (woff2, woff),
+				formats: (
+					woff2,
+					woff,
+				),
 			),
 		),
-		sbold: (family: ("Open Sans",
+		sbold: (
+			family: (
+				"Open Sans",
 				arial,
 				sans-serif,
 			),
 			weight: 600,
 			style: normal,
 			font-display: swap,
-			font-face: (family: "Open Sans",
+			font-face: (
+				family: "Open Sans",
 				path: "OpenSans-SemiBold",
-				formats: (woff2, woff),
+				formats: (
+					woff2,
+					woff,
+				),
 			),
 		),
-		bold: (family: ("Open Sans",
+		bold: (
+			family: (
+				"Open Sans",
 				arial,
 				sans-serif,
 			),
 			weight: 700,
 			style: normal,
 			font-display: swap,
-			font-face: (family: "Open Sans",
+			font-face: (
+				family: "Open Sans",
 				path: "OpenSans-Bold",
-				formats: (woff2, woff),
+				formats: (
+					woff2,
+					woff,
+				),
 			),
 		),
 	),
@@ -57,7 +82,7 @@ $base-font-stack: (
 // Fetch nested keys
 @function map-deep-get($map, $keys...) {
 	@each $key in $keys {
-		@if type-of($map) !="map" {
+		@if type-of($map) != "map" {
 			// @warn "`#{$map}` is not a map.";
 			@return false;
 		}
@@ -71,7 +96,7 @@ $base-font-stack: (
 // Checks if a list contains a value(s).
 @function contains($list, $values...) {
 	@each $value in $values {
-		@if type-of(index($list, $value)) !="number" {
+		@if type-of(index($list, $value)) != "number" {
 			@return false;
 		}
 	}
@@ -81,20 +106,20 @@ $base-font-stack: (
 
 // Returns URL to a font based on its path
 @function font($path, $base: $base-url) {
-	@if $path !="" {
+	@if $path != "" {
 		@return url($base + "fonts/" + $path);
-	}
-
-	@else {
+	} @else {
 		@return none; // or handle empty path case accordingly
 	}
 }
 
 // Font styling shorthand
-@mixin font($group,
+@mixin font(
+	$group,
 	$variant: reguopen,
 	$properties: family weight style,
-	$font-stack: $base-font-stack) {
+	$font-stack: $base-font-stack
+) {
 	$font-properties: map-deep-get($font-stack, $group, $variant);
 
 	@if $font-properties {
@@ -112,28 +137,31 @@ $base-font-stack: (
 // Check if this combination already exists in the map.
 // If not, we add it to the map.
 @mixin track-fonts($group, $variant) {
-
 	// First check if we already knew this one:
-	@if map-has-key($used-fonts, $group)==false {
+	@if map-has-key($used-fonts, $group) ==false {
 		// Font-family isn't in the map yet, so add it.
 		// The key for the nested map is the font name:
-		$used-fonts: map-merge($used-fonts,
-				($group: (
-				),
-			)) !global;
+		$used-fonts: map-merge(
+			$used-fonts,
+			(
+				$group: (),
+			)
+		) !global;
 	}
 
 	// Now check if the variation is known
-	$font-map: map-get($used-fonts, $group
-	);
+	$font-map: map-get($used-fonts, $group);
 
-@if index($font-map, $variant)==null {
-	// Variation isn't in the map yet, so add it:
-	$variations: append($font-map, $variant);
-	$used-fonts: map-merge($used-fonts,
-			($group: $variations,
-			)) !global;
-}
+	@if index($font-map, $variant) ==null {
+		// Variation isn't in the map yet, so add it:
+		$variations: append($font-map, $variant);
+		$used-fonts: map-merge(
+			$used-fonts,
+			(
+				$group: $variations,
+			)
+		) !global;
+	}
 }
 
 // Add the font-face rules for all used fonts
@@ -154,18 +182,20 @@ $base-font-stack: (
 					$font-style: map-get($font-properties, style);
 
 					@if $file-formats {
-						@include font-face($font-family,
+						@include font-face(
+							$font-family,
 							$file-path,
 							$font-weight,
 							$font-style,
-							$file-formats);
-					}
-
-					@else {
-						@include font-face($font-family,
+							$file-formats
+						);
+					} @else {
+						@include font-face(
+							$font-family,
 							$file-path,
 							$font-weight,
-							$font-style);
+							$font-style
+						);
 					}
 				}
 			}
@@ -175,34 +205,35 @@ $base-font-stack: (
 
 // Used for creating the source string for fonts using @font-face
 @function font-source($font-family, $file-path, $file-formats) {
-	$src: (
-	);
+	$src: ();
 
-@if $file-path !="" {
-	$formats-map: (
-		woff2: "#{$file-path}.woff2" format("woff2"),
-		// Add other formats as needed
-	);
+	@if $file-path != "" {
+		$formats-map: (
+			woff2: "#{$file-path}.woff2" format("woff2"),
+			// Add other formats as needed
+		);
 
-@each $key, $values in $formats-map {
-	@if contains($file-formats, $key) {
-		$file-path: nth($values, 1);
-		$font-format: nth($values, 2);
-		$src: append($src, font($file-path) $font-format, comma);
+		@each $key, $values in $formats-map {
+			@if contains($file-formats, $key) {
+				$file-path: nth($values, 1);
+				$font-format: nth($values, 2);
+				$src: append($src, font($file-path) $font-format, comma);
+			}
+		}
 	}
-}
-}
 
-@return $src;
+	@return $src;
 }
 
 // Add a font-face rule
-@mixin font-face($font-family,
+@mixin font-face(
+	$font-family,
 	$file-path,
 	$font-weight: 400,
 	$font-style: normal,
-	$file-formats: eot woff2 woff ttf svg) {
-	@if $file-path !="" {
+	$file-formats: eot woff2 woff ttf svg
+) {
+	@if $file-path != "" {
 		@font-face {
 			font-family: $font-family;
 			font-style: $font-style;
