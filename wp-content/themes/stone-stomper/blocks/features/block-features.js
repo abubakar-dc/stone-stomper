@@ -2191,23 +2191,23 @@ function Edit(props) {
   }, [['core/column', {
     className: 'features-image image-cover',
     style: {
-      flexBasis: '70%'
+      flexBasis: '66%'
     },
-    width: '65%',
+    width: '66%',
     verticalAlignment: 'center'
   }, [['core/image', {
     className: 'size-full'
   }]]], ['core/column', {
     className: 'features-tile',
     style: {
-      flexBasis: '30%'
+      flexBasis: '32%'
     },
-    width: '35%',
+    width: '32%',
     verticalAlignment: 'center'
   }, [['core/image', {
     className: 'size-full'
   }], ['core/group', {
-    className: 'features-inner-cotnent'
+    className: 'features-inner-content'
   }, [['core/heading', {
     placeholder: 'Enter heading…',
     className: 'heading-4',

@@ -36,29 +36,29 @@ function Edit( props ) {
 
 	const TEMPLATE = [
 		[ 'core/columns', { className: 'stone-stomper-features' }, [
-				[ 'core/column', { className: 'features-image image-cover', style: { flexBasis: '70%' }, width:'65%', verticalAlignment: 'center' }, [
-						[
-							'core/image',
-							{ className: 'size-full' },
-						],
-					],
+			[ 'core/column', { className: 'features-image image-cover', style: { flexBasis: '66%' }, width: '66%', verticalAlignment: 'center' }, [
+				[
+					'core/image',
+					{ className: 'size-full' },
 				],
-				[ 'core/column', { className: 'features-tile', style: { flexBasis: '30%' }, width:'35%', verticalAlignment: 'center' }, [
-						[ 'core/image', { className: 'size-full' } ],
-						[ 'core/group', { className: 'features-inner-cotnent' }, [
-							[
-								'core/heading',
-								{ placeholder: 'Enter heading…', className: 'heading-4', level: 2 },
-							],
-							[
-								'core/paragraph',
-								{ placeholder: 'Enter your description text here…' },
-							],
-						]],
-					],
-				],
-
 			],
+			],
+			[ 'core/column', { className: 'features-tile', style: { flexBasis: '32%' }, width: '32%', verticalAlignment: 'center' }, [
+				[ 'core/image', { className: 'size-full' } ],
+				[ 'core/group', { className: 'features-inner-content' }, [
+					[
+						'core/heading',
+						{ placeholder: 'Enter heading…', className: 'heading-4', level: 2 },
+					],
+					[
+						'core/paragraph',
+						{ placeholder: 'Enter your description text here…' },
+					],
+				] ],
+			],
+			],
+
+		],
 		],
 	];
 
