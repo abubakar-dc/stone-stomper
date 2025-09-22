@@ -120,7 +120,29 @@ registerBlockType(metadata.name + '-item', {
     parent: [metadata.name],
     category: 'theme-blocks',
     icon: icons.item,
-    attributes: { },
+    attributes: {
+		imageUrl: { type: "string" },
+		imageAlt: { type: "string", default: "" },
+		videoUrl: { type: "string" },
+		description: { type: "string" },
+		image: { type: 'object', default: {} },
+		video: {
+			type: 'object',
+			default: {},
+		},
+		videoInline: {
+			type: 'object',
+			default: {},
+		},
+		title: {
+			type: 'string',
+			default: '',
+		},
+			selectionMode: {
+			type: 'string',
+			default: 'url',
+		},
+  	},
 
     edit(props) {
         const { attributes, setAttributes } = props;
@@ -138,8 +160,8 @@ registerBlockType(metadata.name + '-item', {
         return (
 			<>
 			<div { ...blockProps }>
-				<div className="video-item">
 
+				<div className="video-item">
 					<InspectorControls>
 						<Panel>
 							<PanelBody title="Video Settings" initialOpen={ true }>
@@ -188,7 +210,6 @@ registerBlockType(metadata.name + '-item', {
 						</Panel>
 					</InspectorControls>
 
-
 					<div className="video-section image-cover">
 						{ selectionMode === 'url' || selectionMode === 'upload' && (
 							<div className="play-icon">
@@ -198,7 +219,6 @@ registerBlockType(metadata.name + '-item', {
 						) }
 						<PlaceholderImage props={props} valueImage={attributes.image} attrImage="image" />
 					</div>
-
 					<div className="video-description">
 						{ children }
 					</div>
@@ -206,7 +226,6 @@ registerBlockType(metadata.name + '-item', {
 			</div>
 
 			</>
-
         );
     },
 
@@ -221,7 +240,7 @@ registerBlockType(metadata.name + '-item', {
 					<div className="video-section image-cover">
 						{image?.source_url && (
 							<img src={image.source_url} alt={image.alt || 'Stat Background'} />
-							)}
+						)}
 							{ selectionMode === 'url' && title &&  (
 							<div className="play-icon">
 								<a href={title} data-lity="true" className="play-btn-icon"></a>

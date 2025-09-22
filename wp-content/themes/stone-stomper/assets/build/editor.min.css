@@ -993,6 +993,12 @@ Mixin for transition
   /**
   * Custom Select Styles
   **/
+  /*! Lity - v2.2.2 - 2016-12-14
+  * http://sorgalla.com/lity/
+  * Copyright (c) 2015-2016 Jan Sorgalla; Licensed MIT */
+  /* Image */
+  /* iFrame */
+  /* iFrame */
   /*-------------------------------------------------
   >> Basic styles for Blog post
   -------------------------------------------------*/
@@ -1010,6 +1016,9 @@ Mixin for transition
   -------------------------------------------------*/
   /*-------------------------------------------------
   >> Basic styles for Team Block
+  -------------------------------------------------*/
+  /*-------------------------------------------------
+  >> Basic styles for Image Alongside Text Block
   -------------------------------------------------*/
   /*-------------------------------------------------
   >> Basic styles for Image Alongside Text Block
@@ -3597,6 +3606,176 @@ Mixin for transition
   pointer-events: none !important;
   opacity: 0.2;
 }
+.editor-styles-wrapper .lity {
+  z-index: 9990;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  white-space: nowrap;
+  background: #121212;
+  outline: none !important;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.editor-styles-wrapper .lity.lity-opened {
+  opacity: 1;
+}
+.editor-styles-wrapper .lity.lity-closed {
+  opacity: 0;
+}
+.editor-styles-wrapper .lity * {
+  box-sizing: border-box;
+}
+.editor-styles-wrapper .lity-wrap {
+  z-index: 9990;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  outline: none !important;
+}
+.editor-styles-wrapper .lity-wrap:before {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -0.25em;
+}
+.editor-styles-wrapper .lity-loader {
+  z-index: 9991;
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  margin-top: -0.8em;
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.editor-styles-wrapper .lity-loading .lity-loader {
+  opacity: 1;
+}
+.editor-styles-wrapper .lity-container {
+  z-index: 9992;
+  position: relative;
+  text-align: left;
+  vertical-align: middle;
+  display: inline-block;
+  white-space: normal;
+  max-width: 100%;
+  max-height: 100%;
+  outline: none !important;
+}
+.editor-styles-wrapper .lity-content {
+  z-index: 9993;
+  width: 100%;
+  transform: scale(1);
+  transition: transform 0.3s ease;
+}
+.editor-styles-wrapper .lity-loading .lity-content,
+.editor-styles-wrapper .lity-closed .lity-content {
+  transform: scale(0.8);
+}
+.editor-styles-wrapper .lity-content:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  display: block;
+  right: 0;
+  width: auto;
+  height: auto;
+  z-index: -1;
+}
+.editor-styles-wrapper .lity-close {
+  z-index: 9994;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  right: 0;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIHdpZHRoPSIyNTYiIGhlaWdodD0iMjU2IiB2aWV3Qm94PSIwIDAgMjU2IDI1NiIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+Cgo8ZGVmcz4KPC9kZWZzPgo8ZyBzdHlsZT0ic3Ryb2tlOiBub25lOyBzdHJva2Utd2lkdGg6IDA7IHN0cm9rZS1kYXNoYXJyYXk6IG5vbmU7IHN0cm9rZS1saW5lY2FwOiBidXR0OyBzdHJva2UtbGluZWpvaW46IG1pdGVyOyBzdHJva2UtbWl0ZXJsaW1pdDogMTA7IGZpbGw6IG5vbmU7IGZpbGwtcnVsZTogbm9uemVybzsgb3BhY2l0eTogMTsiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEuNDA2NTkzNDA2NTkzNDAxNiAxLjQwNjU5MzQwNjU5MzQwMTYpIHNjYWxlKDIuODEgMi44MSkiID4KCTxyZWN0IHg9Ii0xMy41OSIgeT0iMzkuOTUiIHJ4PSIwIiByeT0iMCIgd2lkdGg9IjExNy4xNyIgaGVpZ2h0PSIxMC4xIiBzdHlsZT0ic3Ryb2tlOiBub25lOyBzdHJva2Utd2lkdGg6IDE7IHN0cm9rZS1kYXNoYXJyYXk6IG5vbmU7IHN0cm9rZS1saW5lY2FwOiBidXR0OyBzdHJva2UtbGluZWpvaW46IG1pdGVyOyBzdHJva2UtbWl0ZXJsaW1pdDogMTA7IGZpbGw6IHJnYigwLDAsMCk7IGZpbGwtcnVsZTogbm9uemVybzsgb3BhY2l0eTogMTsiIHRyYW5zZm9ybT0iIG1hdHJpeCgwLjcwNzEgLTAuNzA3MiAwLjcwNzIgMC43MDcxIC0xOC42Mzk2IDQ1LjAwNDQpICIvPgoJPHJlY3QgeD0iMzkuOTUiIHk9Ii0xMy41OSIgcng9IjAiIHJ5PSIwIiB3aWR0aD0iMTAuMSIgaGVpZ2h0PSIxMTcuMTciIHN0eWxlPSJzdHJva2U6IG5vbmU7IHN0cm9rZS13aWR0aDogMTsgc3Ryb2tlLWRhc2hhcnJheTogbm9uZTsgc3Ryb2tlLWxpbmVjYXA6IGJ1dHQ7IHN0cm9rZS1saW5lam9pbjogbWl0ZXI7IHN0cm9rZS1taXRlcmxpbWl0OiAxMDsgZmlsbDogcmdiKDAsMCwwKTsgZmlsbC1ydWxlOiBub256ZXJvOyBvcGFjaXR5OiAxOyIgdHJhbnNmb3JtPSIgbWF0cml4KDAuNzA3MSAtMC43MDcxIDAuNzA3MSAwLjcwNzEgLTE4LjYzOTYgNDUuMDAwNCkgIi8+CjwvZz4KPC9zdmc+);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 24px;
+  top: -54px;
+  -webkit-appearance: none;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  padding: 0;
+  border: 0;
+  outline: none;
+  background-color: transparent;
+  filter: invert(1);
+}
+.editor-styles-wrapper .lity-close:hover {
+  background-color: transparent;
+}
+.editor-styles-wrapper .lity-close::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+.editor-styles-wrapper .lity-image img {
+  max-width: 100%;
+  display: block;
+  line-height: 0;
+  border: 0;
+}
+.editor-styles-wrapper .lity-iframe .lity-container,
+.editor-styles-wrapper .lity-youtube .lity-container,
+.editor-styles-wrapper .lity-vimeo .lity-container,
+.editor-styles-wrapper .lity-facebookvideo .lity-container,
+.editor-styles-wrapper .lity-googlemaps .lity-container {
+  width: 90%;
+  max-width: 964px;
+}
+.editor-styles-wrapper .lity-iframe-container {
+  width: 100%;
+  height: 0;
+  padding-top: 56.25%;
+  overflow: auto;
+  pointer-events: auto;
+  transform: translateZ(0);
+  -webkit-overflow-scrolling: touch;
+}
+.editor-styles-wrapper .lity-iframe-container iframe {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.editor-styles-wrapper .lity-hide {
+  display: none;
+}
+.editor-styles-wrapper .lity-inline .lity-container {
+  width: 100%;
+}
+.editor-styles-wrapper .lity-inline .lity-wrap {
+  max-width: 964px;
+  margin: auto;
+}
+.editor-styles-wrapper .lity-inline .lity-wrap .lity-content video {
+  margin: 0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.editor-styles-wrapper .lity-iframe .lity-container,
+.editor-styles-wrapper .lity-youtube .lity-container,
+.editor-styles-wrapper .lity-vimeo .lity-container,
+.editor-styles-wrapper .lity-facebookvideo .lity-container,
+.editor-styles-wrapper .lity-googlemaps .lity-container {
+  width: 90%;
+  max-width: 964px;
+}
 .editor-styles-wrapper .post-box .post-box-img a {
   height: 100%;
   display: inline-block;
@@ -4227,6 +4406,35 @@ Mixin for transition
   font-weight: 500;
   font-style: normal;
   letter-spacing: -1.2px;
+}
+.editor-styles-wrapper .video-section {
+  position: relative;
+}
+.editor-styles-wrapper .video-section a {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.editor-styles-wrapper .video-section a::after {
+  content: "";
+  height: 68px;
+  width: 68px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjUiIGhlaWdodD0iMjkiIHZpZXdCb3g9IjAgMCAyNSAyOSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTI0LjkyNzUgMTQuNUMyNC45Mjg0IDE0Ljg3ODcgMjQuODMgMTUuMjUxMiAyNC42NDE5IDE1LjU4MTJDMjQuNDUzOCAxNS45MTEzIDI0LjE4MjQgMTYuMTg3NyAyMy44NTQxIDE2LjM4MzVMMy41MDUxMiAyOC42NzE3QzMuMTYyMDQgMjguODc5MSAyLjc2OTEgMjguOTkyMyAyLjM2Njg4IDI4Ljk5OTZDMS45NjQ2NiAyOS4wMDcgMS41Njc3NSAyOC45MDgyIDEuMjE3MTMgMjguNzEzNUMwLjg2OTg1MSAyOC41MjE4IDAuNTgwNTU2IDI4LjI0MjMgMC4zNzg5OTggMjcuOTAzN0MwLjE3NzQ0IDI3LjU2NSAwLjA3MDg5MjggMjcuMTc5NSAwLjA3MDMxMjUgMjYuNzg2OFYyLjIxMzIzQzAuMDcwODkyOCAxLjgyMDQ4IDAuMTc3NDQgMS40MzQ5NiAwLjM3ODk5OCAxLjA5NjMzQzAuNTgwNTU2IDAuNzU3Njk3IDAuODY5ODUxIDAuNDc4MTczIDEuMjE3MTMgMC4yODY1QzEuNTY3NzUgMC4wOTE4MDI0IDEuOTY0NjYgLTAuMDA2OTcwMTYgMi4zNjY4OCAwLjAwMDM4MjQ4NEMyLjc2OTEgMC4wMDc3MzUxMyAzLjE2MjA0IDAuMTIwOTQ3IDMuNTA1MTIgMC4zMjgzMjVMMjMuODU0MSAxMi42MTY1QzI0LjE4MjQgMTIuODEyMyAyNC40NTM4IDEzLjA4ODcgMjQuNjQxOSAxMy40MTg4QzI0LjgzIDEzLjc0ODggMjQuOTI4NCAxNC4xMjEzIDI0LjkyNzUgMTQuNVoiIGZpbGw9IiNGMUYxRjEiLz4KPC9zdmc+Cg==);
+  background-color: var(--hj_color_primary) !important;
+  background-size: 17px;
+  background-repeat: no-repeat;
+  background-position: center left 27px;
+  border-radius: 100%;
+  transition: scale 0.3s ease-in-out;
+  will-change: transform;
 }
 .editor-styles-wrapper .wp-block-button .wp-block-button__link {
   box-sizing: border-box;

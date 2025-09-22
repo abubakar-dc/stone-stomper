@@ -2666,7 +2666,41 @@ function Save(props) {
   parent: [_block_json__WEBPACK_IMPORTED_MODULE_1__.name],
   category: 'theme-blocks',
   icon: _block_assets_icons_Icons_jsx__WEBPACK_IMPORTED_MODULE_2__["default"].item,
-  attributes: {},
+  attributes: {
+    imageUrl: {
+      type: "string"
+    },
+    imageAlt: {
+      type: "string",
+      default: ""
+    },
+    videoUrl: {
+      type: "string"
+    },
+    description: {
+      type: "string"
+    },
+    image: {
+      type: 'object',
+      default: {}
+    },
+    video: {
+      type: 'object',
+      default: {}
+    },
+    videoInline: {
+      type: 'object',
+      default: {}
+    },
+    title: {
+      type: 'string',
+      default: ''
+    },
+    selectionMode: {
+      type: 'string',
+      default: 'url'
+    }
+  },
   edit(props) {
     const {
       attributes,
