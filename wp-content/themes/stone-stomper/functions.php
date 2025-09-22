@@ -346,12 +346,15 @@ add_action( 'woocommerce_new_order', function( $order_id ) {
 	) );
 
 	if ( is_wp_error( $post_id ) ) return;
-
+	$customer_details = array(
+    'name' => $cust_name, // or address
+    'delivery_address' => $cust_email, // or address
+);
+error_log(print_r($cust_name,true));
 	// Link to order + basic fields
-	update_post_meta( $post_id, 'name', $order_id );
-	// update_post_meta( $post_id, 'customer_name', $cust_name );
-	// update_post_meta( $post_id, 'customer_email', $cust_email );
-	// update_post_meta( $post_id, 'customer_address', $cust_address );
+	update_post_meta( $post_id, 'order_id', $order_id );
+	update_post_meta( $post_id, 'name', $cust_name );
+	update_post_meta( $post_id, 'delivery_address', $cust_address );
 	// update_post_meta( $post_id, 'customer_suburb', $cust_suburb );
 	// update_post_meta( $post_id, 'customer_state', $cust_state );
 	// update_post_meta( $post_id, 'product_type', $product_type );

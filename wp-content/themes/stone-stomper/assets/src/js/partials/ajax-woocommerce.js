@@ -29,8 +29,8 @@ jQuery( document ).ready( function() {
 	} );
 
 	function AddToCart() {
-		const ids = $.merge( [], mainProductId ); // Start with a copy of the first array
-		$.merge( ids, upsellsProductId ); // Add the second array into it
+		const ids = jQuery.merge( [], mainProductId ); // Start with a copy of the first array
+		jQuery.merge( ids, upsellsProductId ); // Add the second array into it
 
 		jQuery.ajax( {
 			type: 'POST',
@@ -43,7 +43,7 @@ jQuery( document ).ready( function() {
 			},
 			success( response ) {
 				if ( response?.success && response?.data?.added ) {
-					// window.location.href = response.data.redirect || '/cart';
+					window.location.href = response.data.redirect || '/cart';
 				} else {
 					alert( 'Could not add to cart. Please try again.' );
 					console.error( 'Add to cart unexpected response:', response );

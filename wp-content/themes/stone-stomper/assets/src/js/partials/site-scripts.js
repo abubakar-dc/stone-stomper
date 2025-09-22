@@ -8,7 +8,6 @@ import swiper from '../vendors/swiper-bundle.min';
 import slick from '../vendors/slick.min';
 import Lity from '../vendors/lity.js';
 
-
 jQuery( document ).on( 'scroll', function() {
 	if ( jQuery( document ).scrollTop() > 0 ) {
 		jQuery( 'header, body' ).addClass( 'shrink' );

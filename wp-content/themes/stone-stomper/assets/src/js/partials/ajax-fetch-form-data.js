@@ -1,4 +1,4 @@
-jQuery( document ).ready( function( $ ) {
+jQuery( document ).ready( function() {
 	let carMake = '';
 	let postID = '';
 	let caravanPostID = '';
@@ -6,40 +6,48 @@ jQuery( document ).ready( function( $ ) {
 	let caravan = true;
 	let caravanMake = '';
 
-	jQuery( '#van_make' ).on( 'change', function() {
-		caravanMake = jQuery( this ).val();
-		console.log( 'Selected Caravan Make:', caravanMake );
-		caravan = true;
-		// Call your function to fetch form data
-		fetchCaravanData();
+	jQuery( '#van_make' ).on( 'change', function( e ) {
+		if ( e.originalEvent ) {
+			caravanMake = jQuery( this ).val();
+			// console.log( 'Selected Caravan Make:', caravanMake );
+			caravan = true;
+			// Call your function to fetch form data
+			fetchCaravanData();
+		}
 	} );
 
-	jQuery( '#van_model' )( 'change', function() {
-		const selectedOption = jQuery( this ).find( ':selected' );
-		caravanPostID = selectedOption.data( 'post-id' );
-		console.log( 'Selected Caravan Model ID:', caravanPostID );
-		caravan = false;
-		// 🔹 Call your next function if needed
-		fetchCaravanData();
+	jQuery( '#van_model' ).on( 'change', function( e ) {
+		if ( e.originalEvent ) {
+			const selectedOption = jQuery( this ).find( ':selected' );
+			caravanPostID = selectedOption.data( 'post-id' );
+			// console.log( 'Selected Caravan Model ID:', caravanPostID );
+			caravan = false;
+			// 🔹 Call your next function if needed
+			fetchCaravanData();
+		}
 	} );
 
 	// Get Category Slug on Click Start.
-	jQuery().on( '#veh_make', function() {
-		carMake = jQuery( this ).val();
-		console.log( 'Selected Car Make:', carMake );
-		yearRequested = true;
-		postID = '';
-		// Call your function to fetch form data
-		fetchFormData();
+	jQuery( '#veh_make' ).on( 'change', function( e ) {
+		if ( e.originalEvent ) {
+			carMake = jQuery( this ).val();
+			// console.log( 'Selected Car Make:', carMake );
+			yearRequested = true;
+			postID = '';
+			// Call your function to fetch form data
+			fetchFormData();
+		}
 	} );
 
-	jQuery( document ).on( 'change', '#veh_model', function() {
-		const selectedOption = jQuery( this ).find( ':selected' );
-		postID = selectedOption.data( 'post-id' );
-		console.log( 'Selected Car Model ID:', postID );
-		yearRequested = false;
-		// 🔹 Call your next function if needed
-		fetchFormData();
+	jQuery( '#veh_model' ).on( 'change', function( e ) {
+		if ( e.originalEvent ) {
+			const selectedOption = jQuery( this ).find( ':selected' );
+			postID = selectedOption.data( 'post-id' );
+			console.log( 'Selected Car Model ID:', postID );
+			yearRequested = false;
+			// 🔹 Call your next function if needed
+			fetchFormData();
+		}
 	} );
 
 	// Getting News
@@ -65,8 +73,10 @@ jQuery( document ).ready( function( $ ) {
 						jQuery( '#barwidth' ).val( response.barwidth + ' mm' );
 					}
 					jQuery( '#veh_year' ).html( response.year );
-					if ( response.vehicleImage ) {
+					if ( response.vehicleImage !== null ) {
 						jQuery( '#towing-vehicle-image' ).html( response.vehicleImage );
+					} else {
+						jQuery( '#towing-vehicle-image' ).html( '' );
 					}
 					jQuery( '.loader-container' ).hide();
 				}
@@ -126,7 +136,7 @@ jQuery( document ).ready( function( $ ) {
 						jQuery( '#caravan-images' ).html( response.stoneguard_image );
 					}
 					if ( response.toolbox_image ) {
-						jQuery( '#caravan-images' ).html( response.toolbox_image );
+						jQuery( '#caravan-images' ).append( response.toolbox_image );
 					}
 					jQuery( '.loader-container' ).hide();
 				}

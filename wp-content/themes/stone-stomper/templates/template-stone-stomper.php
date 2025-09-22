@@ -74,9 +74,6 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 							<!-- Your Details -->
 							 <div class="order-form-section-inner form-detail-section two-columns justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
-									<!-- <div class="grid cols-2 vehicle-images ">
-										<div class="vehicle-image" id="towing-vehicle-image" tabindex="0" role="img"  aria-label="Image illustrating the content of this block"></div>
-									</div> -->
 									<?php if($sts_var_section_head_image){ ?>
 										<?php StoneStomper::the_attachment_image($sts_var_section_head_image,1200 ); ?>
 									<?php } ?>
@@ -161,7 +158,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 							</div>
 
 							<!-- Towing Vehicle Details -->
-							<div id="vehicle-details" class="asad order-form-section-inner form-vehicle-section two-columns justify-content-between align-items-start image-at-left">
+							<div id="vehicle-details" class="section-disable order-form-section-inner form-vehicle-section two-columns justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 vehicle-images ">
 										<div class="vehicle-image" id="towing-vehicle-image" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
@@ -213,13 +210,13 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 										<div class="field">
 											<label class="req" for="veh_model">Vehicle Model</label>
 											<select id="veh_model" name="vehicle_model" required >
-
+												<option value="">Select Vehicle Model </option>
 											</select>
 										</div>
 										<div class="field">
 											<label class="req" for="veh_year">Year of Manufacture</label>
 											<select id="veh_year" name="vehicle_year" required>
-												<option value="">Select…</option>
+												<option value="">Select Model Year </option>
 											</select>
 										</div>
 									</div>
@@ -240,7 +237,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 							</div>
 
 							<!-- Caravan Details -->
-							<div id="caravan-details" class="asad order-form-section-inner form-carvan-section two-columns justify-content-between align-items-start image-at-left">
+							<div id="caravan-details" class="section-disable order-form-section-inner form-carvan-section two-columns justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 vehicle-images ">
 										<div class="vehicle-image" id="caravan-images" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
@@ -334,7 +331,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 							</div>
 
 							<!-- Photographs -->
-							<div id="photographs-details" class="asad order-form-section-inner form-carvan-section two-columns justify-content-between align-items-start image-at-left">
+							<div id="photographs-details" class="section-disable order-form-section-inner form-carvan-section two-columns justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="form-image-slider">
 										<?php if($sts_var_example_photographs){ ?>
@@ -408,7 +405,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 							</div>
 
 							<!-- Final Measurements -->
-							<div id="final-measurements" class="asad order-form-section-inner form-measurements-section two-columns justify-content-between align-items-start image-at-left">
+							<div id="final-measurements" class=" order-form-section-inner form-measurements-section two-columns justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 measurements-images ">
 										<?php
@@ -504,7 +501,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 							</div>
 
 							<!-- Final Details & Summary -->
-							<div id="final-summary" class="asad order-form-section-inner form-details-section two-columns justify-content-between align-items-start image-at-left">
+							<div id="final-summary" class=" order-form-section-inner form-details-section two-columns justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 details-images ">
 										<?php

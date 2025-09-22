@@ -202,34 +202,9 @@ class WP_Theme_Ajax {
 	 * Define ajax filter
 	 **/
 	public function woocommerce_ajax_add_to_cart() {
-		$raw_ids  = $_POST['ids'] ?? [];
+		$product_ids  = $_POST['ids'] ?? [];
 		$quantity = 1;
 		$shipping = sanitize_text_field($_POST['shipping'] ?? '');
-
-		$parse_ids = static function($raw) {
-			if (is_array($raw)) {
-				return array_values(array_filter(array_map('intval', $raw)));
-			}
-			if (is_string($raw)) {
-				$raw = trim($raw);
-				if ($raw === '') return [];
-				if (strpos($raw, '[') === 0) {
-					$decoded = json_decode($raw, true);
-					if (is_array($decoded)) {
-						return array_values(array_filter(array_map('intval', $decoded)));
-					}
-				}
-				$parts = preg_split('/[\s,|]+/', $raw);
-				return array_values(array_filter(array_map('intval', $parts)));
-			}
-			return [];
-		};
-
-		$product_ids = $parse_ids($raw_ids);
-
-		if (empty($product_ids)) {
-			wp_send_json_error(['message' => 'No valid product IDs provided']);
-		}
 
 		$added_any = false;
 
@@ -367,14 +342,14 @@ class WP_Theme_Ajax {
 			$sts_var_car_year = get_field('sts_var_car_year', $post_id);
 			$year    = '<option>Select Model Year</option>';
 			$year .= '<option value="'.esc_attr($sts_var_car_year).'">'.esc_html($sts_var_car_year).'</option>';
+		} else {
+			$year    = '<option>Select Model Year</option>';
 		}
 
 		//Getting Vehicle Image
 		if($post_id && has_post_thumbnail( $post_id )){
 
 			$vehicleImage = '<img src="'.get_the_post_thumbnail_url( $post_id, 'medium' ).'" alt="'.get_the_title($post_id).'" />';
-		} else {
-			$vehicleImage = '';
 		}
 
 		//Getting Bar Width
