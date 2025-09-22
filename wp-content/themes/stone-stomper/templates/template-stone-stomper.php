@@ -233,7 +233,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 							</div>
 
 							<!-- Caravan Details -->
-							<div class="order-form-section-inner form-carvan-section two-columns justify-content-between align-items-start image-at-left">
+							<div class="section-disable order-form-section-inner form-carvan-section two-columns justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 vehicle-images ">
 										<div class="vehicle-image" id="caravan-images" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
@@ -402,9 +402,9 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 
 
 							<!-- Final Measurements -->
-							  <div class="order-form-section-inner form-vehicle-section two-columns justify-content-between align-items-start image-at-left">
+							  <div class="order-form-section-inner form-measurements-section two-columns justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
-									<div class="grid cols-2 vehicle-images ">
+									<div class="grid cols-2 measurements-images ">
 										<?php
 											if($sts_var_measurements_image){
 												StoneStomper::the_attachment_image($sts_var_measurements_image,300 );
@@ -498,9 +498,9 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 							</div>
 
 							<!-- Final Details & Summary -->
-							<div class="order-form-section-inner form-vehicle-section two-columns justify-content-between align-items-start image-at-left">
+							<div class="order-form-section-inner form-details-section two-columns justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
-									<div class="grid cols-2 vehicle-images ">
+									<div class="grid cols-2 details-images ">
 										<?php
 											global $product;
 											$p = wc_get_product( 545 );

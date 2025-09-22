@@ -430,7 +430,6 @@ button[disabled]:hover {
 	}
 
 	.select-dropdown__button {
-
 		&:focus,
 		&:focus-visible {
 			outline-color: black !important;
@@ -494,12 +493,9 @@ body {
 	display: none;
 }
 
-
-
 // Stone stomper slider
 
 .form-image-slider {
-
 	.slider-image {
 		img {
 			width: 100%;
@@ -507,4 +503,28 @@ body {
 			object-fit: cover;
 		}
 	}
+}
+
+.vehicle-image {
+	display: flex;
+	img {
+		width: 50%;
+	}
+}
+
+.form-measurements-section {
+	.measurements-images img {
+		width: 100%;
+	}
+}
+
+.form-details-section {
+	.details-images img {
+		width: 100%;
+	}
+}
+
+.section-disable {
+	pointer-events: none !important;
+	opacity: 0.2;
 }

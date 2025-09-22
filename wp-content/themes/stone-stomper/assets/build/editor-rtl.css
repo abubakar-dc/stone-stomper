@@ -3543,6 +3543,22 @@ Mixin for transition
   -o-object-fit: cover;
      object-fit: cover;
 }
+.editor-styles-wrapper .vehicle-image {
+  display: flex;
+}
+.editor-styles-wrapper .vehicle-image img {
+  width: 50%;
+}
+.editor-styles-wrapper .form-measurements-section .measurements-images img {
+  width: 100%;
+}
+.editor-styles-wrapper .form-details-section .details-images img {
+  width: 100%;
+}
+.editor-styles-wrapper .section-disable {
+  pointer-events: none !important;
+  opacity: 0.2;
+}
 .editor-styles-wrapper .post-box .post-box-img a {
   height: 100%;
   display: inline-block;

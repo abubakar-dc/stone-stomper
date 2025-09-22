@@ -4679,6 +4679,26 @@ body #daextlwcnf-cookie-settings-button-2:hover {
      object-fit: cover;
 }
 
+.vehicle-image {
+  display: flex;
+}
+.vehicle-image img {
+  width: 50%;
+}
+
+.form-measurements-section .measurements-images img {
+  width: 100%;
+}
+
+.form-details-section .details-images img {
+  width: 100%;
+}
+
+.section-disable {
+  pointer-events: none !important;
+  opacity: 0.2;
+}
+
 /*-------------------------------------------------
 >> Basic styles for Blog post
 -------------------------------------------------*/
