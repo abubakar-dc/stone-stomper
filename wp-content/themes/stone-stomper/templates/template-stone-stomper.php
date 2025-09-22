@@ -154,7 +154,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 							</div>
 
 							<!-- Towing Vehicle Details -->
-							 <div class="order-form-section-inner form-vehicle-section two-columns justify-content-between align-items-start image-at-left">
+							<div class="section-disable order-form-section-inner form-vehicle-section two-columns justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 vehicle-images ">
 										<div class="vehicle-image" id="towing-vehicle-image" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
@@ -327,7 +327,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 							</div>
 
 							<!-- Photographs -->
-							 <div class="order-form-section-inner form-carvan-section two-columns justify-content-between align-items-start image-at-left">
+							<div class="section-disable order-form-section-inner form-carvan-section two-columns justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="form-image-slider">
 										<?php if($sts_var_example_photographs){ ?>
@@ -402,7 +402,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 
 
 							<!-- Final Measurements -->
-							  <div class="order-form-section-inner form-measurements-section two-columns justify-content-between align-items-start image-at-left">
+							<div class="section-disable order-form-section-inner form-measurements-section two-columns justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 measurements-images ">
 										<?php
@@ -617,6 +617,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 									</div>
 								</div>
 							</div>
+
 						</div>
 					</form>
 
