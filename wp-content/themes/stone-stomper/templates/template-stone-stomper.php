@@ -14,7 +14,7 @@
 // Include header.
 get_header();
 list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaults();
-
+$sts_var_select_products = $sts_fields['sts_var_select_products'] ?? null;
 $sts_var_section_head           = $sts_fields['sts_var_section_head'] ?? null;
 if($sts_var_section_head){
 	$sts_var_section_headline = $sts_var_section_head['headline']??null;
@@ -78,11 +78,11 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 										<div class="vehicle-image" id="towing-vehicle-image" tabindex="0" role="img"  aria-label="Image illustrating the content of this block"></div>
 									</div> -->
 									<?php if($sts_var_section_head_image){ ?>
-										<?php StoneStomper::the_attachment_image($sts_var_section_head_image,800 ); ?>
+										<?php StoneStomper::the_attachment_image($sts_var_section_head_image,1200 ); ?>
 									<?php } ?>
 								</div>
 
-								<div class="form-section-right column" id="blk-details">
+								<div class="form-section-right column" id="details-section">
 									<?php if($sts_var_section_head_notices){
 										foreach($sts_var_section_head_notices as $sts_key => $notice){
 										$sts_var_headline = $notice['headline']??null;
@@ -131,8 +131,15 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 										</div>
 										<div class="field">
 											<select id="product_type" placeholder="Product Type" name="product_type" required>
-												<option value="stone-stomper">Stone Stomper</option>
-												<option value="mesh" >Mesh</option>
+												<?php
+												if ( $sts_var_select_products ) {
+													foreach( $sts_var_select_products as $key =>  $sts_var_select_product ){
+														?>
+														<option value="<?php echo esc_html($sts_var_select_product);?>" > <?php echo esc_html(get_the_title($sts_var_select_product));  ?> </option>
+														<?php
+													}
+												}
+												?>
 											</select>
 										</div>
 
@@ -154,13 +161,13 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 							</div>
 
 							<!-- Towing Vehicle Details -->
-							<div class="section-disable order-form-section-inner form-vehicle-section two-columns justify-content-between align-items-start image-at-left">
+							<div id="vehicle-details" class="asad order-form-section-inner form-vehicle-section two-columns justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 vehicle-images ">
 										<div class="vehicle-image" id="towing-vehicle-image" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
 												<?php
 													if($sts_var_vichle_detail_image ){
-													 StoneStomper::the_attachment_image($sts_var_vichle_detail_image,800 );
+													 StoneStomper::the_attachment_image($sts_var_vichle_detail_image,1200 );
 													}
 												?>
 										</div>
@@ -233,16 +240,16 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 							</div>
 
 							<!-- Caravan Details -->
-							<div class="section-disable order-form-section-inner form-carvan-section two-columns justify-content-between align-items-start image-at-left">
+							<div id="caravan-details" class="asad order-form-section-inner form-carvan-section two-columns justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 vehicle-images ">
 										<div class="vehicle-image" id="caravan-images" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
 												<?php
 													if($sts_var_caravan_detail_factory_stoneguard ){
-													 StoneStomper::the_attachment_image($sts_var_caravan_detail_factory_stoneguard,800 );
+													 StoneStomper::the_attachment_image($sts_var_caravan_detail_factory_stoneguard,1200 );
 													}
 													if($sts_var_caravan_detail_toolbox ){
-													 StoneStomper::the_attachment_image($sts_var_caravan_detail_toolbox,800 );
+													 StoneStomper::the_attachment_image($sts_var_caravan_detail_toolbox,1200 );
 													}
 												?>
 
@@ -327,7 +334,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 							</div>
 
 							<!-- Photographs -->
-							<div class="section-disable order-form-section-inner form-carvan-section two-columns justify-content-between align-items-start image-at-left">
+							<div id="photographs-details" class="asad order-form-section-inner form-carvan-section two-columns justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="form-image-slider">
 										<?php if($sts_var_example_photographs){ ?>
@@ -335,7 +342,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 												<div class="slick-slide">
 
 													<div class="slider-image">
-														<?php StoneStomper::the_attachment_image($photo,300 ); ?>
+														<?php StoneStomper::the_attachment_image($photo,1200 ); ?>
 													</div>
 												</div>
 											<?php }
@@ -401,12 +408,12 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 							</div>
 
 							<!-- Final Measurements -->
-							<div class="section-disable order-form-section-inner form-measurements-section two-columns justify-content-between align-items-start image-at-left">
+							<div id="final-measurements" class="asad order-form-section-inner form-measurements-section two-columns justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 measurements-images ">
 										<?php
 											if($sts_var_measurements_image){
-												StoneStomper::the_attachment_image($sts_var_measurements_image,300 );
+												StoneStomper::the_attachment_image($sts_var_measurements_image,1200 );
 											}
 										?>
 									</div>
@@ -497,7 +504,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 							</div>
 
 							<!-- Final Details & Summary -->
-							<div class="order-form-section-inner form-details-section two-columns justify-content-between align-items-start image-at-left">
+							<div id="final-summary" class="asad order-form-section-inner form-details-section two-columns justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 details-images ">
 										<?php
@@ -517,7 +524,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 													echo '<div class="checkbox-item">';
 													if( has_post_thumbnail( $upsell_id ) ) {
 													echo '<div class="thumb">';
-													echo '<img src="' . esc_url( get_the_post_thumbnail_url( $upsell_id, 'thumbnail' ) ) . '" alt="' . esc_attr( $title ) . '" />';
+													echo '<img src="' . esc_url( get_the_post_thumbnail_url( $upsell_id, 'thumb_800' ) ) . '" alt="' . esc_attr( $title ) . '" />';
 													echo '<p>' . esc_html( $title ) . '</p>';
 													echo '</div>';
 													}
@@ -596,8 +603,10 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 									?>
 
 									<div class="summary" id="order_summary">
-										<div class="line"><span>Stone Stomper®</span><strong>$<span
-													data-id="base">825.00</span></strong></div>
+										<div class="line">
+											<span>Stone Stomper®</span>
+											<strong id="selected-product-price" >$825.00</strong>
+										</div>
 										<!-- <div class="line" id="sum_sleeve" style="display:none"><span>Stone Stomper®
 												Bar
 												Sleeve</span><strong>$<span data-id="sleeve">95.00</span></strong>

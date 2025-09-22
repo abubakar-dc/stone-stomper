@@ -3,6 +3,38 @@
     "title": "Template Stone Stomper - Options",
     "fields": [
         {
+            "key": "field_68d14c9d6fd0a",
+            "label": "Select Products",
+            "name": "sts_var_select_products",
+            "aria-label": "",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "product"
+            ],
+            "post_status": [
+                "publish"
+            ],
+            "taxonomy": "",
+            "filters": [
+                "search"
+            ],
+            "return_format": "id",
+            "min": "",
+            "max": "",
+            "allow_in_bindings": 0,
+            "elements": "",
+            "bidirectional": 0,
+            "bidirectional_target": []
+        },
+        {
             "key": "field_68c15c0696249",
             "label": "Section Head",
             "name": "sts_var_section_head",
@@ -347,5 +379,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1758296323
+    "modified": 1758547193
 }
