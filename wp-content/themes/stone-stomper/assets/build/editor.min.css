@@ -4526,11 +4526,23 @@ Mixin for transition
 }
 .editor-styles-wrapper .form-detail-section .content-head {
   border-bottom: 1px solid;
-  margin-bottom: 30px;
+  margin-bottom: 42px;
+}
+.editor-styles-wrapper .form-detail-section .content-head p {
+  font-size: var(--ss_font_size_16);
+  max-width: 97%;
+  line-height: 1.4;
+  letter-spacing: -0.1px;
+  margin-bottom: 18px;
+}
+.editor-styles-wrapper .form-detail-section .content-head p:last-of-type {
+  margin-bottom: 33px;
 }
 .editor-styles-wrapper .form-detail-section .content-head h2 {
   text-transform: uppercase;
-  letter-spacing: 10px;
+  letter-spacing: 8.3px;
+  line-height: 1.1;
+  margin-bottom: 22px;
 }
 .editor-styles-wrapper .order-form-section-inner {
   -moz-column-gap: 40px;
@@ -4541,10 +4553,15 @@ Mixin for transition
   width: 55.2%;
 }
 .editor-styles-wrapper .form-section-right {
-  width: 41.5%;
+  width: 40.4%;
   border-bottom: 1px solid;
   padding-bottom: 20px;
   margin-bottom: 40px;
+}
+.editor-styles-wrapper .form-section-right h3 {
+  font-size: 27px;
+  letter-spacing: 0.4px;
+  margin-bottom: 12px;
 }
 .editor-styles-wrapper .form-section-right .content-head h3 {
   margin-bottom: 10px;
@@ -4572,6 +4589,52 @@ Mixin for transition
   position: absolute;
   left: 32px;
   top: 20px;
+}
+.editor-styles-wrapper .line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 9px;
+}
+.editor-styles-wrapper .line span {
+  letter-spacing: 0.3px;
+}
+.editor-styles-wrapper .total {
+  border-top: 1px solid;
+  margin-top: 36px;
+  text-align: right;
+  padding-top: 39px;
+  font-size: 28px;
+  font-family: "Jost", arial, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+.editor-styles-wrapper .total span {
+  letter-spacing: 0.9px;
+}
+.editor-styles-wrapper .total .muted {
+  font-size: 15px;
+  margin-top: -8px;
+  display: block;
+}
+.editor-styles-wrapper .actions {
+  margin-top: 54px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.editor-styles-wrapper .actions button {
+  margin: 0;
+  font-weight: 600;
+  text-transform: uppercase;
+  height: 68px;
+  width: 49.1%;
+  letter-spacing: 2.7px;
+}
+.editor-styles-wrapper .actions button.secondary {
+  border: 1px solid black;
+  background-color: transparent;
+  color: black;
 }
 .editor-styles-wrapper .wp-block-button .wp-block-button__link {
   box-sizing: border-box;
@@ -4659,7 +4722,7 @@ Mixin for transition
   font-weight: 400;
   font-style: normal;
   font-size: var(--ss_font_size_18);
-  height: 50px;
+  height: 68px;
   width: 100%;
   border: 1px solid var(--ss_input_border_color);
   background-color: var(--ss_input_bgcolor);
