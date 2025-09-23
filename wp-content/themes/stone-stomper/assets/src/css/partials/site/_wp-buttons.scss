@@ -48,7 +48,8 @@
 		}
 	}
 
-	&.is-style-outline-boxed {
+	&.is-style-outline-boxed,
+	&.is-style-outline {
 		.wp-block-button__link {
 			background-color: var(--ss_transparent);
 			color: var(--ss_theme_btn_color_hover);

@@ -218,5 +218,30 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
+
+		.has-font-size-3-font-size {
+			font-size: var(--ss_font_size_38) !important;
+			letter-spacing: 7px;
+			word-spacing: 3px;
+			line-height: 1.1;
+			margin-top: 9px;
+		}
+
+		.wp-block-buttons {
+			margin-top: 43px;
+		}
+
+		.wp-block-button .wp-block-button__link {
+			padding: 20px 53px;
+			border-color: var(--ss_white);
+			color: var(--ss_white);
+
+			&:hover,
+			&:focus-visible {
+				background-color: var(--ss_color_primary);
+				border-color: var(--ss_color_primary);
+				color: var(--ss_white);
+			}
+		}
 	}
 }

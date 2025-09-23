@@ -1,7 +1,7 @@
 .products-teaser-slider {
 	width: calc(100% + 26px);
 	left: -13px;
-	padding-bottom: 50px;
+	padding-bottom: 53px;
 	box-sizing: border-box;
 	margin: var(--ss_space_64) 0 0 !important;
 	cursor: grab;
@@ -23,7 +23,7 @@
 		margin: 0 13px;
 
 		.add_to_cart_inline {
-			margin: 15px 0 0;
+			margin: 19px 0 0;
 			border: none !important;
 			padding: 0 !important;
 
@@ -131,8 +131,35 @@
 }
 
 .product-price {
-	font-size: 29px;
-	margin-top: 16px;
-	@include font(jost, med);
-	letter-spacing: -1.2px;
+	margin-top: 20px;
+
+	h3 {
+		font-size: 29px;
+		@include font(jost, med);
+		letter-spacing: -1.2px;
+
+	}
+}
+
+.product-item {
+
+	a,
+	a:visited {
+		background-color: var(--ss_transparent);
+		color: var(--ss_link_color);
+		border: none;
+		border-bottom: 1px solid var(--ss_link_border_color);
+		padding: 0;
+		padding-bottom: 2px;
+		letter-spacing: 3.4px;
+		border-color: transparent;
+		border-radius: 0;
+		@include font(open, bold);
+		text-transform: uppercase;
+
+		&:hover,
+		&:focus-visible {
+			border-color: var(--ss_link_border_color);
+		}
+	}
 }

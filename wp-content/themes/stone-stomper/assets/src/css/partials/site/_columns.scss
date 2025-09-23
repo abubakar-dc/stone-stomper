@@ -12,7 +12,7 @@
 
 .video-three-columns {
 	display: grid;
-	@include fluidColumns(3, 309px, 2%, 0);
+	@include fluidColumns(3, 309px, 1.8%, 0);
 	row-gap: var(--ss_space_30);
 }
 
