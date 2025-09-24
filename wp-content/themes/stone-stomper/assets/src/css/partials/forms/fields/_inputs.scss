@@ -44,7 +44,6 @@ select,
 textarea,
 .gform-text-input-reset {
 	@include font(open, reg);
-
 	font-size: var(--ss_font_size_18);
 	height: 68px;
 	width: 100%;
@@ -52,15 +51,17 @@ textarea,
 	background-color: var(--ss_input_bgcolor);
 	color: var(--ss_input_color);
 	outline: none;
-	padding: 0 0 0 12px;
+	padding: 0 25px;
+	letter-spacing: 0.3px;
 	margin: 0;
 	max-width: 100%;
 	box-sizing: border-box;
-
 	@include transition(all, 0.4s, ease-in-out);
+	opacity: 0.5;
 
 	&:focus {
-		border: 1px solid var(--ss_input_focus_border_color);
+		opacity: 1;
+		border: 1px solid var(--ss_black);
 	}
 }
 
@@ -90,6 +91,7 @@ datalist {
 
 input[type="file"] {
 	padding: 9px;
+	height: auto;
 }
 
 // Search Field Style
@@ -157,7 +159,8 @@ select {
 	appearance: none;
 	background-image: url(../images/arrow-down.svg);
 	background-repeat: no-repeat;
-	background-position: center right 10px;
+	background-position: center right 29px;
+	background-size: 10px;
 }
 
 .ginput_container_multiselect select {

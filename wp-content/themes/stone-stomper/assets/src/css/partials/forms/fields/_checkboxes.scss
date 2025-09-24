@@ -10,12 +10,13 @@
 	left: -9999px;
 }
 
-[type="checkbox"]:checked + label,
-[type="checkbox"]:not(:checked) + label,
-[type="checkbox"]:checked + span,
-[type="checkbox"]:not(:checked) + span {
+[type="checkbox"]:checked+label,
+[type="checkbox"]:not(:checked)+label,
+[type="checkbox"]:checked+span,
+[type="checkbox"]:not(:checked)+span {
 	position: relative;
-	padding-left: 26px;
+	padding-left: 27px;
+	letter-spacing: 0.4px;
 	cursor: pointer;
 	line-height: 20px;
 	display: inline-block;
@@ -24,42 +25,45 @@
 	margin: 0 20px 10px 0;
 }
 
-[type="checkbox"]:checked + label::before,
-[type="checkbox"]:not(:checked) + label::before,
-[type="checkbox"]:checked + span::before,
-[type="checkbox"]:not(:checked) + span::before {
+[type="checkbox"]:checked+label::before,
+[type="checkbox"]:not(:checked)+label::before,
+[type="checkbox"]:checked+span::before,
+[type="checkbox"]:not(:checked)+span::before {
 	content: "";
 	position: absolute;
 	left: 0;
-	top: 0;
-	width: 18px;
-	height: 18px;
+	top: 5px;
+	width: 13px;
+	height: 13px;
 	border: 1px solid var(--ss_checkbox_border_color);
 	background-color: var(--ss_checkbox_bgcolor);
 }
 
-[type="checkbox"]:checked + label::after,
-[type="checkbox"]:not(:checked) + label::after,
-[type="checkbox"]:checked + span::after,
-[type="checkbox"]:not(:checked) + span::after {
+[type="checkbox"]:checked+label::after,
+[type="checkbox"]:not(:checked)+label::after,
+[type="checkbox"]:checked+span::after,
+[type="checkbox"]:not(:checked)+span::after {
 	content: "";
-	width: 10px;
-	height: 10px;
-	background-color: var(--ss_checkbox_after_bgcolor);
+	width: 7px;
+	height: 7px;
 	position: absolute;
-	top: 4px;
-	left: 4px;
+	top: 8px;
+	left: 3px;
 	transition: all 0.2s ease;
+	background-image: url("../images/check-icon.svg");
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 12px;
 }
 
-[type="checkbox"]:not(:checked) + label::after,
-[type="checkbox"]:not(:checked) + span::after {
+[type="checkbox"]:not(:checked)+label::after,
+[type="checkbox"]:not(:checked)+span::after {
 	opacity: 0;
 	transform: scale(0);
 }
 
-[type="checkbox"]:checked + label::after,
-[type="checkbox"]:checked + span::after {
+[type="checkbox"]:checked+label::after,
+[type="checkbox"]:checked+span::after {
 	opacity: 1;
 	transform: scale(1);
 }

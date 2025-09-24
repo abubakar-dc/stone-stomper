@@ -315,7 +315,6 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 									</fieldset>
 									<div class="checkboxes">
 										<label>
-											Other Information
 											<input id="opt_other_access" placeholder="Other Information" type="text" name="other_a_frame" />
 										</label>
 									</div>
