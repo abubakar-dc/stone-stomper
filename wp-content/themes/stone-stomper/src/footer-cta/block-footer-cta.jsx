@@ -37,23 +37,23 @@ function Edit( props ) {
 	const TEMPLATE = [
 		[
 			'core/columns', { className: 'footer-cta-section' }, [
-				[ 'core/column', { className: 'cta-image image-cover', style: { flexBasis: '60%' }, width:'60%', verticalAlignment: 'center' }, [
-						[ 'core/image', { className: 'size-full' }],
+				[ 'core/column', { className: 'cta-image image-cover', style: { flexBasis: '57.5%' }, width: '57.5%', verticalAlignment: 'center' }, [
+					[ 'core/image', { className: 'size-full' } ],
+				],
+				],
+				[ 'core/column', { className: 'cta-content', style: { flexBasis: '42.6%' }, width: '42.6%', verticalAlignment: 'stretch', backgroundColor: 'black-100', textColor: 'white' }, [
+					[
+						'core/heading',
+						{ placeholder: 'Enter heading…', textAlign: 'center', className: '', level: 2 },
+					],
+					[ 'core/buttons', { className: 'is-layout-flex', layout: { type: 'flex', justifyContent: 'center' } }, [
+						[
+							'core/button',
+							{ className: '', text: '' },
+						],
+					],
 					],
 				],
-				[ 'core/column', { className: 'cta-content', style: { flexBasis: '40%' }, width:'40%', verticalAlignment: 'stretch', backgroundColor: 'black-100', textColor: 'white' }, [
-						[
-							'core/heading',
-							{ placeholder: 'Enter heading…', textAlign:'center', className: '', level: 2 },
-						],
-						[ 'core/buttons', { className: 'is-layout-flex', layout: { type: 'flex', justifyContent: 'center' }}, [
-								[
-									'core/button',
-									{ className: '', text: '' },
-								],
-							],
-						],
-					],
 				],
 
 			],

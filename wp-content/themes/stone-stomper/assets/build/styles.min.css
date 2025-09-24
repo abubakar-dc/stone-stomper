@@ -403,6 +403,7 @@ Mixin for transition
   --ss_font_size_22: clamp(20 * 1px, 2 / 806 * (100vw - 474 * 1px) + 20 * 1px, 22 * 1px);
   --ss_font_size_24: clamp(20 * 1px, 4 / 806 * (100vw - 474 * 1px) + 20 * 1px, 24 * 1px);
   --ss_font_size_28: clamp(22 * 1px, 5 / 806 * (100vw - 474 * 1px) + 22 * 1px, 27 * 1px);
+  --ss_font_size_38: clamp(24 * 1px, 14 / 806 * (100vw - 474 * 1px) + 24 * 1px, 38 * 1px);
   --ss_font_size_32: clamp(24 * 1px, 8 / 806 * (100vw - 474 * 1px) + 24 * 1px, 32 * 1px);
   --ss_font_size_44: clamp(30 * 1px, 18 / 806 * (100vw - 474 * 1px) + 30 * 1px, 48 * 1px);
   --ss_font_size_58: clamp(45 * 1px, 13 / 806 * (100vw - 474 * 1px) + 45 * 1px, 58 * 1px);
@@ -1547,7 +1548,7 @@ textarea,
   font-weight: 400;
   font-style: normal;
   font-size: var(--ss_font_size_18);
-  height: 50px;
+  height: 68px;
   width: 100%;
   border: 1px solid var(--ss_input_border_color);
   background-color: var(--ss_input_bgcolor);
@@ -4088,6 +4089,26 @@ header {
   align-items: center;
   justify-content: center;
 }
+.footer-cta-section .cta-content .has-font-size-3-font-size {
+  font-size: var(--ss_font_size_38) !important;
+  letter-spacing: 7px;
+  word-spacing: 3px;
+  line-height: 1.1;
+  margin-top: 9px;
+}
+.footer-cta-section .cta-content .wp-block-buttons {
+  margin-top: 43px;
+}
+.footer-cta-section .cta-content .wp-block-button .wp-block-button__link {
+  padding: 20px 53px;
+  border-color: var(--ss_white);
+  color: var(--ss_white);
+}
+.footer-cta-section .cta-content .wp-block-button .wp-block-button__link:hover, .footer-cta-section .cta-content .wp-block-button .wp-block-button__link:focus-visible {
+  background-color: var(--ss_color_primary);
+  border-color: var(--ss_color_primary);
+  color: var(--ss_white);
+}
 
 /*-------------------------------------------------
 >> Styles for Containers
@@ -4098,7 +4119,7 @@ header {
  *
 ****/
 .wrapper {
-  max-width: 1393px;
+  max-width: 1400px;
   width: 90%;
   margin: 0 auto;
 }
@@ -5132,8 +5153,8 @@ body #daextlwcnf-cookie-settings-button-2:hover {
 
 .video-three-columns {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(clamp(309px, 33.3333333333% - 2%, 100%), 100%), 1fr));
-  gap: 2%;
+  grid-template-columns: repeat(auto-fit, minmax(min(clamp(309px, 33.3333333333% - 1.8%, 100%), 100%), 1fr));
+  gap: 1.8%;
   row-gap: var(--ss_space_30);
 }
 
@@ -5506,7 +5527,7 @@ body #daextlwcnf-cookie-settings-button-2:hover {
 .products-teaser-slider {
   width: calc(100% + 26px);
   left: -13px;
-  padding-bottom: 50px;
+  padding-bottom: 53px;
   box-sizing: border-box;
   margin: var(--ss_space_64) 0 0 !important;
   cursor: grab;
@@ -5527,7 +5548,7 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   margin: 0 13px;
 }
 .products-teaser-slider .slick-slide .add_to_cart_inline {
-  margin: 15px 0 0;
+  margin: 19px 0 0;
   border: none !important;
   padding: 0 !important;
 }
@@ -5619,12 +5640,36 @@ body #daextlwcnf-cookie-settings-button-2:hover {
 }
 
 .product-price {
+  margin-top: 20px;
+}
+.product-price h3 {
   font-size: 29px;
-  margin-top: 16px;
   font-family: "Jost", arial, sans-serif;
   font-weight: 500;
   font-style: normal;
   letter-spacing: -1.2px;
+}
+
+.product-item a,
+.product-item a:visited {
+  background-color: var(--ss_transparent);
+  color: var(--ss_link_color);
+  border: none;
+  border-bottom: 1px solid var(--ss_link_border_color);
+  padding: 0;
+  padding-bottom: 2px;
+  letter-spacing: 3.4px;
+  border-color: transparent;
+  border-radius: 0;
+  font-family: "Open Sans", arial, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  text-transform: uppercase;
+}
+.product-item a:hover, .product-item a:focus-visible,
+.product-item a:visited:hover,
+.product-item a:visited:focus-visible {
+  border-color: var(--ss_link_border_color);
 }
 
 /*-------------------------------------------------
@@ -5632,6 +5677,7 @@ body #daextlwcnf-cookie-settings-button-2:hover {
 -------------------------------------------------*/
 .video-section {
   position: relative;
+  aspect-ratio: 447/336;
 }
 .video-section img {
   aspect-ratio: 4/2.7;
@@ -5649,9 +5695,9 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   height: 49px;
   width: 128px;
   position: absolute;
-  left: 0;
+  left: 6px;
   right: 0;
-  bottom: 0;
+  bottom: 3px;
   top: 0;
   margin: auto;
   background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI5IiBoZWlnaHQ9IjkwIiB2aWV3Qm94PSIwIDAgMTI5IDkwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNMTI2LjAyNSAxNC43ODQ4QzEyNC41NTMgOS4zNTQ0NiAxMjAuMjEzIDUuMDc2ODIgMTE0LjcwMiAzLjYyNTkzQzEwNC43MTQgMC45ODc2MjMgNjQuNjY1NSAwLjk4NzYyNSA2NC42NjU1IDAuOTg3NjI1QzY0LjY2NTUgMC45ODc2MjUgMjQuNjE1MiAwLjk4NzYyMyAxNC42MjczIDMuNjI1OTNDOS4xMTgzMyA1LjA3NjgyIDQuNzc4NDkgOS4zNTQ0NiAzLjMwMzgyIDE0Ljc4NDhDMC42Mjg5MTcgMjQuNjI4MSAwLjYyODkwNiA0NS4xNjU2IDAuNjI4OTA2IDQ1LjE2NTZDMC42Mjg5MDYgNDUuMTY1NiAwLjYyODkxNyA2NS43MDQ4IDMuMzAzODIgNzUuNTQ4MkM0Ljc3ODQ5IDgwLjk3ODUgOS4xMTgzMyA4NS4wNzg3IDE0LjYyNzMgODYuNTI5NUMyNC42MTUyIDg5LjE2NiA2NC42NjU1IDg5LjE2NiA2NC42NjU1IDg5LjE2NkM2NC42NjU1IDg5LjE2NiAxMDQuNzE0IDg5LjE2NiAxMTQuNzAyIDg2LjUyOTVDMTIwLjIxMyA4NS4wNzg3IDEyNC41NTMgODAuOTc4NSAxMjYuMDI1IDc1LjU0ODJDMTI4LjcwMiA2NS43MDQ4IDEyOC43MDIgNDUuMTY1NiAxMjguNzAyIDQ1LjE2NTZDMTI4LjcwMiA0NS4xNjU2IDEyOC43MDIgMjQuNjI4MSAxMjYuMDI1IDE0Ljc4NDhaTTUxLjU2NzMgNjMuODEzVjI2LjUxOTlMODUuMDQwMSA0NS4xNjc0TDUxLjU2NzMgNjMuODEzWiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg==);
@@ -5664,11 +5710,20 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   will-change: transform;
 }
 
+.video-columns-section .kicker-text {
+  font-size: 14px;
+  letter-spacing: 3px;
+}
 .video-columns-section .section-head .wp-block-heading {
-  margin-bottom: 30px;
+  margin: 6px 0 43px;
+  letter-spacing: 8px;
 }
 .video-columns-section .video-description {
-  margin-top: 20px;
+  margin-top: 23px;
+}
+.video-columns-section .video-description .has-font-size-5-font-size {
+  font-size: 27px !important;
+  letter-spacing: 0.4px;
 }
 
 /*-------------------------------------------------
@@ -5708,11 +5763,23 @@ body #daextlwcnf-cookie-settings-button-2:hover {
 }
 .form-detail-section .content-head {
   border-bottom: 1px solid;
-  margin-bottom: 30px;
+  margin-bottom: 42px;
+}
+.form-detail-section .content-head p {
+  font-size: var(--ss_font_size_16);
+  max-width: 97%;
+  line-height: 1.4;
+  letter-spacing: -0.1px;
+  margin-bottom: 18px;
+}
+.form-detail-section .content-head p:last-of-type {
+  margin-bottom: 33px;
 }
 .form-detail-section .content-head h2 {
   text-transform: uppercase;
-  letter-spacing: 10px;
+  letter-spacing: 8.3px;
+  line-height: 1.1;
+  margin-bottom: 22px;
 }
 
 .order-form-section-inner {
@@ -5726,10 +5793,15 @@ body #daextlwcnf-cookie-settings-button-2:hover {
 }
 
 .form-section-right {
-  width: 41.5%;
+  width: 40.4%;
   border-bottom: 1px solid;
   padding-bottom: 20px;
   margin-bottom: 40px;
+}
+.form-section-right h3 {
+  font-size: 27px;
+  letter-spacing: 0.4px;
+  margin-bottom: 12px;
 }
 .form-section-right .content-head h3 {
   margin-bottom: 10px;
@@ -5758,6 +5830,55 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   position: absolute;
   left: 32px;
   top: 20px;
+}
+
+.line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 9px;
+}
+.line span {
+  letter-spacing: 0.3px;
+}
+
+.total {
+  border-top: 1px solid;
+  margin-top: 36px;
+  text-align: right;
+  padding-top: 39px;
+  font-size: 28px;
+  font-family: "Jost", arial, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+.total span {
+  letter-spacing: 0.9px;
+}
+.total .muted {
+  font-size: 15px;
+  margin-top: -8px;
+  display: block;
+}
+
+.actions {
+  margin-top: 54px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.actions button {
+  margin: 0;
+  font-weight: 600;
+  text-transform: uppercase;
+  height: 68px;
+  width: 49.1%;
+  letter-spacing: 2.7px;
+}
+.actions button.secondary {
+  border: 1px solid black;
+  background-color: transparent;
+  color: black;
 }
 
 /*-------------------------------------------------
@@ -5805,11 +5926,11 @@ body #daextlwcnf-cookie-settings-button-2:hover {
 .wp-block-button .wp-block-button__link.has-text-color.has-background:hover, .wp-block-button .wp-block-button__link.has-text-color.has-background:focus-visible {
   border: none;
 }
-.wp-block-button.is-style-outline-boxed .wp-block-button__link {
+.wp-block-button.is-style-outline-boxed .wp-block-button__link, .wp-block-button.is-style-outline .wp-block-button__link {
   background-color: var(--ss_transparent);
   color: var(--ss_theme_btn_color_hover);
 }
-.wp-block-button.is-style-outline-boxed .wp-block-button__link:hover, .wp-block-button.is-style-outline-boxed .wp-block-button__link:focus-visible {
+.wp-block-button.is-style-outline-boxed .wp-block-button__link:hover, .wp-block-button.is-style-outline-boxed .wp-block-button__link:focus-visible, .wp-block-button.is-style-outline .wp-block-button__link:hover, .wp-block-button.is-style-outline .wp-block-button__link:focus-visible {
   color: var(--ss_wp_outline_btn_color);
 }
 .wp-block-button.is-style-fill-boxed .wp-block-button__link {

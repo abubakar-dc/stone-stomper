@@ -1,5 +1,6 @@
 .video-section {
 	position: relative;
+	aspect-ratio: 447 / 336;
 
 	img {
 		aspect-ratio: 4/2.7;
@@ -19,9 +20,9 @@
 			height: 49px;
 			width: 128px;
 			position: absolute;
-			left: 0;
+			left: 6px;
 			right: 0;
-			bottom: 0;
+			bottom: 3px;
 			top: 0;
 			margin: auto;
 			background-image: url(../images/youtube-play-icon.svg);
@@ -37,14 +38,25 @@
 }
 
 .video-columns-section {
+	.kicker-text {
+		font-size: 14px;
+		letter-spacing: 3px;
+	}
+
 	.section-head {
 		.wp-block-heading {
-			margin-bottom: 30px;
+			margin: 6px 0 43px;
+			letter-spacing: 8px;
 		}
 	}
 
 	.video-description {
-		margin-top: 20px;
+		margin-top: 23px;
+
+		.has-font-size-5-font-size {
+			font-size: 27px !important;
+			letter-spacing: 0.4px;
+		}
 	}
 
 }
