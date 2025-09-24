@@ -349,7 +349,7 @@ class WP_Theme_Ajax {
 		//Getting Vehicle Image
 		if($post_id && has_post_thumbnail( $post_id )){
 
-			$vehicleImage = '<img src="'.get_the_post_thumbnail_url( $post_id, 'medium' ).'" alt="'.get_the_title($post_id).'" />';
+			$vehicleImage = '<img src="'.get_the_post_thumbnail_url( $post_id, 'thumb_1000' ).'" alt="'.get_the_title($post_id).'" />';
 		}
 
 		//Getting Bar Width

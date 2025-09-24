@@ -298,14 +298,18 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 									<fieldset>
 										<div class="ginput_container ginput_container_checkbox">
 											<div class="gchoice">
-												<input class="gfield-choice-input" name="input_1.2" type="checkbox" value="toolbox" id="toolbox">
-												<label for="toolbox" id="label_4_1_2">Toolbox</label>
+												<input class="gfield-choice-input" name="input_1.1" type="checkbox" value="factory-stoneguard" id="factory_stoneguard">
+												<label for="factory_stoneguard" id="label_4_1_1">Factory Stoneguard</label>
 											</div>
 											<div class="gchoice">
-												<input class="gfield-choice-input" name="input_1.1" type="checkbox" value="factory-stoneguard" id="factory_stoneguard">
-												<label for="factory_stoneguard" id="label_4_1_1">Factory Stoneguard
-												</label>
+												<input class="gfield-choice-input" name="input_1.2" type="checkbox" value="support_pockets" id="support_pockets">
+												<label for="support_pockets" id="label_4_1_3">Supoort Pockets</label>
 											</div>
+											<div class="gchoice">
+												<input class="gfield-choice-input" name="input_1.3" type="checkbox" value="toolbox" id="toolbox">
+												<label for="toolbox" id="label_4_1_2">Toolbox</label>
+											</div>
+
 
 										</div>
 									</fieldset>
@@ -469,7 +473,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 											<input id="stoneguard_width" name="stoneguard_width_mm" type="text"
 												placeholder="e.g.600 mm" required />
 										</div>
-										<div class="field">
+										<!-- <div class="field">
 											<label class="req" for="vinyl_width">Vinyl Insert Width</label>
 											<input id="vinyl_width" name="vinyl_width_mm" type="text"
 												placeholder="e.g.600 mm" required />
@@ -478,7 +482,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 											<label class="req" for="vinyl_length">Vinyl Insert Length</label>
 											<input id="vinyl_length" name="vinyl_length_mm" type="text"
 												placeholder="e.g.600 mm" required />
-										</div>
+										</div> -->
 
 										<label class="row"><input id="support_pockets" type="checkbox"
 												name="support_pockets" /> Support
