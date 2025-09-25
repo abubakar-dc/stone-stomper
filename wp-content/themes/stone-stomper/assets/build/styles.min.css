@@ -6255,6 +6255,12 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   }
 }
 @media only screen and (max-width: 747px) {
+  .form-section-left {
+    width: 100%;
+  }
+  .form-section-right {
+    width: 100%;
+  }
   .hero-default.with-image .hero-default-content,
   .hero-default.with-image .hero-default-image {
     width: 100%;

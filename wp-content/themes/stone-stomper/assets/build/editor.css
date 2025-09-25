@@ -5690,6 +5690,12 @@ Mixin for transition
   }
 }
 @media only screen and (max-width: 747px) {
+  .editor-styles-wrapper .form-section-left {
+    width: 100%;
+  }
+  .editor-styles-wrapper .form-section-right {
+    width: 100%;
+  }
   .editor-styles-wrapper .hero-default.with-image .hero-default-content,
   .editor-styles-wrapper .hero-default.with-image .hero-default-image {
     width: 100%;
