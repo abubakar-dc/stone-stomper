@@ -167,6 +167,32 @@ jQuery( function() {
 				arrows: true,
 				dots: true,
 				touchThreshold: 200,
+				responsive: [
+					{
+						breakpoint: 1200,
+						settings: {
+							slidesToShow: 3,
+							slidesToScroll: 1,
+						},
+					},
+
+					{
+						breakpoint: 1003,
+						settings: {
+							slidesToShow: 2,
+							slidesToScroll: 1,
+						},
+					},
+
+					{
+						breakpoint: 747,
+						settings: {
+							slidesToShow: 1,
+							slidesToScroll: 1,
+						},
+					},
+				],
+
 			} );
 		} );
 	}
