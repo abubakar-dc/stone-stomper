@@ -143,6 +143,8 @@
 				color: var(--ss_legal_nav_color);
 				position: relative;
 				display: block;
+				font-size: 16px;
+				letter-spacing: 0.4px;
 
 				&::after {
 					content: "";

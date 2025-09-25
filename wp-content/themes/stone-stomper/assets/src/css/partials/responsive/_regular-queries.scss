@@ -2,6 +2,7 @@
 	.top-bar.center-align {
 		text-align: left;
 	}
+
 	// masthead
 	.hero-single {
 		padding: 40px 0 30px;
@@ -76,23 +77,40 @@
 
 	.footer-bottom {
 		flex-wrap: wrap;
-		padding: 30px 0;
+		padding: 54px 42px;
 
 		.copy-right,
 		.menu-legal-nav {
 			width: 100%;
+			font-size: 16px;
+			letter-spacing: 0px;
+			line-height: 1.4;
 		}
 
 		.legal-nav ul {
-			justify-content: left;
+			justify-content: center;
+			gap: 23px 22px;
 
 			li {
-				margin: 10px 10px 0 0;
+				margin: 0;
+
+				&:nth-child(2) {
+					position: relative;
+
+					&::before {
+						content: "|";
+						position: absolute;
+						left: -14px;
+						top: -4px;
+						color: var(--ss_copyright_color);
+					}
+				}
 			}
 		}
 
 		.legal-nav {
 			width: 100%;
+			margin-top: 23px;
 		}
 	}
 }

@@ -75,6 +75,222 @@
 }
 
 @media only screen and (max-width: 747px) {
+	.hero-section .wp-block-cover {
+		height: 71.7vh;
+	}
+
+	.thumb p {
+		&::before {
+			top: 13px;
+		}
+	}
+
+	.product-main-title {
+		letter-spacing: 3.6px;
+		margin-bottom: 30px;
+	}
+
+	.three-columns.product-items .product-item .product-title {
+		margin-top: 20px;
+	}
+
+	.product-price h3 {
+		font-size: 22px;
+	}
+
+	.product-price {
+		margin-top: 10px;
+	}
+
+	.footer-cta-section {
+		gap: 0;
+
+		.cta-content {
+			padding: 50px 20px;
+
+			.has-font-size-3-font-size {
+				margin-top: 0;
+			}
+
+			.wp-block-buttons {
+				margin-top: 30px;
+			}
+		}
+
+		.wp-block-button {
+			line-height: 0.65;
+		}
+	}
+
+	.video-columns-section {
+		.section-head {
+			.wp-block-heading {
+				margin: 6px 0 35px;
+				letter-spacing: 0;
+			}
+		}
+
+		.video-description {
+			margin-top: 16px;
+
+			.has-font-size-5-font-size {
+				margin-bottom: 10px;
+				font-size: 22px !important;
+			}
+		}
+	}
+
+	.slick-slider .slick-dots {
+		padding: 0 14px;
+	}
+
+	.product-title {
+		margin-top: 20px;
+	}
+
+	.features-inner-content {
+		padding: 38px 20px;
+
+	}
+
+	.stone-stomper-features .features-image figure {
+		aspect-ratio: 540 / 520;
+	}
+
+	.wp-block-separator {
+		margin: 0 0 12px 0;
+	}
+
+	.hero-home-section .wp-block-heading {
+		letter-spacing: 0;
+	}
+
+	.hero-content .hero-content-inner {
+		margin-left: 10%;
+		margin-top: 22px;
+	}
+
+	.hero-home-section .wp-block-cover .wp-block-cover__inner-container {
+		width: 87%;
+	}
+
+	.footer-bottom {
+		text-align: center;
+	}
+
+	#final-summary .form-section-right {
+		margin-bottom: 57px;
+	}
+
+	.thumb p {
+		top: -18px;
+		display: inline;
+	}
+
+	.actions {
+		margin-top: 30px;
+
+		button {
+			width: 100%;
+		}
+	}
+
+	.line {
+		strong {
+			font-weight: 400;
+		}
+	}
+
+	#vehicle-details fieldset,
+	#caravan-details fieldset {
+		margin: 25px 0 10px;
+		display: block;
+	}
+
+	.checkboxes {
+		label {
+			width: 100%;
+			margin: 0;
+		}
+	}
+
+	.slick-slider .slick-prev {
+		left: 0;
+	}
+
+	.slick-slider .slick-next {
+		right: 0;
+	}
+
+	.mobile-form-image-slider {
+		padding-bottom: 50px;
+		box-sizing: border-box;
+	}
+
+	.notice-bar {
+		padding: 26px 27px 24px 58px;
+	}
+
+	.vehicle-image img {
+		aspect-ratio: 382 / 250;
+	}
+
+	#vehicle-details {
+		.form-section-right {
+			p {
+				margin-bottom: 30px;
+			}
+		}
+	}
+
+	.mobile-image-hide {
+		display: none;
+	}
+
+	.two-columns-fields {
+		flex-wrap: wrap;
+
+		.field {
+			width: 100%;
+		}
+	}
+
+	.mobile-image {
+		display: block;
+		line-height: 0.65px;
+		margin-bottom: 27px;
+	}
+
+	.form-section-right p {
+		letter-spacing: 0.4px;
+	}
+
+	.form-detail-section .content-head {
+		h2 {
+			line-height: 1.14;
+			margin-bottom: 27px;
+		}
+
+		p {
+			max-width: 100%;
+			line-height: 1.37;
+			letter-spacing: -0.1px;
+			margin-bottom: 19px;
+		}
+	}
+
+	.wrapper {
+		width: 87%;
+	}
+
+	.order-section {
+		margin-top: 14px;
+	}
+
+	.order-form-section-inner {
+		flex-direction: column-reverse;
+	}
+
 	.form-section-left {
 		width: 100%;
 	}
@@ -141,6 +357,12 @@
 	// code will be starts from here
 }
 
-@media only screen and (max-width: 459px) {
-	// code will be starts from here
+@media only screen and (max-width: 435px) {
+	.footer-bottom {
+		padding: 54px 0;
+	}
+
+	.hero-section .wp-block-cover h1 {
+		letter-spacing: 1px;
+	}
 }

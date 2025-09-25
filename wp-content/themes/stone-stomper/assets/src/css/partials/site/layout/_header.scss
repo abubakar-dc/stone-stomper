@@ -140,6 +140,21 @@ header {
 	align-items: center;
 	width: 4.8%;
 	justify-content: flex-end;
+
+	.fcp_icon_2 {
+		&::before {
+			content: "";
+			background-image: url(../images/chart-icon.svg);
+			background-repeat: no-repeat;
+			width: 33px;
+			height: 33px;
+			background-size: 33px;
+			display: block;
+			position: relative;
+			top: 13px;
+			left: -12px;
+		}
+	}
 }
 
 .hide-topbar {
@@ -154,10 +169,22 @@ header {
 
 .header-btns {
 	.account-icon {
-		margin-left: 10px;
+		background-image: url(../images/person-icon.svg);
+		background-repeat: no-repeat;
+		width: 35px;
+		height: 34px;
+		background-size: 28px;
+		margin-left: 8px;
 
 		svg {
 			margin-bottom: 0;
 		}
 	}
+}
+
+div#menuiconwrap.icons02 span.cart_count_header {
+	bottom: auto;
+	top: -40px;
+	right: -18px;
+	left: auto;
 }
