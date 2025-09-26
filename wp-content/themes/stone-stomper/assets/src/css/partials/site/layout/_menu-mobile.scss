@@ -10,7 +10,7 @@
 	}
 
 	.header-wrapper {
-		width: 87%;
+		width: 90%;
 	}
 
 	.header-inner {
@@ -294,6 +294,12 @@
 		width: 12%;
 	}
 
+}
+
+@media (max-width: 747px) {
+	.header-wrapper {
+		width: 87%;
+	}
 }
 
 @media (max-width: 782px) {

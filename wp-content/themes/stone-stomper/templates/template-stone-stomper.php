@@ -282,7 +282,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 										}
 											}
 										} ?>
-										<div class="vehicle-image mobile-form-image-slider" id="caravan-images" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
+										<div class="vehicle-image mobile-form-image-slider mobile-image" id="caravan-images" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
 												<?php
 													if($sts_var_caravan_detail_factory_stoneguard ){
 													 StoneStomper::the_attachment_image($sts_var_caravan_detail_factory_stoneguard,1200 );
@@ -388,7 +388,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 										}
 											}
 										} ?>
-									<div class="form-image-slider">
+									<div class="form-image-slider mobile-image">
 										<?php if($sts_var_example_photographs){ ?>
 											<?php foreach($sts_var_example_photographs as $sts_key => $photo){ ?>
 												<div class="slick-slide">

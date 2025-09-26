@@ -2604,7 +2604,7 @@ Mixin for transition
     background-color: var(--ss_header_bgcolor_sticky);
   }
   .editor-styles-wrapper .header-wrapper {
-    width: 87%;
+    width: 90%;
   }
   .editor-styles-wrapper .header-inner {
     padding: 26px 0;
@@ -2826,6 +2826,11 @@ Mixin for transition
 @media (max-width: 1003px) {
   .editor-styles-wrapper .header-btns {
     width: 12%;
+  }
+}
+@media (max-width: 747px) {
+  .editor-styles-wrapper .header-wrapper {
+    width: 87%;
   }
 }
 @media (max-width: 782px) {
@@ -5687,6 +5692,9 @@ Mixin for transition
   .editor-styles-wrapper .header-btns {
     width: 6.2%;
   }
+  .editor-styles-wrapper .actions button {
+    width: 48.8%;
+  }
   .editor-styles-wrapper .header-nav ul li {
     margin: 0 10px;
   }
@@ -5695,6 +5703,15 @@ Mixin for transition
   }
 }
 @media only screen and (min-width: 1180px) and (max-width: 1345px) {
+  .editor-styles-wrapper .legal-nav {
+    width: 43%;
+  }
+  .editor-styles-wrapper .copy-right {
+    width: 38%;
+  }
+  .editor-styles-wrapper .actions button {
+    width: 48.8%;
+  }
   .editor-styles-wrapper .header-btns {
     width: 6.8%;
   }
@@ -5713,6 +5730,15 @@ Mixin for transition
   }
 }
 @media only screen and (min-width: 1004px) and (max-width: 1179px) {
+  .editor-styles-wrapper .form-section-right {
+    width: 45.5%;
+  }
+  .editor-styles-wrapper .actions button {
+    width: 48.7%;
+  }
+  .editor-styles-wrapper .form-section-left {
+    width: 50%;
+  }
   .editor-styles-wrapper .footer-bottom {
     padding: 25px 0;
   }
@@ -5744,6 +5770,16 @@ Mixin for transition
   }
 }
 @media only screen and (min-width: 748px) and (max-width: 1003px) {
+  .editor-styles-wrapper .form-section-left {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+  .editor-styles-wrapper .form-section-right {
+    width: 100%;
+  }
+  .editor-styles-wrapper .order-form-section-inner {
+    flex-direction: column-reverse;
+  }
   .editor-styles-wrapper .copy-right {
     width: 58%;
   }
@@ -5880,6 +5916,9 @@ Mixin for transition
   .editor-styles-wrapper .notice-bar {
     padding: 26px 58px 24px 27px;
   }
+  .editor-styles-wrapper .notice-bar p {
+    margin: 0 !important;
+  }
   .editor-styles-wrapper .vehicle-image img {
     aspect-ratio: 382/250;
   }
@@ -5968,6 +6007,23 @@ Mixin for transition
   }
 }
 @media only screen and (max-width: 360px) {
+  .editor-styles-wrapper .three-columns.product-items .product-item .product-title {
+    margin-top: 12px;
+  }
+  .editor-styles-wrapper .product-main-title {
+    font-size: 30px;
+  }
+  .editor-styles-wrapper .thumb p {
+    padding: 12px 30px 10px 4px;
+  }
+  .editor-styles-wrapper .thumb p::before {
+    top: 14px;
+    right: 8px;
+  }
+  .editor-styles-wrapper .hero-section .wp-block-cover h1 {
+    letter-spacing: 0;
+    font-size: 37px;
+  }
   .editor-styles-wrapper .notice-bar {
     padding: 26px 50px 24px 20px;
   }
@@ -6003,6 +6059,7 @@ Mixin for transition
   }
   .editor-styles-wrapper .header-btns .fcp_icon_2::before {
     background-size: 24px;
+    top: 14px;
     right: 0;
     background-position: center;
   }

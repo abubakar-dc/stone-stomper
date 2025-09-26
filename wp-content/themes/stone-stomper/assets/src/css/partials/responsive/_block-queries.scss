@@ -3,6 +3,10 @@
 		width: 6.2%;
 	}
 
+	.actions button {
+		width: 48.8%;
+	}
+
 	.header-nav ul li {
 		margin: 0 10px;
 	}
@@ -13,6 +17,18 @@
 }
 
 @media only screen and (min-width: 1180px) and (max-width: 1345px) {
+	.legal-nav {
+		width: 43%;
+	}
+
+	.copy-right {
+		width: 38%;
+	}
+
+	.actions button {
+		width: 48.8%;
+	}
+
 	.header-btns {
 		width: 6.8%;
 	}
@@ -36,6 +52,18 @@
 }
 
 @media only screen and (min-width: 1004px) and (max-width: 1179px) {
+	.form-section-right {
+		width: 45.5%;
+	}
+
+	.actions button {
+		width: 48.7%;
+	}
+
+	.form-section-left {
+		width: 50%;
+	}
+
 	.footer-bottom {
 		padding: 25px 0;
 	}
@@ -74,11 +102,22 @@
 	}
 }
 
-@media only screen and (max-width: 1003px) {
-	// code will be starts from here
-}
 
 @media only screen and (min-width: 748px) and (max-width: 1003px) {
+	.form-section-left {
+		width: 100%;
+		margin-bottom: 30px;
+	}
+
+	.form-section-right {
+		width: 100%;
+
+	}
+
+	.order-form-section-inner {
+		flex-direction: column-reverse;
+	}
+
 	.copy-right {
 		width: 58%;
 	}
@@ -265,6 +304,10 @@
 
 	.notice-bar {
 		padding: 26px 27px 24px 58px;
+
+		p {
+			margin: 0 !important;
+		}
 	}
 
 	.vehicle-image img {
@@ -389,10 +432,6 @@
 	}
 }
 
-@media only screen and (min-width: 460px) and (max-width: 747px) {
-	// code will be starts from here
-}
-
 @media only screen and (max-width: 435px) {
 	.footer-bottom {
 		padding: 54px 0;
@@ -404,6 +443,28 @@
 }
 
 @media only screen and (max-width: 360px) {
+	.three-columns.product-items .product-item .product-title {
+		margin-top: 12px;
+	}
+
+	.product-main-title {
+		font-size: 30px;
+	}
+
+	.thumb p {
+		padding: 12px 4px 10px 30px;
+
+		&::before {
+			top: 14px;
+			left: 8px;
+		}
+	}
+
+	.hero-section .wp-block-cover h1 {
+		letter-spacing: 0;
+		font-size: 37px;
+	}
+
 	.notice-bar {
 		padding: 26px 20px 24px 50px;
 	}
@@ -449,6 +510,7 @@
 
 	.header-btns .fcp_icon_2::before {
 		background-size: 24px;
+		top: 14px;
 		left: 0;
 		background-position: center;
 	}

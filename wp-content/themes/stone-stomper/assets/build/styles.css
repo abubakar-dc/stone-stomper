@@ -3563,7 +3563,7 @@ div#menuiconwrap.icons02 span.cart_count_header {
     background-color: var(--ss_header_bgcolor_sticky);
   }
   .header-wrapper {
-    width: 87%;
+    width: 90%;
   }
   .header-inner {
     padding: 26px 0;
@@ -3785,6 +3785,11 @@ div#menuiconwrap.icons02 span.cart_count_header {
 @media (max-width: 1003px) {
   .header-btns {
     width: 12%;
+  }
+}
+@media (max-width: 747px) {
+  .header-wrapper {
+    width: 87%;
   }
 }
 @media (max-width: 782px) {
@@ -6269,6 +6274,9 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   .header-btns {
     width: 6.2%;
   }
+  .actions button {
+    width: 48.8%;
+  }
   .header-nav ul li {
     margin: 0 10px;
   }
@@ -6277,6 +6285,15 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   }
 }
 @media only screen and (min-width: 1180px) and (max-width: 1345px) {
+  .legal-nav {
+    width: 43%;
+  }
+  .copy-right {
+    width: 38%;
+  }
+  .actions button {
+    width: 48.8%;
+  }
   .header-btns {
     width: 6.8%;
   }
@@ -6295,6 +6312,15 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   }
 }
 @media only screen and (min-width: 1004px) and (max-width: 1179px) {
+  .form-section-right {
+    width: 45.5%;
+  }
+  .actions button {
+    width: 48.7%;
+  }
+  .form-section-left {
+    width: 50%;
+  }
   .footer-bottom {
     padding: 25px 0;
   }
@@ -6326,6 +6352,16 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   }
 }
 @media only screen and (min-width: 748px) and (max-width: 1003px) {
+  .form-section-left {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+  .form-section-right {
+    width: 100%;
+  }
+  .order-form-section-inner {
+    flex-direction: column-reverse;
+  }
   .copy-right {
     width: 58%;
   }
@@ -6462,6 +6498,9 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   .notice-bar {
     padding: 26px 27px 24px 58px;
   }
+  .notice-bar p {
+    margin: 0 !important;
+  }
   .vehicle-image img {
     aspect-ratio: 382/250;
   }
@@ -6550,6 +6589,23 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   }
 }
 @media only screen and (max-width: 360px) {
+  .three-columns.product-items .product-item .product-title {
+    margin-top: 12px;
+  }
+  .product-main-title {
+    font-size: 30px;
+  }
+  .thumb p {
+    padding: 12px 4px 10px 30px;
+  }
+  .thumb p::before {
+    top: 14px;
+    left: 8px;
+  }
+  .hero-section .wp-block-cover h1 {
+    letter-spacing: 0;
+    font-size: 37px;
+  }
   .notice-bar {
     padding: 26px 20px 24px 50px;
   }
@@ -6585,6 +6641,7 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   }
   .header-btns .fcp_icon_2::before {
     background-size: 24px;
+    top: 14px;
     left: 0;
     background-position: center;
   }
