@@ -1,4 +1,31 @@
+@media only screen and (min-width: 1346px) and (max-width: 1600px) {
+	.header-btns {
+		width: 6.2%;
+	}
+
+	.header-nav ul li {
+		margin: 0 10px;
+	}
+
+	.footer-bottom {
+		padding: 30px 0;
+	}
+}
+
 @media only screen and (min-width: 1180px) and (max-width: 1345px) {
+	.header-btns {
+		width: 6.8%;
+	}
+
+	.header-nav ul li {
+		margin: 0 6px;
+
+		a,
+		a:visited {
+			font-size: 14px;
+		}
+	}
+
 	.footer-cta-section .cta-content .has-font-size-3-font-size {
 		margin-top: 16px;
 	}
@@ -52,6 +79,10 @@
 }
 
 @media only screen and (min-width: 748px) and (max-width: 1003px) {
+	.copy-right {
+		width: 58%;
+	}
+
 	.footer-cta-section .cta-content .wp-block-buttons {
 		margin-top: 25px;
 	}
@@ -75,6 +106,11 @@
 }
 
 @media only screen and (max-width: 747px) {
+	.header-btns {
+		width: 23%;
+		max-width: 75px;
+	}
+
 	.hero-section .wp-block-cover {
 		height: 71.7vh;
 	}
@@ -166,7 +202,7 @@
 	}
 
 	.hero-content .hero-content-inner {
-		margin-left: 10%;
+		margin-left: 0%;
 		margin-top: 22px;
 	}
 
@@ -364,5 +400,62 @@
 
 	.hero-section .wp-block-cover h1 {
 		letter-spacing: 1px;
+	}
+}
+
+@media only screen and (max-width: 360px) {
+	.notice-bar {
+		padding: 26px 20px 24px 50px;
+	}
+
+	.slick-slider .slick-dots {
+		padding: 0 5px;
+	}
+
+	.form-detail-section .content-head h2 {
+		margin-bottom: 20px;
+		font-size: 26px;
+	}
+
+	.footer-cta-section .cta-content .wp-block-button .wp-block-button__link {
+		padding: 20px 10px;
+	}
+
+	.wp-block-button {
+		width: 100%;
+
+		.wp-block-button__link {
+			padding: 18px 20px;
+		}
+	}
+
+	.hero-home-section .wp-block-heading {
+		font-size: 40px;
+	}
+
+	div#menuiconwrap.icons02 span.cart_count_header {
+		right: -28px;
+	}
+
+	.logo {
+		max-width: 95px;
+	}
+
+	.header-btns {
+		width: 27%;
+		max-width: 75px;
+		margin-right: 15px;
+	}
+
+	.header-btns .fcp_icon_2::before {
+		background-size: 24px;
+		left: 0;
+		background-position: center;
+	}
+
+	.header-btns .account-icon {
+		background-size: 22px;
+		margin: 0;
+		background-position: center;
 	}
 }

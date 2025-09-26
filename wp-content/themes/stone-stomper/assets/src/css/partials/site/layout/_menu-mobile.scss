@@ -205,7 +205,7 @@
 	}
 
 	.header-btns {
-		width: 23%;
+		width: 8%;
 		margin: 0 30px 0 auto;
 	}
 
@@ -287,6 +287,13 @@
 			height: calc(100vh - var(--wp-admin--admin-bar--height));
 		}
 	}
+}
+
+@media (max-width: 1003px) {
+	.header-btns {
+		width: 12%;
+	}
+
 }
 
 @media (max-width: 782px) {
