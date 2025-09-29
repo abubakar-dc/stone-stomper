@@ -128,11 +128,11 @@
             "append": ""
         },
         {
-            "key": "field_68c2cf572b507",
-            "label": "Vehicle Details",
-            "name": "vehicle_details",
+            "key": "field_68c2d0672b508",
+            "label": "Vehicle Make",
+            "name": "vehicle_make",
             "aria-label": "",
-            "type": "group",
+            "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -141,77 +141,59 @@
                 "class": "",
                 "id": ""
             },
-            "layout": "block",
-            "sub_fields": [
-                {
-                    "key": "field_68c2d0672b508",
-                    "label": "Vehicle Make",
-                    "name": "vehicle_make",
-                    "aria-label": "",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "maxlength": "",
-                    "allow_in_bindings": 0,
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": ""
-                },
-                {
-                    "key": "field_68c2d0702b509",
-                    "label": "Vehicle Model",
-                    "name": "vehicle_model",
-                    "aria-label": "",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "maxlength": "",
-                    "allow_in_bindings": 0,
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": ""
-                },
-                {
-                    "key": "field_68c2d07d2b50a",
-                    "label": "Year of Manufacture",
-                    "name": "year_of_manufacture",
-                    "aria-label": "",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "maxlength": "",
-                    "allow_in_bindings": 0,
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": ""
-                }
-            ]
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
-            "key": "field_68c2cf3b16f33",
-            "label": "SS Measurement  ( Width mm )",
-            "name": "ss_measurement_width",
+            "key": "field_68c2d0702b509",
+            "label": "Vehicle Model",
+            "name": "vehicle_model",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_68c2d07d2b50a",
+            "label": "Year of Manufacture",
+            "name": "year_of_manufacture",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_68d560f565028",
+            "label": "Bar Width (mm)",
+            "name": "bar_width_mm",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -230,9 +212,9 @@
             "append": ""
         },
         {
-            "key": "field_68c2cf3b16f4f",
-            "label": "SS Measurement ( height mm )",
-            "name": "ss_measurement_height",
+            "key": "field_68d561a665029",
+            "label": "Caravan Width (mm)",
+            "name": "caravan_width_mm",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -514,5 +496,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1758645548
+    "modified": 1758814823
 }

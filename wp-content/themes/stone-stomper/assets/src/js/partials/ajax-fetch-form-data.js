@@ -108,36 +108,41 @@ jQuery( document ).ready( function() {
 					if ( caravan ) {
 						jQuery( '#van_model' ).html( response.html );
 					}
+					console.log( response.barheight );
+					if ( response.barheight > 1800 ) {
+						jQuery( '.extra-support' ).show();
+					}
 					if ( response.barwidth ) {
-						jQuery( '#vanwidth' ).val( response.barwidth + ' mm' );
+						jQuery( '#vanwidth' ).val( response.barwidth + ' mm' ).trigger( 'change' );
 					}
 					if ( response.barheight ) {
-						jQuery( '#a_frame_length' ).val( response.barheight + ' mm' );
+						jQuery( '#a_frame_length' ).val( response.barheight + ' mm' ).trigger( 'change' );
 					}
 					if ( response.stoneguard_width ) {
-						jQuery( '#stoneguard_width' ).val( response.stoneguard_width + ' mm' );
+						jQuery( '#stoneguard_width' ).val( response.stoneguard_width + ' mm' ).trigger( 'change' );
 					}
 					if ( response.stoneguard_height ) {
-						jQuery( '#stoneguard_length' ).val( response.stoneguard_height + ' mm' );
+						jQuery( '#stoneguard_length' ).val( response.stoneguard_height + ' mm' ).trigger( 'change' );
 					}
 					if ( response.toolbox_width ) {
-						jQuery( '#toolbox_width' ).val( response.toolbox_width + ' mm' );
+						jQuery( '#toolbox_width' ).val( response.toolbox_width + ' mm' ).trigger( 'change' );
 					}
 					if ( response.toolbox_height ) {
-						jQuery( '#toolbox_length' ).val( response.toolbox_height + ' mm' );
+						jQuery( '#toolbox_length' ).val( response.toolbox_height + ' mm' ).trigger( 'change' );
 					}
 					if ( response.vinyl_insert_width ) {
-						jQuery( '#vinyl_width' ).val( response.vinyl_insert_width + ' mm' );
+						jQuery( '#vinyl_width' ).val( response.vinyl_insert_width + ' mm' ).trigger( 'change' );
 					}
 					if ( response.vinyl_insert_height ) {
-						jQuery( '#vinyl_length' ).val( response.vinyl_insert_height + ' mm' );
+						jQuery( '#vinyl_length' ).val( response.vinyl_insert_height + ' mm' ).trigger( 'change' );
 					}
 					if ( response.stoneguard_image ) {
-						jQuery( '#caravan-images' ).html( response.stoneguard_image );
+						jQuery( '#caravan-images' ).html( response.stoneguard_image ).trigger( 'change' );
 					}
 					if ( response.toolbox_image ) {
-						jQuery( '#caravan-images' ).append( response.toolbox_image );
+						jQuery( '#caravan-images' ).append( response.toolbox_image ).trigger( 'change' );
 					}
+
 					jQuery( '.loader-container' ).hide();
 				}
 				// selectModel();

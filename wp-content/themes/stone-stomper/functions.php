@@ -292,16 +292,14 @@ add_action( 'woocommerce_new_order', function( $order_id ) {
 	$cust_state   = isset( $data['customer_state'] )  ? sanitize_text_field( $data['customer_state'] )  : '';
 	$product_type = isset( $data['product_type'] )    ? sanitize_text_field( $data['product_type'] )    : '';
 
-	$vehicle = array(
-		'make'  => isset( $data['vehicle_make'] )  ? sanitize_text_field( $data['vehicle_make'] )  : ( isset( $data['veh_make'] ) ? sanitize_text_field( $data['veh_make'] ) : '' ),
-		'model' => isset( $data['vehicle_model'] ) ? sanitize_text_field( $data['vehicle_model'] ) : ( isset( $data['veh_model'] ) ? sanitize_text_field( $data['veh_model'] ) : '' ),
-		'year'  => isset( $data['vehicle_year'] )  ? sanitize_text_field( $data['vehicle_year'] )  : ( isset( $data['veh_year'] ) ? sanitize_text_field( $data['veh_year'] ) : '' ),
-	);
+	$vehicle_make  = isset( $data['vehicle_make'] )  ? sanitize_text_field( $data['vehicle_make'] )  : ( isset( $data['veh_make'] ) ? sanitize_text_field( $data['veh_make'] ) : '' );
+	$vehicle_model = isset( $data['vehicle_model'] ) ? sanitize_text_field( $data['vehicle_model'] ) : ( isset( $data['veh_model'] ) ? sanitize_text_field( $data['veh_model'] ) : '' );
+	$vehicle_year  = isset( $data['vehicle_year'] )  ? sanitize_text_field( $data['vehicle_year'] )  : ( isset( $data['veh_year'] ) ? sanitize_text_field( $data['veh_year'] ) : '' );
 
-	$caravan = array(
-		'make'  => isset( $data['caravan_make'] )  ? sanitize_text_field( $data['caravan_make'] )  : ( isset( $data['caravan_make'] ) ? sanitize_text_field( $data['caravan_make'] ) : ( isset( $data['van_make'] ) ? sanitize_text_field( $data['van_make'] ) : '' ) ),
-		'model' => isset( $data['caravan_model'] ) ? sanitize_text_field( $data['caravan_model'] ) : ( isset( $data['van_model'] ) ? sanitize_text_field( $data['van_model'] ) : '' ),
-	);
+
+	$caravan_make  = isset( $data['caravan_make'] )  ? sanitize_text_field( $data['caravan_make'] )  : ( isset( $data['caravan_make'] ) ? sanitize_text_field( $data['caravan_make'] ) : ( isset( $data['van_make'] ) ? sanitize_text_field( $data['van_make'] ) : '' ) );
+	$caravan_model = isset( $data['caravan_model'] ) ? sanitize_text_field( $data['caravan_model'] ) : ( isset( $data['van_model'] ) ? sanitize_text_field( $data['van_model'] ) : '' );
+
 
 	// Accessories: check Gravity-like names and "other"
 	$accessories = array();
@@ -310,18 +308,17 @@ add_action( 'woocommerce_new_order', function( $order_id ) {
 	if ( ! empty( $data['other_a_frame'] ) ) $accessories[] = sanitize_text_field( $data['other_a_frame'] );
 
 	// Measurements
-	$measure = array(
-		'barwidth_mm'         => isset( $data['barwidth_mm'] ) ? sanitize_text_field( $data['barwidth_mm'] ) : '',
-		'toolbox_width_mm'    => isset( $data['toolbox_width_mm'] ) ? sanitize_text_field( $data['toolbox_width_mm'] ) : '',
-		'toolbox_length_mm'   => isset( $data['toolbox_length_mm'] ) ? sanitize_text_field( $data['toolbox_length_mm'] ) : '',
-		'caravan_width_mm'    => isset( $data['caravan_width_mm'] ) ? sanitize_text_field( $data['caravan_width_mm'] ) : '',
-		'a_frame_length_mm'   => isset( $data['a_frame_length_mm'] ) ? sanitize_text_field( $data['a_frame_length_mm'] ) : '',
-		'stoneguard_length_mm'=> isset( $data['stoneguard_length_mm'] ) ? sanitize_text_field( $data['stoneguard_length_mm'] ) : '',
-		'stoneguard_width_mm' => isset( $data['stoneguard_width_mm'] ) ? sanitize_text_field( $data['stoneguard_width_mm'] ) : '',
-		'vinyl_width_mm'      => isset( $data['vinyl_width_mm'] ) ? sanitize_text_field( $data['vinyl_width_mm'] ) : '',
-		'vinyl_length_mm'     => isset( $data['vinyl_length_mm'] ) ? sanitize_text_field( $data['vinyl_length_mm'] ) : '',
-		'support_pockets'     => sts_bool( $data['support_pockets'] ?? '' ) ? 'yes' : 'no',
-	);
+	$measure_barwidth_mm         = isset( $data['barwidth_mm'] ) ? sanitize_text_field( $data['barwidth_mm'] ) : '';
+	$toolbox_width_mm    = isset( $data['toolbox_width_mm'] ) ? sanitize_text_field( $data['toolbox_width_mm'] ) : '';
+	$toolbox_length_mm   = isset( $data['toolbox_length_mm'] ) ? sanitize_text_field( $data['toolbox_length_mm'] ) : '';
+	$caravan_width_mm    = isset( $data['caravan_width_mm'] ) ? sanitize_text_field( $data['caravan_width_mm'] ) : '';
+	$a_frame_length_mm   = isset( $data['a_frame_length_mm'] ) ? sanitize_text_field( $data['a_frame_length_mm'] ) : '';
+	$stoneguard_length_mm = isset( $data['stoneguard_length_mm'] ) ? sanitize_text_field( $data['stoneguard_length_mm'] ) : '';
+	$stoneguard_width_mm = isset( $data['stoneguard_width_mm'] ) ? sanitize_text_field( $data['stoneguard_width_mm'] ) : '';
+	$vinyl_width_mm     = isset( $data['vinyl_width_mm'] ) ? sanitize_text_field( $data['vinyl_width_mm'] ) : '';
+	$vinyl_length_mm     = isset( $data['vinyl_length_mm'] ) ? sanitize_text_field( $data['vinyl_length_mm'] ) : '';
+	$support_pockets     = sts_bool( $data['support_pockets'] ?? '' ) ? 'yes' : 'no';
+
 
 	// Photos (hidden inputs hold JSON arrays of IDs)
 	$photos = array(
@@ -355,15 +352,29 @@ error_log(print_r($cust_name,true));
 	update_post_meta( $post_id, 'order_id', $order_id );
 	update_post_meta( $post_id, 'name', $cust_name );
 	update_post_meta( $post_id, 'delivery_address', $cust_address );
-	// update_post_meta( $post_id, 'customer_suburb', $cust_suburb );
-	// update_post_meta( $post_id, 'customer_state', $cust_state );
+	update_post_meta( $post_id, 'subrubs', $cust_suburb );
+	update_post_meta( $post_id, 'state', $cust_state );
 	// update_post_meta( $post_id, 'product_type', $product_type );
+	update_post_meta( $post_id, 'vehicle_make', $vehicle_make );
+	update_post_meta( $post_id, 'vehicle_model', $vehicle_model );
+	update_post_meta( $post_id, 'year_of_manufacture', $vehicle_year );
+	update_post_meta( $post_id, 'measure_barwidth_mm', $measure_barwidth_mm );
+	update_post_meta( $post_id, 'bar_width_mm', $measure_barwidth_mm );
+	update_post_meta( $post_id, 'caravan_width_mm', $caravan_width_mm );
+	update_post_meta( $post_id, 'caravan_width_mm', $caravan_width_mm );
+	update_post_meta( $post_id, 'sts_var_caravan_support_pockets', $support_pockets );
+	update_post_meta( $post_id, 'factory_stoneguard_width', $stoneguard_length_mm );
+	update_post_meta( $post_id, 'factory_stoneguard_height', $stoneguard_width_mm );
+	update_post_meta( $post_id, 'vinyl_insert_width_mm', $vinyl_width_mm );
+	update_post_meta( $post_id, 'vinyl_insert_height_mm', $vinyl_length_mm );
+	update_post_meta( $post_id, 'toolbox_width_mm', $toolbox_width_mm );
+	update_post_meta( $post_id, 'toolbox_height_mm', $toolbox_length_mm );
 
-	// update_post_meta( $post_id, 'vehicle', $vehicle );
-	// update_post_meta( $post_id, 'caravan', $caravan );
-	// update_post_meta( $post_id, 'accessories', $accessories );
-	// update_post_meta( $post_id, 'measurements', $measure );
-	// update_post_meta( $post_id, 'photos', $photos );
+
+
+
+
+
 	// update_post_meta( $post_id, 'final_details', $final );
 
 	// Optionally set a featured image from the first uploaded photo if any

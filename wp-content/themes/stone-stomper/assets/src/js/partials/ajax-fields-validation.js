@@ -122,6 +122,8 @@ jQuery( document ).ready( function( $ ) {
 
 		if ( isValid ) {
 			jQuery( '#final-measurements' ).removeClass( 'section-disable' );
+			jQuery( '#final-summary' ).removeClass( 'section-disable' );
+
 			// console.log( '✅ All required photographs uploaded.' );
 			// console.log( '🖼️ Uploaded photo IDs:', photoData );
 		} else {
