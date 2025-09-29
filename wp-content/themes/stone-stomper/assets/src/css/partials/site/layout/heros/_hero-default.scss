@@ -4,12 +4,18 @@
 	// padding-top: var(--ss_space_128);
 
 	.wp-block-cover {
-		height: 55vh;
+		height: 89.4vh;
 		padding: 60px 0;
+
+		h1 {
+			text-transform: uppercase;
+			letter-spacing: 10px;
+			line-height: 1.2;
+		}
 
 		&__inner-container {
 			max-width: 1750px;
-			width: 90% !important;
+			width: 87% !important;
 			margin: 0 auto !important;
 		}
 	}

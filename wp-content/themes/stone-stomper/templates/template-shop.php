@@ -20,29 +20,29 @@ $sts_var_pagetitle          = $sts_fields['sts_var_pagetitle'] ?? get_the_title(
 $sts_var_shop_sub_title = $sts_fields['sts_var_shop_sub_title'] ?? null;
 
 ?>
-
-
 <section id="hero-section" class="hero-section hero-section-default">
-	<div class="blog-hero">
-		<div class="wrapper">
-			<div class="banner-content">
-				<h1><?php echo esc_html( $sts_var_pagetitle ); ?></h1>
+		<!-- hero start -->
+		<div class="hero-default">
+			<div class="wp-block-cover has-custom-content-position is-position-bottom-left">
+
+				<?php if(has_post_thumbnail($sts_var_post_id)){
+					StoneStomper::the_featured_image($sts_var_post_id,2000,   array(  'class' => 'wp-block-cover__image-background wp-image-342 size-large' ) );
+				}  ?>
+
+				<span aria-hidden="true" class="wp-block-cover__background has-background-dim" style="background-color:#645641"></span>
+				<div class="wp-block-cover__inner-container is-layout-constrained wp-block-cover-is-layout-constrained">
+					<h1 class="" tabindex="0"><?php echo esc_html($sts_var_pagetitle); ?></h1>
+				</div>
 			</div>
-			<?php if(has_post_thumbnail($sts_var_post_id)){ ?>
-			<div class="shop-feature-image">
-				<?php StoneStomper::the_featured_image($sts_var_post_id,2000); ?>
-			</div>
-			<?php } ?>
-			<div class="st-s72"></div>
 		</div>
-	</div>
-	<!-- Hero End -->
-</section>
+	</section>
+
 <section id="page-section" class="page-section">
 	<!-- Content Start -->
+	 <div class="st-s128"></div>
 	<div class="wrapper">
-		<h2><?php echo esc_html($sts_var_shop_sub_title); ?></h2>
-		<div class="three-columns">
+		<h2 class="product-main-title"><?php echo esc_html($sts_var_shop_sub_title); ?></h2>
+		<div class="three-columns product-items">
 
 
 

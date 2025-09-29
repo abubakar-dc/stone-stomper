@@ -26,7 +26,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 <section id="page-section" class="page-section">
 	<!-- Content Start -->
 	<div class="wrapper">
-		<div class="<?php StoneStomper::have_post_class( 'three-columns' ); ?>">
+		<div class="<?php StoneStomper::have_post_class( 'three-columns product-items' ); ?>">
 			<?php
 			global $wp_query;
 			if ( have_posts() ) {

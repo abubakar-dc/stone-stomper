@@ -65,7 +65,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 						<div id="form-all">
 							<!-- Your Details -->
 							 <div class="order-form-section-inner form-detail-section d-flex justify-content-between align-items-start image-at-left">
-								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
+								<div class="form-section-left column mobile-image-hide" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<?php if($sts_var_section_head_image){ ?>
 										<?php StoneStomper::the_attachment_image($sts_var_section_head_image,1200 ); ?>
 									<?php } ?>
@@ -97,6 +97,11 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 										}
 											}
 									} ?>
+									<div class="mobile-image" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
+										<?php if($sts_var_section_head_image){ ?>
+											<?php StoneStomper::the_attachment_image($sts_var_section_head_image,1200 ); ?>
+										<?php } ?>
+									</div>
 									<div class="grid cols-2">
 										<div class="field">
 											<input id="cust_name" placeholder="Name" name="customer_name" type="text" required />
@@ -186,6 +191,13 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 											<?php }
 										}
 									} ?>
+									<div class="towing-vehicle-image mobile-image" id="towing-vehicle-image" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
+												<?php
+													if($sts_var_vichle_detail_image ){
+													 StoneStomper::the_attachment_image($sts_var_vichle_detail_image,1200 );
+													}
+												?>
+									</div>
 									<div class="grid cols-2">
 										<div class="field">
 											<label class="req" for="veh_make">Vehicle Make</label>
@@ -240,8 +252,8 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 							<!-- Caravan Details -->
 							<div id="caravan-details" class="section-disable-class order-form-section-inner d-flex form-carvan-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
-									<div class="grid cols-2 vehicle-images ">
-										<div class="vehicle-image" id="caravan-images" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
+									<div class="grid cols-2 vehicle-images">
+										<div class="vehicle-image mobile-image-hide" id="caravan-images" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
 												<?php
 													if($sts_var_caravan_detail_factory_stoneguard ){
 													 StoneStomper::the_attachment_image($sts_var_caravan_detail_factory_stoneguard,1200 );
@@ -250,7 +262,6 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 													 StoneStomper::the_attachment_image($sts_var_caravan_detail_toolbox,1200 );
 													}
 												?>
-
 										</div>
 									</div>
 								</div>
@@ -271,6 +282,17 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 										}
 											}
 										} ?>
+										<div class="vehicle-image mobile-form-image-slider mobile-image" id="caravan-images" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
+												<?php
+													if($sts_var_caravan_detail_factory_stoneguard ){
+													 StoneStomper::the_attachment_image($sts_var_caravan_detail_factory_stoneguard,1200 );
+													}
+													if($sts_var_caravan_detail_toolbox ){
+													 StoneStomper::the_attachment_image($sts_var_caravan_detail_toolbox,1200 );
+													}
+												?>
+
+										</div>
 									<div class="grid cols-2">
 										<div class="field">
 											<label class="req" for="van_make">Caravan Make</label>
@@ -315,7 +337,6 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 									</fieldset>
 									<div class="checkboxes">
 										<label>
-											Other Information
 											<input id="opt_other_access" placeholder="Other Information" type="text" name="other_a_frame" />
 										</label>
 									</div>
@@ -342,7 +363,6 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 										<?php if($sts_var_example_photographs){ ?>
 											<?php foreach($sts_var_example_photographs as $sts_key => $photo){ ?>
 												<div class="slick-slide">
-
 													<div class="slider-image">
 														<?php StoneStomper::the_attachment_image($photo,1200 ); ?>
 													</div>
@@ -368,6 +388,17 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 										}
 											}
 										} ?>
+									<div class="form-image-slider mobile-image">
+										<?php if($sts_var_example_photographs){ ?>
+											<?php foreach($sts_var_example_photographs as $sts_key => $photo){ ?>
+												<div class="slick-slide">
+													<div class="slider-image">
+														<?php StoneStomper::the_attachment_image($photo,1200 ); ?>
+													</div>
+												</div>
+											<?php }
+										} ?>
+									</div>
 									<div class="grid cols-2">
 										<div class="field">
 											<label class="req" for="photo_hitch">Hitch Photograph</label>
@@ -437,6 +468,14 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 										}
 											}
 										} ?>
+
+										<div class="grid cols-2 measurements-images mobile-image">
+										<?php
+											if($sts_var_measurements_image){
+												StoneStomper::the_attachment_image($sts_var_measurements_image,1200 );
+											}
+										?>
+									</div>
 									<div class="grid cols-2">
 										<div class="field">
 											<label class="req" for="barwidth">Towing Vehicle Barwidth</label>
@@ -574,7 +613,36 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 											</select>
 										</div>
 									</div>
+									<div class="form-section-left column mobile-image" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
+									<div class="grid cols-2 details-images ">
+										<?php
+											global $product;
+											$p = wc_get_product( 545 );
+											$upsell_ids = $p ? $p->get_upsell_ids() : [];
 
+											if ( $upsell_ids ) {
+												foreach ( $upsell_ids as $upsell_id ) {
+													$upsell = wc_get_product( $upsell_id );
+													if ( ! $upsell ) {
+														continue;
+													}
+
+													$price = $upsell->get_price();
+													$title = $upsell->get_name();
+													echo '<div class="checkbox-item">';
+													if( has_post_thumbnail( $upsell_id ) ) {
+													echo '<div class="thumb">';
+													echo '<img src="' . esc_url( get_the_post_thumbnail_url( $upsell_id, 'thumb_800' ) ) . '" alt="' . esc_attr( $title ) . '" />';
+													echo '<p>' . esc_html( $title ) . '</p>';
+													echo '</div>';
+													}
+												}
+
+												echo '</div>';
+											}
+											?>
+									</div>
+								</div>
 									<?php
 									global $product;
 									$p = wc_get_product( 545 );
@@ -646,9 +714,9 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 		}
 	}
 	?>
-	<div class="ts-80"></div>
+	<div class="ts-80 mobile-image-hide"></div>
 	<!-- Content End -->
-	<div class="st-s200"></div>
+	<div class="st-s200 mobile-image-hide"></div>
 
 </section>
 <?php get_footer(); ?>
