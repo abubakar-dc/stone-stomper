@@ -1007,6 +1007,9 @@ Mixin for transition
   >> Basic styles for Blog post
   -------------------------------------------------*/
   /*-------------------------------------------------
+  >> Basic styles for Blog post
+  -------------------------------------------------*/
+  /*-------------------------------------------------
   >> Styles for Website Blocks
   -------------------------------------------------*/
   /*-------------------------------------------------
@@ -4028,6 +4031,73 @@ Mixin for transition
 }
 .editor-styles-wrapper .post-meta {
   margin-bottom: 30px;
+}
+.editor-styles-wrapper .woocommerce-checkout .wp-block-woocommerce-checkout {
+  width: 90%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--ss_space_200) 0;
+}
+.editor-styles-wrapper .woocommerce-checkout .wc-block-components-totals-item__label {
+  color: --ss_black;
+}
+.editor-styles-wrapper .woocommerce-checkout .wc-block-components-text-input input {
+  border-radius: 0px !important;
+}
+.editor-styles-wrapper .woocommerce-checkout .wc-blocks-components-select .wc-blocks-components-select__select {
+  border-radius: 0px;
+}
+.editor-styles-wrapper .woocommerce-checkout .wc-block-components-radio-control--highlight-checked .wc-block-components-radio-control-accordion-option--checked-option-highlighted,
+.editor-styles-wrapper .woocommerce-checkout .wc-block-components-radio-control--highlight-checked label.wc-block-components-radio-control__option--checked-option-highlighted {
+  border-radius: 0px;
+}
+.editor-styles-wrapper .woocommerce-checkout .wp-block-woocommerce-checkout-order-summary-block {
+  border: none;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+.editor-styles-wrapper .woocommerce-checkout .wc-block-components-button:not(.is-link) {
+  align-items: center;
+  display: inline-flex;
+  height: auto;
+  justify-content: center;
+  position: relative;
+  text-align: center;
+  transition: box-shadow 0.1s linear;
+}
+.editor-styles-wrapper .woocommerce-checkout .woocommerce-checkout .wp-element-button,
+.editor-styles-wrapper .woocommerce-checkout .woocommerce-checkout .wp-block-button__link {
+  background-color: --ss_color_primary !important;
+}
+.editor-styles-wrapper .woocommerce-checkout :root :where(.wp-element-button, .wp-block-button__link) {
+  background-color: --ss_color_primary !important;
+}
+.editor-styles-wrapper .woocommerce-checkout input[type=submit],
+.editor-styles-wrapper .woocommerce-checkout button,
+.editor-styles-wrapper .woocommerce-checkout input[type=button],
+.editor-styles-wrapper .woocommerce-checkout input[type=reset] {
+  padding: 0 30px;
+  display: inline-block;
+  line-height: 1;
+  box-sizing: border-box;
+  transition: all 0.4s ease-in-out;
+  background-color: var(--ss_color_primary);
+}
+.editor-styles-wrapper .woocommerce-checkout .wc-block-components-order-summary .wc-block-components-order-summary__content {
+  display: table;
+  width: 100%;
+  margin-bottom: 50px;
+}
+.editor-styles-wrapper .woocommerce-checkout .wc-block-components-totals-wrapper {
+  border-top: 1px solid var(--ss_black_1);
+  padding: 16px 0;
+}
+.editor-styles-wrapper .woocommerce-checkout .wp-block-woocommerce-checkout-order-summary-totals-block {
+  border-top: 1px solid var(--ss_black_1);
+  padding-bottom: 16px;
+}
+.editor-styles-wrapper .woocommerce-checkout .header-section, .editor-styles-wrapper .woocommerce-checkout .cart {
+  background-color: var(--ss_header_bgcolor_sticky);
 }
 .editor-styles-wrapper .two-columns {
   display: grid;
