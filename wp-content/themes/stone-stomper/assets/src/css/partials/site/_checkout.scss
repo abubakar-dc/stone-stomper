@@ -1,0 +1,95 @@
+.woocommerce-checkout {
+	.wp-block-woocommerce-checkout {
+
+		width: 90%;
+		max-width: 1400px;
+		margin: 0 auto;
+		padding: var(--ss_space_200) 0;
+	}
+
+	.wc-block-components-totals-item__label {
+		color: --ss_black;
+
+	}
+
+	.wc-block-components-text-input input,
+    {
+		border-radius: 0px !important;
+	}
+
+	.wc-blocks-components-select .wc-blocks-components-select__select {
+		border-radius: 0px;
+	}
+
+	.wc-block-components-radio-control--highlight-checked .wc-block-components-radio-control-accordion-option--checked-option-highlighted,
+	.wc-block-components-radio-control--highlight-checked label.wc-block-components-radio-control__option--checked-option-highlighted {
+		border-radius: 0px;
+	}
+
+	.wp-block-woocommerce-checkout-order-summary-block {
+		border: none;
+		border-radius: 5px;
+		box-sizing: border-box;
+
+	}
+
+	.wc-block-components-button:not(.is-link) {
+		align-items: center;
+		display: inline-flex;
+		height: auto;
+		justify-content: center;
+		position: relative;
+		text-align: center;
+		transition: box-shadow .1s linear;
+	}
+
+	.woocommerce-checkout .wp-element-button,
+	.woocommerce-checkout .wp-block-button__link {
+		background-color: --ss_color_primary !important;
+	}
+
+	:root :where(.wp-element-button, .wp-block-button__link) {
+		background-color: --ss_color_primary !important;
+
+	}
+
+
+
+	input[type="submit"],
+	button,
+	input[type="button"],
+	input[type="reset"] {
+		padding: 0 30px;
+		display: inline-block;
+		line-height: 1;
+		box-sizing: border-box;
+
+		@include transition(all, 0.4s, ease-in-out);
+
+		background-color: var(--ss_color_primary);
+
+
+
+	}
+	.wc-block-components-order-summary .wc-block-components-order-summary__content {
+		display: table;
+		width: 100%;
+		margin-bottom: 50px;
+	}
+
+	.wc-block-components-totals-wrapper {
+		border-top: 1px solid var(--ss_black_1);
+		padding: 16px 0;
+	}
+
+	.wp-block-woocommerce-checkout-order-summary-totals-block {
+		border-top: 1px solid var(--ss_black_1);
+		padding-bottom: 16px;
+	}
+
+
+
+	.header-section , .cart{
+		background-color: var(--ss_header_bgcolor_sticky);
+	}
+}

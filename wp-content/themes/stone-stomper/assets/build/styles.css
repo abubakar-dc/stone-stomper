@@ -5211,6 +5211,77 @@ body #daextlwcnf-cookie-settings-button-2:hover {
 /*-------------------------------------------------
 >> Basic styles for Blog post
 -------------------------------------------------*/
+.woocommerce-checkout .wp-block-woocommerce-checkout {
+  width: 90%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--ss_space_200) 0;
+}
+.woocommerce-checkout .wc-block-components-totals-item__label {
+  color: --ss_black;
+}
+.woocommerce-checkout .wc-block-components-text-input input {
+  border-radius: 0px !important;
+}
+.woocommerce-checkout .wc-blocks-components-select .wc-blocks-components-select__select {
+  border-radius: 0px;
+}
+.woocommerce-checkout .wc-block-components-radio-control--highlight-checked .wc-block-components-radio-control-accordion-option--checked-option-highlighted,
+.woocommerce-checkout .wc-block-components-radio-control--highlight-checked label.wc-block-components-radio-control__option--checked-option-highlighted {
+  border-radius: 0px;
+}
+.woocommerce-checkout .wp-block-woocommerce-checkout-order-summary-block {
+  border: none;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+.woocommerce-checkout .wc-block-components-button:not(.is-link) {
+  align-items: center;
+  display: inline-flex;
+  height: auto;
+  justify-content: center;
+  position: relative;
+  text-align: center;
+  transition: box-shadow 0.1s linear;
+}
+.woocommerce-checkout .woocommerce-checkout .wp-element-button,
+.woocommerce-checkout .woocommerce-checkout .wp-block-button__link {
+  background-color: --ss_color_primary !important;
+}
+.woocommerce-checkout :root :where(.wp-element-button, .wp-block-button__link) {
+  background-color: --ss_color_primary !important;
+}
+.woocommerce-checkout input[type=submit],
+.woocommerce-checkout button,
+.woocommerce-checkout input[type=button],
+.woocommerce-checkout input[type=reset] {
+  padding: 0 30px;
+  display: inline-block;
+  line-height: 1;
+  box-sizing: border-box;
+  transition: all 0.4s ease-in-out;
+  background-color: var(--ss_color_primary);
+}
+.woocommerce-checkout .wc-block-components-order-summary .wc-block-components-order-summary__content {
+  display: table;
+  width: 100%;
+  margin-bottom: 50px;
+}
+.woocommerce-checkout .wc-block-components-totals-wrapper {
+  border-top: 1px solid var(--ss_black_1);
+  padding: 16px 0;
+}
+.woocommerce-checkout .wp-block-woocommerce-checkout-order-summary-totals-block {
+  border-top: 1px solid var(--ss_black_1);
+  padding-bottom: 16px;
+}
+.woocommerce-checkout .header-section, .woocommerce-checkout .cart {
+  background-color: var(--ss_header_bgcolor_sticky);
+}
+
+/*-------------------------------------------------
+>> Basic styles for Blog post
+-------------------------------------------------*/
 .two-columns {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(clamp(350px, 50% - 2%, 100%), 100%), 1fr));
