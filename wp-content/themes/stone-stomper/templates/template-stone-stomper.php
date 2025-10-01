@@ -164,7 +164,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 							</div>
 
 							<!-- Towing Vehicle Details -->
-							<div id="vehicle-details" class="section-disable-class order-form-section-inner d-flex form-vehicle-section justify-content-between align-items-start image-at-left">
+							<div id="vehicle-details" class="order-form-section-inner d-flex form-vehicle-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 vehicle-images ">
 										<div class="towing-vehicle-image" id="towing-vehicle-image" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
@@ -250,7 +250,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 							</div>
 
 							<!-- Caravan Details -->
-							<div id="caravan-details" class="section-disable-class order-form-section-inner d-flex form-carvan-section justify-content-between align-items-start image-at-left">
+							<div id="caravan-details" class="section-disable order-form-section-inner d-flex form-carvan-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 vehicle-images">
 										<div class="vehicle-image mobile-image-hide" id="caravan-images" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
@@ -357,7 +357,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 							</div>
 
 							<!-- Photographs -->
-							<div id="photographs-details" class="section-disable-class order-form-section-inner d-flex form-carvan-section justify-content-between align-items-start image-at-left">
+							<div id="photographs-details" class="section-disable order-form-section-inner d-flex form-carvan-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="form-image-slider">
 										<?php if($sts_var_example_photographs){ ?>
@@ -441,7 +441,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 							</div>
 
 							<!-- Final Measurements -->
-							<div id="final-measurements" class="section-disable-class order-form-section-inner d-flex form-measurements-section justify-content-between align-items-start image-at-left">
+							<div id="final-measurements" class="section-disable order-form-section-inner d-flex form-measurements-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 measurements-images ">
 										<?php
@@ -545,7 +545,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 							</div>
 
 							<!-- Final Details & Summary -->
-							<div id="final-summary" class="section-disable-class order-form-section-inner d-flex form-details-section justify-content-between align-items-start image-at-left">
+							<div id="final-summary" class="section-disable order-form-section-inner d-flex form-details-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 details-images ">
 										<?php
