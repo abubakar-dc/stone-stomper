@@ -1,0 +1,129 @@
+.woocommerce form.login {
+
+	border-radius: 0;
+	border: none;
+	.woocommerce-form-row{
+
+		margin: 0 var(--ss_space_72);
+	}
+
+	.input-text{
+
+		border-radius: 0 !important;
+
+	}
+	.form-row {
+		display:flex  !important;
+		flex-direction: column !important;
+
+		margin: 0 var(--ss_space_72) !important;
+	}
+	.lost_password{
+		margin:  var(--ss_space_16)  var(--ss_space_72) !important;
+	}
+	.woocommerce-form-login__submit{
+		background-color: var(--ss_color_primary);
+		color:var(--ss_button_color);
+		margin: 0;
+	}
+	.woocommerce-form-login__submit:hover{
+		background-color: transparent;
+		border:1px solid var(--ss_color_primary);
+		color:var(--ss_button_color_hover);
+
+
+	}
+
+
+}
+.woocommerce-account{
+	.woocommerce{
+		max-width: 1400px;
+		margin: var(--ss_space_48) auto;
+		padding: var(--ss_space_48) 0;
+		box-sizing: border-box;
+		border: 1px solid var(--ss_border_3);
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+		h2{
+			text-align: center !important;
+
+		}
+
+	}
+}
+
+.woocommerce-account:not(.logged-in.admin-bar){
+	.woocommerce{
+		width: 50%;
+	}
+}
+
+.woocommerce-account.logged-in.admin-bar{
+	.woocommerce{
+		padding:  var(--ss_space_30) ;
+	}
+}
+
+
+//  my account style
+.woocommerce-dashboard.woocommerce-account{
+	.woocommerce-MyAccount-navigation-link{
+		margin-left:  var(--ss_space_48);
+	}
+	.woocommerce{
+
+
+	}
+	.woocommerce-MyAccount-content{
+		margin-right: var(--ss_space_64);
+		align-self: start;
+		margin: auto 0 !important;
+	}
+
+
+}
+.woocommerce-dashboard.woocommerce-account, .logged-in.admin-bar{
+
+	.woocommerce-MyAccount-navigation-link::before {
+		display: none;
+	}
+
+	.woocommerce-MyAccount-navigation-link a {
+		color: var(--ss_black_2);
+		border-bottom:none;
+		font-weight: 600;
+
+	}
+	.woocommerce-MyAccount-navigation-link a:hover, .woocommerce-MyAccount-navigation-link a:visited {
+		color: red;
+		border-bottom:1px solid var(--ss_color_primary) !important;
+		font-weight: 600;
+
+	}}
+.woocommerce-account,  .woocommerce-checkout, .woocommerce-cart, .woocommerce-shop{
+	padding-top: var(--ss_header-wrapper-default);
+	.header-section{
+		background-color: var(--ss_header_bgcolor_sticky);
+		top: 0 ;
+
+	}
+}
+.woocommerce-orders{
+	a.button:hover{
+		border: none !important;
+	}
+}
+.woocommerce-downloads{
+	a.button:hover{
+		background-color: transparent;
+	}
+}
+.woocommerce-edit-account, .woocommerce-edit-address{
+	.input-text, .select2-selection--single{
+		border-radius: 0 !important;
+	}
+	.select2-search__field{
+		height: 30px;
+	}
+}
