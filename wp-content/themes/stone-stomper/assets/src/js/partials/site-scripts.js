@@ -37,7 +37,7 @@ jQuery( function() {
 	if ( jQuery( '.header-wrapper' ).length > 0 ) {
 		function updateHeaderHeight() {
 			jQuery( '.header-wrapper' ).each( function() {
-				jQuery( this ).css( '--ss_header-wrapper-default', jQuery( this ).outerHeight() + 'px' );
+				jQuery( 'body.woocommerce-account, body.woocommerce-checkout,body.woocommerce-cart' ).css( '--ss_header-wrapper-default', jQuery( this ).outerHeight() + 'px' );
 			} );
 		}
 		updateHeaderHeight();

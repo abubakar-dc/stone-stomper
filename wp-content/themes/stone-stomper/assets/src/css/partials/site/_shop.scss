@@ -1,0 +1,33 @@
+.woocommerce-shop{
+
+	.site-main{
+		padding: var(--ss_space_128) 0 0 10px ;
+
+	}
+	.woocommerce-ordering{
+		margin-right: var(--ss_space_8);
+	}
+	.woocommerce-ordering select{
+		height: var(--ss_space_36);
+		padding: 0 40px;
+
+	}
+	.add_to_cart_button{
+		background-color: var(--ss_color_on_primary)  !important;
+		border: 1px solid !important;
+		border-radius: 0;
+	}
+
+	.add_to_cart_button:hover{
+		background-color: var(--ss_color_primary)  !important;
+		color: var(--ss_color_on_primary) !important;
+	}
+	.search-field, .search-submit{
+		height: var(--ss_space_36);
+	}
+	.added_to_cart{
+		color: var(--ss_color_primary) ;
+
+		margin-left: 10px;
+	}
+}
