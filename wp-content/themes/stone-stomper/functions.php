@@ -370,11 +370,6 @@ error_log(print_r($cust_name,true));
 	update_post_meta( $post_id, 'toolbox_width_mm', $toolbox_width_mm );
 	update_post_meta( $post_id, 'toolbox_height_mm', $toolbox_length_mm );
 
-
-
-
-
-
 	// update_post_meta( $post_id, 'final_details', $final );
 
 	// Optionally set a featured image from the first uploaded photo if any
@@ -484,3 +479,47 @@ add_action( 'template_redirect', function() {
 		exit;
 	}
 });
+
+
+add_action( 'add_meta_boxes', function() {
+    add_meta_box(
+        'towing_svg_preview',        // ID
+        'Stone Stomper Preview',       // Title
+        'show_towing_svg_in_editor', // Callback
+        'customer',                  // Post type (CPT slug)
+        'bottom',                      // Position (side or normal)
+        'low'                       // Priority
+    );
+});
+
+function show_towing_svg_in_editor($post) {
+	 $measure_barwidth_mm = get_post_meta( $post->ID, 'measure_barwidth_mm', true );
+    $bar_width_mm        = get_post_meta( $post->ID, 'bar_width_mm', true );
+    $caravan_width_mm    = get_post_meta( $post->ID, 'caravan_width_mm', true );
+    ?>
+    <div style="padding:50px 0; text-align:center;">
+        <img
+          src="<?php echo get_template_directory_uri(); ?>/assets/src/images/caravan-towing-drawing.svg"
+          alt="Towing Vehicle"
+          style="max-width:600px; height:auto;"
+        />
+		 <div style="margin-top:30px; text-align:center; font-size:16px;">
+            <h3 style="margin-bottom:10px;">📏 Measurements</h3>
+            <table style="margin:0 auto; border-collapse:collapse; font-size:15px;">
+                <tr>
+                    <td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Measure Barwidth (mm):</td>
+                    <td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $measure_barwidth_mm ?: '-' ); ?></td>
+                </tr>
+                <tr>
+                    <td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Bar Width (mm):</td>
+                    <td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $bar_width_mm ?: '-' ); ?></td>
+                </tr>
+                <tr>
+                    <td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Caravan Width (mm):</td>
+                    <td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $caravan_width_mm ?: '-' ); ?></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <?php
+}

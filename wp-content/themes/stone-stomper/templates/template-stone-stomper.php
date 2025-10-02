@@ -132,19 +132,18 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 										<div class="field">
 											<input id="cust_email" placeholder="Email Address" name="customer_email" type="email" required />
 										</div>
-										<div class="field">
-											<select id="product_type" placeholder="Product Type" name="product_type" required>
-												<?php
-												if ( $sts_var_select_products ) {
-													foreach( $sts_var_select_products as $key =>  $sts_var_select_product ){
-														?>
-														<option value="<?php echo esc_html($sts_var_select_product);?>" > <?php echo esc_html(get_the_title($sts_var_select_product));  ?> </option>
-														<?php
-													}
-												}
-												?>
-											</select>
-										</div>
+										<?php if ( $sts_var_select_products ) {
+											?>
+											<div class="field">
+												<select id="product_type" placeholder="Product Type" name="product_type" required>
+													<?php foreach( $sts_var_select_products as $key =>  $sts_var_select_product ){
+															?>
+															<option value="<?php echo esc_html($sts_var_select_product);?>" > <?php echo esc_html(get_the_title($sts_var_select_product));  ?> </option>
+															<?php
+														} ?>
+												</select>
+											</div>
+										<?php } ?>
 
 										<?php
 											if($sts_var_section_head_notices){
@@ -476,6 +475,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 											}
 										?>
 									</div>
+
 									<div class="grid cols-2">
 										<div class="field">
 											<label class="req" for="barwidth">Towing Vehicle Barwidth</label>

@@ -10,17 +10,16 @@ get_header(); ?>
 		the_post();
 		global $product;
 	?>
-
 		<div class="product-image">
 			<?php echo $product->get_image(); ?>
 		</div>
+
 		<div class="product-image-gallery">
 			<?php
 			if($product){
 				$attachment_ids = $product->get_gallery_image_ids();
 					foreach ( $attachment_ids as $attachment_id ) {
 						StoneStomper::the_attachment_image($attachment_id, 1000);
-
 					}
 			}
 			?>
