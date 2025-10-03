@@ -1,7 +1,29 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
-get_header(); ?>
+get_header();
+list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaults();
+
+?>
+
+<section id="hero-section" class="hero-section hero-section-default">
+	<!-- hero start -->
+	<div class="hero-default">
+		<div class="wp-block-cover has-custom-content-position is-position-bottom-left">
+
+			<?php if(has_post_thumbnail($sts_var_post_id)){
+				StoneStomper::the_featured_image($sts_var_post_id,2000,   array(  'class' => 'wp-block-cover__image-background wp-image-342 size-large' ) );
+			}  ?>
+
+			<span aria-hidden="true" class="wp-block-cover__background has-background-dim" style="background-color:#645641"></span>
+			<div class="wp-block-cover__inner-container is-layout-constrained wp-block-cover-is-layout-constrained">
+				<h1 class="" tabindex="0"><?php echo the_title(); ?></h1>
+			</div>
+		</div>
+	</div>
+</section>
+
+
 
 <div class="single-product-custom">
 
@@ -10,18 +32,17 @@ get_header(); ?>
 		the_post();
 		global $product;
 	?>
-		<div class="product-image">
-			<?php echo $product->get_image(); ?>
-		</div>
+		<div class="single-content-section two-column">
 
-		<div class="product-image-gallery">
+		</div>
+		<div class="product-image-gallery two-columns">
 			<?php
-			if($product){
-				$attachment_ids = $product->get_gallery_image_ids();
+				if($product){
+					$attachment_ids = $product->get_gallery_image_ids();
 					foreach ( $attachment_ids as $attachment_id ) {
 						StoneStomper::the_attachment_image($attachment_id, 1000);
 					}
-			}
+				}
 			?>
 		</div>
 
