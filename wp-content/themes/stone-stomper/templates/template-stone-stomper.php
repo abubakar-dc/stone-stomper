@@ -249,7 +249,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 							</div>
 
 							<!-- Caravan Details -->
-							<div id="caravan-details" class="section-disable order-form-section-inner d-flex form-carvan-section justify-content-between align-items-start image-at-left">
+							<div id="caravan-details" class=" order-form-section-inner d-flex form-carvan-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 vehicle-images">
 										<div class="vehicle-image mobile-image-hide" id="caravan-images" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
@@ -317,7 +317,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 										</div>
 									</div>
 									<fieldset>
-										<div  class="ginput_container ginput_container_checkbox extra-support" style="display:none;">
+										<div  class="ginput_container ginput_container_checkbox extra-support">
 											<div class="gchoice">
 												<input class="gfield-choice-input" name="input_1.1" type="checkbox" value="factory-stoneguard" id="factory_stoneguard">
 												<label for="factory_stoneguard" id="label_4_1_1">Factory Stoneguard</label>
@@ -356,7 +356,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 							</div>
 
 							<!-- Photographs -->
-							<div id="photographs-details" class="section-disable order-form-section-inner d-flex form-carvan-section justify-content-between align-items-start image-at-left">
+							<div id="photographs-details" class=" order-form-section-inner d-flex form-carvan-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="form-image-slider">
 										<?php if($sts_var_example_photographs){ ?>
@@ -440,7 +440,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 							</div>
 
 							<!-- Final Measurements -->
-							<div id="final-measurements" class="section-disable order-form-section-inner d-flex form-measurements-section justify-content-between align-items-start image-at-left">
+							<div id="final-measurements" class=" order-form-section-inner d-flex form-measurements-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 measurements-images ">
 										<?php
@@ -545,7 +545,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 							</div>
 
 							<!-- Final Details & Summary -->
-							<div id="final-summary" class="section-disable order-form-section-inner d-flex form-details-section justify-content-between align-items-start image-at-left">
+							<div id="final-summary" class=" order-form-section-inner d-flex form-details-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 details-images ">
 										<?php
