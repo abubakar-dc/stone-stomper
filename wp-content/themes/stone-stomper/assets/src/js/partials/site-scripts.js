@@ -337,3 +337,37 @@ function setupImageUpload( inputId, listId, slot ) {
 setupImageUpload( 'photo_hitch', 'list_hitch', 'hitch' );
 setupImageUpload( 'photo_rear', 'list_rear', 'rear' );
 setupImageUpload( 'photo_front', 'list_front', 'front' );
+
+
+
+
+jQuery( function() {
+
+	  jQuery('.stone-stomper-supports #factory_stoneguard').on('change', function() {
+	    if (jQuery(this).is(':checked')) {
+	      jQuery('.factory_stoneguard').slideDown();
+	    } else {
+	      jQuery('.factory_stoneguard').slideUp();
+	    }
+	  });
+
+	  jQuery('.stone-stomper-supports #toolbox').on('change', function() {
+	    if (jQuery(this).is(':checked')) {
+	      jQuery('.toolbox-support').slideDown();
+	    } else {
+	      jQuery('.toolbox-support').slideUp();
+	    }
+	  });
+
+	  jQuery('#vanwidth').on('input change', function() {
+    // Get the input value and extract only the number part
+    let val = jQuery(this).val().replace(/[^0-9]/g, '');
+    let num = parseInt(val, 10);
+
+    if (!isNaN(num) && num >= 1900) {
+      jQuery('.ss-support-options').slideDown();
+    } else {
+      jQuery('.ss-support-options').slideUp();
+    }
+  });
+} );

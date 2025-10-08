@@ -316,24 +316,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 											</select>
 										</div>
 									</div>
-									<fieldset>
-										<div  class="ginput_container ginput_container_checkbox extra-support">
-											<div class="gchoice">
-												<input class="gfield-choice-input" name="input_1.1" type="checkbox" value="factory-stoneguard" id="factory_stoneguard">
-												<label for="factory_stoneguard" id="label_4_1_1">Factory Stoneguard</label>
-											</div>
-											<div class="gchoice">
-												<input class="gfield-choice-input" name="input_1.2" type="checkbox" value="support_pockets" id="support_pockets">
-												<label for="support_pockets" id="label_4_1_3">Supoort Pockets</label>
-											</div>
-											<div class="gchoice">
-												<input class="gfield-choice-input" name="input_1.3" type="checkbox" value="toolbox" id="toolbox">
-												<label for="toolbox" id="label_4_1_2">Toolbox</label>
-											</div>
 
-
-										</div>
-									</fieldset>
 									<div class="checkboxes">
 										<label>
 											<input id="opt_other_access" placeholder="Other Information" type="text" name="other_a_frame" />
@@ -482,16 +465,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 											<input id="barwidth" name="barwidth_mm" type="text"
 												placeholder="e.g. 1800 mm" required />
 										</div>
-										<div class="field extra-support"  style="display:none" >
-											<label class="req" for="toolbox_width">Toolbox Width</label>
-											<input id="toolbox_width" name="toolbox_width_mm" type="text"
-												placeholder="e.g. 900 mm" required />
-										</div>
-										<div class="field extra-support" style="display:none" >
-											<label class="req" for="toolbox_length">Toolbox Length</label>
-											<input id="toolbox_length" name="toolbox_length_mm" type="text"
-												placeholder="e.g. 900 mm" required />
-										</div>
+
 										<div class="field" >
 											<label class="req" for="vanwidth">Caravan Width</label>
 											<input id="vanwidth" name="caravan_width_mm" type="text"
@@ -502,16 +476,54 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 											<input id="a_frame_length" name="a_frame_length_mm" type="text"
 												placeholder="e.g. 2260 mm" required />
 										</div>
-										<div class="field extra-support"  style="display:none">
-											<label class="req" for="stoneguard_length">Stoneguard Length</label>
-											<input id="stoneguard_length" name="stoneguard_length_mm" type="text"
-												placeholder="e.g.600 mm" required />
-										</div>
-										<div class="field extra-support"  style="display:none">
-											<label class="req" for="stoneguard_width">Stoneguard Width</label>
-											<input id="stoneguard_width" name="stoneguard_width_mm" type="text"
-												placeholder="e.g.600 mm" required />
-										</div>
+
+										<fieldset class="ss-support-options" style="display:none">
+											<div  class="ginput_container ginput_container_checkbox extra-support">
+												<div class="gchoice stone-stomper-supports">
+													<input class="gfield-choice-input" name="input_1.1" type="checkbox" value="factory-stoneguard" id="factory_stoneguard">
+													<label for="factory_stoneguard" id="label_4_1_1">Factory Stoneguard</label>
+
+													<div class="factory_stoneguard" style="display:none">
+														<div class="factory_stoneguard_inner two-columns-fields">
+															<div class="field extra-support">
+																<label class="req" for="stoneguard_width">Width</label>
+																<input id="stoneguard_width" name="stoneguard_width_mm" type="text"
+																	placeholder="e.g.600 mm" required />
+															</div>
+															<div class="field extra-support">
+																<label class="req" for="stoneguard_length">Length</label>
+																<input id="stoneguard_length" name="stoneguard_length_mm" type="text"
+																	placeholder="e.g.600 mm" required />
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="gchoice stone-stomper-supports">
+													<input class="gfield-choice-input" name="input_1.2" type="checkbox" value="support_pockets" id="support_pockets">
+													<label for="support_pockets" id="label_4_1_3">Supoort Pockets</label>
+												</div>
+												<div class="gchoice stone-stomper-supports">
+													<input class="gfield-choice-input" name="input_1.3" type="checkbox" value="toolbox" id="toolbox">
+													<label for="toolbox" id="label_4_1_2">Toolbox</label>
+
+													<div class="toolbox-support" style="display:none">
+														<div class="factory_stoneguard_inner two-columns-fields">
+															<div class="field extra-support" >
+																<label class="req" for="toolbox_width">Width</label>
+																<input id="toolbox_width" name="toolbox_width_mm" type="text"
+																	placeholder="e.g. 900 mm" required />
+															</div>
+															<div class="field extra-support">
+																<label class="req" for="toolbox_length">Length</label>
+																<input id="toolbox_length" name="toolbox_length_mm" type="text"
+																	placeholder="e.g. 900 mm" required />
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</fieldset>
+
 										<!-- <div class="field">
 											<label class="req" for="vinyl_width">Vinyl Insert Width</label>
 											<input id="vinyl_width" name="vinyl_width_mm" type="text"
@@ -522,8 +534,8 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 											<input id="vinyl_length" name="vinyl_length_mm" type="text"
 												placeholder="e.g.600 mm" required />
 										</div> -->
-<!--
-										<label class="row"><input id="support_pockets" type="checkbox"
+
+										<!-- <label class="row"><input id="support_pockets" type="checkbox"
 												name="support_pockets" /> Support
 											Pockets</label> -->
 									</div>

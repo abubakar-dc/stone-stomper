@@ -4097,7 +4097,8 @@ Mixin for transition
   border-top: 1px solid var(--ss_black_1);
   padding-bottom: 16px;
 }
-.editor-styles-wrapper .wp-block-woocommerce-checkout, .editor-styles-wrapper .wp-block-woocommerce-cart {
+.editor-styles-wrapper .wp-block-woocommerce-checkout,
+.editor-styles-wrapper .wp-block-woocommerce-cart {
   width: 90%;
   max-width: 1400px;
   margin: 0 auto;
@@ -4297,6 +4298,13 @@ Mixin for transition
   grid-template-columns: repeat(auto-fit, minmax(min(clamp(200px, 20% - 2%, 100%), 100%), 1fr));
   gap: 2%;
   row-gap: var(--ss_space_30);
+}
+.editor-styles-wrapper .two-columns-fields {
+  display: flex;
+  -moz-column-gap: 11px;
+       column-gap: 11px;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 .editor-styles-wrapper .faq-block {
   max-width: 825px;

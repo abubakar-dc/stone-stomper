@@ -27,3 +27,10 @@
 	@include fluidColumns(5, 200px, 2%);
 	row-gap: var(--ss_space_30);
 }
+
+.two-columns-fields {
+	display: flex;
+	column-gap: 11px;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}

@@ -5268,7 +5268,8 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   padding-bottom: 16px;
 }
 
-.wp-block-woocommerce-checkout, .wp-block-woocommerce-cart {
+.wp-block-woocommerce-checkout,
+.wp-block-woocommerce-cart {
   width: 90%;
   max-width: 1400px;
   margin: 0 auto;
@@ -5497,6 +5498,14 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   grid-template-columns: repeat(auto-fit, minmax(min(clamp(200px, 20% - 2%, 100%), 100%), 1fr));
   gap: 2%;
   row-gap: var(--ss_space_30);
+}
+
+.two-columns-fields {
+  display: flex;
+  -moz-column-gap: 11px;
+       column-gap: 11px;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 /*-------------------------------------------------

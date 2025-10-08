@@ -480,7 +480,6 @@ add_action( 'template_redirect', function() {
 	}
 });
 
-
 add_action( 'add_meta_boxes', function() {
     add_meta_box(
         'towing_svg_preview',        // ID
@@ -492,19 +491,45 @@ add_action( 'add_meta_boxes', function() {
     );
 });
 
-function show_towing_svg_in_editor($post) {
-	 $measure_barwidth_mm = get_post_meta( $post->ID, 'measure_barwidth_mm', true );
+function show_towing_svg_in_editor( $post ) {
+    // Get all meta data
+   $order_id = get_post_meta( $post->ID, 'order_id', true );
+	$order    = wc_get_order( $order_id );
+
+	if ( $order ) {
+		$order_date       = $order->get_date_created()->date_i18n( 'd M Y' );
+		$customer_name    = $order->get_formatted_billing_full_name();
+		$delivery_address = $order->get_formatted_shipping_address();
+		$vehicle_make     = $order->get_meta( 'vehicle_make' ); // only if stored as order meta
+		$van_make         = $order->get_meta( 'van_make' );     // same here
+
+		// Products list
+		$products = [];
+		foreach ( $order->get_items() as $item ) {
+			$products[] = $item->get_name() . ' × ' . $item->get_quantity();
+		}
+		$products = implode( ', ', $products );
+
+		$total_price   = $order->get_total();
+		$delivery_cost = $order->get_shipping_total();
+	} else {
+		$order_date = $customer_name = $delivery_address = $vehicle_make = $van_make = $products = $total_price = $delivery_cost = '-';
+	}
+
+
+	var_dump($order_id);
+
+	$measure_barwidth_mm = get_post_meta( $post->ID, 'measure_barwidth_mm', true );
     $bar_width_mm        = get_post_meta( $post->ID, 'bar_width_mm', true );
     $caravan_width_mm    = get_post_meta( $post->ID, 'caravan_width_mm', true );
     ?>
-    <div style="padding:50px 0; text-align:center;">
-        <img
-          src="<?php echo get_template_directory_uri(); ?>/assets/src/images/caravan-towing-drawing.svg"
-          alt="Towing Vehicle"
-          style="max-width:600px; height:auto;"
-        />
+
+    <div style="text-align:center; padding:20px;">
+        <a href="#" id="show-order-popup">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/src/images/caravan-towing-drawing.svg" style="max-width:600px;cursor:pointer;" />
+        </a>
 		 <div style="margin-top:30px; text-align:center; font-size:16px;">
-            <h3 style="margin-bottom:10px;">📏 Measurements</h3>
+            <h3 style="margin-bottom:10px;"> Measurements</h3>
             <table style="margin:0 auto; border-collapse:collapse; font-size:15px;">
                 <tr>
                     <td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Measure Barwidth (mm):</td>
@@ -521,5 +546,79 @@ function show_towing_svg_in_editor($post) {
             </table>
         </div>
     </div>
+
+    <!-- Popup container -->
+    <!-- <div id="order-popup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:9999;"> -->
+    <div id="order-popup" style="">
+        <div style="background:#fff; width:600px; max-width:90%; margin:60px auto; padding:30px; position:relative; border-radius:10px;">
+            <a href="#" id="close-popup" style="position:absolute; top:15px; right:20px; font-size:20px; text-decoration:none;">✖</a>
+            <h2 style="text-align:center; margin-bottom:20px;">Order Summary</h2>
+
+            <table style="width:100%; border-collapse:collapse;">
+                <tr><th style="text-align:left;">Order Date</th><td><?php echo esc_html( $order_date ); ?></td></tr>
+                <tr><th style="text-align:left;">Customer Name:</th><td><?php echo esc_html( $customer_name ); ?></td></tr>
+                <tr><th style="text-align:left;">Delivery Address</th><td><?php echo esc_html( $delivery_address ); ?></td></tr>
+                <tr><th style="text-align:left;">Vehicle Make</th><td><?php echo esc_html( $vehicle_make ); ?></td></tr>
+                <tr><th style="text-align:left;">Van Make</th><td><?php echo esc_html( $van_make ); ?></td></tr>
+                <tr><th style="text-align:left;">Products</th><td><?php echo esc_html( $products ); ?></td></tr>
+                <tr><th style="text-align:left;">Total Price</th><td><?php echo esc_html( $total_price ); ?></td></tr>
+                <tr><th style="text-align:left;">Delivery Cost</th><td><?php echo esc_html( $delivery_cost ); ?></td></tr>
+                <tr><th style="text-align:left;">Total</th><td><?php echo esc_html( $delivery_cost ); ?></td></tr>
+            </table>
+
+            <div style="text-align:center; margin-top:25px;">
+                <a href="<?php echo admin_url( 'admin-ajax.php?action=download_customer_pdf&post_id=' . $post->ID ); ?>" target="_blank" class="button button-primary">Download PDF</a>
+            </div>
+        </div>
+    </div>
+	<!-- <script>
+		jQuery(document).ready(function($){
+		jQuery('#show-order-popup').on('click', function(e){
+			e.preventDefault();
+			jQuery('#order-popup').fadeIn(200);
+		});
+
+		jQuery('#close-popup').on('click', function(e){
+			e.preventDefault();
+			jQuery('#order-popup').fadeOut(200);
+		});
+
+		jQuery(document).on('click', '#order-popup', function(e){
+			if( e.target.id === 'order-popup' ) {
+			jQuery(this).fadeOut(200);
+			}
+		});
+		});
+	</script> -->
     <?php
 }
+
+add_action( 'wp_ajax_download_customer_pdf', function() {
+    $post_id = intval( $_GET['post_id'] ?? 0 );
+    if ( ! $post_id ) wp_die( 'Invalid request.' );
+
+    $customer_name   = get_post_meta( $post_id, 'customer_name', true );
+    $delivery_address = get_post_meta( $post_id, 'delivery_address', true );
+    $vehicle_make    = get_post_meta( $post_id, 'vehicle_make', true );
+    $van_make        = get_post_meta( $post_id, 'van_make', true );
+    $products        = get_post_meta( $post_id, 'selected_products', true );
+    $total_price     = get_post_meta( $post_id, 'total_price', true );
+    $delivery_cost   = get_post_meta( $post_id, 'delivery_cost', true );
+    $order_date      = get_the_date( 'd M Y', $post_id );
+
+    header('Content-Type: application/pdf');
+    header('Content-Disposition: attachment; filename="customer-order-' . $post_id . '.pdf"');
+
+    // Very basic PDF (you can replace this with proper PDF library later)
+    echo "Order Summary\n\n";
+    echo "Order Date: $order_date\n";
+    echo "Customer: $customer_name\n";
+    echo "Delivery Address: $delivery_address\n";
+    echo "Vehicle Make: $vehicle_make\n";
+    echo "Van Make: $van_make\n";
+    echo "Products: $products\n";
+    echo "Total Price: $total_price\n";
+    echo "Delivery Cost: $delivery_cost\n";
+
+    exit;
+});
