@@ -526,24 +526,24 @@ function show_towing_svg_in_editor( $post ) {
 
     <div style="text-align:center; padding:20px;">
         <a href="#" id="show-order-popup">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/src/images/caravan-towing-drawing.svg" style="max-width:600px;cursor:pointer;" />
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/src/images/stone-stomper-vector.png" style="max-width:600px;cursor:pointer;" />
         </a>
-		 <div style="margin-top:30px; text-align:center; font-size:16px;">
-            <h3 style="margin-bottom:10px;"> Measurements</h3>
-            <table style="margin:0 auto; border-collapse:collapse; font-size:15px;">
-                <tr>
-                    <td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Measure Barwidth (mm):</td>
-                    <td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $measure_barwidth_mm ?: '-' ); ?></td>
-                </tr>
-                <tr>
-                    <td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Bar Width (mm):</td>
-                    <td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $bar_width_mm ?: '-' ); ?></td>
-                </tr>
-                <tr>
-                    <td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Caravan Width (mm):</td>
-                    <td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $caravan_width_mm ?: '-' ); ?></td>
-                </tr>
-            </table>
+		<div style="margin-top:30px; text-align:center; font-size:16px;">
+			<h3 style="margin-bottom:10px;"> Measurements</h3>
+			<table style="margin:0 auto; border-collapse:collapse; font-size:15px;">
+				<tr>
+					<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Measure Barwidth (mm):</td>
+					<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $measure_barwidth_mm ?: '-' ); ?></td>
+				</tr>
+				<tr>
+					<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Bar Width (mm):</td>
+					<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $bar_width_mm ?: '-' ); ?></td>
+				</tr>
+				<tr>
+					<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Caravan Width (mm):</td>
+					<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $caravan_width_mm ?: '-' ); ?></td>
+				</tr>
+			</table>
         </div>
     </div>
 
@@ -552,6 +552,20 @@ function show_towing_svg_in_editor( $post ) {
     <div id="order-popup" style="">
         <div style="background:#fff; width:600px; max-width:90%; margin:60px auto; padding:30px; position:relative; border-radius:10px;">
             <a href="#" id="close-popup" style="position:absolute; top:15px; right:20px; font-size:20px; text-decoration:none;">✖</a>
+			<div class="invoice-header-section">
+				<div class="invoice-image">
+					<img src="<?php echo get_template_directory_uri(); ?>/assets/src/images/stone-stomper-vector.png" style="max-width:600px;cursor:pointer;" />
+				</div>
+				<div class="invoice-bussiness-details">
+					<div class="h4">Stone Stomper</div>
+					<p>PO Box 204, Port Noarlunga, SA <br> 5167 <br> Factory location:  Lonsdale SA <br>
+					<strong>
+						Email:
+					</strong>
+					<br>
+					<a href="mailto:sales@stonestomper.com.au"></a>sales@stonestomper.com.au</p>
+				</div>
+			</div>
             <h2 style="text-align:center; margin-bottom:20px;">Order Summary</h2>
 
             <table style="width:100%; border-collapse:collapse;">
@@ -561,9 +575,9 @@ function show_towing_svg_in_editor( $post ) {
                 <tr><th style="text-align:left;">Vehicle Make</th><td><?php echo esc_html( $vehicle_make ); ?></td></tr>
                 <tr><th style="text-align:left;">Van Make</th><td><?php echo esc_html( $van_make ); ?></td></tr>
                 <tr><th style="text-align:left;">Products</th><td><?php echo esc_html( $products ); ?></td></tr>
-                <tr><th style="text-align:left;">Total Price</th><td><?php echo esc_html( $total_price ); ?></td></tr>
+
                 <tr><th style="text-align:left;">Delivery Cost</th><td><?php echo esc_html( $delivery_cost ); ?></td></tr>
-                <tr><th style="text-align:left;">Total</th><td><?php echo esc_html( $delivery_cost ); ?></td></tr>
+                <tr><th style="text-align:left;">Total Price</th><td><?php echo esc_html( $total_price ); ?></td></tr>
             </table>
 
             <div style="text-align:center; margin-top:25px;">
