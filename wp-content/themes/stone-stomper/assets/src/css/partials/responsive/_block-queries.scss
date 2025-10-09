@@ -105,6 +105,10 @@
 
 @media only screen and (min-width: 748px) and (max-width: 1003px) {
 	.form-section-left {
+		position: initial;
+	}
+
+	.form-section-left {
 		width: 100%;
 		margin-bottom: 30px;
 	}
@@ -145,9 +149,14 @@
 }
 
 @media only screen and (max-width: 747px) {
-	.woocommerce-account:not(.logged-in.admin-bar) .woocommerce{
+	.form-section-left {
+		position: initial;
+	}
+
+	.woocommerce-account:not(.logged-in.admin-bar) .woocommerce {
 		width: 100%;
 	}
+
 	.header-btns {
 		width: 23%;
 		max-width: 75px;
@@ -260,9 +269,21 @@
 		margin-bottom: 57px;
 	}
 
+	.image-caption {
+		width: 100%;
+	}
+
 	.thumb p {
-		top: -18px;
-		display: inline;
+		top: -46px;
+		line-height: 1.7;
+
+	}
+
+	.image-caption {
+
+		p {
+			line-height: 1.7;
+		}
 	}
 
 	.actions {

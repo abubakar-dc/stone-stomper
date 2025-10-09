@@ -265,15 +265,28 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 							<div id="caravan-details" class=" order-form-section-inner d-flex form-carvan-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 vehicle-images">
-										<div class="vehicle-image mobile-image-hide" id="caravan-images" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
-												<?php
-													if($sts_var_caravan_detail_factory_stoneguard ){
-													 StoneStomper::the_attachment_image($sts_var_caravan_detail_factory_stoneguard,1200 );
-													}
-													if($sts_var_caravan_detail_toolbox ){
-													 StoneStomper::the_attachment_image($sts_var_caravan_detail_toolbox,1200 );
-													}
-												?>
+										<div class="vehicle-images mobile-image-hide" id="caravan-images" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
+											<?php if ( $sts_var_caravan_detail_factory_stoneguard ) { ?>
+												<div class="vehicle-image">
+													<?php StoneStomper::the_attachment_image( $sts_var_caravan_detail_factory_stoneguard, 1200 ); ?>
+													<div class="image-caption-area">
+														<div class="image-caption">
+															<p>Factory Stoneguard</p>
+														</div>
+													</div>
+												</div>
+											<?php } ?>
+
+											<?php if ( $sts_var_caravan_detail_toolbox ) { ?>
+												<div class="vehicle-image">
+													<?php StoneStomper::the_attachment_image( $sts_var_caravan_detail_toolbox, 1200 ); ?>
+													<div class="image-caption-area">
+														<div class="image-caption">
+															<p>Toolbox</p>
+														</div>
+													</div>
+												</div>
+											<?php } ?>
 										</div>
 									</div>
 								</div>
@@ -295,15 +308,14 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											}
 										} ?>
 										<div class="vehicle-image mobile-form-image-slider mobile-image" id="caravan-images" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
-												<?php
-													if($sts_var_caravan_detail_factory_stoneguard ){
-													 StoneStomper::the_attachment_image($sts_var_caravan_detail_factory_stoneguard,1200 );
-													}
-													if($sts_var_caravan_detail_toolbox ){
-													 StoneStomper::the_attachment_image($sts_var_caravan_detail_toolbox,1200 );
-													}
-												?>
-
+										<?php
+											if($sts_var_caravan_detail_factory_stoneguard ){
+												StoneStomper::the_attachment_image($sts_var_caravan_detail_factory_stoneguard,1200 );
+											}
+											if($sts_var_caravan_detail_toolbox ){
+												StoneStomper::the_attachment_image($sts_var_caravan_detail_toolbox,1200 );
+											}
+										?>
 										</div>
 									<div class="grid cols-2">
 										<div class="field">
@@ -360,6 +372,11 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 												<div class="slick-slide">
 													<div class="slider-image">
 														<?php StoneStomper::the_attachment_image($photo,1200 ); ?>
+															<div class="image-caption-area">
+															<div class="image-caption">
+																<p>Example Towing Vehicle Rear Photograph</p>
+															</div>
+														</div>
 													</div>
 												</div>
 											<?php }
@@ -389,6 +406,11 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 												<div class="slick-slide">
 													<div class="slider-image">
 														<?php StoneStomper::the_attachment_image($photo,1200 ); ?>
+													<div class="image-caption-area">
+														<div class="image-caption">
+															<p>Toolbox</p>
+														</div>
+													</div>
 													</div>
 												</div>
 											<?php }
@@ -445,6 +467,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											}
 										?>
 									</div>
+									<div class="image-caption-area"><div class="image-caption"><p> Diagram for example purposes only</p></div></div>
 								</div>
 								<div class="form-section-right column" id="blk-measure">
 									<?php if($sts_var_section_head_notices){
@@ -662,7 +685,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 													echo '</div>';
 													}
 												}
-
 												echo '</div>';
 											}
 											?>

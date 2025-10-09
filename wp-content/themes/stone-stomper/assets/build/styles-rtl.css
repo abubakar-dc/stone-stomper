@@ -6357,10 +6357,10 @@ body #daextlwcnf-cookie-settings-button-2:hover {
      object-fit: cover;
 }
 
-.vehicle-image {
+.vehicle-images {
   display: flex;
 }
-.vehicle-image img {
+.vehicle-images .vehicle-image {
   width: 50%;
 }
 
@@ -6411,6 +6411,13 @@ body #daextlwcnf-cookie-settings-button-2:hover {
 
 .form-section-left {
   width: 55.2%;
+  position: sticky;
+  top: 140px;
+  margin-bottom: 20px;
+}
+
+.logged-in.admin-bar .form-section-left {
+  top: 162px;
 }
 
 .form-section-right {
@@ -6612,6 +6619,42 @@ body #daextlwcnf-cookie-settings-button-2:hover {
 
 .mobile-image {
   display: none;
+}
+
+.image-caption {
+  position: relative;
+  padding: 12px 38px 10px 14px;
+  letter-spacing: 0.3px;
+  background: var(--ss_white);
+  margin-bottom: 20px;
+  width: -moz-max-content;
+  width: max-content;
+}
+.image-caption p {
+  margin: 0;
+}
+.image-caption::before {
+  content: "";
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgNjQwIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIHY3LjAuMSBieSBAZm9udGF3ZXNvbWUgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbSBMaWNlbnNlIC0gaHR0cHM6Ly9mb250YXdlc29tZS5jb20vbGljZW5zZS9mcmVlIENvcHlyaWdodCAyMDI1IEZvbnRpY29ucywgSW5jLi0tPjxwYXRoIGZpbGw9IiMyYzJjMmMiIGQ9Ik0zMjAgMTEyQzQzNC45IDExMiA1MjggMjA1LjEgNTI4IDMyMEM1MjggNDM0LjkgNDM0LjkgNTI4IDMyMCA1MjhDMjA1LjEgNTI4IDExMiA0MzQuOSAxMTIgMzIwQzExMiAyMDUuMSAyMDUuMSAxMTIgMzIwIDExMnpNMzIwIDU3NkM0NjEuNCA1NzYgNTc2IDQ2MS40IDU3NiAzMjBDNTc2IDE3OC42IDQ2MS40IDY0IDMyMCA2NEMxNzguNiA2NCA2NCAxNzguNiA2NCAzMjBDNjQgNDYxLjQgMTc4LjYgNTc2IDMyMCA1NzZ6TTI4MCA0MDBDMjY2LjcgNDAwIDI1NiA0MTAuNyAyNTYgNDI0QzI1NiA0MzcuMyAyNjYuNyA0NDggMjgwIDQ0OEwzNjAgNDQ4QzM3My4zIDQ0OCAzODQgNDM3LjMgMzg0IDQyNEMzODQgNDEwLjcgMzczLjMgNDAwIDM2MCA0MDBMMzUyIDQwMEwzNTIgMzEyQzM1MiAyOTguNyAzNDEuMyAyODggMzI4IDI4OEwyODAgMjg4QzI2Ni43IDI4OCAyNTYgMjk4LjcgMjU2IDMxMkMyNTYgMzI1LjMgMjY2LjcgMzM2IDI4MCAzMzZMMzA0IDMzNkwzMDQgNDAwTDI4MCA0MDB6TTMyMCAyNTZDMzM3LjcgMjU2IDM1MiAyNDEuNyAzNTIgMjI0QzM1MiAyMDYuMyAzMzcuNyAxOTIgMzIwIDE5MkMzMDIuMyAxOTIgMjg4IDIwNi4zIDI4OCAyMjRDMjg4IDI0MS43IDMwMi4zIDI1NiAzMjAgMjU2eiIvPjwvc3ZnPgo=);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  position: absolute;
+  right: 13px;
+  top: 15px;
+}
+
+.form-image-slider .image-caption-area,
+.vehicle-images .image-caption-area {
+  position: relative;
+  bottom: 44px;
+  margin-bottom: -44px;
+}
+
+#caravan-details .checkboxes label {
+  width: 100%;
 }
 
 /*-------------------------------------------------
@@ -6861,6 +6904,9 @@ body #daextlwcnf-cookie-settings-button-2:hover {
 }
 @media only screen and (min-width: 748px) and (max-width: 1003px) {
   .form-section-left {
+    position: initial;
+  }
+  .form-section-left {
     width: 100%;
     margin-bottom: 30px;
   }
@@ -6891,6 +6937,9 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   }
 }
 @media only screen and (max-width: 747px) {
+  .form-section-left {
+    position: initial;
+  }
   .woocommerce-account:not(.logged-in.admin-bar) .woocommerce {
     width: 100%;
   }
@@ -6974,9 +7023,15 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   #final-summary .form-section-right {
     margin-bottom: 57px;
   }
+  .image-caption {
+    width: 100%;
+  }
   .thumb p {
-    top: -18px;
-    display: inline;
+    top: -46px;
+    line-height: 1.7;
+  }
+  .image-caption p {
+    line-height: 1.7;
   }
   .actions {
     margin-top: 30px;
