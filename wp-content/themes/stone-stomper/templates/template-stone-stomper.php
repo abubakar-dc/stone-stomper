@@ -14,27 +14,30 @@
 // Include header.
 get_header();
 list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaults();
-$sts_var_select_products = $sts_fields['sts_var_select_products'] ?? null;
-$sts_var_section_head           = $sts_fields['sts_var_section_head'] ?? null;
-if($sts_var_section_head){
-	$sts_var_section_headline = $sts_var_section_head['headline']??null;
-	$sts_var_section_head_text = $sts_var_section_head['text']??null;
-	$sts_var_section_head_image = $sts_var_section_head['image']??null;
-}
-$sts_var_vichle_detail_image           = $sts_fields['sts_var_vichle_detail_image'] ?? null;
-$sts_var_example_photographs           = $sts_fields['sts_var_example_photographs'] ?? null;
-$sts_var_caravan_detail_images           = $sts_fields['sts_var_caravan_detail_images'] ?? null;
-if($sts_var_caravan_detail_images ){
-	$sts_var_caravan_detail_factory_stoneguard = $sts_var_caravan_detail_images['factory_stoneguard']??null;
-	$sts_var_caravan_detail_toolbox = $sts_var_caravan_detail_images['toolbox']??null;
+	$sts_var_select_products = $sts_fields['sts_var_select_products'] ?? null;
+	$sts_var_section_head           = $sts_fields['sts_var_section_head'] ?? null;
 
-}
-$sts_var_measurements_image           = $sts_fields['sts_var_measurements_image'] ?? null;
-$sts_var_section_head_notices           = $sts_fields['sts_var_section_head_notices'] ?? null;
+	if($sts_var_section_head){
+		$sts_var_section_headline = $sts_var_section_head['headline']??null;
+		$sts_var_section_head_text = $sts_var_section_head['text']??null;
+		$sts_var_section_head_image = $sts_var_section_head['image']??null;
+	}
 
+	$sts_var_vichle_detail_image           = $sts_fields['sts_var_vichle_detail_image'] ?? null;
+	$sts_var_example_photographs           = $sts_fields['sts_var_example_photographs'] ?? null;
+	$sts_var_caravan_detail_images           = $sts_fields['sts_var_caravan_detail_images'] ?? null;
+
+	if($sts_var_caravan_detail_images ){
+		$sts_var_caravan_detail_factory_stoneguard = $sts_var_caravan_detail_images['factory_stoneguard']??null;
+		$sts_var_caravan_detail_toolbox = $sts_var_caravan_detail_images['toolbox']??null;
+	}
+
+	$sts_var_measurements_image           = $sts_fields['sts_var_measurements_image'] ?? null;
+	$sts_var_section_head_notices         = $sts_fields['sts_var_section_head_notices'] ?? null;
 ?>
-<section id="page-section" class="page-section">
 
+
+<section id="page-section" class="page-section">
 	<section id="hero-section" class="hero-section hero-section-default">
 		<!-- hero start -->
 		<div class="hero-default">
@@ -72,6 +75,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 								</div>
 
 								<div class="form-section-right column" id="details-section">
+
 									<div class="content-head">
 										<?php if($sts_var_section_headline){ ?>
 											<h2 class=""><?php echo esc_html($sts_var_section_headline); ?></h2>
@@ -81,6 +85,25 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 											}
 										?>
 									</div>
+
+									<div class="products-select">
+										<?php if ( $sts_var_select_products ) { ?>
+
+											<?php if($sts_var_section_headline){ ?>
+												<h3 class="">Products</h2>
+											<?php } ?>
+											<div class="field">
+												<select id="product_type" placeholder="Please Select" name="product_type" required>
+													<option value="">Please Select</option>
+													<?php foreach( $sts_var_select_products as $key =>  $sts_var_select_product ){ ?>
+														<option value="<?php echo esc_html($sts_var_select_product);?>" > <?php echo esc_html(get_the_title($sts_var_select_product));  ?> </option>
+													<?php } ?>
+												</select>
+											</div>
+										<?php } ?>
+									</div>
+									<div class="st-s36"></div>
+
 									<?php if($sts_var_section_head_notices){
 										foreach($sts_var_section_head_notices as $sts_key => $notice){
 										$sts_var_headline = $notice['headline']??null;
@@ -107,7 +130,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 											<input id="cust_name" placeholder="Name" name="customer_name" type="text" required />
 										</div>
 										<div class="field">
-											<input id="cust_address" placeholder="Delivery Address" name="customer_address" type="text" required />
+											<input id="cust_address" placeholder="Home Address" name="customer_address" type="text" required />
 										</div>
 										<div class="grid cols-2 two-columns-fields">
 											<div class="field">
@@ -132,18 +155,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 										<div class="field">
 											<input id="cust_email" placeholder="Email Address" name="customer_email" type="email" required />
 										</div>
-										<?php if ( $sts_var_select_products ) {
-											?>
-											<div class="field">
-												<select id="product_type" placeholder="Product Type" name="product_type" required>
-													<?php foreach( $sts_var_select_products as $key =>  $sts_var_select_product ){
-															?>
-															<option value="<?php echo esc_html($sts_var_select_product);?>" > <?php echo esc_html(get_the_title($sts_var_select_product));  ?> </option>
-															<?php
-														} ?>
-												</select>
-											</div>
-										<?php } ?>
+
 
 										<?php
 											if($sts_var_section_head_notices){
@@ -169,7 +181,7 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 										<div class="towing-vehicle-image" id="towing-vehicle-image" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
 												<?php
 													if($sts_var_vichle_detail_image ){
-													 StoneStomper::the_attachment_image($sts_var_vichle_detail_image,1200 );
+													 	StoneStomper::the_attachment_image($sts_var_vichle_detail_image,1200 );
 													}
 												?>
 										</div>
@@ -180,9 +192,10 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 										foreach($sts_var_section_head_notices as $sts_key => $notice){
 											$sts_var_headline = $notice['headline']??null;
 											$sts_var_text = $notice['text']??null;
+
 											if($sts_key === 1){ ?>
 												<?php if ( $sts_var_headline ) { ?>
-												<h3><?php echo esc_html($sts_var_headline); ?></h3>
+													<h3><?php echo esc_html($sts_var_headline); ?></h3>
 												<?php }
 												if($sts_var_text){ ?>
 													<p><?php echo html_entity_decode($sts_var_text); ?></p>
@@ -191,11 +204,11 @@ $sts_var_section_head_notices           = $sts_fields['sts_var_section_head_noti
 										}
 									} ?>
 									<div class="towing-vehicle-image mobile-image" id="towing-vehicle-image" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
-												<?php
-													if($sts_var_vichle_detail_image ){
-													 StoneStomper::the_attachment_image($sts_var_vichle_detail_image,1200 );
-													}
-												?>
+										<?php
+											if($sts_var_vichle_detail_image ){
+												StoneStomper::the_attachment_image($sts_var_vichle_detail_image,1200 );
+											}
+										?>
 									</div>
 									<div class="grid cols-2">
 										<div class="field">

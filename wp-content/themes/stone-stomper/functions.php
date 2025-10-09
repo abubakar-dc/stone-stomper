@@ -480,16 +480,7 @@ add_action( 'template_redirect', function() {
 	}
 });
 
-add_action( 'add_meta_boxes', function() {
-    add_meta_box(
-        'towing_svg_preview',        // ID
-        'Stone Stomper Preview',       // Title
-        'show_towing_svg_in_editor', // Callback
-        'customer',                  // Post type (CPT slug)
-        'bottom',                      // Position (side or normal)
-        'low'                       // Priority
-    );
-});
+
 
 function show_towing_svg_in_editor( $post ) {
     // Get all meta data
@@ -684,6 +675,17 @@ function show_towing_svg_in_editor( $post ) {
 	</script>
     <?php
 }
+
+add_action( 'add_meta_boxes', function() {
+    add_meta_box(
+        'towing_svg_preview',        // ID
+        'Stone Stomper Preview',       // Title
+        'show_towing_svg_in_editor', // Callback
+        'customer',                  // Post type (CPT slug)
+        'normal',                      // Position (side or normal)
+        'low'                       // Priority
+    );
+});
 
 use Dompdf\Dompdf;
 

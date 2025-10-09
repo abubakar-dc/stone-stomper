@@ -75,9 +75,8 @@ jQuery( document ).ready( function() {
 					jQuery( '#veh_year' ).html( response.year );
 					if ( response.vehicleImage !== null ) {
 						jQuery( '#towing-vehicle-image' ).html( response.vehicleImage );
-					} else {
-						jQuery( '#towing-vehicle-image' ).html( '' );
 					}
+
 					jQuery( '.loader-container' ).hide();
 				}
 				// selectModel();
