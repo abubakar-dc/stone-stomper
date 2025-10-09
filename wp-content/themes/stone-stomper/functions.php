@@ -497,31 +497,36 @@ function show_towing_svg_in_editor( $post ) {
 	$order    = wc_get_order( $order_id );
 
 	if ( $order ) {
-		$order_date       = $order->get_date_created()->date_i18n( 'd M Y' );
+		// Basic info
+		$order_date       = $order->get_date_created()->date_i18n('Y-m-d');
 		$customer_name    = $order->get_formatted_billing_full_name();
+		$customer_phone   = $order->get_billing_phone();
+		$customer_email   = $order->get_billing_email();
 		$delivery_address = $order->get_formatted_shipping_address();
-		$vehicle_make     = $order->get_meta( 'vehicle_make' ); // only if stored as order meta
-		$van_make         = $order->get_meta( 'van_make' );     // same here
+		$delivery_cost    = $order->get_shipping_total();
+		$order_total      = $order->get_total();
+		$products         = [];
 
-		// Products list
-		$products = [];
-		foreach ( $order->get_items() as $item ) {
-			$products[] = $item->get_name() . ' × ' . $item->get_quantity();
+		// Loop products in the order
+		foreach ( $order->get_items() as $item_id => $item ) {
+			$product_name = $item->get_name();
+			$quantity     = $item->get_quantity();
+			$total        = $item->get_total();
+
+			$products[] = [
+				'name'     => $product_name,
+				'quantity' => $quantity,
+				'total'    => $total,
+			];
 		}
-		$products = implode( ', ', $products );
-
-		$total_price   = $order->get_total();
-		$delivery_cost = $order->get_shipping_total();
-	} else {
-		$order_date = $customer_name = $delivery_address = $vehicle_make = $van_make = $products = $total_price = $delivery_cost = '-';
 	}
 
-
-	var_dump($order_id);
 
 	$measure_barwidth_mm = get_post_meta( $post->ID, 'measure_barwidth_mm', true );
     $bar_width_mm        = get_post_meta( $post->ID, 'bar_width_mm', true );
     $caravan_width_mm    = get_post_meta( $post->ID, 'caravan_width_mm', true );
+    $vehicle_make    = get_post_meta( $post->ID, 'vehicle_make', true );
+
     ?>
 
     <div style="text-align:center; padding:20px;">
@@ -548,15 +553,15 @@ function show_towing_svg_in_editor( $post ) {
     </div>
 
     <!-- Popup container -->
-    <!-- <div id="order-popup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:9999;"> -->
-    <div id="order-popup" style="">
-        <div style="background:#fff; width:600px; max-width:90%; margin:60px auto; padding:30px; position:relative; border-radius:10px;">
+    <div id="order-popup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:9999;">
+    <!-- <div id="order-popup" style=""> -->
+        <div style="background:#fff; width:900px; max-width:90%; margin:60px auto; padding:60px; position:relative; border-radius:10px;">
             <a href="#" id="close-popup" style="position:absolute; top:15px; right:20px; font-size:20px; text-decoration:none;">✖</a>
-			<div class="invoice-header-section">
-				<div class="invoice-image">
-					<img src="<?php echo get_template_directory_uri(); ?>/assets/src/images/stone-stomper-vector.png" style="max-width:600px;cursor:pointer;" />
+			<div class="invoice-header-section d-flex justify-content-between " >
+				<div class="invoice-logo inv-column">
+					<img src="<?php echo get_template_directory_uri(); ?>/assets/src/images/invoice-gaurd.png" style="max-width:600px;cursor:pointer;" />
 				</div>
-				<div class="invoice-bussiness-details">
+				<div class="invoice-bussiness-details inv-column">
 					<div class="h4">Stone Stomper</div>
 					<p>PO Box 204, Port Noarlunga, SA <br> 5167 <br> Factory location:  Lonsdale SA <br>
 					<strong>
@@ -565,19 +570,92 @@ function show_towing_svg_in_editor( $post ) {
 					<br>
 					<a href="mailto:sales@stonestomper.com.au"></a>sales@stonestomper.com.au</p>
 				</div>
+				<div class="invoice-right-column inv-column">
+					<h3>Quote/Invoice</h2>
+					<table>
+						<tr><td><strong>DATE:</strong> <?php echo esc_html( $order_date ); ?> </td></tr>
+						<tr><td><strong>INV#:</strong> <?php echo esc_html( $order_id ); ?> </td></tr>
+						<tr><td><strong>P/O#:</strong>  </td></tr>
+					</table>
+				</div>
 			</div>
-            <h2 style="text-align:center; margin-bottom:20px;">Order Summary</h2>
+			<br>
+				<br>
+			<div class="inv-order-details">
+				<div class="customer-details inv-order-row">
+					<strong>Name: </strong><?php echo esc_html( $customer_name ); ?>
+					&nbsp;&nbsp;&nbsp;
+					<strong>Phone: </strong><?php echo esc_html( $customer_phone ); ?>
+					&nbsp;&nbsp;&nbsp;
+					<strong>Email: </strong><?php echo esc_html( $customer_email ); ?>
+				</div>
+				<br>
+				<div class="customer-details inv-order-row">
+					<strong>Delivery Address: </strong><?php echo html_entity_decode( $delivery_address ); ?>
+				</div>
+				<br>
+				<div class="customer-details inv-order-row">
+					<strong>Delivery Instructions/Authority to Leave: </strong>No
+				</div>
+				<br>
+				<div class="customer-details inv-order-row">
+					<strong>Trailer Make: </strong>Van
+					&nbsp;&nbsp;&nbsp;
+					<?php if($vehicle_make){ ?>
+						<strong>Vehicle Make: </strong><?php echo esc_html( $vehicle_make ); ?>
+					<?php } ?>
+				</div>
+				<br>
+				<div class="customer-details inv-order-row">
+					<strong>Bar Option: </strong>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<strong>Date Required: </strong><?php echo esc_html( $order_date ); ?>
+				</div>
 
-            <table style="width:100%; border-collapse:collapse;">
-                <tr><th style="text-align:left;">Order Date</th><td><?php echo esc_html( $order_date ); ?></td></tr>
-                <tr><th style="text-align:left;">Customer Name:</th><td><?php echo esc_html( $customer_name ); ?></td></tr>
-                <tr><th style="text-align:left;">Delivery Address</th><td><?php echo esc_html( $delivery_address ); ?></td></tr>
-                <tr><th style="text-align:left;">Vehicle Make</th><td><?php echo esc_html( $vehicle_make ); ?></td></tr>
-                <tr><th style="text-align:left;">Van Make</th><td><?php echo esc_html( $van_make ); ?></td></tr>
-                <tr><th style="text-align:left;">Products</th><td><?php echo esc_html( $products ); ?></td></tr>
+			</div>
+			<br>
 
-                <tr><th style="text-align:left;">Delivery Cost</th><td><?php echo esc_html( $delivery_cost ); ?></td></tr>
-                <tr><th style="text-align:left;">Total Price</th><td><?php echo esc_html( $total_price ); ?></td></tr>
+
+            <table class="order-table" style="width:100%; border-collapse:collapse;">
+				<tr>
+					<td style="text-align:center;"><strong>Quantity</strong></td>
+					<td style="text-align:center;"><strong>Description</strong></td>
+					<td style="text-align:center;"><strong>Unit Price</strong></td>
+					<td style="text-align:center;"><strong>Total</strong></td>
+				</tr>
+
+				<?php if ( $products ) { ?>
+
+					<?php foreach( $products as $key =>  $product ){ ?>
+						<tr>
+							<td style="text-align:center;"><?php echo $key; ?></td>
+							<td style="text-align:center;"><?php echo esc_html( $product['name'] ); ?></td>
+							<td style="text-align:center;">$<?php echo wc_format_decimal( $product['total'] / $product['quantity'], 2 ); ?></td>
+							<td style="text-align:center;">$<?php echo wc_format_decimal( $product['total'], 2 ); ?></td>
+						</tr>
+					<?php } ?>
+				<?php }	?>
+				<br>
+
+                <tr>
+					<td style="text-align:center;"><!-- remain empty --></td>
+					<td style="text-align:center;"><!-- remain empty --></td>
+					<td style="text-align:center;"><strong>Delivery</strong></td>
+					<td style="text-align:center;"><?php echo esc_html( $delivery_cost ); ?></td>
+				</tr>
+
+                <tr>
+					<td style="text-align:center;"><!-- remain empty --></td>
+					<td style="text-align:center;"><!-- remain empty --></td>
+					<td style="text-align:center;"><strong>Total Due</strong></td>
+					<td style="text-align:center;"><?php echo esc_html( $order_total ); ?></td>
+				</tr>
+                <tr>
+					<td style="text-align:center;"><!-- remain empty --></td>
+					<td style="text-align:center;"><!-- remain empty --></td>
+					<td style="text-align:center;">GST (included)</td>
+					<td>-</td>
+				</tr>
             </table>
 
             <div style="text-align:center; margin-top:25px;">
@@ -585,7 +663,7 @@ function show_towing_svg_in_editor( $post ) {
             </div>
         </div>
     </div>
-	<!-- <script>
+	<script>
 		jQuery(document).ready(function($){
 		jQuery('#show-order-popup').on('click', function(e){
 			e.preventDefault();
@@ -603,36 +681,116 @@ function show_towing_svg_in_editor( $post ) {
 			}
 		});
 		});
-	</script> -->
+	</script>
     <?php
 }
 
-add_action( 'wp_ajax_download_customer_pdf', function() {
+use Dompdf\Dompdf;
+
+function download_customer_pdf_callback() {
     $post_id = intval( $_GET['post_id'] ?? 0 );
-    if ( ! $post_id ) wp_die( 'Invalid request.' );
+    if ( ! $post_id ) {
+        wp_die( 'Invalid request.' );
+    }
 
-    $customer_name   = get_post_meta( $post_id, 'customer_name', true );
-    $delivery_address = get_post_meta( $post_id, 'delivery_address', true );
-    $vehicle_make    = get_post_meta( $post_id, 'vehicle_make', true );
-    $van_make        = get_post_meta( $post_id, 'van_make', true );
-    $products        = get_post_meta( $post_id, 'selected_products', true );
-    $total_price     = get_post_meta( $post_id, 'total_price', true );
-    $delivery_cost   = get_post_meta( $post_id, 'delivery_cost', true );
-    $order_date      = get_the_date( 'd M Y', $post_id );
+    $order_id = get_post_meta( $post_id, 'order_id', true );
+    $order    = wc_get_order( $order_id );
 
-    header('Content-Type: application/pdf');
-    header('Content-Disposition: attachment; filename="customer-order-' . $post_id . '.pdf"');
+    if ( ! $order ) {
+        wp_die( 'Order not found.' );
+    }
 
-    // Very basic PDF (you can replace this with proper PDF library later)
-    echo "Order Summary\n\n";
-    echo "Order Date: $order_date\n";
-    echo "Customer: $customer_name\n";
-    echo "Delivery Address: $delivery_address\n";
-    echo "Vehicle Make: $vehicle_make\n";
-    echo "Van Make: $van_make\n";
-    echo "Products: $products\n";
-    echo "Total Price: $total_price\n";
-    echo "Delivery Cost: $delivery_cost\n";
+    $order_date       = $order->get_date_created()->date_i18n('Y-m-d');
+    $customer_name    = $order->get_formatted_billing_full_name();
+    $customer_phone   = $order->get_billing_phone();
+    $customer_email   = $order->get_billing_email();
+    $delivery_address = $order->get_formatted_shipping_address();
+    $delivery_cost    = $order->get_shipping_total();
+    $order_total      = $order->get_total();
+    $inv_logo      = get_template_directory_uri().'/assets/src/images/invoice-gaurd.png';
 
+    $product_rows = '';
+    foreach ( $order->get_items() as $item ) {
+        $name     = $item->get_name();
+        $qty      = $item->get_quantity();
+        $total    = wc_format_decimal( $item->get_total(), 2 );
+        $unit     = wc_format_decimal( $item->get_total() / $qty, 2 );
+        $product_rows .= "
+            <tr>
+                <td style='text-align:center;'>$qty</td>
+                <td style='text-align:center;'>$name</td>
+                <td style='text-align:center;'>$$unit</td>
+                <td style='text-align:center;'>$$total</td>
+            </tr>";
+    }
+
+    $html = "
+
+		<div class='invoice-header-section d-flex justify-content-between ' >
+				<div class='invoice-logo inv-column'>
+					<img src='{$inv_logo}' style='max-width:600px;cursor:pointer;' />
+				</div>
+				<div class='invoice-bussiness-details inv-column'>
+					<div class='h4'>Stone Stomper</div>
+					<p>PO Box 204, Port Noarlunga, SA <br> 5167 <br> Factory location:  Lonsdale SA <br>
+					<strong>
+						Email:
+					</strong>
+					<br>
+					<a href='mailto:sales@stonestomper.com.au'></a>sales@stonestomper.com.au</p>
+				</div>
+				<div class='invoice-right-column inv-column'>
+					<h3>Quote/Invoice</h2>
+					<table>
+						<tr><td><strong>DATE:</strong> <?php echo esc_html( $order_date ); ?> </td></tr>
+						<tr><td><strong>INV#:</strong> <?php echo esc_html( $order_id ); ?> </td></tr>
+						<tr><td><strong>P/O#:</strong>  </td></tr>
+					</table>
+				</div>
+			</div>
+
+    <h2 style='text-align:center;'>Customer Order Summary</h2>
+    <p><strong>Date:</strong> {$order_date}<br>
+       <strong>Customer:</strong> {$customer_name}<br>
+       <strong>Email:</strong> {$customer_email}<br>
+       <strong>Phone:</strong> {$customer_phone}<br>
+       <strong>Address:</strong> {$delivery_address}</p>
+
+    <table border='1' cellspacing='0' cellpadding='5' width='100%' style='border-collapse:collapse;'>
+        <thead>
+            <tr>
+                <th>Qty</th>
+                <th>Description</th>
+                <th>Unit Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>$product_rows</tbody>
+        <tfoot>
+            <tr>
+                <td colspan='3' style='text-align:right;'><strong>Delivery</strong></td>
+                <td style='text-align:center;'>$$delivery_cost</td>
+            </tr>
+            <tr>
+                <td colspan='3' style='text-align:right;'><strong>Total Due</strong></td>
+                <td style='text-align:center;'>$$order_total</td>
+            </tr>
+        </tfoot>
+    </table>";
+
+    // Load Dompdf
+    require_once __DIR__ . '/vendor/autoload.php';
+
+    $dompdf = new Dompdf();
+    $dompdf->loadHtml( $html );
+    $dompdf->setPaper('A4', 'portrait');
+    $dompdf->render();
+
+    // Output to browser
+    $dompdf->stream( "customer-order-{$post_id}.pdf", [ 'Attachment' => false ] );
     exit;
-});
+}
+
+add_action( 'wp_ajax_download_customer_pdf', 'download_customer_pdf_callback' );
+add_action( 'wp_ajax_nopriv_download_customer_pdf', 'download_customer_pdf_callback' );
+

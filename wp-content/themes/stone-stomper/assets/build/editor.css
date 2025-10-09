@@ -6755,4 +6755,119 @@ body.post-type-post .editor-styles-wrapper > div {
   height: 100% !important;
 }
 
+#order-popup .invoice-right-column table tr td {
+  padding-bottom: 12px;
+}
+#order-popup .order-table tr td {
+  padding-bottom: 20px;
+}
+#order-popup .invoice-header-section {
+  display: flex;
+  justify-content: space-between;
+  -moz-column-gap: 30px;
+       column-gap: 30px;
+  flex-wrap: wrap;
+}
+#order-popup .invoice-header-section h1,
+#order-popup .invoice-header-section .heading-1,
+#order-popup .invoice-header-section h2,
+#order-popup .invoice-header-section .heading-2,
+#order-popup .invoice-header-section h3,
+#order-popup .invoice-header-section .heading-3,
+#order-popup .invoice-header-section h4,
+#order-popup .invoice-header-section .heading-4,
+#order-popup .invoice-header-section h5,
+#order-popup .invoice-header-section .heading-5,
+#order-popup .invoice-header-section h6,
+#order-popup .invoice-header-section .heading-6 {
+  margin: 0 0 20px;
+  color: var(--ss_heading_color);
+  line-height: 1.3;
+  text-transform: initial;
+  font-family: "Jost", arial, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+#order-popup .invoice-header-section h1 a,
+#order-popup .invoice-header-section .heading-1 a,
+#order-popup .invoice-header-section h2 a,
+#order-popup .invoice-header-section .heading-2 a,
+#order-popup .invoice-header-section h3 a,
+#order-popup .invoice-header-section .heading-3 a,
+#order-popup .invoice-header-section h4 a,
+#order-popup .invoice-header-section .heading-4 a,
+#order-popup .invoice-header-section h5 a,
+#order-popup .invoice-header-section .heading-5 a,
+#order-popup .invoice-header-section h6 a,
+#order-popup .invoice-header-section .heading-6 a {
+  color: var(--ss_heading_link_color);
+  border-bottom: none;
+}
+#order-popup .invoice-header-section h1 a:hover, #order-popup .invoice-header-section h1 a:focus-visible,
+#order-popup .invoice-header-section .heading-1 a:hover,
+#order-popup .invoice-header-section .heading-1 a:focus-visible,
+#order-popup .invoice-header-section h2 a:hover,
+#order-popup .invoice-header-section h2 a:focus-visible,
+#order-popup .invoice-header-section .heading-2 a:hover,
+#order-popup .invoice-header-section .heading-2 a:focus-visible,
+#order-popup .invoice-header-section h3 a:hover,
+#order-popup .invoice-header-section h3 a:focus-visible,
+#order-popup .invoice-header-section .heading-3 a:hover,
+#order-popup .invoice-header-section .heading-3 a:focus-visible,
+#order-popup .invoice-header-section h4 a:hover,
+#order-popup .invoice-header-section h4 a:focus-visible,
+#order-popup .invoice-header-section .heading-4 a:hover,
+#order-popup .invoice-header-section .heading-4 a:focus-visible,
+#order-popup .invoice-header-section h5 a:hover,
+#order-popup .invoice-header-section h5 a:focus-visible,
+#order-popup .invoice-header-section .heading-5 a:hover,
+#order-popup .invoice-header-section .heading-5 a:focus-visible,
+#order-popup .invoice-header-section h6 a:hover,
+#order-popup .invoice-header-section h6 a:focus-visible,
+#order-popup .invoice-header-section .heading-6 a:hover,
+#order-popup .invoice-header-section .heading-6 a:focus-visible {
+  color: var(--ss_heading_link_color_hover);
+}
+#order-popup .invoice-header-section h1,
+#order-popup .invoice-header-section .heading-1 {
+  font-size: var(--ss_font_size_58);
+}
+#order-popup .invoice-header-section h2,
+#order-popup .invoice-header-section .heading-2 {
+  font-size: var(--ss_font_size_44);
+}
+#order-popup .invoice-header-section h3,
+#order-popup .invoice-header-section .heading-3 {
+  font-size: var(--ss_font_size_32);
+  letter-spacing: 0.2px;
+}
+#order-popup .invoice-header-section h4,
+#order-popup .invoice-header-section .heading-4 {
+  font-size: var(--ss_font_size_28);
+}
+#order-popup .invoice-header-section h5,
+#order-popup .invoice-header-section .heading-5 {
+  font-size: var(--ss_font_size_24);
+}
+#order-popup .invoice-header-section h6,
+#order-popup .invoice-header-section .heading-6 {
+  font-size: var(--ss_font_size_22);
+}
+#order-popup .invoice-header-section .large-heading {
+  font-size: var(--ss_font_size_77);
+}
+#order-popup .invoice-header-section .invoice-logo {
+  width: 22%;
+}
+#order-popup .invoice-header-section .invoice-logo img {
+  width: 100%;
+  height: auto;
+}
+#order-popup .invoice-header-section .invoice-bussiness-details {
+  width: 33%;
+}
+#order-popup .invoice-header-section .invoice-right-column {
+  max-width: 40%;
+}
+
 /*# sourceMappingURL=editor.css.map*/
