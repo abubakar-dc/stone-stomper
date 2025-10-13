@@ -519,6 +519,7 @@ Mixin for transition
   --ss_font_size_14: clamp(13 * 1px, 1 / 806 * (100vw - 474 * 1px) + 13 * 1px, 14 * 1px);
   --ss_font_size_15: clamp(15 * 1px, 0 / 806 * (100vw - 474 * 1px) + 15 * 1px, 15 * 1px);
   --ss_font_size_16: clamp(16 * 1px, 0 / 806 * (100vw - 474 * 1px) + 16 * 1px, 16 * 1px);
+  --ss_font_size_18: clamp(16 * 1px, 2 / 806 * (100vw - 474 * 1px) + 16 * 1px, 18 * 1px);
   --ss_font_size_22: clamp(20 * 1px, 2 / 806 * (100vw - 474 * 1px) + 20 * 1px, 22 * 1px);
   --ss_font_size_24: clamp(20 * 1px, 4 / 806 * (100vw - 474 * 1px) + 20 * 1px, 24 * 1px);
   --ss_font_size_28: clamp(22 * 1px, 5 / 806 * (100vw - 474 * 1px) + 22 * 1px, 27 * 1px);
@@ -6806,11 +6807,17 @@ body.post-type-post .editor-styles-wrapper > div {
   height: 100% !important;
 }
 
+#order-popup .invoice-bussiness-details h4 {
+  font-weight: 700;
+}
+#order-popup .invoice-right-column table {
+  width: 100%;
+  border: 1px solid black;
+  padding: 10px;
+  box-sizing: border-box;
+}
 #order-popup .invoice-right-column table tr td {
   padding-bottom: 12px;
-}
-#order-popup .order-table tr td {
-  padding-bottom: 20px;
 }
 #order-popup .invoice-header-section {
   display: flex;
@@ -6830,7 +6837,8 @@ body.post-type-post .editor-styles-wrapper > div {
 #order-popup .invoice-header-section h5,
 #order-popup .invoice-header-section .heading-5,
 #order-popup .invoice-header-section h6,
-#order-popup .invoice-header-section .heading-6 {
+#order-popup .invoice-header-section .heading-6,
+#order-popup .invoice-header-section strong {
   margin: 0 0 20px;
   color: var(--ss_heading_color);
   line-height: 1.3;
@@ -6850,7 +6858,8 @@ body.post-type-post .editor-styles-wrapper > div {
 #order-popup .invoice-header-section h5 a,
 #order-popup .invoice-header-section .heading-5 a,
 #order-popup .invoice-header-section h6 a,
-#order-popup .invoice-header-section .heading-6 a {
+#order-popup .invoice-header-section .heading-6 a,
+#order-popup .invoice-header-section strong a {
   color: var(--ss_heading_link_color);
   border-bottom: none;
 }
@@ -6876,7 +6885,9 @@ body.post-type-post .editor-styles-wrapper > div {
 #order-popup .invoice-header-section h6 a:hover,
 #order-popup .invoice-header-section h6 a:focus-visible,
 #order-popup .invoice-header-section .heading-6 a:hover,
-#order-popup .invoice-header-section .heading-6 a:focus-visible {
+#order-popup .invoice-header-section .heading-6 a:focus-visible,
+#order-popup .invoice-header-section strong a:hover,
+#order-popup .invoice-header-section strong a:focus-visible {
   color: var(--ss_heading_link_color_hover);
 }
 #order-popup .invoice-header-section h1,
@@ -6891,6 +6902,7 @@ body.post-type-post .editor-styles-wrapper > div {
 #order-popup .invoice-header-section .heading-3 {
   font-size: var(--ss_font_size_32);
   letter-spacing: 0.2px;
+  text-transform: uppercase;
 }
 #order-popup .invoice-header-section h4,
 #order-popup .invoice-header-section .heading-4 {
@@ -6908,22 +6920,64 @@ body.post-type-post .editor-styles-wrapper > div {
   font-size: var(--ss_font_size_77);
 }
 #order-popup .invoice-header-section .invoice-logo {
-  width: 22%;
+  width: 25%;
 }
 #order-popup .invoice-header-section .invoice-logo img {
   width: 100%;
   height: auto;
 }
 #order-popup .invoice-header-section .invoice-bussiness-details {
-  width: 33%;
+  width: 32%;
+}
+#order-popup .invoice-header-section .invoice-bussiness-details .heading-6 {
+  font-size: var(--ss_font_size_18);
+  margin-bottom: 0;
+}
+#order-popup .invoice-header-section .invoice-bussiness-details p {
+  margin: 0;
+  font-size: var(--ss_font_size_16);
+}
+#order-popup .invoice-header-section .invoice-bussiness-details p strong {
+  font-size: var(--ss_font_size_18);
 }
 #order-popup .invoice-header-section .invoice-right-column {
-  max-width: 40%;
+  width: 35%;
+}
+#order-popup .invoice-header-section .invoice-right-column h3,
+#order-popup .invoice-header-section .invoice-right-column .heading-3 {
+  text-align: center;
+  width: 51%;
+  margin: 0 auto 5px;
+  word-break: break-word;
+  font-size: var(--ss_font_size_32);
+  font-family: "Open Sans", arial, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-family: serif;
+}
+#order-popup .invoice-header-section .invoice-right-column table {
+  padding: 0;
+  border-collapse: collapse;
+}
+#order-popup .invoice-header-section .invoice-right-column table tr {
+  width: 100%;
+}
+#order-popup .invoice-header-section .invoice-right-column table tr:nth-child(n+2) {
+  border-top: 1px solid black;
+}
+#order-popup .invoice-header-section .invoice-right-column table td {
+  font-size: 16px;
+  padding: 8px 10px;
+  box-sizing: border-box;
 }
 
 .stone-stomper-vector {
   position: relative;
   display: inline-block;
+  width: 100%;
+}
+.stone-stomper-vector img {
+  width: 100%;
 }
 .stone-stomper-vector .ss-width {
   display: inline-block;
@@ -6943,4 +6997,81 @@ body.post-type-post .editor-styles-wrapper > div {
   border-radius: 10px;
   overflow-y: scroll;
   height: 75vh;
+}
+
+.inv-order-details .stone-stomper-vector {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+.inv-order-details .stone-stomper-vector img {
+  width: 100%;
+  max-width: 900px !important;
+  margin: 0 auto;
+}
+.inv-order-details .stone-stomper-vector .ss-width {
+  display: inline-block;
+  position: absolute;
+  top: 28px;
+  right: 41%;
+  transform: translateX(50%);
+}
+.inv-order-details br {
+  display: none;
+}
+.inv-order-details .customer-details {
+  border-bottom: 2px solid #b9b9b9;
+  font-size: var(--ss_font_size_14);
+  padding-bottom: 6px;
+  box-sizing: border-box;
+  margin-bottom: 4px;
+}
+.inv-order-details .customer-details br {
+  display: none;
+}
+
+.order-table {
+  border: 1px solid black;
+}
+.order-table tr:first-child td {
+  text-transform: uppercase;
+}
+.order-table tr td {
+  font-size: var(--ss_font_size_16);
+  border: 1px solid black;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.order-table tr td strong {
+  font-weight: 400;
+}
+
+.inv-one .stone-stomper-vector {
+  margin-top: 30px;
+}
+.inv-one .stone-stomper-vector img {
+  max-width: 900px !important;
+}
+
+.thanks-message {
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--ss_heading_color);
+  line-height: 1.3;
+  text-transform: initial;
+  font-family: "Jost", arial, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  margin: 0 0 20px;
+  font-size: var(--ss_font_size_24);
+}
+
+.inv-two .stone-stomper-vector {
+  margin-top: 30px;
+}
+.inv-two .order-table {
+  margin-top: 20px;
+}
+.inv-two .order-table tr {
+  text-align: right;
 }

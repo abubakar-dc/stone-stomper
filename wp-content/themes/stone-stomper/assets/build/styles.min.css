@@ -400,6 +400,7 @@ Mixin for transition
   --ss_font_size_14: clamp(13 * 1px, 1 / 806 * (100vw - 474 * 1px) + 13 * 1px, 14 * 1px);
   --ss_font_size_15: clamp(15 * 1px, 0 / 806 * (100vw - 474 * 1px) + 15 * 1px, 15 * 1px);
   --ss_font_size_16: clamp(16 * 1px, 0 / 806 * (100vw - 474 * 1px) + 16 * 1px, 16 * 1px);
+  --ss_font_size_18: clamp(16 * 1px, 2 / 806 * (100vw - 474 * 1px) + 16 * 1px, 18 * 1px);
   --ss_font_size_22: clamp(20 * 1px, 2 / 806 * (100vw - 474 * 1px) + 20 * 1px, 22 * 1px);
   --ss_font_size_24: clamp(20 * 1px, 4 / 806 * (100vw - 474 * 1px) + 20 * 1px, 24 * 1px);
   --ss_font_size_28: clamp(22 * 1px, 5 / 806 * (100vw - 474 * 1px) + 22 * 1px, 27 * 1px);

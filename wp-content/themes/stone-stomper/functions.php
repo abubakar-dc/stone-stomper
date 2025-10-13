@@ -576,7 +576,7 @@ function show_towing_svg_in_editor( $post ) {
 							<img src="<?php echo get_template_directory_uri(); ?>/assets/src/images/invoice-gaurd.png" style="max-width:600px;cursor:pointer;" />
 						</div>
 						<div class="invoice-bussiness-details inv-column">
-							<div class="h4">Stone Stomper</div>
+							<div class="heading-6">Stone Stomper</div>
 							<p>PO Box 204, Port Noarlunga, SA <br> 5167 <br> Factory location:  Lonsdale SA <br>
 							<strong>
 								Email:
@@ -693,7 +693,7 @@ function show_towing_svg_in_editor( $post ) {
 							</span>
 						</div>
 					</div>
-					<div class="tanks-message">THANK YOU FOR YOUR BUSINESS</div>
+					<div class="thanks-message">THANK YOU FOR YOUR BUSINESS</div>
 				</div>
 				<!-- popup second page -->
 				<div class="inv-two office-use">
@@ -760,24 +760,24 @@ function show_towing_svg_in_editor( $post ) {
 						<table class="order-table" style="width:100%; border-collapse:collapse;">
 
 							<tr>
-								<td style="text-align:center;">Fittings 150mm</td>
-								<td style="text-align:center;"></td>
+								<td style="text-align:left;">Fittings 150mm</td>
+								<td style="text-align:left;"></td>
 							</tr>
 							<tr>
-								<td style="text-align:center;">Fittings 150mm</td>
-								<td style="text-align:center;"></td>
+								<td style="text-align:left;">Fittings 150mm</td>
+								<td style="text-align:left;"></td>
 							</tr>
 							<tr>
-								<td style="text-align:center;">Fittings 150mm</td>
-								<td style="text-align:center;"></td>
+								<td style="text-align:left;">Fittings 150mm</td>
+								<td style="text-align:left;"></td>
 							</tr>
 							<tr>
-								<td style="text-align:center;">Fittings 150mm</td>
-								<td style="text-align:center;"></td>
+								<td style="text-align:left;">Fittings 150mm</td>
+								<td style="text-align:left;"></td>
 							</tr>
 							<tr>
-								<td style="text-align:center;">Fittings 150mm</td>
-								<td style="text-align:center;"></td>
+								<td style="text-align:left;">Fittings 150mm</td>
+								<td style="text-align:left;"></td>
 							</tr>
 						</table>
 						<div class="stone-stomper-vector">
