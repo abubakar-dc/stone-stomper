@@ -191,6 +191,48 @@
             "append": ""
         },
         {
+            "key": "field_68c2d0672b908",
+            "label": "Carvan Make",
+            "name": "caravan_make",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_68c2d0702b909",
+            "label": "Carvan Model",
+            "name": "caravan_model",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_68d560f565028",
             "label": "Bar Width (mm)",
             "name": "bar_width_mm",
@@ -568,5 +610,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1758814823
+    "modified": 1760110974
 }

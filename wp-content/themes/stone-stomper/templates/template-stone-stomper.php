@@ -310,10 +310,10 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											<label class="req" for="van_make">Caravan Make</label>
 											<select id="van_make" name="caravan_make" required>
 												<?php
-												$terms = get_terms( array(
-													'taxonomy'   => 'caravan-category', // Replace with your taxonomy slug
-													'hide_empty' => false,      // Show terms even if they have no posts
-												) );
+													$terms = get_terms( array(
+														'taxonomy'   => 'caravan-category', // Replace with your taxonomy slug
+														'hide_empty' => false,      // Show terms even if they have no posts
+													) );
 
 												?>
 												<option value="">Select Caravan Make</option>

@@ -357,11 +357,13 @@ error_log(print_r($cust_name,true));
 	// update_post_meta( $post_id, 'product_type', $product_type );
 	update_post_meta( $post_id, 'vehicle_make', $vehicle_make );
 	update_post_meta( $post_id, 'vehicle_model', $vehicle_model );
+	update_post_meta( $post_id, 'caravan_make', $caravan_make );
+	update_post_meta( $post_id, 'caravan_model', $caravan_model );
 	update_post_meta( $post_id, 'year_of_manufacture', $vehicle_year );
 	update_post_meta( $post_id, 'measure_barwidth_mm', $measure_barwidth_mm );
 	update_post_meta( $post_id, 'bar_width_mm', $measure_barwidth_mm );
 	update_post_meta( $post_id, 'caravan_width_mm', $caravan_width_mm );
-	update_post_meta( $post_id, 'caravan_width_mm', $caravan_width_mm );
+	update_post_meta( $post_id, 'caravan_length_mm', $a_frame_length_mm );
 	update_post_meta( $post_id, 'sts_var_caravan_support_pockets', $support_pockets );
 	update_post_meta( $post_id, 'factory_stoneguard_width', $stoneguard_length_mm );
 	update_post_meta( $post_id, 'factory_stoneguard_height', $stoneguard_width_mm );
@@ -486,7 +488,6 @@ function show_towing_svg_in_editor( $post ) {
     // Get all meta data
    $order_id = get_post_meta( $post->ID, 'order_id', true );
 	$order    = wc_get_order( $order_id );
-
 	if ( $order ) {
 		// Basic info
 		$order_date       = $order->get_date_created()->date_i18n('Y-m-d');
@@ -496,6 +497,9 @@ function show_towing_svg_in_editor( $post ) {
 		$delivery_address = $order->get_formatted_shipping_address();
 		$delivery_cost    = $order->get_shipping_total();
 		$order_total      = $order->get_total();
+			$delivery_instructions = $order->get_customer_note(); // 🟢 Add this line
+
+
 		$products         = [];
 
 		// Loop products in the order
@@ -517,12 +521,28 @@ function show_towing_svg_in_editor( $post ) {
     $bar_width_mm        = get_post_meta( $post->ID, 'bar_width_mm', true );
     $caravan_width_mm    = get_post_meta( $post->ID, 'caravan_width_mm', true );
     $vehicle_make    = get_post_meta( $post->ID, 'vehicle_make', true );
+    $caravan_make    = get_post_meta( $post->ID, 'caravan_make', true );
 
     ?>
 
     <div style="text-align:center; padding:20px;">
-        <a href="#" id="show-order-popup">
+        <a href="#" class="stone-stomper-vector" id="show-order-popup">
+			<div class="ss-width">
+				<span>
+					<?php echo esc_html( $caravan_width_mm ?: '-' ); ?>
+				</span>
+			</div>
+			<div class="ss-length">
+				<span>
+					<?php echo esc_html( $bar_width_mm ?: '-' ); ?>
+				</span>
+			</div>
             <img src="<?php echo get_template_directory_uri(); ?>/assets/src/images/stone-stomper-vector.png" style="max-width:600px;cursor:pointer;" />
+			<div class="towing-vehicle-bar-width">
+				<span>
+					<?php echo esc_html( $bar_width_mm ?: '-' ); ?>
+				</span>
+			</div>
         </a>
 		<div style="margin-top:30px; text-align:center; font-size:16px;">
 			<h3 style="margin-bottom:10px;"> Measurements</h3>
@@ -566,7 +586,7 @@ function show_towing_svg_in_editor( $post ) {
 					<table>
 						<tr><td><strong>DATE:</strong> <?php echo esc_html( $order_date ); ?> </td></tr>
 						<tr><td><strong>INV#:</strong> <?php echo esc_html( $order_id ); ?> </td></tr>
-						<tr><td><strong>P/O#:</strong>  </td></tr>
+						<tr><td><strong>P/O#:</strong> <?php echo esc_html( $order_id ); ?> </td></tr>
 					</table>
 				</div>
 			</div>
@@ -586,11 +606,14 @@ function show_towing_svg_in_editor( $post ) {
 				</div>
 				<br>
 				<div class="customer-details inv-order-row">
-					<strong>Delivery Instructions/Authority to Leave: </strong>No
+					<strong>Delivery Instructions/Authority to Leave:</strong>
+					<?php echo ! empty( $delivery_instructions ) ? esc_html( $delivery_instructions ) : 'No'; ?>
 				</div>
 				<br>
 				<div class="customer-details inv-order-row">
-					<strong>Trailer Make: </strong>Van
+					<?php if($caravan_make){ ?>
+						<strong>Trailer Make: </strong><?php echo esc_html( $caravan_make ); ?>
+					<?php } ?>
 					&nbsp;&nbsp;&nbsp;
 					<?php if($vehicle_make){ ?>
 						<strong>Vehicle Make: </strong><?php echo esc_html( $vehicle_make ); ?>
@@ -795,4 +818,5 @@ function download_customer_pdf_callback() {
 
 add_action( 'wp_ajax_download_customer_pdf', 'download_customer_pdf_callback' );
 add_action( 'wp_ajax_nopriv_download_customer_pdf', 'download_customer_pdf_callback' );
+
 

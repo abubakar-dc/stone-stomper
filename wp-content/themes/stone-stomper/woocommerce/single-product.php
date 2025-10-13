@@ -23,8 +23,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 	</div>
 </section>
 
-
-
 <div class="single-product-custom">
 
 	<?php

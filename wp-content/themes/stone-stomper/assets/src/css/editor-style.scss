@@ -470,3 +470,16 @@ body.post-type-post .editor-styles-wrapper {
 		}
 	}
 }
+
+.stone-stomper-vector {
+	position: relative;
+	display: inline-block;
+
+	.ss-width {
+		display: inline-block;
+		position: absolute;
+		top: 28px;
+		left: 41%;
+		transform: translateX(-50%);
+	}
+}

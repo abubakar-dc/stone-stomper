@@ -6869,3 +6869,15 @@ body.post-type-post .editor-styles-wrapper > div {
 #order-popup .invoice-header-section .invoice-right-column {
   max-width: 40%;
 }
+
+.stone-stomper-vector {
+  position: relative;
+  display: inline-block;
+}
+.stone-stomper-vector .ss-width {
+  display: inline-block;
+  position: absolute;
+  top: 28px;
+  right: 41%;
+  transform: translateX(50%);
+}
