@@ -8,10 +8,10 @@
 	}
 }
 
-.vehicle-image {
+.vehicle-images {
 	display: flex;
 
-	img {
+	.vehicle-image {
 		width: 50%;
 	}
 }
@@ -74,6 +74,15 @@
 
 .form-section-left {
 	width: 55.2%;
+	position: sticky;
+	top: 140px;
+	margin-bottom: 20px;
+}
+
+.logged-in.admin-bar {
+	.form-section-left {
+		top: 162px;
+	}
 }
 
 .form-section-right {
@@ -306,4 +315,47 @@
 
 .mobile-image {
 	display: none;
+}
+
+.image-caption {
+	position: relative;
+	padding: 12px 14px 10px 38px;
+	letter-spacing: 0.3px;
+	background: var(--ss_white);
+	margin-bottom: 20px;
+	width: max-content;
+
+	p {
+		margin: 0;
+	}
+
+	&::before {
+		content: "";
+		background-image: url("../images/info-icon.svg");
+		background-size: contain;
+		background-repeat: no-repeat;
+		width: 18px;
+		height: 18px;
+		display: inline-block;
+		position: absolute;
+		left: 13px;
+		top: 15px;
+	}
+}
+
+.form-image-slider,
+.vehicle-images {
+	.image-caption-area {
+		position: relative;
+		bottom: 44px;
+		margin-bottom: -44px;
+	}
+}
+
+#caravan-details {
+	.checkboxes {
+		label {
+			width: 100%;
+		}
+	}
 }

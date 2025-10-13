@@ -145,9 +145,10 @@ class WP_Theme_Settings {
 				.login h1 a {
 					background-image: url(' . esc_url( get_stylesheet_directory_uri() ) . '/assets/build/images/site-logo.svg) !important;
 					background-position: center center;
+					background-color: black;
 					color:rgba(0, 0, 0, 0);
-					background-size: contain;
-					height: 80px;
+					background-size: 150px;
+					height: 100px;
 					width: 80%;
 					outline: 0;
 				}

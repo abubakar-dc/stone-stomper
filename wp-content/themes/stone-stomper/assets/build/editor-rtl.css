@@ -760,428 +760,19 @@ Mixin for transition
   font-size: var(--gb_font_size_20);
   color: var(--gb_body_color);
   line-height: 1.5;
-  /* Editor style */
-  /* containers */
-  /* Typography */
-  /*-------------------------------------------------
-  >> Styles for headings
-  -------------------------------------------------*/
-  /* -------------------------------------------------
-  >> Base Styles
-  ---------------------------------------------------
-  >> Edit these styles as required
-  ------------------------------------------------- */
-  /*-------------------------------------------------
-  >> Styles for content tags
-  -------------------------------------------------*/
-  /* -------------------------------------------------
-  >> Base Styles
-  ---------------------------------------------------
-  >> Edit these styles as required
-  ------------------------------------------------- */
-  /* Elements */
-  /* -------------------------------------------------
-  >> Base Styles
-  ---------------------------------------------------
-  >> Do not edit these styles
-  ------------------------------------------------- */
-  /* -------------------------------------------------
-  >> Project Styles
-  ---------------------------------------------------
-  >> Edit these styles as required
-  ------------------------------------------------- */
-  /* -------------------------------------------------
-  >> Base Styles
-  ---------------------------------------------------
-  >> Edit these styles as required
-  ------------------------------------------------- */
-  /* -------------------------------------------------
-  >> Base Styles
-  ---------------------------------------------------
-  >> Edit these styles as required
-  ------------------------------------------------- */
-  /* Media */
-  /*-------------------------------------------------
-  >> Styles for WordPress captions
-  -------------------------------------------------*/
-  /*-------------------------------------------------
-  >> Styles for default WordPress galleries
-  -------------------------------------------------*/
-  /* Core */
-  /*-------------------------------------------------
-  >> Accessibility styles for WordPress
-  -------------------------------------------------*/
-  /* -------------------------------------------------
-  >> Base Styles
-  ---------------------------------------------------
-  >> Edit these styles as required
-  ------------------------------------------------- */
-  /*-------------------------------------------------
-  >> Default WordPress alignments
-  -------------------------------------------------*/
-  /* -------------------------------------------------
-  >> Base Styles
-  ---------------------------------------------------
-  >> Edit these styles as required
-  ------------------------------------------------- */
-  /*-------------------------------------------------
-  >> Styles for posts and pages
-  -------------------------------------------------*/
-  /* -------------------------------------------------
-  >> Base Styles
-  ---------------------------------------------------
-  >> Do not edit these styles
-  ------------------------------------------------- */
-  /* -------------------------------------------------
-  >> Project Styles
-  ---------------------------------------------------
-  >> Edit following styles or write your own
-  ------------------------------------------------- */
-  /*-------------------------------------------------
-  >> Pagination styles
-  -------------------------------------------------*/
-  /* -------------------------------------------------
-  >> Base Styles
-  ---------------------------------------------------
-  >> Edit these styles as required
-  ------------------------------------------------- */
-  /*-------------------------------------------------
-  >> Styles for WordPress comments
-  -------------------------------------------------*/
-  /* -------------------------------------------------
-  >> Base Styles
-  ---------------------------------------------------
-  >> Edit these styles as required
-  ------------------------------------------------- */
-  /*-------------------------------------------------
-  >> Styles for default WordPress widgets
-  -------------------------------------------------*/
-  /* -------------------------------------------------
-  >> Base Styles
-  ---------------------------------------------------
-  >> Do not edit these styles
-  ------------------------------------------------- */
-  /* -------------------------------------------------
-  >> Project Styles
-  ---------------------------------------------------
-  >> Edit following styles or write your own
-  ------------------------------------------------- */
-  /* Blocks */
-  /* -------------------------------------------------
-  >> Accessibility styles for WordPress Gallery Block
-  ------------------------------------------------- */
-  /* -------------------------------------------------
-  >> Accessibility styles for WordPress Cover Block
-  ------------------------------------------------- */
-  /* -------------------------------------------------
-  >> Accessibility styles for WordPress Calender Block
-  ------------------------------------------------- */
-  /* -------------------------------------------------
-  >> Accessibility styles for WordPress Categories Block
-  ------------------------------------------------- */
-  /* -------------------------------------------------
-  >> Accessibility styles for WordPress Image Block
-  ------------------------------------------------- */
-  /* -------------------------------------------------
-  >> Base Styles
-  ---------------------------------------------------
-  >> Edit these styles as required
-  ------------------------------------------------- */
-  /* -------------------------------------------------
-  >> Accessibility styles for WordPress Latest Comments Block
-  ------------------------------------------------- */
-  /* -------------------------------------------------
-  >> Accessibility styles for WordPress Latest Posts Block
-  ------------------------------------------------- */
-  /* -------------------------------------------------
-  >> Accessibility styles for WordPress Quote Block
-  ------------------------------------------------- */
-  /* -------------------------------------------------
-  >> Accessibility styles for WordPress PullQuote Block
-  ------------------------------------------------- */
-  /* -------------------------------------------------
-  >> Base Styles
-  ---------------------------------------------------
-  >> Edit these styles as required
-  ------------------------------------------------- */
-  /* -------------------------------------------------
-  >> Accessibility styles for WordPress RSS Feed Block
-  ------------------------------------------------- */
-  /* -------------------------------------------------
-  >> Accessibility styles for WordPress Search Block
-  ------------------------------------------------- */
-  /* -------------------------------------------------
-  >> Accessibility styles for WordPress Social-links Block
-  ------------------------------------------------- */
-  /* -------------------------------------------------
-  >> Accessibility styles for WordPress Tag Cloud Block
-  ------------------------------------------------- */
-  /*  Vendor CSS Magnific popup */
-  @import "vendors/magnific-popup.css";
-  /*  Vendor CSS Wordpress Buttons */
-  /****
-   *
-   * WordPress buttons
-   *
-  ****/
-  /* site */
-  /*-------------------------------------------------
-  >> Styles for header and footer of website
-  -------------------------------------------------*/
-  /*-------------------------------------------------
-  >> Styles for header
-  -------------------------------------------------*/
-  /*-------------------------------------------------
-  >> Styles for desktop menu
-  -------------------------------------------------*/
-  /*-------------------------------------------------
-  >> Styles for mobile menu
-  -------------------------------------------------*/
-  /*-------------------------------------------------
-  >> Styles for Masthead
-  -------------------------------------------------*/
-  /*-------------------------------------------------
-  >> Styles for Default
-  -------------------------------------------------*/
-  /*-------------------------------------------------
-  >> Styles for Home
-  -------------------------------------------------*/
-  /*-------------------------------------------------
-  >> Styles for footer
-  -------------------------------------------------*/
-  /*-------------------------------------------------
-  >> Styles for Containers
-  -------------------------------------------------*/
-  /****
-   *
-   * containers
-   *
-  ****/
-  /*-------------------------------------------------
-  >> Styles for Spacers
-  -------------------------------------------------*/
-  /*-------------------------------------------------
-  >> Styles for Theme Spacers
-  -------------------------------------------------*/
-  /*-------------------------------------------------
-  >> Basic styles for theme
-  -------------------------------------------------*/
-  /****
-   *
-   * Helper classes
-   *
-  ****/
-  /****
-   *
-   * Breadcrumbs
-   *
-  ****/
-  /****
-   *
-   * Learn Button
-   *
-  ****/
-  /****
-   *
-   * Theme Buttons
-   *
-  ****/
-  /****
-   *
-   * 404 page
-   *
-  ****/
-  /**
-  * Custom Select Styles
-  **/
-  /*! Lity - v2.2.2 - 2016-12-14
-  * http://sorgalla.com/lity/
-  * Copyright (c) 2015-2016 Jan Sorgalla; Licensed MIT */
-  /* Image */
-  /* iFrame */
-  /* iFrame */
-  /*-------------------------------------------------
-  >> Basic styles for Blog post
-  -------------------------------------------------*/
-  /*-------------------------------------------------
-  >> Basic styles for Blog post
-  -------------------------------------------------*/
-  /*-------------------------------------------------
-  >> Basic styles for Blog post
-  -------------------------------------------------*/
-  /*-------------------------------------------------
-  >> Basic styles for Blog post
-  -------------------------------------------------*/
-  /*-------------------------------------------------
-  >> Basic styles for Blog post
-  -------------------------------------------------*/
-  /*-------------------------------------------------
-  >> Basic styles for Blog post
-  -------------------------------------------------*/
-  /*-------------------------------------------------
-  >> Basic styles for Blog post
-  -------------------------------------------------*/
-  /*-------------------------------------------------
-  >> Basic styles for Blog post
-  -------------------------------------------------*/
-  /*-------------------------------------------------
-  >> Styles for Website Blocks
-  -------------------------------------------------*/
-  /*-------------------------------------------------
-  >> Basic styles for Defualt Block
-  -------------------------------------------------*/
-  /*-------------------------------------------------
-  >> Basic styles for FAQ's Block
-  -------------------------------------------------*/
-  /*-------------------------------------------------
-  >> Basic styles for Team Block
-  -------------------------------------------------*/
-  /*-------------------------------------------------
-  >> Basic styles for Image Alongside Text Block
-  -------------------------------------------------*/
-  /*-------------------------------------------------
-  >> Basic styles for Image Alongside Text Block
-  -------------------------------------------------*/
-  /*-------------------------------------------------
-  >> Basic styles for Image Alongside Text Block
-  -------------------------------------------------*/
-  /*-------------------------------------------------
-  >> Basic styles for Image Alongside Text Block
-  -------------------------------------------------*/
-  /*-------------------------------------------------
-  >> Basic styles for Image Alongside Text Block
-  -------------------------------------------------*/
-  /*-------------------------------------------------
-  >> Styles for Wp Buttons
-  -------------------------------------------------*/
-  /****
-   *
-   * WordPress buttons
-   *
-  ****/
-  /* Forms */
-  /* -------------------------------------------------
-  >> Styles for form fields
-  ------------------------------------------------- */
-  /* -------------------------------------------------
-  >> Styles for form Input fields
-  ------------------------------------------------- */
-  /* -------------------------------------------------
-  >> Base Styles
-  ---------------------------------------------------
-  >> Edit these styles as required
-  ------------------------------------------------- */
-  /* clears the ‘X’ from Internet Explorer */
-  /* clears the ‘X’ from Chrome */
-  /* -------------------------------------------------
-  >> Styles for buttons
-  ------------------------------------------------- */
-  /* -------------------------------------------------
-  >> Project Styles
-  ---------------------------------------------------
-  >> Edit these styles as required
-  ------------------------------------------------- */
-  /* -------------------------------------------------
-  >> Default styles for CheckBoxes
-  ------------------------------------------------- */
-  /* -------------------------------------------------
-  >> Project Styles
-  ---------------------------------------------------
-  >> Edit these styles as required
-  ------------------------------------------------- */
-  /* -------------------------------------------------
-  >> Default styles for Radio Buttons
-  ------------------------------------------------- */
-  /* -------------------------------------------------
-  >> Project Styles
-  ---------------------------------------------------
-  >> Edit these styles as required
-  ------------------------------------------------- */
-  /* -------------------------------------------------
-  >> Default styles for Meter Tag
-  ------------------------------------------------- */
-  /* WebKit */
-  /* Firefox */
-  /* -------------------------------------------------
-  >> Default styles for Progress Tag
-  ------------------------------------------------- */
-  /* -------------------------------------------------
-  >> Project Styles
-  ---------------------------------------------------
-  >> Edit these styles as required
-  ------------------------------------------------- */
-  /* -------------------------------------------------
-  >> Default styles for Range Field
-  ------------------------------------------------- */
-  /* -------------------------------------------------
-  >> Project Styles
-  ---------------------------------------------------
-  >> Edit these styles as required
-  ------------------------------------------------- */
-  /* -------------------------------------------------
-  >> Default styles for forms
-  ------------------------------------------------- */
-  /* -------------------------------------------------
-  >> Base Styles
-  ---------------------------------------------------
-  >> Do not edit these styles
-  ------------------------------------------------- */
-  /**
-   * Correct the inability to style clickable types in iOS and Safari.
-   */
-  /**
-   * Remove the inner border and padding in Firefox.
-   */
-  /**
-   * Restore the focus styles unset by the previous rule.
-   */
-  /**
-   * Add the correct box sizing in IE 10.
-   */
-  /**
-   * Remove the inner padding in Chrome and Safari on macOS.
-   */
-  /* -------------------------------------------------
-  >> Default styles for Gravity Forms
-  ------------------------------------------------- */
-  /* -------------------------------------------------
-  >> Project Styles
-  ---------------------------------------------------
-  >> Edit these styles as required
-  ------------------------------------------------- */
-  /* =============================================
-  = Style For Date Picker for gravity form  =
-  ============================================= */
-  /* =====  End of Date Picker Style for Gravity Form ====== */
-  /**
-   *
-   * Style for hidden field in gravity form
-   *
-   */
-  /**
-   *
-   * Spinner
-   *
-   */
-  /* -------------------------------------------------
-  >> Default styles for Hubspot Forms
-  ------------------------------------------------- */
-  /* -------------------------------------------------
-  >> Project Styles
-  ---------------------------------------------------
-  >> Edit these styles as required
-  ------------------------------------------------- */
-  /* -------------------------------------------------
-  >> Default styles for Contact Form Forms
-  ------------------------------------------------- */
-  /* Responsive */
 }
 .editor-styles-wrapper .acf-block-body {
   margin-block-end: 50px !important;
   margin-block-start: 50px !important;
 }
+.editor-styles-wrapper {
+  /* Editor style */
+}
 .editor-styles-wrapper .dc-spacer {
   background-image: url(images/spacer.jpg);
+}
+.editor-styles-wrapper {
+  /* containers */
 }
 .editor-styles-wrapper .editor-ctn-red {
   background-color: var(--ss_ctn_red);
@@ -1292,6 +883,17 @@ Mixin for transition
 .editor-styles-wrapper .wp-block-spacer {
   background: rgba(0, 0, 0, 0.1);
 }
+.editor-styles-wrapper {
+  /* Typography */
+  /*-------------------------------------------------
+  >> Styles for headings
+  -------------------------------------------------*/
+  /* -------------------------------------------------
+  >> Base Styles
+  ---------------------------------------------------
+  >> Edit these styles as required
+  ------------------------------------------------- */
+}
 .editor-styles-wrapper h1,
 .editor-styles-wrapper .heading-1,
 .editor-styles-wrapper h2,
@@ -1379,6 +981,16 @@ Mixin for transition
 }
 .editor-styles-wrapper .large-heading {
   font-size: var(--ss_font_size_77);
+}
+.editor-styles-wrapper {
+  /*-------------------------------------------------
+  >> Styles for content tags
+  -------------------------------------------------*/
+  /* -------------------------------------------------
+  >> Base Styles
+  ---------------------------------------------------
+  >> Edit these styles as required
+  ------------------------------------------------- */
 }
 .editor-styles-wrapper i,
 .editor-styles-wrapper em,
@@ -1485,11 +1097,26 @@ Mixin for transition
   margin-bottom: 30px;
   width: 100%;
 }
+.editor-styles-wrapper {
+  /* Elements */
+  /* -------------------------------------------------
+  >> Base Styles
+  ---------------------------------------------------
+  >> Do not edit these styles
+  ------------------------------------------------- */
+}
 .editor-styles-wrapper header ul,
 .editor-styles-wrapper header ol,
 .editor-styles-wrapper footer ul,
 .editor-styles-wrapper footer ol {
   list-style: none;
+}
+.editor-styles-wrapper {
+  /* -------------------------------------------------
+  >> Project Styles
+  ---------------------------------------------------
+  >> Edit these styles as required
+  ------------------------------------------------- */
 }
 .editor-styles-wrapper dl {
   margin: 0 0 30px;
@@ -1598,6 +1225,13 @@ Mixin for transition
   right: 0;
   top: 9px;
 }
+.editor-styles-wrapper {
+  /* -------------------------------------------------
+  >> Base Styles
+  ---------------------------------------------------
+  >> Edit these styles as required
+  ------------------------------------------------- */
+}
 .editor-styles-wrapper blockquote,
 .editor-styles-wrapper q {
   quotes: none;
@@ -1672,6 +1306,13 @@ Mixin for transition
   display: inline-block;
   top: -11px;
 }
+.editor-styles-wrapper {
+  /* -------------------------------------------------
+  >> Base Styles
+  ---------------------------------------------------
+  >> Edit these styles as required
+  ------------------------------------------------- */
+}
 .editor-styles-wrapper table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -1744,6 +1385,12 @@ Mixin for transition
 .editor-styles-wrapper .wp-block-table table.has-background tfoot tr {
   border-top: 3px solid var(--ss_table_head_border_color);
 }
+.editor-styles-wrapper {
+  /* Media */
+  /*-------------------------------------------------
+  >> Styles for WordPress captions
+  -------------------------------------------------*/
+}
 .editor-styles-wrapper .wp-caption {
   max-width: 100%;
   box-sizing: border-box;
@@ -1785,6 +1432,11 @@ Mixin for transition
   margin-right: auto;
   margin-left: auto;
 }
+.editor-styles-wrapper {
+  /*-------------------------------------------------
+  >> Styles for default WordPress galleries
+  -------------------------------------------------*/
+}
 .editor-styles-wrapper .gallery {
   margin-bottom: 24px;
 }
@@ -1804,6 +1456,17 @@ Mixin for transition
 .editor-styles-wrapper .size-thumbnail {
   max-width: 100%;
   height: auto;
+}
+.editor-styles-wrapper {
+  /* Core */
+  /*-------------------------------------------------
+  >> Accessibility styles for WordPress
+  -------------------------------------------------*/
+  /* -------------------------------------------------
+  >> Base Styles
+  ---------------------------------------------------
+  >> Edit these styles as required
+  ------------------------------------------------- */
 }
 .editor-styles-wrapper .screen-reader-text {
   margin: 0px;
@@ -1859,6 +1522,16 @@ Mixin for transition
 .editor-styles-wrapper .header-nav ul li a:focus-visible {
   outline-color: var(--ss_acc_outline);
 }
+.editor-styles-wrapper {
+  /*-------------------------------------------------
+  >> Default WordPress alignments
+  -------------------------------------------------*/
+  /* -------------------------------------------------
+  >> Base Styles
+  ---------------------------------------------------
+  >> Edit these styles as required
+  ------------------------------------------------- */
+}
 .editor-styles-wrapper .alignnone {
   margin: 15px 0 30px;
 }
@@ -1893,6 +1566,16 @@ Mixin for transition
   text-align: center;
   clear: both;
 }
+.editor-styles-wrapper {
+  /*-------------------------------------------------
+  >> Styles for posts and pages
+  -------------------------------------------------*/
+  /* -------------------------------------------------
+  >> Base Styles
+  ---------------------------------------------------
+  >> Do not edit these styles
+  ------------------------------------------------- */
+}
 .editor-styles-wrapper .sticky {
   display: block;
 }
@@ -1919,6 +1602,13 @@ Mixin for transition
   margin-top: 0;
   padding: 0;
 }
+.editor-styles-wrapper {
+  /* -------------------------------------------------
+  >> Project Styles
+  ---------------------------------------------------
+  >> Edit following styles or write your own
+  ------------------------------------------------- */
+}
 .editor-styles-wrapper .post-shares {
   display: flex;
 }
@@ -1935,6 +1625,16 @@ Mixin for transition
 }
 .editor-styles-wrapper .post-shares a:hover, .editor-styles-wrapper .post-shares a:focus-visible {
   border: 1px solid var(--wp--preset--color--lblack);
+}
+.editor-styles-wrapper {
+  /*-------------------------------------------------
+  >> Pagination styles
+  -------------------------------------------------*/
+  /* -------------------------------------------------
+  >> Base Styles
+  ---------------------------------------------------
+  >> Edit these styles as required
+  ------------------------------------------------- */
 }
 .editor-styles-wrapper .page-section .pagination,
 .editor-styles-wrapper .pagination {
@@ -2008,6 +1708,16 @@ Mixin for transition
 .editor-styles-wrapper .pagination > span.current:focus-visible {
   background-color: var(--ss_pagination_first_bgcolor);
   color: var(--ss_pagination_first_color);
+}
+.editor-styles-wrapper {
+  /*-------------------------------------------------
+  >> Styles for WordPress comments
+  -------------------------------------------------*/
+  /* -------------------------------------------------
+  >> Base Styles
+  ---------------------------------------------------
+  >> Edit these styles as required
+  ------------------------------------------------- */
 }
 .editor-styles-wrapper #commentform label {
   display: block;
@@ -2124,6 +1834,16 @@ Mixin for transition
   background-color: var(--ss_comments_reply_btn_bgcolor_hover);
   color: var(--ss_comments_reply_btn_color_hover);
 }
+.editor-styles-wrapper {
+  /*-------------------------------------------------
+  >> Styles for default WordPress widgets
+  -------------------------------------------------*/
+  /* -------------------------------------------------
+  >> Base Styles
+  ---------------------------------------------------
+  >> Do not edit these styles
+  ------------------------------------------------- */
+}
 .editor-styles-wrapper .wp-block-archives,
 .editor-styles-wrapper .wp-block-categories,
 .editor-styles-wrapper .wp-block-latest-comments,
@@ -2136,6 +1856,17 @@ Mixin for transition
 .editor-styles-wrapper .wp-block-calendar {
   margin: 0 0 40px;
 }
+.editor-styles-wrapper {
+  /* -------------------------------------------------
+  >> Project Styles
+  ---------------------------------------------------
+  >> Edit following styles or write your own
+  ------------------------------------------------- */
+  /* Blocks */
+  /* -------------------------------------------------
+  >> Accessibility styles for WordPress Gallery Block
+  ------------------------------------------------- */
+}
 .editor-styles-wrapper .wp-block-gallery .wp-block-image a {
   border-bottom: none;
 }
@@ -2145,8 +1876,18 @@ Mixin for transition
 .editor-styles-wrapper .page-section .wp-block-gallery ul li::before {
   display: none;
 }
+.editor-styles-wrapper {
+  /* -------------------------------------------------
+  >> Accessibility styles for WordPress Cover Block
+  ------------------------------------------------- */
+}
 .editor-styles-wrapper .wp-block-cover-text {
   color: var(--ss_white) !important;
+}
+.editor-styles-wrapper {
+  /* -------------------------------------------------
+  >> Accessibility styles for WordPress Calender Block
+  ------------------------------------------------- */
 }
 .editor-styles-wrapper .wp-block-calendar a {
   text-decoration: none;
@@ -2167,9 +1908,27 @@ Mixin for transition
   background-color: transparent;
   font-weight: 700;
 }
+.editor-styles-wrapper {
+  /* -------------------------------------------------
+  >> Accessibility styles for WordPress Categories Block
+  ------------------------------------------------- */
+}
 .editor-styles-wrapper .wp-block-archives-dropdown.wp-block-archives select,
 .editor-styles-wrapper .wp-block-categories-dropdown.wp-block-categories select {
   margin: 0;
+}
+.editor-styles-wrapper {
+  /* -------------------------------------------------
+  >> Accessibility styles for WordPress Image Block
+  ------------------------------------------------- */
+  /* -------------------------------------------------
+  >> Base Styles
+  ---------------------------------------------------
+  >> Edit these styles as required
+  ------------------------------------------------- */
+  /* -------------------------------------------------
+  >> Accessibility styles for WordPress Latest Comments Block
+  ------------------------------------------------- */
 }
 .editor-styles-wrapper .wp-block-latest-comments .avatar,
 .editor-styles-wrapper .wp-block-latest-comments__comment-avatar {
@@ -2184,6 +1943,11 @@ Mixin for transition
   font-size: 100%;
   line-height: 1.5;
   margin: 5px 0;
+}
+.editor-styles-wrapper {
+  /* -------------------------------------------------
+  >> Accessibility styles for WordPress Latest Posts Block
+  ------------------------------------------------- */
 }
 .editor-styles-wrapper .wp-block-latest-posts__featured-image a {
   border-bottom: none;
@@ -2205,9 +1969,27 @@ Mixin for transition
 .editor-styles-wrapper .wp-block-latest-posts.is-grid li {
   margin-bottom: 12px;
 }
+.editor-styles-wrapper {
+  /* -------------------------------------------------
+  >> Accessibility styles for WordPress Quote Block
+  ------------------------------------------------- */
+}
 .editor-styles-wrapper blockquote.wp-block-quote.is-style-large {
   border-right: 0;
   padding: 0;
+}
+.editor-styles-wrapper {
+  /* -------------------------------------------------
+  >> Accessibility styles for WordPress PullQuote Block
+  ------------------------------------------------- */
+  /* -------------------------------------------------
+  >> Base Styles
+  ---------------------------------------------------
+  >> Edit these styles as required
+  ------------------------------------------------- */
+  /* -------------------------------------------------
+  >> Accessibility styles for WordPress RSS Feed Block
+  ------------------------------------------------- */
 }
 .editor-styles-wrapper .wp-block-rss__item-author,
 .editor-styles-wrapper .wp-block-rss__item-publish-date {
@@ -2216,6 +1998,11 @@ Mixin for transition
 }
 .editor-styles-wrapper .wp-block-rss__item-excerpt {
   margin: 10px 0 20px;
+}
+.editor-styles-wrapper {
+  /* -------------------------------------------------
+  >> Accessibility styles for WordPress Search Block
+  ------------------------------------------------- */
 }
 .editor-styles-wrapper input[type=search].wp-block-search__input {
   background-image: unset;
@@ -2231,6 +2018,11 @@ Mixin for transition
   border: none;
   background-color: var(--ss_white);
 }
+.editor-styles-wrapper {
+  /* -------------------------------------------------
+  >> Accessibility styles for WordPress Social-links Block
+  ------------------------------------------------- */
+}
 .editor-styles-wrapper .wp-block-social-links li.wp-block-social-link {
   list-style: none;
   padding-right: 0;
@@ -2241,8 +2033,23 @@ Mixin for transition
 .editor-styles-wrapper .wp-block-social-links li.wp-block-social-link svg {
   margin-bottom: 0;
 }
+.editor-styles-wrapper {
+  /* -------------------------------------------------
+  >> Accessibility styles for WordPress Tag Cloud Block
+  ------------------------------------------------- */
+}
 .editor-styles-wrapper .wp-block-tag-cloud .tag-cloud-link {
   margin: 0 0 12px 8px;
+}
+.editor-styles-wrapper {
+  /*  Vendor CSS Magnific popup */
+  @import "vendors/magnific-popup.css";
+  /*  Vendor CSS Wordpress Buttons */
+  /****
+   *
+   * WordPress buttons
+   *
+  ****/
 }
 .editor-styles-wrapper .wp-block-button .wp-block-button__link {
   box-sizing: border-box;
@@ -2290,6 +2097,15 @@ Mixin for transition
 }
 .editor-styles-wrapper .wp-block-button.is-style-fill-boxed .wp-block-button__link {
   border-radius: inherit;
+}
+.editor-styles-wrapper {
+  /* site */
+  /*-------------------------------------------------
+  >> Styles for header and footer of website
+  -------------------------------------------------*/
+  /*-------------------------------------------------
+  >> Styles for header
+  -------------------------------------------------*/
 }
 .editor-styles-wrapper .slide-thumb img,
 .editor-styles-wrapper .burger-single,
@@ -2447,6 +2263,11 @@ Mixin for transition
   top: -40px;
   left: -18px;
   right: auto;
+}
+.editor-styles-wrapper {
+  /*-------------------------------------------------
+  >> Styles for desktop menu
+  -------------------------------------------------*/
 }
 @media (min-width: 1024px) {
   .editor-styles-wrapper .header-nav ul li:hover > ul,
@@ -2613,6 +2434,11 @@ Mixin for transition
   top: 12px;
   right: -5px;
   margin: auto;
+}
+.editor-styles-wrapper {
+  /*-------------------------------------------------
+  >> Styles for mobile menu
+  -------------------------------------------------*/
 }
 @media (max-width: 1179px) {
   .editor-styles-wrapper .header-section {
@@ -2886,6 +2712,14 @@ Mixin for transition
     position: fixed !important;
   }
 }
+.editor-styles-wrapper {
+  /*-------------------------------------------------
+  >> Styles for Masthead
+  -------------------------------------------------*/
+  /*-------------------------------------------------
+  >> Styles for Default
+  -------------------------------------------------*/
+}
 .editor-styles-wrapper .hero-section {
   transition: all 0.3s ease-in-out;
   background-color: var(--ss_white_1);
@@ -2932,6 +2766,11 @@ Mixin for transition
 .editor-styles-wrapper .hero-default-button {
   line-height: 0.65;
   margin-top: 30px;
+}
+.editor-styles-wrapper {
+  /*-------------------------------------------------
+  >> Styles for Home
+  -------------------------------------------------*/
 }
 .editor-styles-wrapper .hero-home-section .wp-block-heading {
   line-height: 1.19;
@@ -2995,6 +2834,11 @@ Mixin for transition
 .editor-styles-wrapper .hero-content .hero-content-inner {
   margin-right: 27%;
   margin-top: 22px;
+}
+.editor-styles-wrapper {
+  /*-------------------------------------------------
+  >> Styles for footer
+  -------------------------------------------------*/
 }
 .editor-styles-wrapper .footer-ctn {
   background-color: var(--ss_footer_bgcolor);
@@ -3211,6 +3055,16 @@ Mixin for transition
 .editor-styles-wrapper .cta-image figure {
   height: 100%;
 }
+.editor-styles-wrapper {
+  /*-------------------------------------------------
+  >> Styles for Containers
+  -------------------------------------------------*/
+  /****
+   *
+   * containers
+   *
+  ****/
+}
 .editor-styles-wrapper .wrapper {
   max-width: 1400px;
   width: 90%;
@@ -3233,6 +3087,11 @@ Mixin for transition
 }
 .editor-styles-wrapper .ctn-navy {
   background-color: var(--wp--preset--color--navy);
+}
+.editor-styles-wrapper {
+  /*-------------------------------------------------
+  >> Styles for Spacers
+  -------------------------------------------------*/
 }
 .editor-styles-wrapper .is-style-st-s2,
 .editor-styles-wrapper .st-s2 {
@@ -3314,6 +3173,11 @@ Mixin for transition
 .editor-styles-wrapper .st-s236 {
   height: var(--ss_space_236) !important;
 }
+.editor-styles-wrapper {
+  /*-------------------------------------------------
+  >> Styles for Theme Spacers
+  -------------------------------------------------*/
+}
 .editor-styles-wrapper .ts-160 {
   height: 160px;
 }
@@ -3334,6 +3198,16 @@ Mixin for transition
 }
 .editor-styles-wrapper .ts-40 {
   height: 40px;
+}
+.editor-styles-wrapper {
+  /*-------------------------------------------------
+  >> Basic styles for theme
+  -------------------------------------------------*/
+  /****
+   *
+   * Helper classes
+   *
+  ****/
 }
 .editor-styles-wrapper .large-text {
   font-size: var(--ss_font_size_22);
@@ -3501,6 +3375,13 @@ Mixin for transition
   -o-object-fit: cover;
      object-fit: cover;
 }
+.editor-styles-wrapper {
+  /****
+   *
+   * Breadcrumbs
+   *
+  ****/
+}
 .editor-styles-wrapper #breadcrumbs {
   color: var(--ss_breadcrumb_color);
   text-transform: uppercase;
@@ -3531,11 +3412,25 @@ Mixin for transition
 .editor-styles-wrapper .single-post #breadcrumbs span span span span span span a {
   color: var(--ss_breadcrumb_link_color);
 }
+.editor-styles-wrapper {
+  /****
+   *
+   * Learn Button
+   *
+  ****/
+}
 .editor-styles-wrapper .learn-more {
   color: var(--wp--preset--color--black);
   font-family: "Open Sans", arial, sans-serif;
   font-weight: 700;
   font-style: normal;
+}
+.editor-styles-wrapper {
+  /****
+   *
+   * Theme Buttons
+   *
+  ****/
 }
 .editor-styles-wrapper a.button,
 .editor-styles-wrapper a.button:visited,
@@ -3599,6 +3494,13 @@ Mixin for transition
 .editor-styles-wrapper .no-visible {
   visibility: hidden;
 }
+.editor-styles-wrapper {
+  /****
+   *
+   * 404 page
+   *
+  ****/
+}
 .editor-styles-wrapper .not-found {
   text-align: center;
 }
@@ -3646,6 +3548,11 @@ Mixin for transition
 }
 .editor-styles-wrapper .form-404 p {
   margin-bottom: 20px;
+}
+.editor-styles-wrapper {
+  /**
+  * Custom Select Styles
+  **/
 }
 .editor-styles-wrapper .select-dropdown ul.select-dropdown__list {
   display: none;
@@ -3704,6 +3611,11 @@ Mixin for transition
 }
 .editor-styles-wrapper .hidden {
   display: none;
+}
+.editor-styles-wrapper {
+  /*! Lity - v2.2.2 - 2016-12-14
+  * http://sorgalla.com/lity/
+  * Copyright (c) 2015-2016 Jan Sorgalla; Licensed MIT */
 }
 .editor-styles-wrapper .lity {
   z-index: 9990;
@@ -3821,11 +3733,17 @@ Mixin for transition
   border: 0;
   padding: 0;
 }
+.editor-styles-wrapper {
+  /* Image */
+}
 .editor-styles-wrapper .lity-image img {
   max-width: 100%;
   display: block;
   line-height: 0;
   border: 0;
+}
+.editor-styles-wrapper {
+  /* iFrame */
 }
 .editor-styles-wrapper .lity-iframe .lity-container,
 .editor-styles-wrapper .lity-youtube .lity-container,
@@ -3867,6 +3785,9 @@ Mixin for transition
   border-radius: 12px;
   overflow: hidden;
 }
+.editor-styles-wrapper {
+  /* iFrame */
+}
 .editor-styles-wrapper .lity-iframe .lity-container,
 .editor-styles-wrapper .lity-youtube .lity-container,
 .editor-styles-wrapper .lity-vimeo .lity-container,
@@ -3874,6 +3795,11 @@ Mixin for transition
 .editor-styles-wrapper .lity-googlemaps .lity-container {
   width: 90%;
   max-width: 964px;
+}
+.editor-styles-wrapper {
+  /*-------------------------------------------------
+  >> Basic styles for Blog post
+  -------------------------------------------------*/
 }
 .editor-styles-wrapper .post-box .post-box-img a {
   height: 100%;
@@ -4047,10 +3973,20 @@ Mixin for transition
 .editor-styles-wrapper .post-meta {
   margin-bottom: 30px;
 }
+.editor-styles-wrapper {
+  /*-------------------------------------------------
+  >> Basic styles for Blog post
+  -------------------------------------------------*/
+}
 .editor-styles-wrapper .product-detail-single button.add-upsell-to-cart {
   background-color: transparent;
   color: var(--ss_color_primary);
   padding: 0;
+}
+.editor-styles-wrapper {
+  /*-------------------------------------------------
+  >> Basic styles for Blog post
+  -------------------------------------------------*/
 }
 .editor-styles-wrapper .woocommerce-checkout .wp-block-woocommerce-checkout {
   width: 90%;
@@ -4114,6 +4050,11 @@ Mixin for transition
   max-width: 1400px;
   margin: 0 auto;
   padding: var(--ss_space_110) 0;
+}
+.editor-styles-wrapper {
+  /*-------------------------------------------------
+  >> Basic styles for Blog post
+  -------------------------------------------------*/
 }
 .editor-styles-wrapper .woocommerce-cart .wc-block-components-product-name {
   border-bottom: none;
@@ -4283,6 +4224,11 @@ Mixin for transition
   font-size: var(--ss_font_size_22) !important;
   font-weight: 700;
 }
+.editor-styles-wrapper {
+  /*-------------------------------------------------
+  >> Basic styles for Blog post
+  -------------------------------------------------*/
+}
 .editor-styles-wrapper .whnmfixedcart {
   overflow: auto !important;
 }
@@ -4397,6 +4343,11 @@ Mixin for transition
   font-size: var(--ss_font_size_22) !important;
   font-weight: 700;
 }
+.editor-styles-wrapper {
+  /*-------------------------------------------------
+  >> Basic styles for Blog post
+  -------------------------------------------------*/
+}
 .editor-styles-wrapper .woocommerce-shop .site-main {
   padding: var(--ss_space_128) 10px 0 0;
 }
@@ -4422,6 +4373,11 @@ Mixin for transition
 .editor-styles-wrapper .woocommerce-shop .added_to_cart {
   color: var(--ss_color_primary);
   margin-right: 10px;
+}
+.editor-styles-wrapper {
+  /*-------------------------------------------------
+  >> Basic styles for Blog post
+  -------------------------------------------------*/
 }
 .editor-styles-wrapper .woocommerce form.login {
   border-radius: 0;
@@ -4508,6 +4464,11 @@ Mixin for transition
 .editor-styles-wrapper .woocommerce-edit-account .select2-search__field, .editor-styles-wrapper .woocommerce-edit-address .select2-search__field {
   height: 30px;
 }
+.editor-styles-wrapper {
+  /*-------------------------------------------------
+  >> Basic styles for Blog post
+  -------------------------------------------------*/
+}
 .editor-styles-wrapper .two-columns {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(clamp(350px, 50% - 2%, 100%), 100%), 1fr));
@@ -4544,6 +4505,17 @@ Mixin for transition
        column-gap: 11px;
   justify-content: space-between;
   flex-wrap: wrap;
+}
+.editor-styles-wrapper {
+  /*-------------------------------------------------
+  >> Styles for Website Blocks
+  -------------------------------------------------*/
+  /*-------------------------------------------------
+  >> Basic styles for Defualt Block
+  -------------------------------------------------*/
+  /*-------------------------------------------------
+  >> Basic styles for FAQ's Block
+  -------------------------------------------------*/
 }
 .editor-styles-wrapper .faq-block {
   max-width: 825px;
@@ -4640,6 +4612,11 @@ Mixin for transition
 }
 .editor-styles-wrapper .glossary-content:last-child {
   border-bottom: 0;
+}
+.editor-styles-wrapper {
+  /*-------------------------------------------------
+  >> Basic styles for Team Block
+  -------------------------------------------------*/
 }
 .editor-styles-wrapper .team-members {
   display: flex;
@@ -4822,8 +4799,18 @@ Mixin for transition
 .editor-styles-wrapper .mfp-wrap {
   z-index: 999999 !important;
 }
+.editor-styles-wrapper {
+  /*-------------------------------------------------
+  >> Basic styles for Image Alongside Text Block
+  -------------------------------------------------*/
+}
 .editor-styles-wrapper .image-at-right .iat-image {
   order: 2;
+}
+.editor-styles-wrapper {
+  /*-------------------------------------------------
+  >> Basic styles for Image Alongside Text Block
+  -------------------------------------------------*/
 }
 .editor-styles-wrapper .features-inner-content {
   margin-top: 0;
@@ -4854,6 +4841,11 @@ Mixin for transition
 .editor-styles-wrapper .stone-stomper-features {
   justify-content: space-between;
   align-self: initial;
+}
+.editor-styles-wrapper {
+  /*-------------------------------------------------
+  >> Basic styles for Image Alongside Text Block
+  -------------------------------------------------*/
 }
 .editor-styles-wrapper .products-teaser-slider {
   width: calc(100% + 26px);
@@ -5030,6 +5022,11 @@ Mixin for transition
   letter-spacing: 8.6px;
   margin-bottom: 43px;
 }
+.editor-styles-wrapper {
+  /*-------------------------------------------------
+  >> Basic styles for Image Alongside Text Block
+  -------------------------------------------------*/
+}
 .editor-styles-wrapper .video-section {
   position: relative;
   aspect-ratio: 447/336;
@@ -5079,16 +5076,21 @@ Mixin for transition
   font-size: 27px !important;
   letter-spacing: 0.4px;
 }
+.editor-styles-wrapper {
+  /*-------------------------------------------------
+  >> Basic styles for Image Alongside Text Block
+  -------------------------------------------------*/
+}
 .editor-styles-wrapper .form-image-slider .slider-image img {
   width: 100%;
   aspect-ratio: 4/2.5;
   -o-object-fit: cover;
      object-fit: cover;
 }
-.editor-styles-wrapper .vehicle-image {
+.editor-styles-wrapper .vehicle-images {
   display: flex;
 }
-.editor-styles-wrapper .vehicle-image img {
+.editor-styles-wrapper .vehicle-images .vehicle-image {
   width: 50%;
 }
 .editor-styles-wrapper .form-measurements-section .measurements-images img {
@@ -5133,6 +5135,12 @@ Mixin for transition
 }
 .editor-styles-wrapper .form-section-left {
   width: 55.2%;
+  position: sticky;
+  top: 140px;
+  margin-bottom: 20px;
+}
+.editor-styles-wrapper .logged-in.admin-bar .form-section-left {
+  top: 162px;
 }
 .editor-styles-wrapper .form-section-right {
   width: 40.4%;
@@ -5321,6 +5329,49 @@ Mixin for transition
 .editor-styles-wrapper .mobile-image {
   display: none;
 }
+.editor-styles-wrapper .image-caption {
+  position: relative;
+  padding: 12px 38px 10px 14px;
+  letter-spacing: 0.3px;
+  background: var(--ss_white);
+  margin-bottom: 20px;
+  width: -moz-max-content;
+  width: max-content;
+}
+.editor-styles-wrapper .image-caption p {
+  margin: 0;
+}
+.editor-styles-wrapper .image-caption::before {
+  content: "";
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgNjQwIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIHY3LjAuMSBieSBAZm9udGF3ZXNvbWUgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbSBMaWNlbnNlIC0gaHR0cHM6Ly9mb250YXdlc29tZS5jb20vbGljZW5zZS9mcmVlIENvcHlyaWdodCAyMDI1IEZvbnRpY29ucywgSW5jLi0tPjxwYXRoIGZpbGw9IiMyYzJjMmMiIGQ9Ik0zMjAgMTEyQzQzNC45IDExMiA1MjggMjA1LjEgNTI4IDMyMEM1MjggNDM0LjkgNDM0LjkgNTI4IDMyMCA1MjhDMjA1LjEgNTI4IDExMiA0MzQuOSAxMTIgMzIwQzExMiAyMDUuMSAyMDUuMSAxMTIgMzIwIDExMnpNMzIwIDU3NkM0NjEuNCA1NzYgNTc2IDQ2MS40IDU3NiAzMjBDNTc2IDE3OC42IDQ2MS40IDY0IDMyMCA2NEMxNzguNiA2NCA2NCAxNzguNiA2NCAzMjBDNjQgNDYxLjQgMTc4LjYgNTc2IDMyMCA1NzZ6TTI4MCA0MDBDMjY2LjcgNDAwIDI1NiA0MTAuNyAyNTYgNDI0QzI1NiA0MzcuMyAyNjYuNyA0NDggMjgwIDQ0OEwzNjAgNDQ4QzM3My4zIDQ0OCAzODQgNDM3LjMgMzg0IDQyNEMzODQgNDEwLjcgMzczLjMgNDAwIDM2MCA0MDBMMzUyIDQwMEwzNTIgMzEyQzM1MiAyOTguNyAzNDEuMyAyODggMzI4IDI4OEwyODAgMjg4QzI2Ni43IDI4OCAyNTYgMjk4LjcgMjU2IDMxMkMyNTYgMzI1LjMgMjY2LjcgMzM2IDI4MCAzMzZMMzA0IDMzNkwzMDQgNDAwTDI4MCA0MDB6TTMyMCAyNTZDMzM3LjcgMjU2IDM1MiAyNDEuNyAzNTIgMjI0QzM1MiAyMDYuMyAzMzcuNyAxOTIgMzIwIDE5MkMzMDIuMyAxOTIgMjg4IDIwNi4zIDI4OCAyMjRDMjg4IDI0MS43IDMwMi4zIDI1NiAzMjAgMjU2eiIvPjwvc3ZnPgo=);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  position: absolute;
+  right: 13px;
+  top: 15px;
+}
+.editor-styles-wrapper .form-image-slider .image-caption-area,
+.editor-styles-wrapper .vehicle-images .image-caption-area {
+  position: relative;
+  bottom: 44px;
+  margin-bottom: -44px;
+}
+.editor-styles-wrapper #caravan-details .checkboxes label {
+  width: 100%;
+}
+.editor-styles-wrapper {
+  /*-------------------------------------------------
+  >> Styles for Wp Buttons
+  -------------------------------------------------*/
+  /****
+   *
+   * WordPress buttons
+   *
+  ****/
+}
 .editor-styles-wrapper .wp-block-button .wp-block-button__link {
   box-sizing: border-box;
   position: relative;
@@ -5367,6 +5418,20 @@ Mixin for transition
 }
 .editor-styles-wrapper .wp-block-button.is-style-fill-boxed .wp-block-button__link {
   border-radius: inherit;
+}
+.editor-styles-wrapper {
+  /* Forms */
+  /* -------------------------------------------------
+  >> Styles for form fields
+  ------------------------------------------------- */
+  /* -------------------------------------------------
+  >> Styles for form Input fields
+  ------------------------------------------------- */
+  /* -------------------------------------------------
+  >> Base Styles
+  ---------------------------------------------------
+  >> Edit these styles as required
+  ------------------------------------------------- */
 }
 .editor-styles-wrapper form {
   margin: 0 0 20px;
@@ -5472,6 +5537,9 @@ Mixin for transition
   background-position: center left 10px;
   padding-left: 45px;
 }
+.editor-styles-wrapper {
+  /* clears the ‘X’ from Internet Explorer */
+}
 .editor-styles-wrapper input[type=search]::-ms-clear {
   display: none;
   width: 0;
@@ -5481,6 +5549,9 @@ Mixin for transition
   display: none;
   width: 0;
   height: 0;
+}
+.editor-styles-wrapper {
+  /* clears the ‘X’ from Chrome */
 }
 .editor-styles-wrapper input[type=search]::-webkit-search-decoration,
 .editor-styles-wrapper input[type=search]::-webkit-search-cancel-button,
@@ -5553,6 +5624,16 @@ Mixin for transition
 .editor-styles-wrapper #orderForm .field {
   margin-bottom: 10px;
 }
+.editor-styles-wrapper {
+  /* -------------------------------------------------
+  >> Styles for buttons
+  ------------------------------------------------- */
+  /* -------------------------------------------------
+  >> Project Styles
+  ---------------------------------------------------
+  >> Edit these styles as required
+  ------------------------------------------------- */
+}
 .editor-styles-wrapper input[type=image] {
   margin: 0 0 0 10px;
 }
@@ -5597,6 +5678,16 @@ Mixin for transition
 .editor-styles-wrapper input[type=reset]:hover, .editor-styles-wrapper input[type=reset]:focus-visible {
   color: var(--ss_theme_btn_color);
   background-color: var(--ss_theme_btn_bgcolor_hover);
+}
+.editor-styles-wrapper {
+  /* -------------------------------------------------
+  >> Default styles for CheckBoxes
+  ------------------------------------------------- */
+  /* -------------------------------------------------
+  >> Project Styles
+  ---------------------------------------------------
+  >> Edit these styles as required
+  ------------------------------------------------- */
 }
 .editor-styles-wrapper [type=checkbox]:checked,
 .editor-styles-wrapper [type=checkbox]:not(:checked) {
@@ -5656,6 +5747,16 @@ Mixin for transition
   opacity: 1;
   transform: scale(1);
 }
+.editor-styles-wrapper {
+  /* -------------------------------------------------
+  >> Default styles for Radio Buttons
+  ------------------------------------------------- */
+  /* -------------------------------------------------
+  >> Project Styles
+  ---------------------------------------------------
+  >> Edit these styles as required
+  ------------------------------------------------- */
+}
 .editor-styles-wrapper [type=radio]:checked,
 .editor-styles-wrapper [type=radio]:not(:checked) {
   position: absolute;
@@ -5712,6 +5813,11 @@ Mixin for transition
   opacity: 1;
   transform: scale(1);
 }
+.editor-styles-wrapper {
+  /* -------------------------------------------------
+  >> Default styles for Meter Tag
+  ------------------------------------------------- */
+}
 .editor-styles-wrapper meter {
   -webkit-appearance: none;
      -moz-appearance: none;
@@ -5724,6 +5830,9 @@ Mixin for transition
   border-radius: 0;
   margin: 0 0 20px;
   box-shadow: none;
+}
+.editor-styles-wrapper {
+  /* WebKit */
 }
 .editor-styles-wrapper meter::-webkit-meter-bar {
   background: none;
@@ -5740,6 +5849,9 @@ Mixin for transition
 .editor-styles-wrapper meter::-webkit-meter-even-less-good-value {
   background: var(--ss_meter_value_bgcolor);
 }
+.editor-styles-wrapper {
+  /* Firefox */
+}
 .editor-styles-wrapper meter::-moz-meter-bar {
   background: none;
   border-radius: 0;
@@ -5753,6 +5865,16 @@ Mixin for transition
 }
 .editor-styles-wrapper meter:-moz-meter-sub-sub-optimum::-moz-meter-bar {
   background: var(--ss_meter_value_bgcolor);
+}
+.editor-styles-wrapper {
+  /* -------------------------------------------------
+  >> Default styles for Progress Tag
+  ------------------------------------------------- */
+  /* -------------------------------------------------
+  >> Project Styles
+  ---------------------------------------------------
+  >> Edit these styles as required
+  ------------------------------------------------- */
 }
 .editor-styles-wrapper progress {
   vertical-align: baseline;
@@ -5779,6 +5901,16 @@ Mixin for transition
 .editor-styles-wrapper progress::-moz-progress-bar {
   background-color: var(--ss_progress_value_bgcolor);
   border-radius: 0;
+}
+.editor-styles-wrapper {
+  /* -------------------------------------------------
+  >> Default styles for Range Field
+  ------------------------------------------------- */
+  /* -------------------------------------------------
+  >> Project Styles
+  ---------------------------------------------------
+  >> Edit these styles as required
+  ------------------------------------------------- */
 }
 .editor-styles-wrapper input[type=range] {
   padding: 0;
@@ -5834,6 +5966,19 @@ Mixin for transition
   border: none;
   border-radius: 0;
 }
+.editor-styles-wrapper {
+  /* -------------------------------------------------
+  >> Default styles for forms
+  ------------------------------------------------- */
+  /* -------------------------------------------------
+  >> Base Styles
+  ---------------------------------------------------
+  >> Do not edit these styles
+  ------------------------------------------------- */
+  /**
+   * Correct the inability to style clickable types in iOS and Safari.
+   */
+}
 .editor-styles-wrapper button,
 .editor-styles-wrapper [type=button],
 .editor-styles-wrapper [type=reset],
@@ -5842,6 +5987,11 @@ Mixin for transition
      -moz-appearance: button;
           appearance: button;
 }
+.editor-styles-wrapper {
+  /**
+   * Remove the inner border and padding in Firefox.
+   */
+}
 .editor-styles-wrapper button::-moz-focus-inner,
 .editor-styles-wrapper [type=button]::-moz-focus-inner,
 .editor-styles-wrapper [type=reset]::-moz-focus-inner,
@@ -5849,11 +5999,21 @@ Mixin for transition
   border-style: none;
   padding: 0;
 }
+.editor-styles-wrapper {
+  /**
+   * Restore the focus styles unset by the previous rule.
+   */
+}
 .editor-styles-wrapper button:-moz-focusring,
 .editor-styles-wrapper [type=button]:-moz-focusring,
 .editor-styles-wrapper [type=reset]:-moz-focusring,
 .editor-styles-wrapper [type=submit]:-moz-focusring {
   outline: 1px dotted ButtonText;
+}
+.editor-styles-wrapper {
+  /**
+   * Add the correct box sizing in IE 10.
+   */
 }
 .editor-styles-wrapper [type=checkbox],
 .editor-styles-wrapper [type=radio] {
@@ -5863,6 +6023,11 @@ Mixin for transition
 .editor-styles-wrapper [type=number]::-webkit-inner-spin-button,
 .editor-styles-wrapper [type=number]::-webkit-outer-spin-button {
   height: auto;
+}
+.editor-styles-wrapper {
+  /**
+   * Remove the inner padding in Chrome and Safari on macOS.
+   */
 }
 .editor-styles-wrapper [type=search]::-webkit-search-decoration {
   -webkit-appearance: none;
@@ -5892,6 +6057,16 @@ Mixin for transition
 }
 .editor-styles-wrapper .comment-form-cookies-consent {
   margin-top: 30px;
+}
+.editor-styles-wrapper {
+  /* -------------------------------------------------
+  >> Default styles for Gravity Forms
+  ------------------------------------------------- */
+  /* -------------------------------------------------
+  >> Project Styles
+  ---------------------------------------------------
+  >> Edit these styles as required
+  ------------------------------------------------- */
 }
 .editor-styles-wrapper .gfields {
   margin: 0;
@@ -5951,6 +6126,11 @@ Mixin for transition
   display: inline-block;
   position: relative;
   top: 0;
+}
+.editor-styles-wrapper {
+  /* =============================================
+  = Style For Date Picker for gravity form  =
+  ============================================= */
 }
 .editor-styles-wrapper #ui-datepicker-div {
   border: none;
@@ -6023,6 +6203,9 @@ Mixin for transition
   max-width: 410px;
   background-color: var(--ss_datepicker_calendar);
 }
+.editor-styles-wrapper {
+  /* =====  End of Date Picker Style for Gravity Form ====== */
+}
 .editor-styles-wrapper .validation_error {
   background-color: var(--ss_valiation_error_bg_color);
   font-size: var(--ss_font_size_14);
@@ -6076,8 +6259,22 @@ Mixin for transition
   margin-right: 5px;
   font-size: 0.875rem;
 }
+.editor-styles-wrapper {
+  /**
+   *
+   * Style for hidden field in gravity form
+   *
+   */
+}
 .editor-styles-wrapper .gfield_visibility_hidden {
   display: none !important;
+}
+.editor-styles-wrapper {
+  /**
+   *
+   * Spinner
+   *
+   */
 }
 .editor-styles-wrapper .gform_ajax_spinner,
 .editor-styles-wrapper .gform-loader {
@@ -6099,6 +6296,16 @@ Mixin for transition
 }
 .editor-styles-wrapper .hidden_label label {
   display: none;
+}
+.editor-styles-wrapper {
+  /* -------------------------------------------------
+  >> Default styles for Hubspot Forms
+  ------------------------------------------------- */
+  /* -------------------------------------------------
+  >> Project Styles
+  ---------------------------------------------------
+  >> Edit these styles as required
+  ------------------------------------------------- */
 }
 .editor-styles-wrapper .hs-form {
   text-align: right;
@@ -6156,6 +6363,11 @@ Mixin for transition
 .editor-styles-wrapper .form-columns-2 .hs-form-field:nth-child(2n+2) {
   margin-left: 0;
 }
+.editor-styles-wrapper {
+  /* -------------------------------------------------
+  >> Default styles for Contact Form Forms
+  ------------------------------------------------- */
+}
 .editor-styles-wrapper .wpcf7-list-item {
   margin: 0 0 0 10px !important;
 }
@@ -6173,6 +6385,9 @@ Mixin for transition
 }
 .editor-styles-wrapper .wpcf7-response-output {
   margin: 0 !important;
+}
+.editor-styles-wrapper {
+  /* Responsive */
 }
 @media only screen and (min-width: 1346px) and (max-width: 1600px) {
   .editor-styles-wrapper .header-btns {
@@ -6257,6 +6472,9 @@ Mixin for transition
 }
 @media only screen and (min-width: 748px) and (max-width: 1003px) {
   .editor-styles-wrapper .form-section-left {
+    position: initial;
+  }
+  .editor-styles-wrapper .form-section-left {
     width: 100%;
     margin-bottom: 30px;
   }
@@ -6287,6 +6505,9 @@ Mixin for transition
   }
 }
 @media only screen and (max-width: 747px) {
+  .editor-styles-wrapper .form-section-left {
+    position: initial;
+  }
   .editor-styles-wrapper .woocommerce-account:not(.logged-in.admin-bar) .woocommerce {
     width: 100%;
   }
@@ -6370,9 +6591,15 @@ Mixin for transition
   .editor-styles-wrapper #final-summary .form-section-right {
     margin-bottom: 57px;
   }
+  .editor-styles-wrapper .image-caption {
+    width: 100%;
+  }
   .editor-styles-wrapper .thumb p {
-    top: -18px;
-    display: inline;
+    top: -46px;
+    line-height: 1.7;
+  }
+  .editor-styles-wrapper .image-caption p {
+    line-height: 1.7;
   }
   .editor-styles-wrapper .actions {
     margin-top: 30px;
