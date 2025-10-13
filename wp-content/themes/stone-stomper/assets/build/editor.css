@@ -6982,7 +6982,7 @@ body.post-type-post .editor-styles-wrapper > div {
 .stone-stomper-vector .ss-width {
   display: inline-block;
   position: absolute;
-  top: 28px;
+  top: 20px;
   left: 41%;
   transform: translateX(-50%);
 }
@@ -7039,7 +7039,7 @@ body.post-type-post .editor-styles-wrapper > div {
 .order-table tr td {
   font-size: var(--ss_font_size_16);
   border: 1px solid black;
-  padding: 10px;
+  padding: 6px;
   box-sizing: border-box;
 }
 .order-table tr td strong {
@@ -7062,7 +7062,7 @@ body.post-type-post .editor-styles-wrapper > div {
   font-family: "Jost", arial, sans-serif;
   font-weight: 500;
   font-style: normal;
-  margin: 0 0 20px;
+  margin: var(--ss_space_24) 0 var(--ss_space_72);
   font-size: var(--ss_font_size_24);
 }
 
@@ -7074,6 +7074,37 @@ body.post-type-post .editor-styles-wrapper > div {
 }
 .inv-two .order-table tr {
   text-align: left;
+}
+
+.inv-one .ss-width span,
+.inv-one .ss-length span,
+.inv-one .towing-vehicle-bar-width span,
+.inv-two .ss-width span,
+.inv-two .ss-length span,
+.inv-two .towing-vehicle-bar-width span {
+  color: var(--ss_color_primary);
+  font-size: var(--ss_font_size_18);
+  font-weight: 700;
+}
+.inv-one .ss-length,
+.inv-two .ss-length {
+  top: 48%;
+  bottom: 0;
+  position: absolute;
+  right: 68px;
+  left: auto;
+}
+.inv-one .towing-vehicle-bar-width,
+.inv-two .towing-vehicle-bar-width {
+  width: -moz-max-content;
+  width: max-content;
+  position: absolute;
+  left: 36%;
+  bottom: 3%;
+}
+
+.inv-order-details .stone-stomper-vector .ss-width {
+  top: 18px;
 }
 
 /*# sourceMappingURL=editor.css.map*/
