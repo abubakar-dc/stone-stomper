@@ -13,6 +13,24 @@ use StoneStomper\CPT\WP_Theme_CPT;
 new WP_Theme_CPT(
 	array(
 		'labels'       => array(
+			'singular_capital'   => 'Testimonial',
+			'plural_capital'     => 'Testimonials',
+			'singular_lowercase' => 'testimonial',
+			'plural_lowercase'   => 'testimonials',
+			// CPT Slug & Name.
+			'register_key'       => 'testimonial',
+			'slug'               => 'testimonial',
+		),
+		'supports'     => array( 'title','author' ),
+		'menu_icon'    => 'dashicons-columns',
+		'public'       => false,
+		'show_in_menu' => true,
+		'show_ui'      => true,
+	)
+);
+new WP_Theme_CPT(
+	array(
+		'labels'       => array(
 			'singular_capital'   => 'Caravan',
 			'plural_capital'     => 'Caravans',
 			'singular_lowercase' => 'caravan',

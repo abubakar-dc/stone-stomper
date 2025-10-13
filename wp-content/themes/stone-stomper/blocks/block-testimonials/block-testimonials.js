@@ -2028,13 +2028,13 @@ module.exports = window["wp"]["i18n"];
 
 /***/ }),
 
-/***/ "./src/footer-cta/block.json":
-/*!***********************************!*\
-  !*** ./src/footer-cta/block.json ***!
-  \***********************************/
+/***/ "./src/block-testimonials/block.json":
+/*!*******************************************!*\
+  !*** ./src/block-testimonials/block.json ***!
+  \*******************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json","apiVersion":3,"name":"stonestomperpack/footer-cta","version":"1.0.0","title":"Footer CTA","category":"theme-blocks","icon":"align-center","description":"","supports":{"html":false,"align":["wide","full"]},"attributes":{"preview":{"type":"boolean","default":false},"selected":{"type":"string","default":""}},"example":{"attributes":{"preview":true}},"textdomain":"stonestomper_td","editorScript":"file:./block-footer-cta.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json","apiVersion":3,"name":"stonestomperpack/block-testimonials","version":"1.0.0","title":"block Testimonials","category":"theme-blocks","icon":"align-center","description":"","supports":{"html":false,"align":["wide","full"]},"attributes":{"preview":{"type":"boolean","default":false},"selected":{"type":"string","default":""}},"example":{"attributes":{"preview":true}},"textdomain":"stonestomper_td","editorScript":"file:./block-testimonials.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
 
 /***/ })
 
@@ -2142,13 +2142,13 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://raw.githubusercont
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-/*!*********************************************!*\
-  !*** ./src/footer-cta/block-footer-cta.jsx ***!
-  \*********************************************/
+/*!*******************************************************!*\
+  !*** ./src/block-testimonials/block-testimonials.jsx ***!
+  \*******************************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./block.json */ "./src/footer-cta/block.json");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./block.json */ "./src/block-testimonials/block.json");
 /* harmony import */ var _block_assets_icons_Icons_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../block-assets/icons/Icons.jsx */ "./src/block-assets/icons/Icons.jsx");
 /* harmony import */ var _block_assets_preview_images_default_preview_image_webp__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../block-assets/preview-images/default-preview-image.webp */ "./src/block-assets/preview-images/default-preview-image.webp");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
@@ -2163,15 +2163,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-_block_assets_components_ContainerBlock_jsx__WEBPACK_IMPORTED_MODULE_5__.customAttributes.bgWidth.default = '';
-_block_assets_components_ContainerBlock_jsx__WEBPACK_IMPORTED_MODULE_5__.customAttributes.bgDesignType.default = '';
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_1__.name, {
+  /**
+   * @see ./edit.js
+   */
   attributes: {
     ..._block_json__WEBPACK_IMPORTED_MODULE_1__.attributes,
     ..._block_assets_components_ContainerBlock_jsx__WEBPACK_IMPORTED_MODULE_5__.customAttributes
   },
-  icon: _block_assets_icons_Icons_jsx__WEBPACK_IMPORTED_MODULE_2__["default"].themeStats,
+  icon: _block_assets_icons_Icons_jsx__WEBPACK_IMPORTED_MODULE_2__["default"].testimonials,
   edit: Edit,
+  /**
+   * @see ./save.js
+   */
   save: Save
 });
 function Edit(props) {
@@ -2185,54 +2189,9 @@ function Edit(props) {
   } = attributes;
   const myCustomClassName = className ? className : undefined;
   const classes = [myCustomClassName].join(' ');
-  const allowedBlocks = ['core/columns', 'core/column', 'core/image', 'core/heading', 'core/group', 'core/button', 'core/spacer'];
-  const TEMPLATE = [['core/columns', {
-    className: 'footer-cta-section'
-  }, [['core/column', {
-    className: 'cta-image image-cover',
-    style: {
-      flexBasis: '57.5%'
-    },
-    width: '57.5%',
-    verticalAlignment: 'center'
-  }, [['core/image', {
-    className: 'size-full'
-  }]]], ['core/column', {
-    className: 'cta-content',
-    style: {
-      flexBasis: '42.6%'
-    },
-    width: '42.6%',
-    verticalAlignment: 'stretch',
-    backgroundColor: 'black-100',
-    textColor: 'white'
-  }, [['core/heading', {
-    placeholder: 'Enter heading…',
-    textAlign: 'center',
-    className: '',
-    level: 2
-  }], ['core/buttons', {
-    className: 'is-layout-flex',
-    layout: {
-      type: 'flex',
-      justifyContent: 'center'
-    }
-  }, [['core/button', {
-    className: '',
-    text: ''
-  }]]]]]]]];
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.useBlockProps)();
-  const {
-    children,
-    ...innerBlocksProps
-  } = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.useInnerBlocksProps)(blockProps, {
-    template: TEMPLATE,
-    templateLock: false,
-    // set 'all' if you want to lock structure
-    allowedBlocks
-  });
 
-  // Block preview
+  // block preview
   if (preview) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
       className: "block-preview",
@@ -2247,12 +2206,29 @@ function Edit(props) {
       })
     });
   }
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-    ...blockProps,
+  const {
+    children
+  } = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.useInnerBlocksProps)(blockProps, {
+    allowedBlocks: ['core/columns', 'core/paragraph', 'core/spacer', 'core/heading', 'core/list', 'core/buttons'],
+    template: [['core/group', {
+      className: 'section-head center-align'
+    }, [['core/paragraph', {
+      content: '',
+      className: 'kicker-text'
+    }], ['core/heading', {
+      level: 2,
+      content: '',
+      className: ''
+    }]]], ['stonestomperpack/testimonials', {}]]
+  });
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_block_assets_components_ContainerBlock_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
       props: props,
-      customClassName: classes,
-      children: children
+      customClass: classes,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+        className: "testimonaials-section",
+        children: children
+      })
     })
   });
 }
@@ -2265,12 +2241,17 @@ function Save(props) {
   } = attributes;
   const myCustomClassName = className ? className : '';
   const classes = [myCustomClassName].join(' ');
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_block_assets_components_ContainerBlock_jsx__WEBPACK_IMPORTED_MODULE_5__.ContainerBlockContent, {
-    props: props,
-    customClassName: classes,
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.InnerBlocks.Content, {})
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_block_assets_components_ContainerBlock_jsx__WEBPACK_IMPORTED_MODULE_5__.ContainerBlockContent, {
+      props: props,
+      customClass: `${classes}`,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+        className: "testimonaials-section",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.InnerBlocks.Content, {})
+      })
+    })
   });
 }
 /******/ })()
 ;
-//# sourceMappingURL=block-footer-cta.js.map
+//# sourceMappingURL=block-testimonials.js.map

@@ -2419,7 +2419,7 @@ module.exports = window["wp"]["primitives"];
   \*******************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json","apiVersion":3,"name":"stonestomperpack/videos","version":"1.0.0","title":"Videos","category":"theme-blocks","icon":"align-center","parent":["products-teaser"],"description":"","supports":{"html":false,"align":["wide","full"]},"attributes":{"preview":{"type":"boolean","default":false},"className":{"type":"string"},"image":{"type":"object","default":{}},"video":{"type":"object","default":{}},"videoInline":{"type":"object","default":{}},"videoUrl":{"type":"string","default":""},"title":{"type":"string","default":""},"selectionMode":{"type":"string","default":"url"}},"example":{"attributes":{"preview":true}},"textdomain":"stonestomper_td","editorScript":"file:./videos.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json","apiVersion":3,"name":"stonestomperpack/videos","version":"1.0.0","title":"Videos","category":"theme-blocks","icon":"align-center","parent":["video-columns"],"description":"","supports":{"html":false,"align":["wide","full"]},"attributes":{"preview":{"type":"boolean","default":false},"className":{"type":"string"},"image":{"type":"object","default":{}},"video":{"type":"object","default":{}},"videoInline":{"type":"object","default":{}},"videoUrl":{"type":"string","default":""},"title":{"type":"string","default":""},"selectionMode":{"type":"string","default":"url"}},"example":{"attributes":{"preview":true}},"textdomain":"stonestomper_td","editorScript":"file:./videos.js"}');
 
 /***/ })
 

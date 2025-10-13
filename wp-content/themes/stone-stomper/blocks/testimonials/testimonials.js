@@ -12614,13 +12614,13 @@ function combine (array, callback) {
 
 /***/ }),
 
-/***/ "./src/render-php/block.json":
-/*!***********************************!*\
-  !*** ./src/render-php/block.json ***!
-  \***********************************/
+/***/ "./src/testimonials/block.json":
+/*!*************************************!*\
+  !*** ./src/testimonials/block.json ***!
+  \*************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"stonestomperpack/render-php","version":"0.1.0","title":"Render PHP","category":"theme-blocks","description":" ","supports":{"html":false},"attributes":{"heading":{"type":"string","default":""},"description":{"type":"string","default":""},"preview":{"type":"boolean","default":false},"elevateIds":{"type":"array","default":[]},"stayIds":{"type":"array","default":[]},"linkData":{"type":"object","default":{"url":"","title":"","target":false}}},"example":{"attributes":{"preview":true}},"textdomain":"stonestomper_td","editorScript":"file:./block-render-php.js","render":"file:./render.php"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"stonestomperpack/testimonials","version":"0.1.0","title":"Testimonials","category":"theme-blocks","parent":["block-testimonials"],"description":" ","supports":{"html":false},"attributes":{"preview":{"type":"boolean","default":false},"selectionMode":{"type":"string","default":"recent"},"testimonialIds":{"type":"array","default":[]},"linkData":{"type":"object","default":{"url":"","title":"","target":false}}},"example":{"attributes":{"preview":true}},"textdomain":"stonestomper_td","editorScript":"file:./testimonials.js","render":"file:./render.php"}');
 
 /***/ })
 
@@ -12705,15 +12705,15 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/tru
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-/*!*********************************************!*\
-  !*** ./src/render-php/block-render-php.jsx ***!
-  \*********************************************/
+/*!*******************************************!*\
+  !*** ./src/testimonials/testimonials.jsx ***!
+  \*******************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./block.json */ "./src/render-php/block.json");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./block.json */ "./src/testimonials/block.json");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
@@ -12755,16 +12755,16 @@ __webpack_require__.r(__webpack_exports__);
       preview,
       className,
       selectionMode = 'recent',
-      elevateIds,
+      testimonialIds,
       stayIds
     } = attributes;
-    const elevateOptions = [];
+    const testimonialOptions = [];
     _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_7___default()({
-      path: '/wp/v2/post?per_page=50'
+      path: '/wp/v2/testimonial?per_page=9'
     }).then(posts => {
       for (const key in posts) {
         const element = posts[key];
-        elevateOptions.push({
+        testimonialOptions.push({
           value: element.id,
           label: element.title.rendered
         });
@@ -12789,54 +12789,43 @@ __webpack_require__.r(__webpack_exports__);
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Panel, {
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
-              title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Elevates Settings'),
+              title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Testimonials Settings'),
               initialOpen: true,
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ButtonGroup, {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
+                    isPrimary: selectionMode === 'recent',
+                    isSecondary: selectionMode !== 'recent',
+                    onClick: () => setAttributes({
+                      selectionMode: 'recent'
+                    }),
+                    children: "Recent"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
+                    isPrimary: selectionMode === 'manual',
+                    isSecondary: selectionMode !== 'manual',
+                    onClick: () => setAttributes({
+                      selectionMode: 'manual'
+                    }),
+                    children: "Manual"
+                  })]
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
                 className: "dc-s20"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, {
+              }), selectionMode === 'manual' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, {
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
                   className: "dp-s30"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_select__WEBPACK_IMPORTED_MODULE_11__["default"], {
                   className: "select-post-type",
-                  value: attributes.elevateIds,
+                  value: attributes.testimonialIds,
                   onChange: value => setAttributes({
-                    elevateIds: value
+                    testimonialIds: value
                   }),
-                  options: elevateOptions,
+                  options: testimonialOptions,
                   isMulti: "true"
                 })]
               })]
             })
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
-          className: "section-head",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
-            className: "section-head-left",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.RichText, {
-              tagName: "h2",
-              value: attributes.heading,
-              onChange: value => setAttributes({
-                heading: value
-              }),
-              placeholder: "Heading",
-              className: "section-heading"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.RichText, {
-              tagName: "p",
-              value: attributes.description,
-              onChange: value => setAttributes({
-                description: value
-              }),
-              placeholder: "Description",
-              className: "section-description"
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
-            className: "section-head-right",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_block_assets_components_ButtonComponent_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
-              props: props,
-              value: attributes.linkData,
-              attr: "linkData"
-            })
-          })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)((_wordpress_server_side_render__WEBPACK_IMPORTED_MODULE_6___default()), {
           block: _block_json__WEBPACK_IMPORTED_MODULE_2__.name,
           attributes: attributes
@@ -12847,4 +12836,4 @@ __webpack_require__.r(__webpack_exports__);
 });
 /******/ })()
 ;
-//# sourceMappingURL=block-render-php.js.map
+//# sourceMappingURL=testimonials.js.map

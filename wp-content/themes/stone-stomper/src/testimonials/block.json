@@ -1,35 +1,31 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "stonestomperpack/render-php",
+	"name": "stonestomperpack/testimonials",
 	"version": "0.1.0",
-	"title": "Render PHP",
+	"title": "Testimonials",
 	"category": "theme-blocks",
+		"parent": [
+			"block-testimonials"
+		],
 	"description": " ",
 	"supports": {
 		"html": false
 	},
 	"attributes": {
-		"heading": {
-			"type": "string",
-			"default": ""
-		},
-		"description": {
-			"type": "string",
-			"default": ""
-		},
 		"preview": {
 			"type": "boolean",
 			"default": false
 		},
-		"elevateIds": {
+		"selectionMode": {
+			"type": "string",
+			"default": "recent"
+		},
+		"testimonialIds": {
 			"type": "array",
 			"default": []
 		},
-		"stayIds": {
-			"type": "array",
-			"default": []
-		},
+
 		"linkData": {
 			"type": "object",
 			"default": {
@@ -45,6 +41,6 @@
 		}
 	},
 	"textdomain": "stonestomper_td",
-	"editorScript": "file:./block-render-php.js",
+	"editorScript": "file:./testimonials.js",
 	"render": "file:./render.php"
 }

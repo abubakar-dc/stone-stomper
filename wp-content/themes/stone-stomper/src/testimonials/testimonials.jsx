@@ -34,16 +34,16 @@ registerBlockType( metadata.name, {
 			preview,
 			className,
 			selectionMode = 'recent',
-			elevateIds,
+			testimonialIds,
 			stayIds,
 		} = attributes;
 
-		const elevateOptions = [];
-		apiFetch( { path: '/wp/v2/post?per_page=50' } ).then( ( posts ) => {
+		const testimonialOptions = [];
+		apiFetch( { path: '/wp/v2/testimonial?per_page=9' } ).then( ( posts ) => {
 			for ( const key in posts ) {
 				const element = posts[ key ];
 
-				elevateOptions.push( {
+				testimonialOptions.push( {
 					value: element.id,
 					label: element.title.rendered,
 				} );
@@ -72,56 +72,49 @@ registerBlockType( metadata.name, {
 					<InspectorControls>
 						<Panel>
 							<PanelBody
-								title={ __( 'Elevates Settings' ) }
+								title={ __( 'Testimonials Settings' ) }
 								initialOpen={ true }
 							>
+									<PanelRow>
+									<ButtonGroup>
+										<Button
+											isPrimary={ selectionMode === 'recent' }
+											isSecondary={ selectionMode !== 'recent' }
+											onClick={ () => setAttributes( { selectionMode: 'recent' } ) }
+										>
+											Recent
+										</Button>
+										<Button
+											isPrimary={ selectionMode === 'manual' }
+											isSecondary={ selectionMode !== 'manual' }
+											onClick={ () => setAttributes( { selectionMode: 'manual' } ) }
+										>
+											Manual
+										</Button>
 
-								<div className="dc-s20"></div>
-								<PanelRow>
-									<div className="dp-s30"></div>
-									<Select
-										className="select-post-type"
-										value={ attributes.elevateIds }
-										onChange={ ( value ) =>
-											setAttributes( {
-												elevateIds: value,
-											} )
-										}
-										options={ elevateOptions }
-										isMulti="true"
-									/>
+									</ButtonGroup>
 								</PanelRow>
-
+								<div className="dc-s20"></div>
+								{ selectionMode === 'manual' && (
+									<PanelRow>
+										<div className="dp-s30"></div>
+										<Select
+											className="select-post-type"
+											value={ attributes.testimonialIds }
+											onChange={ ( value ) =>
+												setAttributes( {
+													testimonialIds: value,
+												} )
+											}
+											options={ testimonialOptions }
+											isMulti="true"
+										/>
+									</PanelRow>
+								) }
 							</PanelBody>
 						</Panel>
 					</InspectorControls>
 
-					<div className="section-head">
-						<div className="section-head-left">
-							<RichText
-								tagName="h2"
-								value={ attributes.heading }
-								onChange={ ( value ) => setAttributes( { heading: value } ) }
-								placeholder="Heading"
-								className="section-heading"
-							/>
-							<RichText
-								tagName="p"
-								value={ attributes.description }
-								onChange={ ( value ) => setAttributes( { description: value } ) }
-								placeholder="Description"
-								className="section-description"
-							/>
-						</div>
-
-						<div className="section-head-right">
-							<ButtonComponent
-								props={ props }
-								value={ attributes.linkData }
-								attr="linkData"
-							/>
-						</div>
-					</div>
 					<ServerSideRender
 						block={ metadata.name }
 						attributes={ attributes }

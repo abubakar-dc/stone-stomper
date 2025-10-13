@@ -1,14 +1,11 @@
 {
   "$schema": "https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json",
   "apiVersion": 3,
-  "name": "stonestomperpack/videos",
+  "name": "stonestomperpack/block-testimonials",
   "version": "1.0.0",
-  "title": "Videos",
+  "title": "block Testimonials",
   "category": "theme-blocks",
   "icon": "align-center",
-  "parent": [
-    "video-columns"
-  ],
   "description": "",
   "supports": {
     "html": false,
@@ -22,32 +19,9 @@
       "type": "boolean",
       "default": false
     },
-    "className": {
-      "type": "string"
-    },
-    "image": {
-      "type": "object",
-      "default": {}
-    },
-    "video": {
-      "type": "object",
-      "default": {}
-    },
-    "videoInline": {
-      "type": "object",
-      "default": {}
-    },
-    "videoUrl": {
+    "selected": {
       "type": "string",
       "default": ""
-    },
-    "title": {
-      "type": "string",
-      "default": ""
-    },
-    "selectionMode": {
-      "type": "string",
-      "default": "url"
     }
   },
   "example": {
@@ -56,5 +30,7 @@
     }
   },
   "textdomain": "stonestomper_td",
-  "editorScript": "file:./videos.js"
+  "editorScript": "file:./block-testimonials.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
 }
