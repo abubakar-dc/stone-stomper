@@ -12,7 +12,19 @@
 
 
 $sts_var_testimonial_ids = $attributes['testimonialIds'] ?? null;
-$sts_var_post_values = array_merge($sts_var_testimonial_ids, $sts_var_stay_ids);
 $selectionMode = $attributes['selectionMode'] ?? 'recent';
 
-var_dump($sts_var_post_values);
+var_dump($attributes['testimonialIds']);
+var_dump($selectionMode);
+
+
+
+?>
+
+<?php if($selectionMode === 'recent'){ ?>
+
+	<h2>Recetn Code</h2>
+
+<?php } else { ?>
+		<h2>manual Code </h2>
+<?php }  ?>

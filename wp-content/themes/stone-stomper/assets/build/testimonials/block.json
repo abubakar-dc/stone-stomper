@@ -17,7 +17,11 @@
       "type": "boolean",
       "default": false
     },
-    "elevateIds": {
+    "selectionMode": {
+      "type": "string",
+      "default": "recent"
+    },
+    "testimonialIds": {
       "type": "array",
       "default": []
     },

@@ -6933,4 +6933,16 @@ body.post-type-post .editor-styles-wrapper > div {
   transform: translateX(-50%);
 }
 
+.ss-invoice-popup {
+  background: #fff;
+  width: 900px;
+  max-width: 90%;
+  margin: 60px auto;
+  padding: 60px;
+  position: relative;
+  border-radius: 10px;
+  overflow-y: scroll;
+  height: 75vh;
+}
+
 /*# sourceMappingURL=editor.min.css.map*/

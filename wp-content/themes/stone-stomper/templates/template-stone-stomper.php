@@ -419,25 +419,25 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 									<div class="grid cols-2">
 										<div class="field">
 											<label class="req" for="photo_hitch">Hitch Photograph</label>
-											<input id="photo_hitch" name="photo_hitch" type="file" accept="image/*"
+											<input id="photo_hitch" name="photo_hitch" required type="file" accept="image/*"
 												multiple />
 											<ul class="uploads" id="list_hitch"></ul>
-											<input type="hidden" id="hitch_ids" name="hitch_ids" value="[]">
+											<input type="hidden" id="hitch_ids" required name="hitch_ids" value="[]">
 										</div>
 										<div class="field">
 											<label class="req" for="photo_rear">Towing Vehicle Rear
 												Photograph</label>
-											<input id="photo_rear" name="photo_rear" type="file" accept="image/*"
+											<input id="photo_rear" name="photo_rear" required type="file" accept="image/*"
 												multiple />
 											<ul class="uploads" id="list_rear"></ul>
-											<input type="hidden" id="rear_ids"  name="rear_ids"  value="[]">
+											<input type="hidden" id="rear_ids" required name="rear_ids"  value="[]">
 										</div>
 										<div class="field">
 											<label class="req" for="photo_front">Front of Caravan Photograph</label>
-											<input id="photo_front" name="photo_front" type="file" accept="image/*"
+											<input id="photo_front" name="photo_front" required type="file" accept="image/*"
 												multiple />
 											<ul class="uploads" id="list_front"></ul>
-											<input type="hidden" id="front_ids" name="front_ids" value="[]">
+											<input type="hidden" id="front_ids" required name="front_ids" value="[]">
 										</div>
 									</div>
 									<?php

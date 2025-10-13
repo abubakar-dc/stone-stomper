@@ -529,18 +529,18 @@ function show_towing_svg_in_editor( $post ) {
         <a href="#" class="stone-stomper-vector" id="show-order-popup">
 			<div class="ss-width">
 				<span>
-					<?php echo esc_html( $caravan_width_mm ?: '-' ); ?>
+					<?php echo esc_html( $caravan_width_mm ?: '1900' ); ?>
 				</span>
 			</div>
 			<div class="ss-length">
 				<span>
-					<?php echo esc_html( $bar_width_mm ?: '-' ); ?>
+					<?php echo esc_html( $bar_width_mm ?: '1900' ); ?>
 				</span>
 			</div>
             <img src="<?php echo get_template_directory_uri(); ?>/assets/src/images/stone-stomper-vector.png" style="max-width:600px;cursor:pointer;" />
 			<div class="towing-vehicle-bar-width">
 				<span>
-					<?php echo esc_html( $bar_width_mm ?: '-' ); ?>
+					<?php echo esc_html( $bar_width_mm ?: '1900' ); ?>
 				</span>
 			</div>
         </a>
@@ -566,115 +566,245 @@ function show_towing_svg_in_editor( $post ) {
     <!-- Popup container -->
     <div id="order-popup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:9999;">
     <!-- <div id="order-popup" style=""> -->
-        <div style="background:#fff; width:900px; max-width:90%; margin:60px auto; padding:60px; position:relative; border-radius:10px;">
+        <div class="ss-invoice-popup" style="">
             <a href="#" id="close-popup" style="position:absolute; top:15px; right:20px; font-size:20px; text-decoration:none;">✖</a>
-			<div class="invoice-header-section d-flex justify-content-between " >
-				<div class="invoice-logo inv-column">
-					<img src="<?php echo get_template_directory_uri(); ?>/assets/src/images/invoice-gaurd.png" style="max-width:600px;cursor:pointer;" />
-				</div>
-				<div class="invoice-bussiness-details inv-column">
-					<div class="h4">Stone Stomper</div>
-					<p>PO Box 204, Port Noarlunga, SA <br> 5167 <br> Factory location:  Lonsdale SA <br>
-					<strong>
-						Email:
-					</strong>
+				<!-- popup First page -->
+
+				<div class="inv-one">
+					<div class="invoice-header-section d-flex justify-content-between " >
+						<div class="invoice-logo inv-column">
+							<img src="<?php echo get_template_directory_uri(); ?>/assets/src/images/invoice-gaurd.png" style="max-width:600px;cursor:pointer;" />
+						</div>
+						<div class="invoice-bussiness-details inv-column">
+							<div class="h4">Stone Stomper</div>
+							<p>PO Box 204, Port Noarlunga, SA <br> 5167 <br> Factory location:  Lonsdale SA <br>
+							<strong>
+								Email:
+							</strong>
+							<br>
+							<a href="mailto:sales@stonestomper.com.au"></a>sales@stonestomper.com.au</p>
+						</div>
+						<div class="invoice-right-column inv-column">
+							<h3>Quote/Invoice</h2>
+							<table>
+								<tr><td><strong>DATE:</strong> <?php echo esc_html( $order_date ); ?> </td></tr>
+								<tr><td><strong>INV#:</strong> <?php echo esc_html( $order_id ); ?> </td></tr>
+								<tr><td><strong>P/O#:</strong> <?php echo esc_html( $order_id ); ?> </td></tr>
+							</table>
+						</div>
+					</div>
 					<br>
-					<a href="mailto:sales@stonestomper.com.au"></a>sales@stonestomper.com.au</p>
-				</div>
-				<div class="invoice-right-column inv-column">
-					<h3>Quote/Invoice</h2>
-					<table>
-						<tr><td><strong>DATE:</strong> <?php echo esc_html( $order_date ); ?> </td></tr>
-						<tr><td><strong>INV#:</strong> <?php echo esc_html( $order_id ); ?> </td></tr>
-						<tr><td><strong>P/O#:</strong> <?php echo esc_html( $order_id ); ?> </td></tr>
-					</table>
-				</div>
-			</div>
-			<br>
-				<br>
-			<div class="inv-order-details">
-				<div class="customer-details inv-order-row">
-					<strong>Name: </strong><?php echo esc_html( $customer_name ); ?>
-					&nbsp;&nbsp;&nbsp;
-					<strong>Phone: </strong><?php echo esc_html( $customer_phone ); ?>
-					&nbsp;&nbsp;&nbsp;
-					<strong>Email: </strong><?php echo esc_html( $customer_email ); ?>
-				</div>
-				<br>
-				<div class="customer-details inv-order-row">
-					<strong>Delivery Address: </strong><?php echo html_entity_decode( $delivery_address ); ?>
-				</div>
-				<br>
-				<div class="customer-details inv-order-row">
-					<strong>Delivery Instructions/Authority to Leave:</strong>
-					<?php echo ! empty( $delivery_instructions ) ? esc_html( $delivery_instructions ) : 'No'; ?>
-				</div>
-				<br>
-				<div class="customer-details inv-order-row">
-					<?php if($caravan_make){ ?>
-						<strong>Trailer Make: </strong><?php echo esc_html( $caravan_make ); ?>
-					<?php } ?>
-					&nbsp;&nbsp;&nbsp;
-					<?php if($vehicle_make){ ?>
-						<strong>Vehicle Make: </strong><?php echo esc_html( $vehicle_make ); ?>
-					<?php } ?>
-				</div>
-				<br>
-				<div class="customer-details inv-order-row">
-					<strong>Bar Option: </strong>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<strong>Date Required: </strong><?php echo esc_html( $order_date ); ?>
-				</div>
+						<br>
+					<div class="inv-order-details">
+						<div class="customer-details inv-order-row">
+							<strong>Name: </strong><?php echo esc_html( $customer_name ); ?>
+							&nbsp;&nbsp;&nbsp;
+							<strong>Phone: </strong><?php echo esc_html( $customer_phone ); ?>
+							&nbsp;&nbsp;&nbsp;
+							<strong>Email: </strong><?php echo esc_html( $customer_email ); ?>
+						</div>
+						<br>
+						<div class="customer-details inv-order-row">
+							<strong>Delivery Address: </strong><?php echo html_entity_decode( $delivery_address ); ?>
+						</div>
+						<br>
+						<div class="customer-details inv-order-row">
+							<strong>Delivery Instructions/Authority to Leave:</strong>
+							<?php echo ! empty( $delivery_instructions ) ? esc_html( $delivery_instructions ) : 'No'; ?>
+						</div>
+						<br>
+						<div class="customer-details inv-order-row">
+							<?php if($caravan_make){ ?>
+								<strong>Trailer Make: </strong><?php echo esc_html( $caravan_make ); ?>
+							<?php } ?>
+							&nbsp;&nbsp;&nbsp;
+							<?php if($vehicle_make){ ?>
+								<strong>Vehicle Make: </strong><?php echo esc_html( $vehicle_make ); ?>
+							<?php } ?>
+						</div>
+						<br>
+						<div class="customer-details inv-order-row">
+							<strong>Bar Option: </strong>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<strong>Date Required: </strong><?php echo esc_html( $order_date ); ?>
+						</div>
 
-			</div>
-			<br>
+					</div>
+
+					<br>
 
 
-            <table class="order-table" style="width:100%; border-collapse:collapse;">
-				<tr>
-					<td style="text-align:center;"><strong>Quantity</strong></td>
-					<td style="text-align:center;"><strong>Description</strong></td>
-					<td style="text-align:center;"><strong>Unit Price</strong></td>
-					<td style="text-align:center;"><strong>Total</strong></td>
-				</tr>
-
-				<?php if ( $products ) { ?>
-
-					<?php foreach( $products as $key =>  $product ){ ?>
+					<table class="order-table" style="width:100%; border-collapse:collapse;">
 						<tr>
-							<td style="text-align:center;"><?php echo $key; ?></td>
-							<td style="text-align:center;"><?php echo esc_html( $product['name'] ); ?></td>
-							<td style="text-align:center;">$<?php echo wc_format_decimal( $product['total'] / $product['quantity'], 2 ); ?></td>
-							<td style="text-align:center;">$<?php echo wc_format_decimal( $product['total'], 2 ); ?></td>
+							<td style="text-align:center;"><strong>Quantity</strong></td>
+							<td style="text-align:center;"><strong>Description</strong></td>
+							<td style="text-align:center;"><strong>Unit Price</strong></td>
+							<td style="text-align:center;"><strong>Total</strong></td>
 						</tr>
-					<?php } ?>
-				<?php }	?>
-				<br>
 
-                <tr>
-					<td style="text-align:center;"><!-- remain empty --></td>
-					<td style="text-align:center;"><!-- remain empty --></td>
-					<td style="text-align:center;"><strong>Delivery</strong></td>
-					<td style="text-align:center;"><?php echo esc_html( $delivery_cost ); ?></td>
-				</tr>
+						<?php if ( $products ) { ?>
 
-                <tr>
-					<td style="text-align:center;"><!-- remain empty --></td>
-					<td style="text-align:center;"><!-- remain empty --></td>
-					<td style="text-align:center;"><strong>Total Due</strong></td>
-					<td style="text-align:center;"><?php echo esc_html( $order_total ); ?></td>
-				</tr>
-                <tr>
-					<td style="text-align:center;"><!-- remain empty --></td>
-					<td style="text-align:center;"><!-- remain empty --></td>
-					<td style="text-align:center;">GST (included)</td>
-					<td>-</td>
-				</tr>
-            </table>
+							<?php foreach( $products as $key =>  $product ){ ?>
+								<tr>
+									<td style="text-align:center;"><?php echo $key; ?></td>
+									<td style="text-align:center;"><?php echo esc_html( $product['name'] ); ?></td>
+									<td style="text-align:center;">$<?php echo wc_format_decimal( $product['total'] / $product['quantity'], 2 ); ?></td>
+									<td style="text-align:center;">$<?php echo wc_format_decimal( $product['total'], 2 ); ?></td>
+								</tr>
+							<?php } ?>
+						<?php }	?>
+						<br>
 
-            <div style="text-align:center; margin-top:25px;">
-                <a href="<?php echo admin_url( 'admin-ajax.php?action=download_customer_pdf&post_id=' . $post->ID ); ?>" target="_blank" class="button button-primary">Download PDF</a>
-            </div>
+						<tr>
+							<td style="text-align:center;"><!-- remain empty --></td>
+							<td style="text-align:center;"><!-- remain empty --></td>
+							<td style="text-align:center;"><strong>Delivery</strong></td>
+							<td style="text-align:center;"><?php echo esc_html( $delivery_cost ); ?></td>
+						</tr>
+
+						<tr>
+							<td style="text-align:center;"><!-- remain empty --></td>
+							<td style="text-align:center;"><!-- remain empty --></td>
+							<td style="text-align:center;"><strong>Total Due</strong></td>
+							<td style="text-align:center;"><?php echo esc_html( $order_total ); ?></td>
+						</tr>
+						<tr>
+							<td style="text-align:center;"><!-- remain empty --></td>
+							<td style="text-align:center;"><!-- remain empty --></td>
+							<td style="text-align:center;">GST (included)</td>
+							<td>-</td>
+						</tr>
+					</table>
+					<div class="stone-stomper-vector">
+						<div class="ss-width">
+							<span>
+								<?php echo esc_html( $caravan_width_mm ?: '1900' ); ?>
+							</span>
+						</div>
+						<div class="ss-length">
+							<span>
+								<?php echo esc_html( $bar_width_mm ?: '1900' ); ?>
+							</span>
+						</div>
+						<img src="<?php echo get_template_directory_uri(); ?>/assets/src/images/stone-stomper-vector.png" style="max-width:600px;cursor:pointer;" />
+						<div class="towing-vehicle-bar-width">
+							<span>
+								<?php echo esc_html( $bar_width_mm ?: '1900' ); ?>
+							</span>
+						</div>
+					</div>
+					<div class="tanks-message">THANK YOU FOR YOUR BUSINESS</div>
+				</div>
+				<!-- popup second page -->
+				<div class="inv-two office-use">
+
+					<div class="invoice-header-section d-flex justify-content-between " >
+						<div class="invoice-logo inv-column">
+							<img src="<?php echo get_template_directory_uri(); ?>/assets/src/images/invoice-gaurd.png" style="max-width:600px;cursor:pointer;" />
+						</div>
+						<div class="invoice-bussiness-details inv-column">
+							<div class="h4">Stone Stomper</div>
+							<p>PO Box 204, Port Noarlunga, SA <br> 5167 <br> Factory location:  Lonsdale SA <br>
+							<strong>
+								Email:
+							</strong>
+							<br>
+							<a href="mailto:sales@stonestomper.com.au"></a>sales@stonestomper.com.au</p>
+						</div>
+						<div class="invoice-right-column inv-column">
+							<h3>Quote/Invoice</h2>
+							<table>
+								<tr><td><strong>DATE:</strong> <?php echo esc_html( $order_date ); ?> </td></tr>
+								<tr><td><strong>INV#:</strong> <?php echo esc_html( $order_id ); ?> </td></tr>
+								<tr><td><strong>P/O#:</strong> <?php echo esc_html( $order_id ); ?> </td></tr>
+							</table>
+						</div>
+					</div>
+					<br>
+						<br>
+					<div class="inv-order-details">
+						<div class="customer-details inv-order-row">
+							<strong>Name: </strong><?php echo esc_html( $customer_name ); ?>
+							&nbsp;&nbsp;&nbsp;
+							<strong>Phone: </strong><?php echo esc_html( $customer_phone ); ?>
+							&nbsp;&nbsp;&nbsp;
+							<strong>Email: </strong><?php echo esc_html( $customer_email ); ?>
+						</div>
+						<br>
+						<div class="customer-details inv-order-row">
+							<strong>Delivery Address: </strong><?php echo html_entity_decode( $delivery_address ); ?>
+						</div>
+						<br>
+						<div class="customer-details inv-order-row">
+							<strong>Delivery Instructions/Authority to Leave:</strong>
+							<?php echo ! empty( $delivery_instructions ) ? esc_html( $delivery_instructions ) : 'No'; ?>
+						</div>
+						<br>
+						<div class="customer-details inv-order-row">
+							<?php if($caravan_make){ ?>
+								<strong>Trailer Make: </strong><?php echo esc_html( $caravan_make ); ?>
+							<?php } ?>
+							&nbsp;&nbsp;&nbsp;
+							<?php if($vehicle_make){ ?>
+								<strong>Vehicle Make: </strong><?php echo esc_html( $vehicle_make ); ?>
+							<?php } ?>
+						</div>
+						<br>
+						<div class="customer-details inv-order-row">
+							<strong>Bar Option: </strong>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<strong>Date Required: </strong><?php echo esc_html( $order_date ); ?>
+						</div>
+
+						<!-- table -->
+						<table class="order-table" style="width:100%; border-collapse:collapse;">
+
+							<tr>
+								<td style="text-align:center;">Fittings 150mm</td>
+								<td style="text-align:center;"></td>
+							</tr>
+							<tr>
+								<td style="text-align:center;">Fittings 150mm</td>
+								<td style="text-align:center;"></td>
+							</tr>
+							<tr>
+								<td style="text-align:center;">Fittings 150mm</td>
+								<td style="text-align:center;"></td>
+							</tr>
+							<tr>
+								<td style="text-align:center;">Fittings 150mm</td>
+								<td style="text-align:center;"></td>
+							</tr>
+							<tr>
+								<td style="text-align:center;">Fittings 150mm</td>
+								<td style="text-align:center;"></td>
+							</tr>
+						</table>
+						<div class="stone-stomper-vector">
+							<div class="ss-width">
+								<span>
+									<?php echo esc_html( $caravan_width_mm ?: '1900' ); ?>
+								</span>
+							</div>
+							<div class="ss-length">
+								<span>
+									<?php echo esc_html( $bar_width_mm ?: '1900' ); ?>
+								</span>
+							</div>
+							<img src="<?php echo get_template_directory_uri(); ?>/assets/src/images/stone-stomper-vector.png" style="max-width:600px;cursor:pointer;" />
+							<div class="towing-vehicle-bar-width">
+								<span>
+									<?php echo esc_html( $bar_width_mm ?: '1900' ); ?>
+								</span>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				<div style="text-align:center; margin-top:25px;">
+					<a href="<?php echo admin_url( 'admin-ajax.php?action=download_customer_pdf&post_id=' . $post->ID ); ?>" target="_blank" class="button button-primary">Download PDF</a>
+				</div>
         </div>
     </div>
 	<script>

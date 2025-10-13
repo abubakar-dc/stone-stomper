@@ -294,7 +294,7 @@
         },
         {
             "key": "field_68d561a665029",
-            "label": "Caravan Width (mm)",
+            "label": "SS Width (mm)",
             "name": "caravan_width_mm",
             "aria-label": "",
             "type": "group",
@@ -331,7 +331,7 @@
                 },
                 {
                     "key": "field_68c2cf3b1b18f",
-                    "label": "Height",
+                    "label": "Length",
                     "name": "height",
                     "aria-label": "",
                     "type": "text",
@@ -590,6 +590,132 @@
             "toggle": 0,
             "save_custom": 0,
             "custom_choice_button_text": "Add new choice"
+        },
+        {
+            "key": "field_68ecb6b41614c",
+            "label": "Bar Option",
+            "name": "sts_var_caravan_bar_option",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_68ecb6f41614d",
+            "label": "Bar Bend",
+            "name": "sts_var_caravan_bar_bend",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_68ecba231614e",
+            "label": "SS Length Adjustment",
+            "name": "sts_var_caravan_bar_bend_copy",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_68ecba2c1614f",
+            "label": "Cut Out",
+            "name": "sts_var_caravan_bar_bend_copy2",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_68ecba4b597d0",
+            "label": "Brake Foam",
+            "name": "sts_var_caravan_bar_bend_copy3",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_68ecba4e597d1",
+            "label": "HR Foam",
+            "name": "sts_var_caravan_bar_bend_copy4",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         }
     ],
     "location": [
@@ -610,5 +736,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1760110974
+    "modified": 1760345034
 }
