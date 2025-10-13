@@ -370,10 +370,6 @@ body.post-type-post .editor-styles-wrapper {
 		}
 	}
 
-	.customer-details {
-		br {}
-	}
-
 	.invoice-right-column {
 		table {
 			width: 100%;
@@ -592,7 +588,7 @@ body.post-type-post .editor-styles-wrapper {
 	.customer-details {
 		border-bottom: 2px solid #b9b9b9;
 		font-size: var(--ss_font_size_14);
-		padding-bottom: 6px;
+		padding-bottom: 10px;
 		box-sizing: border-box;
 		margin-bottom: 4px;
 
@@ -659,4 +655,8 @@ body.post-type-post .editor-styles-wrapper {
 			text-align: left;
 		}
 	}
+}
+
+.inv-two.office-use {
+	margin-top: var(--ss_space_200);
 }

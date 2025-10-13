@@ -516,7 +516,6 @@ function show_towing_svg_in_editor( $post ) {
 		}
 	}
 
-
 	$measure_barwidth_mm = get_post_meta( $post->ID, 'measure_barwidth_mm', true );
     $bar_width_mm        = get_post_meta( $post->ID, 'bar_width_mm', true );
     $caravan_width_mm    = get_post_meta( $post->ID, 'caravan_width_mm', true );
@@ -577,7 +576,7 @@ function show_towing_svg_in_editor( $post ) {
 						</div>
 						<div class="invoice-bussiness-details inv-column">
 							<div class="heading-6">Stone Stomper</div>
-							<p>PO Box 204, Port Noarlunga, SA <br> 5167 <br> Factory location:  Lonsdale SA <br>
+							<p>PO Box 204, Port Noarlunga, SA 5167 <br> Factory location:  Lonsdale SA <br>
 							<strong>
 								Email:
 							</strong>
@@ -585,7 +584,7 @@ function show_towing_svg_in_editor( $post ) {
 							<a href="mailto:sales@stonestomper.com.au"></a>sales@stonestomper.com.au</p>
 						</div>
 						<div class="invoice-right-column inv-column">
-							<h3>Quote/Invoice</h2>
+							<h3>Quote/<br>Invoice</h2>
 							<table>
 								<tr><td><strong>DATE:</strong> <?php echo esc_html( $order_date ); ?> </td></tr>
 								<tr><td><strong>INV#:</strong> <?php echo esc_html( $order_id ); ?> </td></tr>
@@ -632,7 +631,6 @@ function show_towing_svg_in_editor( $post ) {
 					</div>
 
 					<br>
-
 
 					<table class="order-table" style="width:100%; border-collapse:collapse;">
 						<tr>
@@ -704,7 +702,7 @@ function show_towing_svg_in_editor( $post ) {
 						</div>
 						<div class="invoice-bussiness-details inv-column">
 							<div class="h4">Stone Stomper</div>
-							<p>PO Box 204, Port Noarlunga, SA <br> 5167 <br> Factory location:  Lonsdale SA <br>
+							<p>PO Box 204, Port Noarlunga, SA 5167 <br> Factory location:  Lonsdale SA <br>
 							<strong>
 								Email:
 							</strong>
