@@ -17,6 +17,7 @@
 }
 
 @media only screen and (min-width: 1180px) and (max-width: 1345px) {
+
 	.legal-nav {
 		width: 43%;
 	}
@@ -114,7 +115,13 @@
 	}
 
 	.testimonial-bottom {
-		padding-top: 15px;
+		padding-top: 15px;}
+
+	.woocommerce-shop .products.columns-4 li {
+		width: calc(50% - 22px) !important;
+		&:nth-child(2n + 2) {
+			margin-right: 0 !important;
+		}
 	}
 
 	.form-section-left {
@@ -193,6 +200,14 @@
 
 	.testimonial-item {
 		width: 100%;
+	}
+
+	.woocommerce-shop .products.columns-4 li {
+		width: 100% !important;
+
+		&:nth-child(2n + 2) {
+			margin-right: 0 !important;
+		}
 	}
 
 	.form-section-left {
@@ -503,6 +518,9 @@
 }
 
 @media only screen and (max-width: 435px) {
+	#pm_menu {
+		width: 98.9% !important;
+	}
 	.footer-bottom {
 		padding: 54px 0;
 	}
@@ -510,9 +528,40 @@
 	.hero-section .wp-block-cover h1 {
 		letter-spacing: 1px;
 	}
-}
+	.woocommerce-account:not(.logged-in.admin-bar){
+		.lost_password{
+			margin:  var(--ss_space_16) auto !important;
+			font-size: 14px !important;
+		}
+		.woocommerce{
+
+			padding: var(--ss_space_48) 30px !important;
+		}
+	}}
 
 @media only screen and (max-width: 360px) {
+	.woocommerce-account:not(.logged-in.admin-bar){
+		.form-row label{
+			font-size: 14px;
+		}
+		.lost_password{
+			margin:  var(--ss_space_16) auto !important;
+			font-size: 14px !important;
+		}
+		.woocommerce{
+
+			padding: var(--ss_space_48) 10px !important;
+		}
+	}
+	.woocommerce-shop{
+		.search-form {
+			flex-direction: column !important;
+			align-items: start;
+			gap: 10px;
+		}}
+	#pm_menu {
+		width: 99.9% !important;
+	}
 	.three-columns.product-items .product-item .product-title {
 		margin-top: 12px;
 	}

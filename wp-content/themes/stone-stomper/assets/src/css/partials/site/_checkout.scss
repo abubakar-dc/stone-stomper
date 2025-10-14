@@ -42,17 +42,10 @@
 	button,
 	input[type="button"],
 	input[type="reset"] {
-		padding: 0 30px;
-		display: inline-block;
-		line-height: 1;
-		box-sizing: border-box;
 
 		@include transition(all, 0.4s, ease-in-out);
-
+		border: 1px solid var(--ss_color_primary);
 		background-color: var(--ss_color_primary);
-
-
-
 	}
 
 	input[type="submit"]:hover,
@@ -82,11 +75,3 @@
 }
 
 
-.wp-block-woocommerce-checkout,
-.wp-block-woocommerce-cart {
-
-	width: 90%;
-	max-width: 1400px;
-	margin: 0 auto;
-	padding: var(--ss_space_110) 0;
-}
