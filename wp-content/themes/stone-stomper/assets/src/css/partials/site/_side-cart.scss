@@ -42,6 +42,22 @@
 			margin-bottom: var(--ss_space_20);
 		}
 	}
+	.whmc-empty-cart{
+		padding: 5px 0;
+		.whmrmtycart-button{
+
+			background-color: var(--ss_color_primary) !important;
+			color: var(--ss_color_on_primary);
+
+		}
+		.whmrmtycart-button:hover{
+			opacity: 1;
+			background-color: var(--ss_color_on_primary) !important;
+			color: var(--ss_black_2) !important;
+			border: 1px solid var(--ss_black_2);
+
+		}
+	}
 	.whmc-cart-item-wrap {
 		padding: 5px 0;
 	}
@@ -67,29 +83,38 @@
 	}
 	.whmc_ft-buttons-con{
 
-
+		display: block !important;
 		order: 3;
 
 	}
-	.whmc_ft-buttons-con a{
-		padding: var(--ss_space_6) 0;
-		border-radius: 0px;
-		background-color: var(--ss_color_primary)!important;
-		color: var(--ss_color_on_primary) !important;
+	.whmc_ft-buttons-con a:hover{
 
+		opacity: .7	 !important;
+
+
+		transition: all 0.4s ease-in-out !important;
 	}
-	.whmc_ft-buttons-con a:hover {
+	#whmckeepshooping{
 
-		color: var(--ss_color_secondary) !important;
+		border: 1px solid var(--ss_black_2);
 
-		padding: var(--ss_space_6) 0;
-		border-radius: 0px;
-		margin: 0 !important;
+		padding: 12px 0;
+	}
+	#whmckeepshooping:hover{
+		background-color: var(--ss_color_primary);
+		color: var(--ss_color_on_primary);
+
+		opacity: 1;
+		transition: all 0.4s ease-in-out;
 	}
 
 	.wmcchevkoutprocess{
-		padding: 6px 0;
+		padding: 12px 0;
+		border: 1px solid var(--ss_black_2);
+		border-radius: 0 !important;
+		background-color:  var(--ss_color_primary) !important;
 	}
+
 	.ckhviewcart{
 		display: none !important;
 	}
@@ -100,22 +125,7 @@
 		gap: 6px;
 		flex-direction: column;
 	}
-	.whmckeepshooping{
-		background-color: transparent;
-		border:1px solid var( --ss_black_2);
-		color:var(--ss_button_color_hover);
-		padding: 12px 0;
-	}
 
-	.whmckeepshooping:hover{
-		background-color: var(--ss_color_primary);
-		border:none;
-		color:var(--ss_color_on_primary);
-		padding: 12px 0;
-		opacity: 1 !important;
-		transition: all 0.4s
-			ease-in-out;
-	}
 	.whmc-cart-total-wrap{
 		justify-content: flex-end;
 		align-items: baseline;

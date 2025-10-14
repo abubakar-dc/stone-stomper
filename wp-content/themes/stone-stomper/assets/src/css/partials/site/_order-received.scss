@@ -1,0 +1,32 @@
+.woocommerce-order-received{
+	.woocommerce{
+		margin: var(--ss_space_20) auto;
+		width: 98%;
+		max-width: 1400px;
+	}
+
+
+	.woocommerce-thankyou-order-details.order_details li::before {
+		display: none !important;
+	}
+
+
+
+	.woocommerce-thankyou-order-details.order_details{
+
+		.woocommerce-order-overview__total.total{
+			margin-top: 0 !important;
+			padding-top: 0 !important;
+			border-top: none !important;
+		}
+
+	}
+
+}
+
+
+
+
+
+
+
