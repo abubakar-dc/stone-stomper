@@ -1,10 +1,10 @@
 .woocommerce form.login {
-
+	padding: 0;
 	border-radius: 0;
 	border: none;
 	.woocommerce-form-row{
 
-		margin: 0 var(--ss_space_72);
+
 	}
 
 	.input-text{
@@ -16,11 +16,9 @@
 		display:flex  !important;
 		flex-direction: column !important;
 
-		margin: 0 var(--ss_space_72) !important;
+
 	}
-	.lost_password{
-		margin:  var(--ss_space_16)  var(--ss_space_72) !important;
-	}
+
 	.woocommerce-form-login__submit{
 		background-color: var(--ss_color_primary);
 		color:var(--ss_button_color);
@@ -55,7 +53,9 @@
 
 .woocommerce-account:not(.logged-in.admin-bar){
 	.woocommerce{
-		width: 50%;
+		max-width: 700px !important;
+		width: 90%;
+		padding: var(--ss_space_48)  !important;
 	}
 }
 
