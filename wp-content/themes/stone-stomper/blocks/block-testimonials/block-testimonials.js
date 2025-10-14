@@ -2034,7 +2034,7 @@ module.exports = window["wp"]["i18n"];
   \*******************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json","apiVersion":3,"name":"stonestomperpack/block-testimonials","version":"1.0.0","title":"block Testimonials","category":"theme-blocks","icon":"align-center","description":"","supports":{"html":false,"align":["wide","full"]},"attributes":{"preview":{"type":"boolean","default":false},"selected":{"type":"string","default":""}},"example":{"attributes":{"preview":true}},"textdomain":"stonestomper_td","editorScript":"file:./block-testimonials.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/block.json","apiVersion":3,"name":"stonestomperpack/block-testimonials","version":"1.0.0","title":"Testimonials Block","category":"theme-blocks","icon":"align-center","description":"","supports":{"html":false,"align":["wide","full"]},"attributes":{"preview":{"type":"boolean","default":false},"selected":{"type":"string","default":""}},"example":{"attributes":{"preview":true}},"textdomain":"stonestomper_td","editorScript":"file:./block-testimonials.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
 
 /***/ })
 
@@ -2226,7 +2226,7 @@ function Edit(props) {
       props: props,
       customClass: classes,
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-        className: "testimonaials-section",
+        className: "testimonial-section",
         children: children
       })
     })
@@ -2246,7 +2246,7 @@ function Save(props) {
       props: props,
       customClass: `${classes}`,
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-        className: "testimonaials-section",
+        className: "testimonial-section",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.InnerBlocks.Content, {})
       })
     })

@@ -52,6 +52,11 @@
 }
 
 @media only screen and (min-width: 1004px) and (max-width: 1179px) {
+	.testimonial-item-inner {
+		padding: 25px 20px;
+		height: calc(100% - 70px);
+	}
+
 	.form-section-right {
 		width: 45.5%;
 	}
@@ -104,6 +109,14 @@
 
 
 @media only screen and (min-width: 748px) and (max-width: 1003px) {
+	.testimonial-item {
+		width: calc(50% - 20px);
+	}
+
+	.testimonial-bottom {
+		padding-top: 15px;
+	}
+
 	.form-section-left {
 		position: initial;
 	}
@@ -149,6 +162,39 @@
 }
 
 @media only screen and (max-width: 747px) {
+	.testimonials-items {
+		gap: 40px;
+	}
+
+	.testimonial-author,
+	.testimonial-location {
+		span {
+			font-size: 14px;
+			letter-spacing: 1px;
+		}
+	}
+
+	.testimonial-item-inner {
+		padding: 25px 25px;
+		height: max-content;
+	}
+
+	.testimonial-bottom {
+		padding: 11px 0 0 55px;
+	}
+
+	.testimonial-section {
+		.section-head {
+			.wp-block-heading {
+				letter-spacing: 0px;
+			}
+		}
+	}
+
+	.testimonial-item {
+		width: 100%;
+	}
+
 	.form-section-left {
 		position: initial;
 	}

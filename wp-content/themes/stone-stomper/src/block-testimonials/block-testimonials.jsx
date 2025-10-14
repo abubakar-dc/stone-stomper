@@ -37,11 +37,11 @@ function Edit( props ) {
 		return (
 			<div className="block-preview">
 				<img src={ previewImage } alt="Preview"
-				 style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover'
-                    }}
+					style={ {
+						width: '100%',
+						height: '100%',
+						objectFit: 'cover',
+					} }
 				/>
 			</div>
 		);
@@ -52,8 +52,8 @@ function Edit( props ) {
 		template: [
 			[ 'core/group', { className: 'section-head center-align' }, [
 				[ 'core/paragraph', { content: '', className: 'kicker-text' } ],
-				[ 'core/heading', { level: 2, content: '', className:'' } ],
-			]],
+				[ 'core/heading', { level: 2, content: '', className: '' } ],
+			] ],
 			[ 'stonestomperpack/testimonials', {} ],
 		],
 	} );
@@ -61,7 +61,7 @@ function Edit( props ) {
 	return (
 		<>
 			<ContainerBlock props={ props } customClass={ classes }>
-				<div className="testimonaials-section">
+				<div className="testimonial-section">
 					{ children }
 				</div>
 			</ContainerBlock>
@@ -79,8 +79,8 @@ function Save( props ) {
 
 	return (
 		<>
-			<ContainerBlockContent props={ props } customClass={ `${classes}` }>
-				<div className="testimonaials-section">
+			<ContainerBlockContent props={ props } customClass={ `${ classes }` }>
+				<div className="testimonial-section">
 					<InnerBlocks.Content />
 				</div>
 			</ContainerBlockContent>
