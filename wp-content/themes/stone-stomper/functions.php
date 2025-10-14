@@ -317,7 +317,7 @@ add_action( 'woocommerce_new_order', function( $order_id ) {
 	$stoneguard_width_mm = isset( $data['stoneguard_width_mm'] ) ? sanitize_text_field( $data['stoneguard_width_mm'] ) : '';
 	$vinyl_width_mm     = isset( $data['vinyl_width_mm'] ) ? sanitize_text_field( $data['vinyl_width_mm'] ) : '';
 	$vinyl_length_mm     = isset( $data['vinyl_length_mm'] ) ? sanitize_text_field( $data['vinyl_length_mm'] ) : '';
-	$support_pockets     = sts_bool( $data['support_pockets'] ?? '' ) ? 'yes' : 'no';
+	$support_pockets     = sts_bool( $data['support_pockets'] ?? 'yes' ) ? 'yes' : 'no';
 
 
 	// // Photos (hidden inputs hold JSON arrays of IDs)
@@ -540,7 +540,7 @@ function show_towing_svg_in_editor( $post ) {
 
     // $hitch_ids = get_post_meta( $post->ID, 'ss_hitch_ids', true );
 
-// var_dump(get_post_meta( $post->ID));
+var_dump(get_post_meta( $post->ID));
     ?>
 
     <div style="text-align:center; padding:20px;">
