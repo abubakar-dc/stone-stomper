@@ -320,12 +320,12 @@ add_action( 'woocommerce_new_order', function( $order_id ) {
 	$support_pockets     = sts_bool( $data['support_pockets'] ?? '' ) ? 'yes' : 'no';
 
 
-	// Photos (hidden inputs hold JSON arrays of IDs)
-	$photos = array(
-		'hitch_ids' => sts_to_int_array( $data['hitch_ids'] ?? array() ),
-		'rear_ids'  => sts_to_int_array( $data['rear_ids'] ?? array() ),
-		'front_ids' => sts_to_int_array( $data['front_ids'] ?? array() ),
-	);
+	// // Photos (hidden inputs hold JSON arrays of IDs)
+	// $photos = array(
+	// 	'hitch_ids' => sts_to_int_array( $data['hitch_ids'] ?? array() ),
+	// 	'rear_ids'  => sts_to_int_array( $data['rear_ids'] ?? array() ),
+	// 	'front_ids' => sts_to_int_array( $data['front_ids'] ?? array() ),
+	// );
 
 	// Final details
 	$final = array(
@@ -347,10 +347,12 @@ add_action( 'woocommerce_new_order', function( $order_id ) {
     'name' => $cust_name, // or address
     'delivery_address' => $cust_email, // or address
 );
+
 error_log(print_r($cust_name,true));
 	// Link to order + basic fields
 	update_post_meta( $post_id, 'order_id', $order_id );
 	update_post_meta( $post_id, 'name', $cust_name );
+	update_post_meta( $post_id, 'email', $cust_email );
 	update_post_meta( $post_id, 'delivery_address', $cust_address );
 	update_post_meta( $post_id, 'subrubs', $cust_suburb );
 	update_post_meta( $post_id, 'state', $cust_state );
@@ -364,7 +366,7 @@ error_log(print_r($cust_name,true));
 	update_post_meta( $post_id, 'bar_width_mm', $measure_barwidth_mm );
 	update_post_meta( $post_id, 'caravan_width_mm', $caravan_width_mm );
 	update_post_meta( $post_id, 'caravan_length_mm', $a_frame_length_mm );
-	update_post_meta( $post_id, 'sts_var_caravan_support_pockets', $support_pockets );
+	update_post_meta( $post_id, 'support_pockets', $support_pockets );
 	update_post_meta( $post_id, 'factory_stoneguard_width', $stoneguard_length_mm );
 	update_post_meta( $post_id, 'factory_stoneguard_height', $stoneguard_width_mm );
 	update_post_meta( $post_id, 'vinyl_insert_width_mm', $vinyl_width_mm );
@@ -399,8 +401,6 @@ error_log(print_r($cust_name,true));
 		}
 	}
 }, 10, 1 );
-
-
 
 add_filter( 'block_categories_all', function( $categories, $post ) {
     // Add your custom category on top
@@ -488,6 +488,7 @@ function show_towing_svg_in_editor( $post ) {
     // Get all meta data
    $order_id = get_post_meta( $post->ID, 'order_id', true );
 	$order    = wc_get_order( $order_id );
+
 	if ( $order ) {
 		// Basic info
 		$order_date       = $order->get_date_created()->date_i18n('Y-m-d');
@@ -518,48 +519,143 @@ function show_towing_svg_in_editor( $post ) {
 
 	$measure_barwidth_mm = get_post_meta( $post->ID, 'measure_barwidth_mm', true );
     $bar_width_mm        = get_post_meta( $post->ID, 'bar_width_mm', true );
+    $caravan_length_mm        = get_post_meta( $post->ID, 'caravan_length_mm', true );
     $caravan_width_mm    = get_post_meta( $post->ID, 'caravan_width_mm', true );
+    $support_pockets    = get_post_meta( $post->ID, 'support_pockets', true );
+    $factory_stoneguard_width    = get_post_meta( $post->ID, 'factory_stoneguard_width', true );
+    $factory_stoneguard_height    = get_post_meta( $post->ID, 'factory_stoneguard_height', true );
+    $vinyl_insert_width_mm    = get_post_meta( $post->ID, 'vinyl_insert_width_mm', true );
+    $vinyl_insert_height_mm    = get_post_meta( $post->ID, 'vinyl_insert_height_mm', true );
+    $toolbox_width_mm    = get_post_meta( $post->ID, 'toolbox_width_mm', true );
+    $toolbox_height_mm    = get_post_meta( $post->ID, 'toolbox_height_mm', true );
+
     $vehicle_make    = get_post_meta( $post->ID, 'vehicle_make', true );
     $caravan_make    = get_post_meta( $post->ID, 'caravan_make', true );
+    $sts_var_caravan_bar_option    	= get_post_meta( $post->ID, 'sts_var_caravan_bar_option', true );
+    $sts_var_caravan_bar_bend    	= get_post_meta( $post->ID, 'sts_var_caravan_bar_bend', true );
+    $sts_var_caravan_ss_length_adj  = get_post_meta( $post->ID, 'sts_var_caravan_ss_length_adj', true );
+    $sts_var_caravan_cut_out    = get_post_meta( $post->ID, 'sts_var_caravan_cut_out', true );
+    $sts_var_caravan_break_form    = get_post_meta( $post->ID, 'sts_var_caravan_break_form', true );
+    $sts_var_caravan_hr_form    = get_post_meta( $post->ID, 'sts_var_caravan_hr_form', true );
 
+    // $hitch_ids = get_post_meta( $post->ID, 'ss_hitch_ids', true );
+
+// var_dump(get_post_meta( $post->ID));
     ?>
 
     <div style="text-align:center; padding:20px;">
         <a href="#" class="stone-stomper-vector" id="show-order-popup">
 			<div class="ss-width">
 				<span>
-					<?php echo esc_html( $caravan_width_mm ?: '1900' ); ?>
+					<?php echo esc_html( $caravan_width_mm ?: '-' ); ?>
 				</span>
 			</div>
 			<div class="ss-length">
 				<span>
-					<?php echo esc_html( $bar_width_mm ?: '1900' ); ?>
+					<?php echo esc_html( $caravan_length_mm ?: '-' ); ?>
 				</span>
 			</div>
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/src/images/stone-stomper-vector.png" style="max-width:600px;cursor:pointer;" />
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/src/images/stone-stomper-vector.png" style="max-width:980px;cursor:pointer;" />
 			<div class="towing-vehicle-bar-width">
 				<span>
-					<?php echo esc_html( $bar_width_mm ?: '1900' ); ?>
+					<?php echo esc_html( $bar_width_mm ?: '-' ); ?>
 				</span>
 			</div>
         </a>
-		<div style="margin-top:30px; text-align:center; font-size:16px;">
-			<h3 style="margin-bottom:10px;"> Measurements</h3>
+		<div style="margin-top:30px; text-align:left; font-size:16px;">
+			<h3 style="margin-bottom:10px; text-align:center; "> Measurements</h3>
 			<table style="margin:0 auto; border-collapse:collapse; font-size:15px;">
+
 				<tr>
-					<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Measure Barwidth (mm):</td>
-					<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $measure_barwidth_mm ?: '-' ); ?></td>
+					<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">SS Width (mm):</td>
+					<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $caravan_width_mm ?: '-' ); ?></td>
 				</tr>
 				<tr>
-					<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Bar Width (mm):</td>
+					<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">SS Length (mm):</td>
+					<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $caravan_length_mm ?: '-' ); ?></td>
+				</tr>
+				<tr>
+					<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Towing Vehicle BarWidth (mm):</td>
 					<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $bar_width_mm ?: '-' ); ?></td>
 				</tr>
 				<tr>
-					<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Caravan Width (mm):</td>
-					<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $caravan_width_mm ?: '-' ); ?></td>
+					<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Support Pockets:</td>
+					<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $support_pockets ?: 'No' ); ?></td>
+				</tr>
+				<tr>
+					<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Vinyl Insert Width (mm):</td>
+					<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $vinyl_insert_width_mm ?: '-' ); ?></td>
+				</tr>
+				<tr>
+					<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Vinyl Insert Length (mm):</td>
+					<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $vinyl_insert_height_mm ?: '-' ); ?></td>
+				</tr>
+				<tr>
+					<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Stoneguard Width (mm):</td>
+					<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $factory_stoneguard_width ?: '-' ); ?></td>
+				</tr>
+				<tr>
+					<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Stoneguard Length (mm):</td>
+					<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $factory_stoneguard_height ?: '-' ); ?></td>
+				</tr>
+				<tr>
+					<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Toolbox Width (mm):</td>
+					<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $toolbox_width_mm ?: '-' ); ?></td>
+				</tr>
+				<tr>
+					<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Toolbox Length (mm):</td>
+					<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $toolbox_height_mm ?: '-' ); ?></td>
 				</tr>
 			</table>
         </div>
+
+		<!-- output these images over here -->
+		 <div style="margin-top:30px;">
+    <!-- <h3 style="margin-bottom:10px;">Uploaded Photos</h3> -->
+
+    <?php
+    // Read saved image ID arrays
+    // $hitch_ids = get_post_meta( $post->ID, 'ss_hitch_ids', true );
+    // $rear_ids  = get_post_meta( $post->ID, 'rear_ids', true );
+    // $front_ids = get_post_meta( $post->ID, 'front_ids', true );
+
+	// var_dump($hitch_ids);
+
+// 	echo '<pre>';
+// // var_dump( get_post_meta( $post->ID, 'hitch_ids', true ) );
+// echo '</pre>';
+
+    // // Decode JSON if needed
+    // $hitch_ids = is_string( $hitch_ids ) ? json_decode( $hitch_ids, true ) : $hitch_ids;
+    // $rear_ids  = is_string( $rear_ids ) ? json_decode( $rear_ids, true ) : $rear_ids;
+    // $front_ids = is_string( $front_ids ) ? json_decode( $front_ids, true ) : $front_ids;
+
+    // $sections = [
+    //     'Hitch Attachments' => $hitch_ids,
+    //     'Rear Attachments'  => $rear_ids,
+    //     'Front Attachments' => $front_ids,
+    // ];
+
+    // foreach ( $sections as $label => $ids ) :
+    //     if ( ! empty( $ids ) && is_array( $ids ) ) :
+    //         echo '<div style="margin-bottom:20px;">';
+    //         echo '<h4 style="margin-bottom:8px;">' . esc_html( $label ) . '</h4>';
+    //         echo '<div style="display:flex; flex-wrap:wrap; gap:10px;">';
+
+    //         foreach ( $ids as $id ) :
+    //             $thumb = wp_get_attachment_image( $id, 'thumbnail', false, [
+    //                 'style' => 'border:1px solid #ccc; border-radius:6px; width:100px; height:100px; object-fit:cover;',
+    //             ] );
+    //             if ( $thumb ) {
+    //                 echo $thumb;
+    //             }
+    //         endforeach;
+
+    //         echo '</div></div>';
+    //     endif;
+    // endforeach;
+    ?>
+</div>
     </div>
 
     <!-- Popup container -->
@@ -588,7 +684,6 @@ function show_towing_svg_in_editor( $post ) {
 							<table>
 								<tr><td><strong>DATE:</strong> <?php echo esc_html( $order_date ); ?> </td></tr>
 								<tr><td><strong>INV#:</strong> <?php echo esc_html( $order_id ); ?> </td></tr>
-								<tr><td><strong>P/O#:</strong> <?php echo esc_html( $order_id ); ?> </td></tr>
 							</table>
 						</div>
 					</div>
@@ -758,25 +853,30 @@ function show_towing_svg_in_editor( $post ) {
 						<table class="order-table" style="width:100%; border-collapse:collapse;">
 
 							<tr>
-								<td style="text-align:left;">Fittings 150mm</td>
+								<td style="text-align:left;">Bar Option <span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_bar_option); ?> </span></td>
 								<td style="text-align:left;"></td>
 							</tr>
 							<tr>
-								<td style="text-align:left;">Fittings 150mm</td>
+								<td style="text-align:left;">Bar Bend <span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_bar_bend); ?> </span></td>
 								<td style="text-align:left;"></td>
 							</tr>
 							<tr>
-								<td style="text-align:left;">Fittings 150mm</td>
+								<td style="text-align:left;">SS Length Adjustment <span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_ss_length_adj); ?> </span></td>
 								<td style="text-align:left;"></td>
 							</tr>
 							<tr>
-								<td style="text-align:left;">Fittings 150mm</td>
+								<td style="text-align:left;">Cut Out <span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_cut_out); ?> </span></td>
 								<td style="text-align:left;"></td>
 							</tr>
 							<tr>
-								<td style="text-align:left;">Fittings 150mm</td>
+								<td style="text-align:left;">Break Foam <span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_break_form); ?> </span></td>
 								<td style="text-align:left;"></td>
 							</tr>
+							<tr>
+								<td style="text-align:left;">Hr Foam <span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_hr_form); ?> </span></td>
+								<td style="text-align:left;"></td>
+							</tr>
+
 						</table>
 						<div class="stone-stomper-vector">
 							<div class="ss-width">

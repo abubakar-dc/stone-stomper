@@ -4377,6 +4377,10 @@ div#menuiconwrap.icons02 span.cart_count_header {
   color: var(--wp--preset--color--black);
 }
 
+.clr-red {
+  color: var(--ss_color_primary);
+}
+
 .white_text {
   color: var(--ss_white);
 }
@@ -6656,6 +6660,12 @@ body #daextlwcnf-cookie-settings-button-2:hover {
 
 #caravan-details .checkboxes label {
   width: 100%;
+}
+
+.woocommerce-order-received .woocommerce-order {
+  width: 90%;
+  margin: 70px auto 0;
+  max-width: 1400px;
 }
 
 /*-------------------------------------------------

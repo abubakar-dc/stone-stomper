@@ -48,6 +48,11 @@
 /* Variables */
 @import "partials/variables/variables";
 
+
+.clr-red {
+	color: var(--ss_color_primary);
+}
+
 .wp-block-spacer .components-resizable-box__handle {
 	display: none !important;
 }
@@ -531,7 +536,7 @@ body.post-type-post .editor-styles-wrapper {
 .stone-stomper-vector {
 	position: relative;
 	display: inline-block;
-	width: 100%;
+	// width: 100%;
 
 	img {
 		width: 100%;
@@ -564,7 +569,7 @@ body.post-type-post .editor-styles-wrapper {
 	.stone-stomper-vector {
 		position: relative;
 		display: inline-block;
-		width: 100%;
+		// width: 100%;
 
 		img {
 			width: 100%;
@@ -653,12 +658,18 @@ body.post-type-post .editor-styles-wrapper {
 
 		tr {
 			text-align: left;
+
+			td {
+				text-transform: initial;
+				width: 50%;
+			}
 		}
 	}
 }
 
 .inv-one,
-.inv-two {
+.inv-two,
+.stone-stomper-vector {
 
 	.ss-width,
 	.ss-length,
@@ -671,10 +682,10 @@ body.post-type-post .editor-styles-wrapper {
 	}
 
 	.ss-length {
-		top: 48%;
+		top: 49.5%;
 		bottom: 0;
 		position: absolute;
-		right: 68px;
+		right: 98px;
 		left: auto;
 	}
 

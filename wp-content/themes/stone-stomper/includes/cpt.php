@@ -83,13 +83,13 @@ new WP_Theme_CPT(
 new WP_Theme_CPT(
 	array(
 		'labels'    => array(
-			'singular_capital'   => 'Customers',
-			'plural_capital'     => 'Customers',
-			'singular_lowercase' => 'customer',
-			'plural_lowercase'   => 'customers',
+			'singular_capital'   => 'Order',
+			'plural_capital'     => 'Orders',
+			'singular_lowercase' => 'order',
+			'plural_lowercase'   => 'orders',
 			// CPT Slug & Name.
 			'register_key'       => 'customer',
-			'slug'               => 'customer',
+			'slug'               => 'order',
 		),
 		'supports'  => array( 'title', 'thumbnail' ),
 		'menu_icon' => 'dashicons-groups',
