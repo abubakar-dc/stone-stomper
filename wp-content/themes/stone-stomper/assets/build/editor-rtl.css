@@ -4392,8 +4392,11 @@ Mixin for transition
   text-align: right !important;
 }
 .editor-styles-wrapper .woocommerce-dashboard.woocommerce-account .woocommerce-Address-title.title .edit, .editor-styles-wrapper .logged-in.admin-bar .woocommerce-Address-title.title .edit {
-  float: right !important;
-  margin-bottom: 10px !important;
+  float: none !important;
+  display: block !important;
+  width: -moz-max-content !important;
+  width: max-content !important;
+  margin-bottom: 20px;
 }
 .editor-styles-wrapper .woocommerce-dashboard.woocommerce-account .woocommerce-MyAccount-navigation-link::before, .editor-styles-wrapper .logged-in.admin-bar .woocommerce-MyAccount-navigation-link::before {
   display: none;
@@ -4444,6 +4447,9 @@ Mixin for transition
 }
 .editor-styles-wrapper .woocommerce-edit-account .select2-container--open .select2-dropdown, .editor-styles-wrapper .woocommerce-edit-address .select2-container--open .select2-dropdown {
   top: -20px !important;
+}
+.editor-styles-wrapper .woocommerce-orders table {
+  table-layout: auto !important;
 }
 .editor-styles-wrapper .two-columns {
   display: grid;
@@ -5344,6 +5350,10 @@ Mixin for transition
 .editor-styles-wrapper .wp-block-button.is-style-fill-boxed .wp-block-button__link {
   border-radius: inherit;
 }
+.editor-styles-wrapper .woocommerce-order-received h2.woocommerce-column__title,
+.editor-styles-wrapper .woocommerce-order-received h2.woocommerce-order-details__title {
+  font-size: var(--ss_font_size_32) !important;
+}
 .editor-styles-wrapper .woocommerce-order-received .woocommerce {
   margin: var(--ss_space_20) auto;
   width: 98%;
@@ -5353,6 +5363,7 @@ Mixin for transition
   display: none !important;
 }
 .editor-styles-wrapper .woocommerce-order-received .woocommerce-thankyou-order-details.order_details .woocommerce-order-overview__total.total {
+  text-align: right !important;
   margin-top: 0 !important;
   padding-top: 0 !important;
   border-top: none !important;
@@ -6205,6 +6216,12 @@ Mixin for transition
   }
 }
 @media only screen and (min-width: 1004px) and (max-width: 1179px) {
+  .editor-styles-wrapper .woocommerce-account .wrapper {
+    width: 95% !important;
+  }
+  .editor-styles-wrapper .woocommerce-account .woocommerce {
+    padding: var(--ss_space_16);
+  }
   .editor-styles-wrapper .form-section-right {
     width: 45.5%;
   }
@@ -6284,7 +6301,58 @@ Mixin for transition
     padding: 20px 0;
   }
 }
+@media only screen and (min-width: 769px) and (max-width: 1003px) {
+  .editor-styles-wrapper .woocommerce-account:not(.woocommerce-dashboard.woocommerce-account) .woocommerce-MyAccount-navigation ul li {
+    font-size: 14px !important;
+  }
+  .editor-styles-wrapper .woocommerce-view-order p, .editor-styles-wrapper .woocommerce-table--order-details.shop_table {
+    font-size: 14px !important;
+  }
+  .editor-styles-wrapper .woocommerce-account .wrapper {
+    width: 98% !important;
+  }
+  .editor-styles-wrapper .woocommerce-account .woocommerce {
+    padding: var(--ss_space_16);
+  }
+  .editor-styles-wrapper .woocommerce-account .woocommerce table.my_account_orders:not(.woocommerce-orders-table__cell-order-number) {
+    font-size: 11px !important;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .editor-styles-wrapper .woocommerce-edit-account .form-row-last, .editor-styles-wrapper .woocommerce-edit-account .form-row-first, .editor-styles-wrapper .woocommerce-edit-address .form-row-last, .editor-styles-wrapper .woocommerce-edit-address .form-row-first {
+    width: 100% !important;
+  }
+  .editor-styles-wrapper .woocommerce-order-received .woocommerce-table--order-details.shop_table, .editor-styles-wrapper .woocommerce-order-received p, .editor-styles-wrapper .woocommerce-order-received .woocommerce-column--shipping-address, .editor-styles-wrapper .woocommerce-order-received .woocommerce-column--billing-address {
+    font-size: 12px !important;
+  }
+  .editor-styles-wrapper .woocommerce-order-received .woocommerce-order-details, .editor-styles-wrapper .woocommerce-view-order .woocommerce-order-details {
+    margin-bottom: 0 !important;
+  }
+  .editor-styles-wrapper .woocommerce-order-received h2.woocommerce-column__title,
+  .editor-styles-wrapper .woocommerce-order-received h2.woocommerce-order-details__title, .editor-styles-wrapper .woocommerce-view-order h2.woocommerce-column__title,
+  .editor-styles-wrapper .woocommerce-view-order h2.woocommerce-order-details__title {
+    font-size: 24px !important;
+    margin-top: 20px !important;
+  }
+  .editor-styles-wrapper .woocommerce-edit-address h2 {
+    font-size: 24px !important;
+    float: right !important;
+  }
+  .editor-styles-wrapper .woocommerce-dashboard.woocommerce-account .woocommerce-orders-table__row.woocommerce-orders-table__row--status-processing, .editor-styles-wrapper .logged-in.admin-bar .woocommerce-orders-table__row.woocommerce-orders-table__row--status-processing {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+  }
+  .editor-styles-wrapper .woocommerce-dashboard.woocommerce-account .woocommerce-MyAccount-navigation ul li, .editor-styles-wrapper .logged-in.admin-bar .woocommerce-MyAccount-navigation ul li {
+    width: 100% !important;
+    margin-bottom: 0 !important;
+    padding-right: 0 !important;
+  }
+}
 @media only screen and (max-width: 747px) {
+  .editor-styles-wrapper .woocommerce ul.order_details li {
+    float: none !important;
+    border-left: none !important;
+  }
   .editor-styles-wrapper .woocommerce-shop .products.columns-4 li {
     width: 100% !important;
   }
@@ -6501,6 +6569,16 @@ Mixin for transition
   }
 }
 @media only screen and (max-width: 435px) {
+  .editor-styles-wrapper .woocommerce-downloads .woocommerce-info a {
+    margin-top: var(--ss_space_16) !important;
+    font-size: 12px !important;
+    letter-spacing: 0.4px !important;
+  }
+  .editor-styles-wrapper .woocommerce-account .woocommerce {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 10px !important;
+  }
   .editor-styles-wrapper #pm_menu {
     width: 98.9% !important;
   }
@@ -6519,6 +6597,10 @@ Mixin for transition
   }
 }
 @media only screen and (max-width: 360px) {
+  .editor-styles-wrapper .woocommerce-order-received .woocommerce-thankyou-order-received {
+    padding-top: 20px;
+    font-size: 12px !important;
+  }
   .editor-styles-wrapper .woocommerce-account:not(.logged-in.admin-bar) .form-row label {
     font-size: 14px;
   }

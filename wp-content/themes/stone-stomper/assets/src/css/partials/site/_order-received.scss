@@ -1,4 +1,11 @@
 .woocommerce-order-received{
+	h2.woocommerce-column__title,
+	h2.woocommerce-order-details__title {
+		font-size: var(--ss_font_size_32) !important;
+
+	}
+
+
 	.woocommerce{
 		margin: var(--ss_space_20) auto;
 		width: 98%;
@@ -15,6 +22,7 @@
 	.woocommerce-thankyou-order-details.order_details{
 
 		.woocommerce-order-overview__total.total{
+			text-align: left !important;
 			margin-top: 0 !important;
 			padding-top: 0 !important;
 			border-top: none !important;
@@ -22,8 +30,9 @@
 
 	}
 
-}
 
+
+}
 
 
 
