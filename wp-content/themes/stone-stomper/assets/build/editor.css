@@ -4297,13 +4297,10 @@ Mixin for transition
   margin: 0;
 }
 .editor-styles-wrapper .woocommerce-shop .site-main {
-  padding-top: 130px !important;
+  padding-top: 112px !important;
   max-width: 1400px;
   width: 90%;
   margin: 0 auto;
-}
-.editor-styles-wrapper .woocommerce-shop .woocommerce-ordering {
-  margin-right: var(--ss_space_8);
 }
 .editor-styles-wrapper .woocommerce-shop .woocommerce-ordering select {
   height: var(--ss_space_36);
@@ -4335,7 +4332,7 @@ Mixin for transition
   font-weight: 700 !important;
 }
 .editor-styles-wrapper .woocommerce-shop .products.columns-4 li {
-  margin: 0 var(--ss_space_24) var(--ss_space_24) 0 !important;
+  margin: 0 var(--ss_space_24) var(--ss_space_72) 0 !important;
   width: calc(25% - 18px) !important;
 }
 .editor-styles-wrapper .woocommerce-shop .products.columns-4 li:nth-child(4n) {
@@ -4460,6 +4457,9 @@ Mixin for transition
 }
 .editor-styles-wrapper .woocommerce-orders table {
   table-layout: auto !important;
+}
+.editor-styles-wrapper .woocommerce-orders table tr:last-child, .editor-styles-wrapper .woocommerce-orders table tbody tr:last-child {
+  margin-bottom: 0 !important;
 }
 .editor-styles-wrapper .two-columns {
   display: grid;
@@ -6014,6 +6014,9 @@ Mixin for transition
   }
 }
 @media only screen and (min-width: 1004px) and (max-width: 1179px) {
+  .editor-styles-wrapper .nav-overlay .header-nav ul {
+    margin-top: 20px;
+  }
   .editor-styles-wrapper .testimonial-item-inner {
     padding: 25px 20px;
     height: calc(100% - 70px);
@@ -6064,6 +6067,9 @@ Mixin for transition
   }
 }
 @media only screen and (min-width: 748px) and (max-width: 1003px) {
+  .editor-styles-wrapper .nav-overlay .header-nav ul {
+    margin-top: 20px;
+  }
   .editor-styles-wrapper .testimonial-item {
     width: calc(50% - 20px);
   }
@@ -6071,7 +6077,7 @@ Mixin for transition
     padding-top: 15px;
   }
   .editor-styles-wrapper .woocommerce-shop .products.columns-4 li {
-    width: calc(50% - 22px) !important;
+    width: calc(50% - 12px) !important;
   }
   .editor-styles-wrapper .woocommerce-shop .products.columns-4 li:nth-child(2n+2) {
     margin-right: 0 !important;
@@ -6176,6 +6182,12 @@ Mixin for transition
   }
 }
 @media only screen and (max-width: 747px) {
+  .editor-styles-wrapper .woocommerce ul.products li.product .button {
+    font-size: 12px !important;
+  }
+  .editor-styles-wrapper .nav-overlay .header-nav ul {
+    margin-top: 20px;
+  }
   .editor-styles-wrapper .testimonials-items {
     gap: 40px;
   }
@@ -6417,6 +6429,14 @@ Mixin for transition
     width: 140px;
   }
 }
+@media only screen and (max-width: 450px) {
+  .editor-styles-wrapper .woocommerce-shop .woocommerce-result-count {
+    margin-right: 20px;
+  }
+  .editor-styles-wrapper .woocommerce-shop .woocommerce-ordering {
+    float: left !important;
+  }
+}
 @media only screen and (max-width: 435px) {
   .editor-styles-wrapper .woocommerce-downloads .woocommerce-info a {
     margin-top: var(--ss_space_16) !important;
@@ -6464,6 +6484,9 @@ Mixin for transition
     flex-direction: column !important;
     align-items: start;
     gap: 10px;
+  }
+  .editor-styles-wrapper .woocommerce-shop input.search-submit {
+    margin: 0 !important;
   }
   .editor-styles-wrapper #pm_menu {
     width: 99.9% !important;

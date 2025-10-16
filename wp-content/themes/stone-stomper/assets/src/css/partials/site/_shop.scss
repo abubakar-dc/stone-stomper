@@ -4,16 +4,13 @@
 		margin: 0;
 
 	}
-
 	.site-main{
-		padding-top: 130px !important;
+		padding-top: 112px !important;
 		max-width: 1400px;
 		width: 90%;
 		margin: 0 auto;
 	}
-	.woocommerce-ordering{
-		margin-right: var(--ss_space_8);
-	}
+
 	.woocommerce-ordering select{
 		height: var(--ss_space_36);
 		background-position: center right var(--ss_space_8);
@@ -47,7 +44,7 @@
 		}}
 	.products.columns-4{
 		li{
-			margin: 0 var(--ss_space_24) var(--ss_space_24) 0 !important;
+			margin: 0 var(--ss_space_24) var(--ss_space_72) 0 !important;
 			width: calc(25% - 18px) !important;
 		}
 		li:nth-child(4n){

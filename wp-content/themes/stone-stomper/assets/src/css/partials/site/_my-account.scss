@@ -171,5 +171,7 @@
 	table{
 
 		table-layout: auto !important;
-
+		tr:last-child, tbody tr:last-child{
+			margin-bottom: 0 !important;
+		}
 	}}
