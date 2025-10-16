@@ -4375,6 +4375,9 @@ Mixin for transition
 .editor-styles-wrapper .woocommerce-account.logged-in.admin-bar .woocommerce {
   margin: 0 auto;
 }
+.editor-styles-wrapper .woocommerce-account.logged-in.admin-bar .woocommerce-EditAccountForm.edit-account fieldset {
+  margin: 10px 0 10px !important;
+}
 .editor-styles-wrapper .woocommerce-dashboard.woocommerce-account .woocommerce-MyAccount-content {
   align-self: start;
   margin: auto 0 !important;
@@ -6325,6 +6328,9 @@ Mixin for transition
   .editor-styles-wrapper .woocommerce-order-received .woocommerce-table--order-details.shop_table, .editor-styles-wrapper .woocommerce-order-received p, .editor-styles-wrapper .woocommerce-order-received .woocommerce-column--shipping-address, .editor-styles-wrapper .woocommerce-order-received .woocommerce-column--billing-address {
     font-size: 12px !important;
   }
+  .editor-styles-wrapper .woocommerce-view-order p, .editor-styles-wrapper .woocommerce-table--order-details.shop_table, .editor-styles-wrapper address {
+    font-size: 12px !important;
+  }
   .editor-styles-wrapper .woocommerce-order-received .woocommerce-order-details, .editor-styles-wrapper .woocommerce-view-order .woocommerce-order-details {
     margin-bottom: 0 !important;
   }
@@ -6338,9 +6344,11 @@ Mixin for transition
     font-size: 24px !important;
     float: left !important;
   }
+  .editor-styles-wrapper .woocommerce-dashboard.woocommerce-account .woocommerce-orders-table__cell-order-actions, .editor-styles-wrapper .logged-in.admin-bar .woocommerce-orders-table__cell-order-actions {
+    padding: 10px 4px !important;
+  }
   .editor-styles-wrapper .woocommerce-dashboard.woocommerce-account .woocommerce-orders-table__row.woocommerce-orders-table__row--status-processing, .editor-styles-wrapper .logged-in.admin-bar .woocommerce-orders-table__row.woocommerce-orders-table__row--status-processing {
     margin-bottom: 30px;
-    padding-bottom: 20px;
   }
   .editor-styles-wrapper .woocommerce-dashboard.woocommerce-account .woocommerce-MyAccount-navigation ul li, .editor-styles-wrapper .logged-in.admin-bar .woocommerce-MyAccount-navigation ul li {
     width: 100% !important;

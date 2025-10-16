@@ -5562,6 +5562,9 @@ body #daextlwcnf-cookie-settings-button-2:hover {
 .woocommerce-account.logged-in.admin-bar .woocommerce {
   margin: 0 auto;
 }
+.woocommerce-account.logged-in.admin-bar .woocommerce-EditAccountForm.edit-account fieldset {
+  margin: 10px 0 10px !important;
+}
 
 .woocommerce-dashboard.woocommerce-account .woocommerce-MyAccount-content {
   align-self: start;
@@ -6933,6 +6936,9 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   .woocommerce-order-received .woocommerce-table--order-details.shop_table, .woocommerce-order-received p, .woocommerce-order-received .woocommerce-column--shipping-address, .woocommerce-order-received .woocommerce-column--billing-address {
     font-size: 12px !important;
   }
+  .woocommerce-view-order p, .woocommerce-table--order-details.shop_table, address {
+    font-size: 12px !important;
+  }
   .woocommerce-order-received .woocommerce-order-details, .woocommerce-view-order .woocommerce-order-details {
     margin-bottom: 0 !important;
   }
@@ -6946,9 +6952,11 @@ body #daextlwcnf-cookie-settings-button-2:hover {
     font-size: 24px !important;
     float: left !important;
   }
+  .woocommerce-dashboard.woocommerce-account .woocommerce-orders-table__cell-order-actions, .logged-in.admin-bar .woocommerce-orders-table__cell-order-actions {
+    padding: 10px 4px !important;
+  }
   .woocommerce-dashboard.woocommerce-account .woocommerce-orders-table__row.woocommerce-orders-table__row--status-processing, .logged-in.admin-bar .woocommerce-orders-table__row.woocommerce-orders-table__row--status-processing {
     margin-bottom: 30px;
-    padding-bottom: 20px;
   }
   .woocommerce-dashboard.woocommerce-account .woocommerce-MyAccount-navigation ul li, .logged-in.admin-bar .woocommerce-MyAccount-navigation ul li {
     width: 100% !important;

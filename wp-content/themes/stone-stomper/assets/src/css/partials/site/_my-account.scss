@@ -63,6 +63,11 @@
 	.woocommerce{
 		margin: 0 auto;
 	}
+	.woocommerce-EditAccountForm.edit-account{
+		fieldset{
+			margin: 10px 0 10px !important;
+		}
+	}
 }
 
 
