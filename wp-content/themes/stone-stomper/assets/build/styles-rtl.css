@@ -5082,15 +5082,6 @@ body #daextlwcnf-cookie-settings-button-2:hover {
 .single-product .upsells.products {
   display: none;
 }
-.single-product .woocommerce div.product .woocommerce-tabs ul.tabs {
-  padding: 0 5px 0 0;
-}
-.single-product .woocommerce p.stars {
-  margin-top: 10px !important;
-}
-.single-product .woocommerce p.stars a::before {
-  color: var(--ss_color_primary);
-}
 .single-product .woocommerce-loop-product__title {
   font-size: var(--ss_font_size_22) !important;
   color: var(--ss_black) !important;
@@ -5143,6 +5134,17 @@ body #daextlwcnf-cookie-settings-button-2:hover {
 .single-product .content-area {
   padding: var(--ss_space_200) 0 var(--ss_space_96);
   box-sizing: border-box;
+}
+
+.woocommerce-tabs ul.tabs {
+  padding: 0 5px 0 0 !important;
+}
+
+.woocommerce p.stars {
+  margin-top: 10px !important;
+}
+.woocommerce p.stars a::before {
+  color: var(--ss_color_primary);
 }
 
 /*-------------------------------------------------

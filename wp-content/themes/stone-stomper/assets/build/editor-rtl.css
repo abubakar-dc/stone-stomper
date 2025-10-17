@@ -3948,15 +3948,6 @@ Mixin for transition
 .editor-styles-wrapper .single-product .upsells.products {
   display: none;
 }
-.editor-styles-wrapper .single-product .woocommerce div.product .woocommerce-tabs ul.tabs {
-  padding: 0 5px 0 0;
-}
-.editor-styles-wrapper .single-product .woocommerce p.stars {
-  margin-top: 10px !important;
-}
-.editor-styles-wrapper .single-product .woocommerce p.stars a::before {
-  color: var(--ss_color_primary);
-}
 .editor-styles-wrapper .single-product .woocommerce-loop-product__title {
   font-size: var(--ss_font_size_22) !important;
   color: var(--ss_black) !important;
@@ -4009,6 +4000,15 @@ Mixin for transition
 .editor-styles-wrapper .single-product .content-area {
   padding: var(--ss_space_200) 0 var(--ss_space_96);
   box-sizing: border-box;
+}
+.editor-styles-wrapper .woocommerce-tabs ul.tabs {
+  padding: 0 5px 0 0 !important;
+}
+.editor-styles-wrapper .woocommerce p.stars {
+  margin-top: 10px !important;
+}
+.editor-styles-wrapper .woocommerce p.stars a::before {
+  color: var(--ss_color_primary);
 }
 .editor-styles-wrapper .post-box .post-box-img a {
   height: 100%;
