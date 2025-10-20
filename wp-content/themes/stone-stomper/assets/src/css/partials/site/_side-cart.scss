@@ -42,11 +42,16 @@
 
 		.whmrmtycart-button{
 			width: 100% !important;
+			letter-spacing: 3px;
+			font-weight: 600;
+			font-size: 14px;
 			background-color: var(--ss_color_primary) !important;
 			color: var(--ss_color_on_primary);
-			padding: 10px 0;
+			padding: 16px 0;
 			border: 1px solid var(--ss_color_primary);
 			border-radius: 0 !important;
+			text-transform: uppercase !important;
+
 		}
 		.whmrmtycart-button:hover{
 			opacity: 1;
@@ -91,10 +96,13 @@
 		transition: all 0.4s ease-in-out !important;
 	}
 	#whmckeepshooping{
-		text-transform: capitalize !important;
-		border: 1px solid var(--ss_black_2);
 
-		padding: 12px 0;
+		border: 1px solid var(--ss_black_2);
+		text-transform: uppercase !important;
+		letter-spacing: 3px;
+		font-weight: 600;
+		font-size: 14px !important;
+		padding: 16px 0;
 	}
 	#whmckeepshooping:hover{
 		background-color: var(--ss_color_primary);
@@ -105,12 +113,19 @@
 	}
 
 	.wmcchevkoutprocess{
-
+		font-weight: 600;
+		text-transform: uppercase !important;
+		letter-spacing: 3px;
 		border-radius: 0 !important;
 		background-color:  var(--ss_color_primary) !important;
-		padding: 12px 0;
-	}
+		padding: 16px 0;
+		font-size: 14px !important;
 
+	}
+	.wmctitel {
+		font-size: 14px !important;
+
+	}
 	.ckhviewcart{
 		display: none !important;
 	}
@@ -129,8 +144,8 @@
 		border: none;
 		label{
 
-			font-size: var(--ss_font_size_22) !important;
-			font-weight: 700;
+			font-size: var(--ss_font_size_28) !important;
+			font-weight: 600;
 		}}
 	.amounts{
 		display: none;
@@ -138,8 +153,8 @@
 	#totalcla{
 		.woocommerce-Price-amount{
 			bdi, .woocommerce-Price-currencySymbol{
-				font-size: var(--ss_font_size_22) !important;
-				font-weight: 700;
+				font-size: var(--ss_font_size_28) !important;
+				font-weight: 600;
 			}
 		}
 	}

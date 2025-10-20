@@ -37,7 +37,7 @@ jQuery( function() {
 	if ( jQuery( '.header-wrapper' ).length > 0 ) {
 		function updateHeaderHeight() {
 			jQuery( '.header-wrapper' ).each( function() {
-				jQuery( 'body.woocommerce-account, body.woocommerce-checkout,body.woocommerce-cart' ).css( '--ss_header-wrapper-default', jQuery( this ).outerHeight() + 'px' );
+				jQuery( 'body.woocommerce-account, body.woocommerce-checkout, body.woocommerce-cart, body.woocommerce-shop' ).css( '--ss_header-wrapper-default', jQuery( this ).outerHeight() + 'px' );
 			} );
 		}
 		updateHeaderHeight();
@@ -338,36 +338,32 @@ setupImageUpload( 'photo_hitch', 'list_hitch', 'hitch' );
 setupImageUpload( 'photo_rear', 'list_rear', 'rear' );
 setupImageUpload( 'photo_front', 'list_front', 'front' );
 
-
-
-
 jQuery( function() {
-
-	  jQuery('.stone-stomper-supports #factory_stoneguard').on('change', function() {
-	    if (jQuery(this).is(':checked')) {
-	      jQuery('.factory_stoneguard').slideDown();
+	  jQuery( '.stone-stomper-supports #factory_stoneguard' ).on( 'change', function() {
+	    if ( jQuery( this ).is( ':checked' ) ) {
+	      jQuery( '.factory_stoneguard' ).slideDown();
 	    } else {
-	      jQuery('.factory_stoneguard').slideUp();
+	      jQuery( '.factory_stoneguard' ).slideUp();
 	    }
-	  });
+	  } );
 
-	  jQuery('.stone-stomper-supports #toolbox').on('change', function() {
-	    if (jQuery(this).is(':checked')) {
-	      jQuery('.toolbox-support').slideDown();
+	  jQuery( '.stone-stomper-supports #toolbox' ).on( 'change', function() {
+	    if ( jQuery( this ).is( ':checked' ) ) {
+	      jQuery( '.toolbox-support' ).slideDown();
 	    } else {
-	      jQuery('.toolbox-support').slideUp();
+	      jQuery( '.toolbox-support' ).slideUp();
 	    }
-	  });
+	  } );
 
-	  jQuery('#vanwidth').on('input change', function() {
-    // Get the input value and extract only the number part
-    let val = jQuery(this).val().replace(/[^0-9]/g, '');
-    let num = parseInt(val, 10);
+	  jQuery( '#vanwidth' ).on( 'input change', function() {
+		// Get the input value and extract only the number part
+		const val = jQuery( this ).val().replace( /[^0-9]/g, '' );
+		const num = parseInt( val, 10 );
 
-    if (!isNaN(num) && num >= 1900) {
-      jQuery('.ss-support-options').slideDown();
-    } else {
-      jQuery('.ss-support-options').slideUp();
-    }
-  });
+		if ( ! isNaN( num ) && num >= 1900 ) {
+			jQuery( '.ss-support-options' ).slideDown();
+		} else {
+			jQuery( '.ss-support-options' ).slideUp();
+		}
+	} );
 } );
