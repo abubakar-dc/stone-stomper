@@ -422,76 +422,6 @@
             "append": ""
         },
         {
-            "key": "field_68c2cf3b15d06",
-            "label": "Images",
-            "name": "sts_var_caravan_images",
-            "aria-label": "",
-            "type": "group",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "layout": "block",
-            "sub_fields": [
-                {
-                    "key": "field_68c2cf3b280e0",
-                    "label": "Factory Stoneguard Image",
-                    "name": "factory_stoneguard_image",
-                    "aria-label": "",
-                    "type": "image",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "50",
-                        "class": "",
-                        "id": ""
-                    },
-                    "return_format": "id",
-                    "library": "all",
-                    "min_width": "",
-                    "min_height": "",
-                    "min_size": "",
-                    "max_width": "",
-                    "max_height": "",
-                    "max_size": "",
-                    "mime_types": "",
-                    "allow_in_bindings": 0,
-                    "preview_size": "admin-square"
-                },
-                {
-                    "key": "field_68c2cf3b280e8",
-                    "label": "Toolbox Image",
-                    "name": "toolbox_image",
-                    "aria-label": "",
-                    "type": "image",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "50",
-                        "class": "",
-                        "id": ""
-                    },
-                    "return_format": "id",
-                    "library": "all",
-                    "min_width": "",
-                    "min_height": "",
-                    "min_size": "",
-                    "max_width": "",
-                    "max_height": "",
-                    "max_size": "",
-                    "mime_types": "",
-                    "allow_in_bindings": 0,
-                    "preview_size": "medium"
-                }
-            ]
-        },
-        {
             "key": "field_68c2cf3b15d1c",
             "label": "Support Pockets",
             "name": "support_pockets",
@@ -664,5 +594,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1760416789
+    "modified": 1760702447
 }
