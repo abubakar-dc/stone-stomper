@@ -148,6 +148,19 @@ add_filter('woocommerce_get_item_data', function($item_data, $cart_item) {
     return $item_data;
 }, 10, 2);
 
+add_filter('woocommerce_add_cart_item_data', function($cart_item_data, $product_id, $variation_id) {
+    if (!empty($_POST['hitch_attachment_ids'])) {
+        $cart_item_data['hitch_attachment_ids'] = sanitize_text_field($_POST['hitch_attachment_ids']);
+    }
+    if (!empty($_POST['rear_attachment_ids'])) {
+        $cart_item_data['rear_attachment_ids'] = sanitize_text_field($_POST['rear_attachment_ids']);
+    }
+    if (!empty($_POST['front_attachment_ids'])) {
+        $cart_item_data['front_attachment_ids'] = sanitize_text_field($_POST['front_attachment_ids']);
+    }
+    return $cart_item_data;
+}, 10, 3);
+
 
 // Persist to Order Items (admin)
 add_action('woocommerce_checkout_create_order_line_item', function($item, $cart_item_key, $values, $order) {
@@ -283,9 +296,10 @@ add_action( 'woocommerce_new_order', function( $order_id ) {
 	$data = sts_read_order_form_cookie();
 
 
-	error_log(print_r($data,true));
+	error_log(print_r($data, true));
 
 	$cust_name    = isset( $data['customer_name'] )   ? sanitize_text_field( $data['customer_name'] )   : '';
+	$cust_phone    = isset( $data['customer_phone'] )   ? sanitize_text_field( $data['customer_phone'] )   : '';
 	$cust_email   = isset( $data['customer_email'] )  ? sanitize_email( $data['customer_email'] )       : '';
 	$cust_address = isset( $data['customer_address'] )? sanitize_text_field( $data['customer_address'] ): '';
 	$cust_suburb  = isset( $data['customer_suburb'] ) ? sanitize_text_field( $data['customer_suburb'] ) : '';
@@ -352,6 +366,7 @@ error_log(print_r($cust_name,true));
 	// Link to order + basic fields
 	update_post_meta( $post_id, 'order_id', $order_id );
 	update_post_meta( $post_id, 'name', $cust_name );
+	update_post_meta( $post_id, 'customer_phone', $cust_phone );
 	update_post_meta( $post_id, 'email', $cust_email );
 	update_post_meta( $post_id, 'delivery_address', $cust_address );
 	update_post_meta( $post_id, 'subrubs', $cust_suburb );
@@ -493,7 +508,7 @@ function show_towing_svg_in_editor( $post ) {
 		// Basic info
 		$order_date       = $order->get_date_created()->date_i18n('Y-m-d');
 		$customer_name    = $order->get_formatted_billing_full_name();
-		$customer_phone   = $order->get_billing_phone();
+		// $customer_phone   = $order->get_billing_phone();
 		$customer_email   = $order->get_billing_email();
 		$delivery_address = $order->get_formatted_shipping_address();
 		$delivery_cost    = $order->get_shipping_total();
@@ -517,6 +532,8 @@ function show_towing_svg_in_editor( $post ) {
 		}
 	}
 
+	$customer_phone = get_post_meta( $post->ID, 'customer_phone', true );
+	// var_dump(get_post_meta( $post->ID, 'phone', true ));
 	$measure_barwidth_mm = get_post_meta( $post->ID, 'measure_barwidth_mm', true );
     $bar_width_mm        = get_post_meta( $post->ID, 'bar_width_mm', true );
     $caravan_length_mm        = get_post_meta( $post->ID, 'caravan_length_mm', true );
@@ -537,35 +554,121 @@ function show_towing_svg_in_editor( $post ) {
     $sts_var_caravan_cut_out    = get_post_meta( $post->ID, 'sts_var_caravan_cut_out', true );
     $sts_var_caravan_break_form    = get_post_meta( $post->ID, 'sts_var_caravan_break_form', true );
     $sts_var_caravan_hr_form    = get_post_meta( $post->ID, 'sts_var_caravan_hr_form', true );
+    $sts_var_proposed_date_of_delivery    = get_post_meta( $post->ID, 'sts_var_proposed_date_of_delivery', true );
+
+
+	if ( ! empty( $sts_var_proposed_date_of_delivery ) ) {
+		// Convert to timestamp
+		$sts_var_proposed_date_of_delivery = strtotime( $sts_var_proposed_date_of_delivery );
+	}
+
 
     // $hitch_ids = get_post_meta( $post->ID, 'ss_hitch_ids', true );
 
-var_dump(get_post_meta( $post->ID));
     ?>
 
     <div style="text-align:center; padding:20px;">
+		<div class="functional-buttons">
+			<a href="#" class="button button-primary generate-diagram" style="margin-right:10px;">Generate Diagram</a>
+			<a href="#" class="button button-secondary generate-word-doc" style="margin-right:10px;">Generate Word Document</a>
+			<a href="#" class="button button-primary generate-pdf" style="margin-right:10px;">Generate PDF</a>
+			<a href="#" class="button button-secondary email-to-manufacturer" style="margin-right:10px;">Email to Manufacturer</a>
+			<a href="<?php echo esc_url( get_edit_post_link( $order_id ) ); ?>" class="button button-secondary" style="">View Order #<?php echo esc_html( $order_id ); ?></a>
+		</div>
+
+		<?php
+		// var_dump(get_post_meta( $post->ID));
+		?>
+
         <a href="#" class="stone-stomper-vector" id="show-order-popup">
-			<div class="ss-width">
-				<span>
-					<?php echo esc_html( $caravan_width_mm ?: '-' ); ?>
-				</span>
-			</div>
-			<div class="ss-length">
-				<span>
-					<?php echo esc_html( $caravan_length_mm ?: '-' ); ?>
-				</span>
-			</div>
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/src/images/stone-stomper-vector.png" style="max-width:980px;cursor:pointer;" />
-			<div class="towing-vehicle-bar-width">
-				<span>
-					<?php echo esc_html( $bar_width_mm ?: '-' ); ?>
-				</span>
-			</div>
+
+			<svg xmlns="http://www.w3.org/2000/svg" id="Layer_2" version="1.1" viewBox="0 0 1200 800">
+				<!-- Generator: Adobe Illustrator 29.8.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 2)  -->
+				<defs>
+					<style>
+					.st0 {
+						stroke: #fa3232;
+					}
+
+					.st0, .st1, .st2 {
+						fill: none;
+					}
+
+					.st3, .st4 {
+						fill: #fff;
+					}
+
+					.st3, .st1, .st2 {
+						stroke: #000;
+					}
+
+					.st1 {
+						stroke-width: 3px;
+					}
+
+					.st5 {
+						fill: #fa3232;
+						font-family: OpenSans, 'Open Sans';
+						font-size: 15px;
+						letter-spacing: .03em;
+					}
+					</style>
+				</defs>
+				<path class="st1" d="M935.7,173.33c.12-1.09-.69-1.99-1.79-1.99H278.24c-1.1,0-1.91.9-1.79,1.99l41.6,402.61c.11,1.09,1.11,1.99,2.21,1.99h246.73c1.1,0,2-.9,2-2v-61.51c0-1.1.9-2,2-2h68.28c1.1,0,2,.9,2,2v61.51c0,1.1.9,2,2,2h247.86c1.1,0,2.09-.9,2.21-1.99l42.37-402.61Z"/>
+				<polyline class="st2" points="329.42 577.92 288.76 180.94 923.79 180.94 882.27 577.92"/>
+				<circle class="st2" cx="928.02" cy="177.82" r="5.22"/>
+				<circle class="st2" cx="283.6" cy="177.82" r="5.22"/>
+				<rect class="st2" x="390.67" y="364.08" width="438.42" height="27.06"/>
+				<rect class="st3" x="504.04" y="315.51" width="211.2" height="195.21"/>
+				<rect class="st2" x="404.09" y="381.28" width="8.47" height="196.64"/>
+				<rect class="st2" x="477.94" y="381.28" width="8.47" height="196.64"/>
+				<rect class="st2" x="732.88" y="381.28" width="8.47" height="196.64"/>
+				<rect class="st2" x="806.72" y="381.28" width="8.47" height="196.64"/>
+				<circle class="st2" cx="737.11" cy="374.25" r="4.24"/>
+				<circle class="st2" cx="810.96" cy="374.25" r="4.24"/>
+				<circle class="st2" cx="408.33" cy="374.25" r="4.24"/>
+				<circle class="st2" cx="482.17" cy="374.25" r="4.24"/>
+				<text class="st5" transform="translate(565.96 411.74)"><tspan x="0" y="0">Vinyl Insert</tspan></text>
+				<g>
+					<line class="st0" x1="274.29" y1="139.99" x2="935.24" y2="139.99"/>
+					<g transform="translate(604.76,139.99)">
+						<rect class="st4" x="-67.5" y="-22" width="135" height="24"/>
+						<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0"><?php echo esc_html( $caravan_width_mm ?: '-' ); ?></text>
+					</g>
+					<polyline class="st0" points="278.3 143.72 274.29 139.99 278.3 136.27"/>
+					<polyline class="st0" points="931.24 136.27 935.24 140 931.24 143.72"/>
+				</g>
+				<g>
+					<line class="st0" x1="317.29" y1="608.6" x2="894.24" y2="608.6"/>
+					<g transform="translate(957.8,375.13)">
+					  <rect class="st4" x="10" y="-12" width="135" height="24"/>
+					  <text class="st5" text-anchor="start" dominant-baseline="middle" x="20"><?php echo esc_html( $caravan_length_mm ?: '-' ); ?></text>
+					</g>
+					<polyline class="st0" points="321.3 612.33 317.29 608.6 321.3 604.88"/>
+					<polyline class="st0" points="890.24 604.88 894.24 608.6 890.24 612.33"/>
+				</g>
+
+
+				<g>
+					<line class="st0" x1="957.8" y1="170.34" x2="957.8" y2="579.93"/>
+					<g transform="translate(605.77,608.6)">
+						<rect class="st4" x="-67.5" y="-12" width="135" height="24"/>
+						<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0"><?php echo esc_html( $bar_width_mm ?: '-' ); ?></text>
+					</g>
+					<polyline class="st0" points="954.07 174.34 957.8 170.34 961.52 174.34"/>
+					<polyline class="st0" points="961.52 575.92 957.8 579.93 954.07 575.92"/>
+				</g>
+			</svg>
+
         </a>
 		<div style="margin-top:30px; text-align:left; font-size:16px;">
 			<h3 style="margin-bottom:10px; text-align:center; "> Measurements</h3>
 			<table style="margin:0 auto; border-collapse:collapse; font-size:15px;">
 
+				<tr>
+					<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Phone:</td>
+					<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $customer_phone ?: '-' ); ?></td>
+				</tr>
 				<tr>
 					<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">SS Width (mm):</td>
 					<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $caravan_width_mm ?: '-' ); ?></td>
@@ -605,6 +708,10 @@ var_dump(get_post_meta( $post->ID));
 				<tr>
 					<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Toolbox Length (mm):</td>
 					<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $toolbox_height_mm ?: '-' ); ?></td>
+				</tr>
+				<tr>
+					<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Proposed Date of Delivery:</td>
+					<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo date( 'd-F-Y', $sts_var_proposed_date_of_delivery ?: '-' ); ?></td>
 				</tr>
 			</table>
         </div>

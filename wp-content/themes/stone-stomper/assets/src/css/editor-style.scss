@@ -670,30 +670,12 @@ body.post-type-post .editor-styles-wrapper {
 .inv-one,
 .inv-two,
 .stone-stomper-vector {
+	display: block;
+	max-width: 900px;
+	margin: 0 auto;
 
-	.ss-width,
-	.ss-length,
-	.towing-vehicle-bar-width {
-		span {
-			color: var(--ss_color_primary);
-			font-size: var(--ss_font_size_18);
-			font-weight: 700;
-		}
-	}
-
-	.ss-length {
-		top: 49.5%;
-		bottom: 0;
-		position: absolute;
-		right: 98px;
-		left: auto;
-	}
-
-	.towing-vehicle-bar-width {
-		width: max-content;
-		position: absolute;
-		left: 36%;
-		bottom: 3%;
+	svg {
+		max-width: 100%;
 	}
 }
 

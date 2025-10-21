@@ -4377,6 +4377,14 @@ div#menuiconwrap.icons02 span.cart_count_header {
   color: var(--wp--preset--color--black);
 }
 
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+
+.mt-0 {
+  margin-top: 0 !important;
+}
+
 .clr-red {
   color: var(--ss_color_primary);
 }
@@ -6721,7 +6729,7 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   font-weight: 600;
   text-transform: uppercase;
   height: 68px;
-  width: 49.1%;
+  width: 100%;
   letter-spacing: 2.7px;
 }
 .actions button.secondary {
@@ -7070,9 +7078,6 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   .header-btns {
     width: 6.2%;
   }
-  .actions button {
-    width: 48.8%;
-  }
   .header-nav ul li {
     margin: 0 10px;
   }
@@ -7086,9 +7091,6 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   }
   .copy-right {
     width: 38%;
-  }
-  .actions button {
-    width: 48.8%;
   }
   .header-btns {
     width: 6.8%;
@@ -7123,9 +7125,6 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   }
   .form-section-right {
     width: 45.5%;
-  }
-  .actions button {
-    width: 48.7%;
   }
   .form-section-left {
     width: 50%;

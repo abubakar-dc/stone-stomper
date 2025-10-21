@@ -3357,6 +3357,12 @@ Mixin for transition
 .editor-styles-wrapper .black-text {
   color: var(--wp--preset--color--black);
 }
+.editor-styles-wrapper .mb-0 {
+  margin-bottom: 0 !important;
+}
+.editor-styles-wrapper .mt-0 {
+  margin-top: 0 !important;
+}
 .editor-styles-wrapper .clr-red {
   color: var(--ss_color_primary);
 }
@@ -5434,7 +5440,7 @@ Mixin for transition
   font-weight: 600;
   text-transform: uppercase;
   height: 68px;
-  width: 49.1%;
+  width: 100%;
   letter-spacing: 2.7px;
 }
 .editor-styles-wrapper .actions button.secondary {
@@ -6454,9 +6460,6 @@ Mixin for transition
   .editor-styles-wrapper .header-btns {
     width: 6.2%;
   }
-  .editor-styles-wrapper .actions button {
-    width: 48.8%;
-  }
   .editor-styles-wrapper .header-nav ul li {
     margin: 0 10px;
   }
@@ -6470,9 +6473,6 @@ Mixin for transition
   }
   .editor-styles-wrapper .copy-right {
     width: 38%;
-  }
-  .editor-styles-wrapper .actions button {
-    width: 48.8%;
   }
   .editor-styles-wrapper .header-btns {
     width: 6.8%;
@@ -6507,9 +6507,6 @@ Mixin for transition
   }
   .editor-styles-wrapper .form-section-right {
     width: 45.5%;
-  }
-  .editor-styles-wrapper .actions button {
-    width: 48.7%;
   }
   .editor-styles-wrapper .form-section-left {
     width: 50%;
@@ -7499,36 +7496,17 @@ body.post-type-post .editor-styles-wrapper > div {
   width: 50%;
 }
 
-.inv-one .ss-width span,
-.inv-one .ss-length span,
-.inv-one .towing-vehicle-bar-width span,
-.inv-two .ss-width span,
-.inv-two .ss-length span,
-.inv-two .towing-vehicle-bar-width span,
-.stone-stomper-vector .ss-width span,
-.stone-stomper-vector .ss-length span,
-.stone-stomper-vector .towing-vehicle-bar-width span {
-  color: var(--ss_color_primary);
-  font-size: var(--ss_font_size_18);
-  font-weight: 700;
+.inv-one,
+.inv-two,
+.stone-stomper-vector {
+  display: block;
+  max-width: 900px;
+  margin: 0 auto;
 }
-.inv-one .ss-length,
-.inv-two .ss-length,
-.stone-stomper-vector .ss-length {
-  top: 49.5%;
-  bottom: 0;
-  position: absolute;
-  left: 98px;
-  right: auto;
-}
-.inv-one .towing-vehicle-bar-width,
-.inv-two .towing-vehicle-bar-width,
-.stone-stomper-vector .towing-vehicle-bar-width {
-  width: -moz-max-content;
-  width: max-content;
-  position: absolute;
-  right: 36%;
-  bottom: 3%;
+.inv-one svg,
+.inv-two svg,
+.stone-stomper-vector svg {
+  max-width: 100%;
 }
 
 .inv-order-details .stone-stomper-vector .ss-width {

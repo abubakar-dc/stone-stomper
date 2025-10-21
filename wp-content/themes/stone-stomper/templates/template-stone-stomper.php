@@ -89,12 +89,10 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 									<div class="products-select">
 										<?php if ( $sts_var_select_products ) { ?>
 
-											<?php if($sts_var_section_headline){ ?>
-												<h3 class="">Products</h2>
-											<?php } ?>
+
 											<div class="field">
 												<select id="product_type" placeholder="Please Select" name="product_type" required>
-													<option value="">Please Select</option>
+													<option value="">Select Product</option>
 													<?php foreach( $sts_var_select_products as $key =>  $sts_var_select_product ){ ?>
 														<option value="<?php echo esc_html($sts_var_select_product);?>" > <?php echo esc_html(get_the_title($sts_var_select_product));  ?> </option>
 													<?php } ?>
@@ -128,6 +126,9 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 									<div class="grid cols-2">
 										<div class="field">
 											<input id="cust_name" placeholder="Name" name="customer_name" type="text" required />
+										</div>
+										<div class="field">
+											<input id="cust_phone" placeholder="Phone" name="customer_phone" type="text" required />
 										</div>
 										<div class="field">
 											<input id="cust_address" placeholder="Home Address" name="customer_address" type="text" required />
@@ -230,19 +231,25 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										</div>
 										<div class="field hidden" id="veh_make_other_wrap">
 											<label class="req" for="veh_make_other">Other Make</label>
-											<input id="veh_make_other" name="vehicle_make_other" type="text" />
+											<input placeholder="Other Make" id="veh_make_other" name="vehicle_make_other" type="text" />
 										</div>
 										<div class="field">
 											<label class="req" for="veh_model">Vehicle Model</label>
+											<!-- default should be dropdown -->
 											<select id="veh_model" name="vehicle_model" required >
 												<option value="">Select Vehicle Model </option>
 											</select>
+											<!-- else if selected other show text input here -->
+											<input style="display:none" placeholder="Vehicle Model" id="vehicle_model_other" name="vehicle_model" type="text" />
+
 										</div>
 										<div class="field">
 											<label class="req" for="veh_year">Year of Manufacture</label>
 											<select id="veh_year" name="vehicle_year" required>
 												<option value="">Select Model Year </option>
 											</select>
+											<input style="display:none" placeholder="Model Year" id="veh_year_other" name="vehicle_year" type="text" />
+
 										</div>
 									</div>
 									<?php
@@ -326,12 +333,13 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 														'taxonomy'   => 'caravan-category', // Replace with your taxonomy slug
 														'hide_empty' => false,      // Show terms even if they have no posts
 													) );
-
 												?>
 												<option value="">Select Caravan Make</option>
 												<?php foreach ( $terms as $term ) : ?>
 													<option value="<?php echo esc_attr( $term->slug ); ?>"><?php echo esc_html( $term->name ); ?></option>
 												<?php endforeach; ?>
+												<option value="other">Other</option>
+
 											</select>
 										</div>
 										<div class="field">
@@ -339,6 +347,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											<select id="van_model" name="caravan_model" required>
 												<option value="">Select Caravan Model</option>
 											</select>
+											<input style="display:none" placeholder="Caravan Model" id="van_model_other" name="caravan_model" type="text" />
 										</div>
 									</div>
 
@@ -514,9 +523,33 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										</div>
 
 										<fieldset class="ss-support-options" style="display:none">
+											<div class="note notice-bar mt-0">As the A-Frame length is large kindly select one of the following options</div>
+
 											<div  class="ginput_container ginput_container_checkbox extra-support">
+												<!-- ToolBox -->
 												<div class="gchoice stone-stomper-supports">
-													<input class="gfield-choice-input" name="input_1.1" type="checkbox" value="factory-stoneguard" id="factory_stoneguard">
+													<div class="checkbox-item">
+														<input class="gfield-choice-input" name="input_1.3" type="radio" value="toolbox" id="toolbox">
+														<label for="toolbox" id="label_4_1_2">Toolbox</label>
+													</div>
+													<div class="toolbox-support" style="display:none">
+														<div class="factory_stoneguard_inner two-columns-fields">
+															<div class="field extra-support" >
+																<label class="req" for="toolbox_width">Width</label>
+																<input id="toolbox_width" name="toolbox_width_mm" type="text"
+																	placeholder="e.g. 900 mm" required />
+															</div>
+															<div class="field extra-support">
+																<label class="req" for="toolbox_length">Distance from the Caravan</label>
+																<input id="toolbox_length" name="toolbox_length_mm" type="text"
+																	placeholder="e.g. 900 mm" required />
+															</div>
+														</div>
+													</div>
+												</div>
+												<!-- Stone Gaurd -->
+												<div class="gchoice stone-stomper-supports">
+													<input class="gfield-choice-input" name="input_1.3" type="radio" value="factory-stoneguard" id="factory_stoneguard">
 													<label for="factory_stoneguard" id="label_4_1_1">Factory Stoneguard</label>
 
 													<div class="factory_stoneguard" style="display:none">
@@ -527,35 +560,17 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 																	placeholder="e.g.600 mm" required />
 															</div>
 															<div class="field extra-support">
-																<label class="req" for="stoneguard_length">Length</label>
+																<label class="req" for="stoneguard_length">Distance from the Caravan</label>
 																<input id="stoneguard_length" name="stoneguard_length_mm" type="text"
 																	placeholder="e.g.600 mm" required />
 															</div>
 														</div>
 													</div>
 												</div>
+												<!-- Support Pockets -->
 												<div class="gchoice stone-stomper-supports">
-													<input class="gfield-choice-input" name="input_1.2" type="checkbox" value="support_pockets" id="support_pockets">
-													<label for="support_pockets" id="label_4_1_3">Supoort Pockets</label>
-												</div>
-												<div class="gchoice stone-stomper-supports">
-													<input class="gfield-choice-input" name="input_1.3" type="checkbox" value="toolbox" id="toolbox">
-													<label for="toolbox" id="label_4_1_2">Toolbox</label>
-
-													<div class="toolbox-support" style="display:none">
-														<div class="factory_stoneguard_inner two-columns-fields">
-															<div class="field extra-support" >
-																<label class="req" for="toolbox_width">Width</label>
-																<input id="toolbox_width" name="toolbox_width_mm" type="text"
-																	placeholder="e.g. 900 mm" required />
-															</div>
-															<div class="field extra-support">
-																<label class="req" for="toolbox_length">Length</label>
-																<input id="toolbox_length" name="toolbox_length_mm" type="text"
-																	placeholder="e.g. 900 mm" required />
-															</div>
-														</div>
-													</div>
+													<input class="gfield-choice-input" name="input_1.3" type="radio" value="support_pockets" id="support_pockets">
+													<label for="support_pockets" id="label_4_1_3">Support Pockets</label>
 												</div>
 											</div>
 										</fieldset>
@@ -649,9 +664,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 												<option value="same">Same as above</option>
 												<option value="move">I am on the move</option>
 											</select>
-											<p class="note hidden" id="move_note">We’ll contact you by phone after
-												manufacture to arrange
-												delivery details.</p>
+											<p class="note notice-bar hidden" id="move_note">Our Team will contact you once your order is ready on your given phone number</p>
 										</div>
 										<div class="field">
 											<label class="req" for="shipping">Shipping (Australia Wide)</label>
@@ -659,6 +672,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											<option value="flat_rate:4">Standard Shipping $75</option>
 												<option value="flat_rate:5">Express Shipping $150</option>
 											</select>
+											<p class="note notice-bar hidden" id="express_delivery_note">Express shipping does not apply to Stonestomper products</p>
 										</div>
 									</div>
 									<div class="form-section-left column mobile-image" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
@@ -736,8 +750,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 									</div>
 
 									<div class="actions">
-										<button class="btn secondary" type="button" id="btn_save">Save
-											Order</button>
+
 										<button class="btn primary" type="submit" id="btn_cart">Add to Cart</button>
 									</div>
 								</div>

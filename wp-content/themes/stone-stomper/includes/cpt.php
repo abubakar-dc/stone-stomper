@@ -99,13 +99,22 @@ new WP_Theme_CPT(
 /**
  * Add a WooCommerce Status column to the custom Order CPT
  */
+/**
+ * Add WooCommerce-related columns to the custom Order CPT
+ */
 add_filter( 'manage_customer_posts_columns', function ( $columns ) {
+
 	$new_columns = [];
 
 	foreach ( $columns as $key => $label ) {
 		$new_columns[ $key ] = $label;
+
 		if ( 'title' === $key ) {
-			$new_columns['order_status'] = __( 'WooCommerce Status', 'textdomain' );
+
+			// 👇 Add Order ID, WooCommerce Status, and Proposed Date after Title
+			$new_columns['order_id']       = __( 'Order ID', 'textdomain' );
+			$new_columns['order_status']   = __( 'Status', 'textdomain' );
+			$new_columns['proposed_date']  = __( 'Proposed Date', 'textdomain' );
 		}
 	}
 
@@ -113,34 +122,57 @@ add_filter( 'manage_customer_posts_columns', function ( $columns ) {
 } );
 
 add_action( 'manage_customer_posts_custom_column', function ( $column, $post_id ) {
-	if ( 'order_status' === $column ) {
 
-		// 🧠 Get the related WooCommerce Order ID from your ACF field
-		$order_id = get_field( 'order_id', $post_id ); // <-- change if your ACF key is different
+	// 🧠 Get linked WooCommerce Order ID from your ACF field
+	$order_id = get_field( 'order_id', $post_id ); // update if your ACF key is different
 
-		if ( ! $order_id ) {
-			echo '<em style="color:#888;">No linked WooCommerce order</em>';
-			return;
-		}
+	switch ( $column ) {
 
-		$order = wc_get_order( $order_id );
+		// ✅ Order ID Column
+		case 'order_id':
+			if ( $order_id ) {
+				echo '<a href="' . esc_url( admin_url( 'post.php?post=' . $order_id . '&action=edit' ) ) . '">#' . esc_html( $order_id ) . '</a>';
+			} else {
+				echo '<em style="color:#888;">—</em>';
+			}
+			break;
 
-		if ( ! $order ) {
-			echo '<em style="color:#888;">Invalid Order #' . esc_html( $order_id ) . '</em>';
-			return;
-		}
+		// ✅ WooCommerce Order Status Column
+		case 'order_status':
+			if ( ! $order_id ) {
+				echo '<em style="color:#888;">No linked WooCommerce order</em>';
+				break;
+			}
 
-		$current_status = $order->get_status();
-		$statuses       = wc_get_order_statuses();
+			$order = wc_get_order( $order_id );
+			if ( ! $order ) {
+				echo '<em style="color:#888;">Invalid Order #' . esc_html( $order_id ) . '</em>';
+				break;
+			}
 
-		echo '<select class="wc-order-status" data-order-id="' . esc_attr( $order_id ) . '">';
-		foreach ( $statuses as $status_key => $status_label ) {
-			$selected = selected( $current_status, str_replace( 'wc-', '', $status_key ), false );
-			echo '<option value="' . esc_attr( $status_key ) . '" ' . $selected . '>' . esc_html( $status_label ) . '</option>';
-		}
-		echo '</select>';
+			$current_status = $order->get_status();
+			$statuses       = wc_get_order_statuses();
+
+			echo '<select class="wc-order-status" data-order-id="' . esc_attr( $order_id ) . '">';
+			foreach ( $statuses as $status_key => $status_label ) {
+				$selected = selected( $current_status, str_replace( 'wc-', '', $status_key ), false );
+				echo '<option value="' . esc_attr( $status_key ) . '" ' . $selected . '>' . esc_html( $status_label ) . '</option>';
+			}
+			echo '</select>';
+			break;
+
+		// ✅ Proposed Date Column
+		case 'proposed_date':
+			$proposed_date = get_field( 'proposed_date', $post_id ); // update ACF key if needed
+			if ( $proposed_date ) {
+				echo esc_html( date_i18n( 'F j, Y', strtotime( $proposed_date ) ) );
+			} else {
+				echo '<em style="color:#888;">—</em>';
+			}
+			break;
 	}
 }, 10, 2 );
+
 
 /**
  * AJAX handler to update WooCommerce order status
