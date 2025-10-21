@@ -2437,6 +2437,36 @@ table.ui-datepicker_calendar {
   display: none;
 }
 
+.gform-theme .gform_fields {
+  -moz-column-gap: 19.5px;
+       column-gap: 19.5px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.gform-theme .gform_heading {
+  display: none;
+}
+.gform-theme .gfield_label {
+  display: none;
+}
+.gform-theme ::-moz-placeholder {
+  text-transform: uppercase;
+}
+.gform-theme ::placeholder {
+  text-transform: uppercase;
+}
+.gform-theme .gfield {
+  width: 100%;
+}
+.gform-theme .gfield.gfield--width-half {
+  display: inline-block;
+  vertical-align: top;
+  width: 48.8%;
+}
+.gform-theme textarea {
+  padding: 20px 25px;
+}
+
 /* -------------------------------------------------
 >> Default styles for Hubspot Forms
 ------------------------------------------------- */
@@ -4201,6 +4231,10 @@ div#menuiconwrap.icons02 span.cart_count_header {
 
 .ctn-980 .wrapper {
   max-width: 980px;
+}
+
+.ctn-960 .wrapper {
+  max-width: 960px;
 }
 
 .ctn-760 .wrapper {
@@ -7227,6 +7261,12 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   }
 }
 @media only screen and (max-width: 768px) {
+  .gform-theme .gfield.gfield--width-half {
+    width: 100%;
+  }
+  .gform-theme textarea {
+    padding: 20px 25px;
+  }
   .woocommerce-edit-account .form-row-last,
   .woocommerce-edit-account .form-row-first,
   .woocommerce-edit-address .form-row-last,
