@@ -3230,6 +3230,9 @@ Mixin for transition
 .editor-styles-wrapper .ctn-980 .wrapper {
   max-width: 980px;
 }
+.editor-styles-wrapper .ctn-960 .wrapper {
+  max-width: 960px;
+}
 .editor-styles-wrapper .ctn-760 .wrapper {
   max-width: 760px;
 }
@@ -6376,6 +6379,35 @@ Mixin for transition
 .editor-styles-wrapper .hidden_label label {
   display: none;
 }
+.editor-styles-wrapper .gform-theme .gform_fields {
+  -moz-column-gap: 19.5px;
+       column-gap: 19.5px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.editor-styles-wrapper .gform-theme .gform_heading {
+  display: none;
+}
+.editor-styles-wrapper .gform-theme .gfield_label {
+  display: none;
+}
+.editor-styles-wrapper .gform-theme ::-moz-placeholder {
+  text-transform: uppercase;
+}
+.editor-styles-wrapper .gform-theme ::placeholder {
+  text-transform: uppercase;
+}
+.editor-styles-wrapper .gform-theme .gfield {
+  width: 100%;
+}
+.editor-styles-wrapper .gform-theme .gfield.gfield--width-half {
+  display: inline-block;
+  vertical-align: top;
+  width: 48.8%;
+}
+.editor-styles-wrapper .gform-theme textarea {
+  padding: 20px 25px;
+}
 .editor-styles-wrapper .hs-form {
   text-align: right;
 }
@@ -6612,6 +6644,12 @@ Mixin for transition
   }
 }
 @media only screen and (max-width: 768px) {
+  .editor-styles-wrapper .gform-theme .gfield.gfield--width-half {
+    width: 100%;
+  }
+  .editor-styles-wrapper .gform-theme textarea {
+    padding: 20px 25px;
+  }
   .editor-styles-wrapper .woocommerce-edit-account .form-row-last,
   .editor-styles-wrapper .woocommerce-edit-account .form-row-first,
   .editor-styles-wrapper .woocommerce-edit-address .form-row-last,
