@@ -5900,14 +5900,9 @@ Mixin for transition
 .editor-styles-wrapper #orderForm .field {
   margin-bottom: 10px;
 }
-.editor-styles-wrapper input:not(:-moz-placeholder-shown), .editor-styles-wrapper textarea:not(:-moz-placeholder-shown) {
-  opacity: 1;
-  border-color: var(--ss_black);
-}
-.editor-styles-wrapper input:not(:placeholder-shown),
-.editor-styles-wrapper textarea:not(:placeholder-shown) {
-  opacity: 1;
-  border-color: var(--ss_black);
+.editor-styles-wrapper .filled {
+  opacity: 1 !important;
+  border-color: var(--ss_black) !important;
 }
 .editor-styles-wrapper input[type=image] {
   margin: 0 10px 0 0;
