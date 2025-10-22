@@ -58,7 +58,7 @@ jQuery( function() {
 	if ( jQuery( '.header-wrapper' ).length > 0 ) {
 		function updateHeaderHeight() {
 			jQuery( '.header-wrapper' ).each( function() {
-				jQuery( 'body.woocommerce-account, body.woocommerce-checkout,body.woocommerce-cart' ).css( '--ss_header-wrapper-default', jQuery( this ).outerHeight() + 'px' );
+				jQuery( 'body.woocommerce-account, body.woocommerce-checkout, body.woocommerce-cart, body.woocommerce-shop' ).css( '--ss_header-wrapper-default', jQuery( this ).outerHeight() + 'px' );
 			} );
 		}
 		updateHeaderHeight();
@@ -359,9 +359,6 @@ setupImageUpload( 'photo_hitch', 'list_hitch', 'hitch' );
 setupImageUpload( 'photo_rear', 'list_rear', 'rear' );
 setupImageUpload( 'photo_front', 'list_front', 'front' );
 
-
-
-
 jQuery( function() {
 
 	  jQuery('.stone-stomper-supports #factory_stoneguard').on('change', function() {
@@ -369,18 +366,18 @@ jQuery( function() {
 	      jQuery('.toolbox-support').slideUp();
 	      jQuery('.factory_stoneguard').slideDown();
 	    } else {
-	      jQuery('.factory_stoneguard').slideUp();
+	      jQuery( '.factory_stoneguard' ).slideUp();
 	    }
-	  });
+	  } );
 
 	  jQuery('.stone-stomper-supports #toolbox').on('change', function() {
 	    if (jQuery(this).is(':checked')) {
 	      jQuery('.factory_stoneguard').slideUp();
 	      jQuery('.toolbox-support').slideDown();
 	    } else {
-	      jQuery('.toolbox-support').slideUp();
+	      jQuery( '.toolbox-support' ).slideUp();
 	    }
-	  });
+	  } );
 
 	  jQuery('.stone-stomper-supports #support_pockets').on('change', function() {
 	    if (jQuery(this).is(':checked')) {

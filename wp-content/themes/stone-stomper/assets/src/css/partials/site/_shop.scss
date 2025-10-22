@@ -5,7 +5,7 @@
 
 	}
 	.site-main{
-		padding-top: 112px !important;
+
 		max-width: 1400px;
 		width: 90%;
 		margin: 0 auto;
@@ -19,6 +19,7 @@
 		background-color: var(--ss_color_on_primary)  !important;
 		border: 1px solid !important;
 		border-radius: 0 !important;
+		padding: var(--ss_space_20) var(--ss_space_48) !important;
 	}
 	.add_to_cart_button:hover{
 		background-color: var(--ss_color_primary)  !important;
