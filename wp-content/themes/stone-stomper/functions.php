@@ -633,72 +633,74 @@ function show_towing_svg_in_editor( $post ) {
 	}
     ?>
 		<div class="customer-upload-images">
-		<?php if ( $hitch_ids ) { ?>
-			<div class="row row-1">
-			<h3>Hitch Images</h3>
-			<div class="hitch-images image-group">
-				<?php foreach ( $hitch_ids as $id ) :
-				$img_url = wp_get_attachment_image_url( $id, 'large' ); ?>
-				<img src="<?php echo esc_url( $img_url ); ?>" alt="" class="popup-image" />
-				<?php endforeach; ?>
-			</div>
-			<div class="image-lightbox">
-				<div class="lightbox-inner">
-				<img src="" alt="" class="lightbox-img" />
-				<div class="lightbox-controls">
-					<span class="lightbox-prev">&#10094;</span>
-					<span class="lightbox-next">&#10095;</span>
-					<span class="lightbox-close">&times;</span>
+			<?php if ( $hitch_ids ) { ?>
+				<div class="row row-1">
+				<h3>Hitch Images</h3>
+				<div class="hitch-images image-group">
+					<?php foreach ( $hitch_ids as $id ) :
+					$img_url = wp_get_attachment_image_url( $id, 'large' ); ?>
+					<img src="<?php echo esc_url( $img_url ); ?>" alt="" class="popup-image" />
+					<?php endforeach; ?>
+				</div>
+				<div class="image-lightbox">
+					<div class="lightbox-inner">
+					<img src="" alt="" class="lightbox-img" />
+					<div class="lightbox-controls">
+						<span class="lightbox-prev">&#10094;</span>
+						<span class="lightbox-next">&#10095;</span>
+						<span class="lightbox-close">&times;</span>
+					</div>
+					</div>
 				</div>
 				</div>
-			</div>
-			</div>
-		<?php } ?>
+			<?php } ?>
 
-		<?php if ( $rear_ids ) { ?>
-			<div class="row row-1">
-			<h3>Rear Images</h3>
-			<div class="rear-images image-group">
-				<?php foreach ( $rear_ids as $id ) :
-				$img_url = wp_get_attachment_image_url( $id, 'large' ); ?>
-				<img src="<?php echo esc_url( $img_url ); ?>" alt="" class="popup-image" />
-				<?php endforeach; ?>
-			</div>
-			<div class="image-lightbox">
-				<div class="lightbox-inner">
-				<img src="" alt="" class="lightbox-img" />
-				<div class="lightbox-controls">
-					<span class="lightbox-prev">&#10094;</span>
-					<span class="lightbox-next">&#10095;</span>
-					<span class="lightbox-close">&times;</span>
+			<?php if ( $rear_ids ) { ?>
+				<div class="row row-1">
+				<h3>Rear Images</h3>
+				<div class="rear-images image-group">
+					<?php foreach ( $rear_ids as $id ) :
+					$img_url = wp_get_attachment_image_url( $id, 'large' ); ?>
+					<img src="<?php echo esc_url( $img_url ); ?>" alt="" class="popup-image" />
+					<?php endforeach; ?>
+				</div>
+				<div class="image-lightbox">
+					<div class="lightbox-inner">
+					<img src="" alt="" class="lightbox-img" />
+					<div class="lightbox-controls">
+						<span class="lightbox-prev">&#10094;</span>
+						<span class="lightbox-next">&#10095;</span>
+						<span class="lightbox-close">&times;</span>
+					</div>
+					</div>
 				</div>
 				</div>
-			</div>
-			</div>
-		<?php } ?>
+			<?php } ?>
 
-		<?php if ( $front_ids ) { ?>
-			<div class="row row-1">
-			<h3>Front Images</h3>
-			<div class="front-images image-group">
-				<?php foreach ( $front_ids as $id ) :
-				$img_url = wp_get_attachment_image_url( $id, 'large' ); ?>
-				<img src="<?php echo esc_url( $img_url ); ?>" alt="" class="popup-image" />
-				<?php endforeach; ?>
-			</div>
-			<div class="image-lightbox">
-				<div class="lightbox-inner">
-				<img src="" alt="" class="lightbox-img" />
-				<div class="lightbox-controls">
-					<span class="lightbox-prev">&#10094;</span>
-					<span class="lightbox-next">&#10095;</span>
-					<span class="lightbox-close">&times;</span>
+			<?php if ( $front_ids ) { ?>
+				<div class="row row-1">
+				<h3>Front Images</h3>
+				<div class="front-images image-group">
+					<?php foreach ( $front_ids as $id ) :
+					$img_url = wp_get_attachment_image_url( $id, 'large' ); ?>
+					<img src="<?php echo esc_url( $img_url ); ?>" alt="" class="popup-image" />
+					<?php endforeach; ?>
+				</div>
+				<div class="image-lightbox">
+					<div class="lightbox-inner">
+					<img src="" alt="" class="lightbox-img" />
+					<div class="lightbox-controls">
+						<span class="lightbox-prev">&#10094;</span>
+						<span class="lightbox-next">&#10095;</span>
+						<span class="lightbox-close">&times;</span>
+					</div>
+					</div>
 				</div>
 				</div>
-			</div>
-			</div>
-		<?php } ?>
+			<?php } ?>
 		</div>
+
+	<div style="margin-top:96px;"></div>
 
 	<!-- Order Preview Image -->
     <div style="text-align:center; padding:20px;">

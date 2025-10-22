@@ -7696,11 +7696,10 @@ body.post-type-post .editor-styles-wrapper > div {
 .postbox-container .customer-upload-images {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   gap: 20px;
 }
 .postbox-container .customer-upload-images .row {
-  width: 48%;
+  width: 30%;
 }
 .postbox-container .customer-upload-images img {
   max-width: 180px !important;
