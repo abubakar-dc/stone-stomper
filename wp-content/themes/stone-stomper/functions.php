@@ -335,6 +335,11 @@ add_action( 'woocommerce_new_order', function( $order_id ) {
 
 
 	// // Photos (hidden inputs hold JSON arrays of IDs)
+	$hitch_ids     = sts_to_int_array( $data['hitch_ids'] ?? array() );
+	$rear_ids     = sts_to_int_array( $data['rear_ids'] ?? array() );
+	$front_ids     = sts_to_int_array( $data['front_ids'] ?? array() );
+
+
 	// $photos = array(
 	// 	'hitch_ids' => sts_to_int_array( $data['hitch_ids'] ?? array() ),
 	// 	'rear_ids'  => sts_to_int_array( $data['rear_ids'] ?? array() ),
@@ -389,16 +394,38 @@ error_log(print_r($cust_name,true));
 	update_post_meta( $post_id, 'toolbox_width_mm', $toolbox_width_mm );
 	update_post_meta( $post_id, 'toolbox_height_mm', $toolbox_length_mm );
 
+	// update_post_meta( $post_id, 'hitch_ids', $hitch_ids );
+	// update_post_meta( $post_id, 'rear_ids', $rear_ids );
+	// update_post_meta( $post_id, 'front_ids', $front_ids );
+
+	// Initialize meta keys if they don't exist
+	$meta_keys = [
+		'hitch_ids' => $hitch_ids,
+		'rear_ids'  => $rear_ids,
+		'front_ids' => $front_ids,
+	];
+
+	foreach ( $meta_keys as $key => $value ) {
+		// If the meta key doesn't exist, add it first
+		if ( ! metadata_exists( 'post', $post_id, $key ) ) {
+			add_post_meta( $post_id, $key, '', true );
+		}
+
+		// Then update it
+		update_post_meta( $post_id, $key, $value );
+	}
+
+
 	// update_post_meta( $post_id, 'final_details', $final );
 
 	// Optionally set a featured image from the first uploaded photo if any
-	$first_img = 0;
-	foreach ( array( 'hitch_ids','rear_ids','front_ids' ) as $k ) {
-		if ( ! empty( $photos[ $k ] ) ) { $first_img = intval( $photos[ $k ][0] ); break; }
-	}
-	if ( $first_img > 0 ) {
-		set_post_thumbnail( $post_id, $first_img );
-	}
+	// $first_img = 0;
+	// foreach ( array( 'hitch_ids','rear_ids','front_ids' ) as $k ) {
+	// 	if ( ! empty( $photos[ $k ] ) ) { $first_img = intval( $photos[ $k ][0] ); break; }
+	// }
+	// if ( $first_img > 0 ) {
+	// 	set_post_thumbnail( $post_id, $first_img );
+	// }
 
 	// Optional: associate CPT with logged-in user
 	if ( $order && $order->get_user_id() ) {
@@ -556,18 +583,77 @@ function show_towing_svg_in_editor( $post ) {
     $sts_var_caravan_hr_form    = get_post_meta( $post->ID, 'sts_var_caravan_hr_form', true );
     $sts_var_proposed_date_of_delivery    = get_post_meta( $post->ID, 'sts_var_proposed_date_of_delivery', true );
 
+	$hitch_ids = get_post_meta( $post->ID, 'hitch_ids', true );
+	$rear_ids  = get_post_meta( $post->ID, 'rear_ids', true );
+	$front_ids = get_post_meta( $post->ID, 'front_ids', true );
+
+	function show_meta_images( $meta_value ) {
+		if ( empty( $meta_value ) ) return;
+
+		// If meta is an array containing serialized values
+		foreach ( (array) $meta_value as $maybe_serialized ) {
+			$ids = maybe_unserialize( $maybe_serialized );
+
+			// If it's still serialized (nested), unserialize again
+			if ( is_string( $ids ) && str_starts_with( $ids, 'a:' ) ) {
+				$ids = maybe_unserialize( $ids );
+			}
+
+			// Single ID case
+			$id = intval( $ids );
+			$url = wp_get_attachment_image_url( $id, 'full' );
+			if ( $url ) {
+				echo '<img src="' . esc_url( $url ) . '" alt="" style="max-width:150px; margin:5px;">';
+			}
+
+		}
+	}
+
+
 
 	if ( ! empty( $sts_var_proposed_date_of_delivery ) ) {
 		// Convert to timestamp
 		$sts_var_proposed_date_of_delivery = strtotime( $sts_var_proposed_date_of_delivery );
 	}
 
-
-    // $hitch_ids = get_post_meta( $post->ID, 'ss_hitch_ids', true );
-
     ?>
+	<div class="customer-uploa-images">
+		<?php if($hitch_ids){ ?>
 
+			<div class="row row-1">
+				<h3>Hitch Images</h3>
+				<div class="hitch-images">
+					<?php show_meta_images( $hitch_ids ); ?>
+				</div>
+			</div>
+		<?php } ?>
+
+
+		<?php if($rear_ids){ ?>
+			<div class="row row-1">
+				<h3>Rear Images</h3>
+
+				<div class="hitch-images">
+					<?php show_meta_images( $rear_ids ); ?>
+				</div>
+			</div>
+		<?php } ?>
+
+		<?php if($front_ids){ ?>
+			<div class="row row-1">
+				<h3>Front Images</h3>
+
+				<div class="hitch-images">
+					<?php show_meta_images( $front_ids ); ?>
+				</div>
+			</div>
+		<?php } ?>
+
+
+	</div>
     <div style="text-align:center; padding:20px;">
+
+
 		<div class="functional-buttons">
 			<a href="#" class="button button-primary generate-diagram" style="margin-right:10px;">Generate Diagram</a>
 			<a href="#" class="button button-secondary generate-word-doc" style="margin-right:10px;">Generate Word Document</a>
@@ -575,10 +661,6 @@ function show_towing_svg_in_editor( $post ) {
 			<a href="#" class="button button-secondary email-to-manufacturer" style="margin-right:10px;">Email to Manufacturer</a>
 			<a href="<?php echo esc_url( get_edit_post_link( $order_id ) ); ?>" class="button button-secondary" style="">View Order #<?php echo esc_html( $order_id ); ?></a>
 		</div>
-
-		<?php
-		// var_dump(get_post_meta( $post->ID));
-		?>
 
         <a href="#" class="stone-stomper-vector" id="show-order-popup">
 
@@ -709,65 +791,23 @@ function show_towing_svg_in_editor( $post ) {
 					<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Toolbox Length (mm):</td>
 					<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $toolbox_height_mm ?: '-' ); ?></td>
 				</tr>
-				<tr>
-					<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Proposed Date of Delivery:</td>
-					<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo date( 'd-F-Y', $sts_var_proposed_date_of_delivery ?: '-' ); ?></td>
-				</tr>
+				<?php if($sts_var_proposed_date_of_delivery){ ?>
+					<tr>
+						<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Proposed Date of Delivery:</td>
+						<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo date( 'd-F-Y', $sts_var_proposed_date_of_delivery ?: '-' ); ?></td>
+					</tr>
+				<?php } ?>
 			</table>
         </div>
 
 		<!-- output these images over here -->
 		 <div style="margin-top:30px;">
-    <!-- <h3 style="margin-bottom:10px;">Uploaded Photos</h3> -->
-
-    <?php
-    // Read saved image ID arrays
-    // $hitch_ids = get_post_meta( $post->ID, 'ss_hitch_ids', true );
-    // $rear_ids  = get_post_meta( $post->ID, 'rear_ids', true );
-    // $front_ids = get_post_meta( $post->ID, 'front_ids', true );
-
-	// var_dump($hitch_ids);
-
-// 	echo '<pre>';
-// // var_dump( get_post_meta( $post->ID, 'hitch_ids', true ) );
-// echo '</pre>';
-
-    // // Decode JSON if needed
-    // $hitch_ids = is_string( $hitch_ids ) ? json_decode( $hitch_ids, true ) : $hitch_ids;
-    // $rear_ids  = is_string( $rear_ids ) ? json_decode( $rear_ids, true ) : $rear_ids;
-    // $front_ids = is_string( $front_ids ) ? json_decode( $front_ids, true ) : $front_ids;
-
-    // $sections = [
-    //     'Hitch Attachments' => $hitch_ids,
-    //     'Rear Attachments'  => $rear_ids,
-    //     'Front Attachments' => $front_ids,
-    // ];
-
-    // foreach ( $sections as $label => $ids ) :
-    //     if ( ! empty( $ids ) && is_array( $ids ) ) :
-    //         echo '<div style="margin-bottom:20px;">';
-    //         echo '<h4 style="margin-bottom:8px;">' . esc_html( $label ) . '</h4>';
-    //         echo '<div style="display:flex; flex-wrap:wrap; gap:10px;">';
-
-    //         foreach ( $ids as $id ) :
-    //             $thumb = wp_get_attachment_image( $id, 'thumbnail', false, [
-    //                 'style' => 'border:1px solid #ccc; border-radius:6px; width:100px; height:100px; object-fit:cover;',
-    //             ] );
-    //             if ( $thumb ) {
-    //                 echo $thumb;
-    //             }
-    //         endforeach;
-
-    //         echo '</div></div>';
-    //     endif;
-    // endforeach;
-    ?>
-</div>
-    </div>
+    	<!-- <h3 style="margin-bottom:10px;">Uploaded Photos</h3> -->
+	</div>
 
     <!-- Popup container -->
     <div id="order-popup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:9999;">
-    <!-- <div id="order-popup" style=""> -->
+    	<!-- <div id="order-popup" style=""> -->
         <div class="ss-invoice-popup" style="">
             <a href="#" id="close-popup" style="position:absolute; top:15px; right:20px; font-size:20px; text-decoration:none;">✖</a>
 				<!-- popup First page -->
@@ -1155,3 +1195,20 @@ add_action( 'wp_ajax_download_customer_pdf', 'download_customer_pdf_callback' );
 add_action( 'wp_ajax_nopriv_download_customer_pdf', 'download_customer_pdf_callback' );
 
 
+
+
+
+
+
+
+// order by date
+
+add_action( 'pre_get_posts', function( $query ) {
+	if ( is_admin() && $query->is_main_query() ) {
+		$screen = get_current_screen();
+		if ( 'customer' === $screen->post_type ) {
+			$query->set( 'orderby', 'date' );
+			$query->set( 'order', 'DESC' );
+		}
+	}
+});

@@ -177,6 +177,7 @@ add_action( 'manage_customer_posts_custom_column', function ( $column, $post_id 
 /**
  * AJAX handler to update WooCommerce order status
  */
+
 add_action( 'wp_ajax_update_wc_order_status', function () {
 	if ( ! current_user_can( 'edit_shop_orders' ) ) {
 		wp_send_json_error( 'Permission denied' );
@@ -201,6 +202,7 @@ add_action( 'wp_ajax_update_wc_order_status', function () {
 /**
  * JS to handle inline status change
  */
+
 add_action( 'admin_footer-edit.php', function () {
 	$screen = get_current_screen();
 	if ( 'edit-customer' !== $screen->id ) {
