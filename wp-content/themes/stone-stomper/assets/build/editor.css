@@ -3630,11 +3630,17 @@ Mixin for transition
   width: 100%;
 }
 .editor-styles-wrapper .error-404 .menu {
-  margin: 0;
+  margin: 0 0 20px 0;
+}
+.editor-styles-wrapper .error-404 ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
 }
 .editor-styles-wrapper .error-404 ul li {
   display: inline-block;
-  margin: 0 0 0 20px;
+  margin: 0 0 0 0px;
   font-weight: 700;
   padding: 0;
 }
@@ -3642,7 +3648,7 @@ Mixin for transition
   display: none;
 }
 .editor-styles-wrapper .error-404 ul li a {
-  padding: 10px;
+  padding: 0px;
   border-bottom: 0;
 }
 .editor-styles-wrapper .error-404 ul li a:hover {
@@ -3666,6 +3672,7 @@ Mixin for transition
 .editor-styles-wrapper .form-404 form input[type=button],
 .editor-styles-wrapper .form-404 form input[type=reset] {
   margin: 0 0 0px 10px;
+  height: 68px;
 }
 .editor-styles-wrapper .form-404 p {
   margin-bottom: 20px;
@@ -4018,6 +4025,24 @@ Mixin for transition
 }
 .editor-styles-wrapper .woocommerce p.stars a::before {
   color: var(--ss_color_primary);
+}
+.editor-styles-wrapper .error404 .header-section {
+  background-color: var(--ss_header_bgcolor_sticky);
+}
+.editor-styles-wrapper .error-page-hero {
+  padding: var(--ss_space_200) 0 var(--ss_space_96);
+}
+.editor-styles-wrapper .error-page-hero h1 {
+  margin-bottom: 10px;
+}
+.editor-styles-wrapper .error-page-hero .banner-text p {
+  margin: 0;
+}
+.editor-styles-wrapper .error-404 h6 {
+  margin-bottom: var(--ss_space_36);
+}
+.editor-styles-wrapper .error-404 .page-content {
+  margin-top: var(--ss_space_30);
 }
 .editor-styles-wrapper .post-box .post-box-img a {
   height: 100%;
@@ -5875,6 +5900,15 @@ Mixin for transition
 .editor-styles-wrapper #orderForm .field {
   margin-bottom: 10px;
 }
+.editor-styles-wrapper input:not(:-moz-placeholder-shown), .editor-styles-wrapper textarea:not(:-moz-placeholder-shown) {
+  opacity: 1;
+  border-color: var(--ss_black);
+}
+.editor-styles-wrapper input:not(:placeholder-shown),
+.editor-styles-wrapper textarea:not(:placeholder-shown) {
+  opacity: 1;
+  border-color: var(--ss_black);
+}
 .editor-styles-wrapper input[type=image] {
   margin: 0 10px 0 0;
 }
@@ -6697,6 +6731,14 @@ Mixin for transition
     font-size: 11px !important;
   }
 }
+@media only screen and (max-width: 1003px) {
+  .editor-styles-wrapper .error-page-hero {
+    padding-top: 170px;
+  }
+  .editor-styles-wrapper .error-404 ul {
+    gap: 15px;
+  }
+}
 @media only screen and (max-width: 768px) {
   .editor-styles-wrapper .gform-theme .gfield.gfield--width-half {
     width: 100%;
@@ -7058,6 +7100,25 @@ Mixin for transition
   }
 }
 @media only screen and (max-width: 360px) {
+  .editor-styles-wrapper .form-404 {
+    margin-top: 20px;
+  }
+  .editor-styles-wrapper .form-404 form {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .editor-styles-wrapper .form-404 form label {
+    width: 100%;
+    margin: 0;
+  }
+  .editor-styles-wrapper .form-404 form input[type=submit],
+  .editor-styles-wrapper .form-404 form button,
+  .editor-styles-wrapper .form-404 form input[type=button],
+  .editor-styles-wrapper .form-404 form input[type=reset] {
+    width: 100%;
+    margin: 0 0 0px 0px;
+    height: 68px;
+  }
   .editor-styles-wrapper .woocommerce-checkout .wc-block-components-order-summary .wc-block-components-order-summary-item__image {
     width: 48px !important;
   }

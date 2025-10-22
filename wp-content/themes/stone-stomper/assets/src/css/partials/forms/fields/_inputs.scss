@@ -202,3 +202,9 @@ textarea {
 		margin-bottom: 10px;
 	}
 }
+
+input:not(:placeholder-shown),
+textarea:not(:placeholder-shown) {
+  opacity: 1;
+  border-color: var(--ss_black);
+}
