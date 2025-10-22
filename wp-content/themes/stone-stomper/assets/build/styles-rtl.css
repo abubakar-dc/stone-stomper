@@ -1721,6 +1721,17 @@ textarea {
   margin-bottom: 10px;
 }
 
+input:not(:-moz-placeholder-shown), textarea:not(:-moz-placeholder-shown) {
+  opacity: 1;
+  border-color: var(--ss_black);
+}
+
+input:not(:placeholder-shown),
+textarea:not(:placeholder-shown) {
+  opacity: 1;
+  border-color: var(--ss_black);
+}
+
 /* -------------------------------------------------
 >> Styles for buttons
 ------------------------------------------------- */
@@ -4760,11 +4771,17 @@ button[disabled]:hover {
   width: 100%;
 }
 .error-404 .menu {
-  margin: 0;
+  margin: 0 0 20px 0;
+}
+.error-404 ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
 }
 .error-404 ul li {
   display: inline-block;
-  margin: 0 20px 0 0;
+  margin: 0 0px 0 0;
   font-weight: 700;
   padding: 0;
 }
@@ -4772,7 +4789,7 @@ button[disabled]:hover {
   display: none;
 }
 .error-404 ul li a {
-  padding: 10px;
+  padding: 0px;
   border-bottom: 0;
 }
 .error-404 ul li a:hover {
@@ -4797,6 +4814,7 @@ button[disabled]:hover {
 .form-404 form input[type=button],
 .form-404 form input[type=reset] {
   margin: 0 10px 0px 0;
+  height: 68px;
 }
 .form-404 p {
   margin-bottom: 20px;
@@ -5187,6 +5205,27 @@ body #daextlwcnf-cookie-settings-button-2:hover {
 }
 .woocommerce p.stars a::before {
   color: var(--ss_color_primary);
+}
+
+.error404 .header-section {
+  background-color: var(--ss_header_bgcolor_sticky);
+}
+
+.error-page-hero {
+  padding: var(--ss_space_200) 0 var(--ss_space_96);
+}
+.error-page-hero h1 {
+  margin-bottom: 10px;
+}
+.error-page-hero .banner-text p {
+  margin: 0;
+}
+
+.error-404 h6 {
+  margin-bottom: var(--ss_space_36);
+}
+.error-404 .page-content {
+  margin-top: var(--ss_space_30);
 }
 
 /*-------------------------------------------------
@@ -7317,6 +7356,14 @@ body #daextlwcnf-cookie-settings-button-2:hover {
     font-size: 11px !important;
   }
 }
+@media only screen and (max-width: 1003px) {
+  .error-page-hero {
+    padding-top: 170px;
+  }
+  .error-404 ul {
+    gap: 15px;
+  }
+}
 @media only screen and (max-width: 768px) {
   .gform-theme .gfield.gfield--width-half {
     width: 100%;
@@ -7678,6 +7725,25 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   }
 }
 @media only screen and (max-width: 360px) {
+  .form-404 {
+    margin-top: 20px;
+  }
+  .form-404 form {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .form-404 form label {
+    width: 100%;
+    margin: 0;
+  }
+  .form-404 form input[type=submit],
+  .form-404 form button,
+  .form-404 form input[type=button],
+  .form-404 form input[type=reset] {
+    width: 100%;
+    margin: 0 0px 0px 0;
+    height: 68px;
+  }
   .woocommerce-checkout .wc-block-components-order-summary .wc-block-components-order-summary-item__image {
     width: 48px !important;
   }
