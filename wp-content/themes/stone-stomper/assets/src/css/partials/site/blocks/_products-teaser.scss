@@ -58,7 +58,7 @@
 	margin-top: 20px;
 
 	h3 {
-		font-size: 29px;
+		font-size: var(--ss_font_size_22);
 		@include font(jost, med);
 		letter-spacing: -1.2px;
 

@@ -6408,7 +6408,7 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   margin-top: 20px;
 }
 .product-price h3 {
-  font-size: 29px;
+  font-size: var(--ss_font_size_22);
   font-family: "Jost", arial, sans-serif;
   font-weight: 500;
   font-style: normal;
@@ -7478,9 +7478,6 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   }
   .three-columns.product-items .product-item .product-title {
     margin-top: 20px;
-  }
-  .product-price h3 {
-    font-size: 22px;
   }
   .product-price {
     margin-top: 10px;

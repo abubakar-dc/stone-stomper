@@ -234,10 +234,7 @@
 			padding: var(--ss_space_16);
 		}
 
-		.woocommerce
-			table.my_account_orders:not(
-				.woocommerce-orders-table__cell-order-number
-			) {
+		.woocommerce table.my_account_orders:not(.woocommerce-orders-table__cell-order-number) {
 			font-size: 11px !important;
 		}
 	}
@@ -247,10 +244,12 @@
 	.error-page-hero {
 		padding-top: 170px;
 	}
+
 	.error-404 ul {
 		gap: 15px;
 	}
 }
+
 @media only screen and (max-width: 768px) {
 	.gform-theme {
 		.gfield {
@@ -266,6 +265,7 @@
 
 	.woocommerce-edit-account,
 	.woocommerce-edit-address {
+
 		.form-row-last,
 		.form-row-first {
 			width: 100% !important;
@@ -419,9 +419,6 @@
 		margin-top: 20px;
 	}
 
-	.product-price h3 {
-		font-size: 22px;
-	}
 
 	.product-price {
 		margin-top: 10px;
@@ -639,6 +636,7 @@
 
 	.hero-default {
 		&.with-image {
+
 			.hero-default-content,
 			.hero-default-image {
 				width: 100%;
@@ -655,6 +653,7 @@
 	ul.children,
 	ol.children {
 		li {
+
 			&.depth-2,
 			&.depth-3,
 			&.depth-4,
@@ -704,6 +703,7 @@
 
 @media only screen and (max-width: 435px) {
 	.woocommerce-order-received {
+
 		.woocommerce-table--order-details.shop_table,
 		p,
 		.woocommerce-column--shipping-address,
@@ -718,9 +718,7 @@
 		font-size: 12px !important;
 	}
 
-	.wp-block-woocommerce-checkout-actions-block
-		.wc-block-checkout__actions_row
-		.wc-block-components-checkout-place-order-button {
+	.wp-block-woocommerce-checkout-actions-block .wc-block-checkout__actions_row .wc-block-components-checkout-place-order-button {
 		width: 80% !important;
 	}
 
@@ -766,9 +764,11 @@
 @media only screen and (max-width: 360px) {
 	.form-404 {
 		margin-top: 20px;
+
 		form {
 			gap: 10px;
 			flex-wrap: wrap;
+
 			label {
 				width: 100%;
 				margin: 0;
@@ -784,14 +784,13 @@
 			}
 		}
 	}
+
 	.woocommerce-checkout {
-		.wc-block-components-order-summary
-			.wc-block-components-order-summary-item__image {
+		.wc-block-components-order-summary .wc-block-components-order-summary-item__image {
 			width: 48px !important;
 		}
 
-		.wc-block-components-order-summary
-			.wc-block-components-order-summary-item {
+		.wc-block-components-order-summary .wc-block-components-order-summary-item {
 			gap: 28px !important;
 		}
 	}

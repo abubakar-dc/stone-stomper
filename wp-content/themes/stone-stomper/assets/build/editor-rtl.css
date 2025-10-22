@@ -5118,7 +5118,7 @@ Mixin for transition
   margin-top: 20px;
 }
 .editor-styles-wrapper .product-price h3 {
-  font-size: 29px;
+  font-size: var(--ss_font_size_22);
   font-family: "Jost", arial, sans-serif;
   font-weight: 500;
   font-style: normal;
@@ -6854,9 +6854,6 @@ Mixin for transition
   }
   .editor-styles-wrapper .three-columns.product-items .product-item .product-title {
     margin-top: 20px;
-  }
-  .editor-styles-wrapper .product-price h3 {
-    font-size: 22px;
   }
   .editor-styles-wrapper .product-price {
     margin-top: 10px;
