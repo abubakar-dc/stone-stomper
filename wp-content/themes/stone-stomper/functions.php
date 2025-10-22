@@ -665,6 +665,7 @@ function show_towing_svg_in_editor( $post ) {
 		<?php } ?>
 	</div>
 
+	<!-- Order Preview Image -->
     <div style="text-align:center; padding:20px;">
 
 		<div class="functional-buttons">
@@ -1124,6 +1125,8 @@ function show_towing_svg_in_editor( $post ) {
 
         </a>
 	</div>
+
+	<!-- Data Table -->
 	<div style="margin-top:30px; text-align:left; font-size:16px;">
 		<h3 style="margin-bottom:10px; text-align:center; "> Measurements</h3>
 		<table style="margin:0 auto; border-collapse:collapse; font-size:15px;">
@@ -1428,6 +1431,7 @@ function show_towing_svg_in_editor( $post ) {
 				</div>
         </div>
     </div>
+
 	<script>
 		jQuery(document).ready(function($){
 			jQuery('#show-order-popup').on('click', function(e){
