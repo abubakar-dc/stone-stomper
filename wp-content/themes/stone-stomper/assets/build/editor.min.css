@@ -6761,7 +6761,9 @@ Mixin for transition
   .editor-styles-wrapper .woocommerce-checkout .woocommerce-checkout .wc-block-components-totals-footer-item {
     font-size: var(--ss_font_size_18) !important;
   }
-  .editor-styles-wrapper .woocommerce-checkout .wc-block-components-totals-coupon, .editor-styles-wrapper .woocommerce-checkout .wc-block-components-totals-item, .editor-styles-wrapper .woocommerce-checkout .wc-block-components-order-summary {
+  .editor-styles-wrapper .woocommerce-checkout .wc-block-components-totals-coupon,
+  .editor-styles-wrapper .woocommerce-checkout .wc-block-components-totals-item,
+  .editor-styles-wrapper .woocommerce-checkout .wc-block-components-order-summary {
     padding: 0 10px !important;
   }
   .editor-styles-wrapper .testimonial-author span,

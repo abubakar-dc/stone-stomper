@@ -7381,7 +7381,9 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   .woocommerce-checkout .woocommerce-checkout .wc-block-components-totals-footer-item {
     font-size: var(--ss_font_size_18) !important;
   }
-  .woocommerce-checkout .wc-block-components-totals-coupon, .woocommerce-checkout .wc-block-components-totals-item, .woocommerce-checkout .wc-block-components-order-summary {
+  .woocommerce-checkout .wc-block-components-totals-coupon,
+  .woocommerce-checkout .wc-block-components-totals-item,
+  .woocommerce-checkout .wc-block-components-order-summary {
     padding: 0 10px !important;
   }
   .testimonial-author span,
