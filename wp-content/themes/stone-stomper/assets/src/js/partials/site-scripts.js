@@ -19,11 +19,11 @@ jQuery( document ).on( 'scroll', function() {
 jQuery( document ).ready( function() {
 	jQuery( '#veh_make' ).on( 'change', function() {
 		if ( jQuery( this ).val() === 'other' ) {
-			jQuery( '#veh_model' ).hide( );
-			jQuery( '#vehicle_model_other' ).show( );
+			jQuery( '#veh_model' ).hide();
+			jQuery( '#vehicle_model_other' ).show();
 
-			jQuery( '#veh_year' ).hide( );
-			jQuery( '#veh_year_other' ).show( );
+			jQuery( '#veh_year' ).hide();
+			jQuery( '#veh_year_other' ).show();
 
 			jQuery( '#veh_make_other_wrap' ).removeClass( 'hidden' );
 		} else {
@@ -38,8 +38,8 @@ jQuery( document ).ready( function() {
 
 	jQuery( '#van_make' ).on( 'change', function() {
 		if ( jQuery( this ).val() === 'other' ) {
-			jQuery( '#van_model' ).hide( );
-			jQuery( '#van_model_other' ).show( );
+			jQuery( '#van_model' ).hide();
+			jQuery( '#van_model_other' ).show();
 		} else {
 			jQuery( '#van_model' ).show();
 			jQuery( '#van_model_other' ).hide();
@@ -165,6 +165,24 @@ jQuery( function() {
 			$text.css( 'min-height', $text[ 0 ].scrollHeight + 'px' );
 		}
 	}
+
+	//Form Input
+
+	jQuery( document ).ready( function( $ ) {
+		function toggleFilledClass( el ) {
+			if ( jQuery( el ).val() ) {
+				jQuery( el ).addClass( 'filled' );
+			} else {
+				jQuery( el ).removeClass( 'filled' );
+			}
+		}
+		jQuery( 'input[type="text"],input[type="number"],input[type="email"],input[type="tel"],input[type="url"],input[type="search"],input[type="password"],input[type="time"],input[type="date"],input[type="datetime-local"],input[type="week"],input[type="month"],input[type="file"],input[type="range"],input[list],input[type="string"],select,textarea,.gform-text-input-reset' ).on( 'input change blur', function() {
+			toggleFilledClass( this );
+		} );
+		jQuery( 'input[type="text"],input[type="number"],input[type="email"],input[type="tel"],input[type="url"],input[type="search"],input[type="password"],input[type="time"],input[type="date"],input[type="datetime-local"],input[type="week"],input[type="month"],input[type="file"],input[type="range"],input[list],input[type="string"],select,textarea,.gform-text-input-reset' ).each( function() {
+			toggleFilledClass( this );
+		} );
+	} );
 
 	// Slider
 
@@ -360,47 +378,46 @@ setupImageUpload( 'photo_rear', 'list_rear', 'rear' );
 setupImageUpload( 'photo_front', 'list_front', 'front' );
 
 jQuery( function() {
-
-	jQuery('.stone-stomper-supports #factory_stoneguard').on('change', function() {
-		if (jQuery(this).is(':checked')) {
-		  jQuery('.toolbox-support').slideUp();
-		  jQuery('.factory_stoneguard').slideDown();
+	jQuery( '.stone-stomper-supports #factory_stoneguard' ).on( 'change', function() {
+		if ( jQuery( this ).is( ':checked' ) ) {
+		  jQuery( '.toolbox-support' ).slideUp();
+		  jQuery( '.factory_stoneguard' ).slideDown();
 		} else {
 		  jQuery( '.factory_stoneguard' ).slideUp();
 		}
 	} );
 
-	jQuery('.stone-stomper-supports #toolbox').on('change', function() {
-		if (jQuery(this).is(':checked')) {
-		  jQuery('.factory_stoneguard').slideUp();
-		  jQuery('.toolbox-support').slideDown();
+	jQuery( '.stone-stomper-supports #toolbox' ).on( 'change', function() {
+		if ( jQuery( this ).is( ':checked' ) ) {
+		  jQuery( '.factory_stoneguard' ).slideUp();
+		  jQuery( '.toolbox-support' ).slideDown();
 		} else {
 		  jQuery( '.toolbox-support' ).slideUp();
 		}
 	} );
 
-	jQuery('.stone-stomper-supports #support_pockets').on('change', function() {
-		if (jQuery(this).is(':checked')) {
-		  jQuery('.factory_stoneguard').slideUp();
-		  jQuery('.toolbox-support').slideUp();
+	jQuery( '.stone-stomper-supports #support_pockets' ).on( 'change', function() {
+		if ( jQuery( this ).is( ':checked' ) ) {
+		  jQuery( '.factory_stoneguard' ).slideUp();
+		  jQuery( '.toolbox-support' ).slideUp();
 		}
-	});
+	} );
 
-	jQuery('#a_frame_length').on('input change', function() {
+	jQuery( '#a_frame_length' ).on( 'input change', function() {
 	// Get the input value and extract only the number part
-	let val = jQuery(this).val().replace(/[^0-9]/g, '');
-	let num = parseInt(val, 10);
+		const val = jQuery( this ).val().replace( /[^0-9]/g, '' );
+		const num = parseInt( val, 10 );
 
-	if (!isNaN(num) && num >= 1900) {
-	  jQuery('.ss-support-options').slideDown();
-	} else {
-	  jQuery('.ss-support-options').slideUp();
-	}
-	});
+		if ( ! isNaN( num ) && num >= 1900 ) {
+	  jQuery( '.ss-support-options' ).slideDown();
+		} else {
+	  jQuery( '.ss-support-options' ).slideUp();
+		}
+	} );
 
   	jQuery( '#final_address' ).on( 'change', function() {
 		if ( jQuery( this ).val() === 'move' ) {
-			jQuery( '#move_note' ).show( );
+			jQuery( '#move_note' ).show();
 		} else {
 			jQuery( '#move_note' ).hide();
 		}
@@ -408,7 +425,7 @@ jQuery( function() {
 
   	jQuery( '#shipping' ).on( 'change', function() {
 		if ( jQuery( this ).val() === 'flat_rate:5' ) {
-			jQuery( '#express_delivery_note' ).show( );
+			jQuery( '#express_delivery_note' ).show();
 		} else {
 			jQuery( '#express_delivery_note' ).hide();
 		}

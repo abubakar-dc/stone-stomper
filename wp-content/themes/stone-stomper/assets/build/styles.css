@@ -1721,15 +1721,9 @@ textarea {
   margin-bottom: 10px;
 }
 
-input:not(:-moz-placeholder-shown), textarea:not(:-moz-placeholder-shown) {
-  opacity: 1;
-  border-color: var(--ss_black);
-}
-
-input:not(:placeholder-shown),
-textarea:not(:placeholder-shown) {
-  opacity: 1;
-  border-color: var(--ss_black);
+.filled {
+  opacity: 1 !important;
+  border-color: var(--ss_black) !important;
 }
 
 /* -------------------------------------------------
