@@ -632,38 +632,73 @@ function show_towing_svg_in_editor( $post ) {
 		$sts_var_proposed_date_of_delivery = strtotime( $sts_var_proposed_date_of_delivery );
 	}
     ?>
-
-	<div class="customer-upload-images">
-		<?php if($hitch_ids){ ?>
-
+		<div class="customer-upload-images">
+		<?php if ( $hitch_ids ) { ?>
 			<div class="row row-1">
-				<h3>Hitch Images</h3>
-				<div class="hitch-images">
-					<?php show_meta_images( $hitch_ids ); ?>
+			<h3>Hitch Images</h3>
+			<div class="hitch-images image-group">
+				<?php foreach ( $hitch_ids as $id ) :
+				$img_url = wp_get_attachment_image_url( $id, 'large' ); ?>
+				<img src="<?php echo esc_url( $img_url ); ?>" alt="" class="popup-image" />
+				<?php endforeach; ?>
+			</div>
+			<div class="image-lightbox">
+				<div class="lightbox-inner">
+				<img src="" alt="" class="lightbox-img" />
+				<div class="lightbox-controls">
+					<span class="lightbox-prev">&#10094;</span>
+					<span class="lightbox-next">&#10095;</span>
+					<span class="lightbox-close">&times;</span>
 				</div>
+				</div>
+			</div>
 			</div>
 		<?php } ?>
 
-		<?php if($rear_ids){ ?>
+		<?php if ( $rear_ids ) { ?>
 			<div class="row row-1">
-				<h3>Rear Images</h3>
-
-				<div class="hitch-images">
-					<?php show_meta_images( $rear_ids ); ?>
+			<h3>Rear Images</h3>
+			<div class="rear-images image-group">
+				<?php foreach ( $rear_ids as $id ) :
+				$img_url = wp_get_attachment_image_url( $id, 'large' ); ?>
+				<img src="<?php echo esc_url( $img_url ); ?>" alt="" class="popup-image" />
+				<?php endforeach; ?>
+			</div>
+			<div class="image-lightbox">
+				<div class="lightbox-inner">
+				<img src="" alt="" class="lightbox-img" />
+				<div class="lightbox-controls">
+					<span class="lightbox-prev">&#10094;</span>
+					<span class="lightbox-next">&#10095;</span>
+					<span class="lightbox-close">&times;</span>
 				</div>
+				</div>
+			</div>
 			</div>
 		<?php } ?>
 
-		<?php if($front_ids){ ?>
+		<?php if ( $front_ids ) { ?>
 			<div class="row row-1">
-				<h3>Front Images</h3>
-
-				<div class="hitch-images">
-					<?php show_meta_images( $front_ids ); ?>
+			<h3>Front Images</h3>
+			<div class="front-images image-group">
+				<?php foreach ( $front_ids as $id ) :
+				$img_url = wp_get_attachment_image_url( $id, 'large' ); ?>
+				<img src="<?php echo esc_url( $img_url ); ?>" alt="" class="popup-image" />
+				<?php endforeach; ?>
+			</div>
+			<div class="image-lightbox">
+				<div class="lightbox-inner">
+				<img src="" alt="" class="lightbox-img" />
+				<div class="lightbox-controls">
+					<span class="lightbox-prev">&#10094;</span>
+					<span class="lightbox-next">&#10095;</span>
+					<span class="lightbox-close">&times;</span>
+				</div>
 				</div>
 			</div>
+			</div>
 		<?php } ?>
-	</div>
+		</div>
 
 	<!-- Order Preview Image -->
     <div style="text-align:center; padding:20px;">
@@ -1379,7 +1414,85 @@ function show_towing_svg_in_editor( $post ) {
     </div>
 
 	<script>
+		jQuery(document).ready(function () {
+		const allImageGroups = jQuery(".hitch-images, .rear-images, .front-images");
+
+		if (!jQuery(".image-lightbox").length) {
+			jQuery("body").append(`
+				<div class="image-lightbox">
+					<div class="lightbox-inner">
+						<img src="" alt="" class="lightbox-img">
+						<div class="lightbox-controls">
+							<span class="lightbox-prev">&#10094;</span>
+							<span class="lightbox-next">&#10095;</span>
+							<span class="lightbox-close">&times;</span>
+						</div>
+					</div>
+				</div>
+			`);
+		}
+
+		const lightbox = jQuery(".image-lightbox");
+		const lightboxImg = jQuery(".lightbox-img");
+		let currentGroup = null;
+		let currentIndex = 0;
+
+		function showImage(index) {
+			const src = jQuery(currentGroup[index]).attr("src");
+			lightboxImg.attr("src", src);
+			currentIndex = index;
+			lightbox.addClass("active");
+		}
+
+		function closeLightbox() {
+			lightbox.removeClass("active");
+			setTimeout(() => {
+				lightboxImg.attr("src", "");
+				currentGroup = null;
+			}, 400);
+		}
+
+		function showNext() {
+			if (!currentGroup) return;
+			currentIndex = (currentIndex + 1) % currentGroup.length;
+			showImage(currentIndex);
+		}
+
+		function showPrev() {
+			if (!currentGroup) return;
+			currentIndex = (currentIndex - 1 + currentGroup.length) % currentGroup.length;
+			showImage(currentIndex);
+		}
+
+		allImageGroups.each(function () {
+			const images = jQuery(this).find("img");
+			images.on("click", function () {
+				currentGroup = images;
+				showImage(images.index(this));
+			});
+		});
+
+		jQuery(".lightbox-close").on("click", closeLightbox);
+		jQuery(".lightbox-next").on("click", showNext);
+		jQuery(".lightbox-prev").on("click", showPrev);
+
+		jQuery(document).on("keydown", function (e) {
+			if (lightbox.hasClass("active")) {
+				if (e.key === "Escape") closeLightbox();
+				if (e.key === "ArrowRight") showNext();
+				if (e.key === "ArrowLeft") showPrev();
+			}
+		});
+
+		lightbox.on("click", function (e) {
+			if (jQuery(e.target).is(".image-lightbox")) closeLightbox();
+		});
+	});
+
+
 		jQuery(document).ready(function($){
+
+
 			jQuery('#show-order-popup').on('click', function(e){
 				e.preventDefault();
 				jQuery('#order-popup').fadeIn(200);
