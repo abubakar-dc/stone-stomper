@@ -96,51 +96,69 @@ jQuery( document ).ready( function( $ ) {
 		validateCaravanSection();
 	} );
 
-	   function validatePhotoUploads() {
-		let isValid = true;
-		const photoData = {};
+function validatePhotoUploads() {
+	let allUploaded = true; // ✅ will only stay true if all 3 images are uploaded
+	const photoData = {};
 
-		const fields = [
-			{ id: 'hitch_ids', label: 'Hitch Photograph' },
-			{ id: 'rear_ids', label: 'Towing Vehicle Rear Photograph' },
-			{ id: 'front_ids', label: 'Front of Caravan Photograph' },
-		];
+	const fields = [
+		{ id: 'hitch_ids', label: 'Hitch Photograph' },
+		{ id: 'rear_ids', label: 'Towing Vehicle Rear Photograph' },
+		{ id: 'front_ids', label: 'Front of Caravan Photograph' },
+	];
 
-		fields.forEach( ( field ) => {
-			const $input = jQuery( '#' + field.id );
-			const value = $input.val()?.trim();
+	fields.forEach((field) => {
+		const $input = jQuery('#' + field.id);
+		const value = $input.val()?.trim();
 
-			if ( value ) {
-				isValid = true;
-			}
-			if ( ! value || value === '[]' ) {
-				isValid = false;
-				$input.addClass( 'field-error' );
-				console.warn( `❌ Missing: ${ field.label }` );
-			} else {
-				$input.removeClass( 'field-error' );
-				photoData[ field.id ] = JSON.parse( value );
-			}
-		} );
+		// Debugging (optional)
+		console.log(`${field.label}:`, value);
 
-		if ( isValid ) {
-			jQuery( '#final-measurements' ).removeClass( 'section-disable' );
-			jQuery( '#final-summary' ).removeClass( 'section-disable' );
-
-			// console.log( '✅ All required photographs uploaded.' );
-			// console.log( '🖼️ Uploaded photo IDs:', photoData );
+		// Check if the field is empty or still has []
+		if (!value || value === '[]') {
+			allUploaded = false; // ❌ mark as incomplete
+			$input.addClass('field-error');
 		} else {
-			console.log( '❌ Some required photographs are still missing.' );
+			$input.removeClass('field-error');
+
+			// Try to parse uploaded IDs
+			try {
+				const parsedValue = JSON.parse(value);
+				if (!Array.isArray(parsedValue) || parsedValue.length === 0) {
+					allUploaded = false;
+					$input.addClass('field-error');
+				} else {
+					photoData[field.id] = parsedValue;
+				}
+			} catch (e) {
+				allUploaded = false;
+				$input.addClass('field-error');
+				console.warn(`⚠️ Invalid JSON for ${field.label}`);
+			}
 		}
+	});
+
+	// ✅ If all 3 uploaded, enable final sections
+	if (allUploaded) {
+		jQuery('#final-measurements').removeClass('section-disable');
+		jQuery('#final-summary').removeClass('section-disable');
+		console.log('✅ All 3 photos uploaded successfully!');
+		console.log('🖼️ Photo data:', photoData);
+	} else {
+		// ❌ If even one missing, keep section disabled
+		jQuery('#final-measurements').addClass('section-disable');
+		jQuery('#final-summary').addClass('section-disable');
+		console.log('❌ One or more required photographs missing.');
 	}
+}
 
-	// Run validation when file inputs change or hidden input values update
-	jQuery( '#blk-photos' ).on( 'change', 'input[type="file"]', function() {
-		setTimeout( validatePhotoUploads, 1000 ); // Delay to allow upload script to update hidden fields
-	} );
 
-	// Optional: Revalidate if hidden fields change via JS
-	jQuery( '#blk-photos' ).on( 'change', 'input[type="hidden"]', function() {
-		validatePhotoUploads();
-	} );
+// Run validation when photo upload completes
+jQuery('#blk-photos').on('change', 'input[type="file"]', function() {
+	setTimeout(validatePhotoUploads, 1500); // delay to allow upload script to update hidden fields
+});
+
+// Also revalidate if hidden inputs change (e.g. after upload AJAX)
+jQuery('#blk-photos').on('change', 'input[type="hidden"]', function() {
+	validatePhotoUploads();
+});
 } );
