@@ -163,7 +163,7 @@ add_action( 'manage_customer_posts_custom_column', function ( $column, $post_id 
 
 		// ✅ Proposed Date Column
 		case 'proposed_date':
-			$proposed_date = get_field( 'proposed_date', $post_id ); // update ACF key if needed
+			$proposed_date = get_field( 'sts_var_proposed_date_of_delivery', $post_id ); // update ACF key if needed
 			if ( $proposed_date ) {
 				echo esc_html( date_i18n( 'F j, Y', strtotime( $proposed_date ) ) );
 			} else {

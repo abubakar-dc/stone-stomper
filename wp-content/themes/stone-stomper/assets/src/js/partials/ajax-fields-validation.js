@@ -3,8 +3,8 @@ jQuery( document ).ready( function( $ ) {
 		let isValid = true;
 		const fieldData = {};
 
-		$( '#details-section' ).find( 'input[required], select[required]' ).each( function() {
-			const $field = $( this );
+		jQuery( '#details-section' ).find( 'input[required], select[required]' ).each( function() {
+			const $field = jQuery( this );
 			const value = $field.val()?.trim();
 			const fieldName = $field.attr( 'name' );
 
@@ -18,7 +18,7 @@ jQuery( document ).ready( function( $ ) {
 		} );
 
 		if ( isValid ) {
-			$( '#vehicle-details' ).removeClass( 'section-disable' );
+			jQuery( '#vehicle-details' ).removeClass( 'section-disable' );
 			// console.log( '✅ All fields filled.' );
 			// console.log( '📝 Filled field data:', fieldData );
 		} else {
@@ -27,7 +27,7 @@ jQuery( document ).ready( function( $ ) {
 	}
 
 	// Listen for input and change events on required fields
-	$( '#details-section' ).on( 'input change', 'input[required], select[required]', function() {
+	jQuery( '#details-section' ).on( 'input change', 'input[required], select[required]', function() {
 		formValidationOne();
 	} );
 
@@ -35,8 +35,8 @@ jQuery( document ).ready( function( $ ) {
 		let isValid = true;
 		const fieldData = {};
 
-		$( '#blk-vehicle' ).find( 'input[required], select[required]' ).each( function() {
-			const $field = $( this );
+		jQuery( '#blk-vehicle' ).find( 'input[required], select[required]' ).each( function() {
+			const $field = jQuery( this );
 			const value = $field.val()?.trim();
 			const fieldName = $field.attr( 'name' );
 
@@ -59,7 +59,7 @@ jQuery( document ).ready( function( $ ) {
 	}
 
 	// Run validation live when any input/select changes in #blk-vehicle
-	$( '#blk-vehicle' ).on( 'input change', 'input[required], select[required]', function() {
+	jQuery( '#blk-vehicle' ).on( 'input change', 'input[required], select[required]', function() {
 		validateVehicleSection();
 	} );
 
@@ -68,8 +68,8 @@ jQuery( document ).ready( function( $ ) {
 		const fieldData = {};
 
 		// Check all required fields in the caravan section
-		$( '#blk-caravan' ).find( 'select[required], input[required]' ).each( function() {
-			const $field = $( this );
+		jQuery( '#blk-caravan' ).find( 'select[required], input[required]' ).each( function() {
+			const $field = jQuery( this );
 			const value = $field.val()?.trim();
 			const fieldName = $field.attr( 'name' );
 
@@ -92,7 +92,7 @@ jQuery( document ).ready( function( $ ) {
 	}
 
 	// Auto-validate when any required input/select changes
-	$( '#blk-caravan' ).on( 'input change', 'input[required], select[required]', function() {
+	jQuery( '#blk-caravan' ).on( 'input change', 'input[required], select[required]', function() {
 		validateCaravanSection();
 	} );
 
@@ -107,9 +107,12 @@ jQuery( document ).ready( function( $ ) {
 		];
 
 		fields.forEach( ( field ) => {
-			const $input = $( '#' + field.id );
+			const $input = jQuery( '#' + field.id );
 			const value = $input.val()?.trim();
 
+			if ( value ) {
+				isValid = true;
+			}
 			if ( ! value || value === '[]' ) {
 				isValid = false;
 				$input.addClass( 'field-error' );
@@ -132,12 +135,12 @@ jQuery( document ).ready( function( $ ) {
 	}
 
 	// Run validation when file inputs change or hidden input values update
-	$( '#blk-photos' ).on( 'change', 'input[type="file"]', function() {
+	jQuery( '#blk-photos' ).on( 'change', 'input[type="file"]', function() {
 		setTimeout( validatePhotoUploads, 1000 ); // Delay to allow upload script to update hidden fields
 	} );
 
 	// Optional: Revalidate if hidden fields change via JS
-	$( '#blk-photos' ).on( 'change', 'input[type="hidden"]', function() {
+	jQuery( '#blk-photos' ).on( 'change', 'input[type="hidden"]', function() {
 		validatePhotoUploads();
 	} );
 } );
