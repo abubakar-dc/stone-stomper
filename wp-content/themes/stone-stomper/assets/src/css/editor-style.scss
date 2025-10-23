@@ -77,6 +77,9 @@
 		margin-block-end: 50px !important;
 		margin-block-start: 50px !important;
 	}
+	.slider-buttons {
+		display: none;
+	}
 
 	/* Editor style */
 
@@ -119,6 +122,42 @@
 
 	/* Responsive */
 	@import "partials/responsive/block-queries";
+
+	.products-teaser-slider {
+		display: flex;
+		overflow-x: auto;
+		scroll-behavior: smooth;
+		scrollbar-width: thin;
+		scrollbar-color: #888 transparent;
+		-webkit-overflow-scrolling: touch;
+		margin-bottom: 50px !important;
+
+		&::-webkit-scrollbar {
+			height: 8px;
+		}
+
+		&::-webkit-scrollbar-track {
+			background: transparent;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background: linear-gradient(90deg, #555, #000);
+			border-radius: 10px;
+
+			&:hover {
+				background: linear-gradient(90deg, #777, #222);
+			}
+		}
+
+		.slick-slide {
+			width: 30%;
+			min-width: 30%;
+		}
+	}
+	.components-button.is-destructive {
+		position: relative;
+		top: 6px;
+	}
 }
 
 /*  Vendor CSS Owl carousel */
@@ -160,7 +199,6 @@
 }
 
 .components-tab-panel__tab-content {
-
 	.acf-field-block-title,
 	.acf-field-spacers {
 		padding: 0px !important;
@@ -186,7 +224,6 @@
 }
 
 .interface-interface-skeleton__sidebar {
-
 	.acf-field-block-title,
 	.acf-field-spacers {
 		padding: 0px !important;
@@ -313,7 +350,7 @@
 		max-width: 100% !important;
 	}
 
-	>figure .components-placeholder {
+	> figure .components-placeholder {
 		height: 100% !important;
 		max-height: 100% !important;
 		width: 100% !important;
@@ -332,7 +369,7 @@
 }
 
 .is-root-container {
-	&>.block-editor-block-list__block.wp-block {
+	& > .block-editor-block-list__block.wp-block {
 		margin-block-start: 40px !important;
 		margin-block-end: 40px !important;
 	}
@@ -359,7 +396,7 @@
 }
 
 body.post-type-post .editor-styles-wrapper {
-	>div {
+	> div {
 		max-width: 1160px !important;
 		margin-inline: auto !important;
 	}
@@ -699,9 +736,11 @@ body.post-type-post .editor-styles-wrapper {
 .image-lightbox {
 	position: fixed;
 	inset: 0;
-	background: radial-gradient(circle at center,
-			rgb(0 0 0 / 95%),
-			rgb(20 20 20));
+	background: radial-gradient(
+		circle at center,
+		rgb(0 0 0 / 95%),
+		rgb(20 20 20)
+	);
 	display: flex;
 	align-items: center;
 	justify-content: center;
