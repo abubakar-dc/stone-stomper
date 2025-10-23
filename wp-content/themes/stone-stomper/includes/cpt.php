@@ -211,31 +211,163 @@ add_action( 'admin_footer-edit.php', function () {
 	?>
 	<script type="text/javascript">
 	jQuery(document).on('change', '.wc-order-status', function () {
-		let select = jQuery(this);
-		let orderId = select.data('order-id');
-		let status = select.val();
+	let select = jQuery(this);
+	let orderId = select.data('order-id');
+	let status = select.val();
 
-		select.css('opacity', '0.5');
+	select.css('opacity', '0.5');
 
-		jQuery.post(ajaxurl, {
-			action: 'update_wc_order_status',
-			order_id: orderId,
-			status: status
-		}, function (response) {
-			select.css('opacity', '1');
-			if (response.success) {
-				select.css('background-color', '#c6efce');
-				setTimeout(() => select.css('background-color', ''), 1000);
-			} else {
-				alert('Error: ' + response.data);
-				select.css('background-color', '#ffc7ce');
-				setTimeout(() => select.css('background-color', ''), 1000);
-			}
-		});
+	jQuery.post(ajaxurl, {
+		action: 'update_wc_order_status',
+		order_id: orderId,
+		status: status
+	}, function (response) {
+		select.css('opacity', '1');
+		if (response.success) {
+			select.css('background-color', '#c6efce');
+			setTimeout(() => {
+				select.css('background-color', '');
+
+				// ✅ If current filter is a specific status, go to "All" view after reload
+				let currentUrl = new URL(window.location.href);
+				let currentStatus = currentUrl.searchParams.get('post_status');
+
+				if (currentStatus && currentStatus !== 'all') {
+					currentUrl.searchParams.set('post_status', 'all');
+					window.location.href = currentUrl.toString(); // redirect to All tab
+				} else {
+					location.reload(); // otherwise just reload current view
+				}
+
+			}, 600);
+		} else {
+			alert('Error: ' + response.data);
+			select.css('background-color', '#ffc7ce');
+			setTimeout(() => select.css('background-color', ''), 1000);
+		}
 	});
+});
+
+
 	</script>
 	<?php
 } );
+
+/**
+ * Add WooCommerce-like status filter tabs in the custom Customer Orders list
+ */
+/**
+ * Add WooCommerce-like status filter tabs next to default "All | Mine | Published | Trash"
+ */
+add_filter( 'views_edit-customer', function ( $views ) {
+
+	global $wpdb;
+
+	// Fetch all customer CPT posts
+	$customer_posts = get_posts( [
+		'post_type'      => 'customer',
+		'posts_per_page' => -1,
+		'fields'         => 'ids',
+	] );
+
+	if ( empty( $customer_posts ) ) {
+		return $views;
+	}
+
+	// Collect statuses from linked WooCommerce orders
+	$status_counts = [];
+	foreach ( $customer_posts as $post_id ) {
+		$order_id = get_field( 'order_id', $post_id );
+		if ( ! $order_id ) continue;
+
+		$order = wc_get_order( $order_id );
+		if ( ! $order ) continue;
+
+		$status = $order->get_status();
+		if ( ! isset( $status_counts[ $status ] ) ) {
+			$status_counts[ $status ] = 0;
+		}
+		$status_counts[ $status ]++;
+	}
+
+	if ( empty( $status_counts ) ) {
+		return $views;
+	}
+
+	$current_status = isset( $_GET['wc_status'] ) ? sanitize_text_field( $_GET['wc_status'] ) : '';
+
+	foreach ( $status_counts as $status => $count ) {
+		$label = wc_get_order_status_name( 'wc-' . $status );
+		$url   = add_query_arg( 'wc_status', $status, remove_query_arg( 'paged' ) );
+		$class = ( $current_status === $status ) ? 'class="current"' : '';
+		$views[ 'wc_' . $status ] = sprintf(
+			'<a href="%s" %s>%s <span class="count">(%d)</span></a>',
+			esc_url( $url ),
+			$class,
+			esc_html( $label ),
+			intval( $count )
+		);
+	}
+
+	return $views;
+} );
+
+/**
+ * Filter the CPT query by WooCommerce order status
+ */
+add_action( 'pre_get_posts', function ( $query ) {
+	if ( ! is_admin() || ! $query->is_main_query() ) {
+		return;
+	}
+
+	// Only for your Orders (Customer CPT)
+	if ( isset( $_GET['post_type'] ) && $_GET['post_type'] === 'customer' ) {
+
+		// Default sort only if user hasn't chosen their own
+		if ( empty( $_GET['orderby'] ) ) {
+			$query->set( 'orderby', 'date' );
+			$query->set( 'order', 'DESC' );
+		}
+
+		// Handle WC status filter if present
+		if ( ! empty( $_GET['wc_status'] ) ) {
+			$status_filter = sanitize_text_field( $_GET['wc_status'] );
+
+			$matching_ids = [];
+			$posts = get_posts( [
+				'post_type'      => 'customer',
+				'posts_per_page' => -1,
+				'fields'         => 'ids',
+			] );
+
+			foreach ( $posts as $post_id ) {
+				$order_id = get_field( 'order_id', $post_id );
+				if ( ! $order_id ) continue;
+
+				$order = wc_get_order( $order_id );
+				if ( $order && $order->get_status() === $status_filter ) {
+					$matching_ids[] = $post_id;
+				}
+			}
+
+			$query->set( 'post__in', $matching_ids ?: [ 0 ] );
+
+			// Restore ordering so post__in doesn’t break sorting
+			if ( isset( $_GET['orderby'] ) && $_GET['orderby'] === 'title' ) {
+				$query->set( 'orderby', 'title' );
+				$query->set( 'order', strtoupper( $_GET['order'] ?? 'ASC' ) );
+			} else {
+				$query->set( 'orderby', 'date' );
+				$query->set( 'order', 'DESC' );
+			}
+		}
+	}
+});
+
+
+
+
+
 
 new WP_Theme_CPT(
 	array(
