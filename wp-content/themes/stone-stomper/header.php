@@ -47,6 +47,31 @@ $sts_var_tbar_btn      = $sts_option_fields['sts_var_tbar_btn'] ?? null;
 		}
 	}
 	?>
+	<link rel="preload"
+		href="<?php echo esc_url( get_template_directory_uri() . '/assets/build/fonts/Jost-Medium.woff2' ); ?>"
+		as="font"
+		type="font/woff2"
+		crossorigin>
+
+	<link rel="preload"
+		href="<?php echo esc_url( get_template_directory_uri() . '/assets/build/fonts/OpenSans-Bold.woff2' ); ?>"
+		as="font"
+		type="font/woff2"
+		crossorigin>
+
+	<link rel="preload"
+		href="<?php echo esc_url( get_template_directory_uri() . '/assets/build/fonts/OpenSans-Regular.woff2' ); ?>"
+		as="font"
+		type="font/woff2"
+		crossorigin>
+
+	<link rel="preload"
+		href="<?php echo esc_url( get_template_directory_uri() . '/assets/build/fonts/OpenSans-SemiBold.woff2' ); ?>"
+		as="font"
+		type="font/woff2"
+		crossorigin>
+
+
 	<link rel="apple-touch-icon" sizes="180x180"
 		href="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/build/images/pwa/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32"

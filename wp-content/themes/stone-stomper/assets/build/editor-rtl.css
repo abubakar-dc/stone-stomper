@@ -418,34 +418,6 @@
 @charset "UTF-8";
 /* stylelint-disable no-invalid-position-at-import-rule */
 /* Mixins */
-@font-face {
-  font-family: "flaticon_basetheme";
-  src: url(fonts/flaticon.woff2) format("woff2");
-}
-.dashicons:not(.dashicons-edit, .dashicons-welcome-view-site) {
-  font-family: "flaticon_basetheme" !important;
-}
-
-.dashicons-faqs:before {
-  content: "\f101";
-}
-
-.dashicons-iat:before {
-  content: "\f102";
-}
-
-.dashicons-jumplink:before {
-  content: "\f103";
-}
-
-.dashicons-smiley:before {
-  content: "\f104";
-}
-
-.dashicons-container:before {
-  content: "\f105";
-}
-
 /* Mixins */
 /*
 Rem output with px fallback with !important
@@ -462,28 +434,28 @@ Mixin for transition
 /* Fonts */
 @font-face {
   font-family: "Jost";
-  src: url(fonts/Jost-Medium.woff2) format("woff2"), url(fonts/Jost-Medium.woff) format("woff");
+  src: url(fonts/Jost-Medium.woff2) format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Open Sans";
-  src: url(fonts/OpenSans-Bold.woff2) format("woff2"), url(fonts/OpenSans-Bold.woff) format("woff");
+  src: url(fonts/OpenSans-Bold.woff2) format("woff2");
   font-weight: bold;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Open Sans";
-  src: url(fonts/OpenSans-Regular.woff2) format("woff2"), url(fonts/OpenSans-Regular.woff) format("woff");
+  src: url(fonts/OpenSans-Regular.woff2) format("woff2");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Open Sans";
-  src: url(fonts/OpenSans-SemiBold.woff2) format("woff2"), url(fonts/OpenSans-SemiBold.woff) format("woff");
+  src: url(fonts/OpenSans-SemiBold.woff2) format("woff2");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -1088,11 +1060,6 @@ Mixin for transition
   >> Styles for buttons
   ------------------------------------------------- */
   /* -------------------------------------------------
-  >> Project Styles
-  ---------------------------------------------------
-  >> Edit these styles as required
-  ------------------------------------------------- */
-  /* -------------------------------------------------
   >> Default styles for CheckBoxes
   ------------------------------------------------- */
   /* -------------------------------------------------
@@ -1190,6 +1157,9 @@ Mixin for transition
 .editor-styles-wrapper .acf-block-body {
   margin-block-end: 50px !important;
   margin-block-start: 50px !important;
+}
+.editor-styles-wrapper .slider-buttons {
+  display: none;
 }
 .editor-styles-wrapper .dc-spacer {
   background-image: url(images/spacer.jpg);
@@ -5139,6 +5109,7 @@ Mixin for transition
   font-weight: 600;
   font-style: normal;
   text-transform: uppercase;
+  text-decoration: none;
 }
 .editor-styles-wrapper .product-item a:hover, .editor-styles-wrapper .product-item a:focus-visible,
 .editor-styles-wrapper .product-item a:visited:hover,
@@ -5162,6 +5133,11 @@ Mixin for transition
   background-repeat: no-repeat;
   background-size: 32px;
   background-position: center;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  font-size: 0;
+  height: 22px;
 }
 .editor-styles-wrapper .slick-slider .slick-prev::before,
 .editor-styles-wrapper .slick-slider .slick-next::before {
@@ -5907,10 +5883,10 @@ Mixin for transition
 .editor-styles-wrapper input[type=image] {
   margin: 0 0 0 10px;
 }
-.editor-styles-wrapper input[type=submit],
-.editor-styles-wrapper button,
-.editor-styles-wrapper input[type=button],
-.editor-styles-wrapper input[type=reset] {
+.editor-styles-wrapper input[type=submit]:not(.components-button),
+.editor-styles-wrapper button:not(.components-button),
+.editor-styles-wrapper input[type=button]:not(.components-button),
+.editor-styles-wrapper input[type=reset]:not(.components-button) {
   padding: 0 30px;
   display: inline-block;
   line-height: 1;
@@ -5925,27 +5901,24 @@ Mixin for transition
   font-style: normal;
   font-size: var(--ss_font_size_16);
   height: 50px;
-  outline: none;
   cursor: pointer;
   margin: 0 0 10px 10px;
 }
-.editor-styles-wrapper input[type=submit]:hover,
-.editor-styles-wrapper button:hover,
-.editor-styles-wrapper input[type=button]:hover {
+.editor-styles-wrapper input[type=submit]:not(.components-button):hover, .editor-styles-wrapper input[type=submit]:not(.components-button):focus-visible,
+.editor-styles-wrapper button:not(.components-button):hover,
+.editor-styles-wrapper button:not(.components-button):focus-visible,
+.editor-styles-wrapper input[type=button]:not(.components-button):hover,
+.editor-styles-wrapper input[type=button]:not(.components-button):focus-visible,
+.editor-styles-wrapper input[type=reset]:not(.components-button):hover,
+.editor-styles-wrapper input[type=reset]:not(.components-button):focus-visible {
   color: var(--ss_button_color_hover);
   background-color: var(--ss_button_bgcolor_hover);
 }
-.editor-styles-wrapper input[type=submit]:focus-visible,
-.editor-styles-wrapper button:focus-visible,
-.editor-styles-wrapper input[type=button]:focus-visible {
-  color: var(--ss_button_color_hover);
-  background-color: var(--ss_button_bgcolor_hover);
-}
-.editor-styles-wrapper input[type=reset] {
+.editor-styles-wrapper input[type=reset]:not(.components-button) {
   background-color: var(--ss_theme_btn_bgcolor);
   color: var(--ss_theme_btn_color);
 }
-.editor-styles-wrapper input[type=reset]:hover, .editor-styles-wrapper input[type=reset]:focus-visible {
+.editor-styles-wrapper input[type=reset]:not(.components-button):hover, .editor-styles-wrapper input[type=reset]:not(.components-button):focus-visible {
   color: var(--ss_theme_btn_color);
   background-color: var(--ss_theme_btn_bgcolor_hover);
 }
@@ -7203,6 +7176,36 @@ Mixin for transition
     margin: 0;
     background-position: center;
   }
+}
+.editor-styles-wrapper .products-teaser-slider {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #888 transparent;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 50px !important;
+}
+.editor-styles-wrapper .products-teaser-slider::-webkit-scrollbar {
+  height: 8px;
+}
+.editor-styles-wrapper .products-teaser-slider::-webkit-scrollbar-track {
+  background: transparent;
+}
+.editor-styles-wrapper .products-teaser-slider::-webkit-scrollbar-thumb {
+  background: linear-gradient(-90deg, #555, #000);
+  border-radius: 10px;
+}
+.editor-styles-wrapper .products-teaser-slider::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(-90deg, #777, #222);
+}
+.editor-styles-wrapper .products-teaser-slider .slick-slide {
+  width: 30%;
+  min-width: 30%;
+}
+.editor-styles-wrapper .components-button.is-destructive {
+  position: relative;
+  top: 6px;
 }
 
 /*  Vendor CSS Owl carousel */

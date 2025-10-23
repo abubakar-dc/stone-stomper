@@ -79,15 +79,6 @@ class WP_Theme_Scripts {
 				'strategy'  => 'defer',
 			)
 		);
-
-		StoneStomper::enqueue_script(
-			'assets/build/vendors/swiper-bundle.min.js',
-			array( 'jquery' ),
-			args:array(
-				'in_footer' => false,
-				'strategy'  => 'defer',
-			)
-		);
 	}
 	/**
 	 * Enqueue Backend Assets
