@@ -17,8 +17,6 @@
 	.wp-block-cover {
 		position: initial;
 		padding: 302px 0 100px;
-		min-height: 100vh;
-
 		.wp-block-cover__inner-container {
 			max-width: 1750px;
 			width: 92%;
@@ -74,4 +72,7 @@
 		margin-left: 27%;
 		margin-top: 22px;
 	}
+}
+.hero-home{
+	max-height: 953px;
 }

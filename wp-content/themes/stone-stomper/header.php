@@ -167,7 +167,7 @@ $sts_var_tbar_btn      = $sts_option_fields['sts_var_tbar_btn'] ?? null;
 		<?php } ?>
 		<div class="header-wrapper header-inner d-flex align-items-center justify-content-between">
 			<div class="header-logo logo">
-				<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img  height="69" width="166"
 						src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/build/images/site-logo.svg"
 						alt="Site Logo" /></a>
 			</div>
