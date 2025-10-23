@@ -536,6 +536,401 @@ add_action( 'template_redirect', function() {
 });
 
 
+function render_towing_diagram( $caravan_length_mm, $caravan_width_mm, $toolbox_height_mm, $toolbox_width_mm, $bar_width_mm ) { ?>
+
+	<div class="stone-stomper-vector-inner">
+		<?php if($caravan_length_mm < 1900 ){ ?>
+			<svg xmlns="http://www.w3.org/2000/svg" id="Layer_2" version="1.1" viewBox="0 0 1200 800">
+				<!-- Generator: Adobe Illustrator 29.8.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 2)  -->
+				<defs>
+					<style>
+					.st0 {
+						stroke: #fa3232;
+					}
+
+					.st0, .st1, .st2 {
+						fill: none;
+					}
+
+					.st3, .st4 {
+						fill: #fff;
+					}
+
+					.st3, .st1, .st2 {
+						stroke: #000;
+					}
+
+					.st1 {
+						stroke-width: 3px;
+					}
+
+					.st5 {
+						fill: #fa3232;
+						font-family: OpenSans, 'Open Sans';
+						font-size: 15px;
+						letter-spacing: .03em;
+					}
+					</style>
+				</defs>
+				<path class="st1" d="M935.7,173.33c.12-1.09-.69-1.99-1.79-1.99H278.24c-1.1,0-1.91.9-1.79,1.99l41.6,402.61c.11,1.09,1.11,1.99,2.21,1.99h246.73c1.1,0,2-.9,2-2v-61.51c0-1.1.9-2,2-2h68.28c1.1,0,2,.9,2,2v61.51c0,1.1.9,2,2,2h247.86c1.1,0,2.09-.9,2.21-1.99l42.37-402.61Z"/>
+				<polyline class="st2" points="329.42 577.92 288.76 180.94 923.79 180.94 882.27 577.92"/>
+				<circle class="st2" cx="928.02" cy="177.82" r="5.22"/>
+				<circle class="st2" cx="283.6" cy="177.82" r="5.22"/>
+				<rect class="st2" x="390.67" y="364.08" width="438.42" height="27.06"/>
+				<rect class="st3" x="504.04" y="315.51" width="211.2" height="195.21"/>
+				<rect class="st2" x="404.09" y="381.28" width="8.47" height="196.64"/>
+				<rect class="st2" x="477.94" y="381.28" width="8.47" height="196.64"/>
+				<rect class="st2" x="732.88" y="381.28" width="8.47" height="196.64"/>
+				<rect class="st2" x="806.72" y="381.28" width="8.47" height="196.64"/>
+				<circle class="st2" cx="737.11" cy="374.25" r="4.24"/>
+				<circle class="st2" cx="810.96" cy="374.25" r="4.24"/>
+				<circle class="st2" cx="408.33" cy="374.25" r="4.24"/>
+				<circle class="st2" cx="482.17" cy="374.25" r="4.24"/>
+				<text class="st5" transform="translate(565.96 411.74)"><tspan x="0" y="0">Vinyl Insert</tspan></text>
+				<g>
+					<line class="st0" x1="274.29" y1="139.99" x2="935.24" y2="139.99"/>
+					<g transform="translate(604.76,139.99)">
+						<rect class="st4" x="-67.5" y="-22" width="135" height="24"/>
+						<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0"><?php echo esc_html( $caravan_width_mm ? $caravan_width_mm.' mm' : '-' ); ?></text>
+					</g>
+					<polyline class="st0" points="278.3 143.72 274.29 139.99 278.3 136.27"/>
+					<polyline class="st0" points="931.24 136.27 935.24 140 931.24 143.72"/>
+				</g>
+				<g>
+					<line class="st0" x1="317.29" y1="608.6" x2="894.24" y2="608.6"/>
+					<g transform="translate(957.8,375.13)">
+					<rect class="st4" x="10" y="-12" width="135" height="24"/>
+					<text class="st5" text-anchor="start" dominant-baseline="middle" x="20"><?php echo esc_html( $caravan_length_mm ? $caravan_length_mm.' mm' : '-' ); ?></text>
+					</g>
+					<polyline class="st0" points="321.3 612.33 317.29 608.6 321.3 604.88"/>
+					<polyline class="st0" points="890.24 604.88 894.24 608.6 890.24 612.33"/>
+				</g>
+
+
+				<g>
+					<line class="st0" x1="957.8" y1="170.34" x2="957.8" y2="579.93"/>
+					<g transform="translate(605.77,608.6)">
+						<rect class="st4" x="-67.5" y="-12" width="135" height="24"/>
+						<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0"><?php echo esc_html( $bar_width_mm ? $bar_width_mm.' mm' : '-' ); ?></text>
+					</g>
+					<polyline class="st0" points="954.07 174.34 957.8 170.34 961.52 174.34"/>
+					<polyline class="st0" points="961.52 575.92 957.8 579.93 954.07 575.92"/>
+				</g>
+			</svg>
+		<?php } else { ?>
+
+
+		<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 1200 800">
+			<!-- Generator: Adobe Illustrator 29.8.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 2)  -->
+			<defs>
+				<style>
+					.st0, .st1, .st2, .st3, .st4, .st5 {
+						fill: none;
+					}
+
+					.st1, .st2, .st3, .st4 {
+						stroke: #fa3232;
+					}
+
+					.st2 {
+						stroke-dasharray: 5.39 5.39;
+					}
+
+					.st3 {
+						stroke-dasharray: 5.23 5.23;
+					}
+
+					.st4 {
+						stroke-dasharray: 5.07 5.07;
+					}
+
+					.st6, .st7 {
+						fill: #2c2a2a;
+					}
+
+					.st7 {
+						opacity: .1;
+					}
+
+					.st8, .st9 {
+						fill: #fa3232;
+					}
+
+					.st9 {
+						font-family: OpenSans, 'Open Sans';
+						font-size: 15px;
+					}
+
+					.st10 {
+						fill: #e6e6e6;
+					}
+
+					.st10, .st5 {
+						stroke: #000;
+						stroke-miterlimit: 10;
+						stroke-width: 2.9px;
+					}
+
+					.st11 {
+						clip-path: url(#clippath-1);
+					}
+
+					.st12 {
+						clip-path: url(#clippath-3);
+					}
+
+					.st13 {
+						clip-path: url(#clippath-4);
+					}
+
+					.st14 {
+						clip-path: url(#clippath-2);
+					}
+
+					.st15 {
+						clip-path: url(#clippath-7);
+					}
+
+					.st16 {
+						clip-path: url(#clippath-6);
+					}
+
+					.st17 {
+						clip-path: url(#clippath-9);
+					}
+
+					.st18 {
+						clip-path: url(#clippath-8);
+					}
+
+					.st19 {
+						clip-path: url(#clippath-5);
+					}
+
+					.st20 {
+						fill: #fff;
+					}
+
+					.st21 {
+						opacity: .1;
+					}
+
+					.st22 {
+						letter-spacing: .03em;
+					}
+
+					.st23 {
+						letter-spacing: .02em;
+					}
+
+					.st24 {
+						letter-spacing: .02em;
+					}
+
+					.st25 {
+						clip-path: url(#clippath);
+					}
+				</style>
+
+				<clipPath id="clippath">
+				<rect class="st0" x="339.32" y="404.87" width="146.76" height="37.86"/>
+				</clipPath>
+				<clipPath id="clippath-1">
+				<rect class="st0" x="442.55" y="415.97" width="26.88" height="17.88"/>
+				</clipPath>
+				<clipPath id="clippath-2">
+				<rect class="st0" x="355.97" y="415.97" width="26.88" height="17.88"/>
+				</clipPath>
+				<clipPath id="clippath-3">
+				<rect class="st0" x="442.55" y="214.04" width="26.88" height="206.49"/>
+				</clipPath>
+				<clipPath id="clippath-4">
+				<rect class="st0" x="355.97" y="214.04" width="26.88" height="206.49"/>
+				</clipPath>
+				<clipPath id="clippath-5">
+				<rect class="st0" x="721.94" y="404.87" width="146.76" height="37.86"/>
+				</clipPath>
+				<clipPath id="clippath-6">
+				<rect class="st0" x="825.17" y="415.97" width="26.88" height="17.88"/>
+				</clipPath>
+				<clipPath id="clippath-7">
+				<rect class="st0" x="738.59" y="415.97" width="26.88" height="17.88"/>
+				</clipPath>
+				<clipPath id="clippath-8">
+				<rect class="st0" x="825.17" y="214.04" width="26.88" height="206.49"/>
+				</clipPath>
+				<clipPath id="clippath-9">
+				<rect class="st0" x="738.59" y="214.04" width="26.88" height="206.49"/>
+				</clipPath>
+			</defs>
+			<g>
+				<path class="st5" d="M273.19,735.73v-150.81c0-10.37,8.41-18.78,18.78-18.78h624.07c10.37,0,18.78,8.41,18.78,18.78v150.81"/>
+				<path class="st5" d="M273.19,755.72v-150.8c0-10.37,8.41-18.78,18.78-18.78h624.07c10.37,0,18.78,8.41,18.78,18.78v150.8"/>
+				<path class="st5" d="M911.21,43.84v150.8c0,10.37-8.41,18.78-18.78,18.78H315.59c-10.37,0-18.78-8.41-18.78-18.78V43.84"/>
+				<path class="st5" d="M903.97,43.84v150.81c0,6.36-5.18,11.54-11.54,11.54H315.59c-6.36,0-11.54-5.18-11.54-11.54V43.84"/>
+				<path class="st5" d="M896.73,43.84v150.81c0,2.37-1.93,4.3-4.3,4.3H315.59c-2.37,0-4.3-1.93-4.3-4.3V43.84"/>
+				<polyline class="st5" points="889.49 46.78 889.49 191.71 318.53 191.71 318.53 46.78"/>
+			</g>
+			<rect class="st5" x="528.75" y="566.14" width="150.53" height="11.48"/>
+			<rect class="st5" x="433.19" y="635.03" width="341.64" height="35.97"/>
+			<rect x="480.53" y="629.5" width="17.43" height="11.91"/>
+			<rect x="595.29" y="629.5" width="17.43" height="11.91"/>
+			<rect x="710.05" y="629.5" width="17.43" height="11.91"/>
+			<polygon class="st5" points="583.81 304.26 568.08 304.26 472.83 566.19 488.56 566.19 583.81 304.26"/>
+			<polygon class="st5" points="624.21 304.26 639.94 304.26 735.19 566.19 719.45 566.19 624.21 304.26"/>
+			<line class="st5" x1="574.88" y1="304.26" x2="633.14" y2="304.26"/>
+			<line class="st5" x1="551.57" y1="392.71" x2="656.44" y2="392.71"/>
+			<line class="st5" x1="522.94" y1="472.08" x2="685.08" y2="472.08"/>
+			<rect class="st5" x="595.51" y="297.41" width="17.01" height="174.42"/>
+			<rect class="st5" x="588.77" y="246.28" width="30.48" height="37.74"/>
+			<rect class="st5" x="599.29" y="284.02" width="9.45" height="13.37"/>
+			<rect class="st5" x="609.49" y="213.65" width="22.17" height="13.37"/>
+			<rect class="st5" x="599.29" y="213.92" width="9.45" height="26.59"/>
+			<rect class="st5" x="599.29" y="239.09" width="9.45" height="6.99"/>
+			<polygon class="st5" points="696.92 420.06 700.71 420.06 723.7 483.27 719.9 483.27 696.92 420.06"/>
+			<line class="st5" x1="685.86" y1="431.09" x2="701.16" y2="431.09"/>
+			<line class="st5" x1="701.48" y1="472.23" x2="716.79" y2="472.23"/>
+			<polygon class="st5" points="511.02 420.06 507.22 420.06 484.24 483.27 488.03 483.27 511.02 420.06"/>
+			<line class="st5" x1="522.08" y1="431.09" x2="506.77" y2="431.09"/>
+			<line class="st5" x1="506.45" y1="472.23" x2="491.15" y2="472.23"/>
+			<line class="st1" x1="299.44" y1="269.28" x2="908.77" y2="269.28"/>
+			<polyline class="st1" points="303.45 273.01 299.44 269.28 303.45 265.56"/>
+			<polyline class="st1" points="904.77 265.56 908.77 269.28 904.77 273.01"/>
+			<rect class="st20" x="532.83" y="261.27" width="142.56" height="16.03"/>
+			<text class="st9" transform="translate(542.83 274.3)"><tspan class="st23" x="30" y="0"><?php echo esc_html( $bar_width_mm ? $bar_width_mm.' mm' : '-' ); ?></tspan></text>
+			<line class="st1" x1="350.44" y1="510.83" x2="858.13" y2="510.83"/>
+			<rect class="st20" x="537.36" y="480.28" width="135.53" height="44.32"/>
+			<rect class="st7" x="349.31" y="453.64" width="509.93" height="98.6"/>
+			<g>
+				<text
+					x="<?php echo 537.36 + (135.53 / 2); ?>"
+					y="<?php echo 480.28 + (60.32 / 2); ?>"
+					text-anchor="middle"
+					dominant-baseline="middle"
+					class="st9 st22"
+				>
+					<?php echo esc_html( $toolbox_width_mm ?: '-' ); ?>
+				</text>
+			</g>
+			<polyline class="st1" points="354.43 514.55 350.42 510.83 354.43 507.1"/>
+			<polyline class="st1" points="854.13 507.1 858.13 510.83 854.13 514.55"/>
+			<g>
+				<line class="st1" x1="276.24" y1="429.03" x2="931.97" y2="429.03"/>
+				<polyline class="st1" points="280.25 432.75 276.24 429.03 280.25 425.31"/>
+				<polyline class="st1" points="927.97 425.31 931.97 429.03 927.97 432.75"/>
+				<rect class="st20" x="547.52" y="421.01" width="115.2" height="16.03"/>
+				<text class="st9" transform="translate(550.59 435.05)"><tspan class="st22" x="15" y="0"><?php echo esc_html( $caravan_width_mm ? $caravan_width_mm.' mm' : '-' ); ?></tspan></text>
+			</g>
+			<line class="st3" x1="935.91" y1="412.02" x2="935.91" y2="589.08"/>
+			<line class="st3" x1="272.11" y1="412.02" x2="272.11" y2="589.08"/>
+			<line class="st3" x1="912.21" y1="192.07" x2="912.21" y2="284.02"/>
+			<line class="st3" x1="912.21" y1="242.66" x2="610.47" y2="242.66"/>
+			<line class="st3" x1="295.81" y1="192.07" x2="295.81" y2="284.02"/>
+			<g>
+				<g class="st21">
+				<g class="st25">
+					<rect class="st6" x="348.32" y="405.87" width="128.76" height="28.86"/>
+				</g>
+				</g>
+				<g class="st21">
+				<g class="st11">
+					<path class="st6" d="M455.99,416.97c-2.45,0-4.44,1.99-4.44,4.44s1.99,4.44,4.44,4.44,4.44-1.99,4.44-4.44-1.99-4.44-4.44-4.44"/>
+				</g>
+				</g>
+				<g class="st21">
+				<g class="st14">
+					<path class="st6" d="M369.41,416.97c-2.45,0-4.44,1.99-4.44,4.44s1.99,4.44,4.44,4.44,4.44-1.99,4.44-4.44-1.99-4.44-4.44-4.44"/>
+				</g>
+				</g>
+				<g class="st21">
+					<g class="st12">
+						<rect class="st6" x="451.55" y="215.04" width="8.88" height="197.49"/>
+					</g>
+				</g>
+				<g class="st21">
+				<g class="st13">
+					<rect class="st6" x="364.97" y="215.04" width="8.88" height="197.49"/>
+				</g>
+				</g>
+				<g class="st21">
+				<g class="st19">
+					<rect class="st6" x="730.94" y="405.87" width="128.76" height="28.86"/>
+				</g>
+				</g>
+				<g class="st21">
+				<g class="st16">
+					<path class="st6" d="M838.61,416.97c-2.45,0-4.44,1.99-4.44,4.44s1.99,4.44,4.44,4.44,4.44-1.99,4.44-4.44-1.99-4.44-4.44-4.44"/>
+				</g>
+				</g>
+				<g class="st21">
+				<g class="st15">
+					<path class="st6" d="M752.03,416.97c-2.45,0-4.44,1.99-4.44,4.44s1.99,4.44,4.44,4.44,4.44-1.99,4.44-4.44-1.99-4.44-4.44-4.44"/>
+				</g>
+				</g>
+				<g class="st21">
+				<g class="st18">
+					<rect class="st6" x="834.17" y="215.04" width="8.88" height="197.49"/>
+				</g>
+				</g>
+				<g class="st21">
+				<g class="st17">
+					<rect class="st6" x="747.59" y="215.04" width="8.88" height="197.49"/>
+				</g>
+				</g>
+			</g>
+			<line class="st2" x1="859.24" y1="543.65" x2="859.24" y2="461.92"/>
+			<line class="st4" x1="850.95" y1="453.64" x2="353.43" y2="453.64"/>
+			<line class="st2" x1="349.31" y1="462.73" x2="349.31" y2="543.96"/>
+			<line class="st4" x1="357.61" y1="552.24" x2="855.13" y2="552.24"/>
+			<path class="st1" d="M855.13,552.24h4.11v-5.28M349.31,546.96v5.28h4.11M353.43,453.64h-4.11v5.28M859.24,458.92v-5.28h-4.11"/>
+			<g>
+				<line class="st1" x1="881.51" y1="563.25" x2="881.51" y2="243.67"/>
+				<polyline class="st1" points="885.23 559.24 881.51 563.25 877.79 559.24"/>
+				<polyline class="st1" points="877.79 247.68 881.51 243.67 885.23 247.68"/>
+				<rect class="st20" x="873.49" y="282.59" width="16.03" height="135.74"/>
+				<g>
+					<text
+						x="<?php echo 873.49 + (16.03 / 2); ?>"
+						y="<?php echo 282.59 + (135.74 / 2); ?>"
+						text-anchor="middle"
+						dominant-baseline="middle"
+						transform="rotate(-90 <?php echo 873.49 + (16.03 / 2); ?> <?php echo 282.59 + (135.74 / 2); ?>)"
+						class="st9 st22"
+					>
+						<?php echo esc_html( $caravan_length_mm ? $caravan_length_mm.' mm' : '-' ); ?>
+					</text>
+				</g>
+			</g>
+			<g>
+				<line class="st1" x1="329.89" y1="563.43" x2="329.89" y2="453.85"/>
+				<polyline class="st1" points="333.61 559.24 329.89 563.25 326.16 559.24"/>
+				<polyline class="st1" points="326.16 457.68 329.89 453.67 333.61 457.68"/>
+				<rect class="st20" x="307.05" y="471.15" width="40.75" height="74.97"/>
+				<g>
+					<text
+						x="<?php echo 307.05 + (40.75 / 2); ?>"
+						y="<?php echo 471.15 + (74.97 / 2); ?>"
+						text-anchor="middle"
+						dominant-baseline="middle"
+						transform="rotate(-90 <?php echo 307.05 + (40.75 / 2); ?> <?php echo 471.15 + (74.97 / 2); ?>)"
+						class="st9 st24"
+					>
+						<?php echo esc_html( $toolbox_height_mm ? $toolbox_height_mm.' mm' : '-' ); ?>
+					</text>
+				</g>
+			</g>
+			<g class="st21">
+				<polygon class="st6" points="311.01 215.04 289.01 564.08 919.01 564.08 893.01 215.04 311.01 215.04"/>
+			</g>
+			<circle class="st10" cx="604.28" cy="242.66" r="7.45"/>
+			</svg>
+
+
+		<?php } ?>
+	</div>
+<?php }
+
+
 
 function show_towing_svg_in_editor( $post ) {
     // Get all meta data
@@ -598,6 +993,9 @@ function show_towing_svg_in_editor( $post ) {
 	$hitch_ids = get_post_meta( $post->ID, 'hitch_ids', true );
 	$rear_ids  = get_post_meta( $post->ID, 'rear_ids', true );
 	$front_ids = get_post_meta( $post->ID, 'front_ids', true );
+
+
+
 
 	// $checked = ($support_pocket === 'yes') ? 'checked' : 'not';
 	// var_dump( get_post_meta( $post->ID));
@@ -706,407 +1104,20 @@ function show_towing_svg_in_editor( $post ) {
     <div style="text-align:center; padding:20px;">
 
 		<div class="functional-buttons">
-			<a href="#" class="button button-primary generate-diagram" style="margin-right:10px;">Generate Diagram</a>
-			<a href="#" class="button button-secondary generate-word-doc" style="margin-right:10px;">Generate Word Document</a>
-			<a href="#" class="button button-primary generate-pdf" style="margin-right:10px;">Generate PDF</a>
+			<span class="button button-primary generate-diagram" style="margin-right:10px;">Generate Diagram</span>
+			<a href="<?php echo admin_url( 'admin-ajax.php?action=download_customer_word&post_id=' . $post->ID ); ?>" target="_blank" class="button button-secondary generate-word-doc" style="margin-right:10px;">Generate Word Document</a>
+			<a href="<?php echo admin_url( 'admin-ajax.php?action=download_customer_pdf&post_id=' . $post->ID ); ?>" target="_blank" class="button button-primary generate-pdf" style="margin-right:10px;">Generate PDF</a>
+
 			<a href="#" class="button button-secondary email-to-manufacturer" style="margin-right:10px;">Email to Manufacturer</a>
-			<a href="<?php echo esc_url( get_edit_post_link( $order_id ) ); ?>" class="button button-secondary" style="">View Order #<?php echo esc_html( $order_id ); ?></a>
+			<a href="#" id="show-order-popup" class="button button-secondary" style="">View Order #<?php echo esc_html( $order_id ); ?></a>
 		</div>
 
-        <a href="#" class="stone-stomper-vector" id="show-order-popup">
 
+		<div class="stone-stomper-vector" style="display:none">
 			<?php
-
-			if($caravan_length_mm < 1900 ){ ?>
-				<svg xmlns="http://www.w3.org/2000/svg" id="Layer_2" version="1.1" viewBox="0 0 1200 800">
-					<!-- Generator: Adobe Illustrator 29.8.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 2)  -->
-					<defs>
-						<style>
-						.st0 {
-							stroke: #fa3232;
-						}
-
-						.st0, .st1, .st2 {
-							fill: none;
-						}
-
-						.st3, .st4 {
-							fill: #fff;
-						}
-
-						.st3, .st1, .st2 {
-							stroke: #000;
-						}
-
-						.st1 {
-							stroke-width: 3px;
-						}
-
-						.st5 {
-							fill: #fa3232;
-							font-family: OpenSans, 'Open Sans';
-							font-size: 15px;
-							letter-spacing: .03em;
-						}
-						</style>
-					</defs>
-					<path class="st1" d="M935.7,173.33c.12-1.09-.69-1.99-1.79-1.99H278.24c-1.1,0-1.91.9-1.79,1.99l41.6,402.61c.11,1.09,1.11,1.99,2.21,1.99h246.73c1.1,0,2-.9,2-2v-61.51c0-1.1.9-2,2-2h68.28c1.1,0,2,.9,2,2v61.51c0,1.1.9,2,2,2h247.86c1.1,0,2.09-.9,2.21-1.99l42.37-402.61Z"/>
-					<polyline class="st2" points="329.42 577.92 288.76 180.94 923.79 180.94 882.27 577.92"/>
-					<circle class="st2" cx="928.02" cy="177.82" r="5.22"/>
-					<circle class="st2" cx="283.6" cy="177.82" r="5.22"/>
-					<rect class="st2" x="390.67" y="364.08" width="438.42" height="27.06"/>
-					<rect class="st3" x="504.04" y="315.51" width="211.2" height="195.21"/>
-					<rect class="st2" x="404.09" y="381.28" width="8.47" height="196.64"/>
-					<rect class="st2" x="477.94" y="381.28" width="8.47" height="196.64"/>
-					<rect class="st2" x="732.88" y="381.28" width="8.47" height="196.64"/>
-					<rect class="st2" x="806.72" y="381.28" width="8.47" height="196.64"/>
-					<circle class="st2" cx="737.11" cy="374.25" r="4.24"/>
-					<circle class="st2" cx="810.96" cy="374.25" r="4.24"/>
-					<circle class="st2" cx="408.33" cy="374.25" r="4.24"/>
-					<circle class="st2" cx="482.17" cy="374.25" r="4.24"/>
-					<text class="st5" transform="translate(565.96 411.74)"><tspan x="0" y="0">Vinyl Insert</tspan></text>
-					<g>
-						<line class="st0" x1="274.29" y1="139.99" x2="935.24" y2="139.99"/>
-						<g transform="translate(604.76,139.99)">
-							<rect class="st4" x="-67.5" y="-22" width="135" height="24"/>
-							<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0"><?php echo esc_html( $caravan_width_mm ?: '-' ); ?></text>
-						</g>
-						<polyline class="st0" points="278.3 143.72 274.29 139.99 278.3 136.27"/>
-						<polyline class="st0" points="931.24 136.27 935.24 140 931.24 143.72"/>
-					</g>
-					<g>
-						<line class="st0" x1="317.29" y1="608.6" x2="894.24" y2="608.6"/>
-						<g transform="translate(957.8,375.13)">
-						<rect class="st4" x="10" y="-12" width="135" height="24"/>
-						<text class="st5" text-anchor="start" dominant-baseline="middle" x="20"><?php echo esc_html( $caravan_length_mm ?: '-' ); ?></text>
-						</g>
-						<polyline class="st0" points="321.3 612.33 317.29 608.6 321.3 604.88"/>
-						<polyline class="st0" points="890.24 604.88 894.24 608.6 890.24 612.33"/>
-					</g>
-
-
-					<g>
-						<line class="st0" x1="957.8" y1="170.34" x2="957.8" y2="579.93"/>
-						<g transform="translate(605.77,608.6)">
-							<rect class="st4" x="-67.5" y="-12" width="135" height="24"/>
-							<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0"><?php echo esc_html( $bar_width_mm ?: '-' ); ?></text>
-						</g>
-						<polyline class="st0" points="954.07 174.34 957.8 170.34 961.52 174.34"/>
-						<polyline class="st0" points="961.52 575.92 957.8 579.93 954.07 575.92"/>
-					</g>
-				</svg>
-			<?php } else { ?>
-
-
-				<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 1200 800">
-				<!-- Generator: Adobe Illustrator 29.8.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 2)  -->
-				<defs>
-					<style>
-						.st0, .st1, .st2, .st3, .st4, .st5 {
-							fill: none;
-						}
-
-						.st1, .st2, .st3, .st4 {
-							stroke: #fa3232;
-						}
-
-						.st2 {
-							stroke-dasharray: 5.39 5.39;
-						}
-
-						.st3 {
-							stroke-dasharray: 5.23 5.23;
-						}
-
-						.st4 {
-							stroke-dasharray: 5.07 5.07;
-						}
-
-						.st6, .st7 {
-							fill: #2c2a2a;
-						}
-
-						.st7 {
-							opacity: .1;
-						}
-
-						.st8, .st9 {
-							fill: #fa3232;
-						}
-
-						.st9 {
-							font-family: OpenSans, 'Open Sans';
-							font-size: 15px;
-						}
-
-						.st10 {
-							fill: #e6e6e6;
-						}
-
-						.st10, .st5 {
-							stroke: #000;
-							stroke-miterlimit: 10;
-							stroke-width: 2.9px;
-						}
-
-						.st11 {
-							clip-path: url(#clippath-1);
-						}
-
-						.st12 {
-							clip-path: url(#clippath-3);
-						}
-
-						.st13 {
-							clip-path: url(#clippath-4);
-						}
-
-						.st14 {
-							clip-path: url(#clippath-2);
-						}
-
-						.st15 {
-							clip-path: url(#clippath-7);
-						}
-
-						.st16 {
-							clip-path: url(#clippath-6);
-						}
-
-						.st17 {
-							clip-path: url(#clippath-9);
-						}
-
-						.st18 {
-							clip-path: url(#clippath-8);
-						}
-
-						.st19 {
-							clip-path: url(#clippath-5);
-						}
-
-						.st20 {
-							fill: #fff;
-						}
-
-						.st21 {
-							opacity: .1;
-						}
-
-						.st22 {
-							letter-spacing: .03em;
-						}
-
-						.st23 {
-							letter-spacing: .02em;
-						}
-
-						.st24 {
-							letter-spacing: .02em;
-						}
-
-						.st25 {
-							clip-path: url(#clippath);
-						}
-					</style>
-
-					<clipPath id="clippath">
-					<rect class="st0" x="339.32" y="404.87" width="146.76" height="37.86"/>
-					</clipPath>
-					<clipPath id="clippath-1">
-					<rect class="st0" x="442.55" y="415.97" width="26.88" height="17.88"/>
-					</clipPath>
-					<clipPath id="clippath-2">
-					<rect class="st0" x="355.97" y="415.97" width="26.88" height="17.88"/>
-					</clipPath>
-					<clipPath id="clippath-3">
-					<rect class="st0" x="442.55" y="214.04" width="26.88" height="206.49"/>
-					</clipPath>
-					<clipPath id="clippath-4">
-					<rect class="st0" x="355.97" y="214.04" width="26.88" height="206.49"/>
-					</clipPath>
-					<clipPath id="clippath-5">
-					<rect class="st0" x="721.94" y="404.87" width="146.76" height="37.86"/>
-					</clipPath>
-					<clipPath id="clippath-6">
-					<rect class="st0" x="825.17" y="415.97" width="26.88" height="17.88"/>
-					</clipPath>
-					<clipPath id="clippath-7">
-					<rect class="st0" x="738.59" y="415.97" width="26.88" height="17.88"/>
-					</clipPath>
-					<clipPath id="clippath-8">
-					<rect class="st0" x="825.17" y="214.04" width="26.88" height="206.49"/>
-					</clipPath>
-					<clipPath id="clippath-9">
-					<rect class="st0" x="738.59" y="214.04" width="26.88" height="206.49"/>
-					</clipPath>
-				</defs>
-				<g>
-					<path class="st5" d="M273.19,735.73v-150.81c0-10.37,8.41-18.78,18.78-18.78h624.07c10.37,0,18.78,8.41,18.78,18.78v150.81"/>
-					<path class="st5" d="M273.19,755.72v-150.8c0-10.37,8.41-18.78,18.78-18.78h624.07c10.37,0,18.78,8.41,18.78,18.78v150.8"/>
-					<path class="st5" d="M911.21,43.84v150.8c0,10.37-8.41,18.78-18.78,18.78H315.59c-10.37,0-18.78-8.41-18.78-18.78V43.84"/>
-					<path class="st5" d="M903.97,43.84v150.81c0,6.36-5.18,11.54-11.54,11.54H315.59c-6.36,0-11.54-5.18-11.54-11.54V43.84"/>
-					<path class="st5" d="M896.73,43.84v150.81c0,2.37-1.93,4.3-4.3,4.3H315.59c-2.37,0-4.3-1.93-4.3-4.3V43.84"/>
-					<polyline class="st5" points="889.49 46.78 889.49 191.71 318.53 191.71 318.53 46.78"/>
-				</g>
-				<rect class="st5" x="528.75" y="566.14" width="150.53" height="11.48"/>
-				<rect class="st5" x="433.19" y="635.03" width="341.64" height="35.97"/>
-				<rect x="480.53" y="629.5" width="17.43" height="11.91"/>
-				<rect x="595.29" y="629.5" width="17.43" height="11.91"/>
-				<rect x="710.05" y="629.5" width="17.43" height="11.91"/>
-				<polygon class="st5" points="583.81 304.26 568.08 304.26 472.83 566.19 488.56 566.19 583.81 304.26"/>
-				<polygon class="st5" points="624.21 304.26 639.94 304.26 735.19 566.19 719.45 566.19 624.21 304.26"/>
-				<line class="st5" x1="574.88" y1="304.26" x2="633.14" y2="304.26"/>
-				<line class="st5" x1="551.57" y1="392.71" x2="656.44" y2="392.71"/>
-				<line class="st5" x1="522.94" y1="472.08" x2="685.08" y2="472.08"/>
-				<rect class="st5" x="595.51" y="297.41" width="17.01" height="174.42"/>
-				<rect class="st5" x="588.77" y="246.28" width="30.48" height="37.74"/>
-				<rect class="st5" x="599.29" y="284.02" width="9.45" height="13.37"/>
-				<rect class="st5" x="609.49" y="213.65" width="22.17" height="13.37"/>
-				<rect class="st5" x="599.29" y="213.92" width="9.45" height="26.59"/>
-				<rect class="st5" x="599.29" y="239.09" width="9.45" height="6.99"/>
-				<polygon class="st5" points="696.92 420.06 700.71 420.06 723.7 483.27 719.9 483.27 696.92 420.06"/>
-				<line class="st5" x1="685.86" y1="431.09" x2="701.16" y2="431.09"/>
-				<line class="st5" x1="701.48" y1="472.23" x2="716.79" y2="472.23"/>
-				<polygon class="st5" points="511.02 420.06 507.22 420.06 484.24 483.27 488.03 483.27 511.02 420.06"/>
-				<line class="st5" x1="522.08" y1="431.09" x2="506.77" y2="431.09"/>
-				<line class="st5" x1="506.45" y1="472.23" x2="491.15" y2="472.23"/>
-				<line class="st1" x1="299.44" y1="269.28" x2="908.77" y2="269.28"/>
-				<polyline class="st1" points="303.45 273.01 299.44 269.28 303.45 265.56"/>
-				<polyline class="st1" points="904.77 265.56 908.77 269.28 904.77 273.01"/>
-				<rect class="st20" x="532.83" y="261.27" width="142.56" height="16.03"/>
-				<text class="st9" transform="translate(542.83 274.3)"><tspan class="st23" x="30" y="0"><?php echo esc_html( $bar_width_mm . ' mm' ?: '-' ); ?></tspan></text>
-				<line class="st1" x1="350.44" y1="510.83" x2="858.13" y2="510.83"/>
-				<rect class="st20" x="537.36" y="480.28" width="135.53" height="44.32"/>
-				<rect class="st7" x="349.31" y="453.64" width="509.93" height="98.6"/>
-				<g>
-					 <text
-						x="<?php echo 537.36 + (135.53 / 2); ?>"
-						y="<?php echo 480.28 + (60.32 / 2); ?>"
-						text-anchor="middle"
-						dominant-baseline="middle"
-						class="st9 st22"
-					>
-						<?php echo esc_html( $toolbox_width_mm . ' mm' ?: '-' ); ?>
-					</text>
-				</g>
-				<polyline class="st1" points="354.43 514.55 350.42 510.83 354.43 507.1"/>
-				<polyline class="st1" points="854.13 507.1 858.13 510.83 854.13 514.55"/>
-				<g>
-					<line class="st1" x1="276.24" y1="429.03" x2="931.97" y2="429.03"/>
-					<polyline class="st1" points="280.25 432.75 276.24 429.03 280.25 425.31"/>
-					<polyline class="st1" points="927.97 425.31 931.97 429.03 927.97 432.75"/>
-					<rect class="st20" x="547.52" y="421.01" width="115.2" height="16.03"/>
-					<text class="st9" transform="translate(550.59 435.05)"><tspan class="st22" x="15" y="0"><?php echo esc_html( $caravan_width_mm . ' mm' ?: '-' ); ?></tspan></text>
-				</g>
-				<line class="st3" x1="935.91" y1="412.02" x2="935.91" y2="589.08"/>
-				<line class="st3" x1="272.11" y1="412.02" x2="272.11" y2="589.08"/>
-				<line class="st3" x1="912.21" y1="192.07" x2="912.21" y2="284.02"/>
-				<line class="st3" x1="912.21" y1="242.66" x2="610.47" y2="242.66"/>
-				<line class="st3" x1="295.81" y1="192.07" x2="295.81" y2="284.02"/>
-				<g>
-					<g class="st21">
-					<g class="st25">
-						<rect class="st6" x="348.32" y="405.87" width="128.76" height="28.86"/>
-					</g>
-					</g>
-					<g class="st21">
-					<g class="st11">
-						<path class="st6" d="M455.99,416.97c-2.45,0-4.44,1.99-4.44,4.44s1.99,4.44,4.44,4.44,4.44-1.99,4.44-4.44-1.99-4.44-4.44-4.44"/>
-					</g>
-					</g>
-					<g class="st21">
-					<g class="st14">
-						<path class="st6" d="M369.41,416.97c-2.45,0-4.44,1.99-4.44,4.44s1.99,4.44,4.44,4.44,4.44-1.99,4.44-4.44-1.99-4.44-4.44-4.44"/>
-					</g>
-					</g>
-					<g class="st21">
-						<g class="st12">
-							<rect class="st6" x="451.55" y="215.04" width="8.88" height="197.49"/>
-						</g>
-					</g>
-					<g class="st21">
-					<g class="st13">
-						<rect class="st6" x="364.97" y="215.04" width="8.88" height="197.49"/>
-					</g>
-					</g>
-					<g class="st21">
-					<g class="st19">
-						<rect class="st6" x="730.94" y="405.87" width="128.76" height="28.86"/>
-					</g>
-					</g>
-					<g class="st21">
-					<g class="st16">
-						<path class="st6" d="M838.61,416.97c-2.45,0-4.44,1.99-4.44,4.44s1.99,4.44,4.44,4.44,4.44-1.99,4.44-4.44-1.99-4.44-4.44-4.44"/>
-					</g>
-					</g>
-					<g class="st21">
-					<g class="st15">
-						<path class="st6" d="M752.03,416.97c-2.45,0-4.44,1.99-4.44,4.44s1.99,4.44,4.44,4.44,4.44-1.99,4.44-4.44-1.99-4.44-4.44-4.44"/>
-					</g>
-					</g>
-					<g class="st21">
-					<g class="st18">
-						<rect class="st6" x="834.17" y="215.04" width="8.88" height="197.49"/>
-					</g>
-					</g>
-					<g class="st21">
-					<g class="st17">
-						<rect class="st6" x="747.59" y="215.04" width="8.88" height="197.49"/>
-					</g>
-					</g>
-				</g>
-				<line class="st2" x1="859.24" y1="543.65" x2="859.24" y2="461.92"/>
-				<line class="st4" x1="850.95" y1="453.64" x2="353.43" y2="453.64"/>
-				<line class="st2" x1="349.31" y1="462.73" x2="349.31" y2="543.96"/>
-				<line class="st4" x1="357.61" y1="552.24" x2="855.13" y2="552.24"/>
-				<path class="st1" d="M855.13,552.24h4.11v-5.28M349.31,546.96v5.28h4.11M353.43,453.64h-4.11v5.28M859.24,458.92v-5.28h-4.11"/>
-				<g>
-					<line class="st1" x1="881.51" y1="563.25" x2="881.51" y2="243.67"/>
-					<polyline class="st1" points="885.23 559.24 881.51 563.25 877.79 559.24"/>
-					<polyline class="st1" points="877.79 247.68 881.51 243.67 885.23 247.68"/>
-					<rect class="st20" x="873.49" y="282.59" width="16.03" height="135.74"/>
-					<g>
-						 <text
-							x="<?php echo 873.49 + (16.03 / 2); ?>"
-							y="<?php echo 282.59 + (135.74 / 2); ?>"
-							text-anchor="middle"
-							dominant-baseline="middle"
-							transform="rotate(-90 <?php echo 873.49 + (16.03 / 2); ?> <?php echo 282.59 + (135.74 / 2); ?>)"
-							class="st9 st22"
-						>
-							<?php echo esc_html( $caravan_length_mm . ' mm' ?: '-' ); ?>
-						</text>
-					</g>
-				</g>
-				<g>
-					<line class="st1" x1="329.89" y1="563.43" x2="329.89" y2="453.85"/>
-					<polyline class="st1" points="333.61 559.24 329.89 563.25 326.16 559.24"/>
-					<polyline class="st1" points="326.16 457.68 329.89 453.67 333.61 457.68"/>
-					<rect class="st20" x="307.05" y="471.15" width="40.75" height="74.97"/>
-					<g>
-						 <text
-							x="<?php echo 307.05 + (40.75 / 2); ?>"
-							y="<?php echo 471.15 + (74.97 / 2); ?>"
-							text-anchor="middle"
-							dominant-baseline="middle"
-							transform="rotate(-90 <?php echo 307.05 + (40.75 / 2); ?> <?php echo 471.15 + (74.97 / 2); ?>)"
-							class="st9 st24"
-						>
-							<?php echo esc_html( $toolbox_height_mm . ' mm' ?: '-' ); ?>
-						</text>
-					</g>
-				</g>
-				<g class="st21">
-					<polygon class="st6" points="311.01 215.04 289.01 564.08 919.01 564.08 893.01 215.04 311.01 215.04"/>
-				</g>
-				<circle class="st10" cx="604.28" cy="242.66" r="7.45"/>
-				</svg>
-
-
-			<?php } ?>
-
-        </a>
+			render_towing_diagram( $caravan_length_mm, $caravan_width_mm, $toolbox_height_mm, $toolbox_width_mm, $bar_width_mm );
+			?>
+		</div>
 	</div>
 
 	<!-- Data Table -->
@@ -1120,40 +1131,40 @@ function show_towing_svg_in_editor( $post ) {
 			</tr>
 			<tr>
 				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">SS Width (mm):</td>
-				<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $caravan_width_mm ?: '-' ); ?></td>
+				<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $caravan_width_mm ? $caravan_width_mm.' mm'  : '-' ); ?></td>
 			</tr>
 			<tr>
 				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">SS Length (mm):</td>
-				<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $caravan_length_mm ?: '-' ); ?></td>
+				<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $caravan_length_mm ? $caravan_length_mm.' mm' : '-' ); ?></td>
 			</tr>
 			<tr>
 				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Towing Vehicle BarWidth (mm):</td>
-				<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $bar_width_mm ?: '-' ); ?></td>
+				<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $bar_width_mm ? $bar_width_mm.' mm' : '-' ); ?></td>
 			</tr>
 
 			<tr>
 				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Vinyl Insert Width (mm):</td>
-				<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $vinyl_insert_width_mm ?: '-' ); ?></td>
+				<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $vinyl_insert_width_mm ? $vinyl_insert_width_mm.' mm' : '-' ); ?></td>
 			</tr>
 			<tr>
 				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Vinyl Insert Length (mm):</td>
-				<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $vinyl_insert_height_mm ?: '-' ); ?></td>
+				<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $vinyl_insert_height_mm ? $vinyl_insert_height_mm.' mm': '-' ); ?></td>
 			</tr>
 			<tr>
 				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Stoneguard Width (mm):</td>
-				<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $factory_stoneguard_width ?: '-' ); ?></td>
+				<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $factory_stoneguard_width ? $factory_stoneguard_width.' mm': '-' ); ?></td>
 			</tr>
 			<tr>
 				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Stoneguard Length (mm):</td>
-				<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $factory_stoneguard_height ?: '-' ); ?></td>
+				<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $factory_stoneguard_height ? $factory_stoneguard_height.' mm': '-' ); ?></td>
 			</tr>
 			<tr>
 				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Toolbox Length (mm):</td>
-				<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $toolbox_width_mm ?: '-' ); ?></td>
+				<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $toolbox_width_mm ? $toolbox_width_mm.' mm': '-' ); ?></td>
 			</tr>
 			<tr>
 				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Distance from the Caravan:</td>
-				<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $toolbox_height_mm ?: '-' ); ?></td>
+				<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $toolbox_height_mm ? $toolbox_height_mm.' mm': '-' ); ?></td>
 			</tr>
 			<?php if($sts_var_proposed_date_of_delivery){ ?>
 				<tr>
@@ -1278,22 +1289,9 @@ function show_towing_svg_in_editor( $post ) {
 						</tr>
 					</table>
 					<div class="stone-stomper-vector">
-						<div class="ss-width">
-							<span>
-								<?php echo esc_html( $caravan_width_mm ?: '1900' ); ?>
-							</span>
-						</div>
-						<div class="ss-length">
-							<span>
-								<?php echo esc_html( $bar_width_mm ?: '1900' ); ?>
-							</span>
-						</div>
-						<img src="<?php echo get_template_directory_uri(); ?>/assets/src/images/stone-stomper-vector.png" style="max-width:600px;cursor:pointer;" />
-						<div class="towing-vehicle-bar-width">
-							<span>
-								<?php echo esc_html( $bar_width_mm ?: '1900' ); ?>
-							</span>
-						</div>
+
+						<?php render_towing_diagram( $caravan_length_mm, $caravan_width_mm, $toolbox_height_mm, $toolbox_width_mm, $bar_width_mm ); ?>
+
 					</div>
 					<div class="thanks-message">THANK YOU FOR YOUR BUSINESS</div>
 				</div>
@@ -1385,32 +1383,12 @@ function show_towing_svg_in_editor( $post ) {
 								<td style="text-align:left;">Hr Foam <span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_hr_form); ?> </span></td>
 								<td style="text-align:left;"></td>
 							</tr>
-
 						</table>
+
 						<div class="stone-stomper-vector">
-							<div class="ss-width">
-								<span>
-									<?php echo esc_html( $caravan_width_mm ?: '1900' ); ?>
-								</span>
-							</div>
-							<div class="ss-length">
-								<span>
-									<?php echo esc_html( $bar_width_mm ?: '1900' ); ?>
-								</span>
-							</div>
-							<img src="<?php echo get_template_directory_uri(); ?>/assets/src/images/stone-stomper-vector.png" style="max-width:600px;cursor:pointer;" />
-							<div class="towing-vehicle-bar-width">
-								<span>
-									<?php echo esc_html( $bar_width_mm ?: '1900' ); ?>
-								</span>
-							</div>
+							<?php render_towing_diagram( $caravan_length_mm, $caravan_width_mm, $toolbox_height_mm, $toolbox_width_mm, $bar_width_mm ); ?>
 						</div>
-
 					</div>
-				</div>
-
-				<div style="text-align:center; margin-top:25px;">
-					<a href="<?php echo admin_url( 'admin-ajax.php?action=download_customer_pdf&post_id=' . $post->ID ); ?>" target="_blank" class="button button-primary">Download PDF</a>
 				</div>
         </div>
     </div>
@@ -1489,6 +1467,11 @@ function show_towing_svg_in_editor( $post ) {
 		lightbox.on("click", function (e) {
 			if (jQuery(e.target).is(".image-lightbox")) closeLightbox();
 		});
+
+		// Generate Image
+		jQuery(".generate-diagram").on("click", function (e) {
+			jQuery(".stone-stomper-vector").slideDown();
+		});
 	});
 
 
@@ -1512,6 +1495,8 @@ function show_towing_svg_in_editor( $post ) {
 			});
 
 		});
+
+
 	</script>
     <?php
 }
@@ -1526,6 +1511,7 @@ add_action( 'add_meta_boxes', function() {
         'low'                       // Priority
     );
 });
+
 
 use Dompdf\Dompdf;
 
@@ -1639,18 +1625,93 @@ add_action( 'wp_ajax_nopriv_download_customer_pdf', 'download_customer_pdf_callb
 
 
 
+use PhpOffice\PhpWord\PhpWord;
+use PhpOffice\PhpWord\IOFactory;
+
+function download_customer_word_callback() {
+    $post_id = intval( $_GET['post_id'] ?? 0 );
+    if ( ! $post_id ) {
+        wp_die( 'Invalid request.' );
+    }
+
+    $order_id = get_post_meta( $post_id, 'order_id', true );
+    $order    = wc_get_order( $order_id );
+
+    if ( ! $order ) {
+        wp_die( 'Order not found.' );
+    }
+
+    $order_date       = $order->get_date_created()->date_i18n('Y-m-d');
+    $customer_name    = $order->get_formatted_billing_full_name();
+    $customer_phone   = $order->get_billing_phone();
+    $customer_email   = $order->get_billing_email();
+    $delivery_address = $order->get_formatted_shipping_address();
+    $delivery_cost    = $order->get_shipping_total();
+    $order_total      = $order->get_total();
+
+    // Create new Word document
+    require_once __DIR__ . '/vendor/autoload.php';
+    $phpWord = new PhpWord();
+    $section = $phpWord->addSection();
+
+    // Header
+    $section->addTitle('Customer Order Summary', 1);
+    $section->addText("Date: {$order_date}");
+    $section->addText("Customer: {$customer_name}");
+    $section->addText("Email: {$customer_email}");
+    $section->addText("Phone: {$customer_phone}");
+    $section->addText("Address: {$delivery_address}");
+    $section->addText("Address: {$delivery_address}");
+    $section->addText("Address: {$delivery_address}");
+    $section->addTextBreak(1);
+
+    // Table
+    $tableStyle = ['borderSize' => 6, 'borderColor' => '999999', 'cellMargin' => 80];
+    $phpWord->addTableStyle('OrderTable', $tableStyle);
+    $table = $section->addTable('OrderTable');
+
+    // Table Header
+    $table->addRow();
+    $table->addCell(1500)->addText('Qty');
+    $table->addCell(4500)->addText('Description');
+    $table->addCell(1500)->addText('Unit Price');
+    $table->addCell(1500)->addText('Total');
+
+    // Table Rows (Products)
+    foreach ( $order->get_items() as $item ) {
+        $name  = $item->get_name();
+        $qty   = $item->get_quantity();
+        $total = wc_format_decimal( $item->get_total(), 2 );
+        $unit  = wc_format_decimal( $item->get_total() / $qty, 2 );
+
+        $table->addRow();
+        $table->addCell(1500)->addText($qty);
+        $table->addCell(4500)->addText($name);
+        $table->addCell(1500)->addText('$' . $unit);
+        $table->addCell(1500)->addText('$' . $total);
+    }
+
+    // Footer rows
+    $table->addRow();
+    $table->addCell(7500, ['gridSpan' => 3])->addText('Delivery', ['bold' => true], ['align' => 'right']);
+    $table->addCell(1500)->addText('$' . $delivery_cost, [], ['align' => 'center']);
+
+    $table->addRow();
+    $table->addCell(7500, ['gridSpan' => 3])->addText('Total Due', ['bold' => true], ['align' => 'right']);
+    $table->addCell(1500)->addText('$' . $order_total, ['bold' => true], ['align' => 'center']);
+
+    // Output file
+    header("Content-Description: File Transfer");
+    header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+    header('Content-Disposition: attachment; filename="customer-order-' . $post_id . '.docx"');
+    header('Cache-Control: max-age=0');
+
+    $writer = IOFactory::createWriter($phpWord, 'Word2007');
+    $writer->save('php://output');
+    exit;
+}
+
+add_action( 'wp_ajax_download_customer_word', 'download_customer_word_callback' );
+add_action( 'wp_ajax_nopriv_download_customer_word', 'download_customer_word_callback' );
 
 
-
-
-// order by date
-
-// add_action( 'pre_get_posts', function( $query ) {
-// 	if ( is_admin() && $query->is_main_query() ) {
-// 		$screen = get_current_screen();
-// 		if ( 'customer' === $screen->post_type ) {
-// 			$query->set( 'orderby', 'date' );
-// 			$query->set( 'order', 'DESC' );
-// 		}
-// 	}
-// });
