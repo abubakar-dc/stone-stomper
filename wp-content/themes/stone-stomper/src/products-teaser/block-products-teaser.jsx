@@ -2,7 +2,7 @@
 import { registerBlockType } from '@wordpress/blocks';
 import metadata from './block.json';
 import icons from '../block-assets/icons/Icons.jsx';
-import previewImage from '../block-assets/preview-images/default-preview-image.webp';
+import previewImage from '../block-assets/preview-images/products.webp';
 import { InnerBlocks, useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 import ContainerBlock, { ContainerBlockContent, customAttributes } from '../block-assets/components/ContainerBlock.jsx';
 
@@ -14,7 +14,7 @@ registerBlockType( metadata.name, {
 		...metadata.attributes,
 		...customAttributes,
 	},
-	icon: icons.themeStats,
+	icon: icons.products,
 	edit: Edit,
 	save: Save,
 } );

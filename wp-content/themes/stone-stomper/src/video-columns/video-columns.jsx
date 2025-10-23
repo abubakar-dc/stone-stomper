@@ -1,7 +1,7 @@
 import { registerBlockType } from '@wordpress/blocks';
 import metadata from './block.json';
 import icons from '../block-assets/icons/Icons.jsx';
-import previewImage from '../block-assets/preview-images/default-preview-image.webp';
+import previewImage from '../block-assets/preview-images/video.webp';
 import { InnerBlocks, useBlockProps, useInnerBlocksProps, InspectorControls } from '@wordpress/block-editor';
 import ContainerBlock, { ContainerBlockContent, customAttributes } from '../block-assets/components/ContainerBlock.jsx';
 
@@ -38,7 +38,7 @@ registerBlockType( metadata.name, {
 		image: { type: 'object', default: {} },
 
 	},
-	icon: icons.imageWithText,
+	icon: icons.video,
 	edit: Edit,
 
 	/**
@@ -62,11 +62,11 @@ function Edit( props ) {
 		return (
 			<div className="block-preview">
 				<img src={ previewImage } alt="Preview"
-				 style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover'
-                    }}
+					style={ {
+						width: '100%',
+						height: '100%',
+						objectFit: 'cover',
+					} }
 				/>
 			</div>
 		);
@@ -77,8 +77,8 @@ function Edit( props ) {
 		template: [
 			[ 'core/group', { className: 'section-head center-align' }, [
 				[ 'core/paragraph', { content: '', className: 'kicker-text' } ],
-				[ 'core/heading', { level: 2, content: '', className:'' } ],
-			]],
+				[ 'core/heading', { level: 2, content: '', className: '' } ],
+			] ],
 			[ 'stonestomperpack/videos', {} ],
 		],
 	} );
@@ -104,7 +104,7 @@ function Save( props ) {
 
 	return (
 		<>
-			<ContainerBlockContent props={ props } customClass={ `${classes}` }>
+			<ContainerBlockContent props={ props } customClass={ `${ classes }` }>
 				<div className="video-columns-section">
 					<InnerBlocks.Content />
 				</div>
