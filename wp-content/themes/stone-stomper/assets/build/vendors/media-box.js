@@ -1,1 +1,72 @@
-jQuery.fn.mediaBox=function(){return this.each((function(){const i=jQuery(this);i.find(".acf-button-group label").off("click").on("click",(function(){const a=jQuery(this).find('input[type="radio"]').attr("value");i.find(".acf-field-inner").hide(),i.find('.acf-field-inner[data-name="'+a+'"]').show()})),i.find('.acf-field-inner[data-name="image"]').find('a[data-name="add"],.acf-actions .-pencil.dark').on("click",(function(){const a=jQuery(this).parents('.acf-field-inner[data-name="image"]'),e=wp.media({title:"Upload Image",multiple:!1,library:{type:"image"}}).open().on("select",(function(){const n=e.state().get("selection").first();a.find('input[type="hidden"]').val(n.id),a.find('input[type="hidden"]').trigger("change"),a.find(".image-wrap").find("img").attr("src",n.attributes.url),a.find(".image-wrap").removeClass("show-if-value"),i.find(".acf-image-uploader").addClass("has-value")}))})),i.find('.acf-field-inner[data-name="image"]').find(".acf-actions .-cancel.dark").on("click",(function(){const a=jQuery(this).parents('.acf-field-inner[data-name="image"]');a.find(".image-wrap").addClass("show-if-value"),a.find(".image-wrap").find("img").attr("src",""),a.find('input[type="hidden"]').val(""),i.find(".acf-image-uploader").removeClass("has-value")})),i.find('.acf-field-inner[data-name="video"]').find('a[data-name="add"],.acf-actions .-pencil.dark').on("click",(function(){const a=jQuery(this).parents('.acf-field-inner[data-name="video"]'),e=wp.media({title:"Upload Video",multiple:!1,library:{type:"video"}}).open().on("select",(function(){const n=e.state().get("selection").first();a.find('input[type="hidden"]').val(n.id),a.find('input[type="hidden"]').trigger("change"),a.find(".file-wrap").removeClass("show-if-value"),a.find(".file-icon").find("img").attr("src",n.attributes.icon),a.find(".file-info").find('strong[data-name="title"]').text(n.attributes.title),a.find(".file-info").find('a[data-name="filename"]').text(n.attributes.filename),a.find(".file-info").find('a[data-name="filename"]').attr("href",n.attributes.url),a.find(".file-info").find('span[data-name="filesize"]').text(n.attributes.filesizeHumanReadable),i.find(".acf-file-uploader").addClass("has-value")}))})),i.find('.acf-field-inner[data-name="video"]').find(".acf-actions .-cancel.dark").on("click",(function(){const a=jQuery(this).parents('.acf-field-inner[data-name="video"]');a.find('input[type="hidden"]').val(""),a.find(".file-wrap").addClass("show-if-value"),a.find(".file-icon").find("img").attr("src",""),a.find(".file-info").find('strong[data-name="title"]').text(""),a.find(".file-info").find('a[data-name="filename"]').text(""),a.find(".file-info").find('a[data-name="filename"]').attr("href",""),a.find(".file-info").find('span[data-name="filesize"]').text(""),i.find(".acf-file-uploader").removeClass("has-value")}))}))};
+jQuery.fn.mediaBox = function() {
+	return this.each( function() {
+		const element = jQuery( this );
+		element.find( '.acf-button-group label' ).off( 'click' ).on( 'click', function() {
+			const value = jQuery( this ).find( 'input[type="radio"]' ).attr( 'value' );
+			element.find( '.acf-field-inner' ).hide();
+			element.find( '.acf-field-inner[data-name="' + value + '"]' ).show();
+		} );
+		element.find( '.acf-field-inner[data-name="image"]' ).find( 'a[data-name="add"],.acf-actions .-pencil.dark' ).on( 'click', function() {
+			const el = jQuery( this ).parents( '.acf-field-inner[data-name="image"]' );
+			const image = wp
+				.media( {
+					title: 'Upload Image',
+					multiple: false,
+					library: {
+						type: 'image',
+					},
+				} )
+				.open()
+				.on( 'select', function() {
+					const uploadedImage = image.state().get( 'selection' ).first();
+					el.find( 'input[type="hidden"]' ).val( uploadedImage.id );
+					el.find( 'input[type="hidden"]' ).trigger( 'change' );
+					el.find( '.image-wrap' ).find( 'img' ).attr( 'src', uploadedImage.attributes.url );
+					el.find( '.image-wrap' ).removeClass( 'show-if-value' );
+					element.find( '.acf-image-uploader' ).addClass( 'has-value' );
+				} );
+		} );
+		element.find( '.acf-field-inner[data-name="image"]' ).find( '.acf-actions .-cancel.dark' ).on( 'click', function() {
+			const el = jQuery( this ).parents( '.acf-field-inner[data-name="image"]' );
+			el.find( '.image-wrap' ).addClass( 'show-if-value' );
+			el.find( '.image-wrap' ).find( 'img' ).attr( 'src', '' );
+			el.find( 'input[type="hidden"]' ).val( '' );
+			element.find( '.acf-image-uploader' ).removeClass( 'has-value' );
+		} );
+		element.find( '.acf-field-inner[data-name="video"]' ).find( 'a[data-name="add"],.acf-actions .-pencil.dark' ).on( 'click', function() {
+			const el = jQuery( this ).parents( '.acf-field-inner[data-name="video"]' );
+			const video = wp
+				.media( {
+					title: 'Upload Video',
+					multiple: false,
+					library: {
+						type: 'video',
+					},
+				} )
+				.open()
+				.on( 'select', function() {
+					const uploadedVideo = video.state().get( 'selection' ).first();
+					el.find( 'input[type="hidden"]' ).val( uploadedVideo.id );
+					el.find( 'input[type="hidden"]' ).trigger( 'change' );
+					el.find( '.file-wrap' ).removeClass( 'show-if-value' );
+					el.find( '.file-icon' ).find( 'img' ).attr( 'src', uploadedVideo.attributes.icon );
+					el.find( '.file-info' ).find( 'strong[data-name="title"]' ).text( uploadedVideo.attributes.title );
+					el.find( '.file-info' ).find( 'a[data-name="filename"]' ).text( uploadedVideo.attributes.filename );
+					el.find( '.file-info' ).find( 'a[data-name="filename"]' ).attr( 'href', uploadedVideo.attributes.url );
+					el.find( '.file-info' ).find( 'span[data-name="filesize"]' ).text( uploadedVideo.attributes.filesizeHumanReadable );
+					element.find( '.acf-file-uploader' ).addClass( 'has-value' );
+				} );
+		} );
+		element.find( '.acf-field-inner[data-name="video"]' ).find( '.acf-actions .-cancel.dark' ).on( 'click', function() {
+			const el = jQuery( this ).parents( '.acf-field-inner[data-name="video"]' );
+			el.find( 'input[type="hidden"]' ).val( '' );
+			el.find( '.file-wrap' ).addClass( 'show-if-value' );
+			el.find( '.file-icon' ).find( 'img' ).attr( 'src', '' );
+			el.find( '.file-info' ).find( 'strong[data-name="title"]' ).text( '' );
+			el.find( '.file-info' ).find( 'a[data-name="filename"]' ).text( '' );
+			el.find( '.file-info' ).find( 'a[data-name="filename"]' ).attr( 'href', '' );
+			el.find( '.file-info' ).find( 'span[data-name="filesize"]' ).text( '' );
+			element.find( '.acf-file-uploader' ).removeClass( 'has-value' );
+		} );
+	} );
+};
