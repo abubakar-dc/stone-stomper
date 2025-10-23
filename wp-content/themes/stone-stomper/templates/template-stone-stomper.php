@@ -176,7 +176,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 							</div>
 
 							<!-- Towing Vehicle Details -->
-							<div id="vehicle-details" class="section-disable order-form-section-inner d-flex form-vehicle-section justify-content-between align-items-start image-at-left">
+							<div id="vehicle-details" class=" order-form-section-inner d-flex form-vehicle-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 vehicle-images ">
 										<div class="towing-vehicle-image" id="towing-vehicle-image" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
@@ -269,7 +269,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 							</div>
 
 							<!-- Caravan Details -->
-							<div id="caravan-details" class="section-disable order-form-section-inner d-flex form-carvan-section justify-content-between align-items-start image-at-left">
+							<div id="caravan-details" class=" order-form-section-inner d-flex form-carvan-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 vehicle-images">
 										<div class="vehicle-images mobile-image-hide" id="caravan-images" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
@@ -373,7 +373,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 							</div>
 
 							<!-- Photographs -->
-							<div id="photographs-details" class="section-disable order-form-section-inner d-flex form-carvan-section justify-content-between align-items-start image-at-left">
+							<div id="photographs-details" class=" order-form-section-inner d-flex form-carvan-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="form-image-slider">
 										<?php if($sts_var_example_photographs){ ?>
@@ -467,7 +467,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 							</div>
 
 							<!-- Final Measurements -->
-							<div id="final-measurements" class="section-disable order-form-section-inner d-flex form-measurements-section justify-content-between align-items-start image-at-left">
+							<div id="final-measurements" class=" order-form-section-inner d-flex form-measurements-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 measurements-images ">
 										<?php
@@ -506,20 +506,20 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 
 									<div class="grid cols-2">
 										<div class="field">
-											<label class="req" for="barwidth">Towing Vehicle Barwidth</label>
+											<label class="req" for="barwidth">Towing Vehicle Barwidth (mm)</label>
 											<input id="barwidth" name="barwidth_mm" type="text"
-												placeholder="e.g. 1800 mm" required />
+												placeholder="e.g. 1800" required />
 										</div>
 
 										<div class="field" >
-											<label class="req" for="vanwidth">Caravan Width</label>
+											<label class="req" for="vanwidth">Caravan Width (mm)</label>
 											<input id="vanwidth" name="caravan_width_mm" type="text"
-												placeholder="e.g. 2260 mm" required />
+												placeholder="e.g. 2260" required />
 										</div>
 										<div class="field">
-											<label class="req" for="a_frame_length">A-Frame Length</label>
+											<label class="req" for="a_frame_length">A-Frame Length (mm)</label>
 											<input id="a_frame_length" name="a_frame_length_mm" type="text"
-												placeholder="e.g. 2260 mm" required />
+												placeholder="e.g. 2260" required />
 										</div>
 
 										<fieldset class="ss-support-options" style="display:none">
@@ -535,12 +535,12 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 													<div class="toolbox-support" style="display:none">
 														<div class="factory_stoneguard_inner two-columns-fields">
 															<div class="field extra-support" >
-																<label class="req" for="toolbox_width">Width</label>
+																<label class="req" for="toolbox_width">Width (mm)</label>
 																<input id="toolbox_width" name="toolbox_width_mm" type="text"
 																	placeholder="e.g. 900 mm" required />
 															</div>
 															<div class="field extra-support">
-																<label class="req" for="toolbox_length">Distance from the Caravan</label>
+																<label class="req" for="toolbox_length">Distance from the Caravan (mm)</label>
 																<input id="toolbox_length" name="toolbox_length_mm" type="text"
 																	placeholder="e.g. 900 mm" required />
 															</div>
@@ -555,12 +555,12 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 													<div class="factory_stoneguard" style="display:none">
 														<div class="factory_stoneguard_inner two-columns-fields">
 															<div class="field extra-support">
-																<label class="req" for="stoneguard_width">Width</label>
+																<label class="req" for="stoneguard_width">Width (mm)</label>
 																<input id="stoneguard_width" name="stoneguard_width_mm" type="text"
 																	placeholder="e.g.600 mm" required />
 															</div>
 															<div class="field extra-support">
-																<label class="req" for="stoneguard_length">Distance from the Caravan</label>
+																<label class="req" for="stoneguard_length">Distance from the Caravan (mm)</label>
 																<input id="stoneguard_length" name="stoneguard_length_mm" type="text"
 																	placeholder="e.g.600 mm" required />
 															</div>
@@ -608,7 +608,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 							</div>
 
 							<!-- Final Details & Summary -->
-							<div id="final-summary" class="section-disable order-form-section-inner d-flex form-details-section justify-content-between align-items-start image-at-left">
+							<div id="final-summary" class=" order-form-section-inner d-flex form-details-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 details-images ">
 										<?php
@@ -765,14 +765,14 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 		</div>
 	</section>
 	<?php
-	if ( have_posts() ) {
-		while ( have_posts() ) {
-			the_post();
-			// Include specific template for the content.
-			get_template_part( 'partials/content', 'page' );
+		if ( have_posts() ) {
+			while ( have_posts() ) {
+				the_post();
+				// Include specific template for the content.
+				get_template_part( 'partials/content', 'page' );
 
+			}
 		}
-	}
 	?>
 	<div class="ts-80 mobile-image-hide"></div>
 	<!-- Content End -->

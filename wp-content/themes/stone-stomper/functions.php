@@ -975,7 +975,7 @@ function show_towing_svg_in_editor( $post ) {
 				<polyline class="st1" points="303.45 273.01 299.44 269.28 303.45 265.56"/>
 				<polyline class="st1" points="904.77 265.56 908.77 269.28 904.77 273.01"/>
 				<rect class="st20" x="532.83" y="261.27" width="142.56" height="16.03"/>
-				<text class="st9" transform="translate(542.83 274.3)"><tspan class="st23" x="30" y="0"><?php echo esc_html( $bar_width_mm ?: '-' ); ?></tspan></text>
+				<text class="st9" transform="translate(542.83 274.3)"><tspan class="st23" x="30" y="0"><?php echo esc_html( $bar_width_mm . ' mm' ?: '-' ); ?></tspan></text>
 				<line class="st1" x1="350.44" y1="510.83" x2="858.13" y2="510.83"/>
 				<rect class="st20" x="537.36" y="480.28" width="135.53" height="44.32"/>
 				<rect class="st7" x="349.31" y="453.64" width="509.93" height="98.6"/>
@@ -987,7 +987,7 @@ function show_towing_svg_in_editor( $post ) {
 						dominant-baseline="middle"
 						class="st9 st22"
 					>
-						<?php echo esc_html( $toolbox_width_mm ?: '-' ); ?>
+						<?php echo esc_html( $toolbox_width_mm . ' mm' ?: '-' ); ?>
 					</text>
 				</g>
 				<polyline class="st1" points="354.43 514.55 350.42 510.83 354.43 507.1"/>
@@ -997,7 +997,7 @@ function show_towing_svg_in_editor( $post ) {
 					<polyline class="st1" points="280.25 432.75 276.24 429.03 280.25 425.31"/>
 					<polyline class="st1" points="927.97 425.31 931.97 429.03 927.97 432.75"/>
 					<rect class="st20" x="547.52" y="421.01" width="115.2" height="16.03"/>
-					<text class="st9" transform="translate(550.59 435.05)"><tspan class="st22" x="15" y="0"><?php echo esc_html( $caravan_width_mm ?: '-' ); ?></tspan></text>
+					<text class="st9" transform="translate(550.59 435.05)"><tspan class="st22" x="15" y="0"><?php echo esc_html( $caravan_width_mm . ' mm' ?: '-' ); ?></tspan></text>
 				</g>
 				<line class="st3" x1="935.91" y1="412.02" x2="935.91" y2="589.08"/>
 				<line class="st3" x1="272.11" y1="412.02" x2="272.11" y2="589.08"/>
@@ -1075,7 +1075,7 @@ function show_towing_svg_in_editor( $post ) {
 							transform="rotate(-90 <?php echo 873.49 + (16.03 / 2); ?> <?php echo 282.59 + (135.74 / 2); ?>)"
 							class="st9 st22"
 						>
-							<?php echo esc_html( $caravan_length_mm ?: '-' ); ?>
+							<?php echo esc_html( $caravan_length_mm . ' mm' ?: '-' ); ?>
 						</text>
 					</g>
 				</g>
@@ -1093,7 +1093,7 @@ function show_towing_svg_in_editor( $post ) {
 							transform="rotate(-90 <?php echo 307.05 + (40.75 / 2); ?> <?php echo 471.15 + (74.97 / 2); ?>)"
 							class="st9 st24"
 						>
-							<?php echo esc_html( $toolbox_height_mm ?: '-' ); ?>
+							<?php echo esc_html( $toolbox_height_mm . ' mm' ?: '-' ); ?>
 						</text>
 					</g>
 				</g>
@@ -1645,12 +1645,12 @@ add_action( 'wp_ajax_nopriv_download_customer_pdf', 'download_customer_pdf_callb
 
 // order by date
 
-add_action( 'pre_get_posts', function( $query ) {
-	if ( is_admin() && $query->is_main_query() ) {
-		$screen = get_current_screen();
-		if ( 'customer' === $screen->post_type ) {
-			$query->set( 'orderby', 'date' );
-			$query->set( 'order', 'DESC' );
-		}
-	}
-});
+// add_action( 'pre_get_posts', function( $query ) {
+// 	if ( is_admin() && $query->is_main_query() ) {
+// 		$screen = get_current_screen();
+// 		if ( 'customer' === $screen->post_type ) {
+// 			$query->set( 'orderby', 'date' );
+// 			$query->set( 'order', 'DESC' );
+// 		}
+// 	}
+// });
