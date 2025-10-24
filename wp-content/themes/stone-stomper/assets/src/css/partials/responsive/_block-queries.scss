@@ -122,6 +122,7 @@
 }
 
 @media only screen and (min-width: 748px) and (max-width: 1003px) {
+
 	.woocommerce-checkout {
 		.wc-block-components-checkout-order-summary__title-text {
 			margin: 0 !important;
@@ -251,6 +252,9 @@
 }
 
 @media only screen and (max-width: 768px) {
+	.single-product .content-area{
+		padding-top: 150px;
+	}
 	.gform-theme {
 		.gfield {
 			&.gfield--width-half {

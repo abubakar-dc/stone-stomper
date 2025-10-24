@@ -824,7 +824,10 @@ body {
 	button.f-button {
 		right: 30px;
 		top: 30px;
-
+		background-color: transparent;
+		border-color: transparent;
+		padding: 0;
+		margin: 0;
 		svg {
 			margin-bottom: 0;
 		}
@@ -914,7 +917,7 @@ body {
 		margin-bottom: var(--ss_space_36);
 	}
 	.page-content{
-		margin-top: var(--ss_space_30);
+		margin-bottom: var(--ss_space_72);
 	}
 }
 

@@ -5139,6 +5139,10 @@ body #daextlwcnf-cookie-settings-button-2:hover {
 .single-product button.f-button {
   left: 30px;
   top: 30px;
+  background-color: transparent;
+  border-color: transparent;
+  padding: 0;
+  margin: 0;
 }
 .single-product button.f-button svg {
   margin-bottom: 0;
@@ -5212,7 +5216,7 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   margin-bottom: var(--ss_space_36);
 }
 .error-404 .page-content {
-  margin-top: var(--ss_space_30);
+  margin-bottom: var(--ss_space_72);
 }
 
 /*-------------------------------------------------
@@ -5868,29 +5872,39 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   margin: auto 0 !important;
 }
 
-.woocommerce-dashboard.woocommerce-account .woocommerce-column--shipping-address h2, .woocommerce-dashboard.woocommerce-account .woocommerce-column--billing-address h2, .woocommerce-dashboard.woocommerce-account .woocommerce-order-details h2, .logged-in.admin-bar .woocommerce-column--shipping-address h2, .logged-in.admin-bar .woocommerce-column--billing-address h2, .logged-in.admin-bar .woocommerce-order-details h2 {
+.woocommerce-dashboard.woocommerce-account .woocommerce-column--shipping-address h2,
+.woocommerce-dashboard.woocommerce-account .woocommerce-column--billing-address h2,
+.woocommerce-dashboard.woocommerce-account .woocommerce-order-details h2,
+.logged-in.admin-bar .woocommerce-column--shipping-address h2,
+.logged-in.admin-bar .woocommerce-column--billing-address h2,
+.logged-in.admin-bar .woocommerce-order-details h2 {
   font-size: var(--ss_font_size_28);
   text-align: right !important;
 }
-.woocommerce-dashboard.woocommerce-account .woocommerce-MyAccount-navigation ul li, .logged-in.admin-bar .woocommerce-MyAccount-navigation ul li {
+.woocommerce-dashboard.woocommerce-account .woocommerce-MyAccount-navigation ul li,
+.logged-in.admin-bar .woocommerce-MyAccount-navigation ul li {
   width: 80% !important;
   margin-bottom: 0 !important;
 }
-.woocommerce-dashboard.woocommerce-account .woocommerce-Address-title.title h2, .logged-in.admin-bar .woocommerce-Address-title.title h2 {
+.woocommerce-dashboard.woocommerce-account .woocommerce-Address-title.title h2,
+.logged-in.admin-bar .woocommerce-Address-title.title h2 {
   font-size: var(--ss_font_size_28);
   text-align: right !important;
 }
-.woocommerce-dashboard.woocommerce-account .woocommerce-Address-title.title .edit, .logged-in.admin-bar .woocommerce-Address-title.title .edit {
+.woocommerce-dashboard.woocommerce-account .woocommerce-Address-title.title .edit,
+.logged-in.admin-bar .woocommerce-Address-title.title .edit {
   float: none !important;
   display: block !important;
   width: -moz-max-content !important;
   width: max-content !important;
   margin-bottom: 20px;
 }
-.woocommerce-dashboard.woocommerce-account .woocommerce-MyAccount-navigation-link::before, .logged-in.admin-bar .woocommerce-MyAccount-navigation-link::before {
+.woocommerce-dashboard.woocommerce-account .woocommerce-MyAccount-navigation-link::before,
+.logged-in.admin-bar .woocommerce-MyAccount-navigation-link::before {
   display: none;
 }
-.woocommerce-dashboard.woocommerce-account .woocommerce-MyAccount-navigation-link a, .logged-in.admin-bar .woocommerce-MyAccount-navigation-link a {
+.woocommerce-dashboard.woocommerce-account .woocommerce-MyAccount-navigation-link a,
+.logged-in.admin-bar .woocommerce-MyAccount-navigation-link a {
   display: inline-block;
   color: var(--ss_black_2);
   font-weight: 600;
@@ -5902,7 +5916,8 @@ body #daextlwcnf-cookie-settings-button-2:hover {
 .woocommerce-dashboard.woocommerce-account .woocommerce-MyAccount-navigation-link a:hover,
 .woocommerce-dashboard.woocommerce-account .woocommerce-MyAccount-navigation-link a:active,
 .woocommerce-dashboard.woocommerce-account .woocommerce-MyAccount-navigation-link.is-active a,
-.woocommerce-dashboard.woocommerce-account .woocommerce-MyAccount-navigation-link.current a, .logged-in.admin-bar .woocommerce-MyAccount-navigation-link a:hover,
+.woocommerce-dashboard.woocommerce-account .woocommerce-MyAccount-navigation-link.current a,
+.logged-in.admin-bar .woocommerce-MyAccount-navigation-link a:hover,
 .logged-in.admin-bar .woocommerce-MyAccount-navigation-link a:active,
 .logged-in.admin-bar .woocommerce-MyAccount-navigation-link.is-active a,
 .logged-in.admin-bar .woocommerce-MyAccount-navigation-link.current a {
@@ -5912,12 +5927,29 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   font-weight: 600 !important;
 }
 
-.woocommerce-account, .woocommerce-checkout, .woocommerce-cart, .woocommerce-shop {
+.woocommerce-account,
+.woocommerce-checkout,
+.woocommerce-cart,
+.woocommerce-shop {
   padding-top: var(--ss_header-wrapper-default);
 }
-.woocommerce-account .header-section, .woocommerce-checkout .header-section, .woocommerce-cart .header-section, .woocommerce-shop .header-section {
+.woocommerce-account .header-section,
+.woocommerce-checkout .header-section,
+.woocommerce-cart .header-section,
+.woocommerce-shop .header-section {
   background-color: var(--ss_header_bgcolor_sticky);
   top: 0;
+}
+
+.woocommerce-cart {
+  padding-top: calc(var(--ss_header-wrapper-default) + var(--ss_space_96));
+}
+.woocommerce-cart .wp-block-woocommerce-cart {
+  padding-bottom: var(--ss_space_96);
+}
+.woocommerce-cart.logged-in .header-section {
+  background-color: var(--ss_header_bgcolor_sticky);
+  top: 32px;
 }
 
 .woocommerce-orders a.button:hover {
@@ -5933,21 +5965,54 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   color: grey !important;
 }
 
-.woocommerce-edit-account .input-text, .woocommerce-edit-account .select2-selection--single, .woocommerce-edit-address .input-text, .woocommerce-edit-address .select2-selection--single {
+.woocommerce-edit-account .input-text,
+.woocommerce-edit-account .select2-selection--single,
+.woocommerce-edit-address .input-text,
+.woocommerce-edit-address .select2-selection--single {
   border-radius: 0 !important;
 }
-.woocommerce-edit-account .select2-search__field, .woocommerce-edit-address .select2-search__field {
+.woocommerce-edit-account .select2-search__field,
+.woocommerce-edit-address .select2-search__field {
   height: 30px;
 }
-.woocommerce-edit-account .select2-container--open .select2-dropdown, .woocommerce-edit-address .select2-container--open .select2-dropdown {
+.woocommerce-edit-account .select2-container--open .select2-dropdown,
+.woocommerce-edit-address .select2-container--open .select2-dropdown {
   top: -20px !important;
 }
 
 .woocommerce-orders table {
   table-layout: auto !important;
 }
-.woocommerce-orders table tr:last-child, .woocommerce-orders table tbody tr:last-child {
+.woocommerce-orders table tr:last-child,
+.woocommerce-orders table tbody tr:last-child {
   margin-bottom: 0 !important;
+}
+
+.wc-block-grid__products li {
+  margin: 0;
+  padding: 0;
+}
+.wc-block-grid__products li::before {
+  display: none;
+}
+.wc-block-grid__products li .wc-block-grid__product-price .woocommerce-Price-amount {
+  font-size: var(--ss_font_size_14);
+}
+.wc-block-grid__products li a,
+.wc-block-grid__products li a:visited {
+  border: none;
+  padding: 0;
+}
+.wc-block-grid__products li a .wc-block-grid__product-image,
+.wc-block-grid__products li a:visited .wc-block-grid__product-image {
+  aspect-ratio: 300/300;
+  max-height: 300px;
+  width: 100%;
+}
+.wc-block-grid__products li a .wc-block-grid__product-title,
+.wc-block-grid__products li a:visited .wc-block-grid__product-title {
+  font-size: var(--ss_font_size_18);
+  margin-top: 10px;
 }
 
 /*-------------------------------------------------
@@ -6991,6 +7056,11 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   max-width: 1400px;
 }
 
+.checkbox-item .woocommerce-Price-amount {
+  display: block !important;
+  margin-top: 10px !important;
+}
+
 /*-------------------------------------------------
 >> Styles for Wp Buttons
 -------------------------------------------------*/
@@ -7358,6 +7428,9 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   }
 }
 @media only screen and (max-width: 768px) {
+  .single-product .content-area {
+    padding-top: 150px;
+  }
   .gform-theme .gfield.gfield--width-half {
     width: 100%;
   }

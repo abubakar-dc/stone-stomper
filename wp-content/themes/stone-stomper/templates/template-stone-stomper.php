@@ -176,7 +176,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 							</div>
 
 							<!-- Towing Vehicle Details -->
-							<div id="vehicle-details" class=" order-form-section-inner d-flex form-vehicle-section justify-content-between align-items-start image-at-left">
+							<div id="vehicle-details" class=" order-form-section-inner section-disable d-flex form-vehicle-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 vehicle-images ">
 										<div class="towing-vehicle-image" id="towing-vehicle-image" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
@@ -269,7 +269,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 							</div>
 
 							<!-- Caravan Details -->
-							<div id="caravan-details" class=" order-form-section-inner d-flex form-carvan-section justify-content-between align-items-start image-at-left">
+							<div id="caravan-details" class=" order-form-section-inner section-disable d-flex form-carvan-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 vehicle-images">
 										<div class="vehicle-images mobile-image-hide" id="caravan-images" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
@@ -373,7 +373,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 							</div>
 
 							<!-- Photographs -->
-							<div id="photographs-details" class=" order-form-section-inner d-flex form-carvan-section justify-content-between align-items-start image-at-left">
+							<div id="photographs-details" class=" order-form-section-inner section-disable d-flex form-carvan-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="form-image-slider">
 										<?php if($sts_var_example_photographs){ ?>
@@ -467,7 +467,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 							</div>
 
 							<!-- Final Measurements -->
-							<div id="final-measurements" class=" order-form-section-inner d-flex form-measurements-section justify-content-between align-items-start image-at-left">
+							<div id="final-measurements" class=" order-form-section-inner section-disable d-flex form-measurements-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 measurements-images ">
 										<?php
@@ -514,16 +514,16 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										<div class="field" >
 											<label class="req" for="vanwidth">Caravan Width (mm)</label>
 											<input id="vanwidth" name="caravan_width_mm" type="text"
-												placeholder="e.g. 2260" required />
+												placeholder="e.g. 1900" required />
 										</div>
 										<div class="field">
 											<label class="req" for="a_frame_length">A-Frame Length (mm)</label>
 											<input id="a_frame_length" name="a_frame_length_mm" type="text"
-												placeholder="e.g. 2260" required />
+												placeholder="e.g. 1900" required />
 										</div>
 
 										<fieldset class="ss-support-options" style="display:none">
-											<div class="note notice-bar mt-0">As the A-Frame length is large kindly select one of the following options</div>
+											<div class="note notice-bar mt-0">As the A-Frame length is longer than 1800mm, we require a mid-fixing point for your Stone Stomper. Please select one of the following options. If you are unsure, please select "Support Pockets"</div>
 
 											<div  class="ginput_container ginput_container_checkbox extra-support">
 												<!-- ToolBox -->
@@ -537,12 +537,12 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 															<div class="field extra-support" >
 																<label class="req" for="toolbox_width">Width (mm)</label>
 																<input id="toolbox_width" name="toolbox_width_mm" type="text"
-																	placeholder="e.g. 900 mm" required />
+																	placeholder="e.g. 500 mm" required />
 															</div>
 															<div class="field extra-support">
 																<label class="req" for="toolbox_length">Distance from the Caravan (mm)</label>
 																<input id="toolbox_length" name="toolbox_length_mm" type="text"
-																	placeholder="e.g. 900 mm" required />
+																	placeholder="e.g. 500 mm" required />
 															</div>
 														</div>
 													</div>
@@ -608,7 +608,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 							</div>
 
 							<!-- Final Details & Summary -->
-							<div id="final-summary" class=" order-form-section-inner d-flex form-details-section justify-content-between align-items-start image-at-left">
+							<div id="final-summary" class=" order-form-section-inner section-disable d-flex form-details-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 details-images ">
 										<?php
