@@ -371,27 +371,6 @@
             "maxlength": ""
         },
         {
-            "key": "field_5ef592de77324",
-            "label": "Text",
-            "name": "sts_var_error_text",
-            "aria-label": "",
-            "type": "wysiwyg",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "wysiwyg_height": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 0,
-            "delay": 0
-        },
-        {
             "key": "field_5ef592f877325",
             "label": "Select Menu",
             "name": "sts_var_error_menu",
@@ -1076,5 +1055,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1761114327
+    "modified": 1761311511
 }
