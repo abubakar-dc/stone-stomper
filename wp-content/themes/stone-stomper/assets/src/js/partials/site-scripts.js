@@ -43,6 +43,14 @@ jQuery( document ).ready( function() {
 		}
 	} );
 
+	jQuery( '#van_model' ).on( 'change', function() {
+		if ( jQuery( this ).val() === 'other' ) {
+			jQuery( '#van_model_other' ).show();
+		} else {
+			jQuery( '#van_model_other' ).hide();
+		}
+	} );
+
 	// Optional: trigger on page load in case "Other" is pre-selected
 	jQuery( '#veh_make' ).trigger( 'change' );
 } );

@@ -4020,6 +4020,43 @@ Mixin for transition
 .editor-styles-wrapper .error-404 .page-content {
   margin-bottom: var(--ss_space_72);
 }
+.editor-styles-wrapper .vehicle-model-group,
+.editor-styles-wrapper .vehicle-year-group,
+.editor-styles-wrapper .van-model-group {
+  position: relative;
+}
+.editor-styles-wrapper .vehicle-model-group.loading::after,
+.editor-styles-wrapper .vehicle-year-group.loading::after,
+.editor-styles-wrapper .van-model-group.loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  border-top-color: #333;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  z-index: 10;
+}
+.editor-styles-wrapper .vehicle-model-group.loading select,
+.editor-styles-wrapper .vehicle-year-group.loading select,
+.editor-styles-wrapper .van-model-group.loading select {
+  opacity: 0.5;
+  pointer-events: none;
+}
+@keyframes spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+.editor-styles-wrapper .field.van-model-group {
+  display: flex;
+  -moz-column-gap: 10px;
+       column-gap: 10px;
+}
 .editor-styles-wrapper .post-box .post-box-img a {
   height: 100%;
   display: inline-block;
@@ -5274,6 +5311,23 @@ Mixin for transition
 }
 .editor-styles-wrapper .three-columns.product-items {
   row-gap: calc(var(--ss_space_72) + 6px);
+}
+.editor-styles-wrapper .three-columns.product-items .product-item a {
+  border-bottom: none !important;
+}
+.editor-styles-wrapper .three-columns.product-items .product-item .product-description {
+  color: var(--ss_body_color);
+}
+.editor-styles-wrapper .three-columns.product-items .product-item .order-button {
+  color: var(--ss_link_color);
+}
+.editor-styles-wrapper .three-columns.product-items .product-item .product-title h3 a,
+.editor-styles-wrapper .three-columns.product-items .product-item .product-price h3 a {
+  text-transform: capitalize;
+  color: var(--ss_dark_text);
+  font-family: "Jost", arial, sans-serif;
+  font-weight: 500;
+  font-style: normal;
 }
 .editor-styles-wrapper .three-columns.product-items .product-item .product-title {
   margin-top: 34px;

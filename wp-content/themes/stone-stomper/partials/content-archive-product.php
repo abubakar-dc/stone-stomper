@@ -24,11 +24,15 @@ $sts_var_product_price = $product->get_price();
 
 <div class="product-item">
 	<div class="product-image">
-		<?php StoneStomper::the_featured_image(  $sts_var_product_id, 500 ); ?>
+		<a href="<?php echo esc_url(get_the_permalink($sts_var_product_id)); ?>">
+			<?php StoneStomper::the_featured_image(  $sts_var_product_id, 500 ); ?>
+		</a>
 	</div>
 	<div class="product-title">
 		<h3>
-			<?php echo esc_html(get_the_title($sts_var_product_id)); ?>
+			<a href="<?php echo esc_url(get_the_permalink($sts_var_product_id)); ?>">
+				<?php echo esc_html(get_the_title($sts_var_product_id)); ?>
+			</a>
 		</h3>
 	</div>
 	<div class="product-description">

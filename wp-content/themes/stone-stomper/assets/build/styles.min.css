@@ -5219,6 +5219,45 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   margin-bottom: var(--ss_space_72);
 }
 
+.vehicle-model-group,
+.vehicle-year-group,
+.van-model-group {
+  position: relative;
+}
+.vehicle-model-group.loading::after,
+.vehicle-year-group.loading::after,
+.van-model-group.loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  border-top-color: #333;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  z-index: 10;
+}
+.vehicle-model-group.loading select,
+.vehicle-year-group.loading select,
+.van-model-group.loading select {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+@keyframes spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+.field.van-model-group {
+  display: flex;
+  -moz-column-gap: 10px;
+       column-gap: 10px;
+}
+
 /*-------------------------------------------------
 >> Basic styles for Blog post
 -------------------------------------------------*/
@@ -6592,6 +6631,23 @@ body #daextlwcnf-cookie-settings-button-2:hover {
 
 .three-columns.product-items {
   row-gap: calc(var(--ss_space_72) + 6px);
+}
+.three-columns.product-items .product-item a {
+  border-bottom: none !important;
+}
+.three-columns.product-items .product-item .product-description {
+  color: var(--ss_body_color);
+}
+.three-columns.product-items .product-item .order-button {
+  color: var(--ss_link_color);
+}
+.three-columns.product-items .product-item .product-title h3 a,
+.three-columns.product-items .product-item .product-price h3 a {
+  text-transform: capitalize;
+  color: var(--ss_dark_text);
+  font-family: "Jost", arial, sans-serif;
+  font-weight: 500;
+  font-style: normal;
 }
 .three-columns.product-items .product-item .product-title {
   margin-top: 34px;

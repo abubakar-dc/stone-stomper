@@ -379,6 +379,7 @@ button[disabled]:hover {
 		flex-wrap: wrap;
 		gap: 20px;
 		justify-content: center;
+
 		li {
 			display: inline-block;
 			margin: 0 0 0 00px;
@@ -400,7 +401,8 @@ button[disabled]:hover {
 
 			ul {
 				display: none;
-			}}
+			}
+		}
 	}
 }
 
@@ -451,6 +453,7 @@ button[disabled]:hover {
 	}
 
 	.select-dropdown__button {
+
 		&:focus,
 		&:focus-visible {
 			outline-color: black !important;
@@ -798,6 +801,7 @@ body {
 	}
 
 	.product_meta {
+
 		a,
 		a:visited {
 			color: var(--ss_black_2) !important;
@@ -828,6 +832,7 @@ body {
 		border-color: transparent;
 		padding: 0;
 		margin: 0;
+
 		svg {
 			margin-bottom: 0;
 		}
@@ -901,24 +906,86 @@ body {
 		background-color: var(--ss_header_bgcolor_sticky);
 	}
 }
+
 .error-page-hero {
 	padding: var(--ss_space_200) 0 var(--ss_space_96);
-	h1{
-		margin-bottom:10px ;
+
+	h1 {
+		margin-bottom: 10px;
 	}
-	.banner-text{
-		p{
+
+	.banner-text {
+		p {
 			margin: 0;
 		}
 	}
 }
-.error-404{
-	h6{
+
+.error-404 {
+	h6 {
 		margin-bottom: var(--ss_space_36);
 	}
-	.page-content{
+
+	.page-content {
 		margin-bottom: var(--ss_space_72);
 	}
 }
 
 
+
+
+.vehicle-model-group,
+.vehicle-year-group,
+.van-model-group {
+	position: relative;
+
+	&.loading::after {
+		content: "";
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 20px;
+		height: 20px;
+		border: 2px solid #ccc;
+		border-top-color: #333;
+		border-radius: 50%;
+		animation: spin 0.6s linear infinite;
+		z-index: 10;
+	}
+
+	&.loading select {
+		opacity: 0.5;
+		pointer-events: none;
+	}
+}
+
+@keyframes spin {
+	to {
+		transform: translate(-50%, -50%) rotate(360deg);
+	}
+}
+
+
+.field.van-model-group {
+	display: flex;
+	column-gap: 10px;
+}
+
+
+// .woocommerce ul.products li.product {
+// 	position: relative;
+// }
+
+// .woocommerce ul.products li.product a.woocommerce-LoopProduct-link {
+// 	position: absolute;
+// 	inset: 0;
+// 	/* top:0; right:0; bottom:0; left:0 */
+// 	z-index: 5;
+// }
+
+// .woocommerce ul.products li.product .button {
+// 	position: relative;
+// 	z-index: 10;
+// 	/* button still clickable */
+// }

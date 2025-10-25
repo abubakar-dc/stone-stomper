@@ -116,6 +116,7 @@
 		padding: 0;
 		font-size: 0;
 		height: 22px;
+
 		&::before {
 			display: none;
 		}
@@ -202,6 +203,27 @@
 	row-gap: calc(var(--ss_space_72) + 6px);
 
 	.product-item {
+		a {
+			border-bottom: none !important;
+		}
+
+		.product-description {
+			color: var(--ss_body_color);
+		}
+
+		.order-button {
+			color: var(--ss_link_color);
+		}
+
+		.product-title,
+		.product-price {
+			h3 a {
+				text-transform: capitalize;
+				color: var(--ss_dark_text);
+				@include font(jost, med);
+			}
+		}
+
 		.product-title {
 			margin-top: 34px;
 

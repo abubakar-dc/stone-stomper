@@ -11,6 +11,11 @@ jQuery( document ).ready( function() {
 			caravanMake = jQuery( this ).val();
 			// console.log( 'Selected Caravan Make:', caravanMake );
 			caravan = true;
+
+			jQuery('.van-model-group').addClass('loading');
+			setTimeout(() => {
+				jQuery('.van-model-group').removeClass('loading');
+			}, 1000);
 			// Call your function to fetch form data
 			fetchCaravanData();
 		}
@@ -22,22 +27,42 @@ jQuery( document ).ready( function() {
 			caravanPostID = selectedOption.data( 'post-id' );
 			// console.log( 'Selected Caravan Model ID:', caravanPostID );
 			caravan = false;
+
+
+
 			// 🔹 Call your next function if needed
 			fetchCaravanData();
 		}
 	} );
 
 	// Get Category Slug on Click Start.
-	jQuery( '#veh_make' ).on( 'change', function( e ) {
-		if ( e.originalEvent ) {
-			carMake = jQuery( this ).val();
-			// console.log( 'Selected Car Make:', carMake );
-			yearRequested = true;
-			postID = '';
-			// Call your function to fetch form data
-			fetchFormData();
-		}
-	} );
+	// jQuery( '#veh_make' ).on( 'change', function( e ) {
+	// 	if ( e.originalEvent ) {
+	// 		carMake = jQuery( this ).val();
+	// 		// console.log( 'Selected Car Make:', carMake );
+	// 		yearRequested = true;
+	// 		postID = '';
+	// 		// Call your function to fetch form data
+	// 		fetchFormData();
+	// 	}
+	// } );
+
+	jQuery('#veh_make').on('change', function(e) {
+	if (e.originalEvent) {
+		carMake = jQuery(this).val();
+		yearRequested = true;
+		postID = '';
+
+		// Add loader
+		jQuery('.vehicle-model-group').addClass('loading');
+		setTimeout(() => {
+			jQuery('.vehicle-model-group').removeClass('loading');
+		}, 1000);
+
+		fetchFormData();
+	}
+});
+
 
 	jQuery( '#veh_model' ).on( 'change', function( e ) {
 		if ( e.originalEvent ) {
@@ -45,6 +70,12 @@ jQuery( document ).ready( function() {
 			postID = selectedOption.data( 'post-id' );
 			console.log( 'Selected Car Model ID:', postID );
 			yearRequested = false;
+
+			jQuery('.vehicle-year-group').addClass('loading');
+			setTimeout(() => {
+				jQuery('.vehicle-year-group').removeClass('loading');
+			}, 1000);
+
 			// 🔹 Call your next function if needed
 			fetchFormData();
 		}
@@ -106,6 +137,7 @@ jQuery( document ).ready( function() {
 					// console.log( response.models );
 					if ( caravan ) {
 						jQuery( '#van_model' ).html( response.html );
+						jQuery('#van_model').append('<option value="other">Other</option>');
 					}
 					console.log( response.barheight );
 					if ( response.barheight > 1800 ) {

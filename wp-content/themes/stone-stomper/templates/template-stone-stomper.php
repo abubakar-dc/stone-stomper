@@ -176,7 +176,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 							</div>
 
 							<!-- Towing Vehicle Details -->
-							<div id="vehicle-details" class=" order-form-section-inner section-disable d-flex form-vehicle-section justify-content-between align-items-start image-at-left">
+							<div id="vehicle-details" class=" order-form-section-inner d-flex form-vehicle-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 vehicle-images ">
 										<div class="towing-vehicle-image" id="towing-vehicle-image" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
@@ -212,7 +212,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										?>
 									</div>
 									<div class="grid cols-2">
-										<div class="field">
+										<div class="field vehicle-make-field-set">
 											<label class="req" for="veh_make">Vehicle Make</label>
 											<select id="veh_make" name="vehicle_make" required>
 												<?php
@@ -233,7 +233,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											<label class="req" for="veh_make_other">Other Make</label>
 											<input placeholder="Other Make" id="veh_make_other" name="vehicle_make_other" type="text" />
 										</div>
-										<div class="field">
+										<div class="field vehicle-model-group">
 											<label class="req" for="veh_model">Vehicle Model</label>
 											<!-- default should be dropdown -->
 											<select id="veh_model" name="vehicle_model" required >
@@ -243,7 +243,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											<input style="display:none" placeholder="Vehicle Model" id="vehicle_model_other" name="vehicle_model" type="text" />
 
 										</div>
-										<div class="field">
+										<div class="field vehicle-year-group">
 											<label class="req" for="veh_year">Year of Manufacture</label>
 											<select id="veh_year" name="vehicle_year" required>
 												<option value="">Select Model Year </option>
@@ -269,7 +269,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 							</div>
 
 							<!-- Caravan Details -->
-							<div id="caravan-details" class=" order-form-section-inner section-disable d-flex form-carvan-section justify-content-between align-items-start image-at-left">
+							<div id="caravan-details" class=" order-form-section-inner d-flex form-carvan-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 vehicle-images">
 										<div class="vehicle-images mobile-image-hide" id="caravan-images" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
@@ -342,7 +342,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 
 											</select>
 										</div>
-										<div class="field">
+										<div class="field van-model-group">
 											<label class="req" for="van_model">Caravan Model</label>
 											<select id="van_model" name="caravan_model" required>
 												<option value="">Select Caravan Model</option>

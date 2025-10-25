@@ -84,6 +84,7 @@ jQuery( document ).ready( function( $ ) {
 
 		if ( isValid ) {
 			jQuery( '#photographs-details' ).removeClass( 'section-disable' );
+			jQuery( '#final-measurements' ).removeClass( 'section-disable' );
 			console.log( '✅ All caravan fields are filled.' );
 			console.log( '🏕️ Caravan data:', fieldData );
 		} else {
