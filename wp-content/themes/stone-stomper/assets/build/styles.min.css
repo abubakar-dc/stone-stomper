@@ -3991,23 +3991,21 @@ div#menuiconwrap.icons02 span.cart_count_header {
   max-height: 953px;
 }
 
-.home .product-item .product-title a {
-  color: var(--ss_regular_text) !important;
+.products-teaser-slider .product-title a {
+  color: var(--ss_regular_text);
+  border: none;
 }
-
-.home .product-item .product-title a:hover,
-.page-id-347 .product-item .product-title a:hover {
-  color: var(--ss_red) !important;
+.products-teaser-slider .product-title a:hover {
+  color: var(--ss_red);
+  border: none;
 }
 
 .product-image {
   overflow: hidden;
 }
-
 .product-image img {
-  transition: transform 0.4s ease; /* smooth animation */
+  transition: transform 0.4s ease;
 }
-
 .product-image:hover img {
   transform: scale(1.1);
 }
@@ -5844,7 +5842,18 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   height: var(--ss_space_36);
   background-position: center right var(--ss_space_8);
 }
-.woocommerce-shop .search-field, .woocommerce-shop .search-submit {
+.woocommerce-shop .add_to_cart_button {
+  background-color: var(--ss_color_on_primary) !important;
+  border: 1px solid !important;
+  border-radius: 0 !important;
+  padding: var(--ss_space_20) var(--ss_space_48) !important;
+}
+.woocommerce-shop .add_to_cart_button:hover {
+  background-color: var(--ss_color_primary) !important;
+  color: var(--ss_color_on_primary) !important;
+}
+.woocommerce-shop .search-field,
+.woocommerce-shop .search-submit {
   height: var(--ss_space_36);
 }
 .woocommerce-shop .added_to_cart {
@@ -5866,18 +5875,6 @@ body #daextlwcnf-cookie-settings-button-2:hover {
 }
 .woocommerce-shop .products.columns-4 li:nth-child(4n) {
   margin-right: 0 !important;
-}
-
-.add_to_cart_button {
-  background-color: var(--ss_color_on_primary) !important;
-  border: 1px solid !important;
-  border-radius: 0 !important;
-  padding: var(--ss_space_20) var(--ss_space_48) !important;
-}
-
-.add_to_cart_button:hover {
-  background-color: var(--ss_color_primary) !important;
-  color: var(--ss_color_on_primary) !important;
 }
 
 /*-------------------------------------------------
@@ -6537,8 +6534,7 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   letter-spacing: -1.2px;
 }
 
-.product-item a,
-.product-item a:visited {
+.product-item a {
   background-color: var(--ss_transparent);
   color: var(--ss_link_color);
   border: none;
@@ -6554,9 +6550,7 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   text-transform: uppercase;
   text-decoration: none;
 }
-.product-item a:hover, .product-item a:focus-visible,
-.product-item a:visited:hover,
-.product-item a:visited:focus-visible {
+.product-item a:hover, .product-item a:focus-visible {
   border-color: var(--ss_link_border_color);
 }
 

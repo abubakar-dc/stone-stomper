@@ -1,56 +1,68 @@
-.woocommerce-shop{
-	#sidebar ul{
+.woocommerce-shop {
+	#sidebar ul {
 		list-style-type: none !important;
 		margin: 0;
 
 	}
-	.site-main{
+
+	.site-main {
 
 		max-width: 1400px;
 		width: 90%;
-		margin: 0 auto;}
+		margin: 0 auto;
+	}
 
 
-	.woocommerce-ordering select{
+	.woocommerce-ordering select {
 		height: var(--ss_space_36);
 		background-position: center right var(--ss_space_8);
 	}
 
-	.search-field, .search-submit{
+	.add_to_cart_button {
+		background-color: var(--ss_color_on_primary) !important;
+		border: 1px solid !important;
+		border-radius: 0 !important;
+		padding: var(--ss_space_20) var(--ss_space_48) !important;
+	}
+
+	.add_to_cart_button:hover {
+		background-color: var(--ss_color_primary) !important;
+		color: var(--ss_color_on_primary) !important;
+
+	}
+
+	.search-field,
+	.search-submit {
 		height: var(--ss_space_36);
 	}
-	.added_to_cart{
-		color: var(--ss_color_primary) ;
+
+	.added_to_cart {
+		color: var(--ss_color_primary);
 
 		margin-left: 10px;
 	}
-	.woocommerce-loop-product__title{
+
+	.woocommerce-loop-product__title {
 		font-size: var(--ss_font_size_22) !important;
 		color: var(--ss_color_secondary);
 	}
-	.price{
-		.woocommerce-Price-amount.amount bdi{
+
+	.price {
+		.woocommerce-Price-amount.amount bdi {
 			font-size: var(--ss_font_size_18) !important;
 			color: var(--ss_color_secondary) !important;
 			font-weight: 700 !important;
-		}}
-	.products.columns-4{
-		li{
+		}
+	}
+
+	.products.columns-4 {
+		li {
 			margin: 0 var(--ss_space_24) var(--ss_space_72) 0 !important;
 			width: calc(25% - 18px) !important;
 		}
-		li:nth-child(4n){
-			margin-right: 0 !important;
-		}}
-}
-.add_to_cart_button{
-	background-color: var(--ss_color_on_primary)  !important;
-	border: 1px solid !important;
-	border-radius: 0 !important;
-	padding: var(--ss_space_20) var(--ss_space_48) !important;
-}
-.add_to_cart_button:hover{
-	background-color: var(--ss_color_primary)  !important;
-	color: var(--ss_color_on_primary) !important;
 
+		li:nth-child(4n) {
+			margin-right: 0 !important;
+		}
+	}
 }
