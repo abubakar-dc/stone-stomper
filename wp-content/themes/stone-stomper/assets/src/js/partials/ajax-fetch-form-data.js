@@ -173,13 +173,6 @@ jQuery( document ).ready( function() {
 							.trigger('change');
 					}
 
-					if (response.toolbox_image) {
-						jQuery('#caravan-images')
-							.append('<div class="vehicle-image">' + response.toolbox_image + '</div>')
-							.trigger('change');
-					}
-
-
 					jQuery( '.loader-container' ).hide();
 				}
 				// selectModel();

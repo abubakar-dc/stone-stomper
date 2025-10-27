@@ -10,10 +10,6 @@
 
 .vehicle-images {
 	display: flex;
-
-	.vehicle-image {
-		width: 50%;
-	}
 }
 
 .form-measurements-section {
@@ -345,11 +341,32 @@
 }
 
 .form-image-slider,
-.vehicle-images {
+.vehicle-images,
+.example-photographs {
 	.image-caption-area {
 		position: relative;
-		bottom: 44px;
 		margin-bottom: -44px;
+		display: inline-block;
+	}
+}
+
+.form-image-slider {
+	.image-caption-area {
+		bottom: 44px;
+	}
+
+	&.no-slider {
+		.slick-dots {
+			display: none !important;
+		}
+	}
+}
+
+
+.vehicle-images,
+.example-photographs {
+	.image-caption-area {
+		bottom: 50px;
 	}
 }
 
@@ -368,7 +385,8 @@
 		max-width: 1400px;
 	}
 }
-.checkbox-item .woocommerce-Price-amount {
-	display: block !important;
-	margin-top: 10px !important;
+
+.van_model_other {
+	width: -webkit-fill-available;
+	margin-top: 10px;
 }

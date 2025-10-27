@@ -21,18 +21,21 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 		$sts_var_section_headline = $sts_var_section_head['headline']??null;
 		$sts_var_section_head_text = $sts_var_section_head['text']??null;
 		$sts_var_section_head_image = $sts_var_section_head['image']??null;
+		$sts_var_section_head_image_caption = $sts_var_section_head['image_caption'] ?? null;
 	}
 
 	$sts_var_vichle_detail_image           = $sts_fields['sts_var_vichle_detail_image'] ?? null;
+	$sts_var_vichle_image_caption           = $sts_fields['sts_var_vichle_image_caption'] ?? null;
 	$sts_var_example_photographs           = $sts_fields['sts_var_example_photographs'] ?? null;
-	$sts_var_caravan_detail_images           = $sts_fields['sts_var_caravan_detail_images'] ?? null;
+	$sts_var_caravan_detail_image           = $sts_fields['sts_var_caravan_detail_image'] ?? null;
 
-	if($sts_var_caravan_detail_images ){
-		$sts_var_caravan_detail_factory_stoneguard = $sts_var_caravan_detail_images['factory_stoneguard']??null;
-		$sts_var_caravan_detail_toolbox = $sts_var_caravan_detail_images['toolbox']??null;
+	if($sts_var_caravan_detail_image ){
+		$sts_var_caravan_detail_factory_stoneguard = $sts_var_caravan_detail_image['carvan'] ? $sts_var_caravan_detail_image['carvan'] : null;
+		$sts_var_caravan_image_caption = $sts_var_caravan_detail_image['image_caption'] ? $sts_var_caravan_detail_image['image_caption'] : null;
 	}
 
 	$sts_var_measurements_image           = $sts_fields['sts_var_measurements_image'] ?? null;
+	$sts_var_measurements_image_caption           = $sts_fields['sts_var_measurements_image_caption'] ?? null;
 	$sts_var_section_head_notices         = $sts_fields['sts_var_section_head_notices'] ?? null;
 ?>
 
@@ -68,9 +71,16 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 						<div id="form-all">
 							<!-- Your Details -->
 							 <div class="order-form-section-inner form-detail-section d-flex justify-content-between align-items-start image-at-left">
-								<div class="form-section-left column mobile-image-hide" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
+								<div class="form-section-left example-photographs column mobile-image-hide" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<?php if($sts_var_section_head_image){ ?>
 										<?php StoneStomper::the_attachment_image($sts_var_section_head_image,1200 ); ?>
+										<?php if($sts_var_section_head_image_caption){ ?>
+											<div class="image-caption-area">
+												<div class="image-caption">
+													<p><?php echo $sts_var_section_head_image_caption; ?></p>
+												</div>
+											</div>
+										<?php } ?>
 									<?php } ?>
 								</div>
 
@@ -118,9 +128,16 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										}
 											}
 									} ?>
-									<div class="mobile-image" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
+									<div class="mobile-image example-photographs" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 										<?php if($sts_var_section_head_image){ ?>
 											<?php StoneStomper::the_attachment_image($sts_var_section_head_image,1200 ); ?>
+											<?php if($sts_var_section_head_image_caption){ ?>
+												<div class="image-caption-area">
+													<div class="image-caption">
+														<p><?php echo $sts_var_section_head_image_caption; ?></p>
+													</div>
+												</div>
+											<?php } ?>
 										<?php } ?>
 									</div>
 									<div class="grid cols-2">
@@ -183,6 +200,13 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 												<?php
 													if($sts_var_vichle_detail_image ){
 													 	StoneStomper::the_attachment_image($sts_var_vichle_detail_image,1200 );
+														if($sts_var_vichle_image_caption){ ?>
+															 <div class="image-caption-area">
+																 <div class="image-caption">
+																	 <p><?php echo $sts_var_vichle_image_caption; ?></p>
+																 </div>
+															 </div>
+														 <?php }
 													}
 												?>
 										</div>
@@ -208,6 +232,13 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										<?php
 											if($sts_var_vichle_detail_image ){
 												StoneStomper::the_attachment_image($sts_var_vichle_detail_image,1200 );
+												if($sts_var_vichle_image_caption){ ?>
+													<div class="image-caption-area">
+														<div class="image-caption">
+															<p><?php echo $sts_var_vichle_image_caption; ?></p>
+														</div>
+													</div>
+												<?php }
 											}
 										?>
 									</div>
@@ -229,9 +260,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 												<option value="other">Other</option>
 											</select>
 										</div>
-										<div class="field hidden" id="veh_make_other_wrap">
-											<label class="req" for="veh_make_other">Other Make</label>
-											<input placeholder="Other Make" id="veh_make_other" name="vehicle_make_other" type="text" />
+										<div class="veh_make_other">
 										</div>
 										<div class="field vehicle-model-group">
 											<label class="req" for="veh_model">Vehicle Model</label>
@@ -239,16 +268,15 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											<select id="veh_model" name="vehicle_model" required >
 												<option value="">Select Vehicle Model </option>
 											</select>
-											<!-- else if selected other show text input here -->
-											<input style="display:none" placeholder="Vehicle Model" id="vehicle_model_other" name="vehicle_model" type="text" />
-
+											<div class="veh_model_other"></div>
 										</div>
 										<div class="field vehicle-year-group">
 											<label class="req" for="veh_year">Year of Manufacture</label>
 											<select id="veh_year" name="vehicle_year" required>
 												<option value="">Select Model Year </option>
 											</select>
-											<input style="display:none" placeholder="Model Year" id="veh_year_other" name="vehicle_year" type="text" />
+											 <div class="veh_year_other">
+											</div>
 
 										</div>
 									</div>
@@ -276,22 +304,13 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											<?php if ( $sts_var_caravan_detail_factory_stoneguard ) { ?>
 												<div class="vehicle-image">
 													<?php StoneStomper::the_attachment_image( $sts_var_caravan_detail_factory_stoneguard, 1200 ); ?>
-													<div class="image-caption-area">
-														<div class="image-caption">
-															<p>Factory Stoneguard</p>
+													<?php if($sts_var_caravan_image_caption){ ?>
+														<div class="image-caption-area">
+															<div class="image-caption">
+																<p><?php echo $sts_var_caravan_image_caption; ?></p>
+															</div>
 														</div>
-													</div>
-												</div>
-											<?php } ?>
-
-											<?php if ( $sts_var_caravan_detail_toolbox ) { ?>
-												<div class="vehicle-image">
-													<?php StoneStomper::the_attachment_image( $sts_var_caravan_detail_toolbox, 1200 ); ?>
-													<div class="image-caption-area">
-														<div class="image-caption">
-															<p>Toolbox</p>
-														</div>
-													</div>
+													<?php } ?>
 												</div>
 											<?php } ?>
 										</div>
@@ -318,9 +337,13 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										<?php
 											if($sts_var_caravan_detail_factory_stoneguard ){
 												StoneStomper::the_attachment_image($sts_var_caravan_detail_factory_stoneguard,1200 );
-											}
-											if($sts_var_caravan_detail_toolbox ){
-												StoneStomper::the_attachment_image($sts_var_caravan_detail_toolbox,1200 );
+												if($sts_var_caravan_image_caption){ ?>
+													<div class="image-caption-area">
+														<div class="image-caption">
+															<p><?php echo $sts_var_caravan_image_caption; ?></p>
+														</div>
+													</div>
+												<?php }
 											}
 										?>
 										</div>
@@ -347,7 +370,9 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											<select id="van_model" name="caravan_model" required>
 												<option value="">Select Caravan Model</option>
 											</select>
-											<input style="display:none" placeholder="Caravan Model" id="van_model_other" name="caravan_model" type="text" />
+											<div class="van_model_other">
+
+											</div>
 										</div>
 									</div>
 
@@ -373,19 +398,23 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 							</div>
 
 							<!-- Photographs -->
-							<div id="photographs-details" class=" order-form-section-inner section-disable d-flex form-carvan-section justify-content-between align-items-start image-at-left">
+							<div id="photographs-details" class=" order-form-section-inner d-flex form-carvan-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="form-image-slider">
 										<?php if($sts_var_example_photographs){ ?>
-											<?php foreach($sts_var_example_photographs as $sts_key => $photo){ ?>
+											<?php foreach($sts_var_example_photographs as $sts_key => $photo){
+												$caption = wp_get_attachment_caption( $photo );
+												?>
 												<div class="slick-slide">
 													<div class="slider-image">
 														<?php StoneStomper::the_attachment_image($photo,1200 ); ?>
+														<?php if ( $caption ) { ?>
 															<div class="image-caption-area">
-															<div class="image-caption">
-																<p>Example Towing Vehicle Rear Photograph</p>
+																<div class="image-caption">
+																	<p><?php echo esc_html( $caption ); ?></p>
+																</div>
 															</div>
-														</div>
+														<?php } ?>
 													</div>
 												</div>
 											<?php }
@@ -411,15 +440,20 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										} ?>
 									<div class="form-image-slider mobile-image">
 										<?php if($sts_var_example_photographs){ ?>
-											<?php foreach($sts_var_example_photographs as $sts_key => $photo){ ?>
+											<?php foreach($sts_var_example_photographs as $sts_key => $photo){
+												$caption = wp_get_attachment_caption( $photo );
+
+												?>
 												<div class="slick-slide">
 													<div class="slider-image">
 														<?php StoneStomper::the_attachment_image($photo,1200 ); ?>
-													<div class="image-caption-area">
-														<div class="image-caption">
-															<p>Toolbox</p>
-														</div>
-													</div>
+														<?php if ( $caption ) { ?>
+																<div class="image-caption-area">
+																	<div class="image-caption">
+																		<p><?php echo esc_html( $caption ); ?></p>
+																	</div>
+																</div>
+															<?php } ?>
 													</div>
 												</div>
 											<?php }
@@ -467,16 +501,22 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 							</div>
 
 							<!-- Final Measurements -->
-							<div id="final-measurements" class=" order-form-section-inner section-disable d-flex form-measurements-section justify-content-between align-items-start image-at-left">
+							<div id="final-measurements" class=" order-form-section-inner d-flex form-measurements-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
-									<div class="grid cols-2 measurements-images ">
+									<div class="grid cols-2 measurements-images example-photographs">
 										<?php
 											if($sts_var_measurements_image){
 												StoneStomper::the_attachment_image($sts_var_measurements_image,1200 );
 											}
 										?>
+										<?php if($sts_var_measurements_image_caption){ ?>
+											<div class="image-caption-area">
+												<div class="image-caption">
+													<p><?php echo $sts_var_measurements_image_caption; ?></p>
+												</div>
+											</div>
+										<?php } ?>
 									</div>
-									<div class="image-caption-area"><div class="image-caption"><p> Diagram for example purposes only</p></div></div>
 								</div>
 								<div class="form-section-right column" id="blk-measure">
 									<?php if($sts_var_section_head_notices){
@@ -496,13 +536,20 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											}
 										} ?>
 
-										<div class="grid cols-2 measurements-images mobile-image">
-										<?php
-											if($sts_var_measurements_image){
-												StoneStomper::the_attachment_image($sts_var_measurements_image,1200 );
-											}
-										?>
-									</div>
+										<div class="grid cols-2 measurements-images mobile-image example-photographs">
+											<?php
+												if($sts_var_measurements_image){
+													StoneStomper::the_attachment_image($sts_var_measurements_image,1200 );
+												}
+											?>
+											<?php if($sts_var_measurements_image_caption){ ?>
+												<div class="image-caption-area">
+													<div class="image-caption">
+														<p><?php echo $sts_var_measurements_image_caption; ?></p>
+													</div>
+												</div>
+											<?php } ?>
+										</div>
 
 									<div class="grid cols-2">
 										<div class="field">
@@ -540,7 +587,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 																	placeholder="e.g. 500 mm" required />
 															</div>
 															<div class="field extra-support">
-																<label class="req" for="toolbox_length">Distance from the Caravan (mm)</label>
+																<label class="req" for="toolbox_length">Toolbox Distance from Caravan (mm)</label>
 																<input id="toolbox_length" name="toolbox_length_mm" type="text"
 																	placeholder="e.g. 500 mm" required />
 															</div>
@@ -560,7 +607,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 																	placeholder="e.g.600 mm" required />
 															</div>
 															<div class="field extra-support">
-																<label class="req" for="stoneguard_length">Distance from the Caravan (mm)</label>
+																<label class="req" for="stoneguard_length">Stoneguard Distance from Caravan (mm)</label>
 																<input id="stoneguard_length" name="stoneguard_length_mm" type="text"
 																	placeholder="e.g.600 mm" required />
 															</div>
@@ -608,36 +655,49 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 							</div>
 
 							<!-- Final Details & Summary -->
-							<div id="final-summary" class=" order-form-section-inner section-disable d-flex form-details-section justify-content-between align-items-start image-at-left">
+							<div id="final-summary" class=" order-form-section-inner d-flex form-details-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
-									<div class="grid cols-2 details-images ">
+									<?php
+										global $product;
+										$p = wc_get_product( 545 );
+										$upsell_ids = $p ? $p->get_upsell_ids() : [];
+										$count_ids = count($upsell_ids);
+
+									?>
+									<div class="form-image-slider <?php if($count_ids === 1){ echo 'no-slider'; } ?>">
 										<?php
-											global $product;
-											$p = wc_get_product( 545 );
-											$upsell_ids = $p ? $p->get_upsell_ids() : [];
 
-											if ( $upsell_ids ) {
-												foreach ( $upsell_ids as $upsell_id ) {
-													$upsell = wc_get_product( $upsell_id );
-													if ( ! $upsell ) {
-														continue;
-													}
-
-													$price = $upsell->get_price();
-													$title = $upsell->get_name();
-													echo '<div class="checkbox-item">';
-													if( has_post_thumbnail( $upsell_id ) ) {
-													echo '<div class="thumb">';
-													echo '<img src="' . esc_url( get_the_post_thumbnail_url( $upsell_id, 'thumb_800' ) ) . '" alt="' . esc_attr( $title ) . '" />';
-													echo '<p>' . esc_html( $title ) . '</p>';
-													echo '</div>';
-													}
+										if ( $upsell_ids ) {
+											foreach ( $upsell_ids as $upsell_id ) {
+												$upsell = wc_get_product( $upsell_id );
+												if ( ! $upsell ) {
+													continue;
 												}
 
-												echo '</div>';
+												$title = $upsell->get_name();
+
+												if ( has_post_thumbnail( $upsell_id ) ) {
+													?>
+													<div class="slick-slide">
+														<div class="slider-image">
+															<?php echo get_the_post_thumbnail( $upsell_id, 'thumb_800', [ 'alt' => esc_attr( $title ) ] ); ?>
+
+															<?php if ( $title ) { ?>
+																<div class="image-caption-area">
+																	<div class="image-caption">
+																		<p><?php echo esc_html( $title ); ?></p>
+																	</div>
+																</div>
+															<?php } ?>
+														</div>
+													</div>
+													<?php
+												}
 											}
-											?>
+										}
+										?>
 									</div>
+
 								</div>
 								<div class="form-section-right column" id="blk-final">
 									<?php if($sts_var_section_head_notices){
@@ -676,34 +736,35 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										</div>
 									</div>
 									<div class="form-section-left column mobile-image" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
-									<div class="grid cols-2 details-images ">
-										<?php
-											global $product;
-											$p = wc_get_product( 545 );
-											$upsell_ids = $p ? $p->get_upsell_ids() : [];
+										<div class="grid cols-2 details-images ">
+											<?php
+												global $product;
+												$p = wc_get_product( 545 );
+												$upsell_ids = $p ? $p->get_upsell_ids() : [];
 
-											if ( $upsell_ids ) {
-												foreach ( $upsell_ids as $upsell_id ) {
-													$upsell = wc_get_product( $upsell_id );
-													if ( ! $upsell ) {
-														continue;
-													}
+												if ( $upsell_ids ) {
+													foreach ( $upsell_ids as $upsell_id ) {
+														$upsell = wc_get_product( $upsell_id );
+														if ( ! $upsell ) {
+															continue;
+														}
 
-													$price = $upsell->get_price();
-													$title = $upsell->get_name();
-													echo '<div class="checkbox-item">';
-													if( has_post_thumbnail( $upsell_id ) ) {
-													echo '<div class="thumb">';
-													echo '<img src="' . esc_url( get_the_post_thumbnail_url( $upsell_id, 'thumb_800' ) ) . '" alt="' . esc_attr( $title ) . '" />';
-													echo '<p>' . esc_html( $title ) . '</p>';
-													echo '</div>';
+														$price = $upsell->get_price();
+														$title = $upsell->get_name();
+														echo '<div class="checkbox-item">';
+															if( has_post_thumbnail( $upsell_id ) ) {
+																echo '<div class="thumb">';
+																	echo '<img src="' . esc_url( get_the_post_thumbnail_url( $upsell_id, 'thumb_800' ) ) . '" alt="' . esc_attr( $title ) . '" />';
+																	echo '<p>' . esc_html( $title ) . '</p>';
+																echo '</div>';
+															}
+														echo '</div>';
 													}
 												}
-												echo '</div>';
-											}
-											?>
+												?>
+										</div>
 									</div>
-								</div>
+									<!-- Section ends -->
 									<?php
 									global $product;
 									$p = wc_get_product( 545 );
@@ -711,28 +772,27 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 
 									if ( $upsell_ids ) {
 										echo '<div class="checkboxes" style="margin-top:8px">';
-										echo '<strong>Accessories</strong>';
+											echo '<strong>Accessories</strong>';
 
-										foreach ( $upsell_ids as $upsell_id ) {
-											$upsell = wc_get_product( $upsell_id );
-											if ( ! $upsell ) {
-												continue;
+											foreach ( $upsell_ids as $upsell_id ) {
+												$upsell = wc_get_product( $upsell_id );
+												if ( ! $upsell ) {
+													continue;
+												}
+
+												$price = $upsell->get_price();
+												$title = $upsell->get_name();
+												echo '<div class="checkbox-item" style="margin-top:8px">';
+													echo '<label>';
+														echo '<input type="checkbox" class="acc-upsell" data-product-id="' . esc_attr( $upsell_id ) . '" data-price-value="' . esc_attr( $price ) . '" />';
+														echo '<span> ' . $title . ' for ' . wc_price( $price ). '</span>';
+													echo '</label>';
+												echo '</div>';
 											}
-
-											$price = $upsell->get_price();
-											$title = $upsell->get_name();
-											echo '<div class="checkbox-item">';
-											echo '<label>';
-											echo '<input type="checkbox" class="acc-upsell" data-product-id="' . esc_attr( $upsell_id ) . '" data-price-value="' . esc_attr( $price ) . '" />';
-											echo ' ' . esc_html( $title ) . ' for ' . wc_price( $price );
-											echo '</label>';
-											echo '</div>';
-										}
 
 										echo '</div>';
 									}
 									?>
-
 									<div class="summary" id="order_summary">
 										<div class="line">
 											<span>Stone Stomper®</span>
@@ -753,6 +813,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 
 										<button class="btn primary" type="submit" id="btn_cart">Add to Cart</button>
 									</div>
+
 								</div>
 							</div>
 

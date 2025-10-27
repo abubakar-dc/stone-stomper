@@ -244,7 +244,7 @@
         },
         {
             "key": "field_68c00e3c02bd5",
-            "label": "Images",
+            "label": "Caravan Details Section",
             "name": "sts_var_caravan_images",
             "aria-label": "",
             "type": "group",
@@ -260,8 +260,8 @@
             "sub_fields": [
                 {
                     "key": "field_68c00e6d02bd6",
-                    "label": "Factory Stoneguard Image",
-                    "name": "factory_stoneguard_image",
+                    "label": "Carvan",
+                    "name": "carvan",
                     "aria-label": "",
                     "type": "image",
                     "instructions": "",
@@ -286,10 +286,10 @@
                 },
                 {
                     "key": "field_68c00eb502bd7",
-                    "label": "Toolbox Image",
-                    "name": "toolbox_image",
+                    "label": "Image Caption",
+                    "name": "image_caption",
                     "aria-label": "",
-                    "type": "image",
+                    "type": "text",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -298,17 +298,12 @@
                         "class": "",
                         "id": ""
                     },
-                    "return_format": "id",
-                    "library": "all",
-                    "min_width": "",
-                    "min_height": "",
-                    "min_size": "",
-                    "max_width": "",
-                    "max_height": "",
-                    "max_size": "",
-                    "mime_types": "",
+                    "default_value": "",
+                    "maxlength": "",
                     "allow_in_bindings": 0,
-                    "preview_size": "medium"
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
                 }
             ]
         },
@@ -380,5 +375,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1757432185
+    "modified": 1761482966
 }

@@ -117,6 +117,27 @@
                     "mime_types": "",
                     "allow_in_bindings": 0,
                     "preview_size": "admin-square"
+                },
+                {
+                    "key": "field_68fe1e33cedbe",
+                    "label": "Image Caption",
+                    "name": "image_caption",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
                 }
             ]
         },
@@ -130,7 +151,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -147,9 +168,30 @@
             "preview_size": "admin-square"
         },
         {
+            "key": "field_68fe1aa6fb262",
+            "label": "Vehicle Image Caption",
+            "name": "sts_var_vichle_image_caption",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_68cd736d2582a",
-            "label": "Caravan Details Section Images",
-            "name": "sts_var_caravan_detail_images",
+            "label": "Caravan Details Section Image",
+            "name": "sts_var_caravan_detail_image",
             "aria-label": "",
             "type": "group",
             "instructions": "",
@@ -163,9 +205,9 @@
             "layout": "block",
             "sub_fields": [
                 {
-                    "key": "field_68cd77e928eff",
-                    "label": "Factory Stoneguard",
-                    "name": "factory_stoneguard",
+                    "key": "field_68fe14cc86254",
+                    "label": "Carvan",
+                    "name": "carvan",
                     "aria-label": "",
                     "type": "image",
                     "instructions": "",
@@ -189,11 +231,11 @@
                     "preview_size": "medium"
                 },
                 {
-                    "key": "field_68cd783028f00",
-                    "label": "Toolbox",
-                    "name": "toolbox",
+                    "key": "field_68fe15484848d",
+                    "label": "Image Caption",
+                    "name": "image_caption",
                     "aria-label": "",
-                    "type": "image",
+                    "type": "text",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -202,17 +244,12 @@
                         "class": "",
                         "id": ""
                     },
-                    "return_format": "id",
-                    "library": "all",
-                    "min_width": "",
-                    "min_height": "",
-                    "min_size": "",
-                    "max_width": "",
-                    "max_height": "",
-                    "max_size": "",
-                    "mime_types": "",
+                    "default_value": "",
+                    "maxlength": "",
                     "allow_in_bindings": 0,
-                    "preview_size": "medium"
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
                 }
             ]
         },
@@ -269,6 +306,27 @@
             "mime_types": "",
             "allow_in_bindings": 0,
             "preview_size": "admin-square"
+        },
+        {
+            "key": "field_68fe24ced9a5f",
+            "label": "Measurements Image Caption",
+            "name": "sts_var_measurements_image_caption",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_68c15986fb133",
@@ -379,5 +437,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1758547193
+    "modified": 1761486364
 }

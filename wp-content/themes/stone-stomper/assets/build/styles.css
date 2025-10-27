@@ -1714,7 +1714,7 @@ textarea {
   justify-content: space-between;
 }
 .two-columns-fields .field {
-  width: 49%;
+  width: 48%;
 }
 
 #orderForm .field {
@@ -5252,12 +5252,6 @@ body #daextlwcnf-cookie-settings-button-2:hover {
     transform: translate(-50%, -50%) rotate(360deg);
   }
 }
-.field.van-model-group {
-  display: flex;
-  -moz-column-gap: 10px;
-       column-gap: 10px;
-}
-
 /*-------------------------------------------------
 >> Basic styles for Blog post
 -------------------------------------------------*/
@@ -6808,9 +6802,6 @@ body #daextlwcnf-cookie-settings-button-2:hover {
 .vehicle-images {
   display: flex;
 }
-.vehicle-images .vehicle-image {
-  width: 50%;
-}
 
 .form-measurements-section .measurements-images img {
   width: 100%;
@@ -7096,10 +7087,23 @@ body #daextlwcnf-cookie-settings-button-2:hover {
 }
 
 .form-image-slider .image-caption-area,
-.vehicle-images .image-caption-area {
+.vehicle-images .image-caption-area,
+.example-photographs .image-caption-area {
   position: relative;
-  bottom: 44px;
   margin-bottom: -44px;
+  display: inline-block;
+}
+
+.form-image-slider .image-caption-area {
+  bottom: 44px;
+}
+.form-image-slider.no-slider .slick-dots {
+  display: none !important;
+}
+
+.vehicle-images .image-caption-area,
+.example-photographs .image-caption-area {
+  bottom: 50px;
 }
 
 #caravan-details .checkboxes label {
@@ -7112,9 +7116,9 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   max-width: 1400px;
 }
 
-.checkbox-item .woocommerce-Price-amount {
-  display: block !important;
-  margin-top: 10px !important;
+.van_model_other {
+  width: -webkit-fill-available;
+  margin-top: 10px;
 }
 
 /*-------------------------------------------------

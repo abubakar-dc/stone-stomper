@@ -348,9 +348,19 @@ class WP_Theme_Ajax {
 
 		//Getting Vehicle Image
 		if($post_id && has_post_thumbnail( $post_id )){
+			$thumb_id   = get_post_thumbnail_id( $post_id );
+			$caption    = wp_get_attachment_caption( $thumb_id );
 
 			$vehicleImage = '<img src="'.get_the_post_thumbnail_url( $post_id, 'thumb_1000' ).'" alt="'.get_the_title($post_id).'" />';
-		}
+			if ( $caption ) {
+				$vehicleImage .= '
+					<div class="image-caption-area">
+						<div class="image-caption">
+							<p>' . esc_html( $caption ) . '</p>
+						</div>
+					</div>';
+				}
+			}
 
 		//Getting Bar Width
 		if($post_id){
@@ -441,11 +451,11 @@ public function fetch_caravan_data() {
 
 		$sts_var_caravan_images = get_field('sts_var_caravan_images', $caravanPostID);
 		if($sts_var_caravan_images){
-			$sts_var_factory_stoneguard_image_id = $sts_var_caravan_images['factory_stoneguard_image'] ?? '';
-			$sts_var_toolbox_image_id = $sts_var_caravan_images['toolbox_image'] ?? '';
+			$sts_var_factory_stoneguard_image_id = $sts_var_caravan_images['carvan'] ?? '';
+			$sts_var_carvan_image_caption = $sts_var_caravan_images['image_caption'] ?? '';
 		} else {
 			$sts_var_factory_stoneguard_image_id = '';
-			$sts_var_toolbox_image_id = '';
+			$sts_var_carvan_image_caption = '';
 		}
 
 
@@ -461,14 +471,17 @@ public function fetch_caravan_data() {
 
 		if($sts_var_factory_stoneguard_image_id){
 			$stoneguard_image = '<img src="'.wp_get_attachment_url($sts_var_factory_stoneguard_image_id).'" alt="'.get_the_title($caravanPostID).'" />';
+			if($sts_var_carvan_image_caption){
+				$stoneguard_image .= '<div class="image-caption-area">
+										<div class="image-caption">
+											<p>'.esc_html($sts_var_carvan_image_caption).'</p>
+										</div>
+									</div>';
+			}
 		} else {
 			$stoneguard_image = '';
 		}
-		if($sts_var_toolbox_image_id){
-			$toolbox_image = '<img src="'.wp_get_attachment_url($sts_var_toolbox_image_id).'" alt="'.get_the_title($caravanPostID).'" />';
-		} else {
-			$toolbox_image = '';
-		}
+
 
 
 		wp_send_json(

@@ -4052,11 +4052,6 @@ Mixin for transition
     transform: translate(50%, -50%) rotate(-360deg);
   }
 }
-.editor-styles-wrapper .field.van-model-group {
-  display: flex;
-  -moz-column-gap: 10px;
-       column-gap: 10px;
-}
 .editor-styles-wrapper .post-box .post-box-img a {
   height: 100%;
   display: inline-block;
@@ -5467,9 +5462,6 @@ Mixin for transition
 .editor-styles-wrapper .vehicle-images {
   display: flex;
 }
-.editor-styles-wrapper .vehicle-images .vehicle-image {
-  width: 50%;
-}
 .editor-styles-wrapper .form-measurements-section .measurements-images img {
   width: 100%;
 }
@@ -5732,10 +5724,21 @@ Mixin for transition
   top: 15px;
 }
 .editor-styles-wrapper .form-image-slider .image-caption-area,
-.editor-styles-wrapper .vehicle-images .image-caption-area {
+.editor-styles-wrapper .vehicle-images .image-caption-area,
+.editor-styles-wrapper .example-photographs .image-caption-area {
   position: relative;
-  bottom: 44px;
   margin-bottom: -44px;
+  display: inline-block;
+}
+.editor-styles-wrapper .form-image-slider .image-caption-area {
+  bottom: 44px;
+}
+.editor-styles-wrapper .form-image-slider.no-slider .slick-dots {
+  display: none !important;
+}
+.editor-styles-wrapper .vehicle-images .image-caption-area,
+.editor-styles-wrapper .example-photographs .image-caption-area {
+  bottom: 50px;
 }
 .editor-styles-wrapper #caravan-details .checkboxes label {
   width: 100%;
@@ -5745,9 +5748,9 @@ Mixin for transition
   margin: 70px auto 0;
   max-width: 1400px;
 }
-.editor-styles-wrapper .checkbox-item .woocommerce-Price-amount {
-  display: block !important;
-  margin-top: 10px !important;
+.editor-styles-wrapper .van_model_other {
+  width: -webkit-fill-available;
+  margin-top: 10px;
 }
 .editor-styles-wrapper .wp-block-button .wp-block-button__link {
   box-sizing: border-box;
@@ -5994,7 +5997,7 @@ Mixin for transition
   justify-content: space-between;
 }
 .editor-styles-wrapper .two-columns-fields .field {
-  width: 49%;
+  width: 48%;
 }
 .editor-styles-wrapper #orderForm .field {
   margin-bottom: 10px;
@@ -7736,18 +7739,12 @@ body.post-type-post .editor-styles-wrapper > div {
   right: 41%;
   transform: translateX(50%);
 }
-.inv-order-details br {
-  display: none;
-}
 .inv-order-details .customer-details {
   border-bottom: 2px solid #b9b9b9;
   font-size: var(--ss_font_size_14);
-  padding-bottom: 10px;
+  padding: 7px 0 10px;
   box-sizing: border-box;
   margin-bottom: 4px;
-}
-.inv-order-details .customer-details br {
-  display: none;
 }
 
 .order-table {
@@ -7818,7 +7815,7 @@ body.post-type-post .editor-styles-wrapper > div {
 }
 
 .inv-two.office-use {
-  margin-top: var(--ss_space_200);
+  margin-top: var(--ss_space_96);
 }
 
 .postbox-container .customer-upload-images {

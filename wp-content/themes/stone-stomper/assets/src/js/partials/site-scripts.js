@@ -16,38 +16,57 @@ jQuery( document ).on( 'scroll', function() {
 jQuery( document ).ready( function() {
 	jQuery( '#veh_make' ).on( 'change', function() {
 		if ( jQuery( this ).val() === 'other' ) {
+				const yearContainer = jQuery('.veh_year_other'); // assuming veh_year is inside a wrapper
+				const vehMakeContainer = jQuery('.veh_make_other'); // assuming veh_year is inside a wrapper
+				const vehModelContainer = jQuery('.veh_model_other'); // assuming veh_year is inside a wrapper
+
 			jQuery( '#veh_model' ).hide();
-			jQuery( '#vehicle_model_other' ).show();
-
 			jQuery( '#veh_year' ).hide();
-			jQuery( '#veh_year_other' ).show();
 
-			jQuery( '#veh_make_other_wrap' ).removeClass( 'hidden' );
+			vehMakeContainer.append(
+				'<input placeholder="Other Make" id="veh_make_other" name="vehicle_make_other" type="text" />'
+			);
+			vehModelContainer.append(
+				'<input style="margin-top:10px" placeholder="Vehicle Model" id="vehicle_model_other" name="vehicle_model" type="text" />'
+			);
+			// Append input if not already present
+			yearContainer.append(
+				'<input placeholder="Model Year" id="veh_year_other" name="vehicle_year" type="text" />'
+			);
+
 		} else {
 			jQuery( '#veh_model' ).show();
-			jQuery( '#vehicle_model_other' ).hide();
-
 			jQuery( '#veh_year' ).show();
-			jQuery( '#veh_year_other' ).hide();
-			jQuery( '#veh_make_other_wrap' ).addClass( 'hidden' );
+
+			jQuery( '.veh_make_other input' ).remove();
+			jQuery('.veh_model_other input').remove();
+			jQuery('.veh_year_other input').remove();
 		}
 	} );
 
 	jQuery( '#van_make' ).on( 'change', function() {
 		if ( jQuery( this ).val() === 'other' ) {
+			const vanModelContainer = jQuery('.van_model_other'); // assuming veh_year is inside a wrapper
+
 			jQuery( '#van_model' ).hide();
-			jQuery( '#van_model_other' ).show();
+
+			vanModelContainer.append(
+				'<input placeholder="Caravan Model" id="van_model_other" name="caravan_model" type="text" />'
+			);
 		} else {
 			jQuery( '#van_model' ).show();
-			jQuery( '#van_model_other' ).hide();
+			jQuery( '.van_model_other input' ).remove();
 		}
 	} );
 
 	jQuery( '#van_model' ).on( 'change', function() {
 		if ( jQuery( this ).val() === 'other' ) {
-			jQuery( '#van_model_other' ).show();
+			const vanModelContainer = jQuery('.van_model_other'); // assuming veh_year is inside a wrapper
+			vanModelContainer.append(
+				'<input placeholder="Caravan Model" id="van_model_other" name="caravan_model" type="text" />'
+			);
 		} else {
-			jQuery( '#van_model_other' ).hide();
+			jQuery( '.van_model_other input' ).remove();
 		}
 	} );
 
