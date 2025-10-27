@@ -76,3 +76,32 @@
 .hero-home{
 	max-height: 953px;
 }
+
+
+// home styles
+.home .product-item .product-title a {
+	color: var(--ss_regular_text) !important;
+}
+.home .product-item .product-title a:hover,
+.page-id-347 .product-item .product-title a:hover {
+	color: var(--ss_red) !important;
+}
+
+
+.product-image {
+	overflow: hidden;
+}
+
+.product-image img {
+
+	transition: transform 0.4s ease;  /* smooth animation */
+}
+
+.product-image:hover img {
+	transform: scale(1.1)     /* zoom in on hover */
+}
+
+
+
+
+
