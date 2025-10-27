@@ -16,9 +16,9 @@ jQuery( document ).on( 'scroll', function() {
 jQuery( document ).ready( function() {
 	jQuery( '#veh_make' ).on( 'change', function() {
 		if ( jQuery( this ).val() === 'other' ) {
-				const yearContainer = jQuery('.veh_year_other'); // assuming veh_year is inside a wrapper
-				const vehMakeContainer = jQuery('.veh_make_other'); // assuming veh_year is inside a wrapper
-				const vehModelContainer = jQuery('.veh_model_other'); // assuming veh_year is inside a wrapper
+			const yearContainer = jQuery( '.veh_year_other' ); // assuming veh_year is inside a wrapper
+			const vehMakeContainer = jQuery( '.veh_make_other' ); // assuming veh_year is inside a wrapper
+			const vehModelContainer = jQuery( '.veh_model_other' ); // assuming veh_year is inside a wrapper
 
 			jQuery( '#veh_model' ).hide();
 			jQuery( '#veh_year' ).hide();
@@ -33,20 +33,19 @@ jQuery( document ).ready( function() {
 			yearContainer.append(
 				'<input placeholder="Model Year" id="veh_year_other" name="vehicle_year" type="text" />'
 			);
-
 		} else {
 			jQuery( '#veh_model' ).show();
 			jQuery( '#veh_year' ).show();
 
 			jQuery( '.veh_make_other input' ).remove();
-			jQuery('.veh_model_other input').remove();
-			jQuery('.veh_year_other input').remove();
+			jQuery( '.veh_model_other input' ).remove();
+			jQuery( '.veh_year_other input' ).remove();
 		}
 	} );
 
 	jQuery( '#van_make' ).on( 'change', function() {
 		if ( jQuery( this ).val() === 'other' ) {
-			const vanModelContainer = jQuery('.van_model_other'); // assuming veh_year is inside a wrapper
+			const vanModelContainer = jQuery( '.van_model_other' ); // assuming veh_year is inside a wrapper
 
 			jQuery( '#van_model' ).hide();
 
@@ -61,7 +60,7 @@ jQuery( document ).ready( function() {
 
 	jQuery( '#van_model' ).on( 'change', function() {
 		if ( jQuery( this ).val() === 'other' ) {
-			const vanModelContainer = jQuery('.van_model_other'); // assuming veh_year is inside a wrapper
+			const vanModelContainer = jQuery( '.van_model_other' ); // assuming veh_year is inside a wrapper
 			vanModelContainer.append(
 				'<input placeholder="Caravan Model" id="van_model_other" name="caravan_model" type="text" />'
 			);
@@ -192,7 +191,7 @@ jQuery( function() {
 
 	//Form Input
 
-	jQuery( document ).ready( function( $ ) {
+	jQuery( document ).ready( function() {
 		function toggleFilledClass( el ) {
 			if ( jQuery( el ).val() ) {
 				jQuery( el ).addClass( 'filled' );
@@ -200,12 +199,51 @@ jQuery( function() {
 				jQuery( el ).removeClass( 'filled' );
 			}
 		}
-		jQuery( 'input[type="text"],input[type="number"],input[type="email"],input[type="tel"],input[type="url"],input[type="search"],input[type="password"],input[type="time"],input[type="date"],input[type="datetime-local"],input[type="week"],input[type="month"],input[type="file"],input[type="range"],input[list],input[type="string"],select,textarea,.gform-text-input-reset' ).on( 'input change blur', function() {
-			toggleFilledClass( this );
+
+		const selector = 'input[type="text"],input[type="number"],input[type="email"],input[type="tel"],input[type="url"],input[type="search"],input[type="password"],input[type="time"],input[type="date"],input[type="datetime-local"],input[type="week"],input[type="month"],input[type="file"],input[type="range"],input[list],input[type="string"],select,textarea,.gform-text-input-reset';
+
+		jQuery( document ).on( 'input change blur', selector, function() {
+			const el = this;
+			setTimeout( function() {
+				toggleFilledClass( el );
+			}, 150 );
 		} );
-		jQuery( 'input[type="text"],input[type="number"],input[type="email"],input[type="tel"],input[type="url"],input[type="search"],input[type="password"],input[type="time"],input[type="date"],input[type="datetime-local"],input[type="week"],input[type="month"],input[type="file"],input[type="range"],input[list],input[type="string"],select,textarea,.gform-text-input-reset' ).each( function() {
-			toggleFilledClass( this );
+
+		function scanAndAttach( context ) {
+			jQuery( selector, context ).each( function() {
+				toggleFilledClass( this );
+			} );
+		}
+
+		scanAndAttach( document );
+
+		const observer = new MutationObserver( function( mutations ) {
+			mutations.forEach( function( mutation ) {
+				if ( mutation.type === 'childList' && mutation.addedNodes.length ) {
+					jQuery( mutation.addedNodes ).each( function() {
+						if ( this.nodeType === 1 ) {
+							scanAndAttach( this );
+						}
+					} );
+				}
+				if ( mutation.type === 'attributes' && ( mutation.attributeName === 'class' || mutation.attributeName === 'style' || mutation.attributeName === 'hidden' ) ) {
+					if ( mutation.target && mutation.target.nodeType === 1 ) {
+						scanAndAttach( mutation.target );
+					}
+				}
+			} );
 		} );
+
+		observer.observe( document.body, { childList: true, subtree: true, attributes: true, attributeFilter: [ 'class', 'style', 'hidden' ] } );
+
+		let tries = 0;
+		var poll = setInterval( function() {
+			scanAndAttach( document );
+			tries++;
+			if ( tries > 12 ) {
+				clearInterval( poll );
+			}
+		}, 250 );
 	} );
 
 	// Slider
