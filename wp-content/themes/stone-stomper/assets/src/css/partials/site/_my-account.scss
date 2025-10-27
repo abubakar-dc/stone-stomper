@@ -127,9 +127,9 @@
 
 .woocommerce-cart {
 	padding-top: calc(var(--ss_header-wrapper-default) + var(--ss_space_96));
-	.wp-block-woocommerce-cart {
-		padding-bottom: var(--ss_space_96);
-	}
+	// .wp-block-woocommerce-cart {
+	// 	padding-bottom: var(--ss_space_96);
+	// }
 	.wc-block-cart.wp-block-woocommerce-filled-cart-block {
 		margin-bottom: 0;
 	}

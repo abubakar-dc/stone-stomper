@@ -214,6 +214,17 @@
 	}
 }
 
+.toolbox-support {
+	.two-columns-fields .extra-support {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		label {
+			font-size: 14px;
+		}
+	}
+}
+
 #final-summary {
 	.form-section-right {
 		border: none;

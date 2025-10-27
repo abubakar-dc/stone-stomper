@@ -1075,6 +1075,14 @@ strong {
   color: var(--ss_text_strong) !important;
 }
 
+.main-section {
+  min-height: calc(100vh - (var(--ss_header-wrapper-default) + var(--ss_space_96) + var(--ss_space_96) - 5px));
+}
+
+.logged-in .main-section {
+  min-height: calc(100vh - (var(--ss_header-wrapper-default) + var(--ss_space_96) + var(--ss_space_96) + 27px));
+}
+
 /*-------------------------------------------------
 >> Styles for links
 -------------------------------------------------*/
@@ -5977,9 +5985,6 @@ body #daextlwcnf-cookie-settings-button-2:hover {
 .woocommerce-cart {
   padding-top: calc(var(--ss_header-wrapper-default) + var(--ss_space_96));
 }
-.woocommerce-cart .wp-block-woocommerce-cart {
-  padding-bottom: var(--ss_space_96);
-}
 .woocommerce-cart .wc-block-cart.wp-block-woocommerce-filled-cart-block {
   margin-bottom: 0;
 }
@@ -6976,6 +6981,15 @@ body #daextlwcnf-cookie-settings-button-2:hover {
 }
 #final-measurements .field {
   margin-bottom: 30px;
+}
+
+.toolbox-support .two-columns-fields .extra-support {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.toolbox-support .two-columns-fields .extra-support label {
+  font-size: 14px;
 }
 
 #final-summary .form-section-right {

@@ -4726,9 +4726,6 @@ Mixin for transition
 .editor-styles-wrapper .woocommerce-cart {
   padding-top: calc(var(--ss_header-wrapper-default) + var(--ss_space_96));
 }
-.editor-styles-wrapper .woocommerce-cart .wp-block-woocommerce-cart {
-  padding-bottom: var(--ss_space_96);
-}
 .editor-styles-wrapper .woocommerce-cart .wc-block-cart.wp-block-woocommerce-filled-cart-block {
   margin-bottom: 0;
 }
@@ -5621,6 +5618,14 @@ Mixin for transition
 }
 .editor-styles-wrapper #final-measurements .field {
   margin-bottom: 30px;
+}
+.editor-styles-wrapper .toolbox-support .two-columns-fields .extra-support {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.editor-styles-wrapper .toolbox-support .two-columns-fields .extra-support label {
+  font-size: 14px;
 }
 .editor-styles-wrapper #final-summary .form-section-right {
   border: none;
