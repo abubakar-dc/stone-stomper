@@ -32,6 +32,7 @@ foreach ( $sts_folder_includes as $sts_folders ) {
 		}
 	}
 }
+
 /**
  * Get folder Dir
  *
@@ -81,20 +82,6 @@ add_filter('woocommerce_get_item_data', function($item_data, $cart_item) {
         'vinyl_inserts'            => 'Vinyl Inserts',
         'support_pockets'          => 'Support Pockets',
     ];
-
-    foreach ($fields as $key => $label) {
-        if (!empty($cart_item[$key])) {
-            $val = $cart_item[$key];
-            if ($key === 'support_pockets') {
-                $val = ($val === '1' || $val === 1 || $val === 'yes' || $val === 'on') ? 'Yes' : 'No';
-            }
-            $item_data[] = [
-                'key'     => $label,
-                'value'   => is_array($val) ? implode(', ', array_map('wc_clean', array_map('strval', $val))) : wc_clean($val),
-                'display' => is_array($val) ? implode(', ', array_map('wc_clean', array_map('strval', $val))) : wc_clean($val),
-            ];
-        }
-    }
 
     // Helper: parse JSON/CSV into clean int IDs
     $parse_ids = static function($raw) {
@@ -170,16 +157,6 @@ add_action('woocommerce_checkout_create_order_line_item', function($item, $cart_
         'vinyl_inserts'            => 'Vinyl Inserts',
         'support_pockets'          => 'Support Pockets',
     ];
-
-    foreach ($fields as $key => $label) {
-        if (!empty($values[$key])) {
-            $val = $values[$key];
-            if ($key === 'support_pockets') {
-                $val = ($val === '1' || $val === 1 || $val === 'yes' || $val === 'on') ? 'Yes' : 'No';
-            }
-            $item->add_meta_data($label, is_array($val) ? implode(', ', array_map('wc_clean', array_map('strval', $val))) : wc_clean($val), true);
-        }
-    }
 
     // Helper: parse JSON/CSV to clean int IDs
     $parse_ids = static function($raw) {
@@ -329,9 +306,7 @@ add_action( 'woocommerce_new_order', function( $order_id ) {
 	$stoneguard_width_mm = isset( $data['stoneguard_width_mm'] ) ? sanitize_text_field( $data['stoneguard_width_mm'] ) : '';
 	$vinyl_width_mm     = isset( $data['vinyl_width_mm'] ) ? sanitize_text_field( $data['vinyl_width_mm'] ) : '';
 	$vinyl_length_mm     = isset( $data['vinyl_length_mm'] ) ? sanitize_text_field( $data['vinyl_length_mm'] ) : '';
-	// $support_pockets     = sts_bool( $data['support_pockets'] ?? 'yes' ) ? 'yes' : 'no';
-	// $support_pockets_raw = $data['support_pockets'] ?? 'yes';
-	// $support_pockets     = sts_bool( $support_pockets_raw ) ? 'yes' : 'no';
+	$support_pockets     = sts_bool( $data['support_pockets']) ? 'yes' : 'no';
 
 
 	// // Photos (hidden inputs hold JSON arrays of IDs)
@@ -386,11 +361,11 @@ error_log(print_r($cust_name,true));
 	update_post_meta( $post_id, 'bar_width_mm', $measure_barwidth_mm );
 	update_post_meta( $post_id, 'caravan_width_mm', $caravan_width_mm );
 	update_post_meta( $post_id, 'caravan_length_mm', $a_frame_length_mm );
-	// // update_post_meta( $post_id, 'support_pockets', $support_pockets );
-	// // Support pockets - save in ACF-compatible format (1/0)
-	// // $support_pockets_raw = $data['support_pockets'] ?? 'no';
-	// // $support_pockets     = ( strtolower( $support_pockets_raw ) === 'yes' || sts_bool( $support_pockets_raw ) ) ? 1 : 0;
-	// // update_post_meta( $post_id, 'support_pockets', $support_pockets );
+	update_post_meta( $post_id, 'support_pockets', $support_pockets );
+	// Support pockets - save in ACF-compatible format (1/0)
+	// $support_pockets_raw = $data['support_pockets'] ?? 'no';
+	// $support_pockets     = ( strtolower( $support_pockets_raw ) === 'yes' || sts_bool( $support_pockets_raw ) ) ? 1 : 0;
+	// update_post_meta( $post_id, 'support_pockets', $support_pockets );
 
 	// $support_pocket = isset( $data['support_pocket'] ) && $data['support_pocket'] === 'yes' ? 'yes' : 'no';
 	// update_post_meta( $post_id, 'support_pocket', $support_pocket );
@@ -862,17 +837,15 @@ function show_towing_svg_in_editor( $post ) {
 	$front_ids = get_post_meta( $post->ID, 'front_ids', true );
 	$support_pockets = get_post_meta( $post->ID, 'support_pockets', true );
 
-	// var_dump(get_post_meta( $post->ID));
-
 
 
 
 	// $checked = ($support_pocket === 'yes') ? 'checked' : 'not';
-	if($support_pockets){
-		$support_pockets = 'Yes';
-	} else {
-		$support_pockets = 'No';
-	}
+	// if($support_pockets){
+	// 	$support_pockets = 'Yes';
+	// } else {
+	// 	$support_pockets = 'No';
+	// }
 
 	function show_meta_images( $meta_value ) {
 		if ( empty( $meta_value ) ) return;

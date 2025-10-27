@@ -104,6 +104,9 @@ jQuery( document ).ready( function() {
 						jQuery( '#barwidth' ).val( response.barwidth );
 					}
 					jQuery( '#veh_year' ).html( response.year );
+
+					jQuery( '#support_pockets' ).html( response.support_pockets );
+
 					if ( response.vehicleImage !== null ) {
 						jQuery( '#towing-vehicle-image' ).html( response.vehicleImage );
 					}
@@ -146,6 +149,7 @@ jQuery( document ).ready( function() {
 					if ( response.barwidth ) {
 						jQuery( '#vanwidth' ).val( response.barwidth ).trigger( 'change' );
 					}
+
 					if ( response.barheight ) {
 						jQuery( '#a_frame_length' ).val( response.barheight ).trigger( 'change' );
 					}
@@ -185,3 +189,5 @@ jQuery( document ).ready( function() {
 		} );
 	}
 } );
+
+

@@ -35,7 +35,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 	}
 
 	$sts_var_measurements_image           = $sts_fields['sts_var_measurements_image'] ?? null;
-	$sts_var_measurements_image_caption           = $sts_fields['sts_var_measurements_image_caption'] ?? null;
+	$sts_var_measurements_image_caption   = $sts_fields['sts_var_measurements_image_caption'] ?? null;
 	$sts_var_section_head_notices         = $sts_fields['sts_var_section_head_notices'] ?? null;
 ?>
 

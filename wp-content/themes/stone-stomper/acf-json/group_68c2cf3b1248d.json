@@ -326,7 +326,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "25",
                 "class": "",
                 "id": ""
             },
@@ -347,7 +347,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "25",
                 "class": "",
                 "id": ""
             },
@@ -368,7 +368,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "25",
                 "class": "",
                 "id": ""
             },
@@ -389,7 +389,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "25",
                 "class": "",
                 "id": ""
             },
@@ -410,7 +410,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "25",
                 "class": "",
                 "id": ""
             },
@@ -431,7 +431,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "25",
                 "class": "",
                 "id": ""
             },
@@ -444,27 +444,24 @@
         },
         {
             "key": "field_68c2cf3b15d1c",
-            "label": "Support Pockets",
+            "label": "Support Pockets Option",
             "name": "support_pockets",
             "aria-label": "",
-            "type": "checkbox",
+            "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
-            "choices": [],
-            "default_value": [],
-            "return_format": "value",
-            "allow_custom": 0,
+            "default_value": "",
+            "maxlength": "",
             "allow_in_bindings": 0,
-            "layout": "vertical",
-            "toggle": 0,
-            "save_custom": 0,
-            "custom_choice_button_text": "Add new choice"
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_68ecb6b41614c",
@@ -631,5 +628,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1761551254
+    "modified": 1761562701
 }
