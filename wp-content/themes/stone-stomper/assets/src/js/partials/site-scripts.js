@@ -16,9 +16,9 @@ jQuery( document ).on( 'scroll', function() {
 jQuery( document ).ready( function() {
 	jQuery( '#veh_make' ).on( 'change', function() {
 		if ( jQuery( this ).val() === 'other' ) {
-				const yearContainer = jQuery('.veh_year_other'); // assuming veh_year is inside a wrapper
-				const vehMakeContainer = jQuery('.veh_make_other'); // assuming veh_year is inside a wrapper
-				const vehModelContainer = jQuery('.veh_model_other'); // assuming veh_year is inside a wrapper
+			const yearContainer = jQuery( '.veh_year_other' ); // assuming veh_year is inside a wrapper
+			const vehMakeContainer = jQuery( '.veh_make_other' ); // assuming veh_year is inside a wrapper
+			const vehModelContainer = jQuery( '.veh_model_other' ); // assuming veh_year is inside a wrapper
 
 			jQuery( '#veh_model' ).hide();
 			jQuery( '#veh_year' ).hide();
@@ -33,20 +33,19 @@ jQuery( document ).ready( function() {
 			yearContainer.append(
 				'<input placeholder="Model Year" id="veh_year_other" name="vehicle_year" type="text" />'
 			);
-
 		} else {
 			jQuery( '#veh_model' ).show();
 			jQuery( '#veh_year' ).show();
 
 			jQuery( '.veh_make_other input' ).remove();
-			jQuery('.veh_model_other input').remove();
-			jQuery('.veh_year_other input').remove();
+			jQuery( '.veh_model_other input' ).remove();
+			jQuery( '.veh_year_other input' ).remove();
 		}
 	} );
 
 	jQuery( '#van_make' ).on( 'change', function() {
 		if ( jQuery( this ).val() === 'other' ) {
-			const vanModelContainer = jQuery('.van_model_other'); // assuming veh_year is inside a wrapper
+			const vanModelContainer = jQuery( '.van_model_other' ); // assuming veh_year is inside a wrapper
 
 			jQuery( '#van_model' ).hide();
 
@@ -61,7 +60,7 @@ jQuery( document ).ready( function() {
 
 	jQuery( '#van_model' ).on( 'change', function() {
 		if ( jQuery( this ).val() === 'other' ) {
-			const vanModelContainer = jQuery('.van_model_other'); // assuming veh_year is inside a wrapper
+			const vanModelContainer = jQuery( '.van_model_other' ); // assuming veh_year is inside a wrapper
 			vanModelContainer.append(
 				'<input placeholder="Caravan Model" id="van_model_other" name="caravan_model" type="text" />'
 			);
@@ -455,3 +454,4 @@ jQuery( function() {
 		}
 	} );
 } );
+
