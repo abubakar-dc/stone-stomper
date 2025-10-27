@@ -31,6 +31,12 @@ strong {
 	color: var(--ss_text_strong) !important;
 }
 
-// .main-section {
-// 	height: calc(100vh - (var(--ss_header-wrapper-default) + var(--ss_space_96) + var(--ss_space_96)));
-// }
+.main-section {
+	min-height: calc(100vh - (var(--ss_header-wrapper-default) + var(--ss_space_96) + var(--ss_space_96) - (5px) ));
+}
+
+.logged-in {
+	.main-section {
+		min-height: calc(100vh - (var(--ss_header-wrapper-default) + var(--ss_space_96) + var(--ss_space_96) + 27px));
+	}
+}
