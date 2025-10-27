@@ -14,11 +14,9 @@ if ( ! defined( 'BASETHEME_BLOCK_DIR' ) ) {
 	define( 'BASETHEME_BLOCK_DIR', __DIR__ . '/blocks' );
 }
 
-
 if ( ! defined( 'BASETHEME_DEFAULT_IMAGE' ) ) {
 	define( 'BASETHEME_DEFAULT_IMAGE', esc_url( get_template_directory_uri() ) . '/assets/build/images/admin/defaults/default-image.webp' );
 }
-
 
 $sts_folder_includes = sts_includes( __DIR__ . '/includes/classes' );
 /**
@@ -536,7 +534,7 @@ add_action( 'template_redirect', function() {
 });
 
 
-function render_towing_diagram( $caravan_length_mm, $caravan_width_mm, $toolbox_height_mm, $toolbox_width_mm, $bar_width_mm, $vinyl_insert_width_mm, $vinyl_insert_height_mm ) { ?>
+function render_towing_diagram( $caravan_length_mm, $caravan_width_mm, $toolbox_height_mm, $toolbox_width_mm, $bar_width_mm, $vinyl_insert_width_mm, $vinyl_insert_height_mm, $stoneguard_width_mm, $stoneguard_height_mm ) { ?>
 
 	<div class="stone-stomper-vector-inner">
 		<?php if($caravan_length_mm < 1900 ){ ?>
@@ -724,9 +722,18 @@ function render_towing_diagram( $caravan_length_mm, $caravan_width_mm, $toolbox_
 				</g>
 				<line class="st0" x1="884.28" y1="181.78" x2="884.28" y2="286.37"/>
 				<rect class="st8" x="873.2" y="212.51" width="22.16" height="43.67"/>
-				<g transform="translate(850,235.13)">
+				<g transform="translate(830,240.13)">
 					<!-- <rect class="st4" x="10" y="-12" width="135" height="24"/> -->
-					<text class="st5" text-anchor="start" dominant-baseline="middle" x="20"><?php echo esc_html( $toolbox_height_mm ? $toolbox_height_mm.' mm' : '-' ); ?></text>
+
+					<!-- Stonegard Size -->
+					<?php if($stoneguard_height_mm){ ?>
+						<text class="st5" text-anchor="start" dominant-baseline="middle" y="-15" x="20"><?php echo esc_html( $stoneguard_height_mm ? 'S: '. $stoneguard_height_mm.' mm' : '-' ); ?></text>
+					<?php } ?>
+
+					<!-- Toolbox Size -->
+					<?php if($toolbox_height_mm){ ?>
+						<text class="st5" text-anchor="start" dominant-baseline="middle" x="20"><?php echo esc_html( $toolbox_height_mm ? 'T: '.$toolbox_height_mm.' mm' : '-' ); ?></text>
+					<?php } ?>
 				</g>
 				<polyline class="st0" points="880.55 185.79 884.28 181.78 888 185.79"/>
 				<polyline class="st0" points="888 282.37 884.28 286.37 880.55 282.37"/>
@@ -736,7 +743,14 @@ function render_towing_diagram( $caravan_length_mm, $caravan_width_mm, $toolbox_
 					<rect class="st8" x="539.36" y="253.9" width="135.53" height="22.16"/>
 					<g transform="translate(555,263.13)">
 						<!-- <rect class="st4" x="10" y="-12" width="135" height="24"/> -->
-						<text class="st5" text-anchor="start" dominant-baseline="middle" x="20"><?php echo esc_html( $toolbox_width_mm ? $toolbox_width_mm.' mm' : '-' ); ?></text>
+						<!-- Stonegard Size -->
+						<?php if($stoneguard_width_mm){ ?>
+						<text class="st5" text-anchor="start" dominant-baseline="middle" y="-15" x="20"><?php echo esc_html( $stoneguard_width_mm ? 'S: '. $stoneguard_width_mm.' mm' : '-' ); ?></text>
+						<?php } ?>
+						<!-- Toolbox Size -->
+						<?php if($toolbox_height_mm){ ?>
+							<text class="st5" text-anchor="start" dominant-baseline="middle" x="20"><?php echo esc_html( $toolbox_width_mm ? 'T: '. $toolbox_width_mm.' mm' : '-' ); ?></text>
+						<?php } ?>
 					</g>
 					<polyline class="st0" points="356.43 270.01 352.42 266.29 356.43 262.56"/>
 					<polyline class="st0" points="856.13 262.56 860.13 266.29 856.13 270.01"/>
@@ -826,6 +840,8 @@ function show_towing_svg_in_editor( $post ) {
     $vinyl_insert_height_mm    = get_post_meta( $post->ID, 'vinyl_insert_height_mm', true );
     $toolbox_width_mm    = get_post_meta( $post->ID, 'toolbox_width_mm', true );
     $toolbox_height_mm    = get_post_meta( $post->ID, 'toolbox_height_mm', true );
+    // $toolbox_width_mm    = get_post_meta( $post->ID, 'toolbox_width_mm', true );
+    // $toolbox_height_mm    = get_post_meta( $post->ID, 'toolbox_height_mm', true );
 
     $vehicle_make    = get_post_meta( $post->ID, 'vehicle_make', true );
     $caravan_make    = get_post_meta( $post->ID, 'caravan_make', true );
@@ -846,6 +862,7 @@ function show_towing_svg_in_editor( $post ) {
 	$front_ids = get_post_meta( $post->ID, 'front_ids', true );
 	$support_pockets = get_post_meta( $post->ID, 'support_pockets', true );
 
+	// var_dump(get_post_meta( $post->ID));
 
 
 
@@ -971,7 +988,7 @@ function show_towing_svg_in_editor( $post ) {
 
 		<div class="stone-stomper-vector" style="display:none;">
 			<?php
-			render_towing_diagram( $caravan_length_mm, $caravan_width_mm, $toolbox_height_mm, $toolbox_width_mm, $bar_width_mm, $vinyl_insert_width_mm, $vinyl_insert_height_mm );
+			render_towing_diagram( $caravan_length_mm, $caravan_width_mm, $toolbox_height_mm, $toolbox_width_mm, $bar_width_mm, $vinyl_insert_width_mm, $vinyl_insert_height_mm, $factory_stoneguard_width, $factory_stoneguard_height  );
 			?>
 		</div>
 	</div>
@@ -1132,7 +1149,7 @@ function show_towing_svg_in_editor( $post ) {
 
 					<table class="order-table" style="width:100%; border-collapse:collapse;">
 						<tr>
-							<td style="text-align:center;"><strong>Quantity</strong></td>
+							<td style="text-align:center;"><strong>Sr. NO</strong></td>
 							<td style="text-align:center;"><strong>Description</strong></td>
 							<td style="text-align:center;"><strong>Unit Price</strong></td>
 							<td style="text-align:center;"><strong>Total</strong></td>
@@ -1173,7 +1190,7 @@ function show_towing_svg_in_editor( $post ) {
 					</table>
 					<div class="stone-stomper-vector">
 
-						<?php render_towing_diagram( $caravan_length_mm, $caravan_width_mm, $toolbox_height_mm, $toolbox_width_mm, $bar_width_mm, $vinyl_insert_width_mm, $vinyl_insert_height_mm ); ?>
+						<?php render_towing_diagram( $caravan_length_mm, $caravan_width_mm, $toolbox_height_mm, $toolbox_width_mm, $bar_width_mm, $vinyl_insert_width_mm, $vinyl_insert_height_mm, $factory_stoneguard_width, $factory_stoneguard_height   ); ?>
 
 					</div>
 					<div class="thanks-message">THANK YOU FOR YOUR BUSINESS</div>
@@ -1305,7 +1322,7 @@ function show_towing_svg_in_editor( $post ) {
 						</table>
 
 						<div class="stone-stomper-vector">
-							<?php render_towing_diagram( $caravan_length_mm, $caravan_width_mm, $toolbox_height_mm, $toolbox_width_mm, $bar_width_mm, $vinyl_insert_width_mm, $vinyl_insert_height_mm ); ?>
+							<?php render_towing_diagram( $caravan_length_mm, $caravan_width_mm, $toolbox_height_mm, $toolbox_width_mm, $bar_width_mm, $vinyl_insert_width_mm, $vinyl_insert_height_mm, $factory_stoneguard_width, $factory_stoneguard_height   ); ?>
 						</div>
 					</div>
 				</div>

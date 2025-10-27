@@ -381,7 +381,7 @@
         },
         {
             "key": "field_68edd34a515e7",
-            "label": "Stoneguard Length (mm)",
+            "label": "Stoneguard Distance from Caravan (mm)",
             "name": "factory_stoneguard_height",
             "aria-label": "",
             "type": "text",
@@ -423,7 +423,7 @@
         },
         {
             "key": "field_68edd04bf1383",
-            "label": "Toolbox Height (mm)",
+            "label": "Toolbox Distance from Caravan (mm)",
             "name": "toolbox_height_mm",
             "aria-label": "",
             "type": "text",
@@ -456,12 +456,8 @@
                 "class": "",
                 "id": ""
             },
-            "choices": {
-                "yes": "Yes"
-            },
-            "default_value": [
-                "yes"
-            ],
+            "choices": [],
+            "default_value": [],
             "return_format": "value",
             "allow_custom": 0,
             "allow_in_bindings": 0,
@@ -635,5 +631,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1761116306
+    "modified": 1761551254
 }

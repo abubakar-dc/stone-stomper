@@ -146,8 +146,8 @@ function validatePhotoUploads() {
 		console.log('🖼️ Photo data:', photoData);
 	} else {
 		// ❌ If even one missing, keep section disabled
-		jQuery('#final-measurements').addClass('section-disable');
-		jQuery('#final-summary').addClass('section-disable');
+		// jQuery('#final-measurements').addClass('section-disable');
+		// jQuery('#final-summary').addClass('section-disable');
 		console.log('❌ One or more required photographs missing.');
 	}
 }
