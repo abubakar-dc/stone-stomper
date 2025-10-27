@@ -16,12 +16,4 @@ $sts_var_page_cta_pagevisibility = $sts_fields['sts_var_page_cta_pagevisibility'
 $sts_var_ftrcta_headline         = $sts_fields['sts_var_page_cta_headline'] ?? $sts_var_to_cta_headline;
 ?>
 
-<section id="cta-section" class="cta-section">
-	<!-- cta Start -->
-	<div class="cta-single">
-		<div class="wrapper">
-			<h4><?php echo esc_html( $sts_var_ftrcta_headline ); ?></h4>
-		</div>
-	</div>
-	<!-- cta End -->
-</section>
+

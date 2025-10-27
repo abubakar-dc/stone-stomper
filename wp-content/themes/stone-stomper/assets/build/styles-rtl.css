@@ -5980,6 +5980,9 @@ body #daextlwcnf-cookie-settings-button-2:hover {
 .woocommerce-cart .wp-block-woocommerce-cart {
   padding-bottom: var(--ss_space_96);
 }
+.woocommerce-cart .wc-block-cart.wp-block-woocommerce-filled-cart-block {
+  margin-bottom: 0;
+}
 .woocommerce-cart.logged-in .header-section {
   background-color: var(--ss_header_bgcolor_sticky);
   top: 32px;

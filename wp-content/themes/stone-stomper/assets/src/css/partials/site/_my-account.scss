@@ -130,6 +130,9 @@
 	.wp-block-woocommerce-cart {
 		padding-bottom: var(--ss_space_96);
 	}
+	.wc-block-cart.wp-block-woocommerce-filled-cart-block {
+		margin-bottom: 0;
+	}
 	&.logged-in {
 		.header-section {
 			background-color: var(--ss_header_bgcolor_sticky);

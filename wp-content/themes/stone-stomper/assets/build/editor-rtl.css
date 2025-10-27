@@ -4729,6 +4729,9 @@ Mixin for transition
 .editor-styles-wrapper .woocommerce-cart .wp-block-woocommerce-cart {
   padding-bottom: var(--ss_space_96);
 }
+.editor-styles-wrapper .woocommerce-cart .wc-block-cart.wp-block-woocommerce-filled-cart-block {
+  margin-bottom: 0;
+}
 .editor-styles-wrapper .woocommerce-cart.logged-in .header-section {
   background-color: var(--ss_header_bgcolor_sticky);
   top: 32px;
