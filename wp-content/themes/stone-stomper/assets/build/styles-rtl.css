@@ -5495,6 +5495,20 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   color: var(--ss_color_primary);
   padding: 0;
 }
+.product-detail-single .related .add_to_cart_button {
+  background-color: var(--ss_color_on_primary) !important;
+  border: 1px solid !important;
+  border-radius: 0 !important;
+  padding: var(--ss_space_20) var(--ss_space_20) !important;
+}
+.product-detail-single .related .add_to_cart_button:hover {
+  background-color: var(--ss_color_primary) !important;
+  color: var(--ss_color_on_primary) !important;
+}
+.product-detail-single .related .price bdi {
+  color: var(--ss_black);
+  font-weight: 700;
+}
 
 /*-------------------------------------------------
 >> Basic styles for Blog post
