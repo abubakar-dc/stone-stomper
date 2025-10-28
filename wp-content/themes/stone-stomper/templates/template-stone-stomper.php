@@ -50,7 +50,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 					StoneStomper::the_featured_image($sts_var_post_id,2000,   array(  'class' => 'wp-block-cover__image-background wp-image-342 size-large' ) );
 				}  ?>
 
-				<span aria-hidden="true" class="wp-block-cover__background has-background-dim" style="background-color:#645641"></span>
+				<span aria-hidden="true" class="wp-block-cover__background has-background-dim"></span>
 				<div class="wp-block-cover__inner-container is-layout-constrained wp-block-cover-is-layout-constrained">
 					<h1 class="" tabindex="0"><?php echo esc_html(get_the_title($sts_var_post_id)); ?></h1>
 				</div>
@@ -66,7 +66,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 
 
 				<div class="iat-form-content">
-
 					<form id="orderForm" novalidate>
 						<div id="form-all">
 							<!-- Your Details -->
@@ -85,7 +84,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 								</div>
 
 								<div class="form-section-right column" id="details-section">
-
 									<div class="content-head">
 										<?php if($sts_var_section_headline){ ?>
 											<h2 class=""><?php echo esc_html($sts_var_section_headline); ?></h2>
@@ -98,9 +96,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 
 									<div class="products-select">
 										<?php if ( $sts_var_select_products ) { ?>
-
-
-											<div class="field">
+											<div class="field jump-01">
 												<select id="product_type" placeholder="Please Select" name="product_type" required>
 													<option value="">Select Product</option>
 													<?php foreach( $sts_var_select_products as $key =>  $sts_var_select_product ){ ?>
@@ -111,7 +107,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										<?php } ?>
 									</div>
 									<div class="st-s36"></div>
-
+								<div id="jump-01" class="section-disable">
 									<?php if($sts_var_section_head_notices){
 										foreach($sts_var_section_head_notices as $sts_key => $notice){
 										$sts_var_headline = $notice['headline']??null;
@@ -140,7 +136,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											<?php } ?>
 										<?php } ?>
 									</div>
-									<div class="grid cols-2">
+									<div class="grid vehicle-details cols-2">
 										<div class="field">
 											<input id="cust_name" placeholder="Name" name="customer_name" type="text" required />
 										</div>
@@ -156,7 +152,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 													required />
 											</div>
 											<div class="field">
-
 												<select id="cust_state" placeholder="State" name="customer_state" required>
 													<option value="">State*</option>
 													<option>NSW</option>
@@ -189,11 +184,12 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 												}
 											?>
 									</div>
+									</div>
 								</div>
 							</div>
 
 							<!-- Towing Vehicle Details -->
-							<div id="vehicle-details" class=" order-form-section-inner d-flex form-vehicle-section justify-content-between align-items-start image-at-left">
+							<div id="vehicle-details" class="section-disable order-form-section-inner d-flex form-vehicle-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 vehicle-images ">
 										<div class="towing-vehicle-image" id="towing-vehicle-image" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
@@ -243,7 +239,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										?>
 									</div>
 									<div class="grid cols-2">
-										<div class="field vehicle-make-field-set">
+										<div class="field vehicle-make-field-set caravan-details">
 											<label class="req" for="veh_make">Vehicle Make</label>
 											<select id="veh_make" name="vehicle_make" required>
 												<?php
@@ -286,7 +282,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											$sts_var_notice = $notice['notice']??null;
 											if($sts_key === 1){ ?>
 											<?php if ( $sts_var_notice ) { ?>
-												<div class="note notice-bar"><?php echo html_entity_decode($sts_var_notice); ?></div>
+												<div class="note notice-bar" style="display:none;"><?php echo html_entity_decode($sts_var_notice); ?></div>
 												<?php } ?>
 											<?php
 											}
@@ -297,7 +293,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 							</div>
 
 							<!-- Caravan Details -->
-							<div id="caravan-details" class=" order-form-section-inner d-flex form-carvan-section justify-content-between align-items-start image-at-left">
+							<div id="caravan-details" class="section-disable  order-form-section-inner d-flex form-carvan-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 vehicle-images">
 										<div class="vehicle-images mobile-image-hide" id="caravan-images" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
@@ -398,7 +394,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 							</div>
 
 							<!-- Photographs -->
-							<div id="photographs-details" class=" order-form-section-inner d-flex form-carvan-section justify-content-between align-items-start image-at-left">
+							<div id="photographs-details" class=" section-disable order-form-section-inner d-flex form-carvan-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="form-image-slider">
 										<?php if($sts_var_example_photographs){ ?>
@@ -501,7 +497,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 							</div>
 
 							<!-- Final Measurements -->
-							<div id="final-measurements" class=" order-form-section-inner d-flex form-measurements-section justify-content-between align-items-start image-at-left">
+							<div id="final-measurements" class=" section-disable order-form-section-inner d-flex form-measurements-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 measurements-images example-photographs">
 										<?php
@@ -655,7 +651,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 							</div>
 
 							<!-- Final Details & Summary -->
-							<div id="final-summary" class=" order-form-section-inner d-flex form-details-section justify-content-between align-items-start image-at-left">
+							<div id="final-summary" class=" section-disable order-form-section-inner d-flex form-details-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<?php
 										global $product;

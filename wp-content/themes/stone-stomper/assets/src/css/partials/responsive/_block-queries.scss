@@ -215,6 +215,12 @@
 }
 
 @media only screen and (min-width: 769px) and (max-width: 1003px) {
+	.footer-cta-section .wp-block-button__link{
+padding: 20px 40px !important;
+	}
+	.page-id-351 .gfield.gfield--width-half{
+		width: 48%;
+	}
 	.woocommerce-account:not(.woocommerce-dashboard.woocommerce-account) {
 		.woocommerce-MyAccount-navigation ul li {
 			font-size: 14px !important;
@@ -695,19 +701,20 @@
 			display: flex;
 			flex-direction: column;
 			gap: 10px;
-			width: 100%;
+
 			.wp-block-button {
 				width: 100%;
 			}
-		}
-		.wp-block-button .wp-block-button__link {
-			padding: 18px 8px;
 
-		}
-		.gform-body{
-.gfield, .hs-form-field {
-    box-sizing: border-box;
-    position: relative;
+		 .wp-block-button__link {
+			padding: 18px 8px;
+			font-size: 14px;
+
+		}}
+
+
+ .gfield {
+
     margin-bottom: 16px;
 }
 input, select{
@@ -715,7 +722,7 @@ input, select{
 }
 
 
-		}
+
 #gform_submit_button_1{
 
 	width: 100% !important;
