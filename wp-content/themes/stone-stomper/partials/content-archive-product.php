@@ -21,11 +21,10 @@ $sts_var_product_permalink = get_permalink($sts_var_product_id);
 $sts_var_product_description = $product->get_short_description();
 $sts_var_product_price = $product->get_price();
 ?>
-
 <div class="product-item">
 	<div class="product-image">
 		<a href="<?php echo esc_url(get_the_permalink($sts_var_product_id)); ?>">
-			<?php StoneStomper::the_featured_image(  $sts_var_product_id, 500 ); ?>
+			<?php StoneStomper::the_featured_image($sts_var_product_id, 500); ?>
 		</a>
 	</div>
 	<div class="product-title">
@@ -40,20 +39,30 @@ $sts_var_product_price = $product->get_price();
 	</div>
 
 	<?php
-	if($sts_var_product_sub_title){ ?>
-		<div class="product-price"><h3 class="heading-5"><?php echo esc_html($sts_var_product_sub_title); ?></h3></div>
-		<a href="<?php echo esc_url(get_the_permalink($sts_var_product_id)); ?>"> Place Your Order </a>
+	if ($sts_var_product_sub_title) { ?>
+		<div class="product-price">
+			<h3 class="heading-5"><?php echo esc_html($sts_var_product_sub_title); ?></h3>
+		</div>
+		<a href="<?php echo esc_url(get_the_permalink($sts_var_product_id)); ?>">Place Your Order</a>
 	<?php } else { ?>
-	<?php if($upsells ){ ?>
-		<div class="product-price"><h3 class="heading-5"> <?php echo StoneStomper::show_product_with_upsells($sts_var_product_id,$upsells); ?></h3></div>
-		<a href="<?php echo esc_url(get_the_permalink($sts_var_product_id)); ?>"> Place Your Order </a>
+		<?php if ($upsells) { ?>
+			<div class="product-price">
+				<h3 class="heading-5"><?php echo StoneStomper::show_product_with_upsells($sts_var_product_id, $upsells); ?></h3>
+			</div>
+			<a href="<?php echo esc_url(get_the_permalink($sts_var_product_id)); ?>">Place Your Order</a>
 		<?php } else { ?>
 			<div class="product-price">
-				<h3 class="heading-5"><?php echo get_woocommerce_currency_symbol(); ?><?php echo html_entity_decode($sts_var_product_price); ?></h3>
+				<h3 class="heading-5">
+					<?php
+					$price = floatval($sts_var_product_price);
+					$formatted_price = number_format($price, 2, '.', '');
+					echo wc_price($formatted_price);
+					echo "<script>console.log('Product ID: {$sts_var_product_id} | Raw: {$sts_var_product_price} | Formatted: {$formatted_price}');</script>";
+					?>
+				</h3>
 			</div>
-	<?php echo do_shortcode( '[add_to_cart  id="' . esc_attr( $sts_var_product_id ) . '" show_price="false"]' ); ?>
+			<?php echo do_shortcode('[add_to_cart id="' . esc_attr($sts_var_product_id) . '" show_price="false"]'); ?>
+		<?php } ?>
 	<?php } ?>
-	<?php }
-
-	?>
 </div>
+

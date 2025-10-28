@@ -748,11 +748,17 @@ body {
 	.product_title {
 		margin: 0;
 	}
-
-	.price {
-		bdi {
-			color: var(--ss_black_2);
+	.entry-summary{
+		.woocommerce-Price-amount {
+			bdi {
+				font-size: var(--ss_font_size_20);
+				color: var(--ss_black_2);
+				@include font(open, bold);
+			}
 		}
+	}
+	bdi {
+		color: var(--ss_black_2);
 	}
 
 	form.cart {
@@ -841,7 +847,7 @@ body {
 	.wcgs-slider-image {
 		width: 100% !important;
 		height: 100% !important;
-		aspect-ratio: 700/550;
+		aspect-ratio: 700/450;
 
 		img {
 			width: 100% !important;
@@ -851,12 +857,13 @@ body {
 
 	.wcgs-thumb {
 		height: 100% !important;
-		min-height: 180px !important;
+		min-height: 140px !important;
 
 		img {
 			width: 100% !important;
 			height: 100% !important;
-			aspect-ratio: 180/180;
+			aspect-ratio: 140/140;
+			max-height: 160px;
 		}
 	}
 

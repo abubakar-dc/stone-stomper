@@ -50,7 +50,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 					StoneStomper::the_featured_image($sts_var_post_id,2000,   array(  'class' => 'wp-block-cover__image-background wp-image-342 size-large' ) );
 				}  ?>
 
-				<span aria-hidden="true" class="wp-block-cover__background has-background-dim" style="background-color:#645641"></span>
+				<span aria-hidden="true" class="wp-block-cover__background has-background-dim"></span>
 				<div class="wp-block-cover__inner-container is-layout-constrained wp-block-cover-is-layout-constrained">
 					<h1 class="" tabindex="0"><?php echo esc_html(get_the_title($sts_var_post_id)); ?></h1>
 				</div>

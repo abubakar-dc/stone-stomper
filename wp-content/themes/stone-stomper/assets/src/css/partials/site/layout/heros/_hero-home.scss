@@ -1,5 +1,4 @@
 .hero-home-section {
-
 	.wp-block-heading {
 		line-height: 1.19;
 		letter-spacing: 14px;
@@ -55,7 +54,6 @@
 		margin-top: 13px;
 		letter-spacing: 0.25px;
 		line-height: 1.45;
-
 	}
 }
 
@@ -77,8 +75,16 @@
 
 .hero-home {
 	max-height: 953px;
+	.wp-block-button {
+		.wp-block-button__link {
+			&:hover,
+			&:focus-visible {
+				border-color: var(--ss_white);
+				color: var(--ss_white);
+			}
+		}
+	}
 }
-
 
 // home styles
 
