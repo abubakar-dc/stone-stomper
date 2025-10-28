@@ -238,8 +238,8 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											}
 										?>
 									</div>
-									<div class="grid cols-2">
-										<div class="field vehicle-make-field-set caravan-details">
+									<div class="grid cols-2 caravan-details">
+										<div class="field vehicle-make-field-set">
 											<label class="req" for="veh_make">Vehicle Make</label>
 											<select id="veh_make" name="vehicle_make" required>
 												<?php
@@ -282,7 +282,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											$sts_var_notice = $notice['notice']??null;
 											if($sts_key === 1){ ?>
 											<?php if ( $sts_var_notice ) { ?>
-												<div class="note notice-bar" style="display:none;"><?php echo html_entity_decode($sts_var_notice); ?></div>
+												<div id="vehicle-notice-bar" class="note notice-bar" style="display:none;"><?php echo html_entity_decode($sts_var_notice); ?></div>
 												<?php } ?>
 											<?php
 											}
@@ -312,7 +312,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										</div>
 									</div>
 								</div>
-								<div class="form-section-right column" id="blk-caravan">
+								<div class="form-section-right column photographs-details" id="blk-caravan">
 									<?php if($sts_var_section_head_notices){
 										foreach($sts_var_section_head_notices as $sts_key => $notice){
 										$sts_var_headline = $notice['headline']??null;
@@ -343,7 +343,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											}
 										?>
 										</div>
-									<div class="grid cols-2">
+									<div class="grid cols-2 ">
 										<div class="field">
 											<label class="req" for="van_make">Caravan Make</label>
 											<select id="van_make" name="caravan_make" required>
@@ -383,7 +383,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										$sts_var_notice = $notice['notice']??null;
 										if($sts_key === 2){ ?>
 										<?php if ( $sts_var_notice ) { ?>
-												<div class="note notice-bar"><?php echo html_entity_decode($sts_var_notice); ?></div>
+												<div id="caravan-notice-bar" class="note notice-bar" style="display:none;"><?php echo html_entity_decode($sts_var_notice); ?></div>
 											<?php } ?>
 										<?php
 										}

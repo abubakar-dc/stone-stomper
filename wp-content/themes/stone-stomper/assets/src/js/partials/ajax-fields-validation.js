@@ -1,83 +1,35 @@
 jQuery( document ).ready( function( $ ) {
-	function formValidationOne() {
-		let isValid = true;
-		const fieldData = {};
+	// function formValidationOne() {
+	// 	let isValid = true;
+	// 	const fieldData = {};
 
-		jQuery( '#details-section' ).find( 'input[required], select[required]' ).each( function() {
-			const $field = jQuery( this );
-			const value = $field.val()?.trim();
-			const fieldName = $field.attr( 'name' );
+	// 	jQuery( '#details-section' ).find( 'input[required], select[required]' ).each( function() {
+	// 		const $field = jQuery( this );
+	// 		const value = $field.val()?.trim();
+	// 		const fieldName = $field.attr( 'name' );
 
-			if ( ! value ) {
-				isValid = false;
-				$field.addClass( 'field-error' );
-			} else {
-				$field.removeClass( 'field-error' );
-				fieldData[ fieldName ] = value;
-			}
-		} );
+	// 		if ( ! value ) {
+	// 			isValid = false;
+	// 			$field.addClass( 'field-error' );
+	// 		} else {
+	// 			$field.removeClass( 'field-error' );
+	// 			fieldData[ fieldName ] = value;
+	// 		}
+	// 	} );
 
-		if ( isValid ) {
-			jQuery( '#vehicle-details' ).removeClass( 'section-disable' );
-		} else {
-			console.log( '❌ Some required fields are still empty.' );
-		}
-	}
-	jQuery( document ).ready( function() {
-		jQuery( '#veh_make' ).on( 'change', function() {
-			if ( jQuery( this ).val() !== '' ) {
-				jQuery( '.notice-bar' ).css( 'display', 'block' );
-			}
-		} );
-	} );
-
-	jQuery( document ).ready( function() {
-	// Product select to reveal and jump
-		jQuery( '#product_type' ).on( 'change', function() {
-			const val = jQuery( this ).val();
-			if ( val ) {
-				const section = jQuery( '#jump-01' );
-				section.removeClass( 'section-disable' );
-				setTimeout( function() {
-					const target = document.querySelector( '#jump-01' );
-					if ( target ) {
-						requestAnimationFrame( function() {
-							target.scrollIntoView( { behavior: 'smooth', block: 'start' } );
-						} );
-					}
-				}, 400 );
-			}
-		} );
-
-		// Vehicle form observer
-		function allFieldsFilled() {
-			let filled = true;
-			jQuery( '#jump-01' ).find( 'input[required], select[required]' ).each( function() {
-				if ( ! jQuery( this ).val().trim() ) {
-					filled = false;
-					return false;
-				}
-			} );
-			return filled;
-		}
-
-		jQuery( '#jump-01 input[required], #jump-01 select[required]' ).on( 'input change', function() {
-			if ( allFieldsFilled() ) {
-				const section = jQuery( '#vehicle-details' );
-				if ( section.hasClass( 'section-disable' ) ) {
-					section.removeClass( 'section-disable' );
-					setTimeout( function() {
-						const target = document.querySelector( '#vehicle-details' );
-						if ( target ) {
-							requestAnimationFrame( function() {
-								target.scrollIntoView( { behavior: 'smooth', block: 'start' } );
-							} );
-						}
-					}, 600 );
-				}
-			}
-		} );
-	} );
+	// 	if ( isValid ) {
+	// 		jQuery( '#vehicle-details' ).removeClass( 'section-disable' );
+	// 	} else {
+	// 		console.log( '❌ Some required fields are still empty.' );
+	// 	}
+	// }
+	// jQuery( document ).ready( function() {
+	// 	jQuery( '#veh_make' ).on( 'change', function() {
+	// 		if ( jQuery( this ).val() !== '' ) {
+	// 			jQuery( '.notice-bar' ).css( 'display', 'block' );
+	// 		}
+	// 	} );
+	// } );
 
 	// Listen for input and change events on required fields
 	jQuery( '#details-section' ).on( 'input change', 'input[required], select[required]', function() {
@@ -128,8 +80,6 @@ jQuery( document ).ready( function( $ ) {
 		} );
 
 		if ( isValid ) {
-			jQuery( '#photographs-details' ).removeClass( 'section-disable' );
-			jQuery( '#final-measurements' ).removeClass( 'section-disable' );
 			console.log( '✅ All caravan fields are filled.' );
 			console.log( '🏕️ Caravan data:', fieldData );
 		} else {
@@ -185,8 +135,6 @@ jQuery( document ).ready( function( $ ) {
 
 		// ✅ If all 3 uploaded, enable final sections
 		if ( allUploaded ) {
-			jQuery( '#final-measurements' ).removeClass( 'section-disable' );
-			jQuery( '#final-summary' ).removeClass( 'section-disable' );
 			console.log( '✅ All 3 photos uploaded successfully!' );
 			console.log( '🖼️ Photo data:', photoData );
 		} else {

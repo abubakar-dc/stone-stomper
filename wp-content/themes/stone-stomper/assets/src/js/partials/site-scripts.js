@@ -24,14 +24,14 @@ jQuery( document ).ready( function() {
 			jQuery( '#veh_year' ).hide();
 
 			vehMakeContainer.append(
-				'<input placeholder="Other Make" id="veh_make_other" name="vehicle_make_other" type="text" />'
+				'<input placeholder="Other Make" id="veh_make_other" name="vehicle_make_other" type="text" />',
 			);
 			vehModelContainer.append(
-				'<input style="margin-top:10px" placeholder="Vehicle Model" id="vehicle_model_other" name="vehicle_model" type="text" />'
+				'<input style="margin-top:10px" placeholder="Vehicle Model" id="vehicle_model_other" name="vehicle_model" type="text" />',
 			);
 			// Append input if not already present
 			yearContainer.append(
-				'<input placeholder="Model Year" id="veh_year_other" name="vehicle_year" type="text" />'
+				'<input placeholder="Model Year" id="veh_year_other" name="vehicle_year" type="text" />',
 			);
 		} else {
 			jQuery( '#veh_model' ).show();
@@ -50,7 +50,7 @@ jQuery( document ).ready( function() {
 			jQuery( '#van_model' ).hide();
 
 			vanModelContainer.append(
-				'<input placeholder="Caravan Model" id="van_model_other" name="caravan_model" type="text" />'
+				'<input placeholder="Caravan Model" id="van_model_other" name="caravan_model" type="text" />',
 			);
 		} else {
 			jQuery( '#van_model' ).show();
@@ -62,7 +62,7 @@ jQuery( document ).ready( function() {
 		if ( jQuery( this ).val() === 'other' ) {
 			const vanModelContainer = jQuery( '.van_model_other' ); // assuming veh_year is inside a wrapper
 			vanModelContainer.append(
-				'<input placeholder="Caravan Model" id="van_model_other" name="caravan_model" type="text" />'
+				'<input placeholder="Caravan Model" id="van_model_other" name="caravan_model" type="text" />',
 			);
 		} else {
 			jQuery( '.van_model_other input' ).remove();
@@ -81,7 +81,12 @@ jQuery( function() {
 	if ( jQuery( '.header-wrapper' ).length > 0 ) {
 		function updateHeaderHeight() {
 			jQuery( '.header-wrapper' ).each( function() {
-				jQuery( 'body.woocommerce-account, body.woocommerce-checkout, body.woocommerce-cart, body.woocommerce-shop' ).css( '--ss_header-wrapper-default', jQuery( this ).outerHeight() + 'px' );
+				jQuery(
+					'body.woocommerce-account, body.woocommerce-checkout, body.woocommerce-cart, body.woocommerce-shop',
+				).css(
+					'--ss_header-wrapper-default',
+					jQuery( this ).outerHeight() + 'px',
+				);
 			} );
 		}
 		updateHeaderHeight();
@@ -118,41 +123,53 @@ jQuery( function() {
 	jQuery( '.header-nav' ).on( 'click', '.submenu-icon', function() {
 		const parentLi = jQuery( this ).closest( 'li' );
 
-		parentLi.siblings( '.active' )
-			.removeClass( 'active' )
-			.find( 'ul' ).slideUp();
+		parentLi.siblings( '.active' ).removeClass( 'active' ).find( 'ul' ).slideUp();
 
-		parentLi.toggleClass( 'active' ).find( 'ul' ).stop( true, true ).slideToggle();
-		parentLi.parents( 'ul' ).toggleClass( 'disabled-menu', parentLi.hasClass( 'active' ) );
+		parentLi
+			.toggleClass( 'active' )
+			.find( 'ul' )
+			.stop( true, true )
+			.slideToggle();
+		parentLi
+			.parents( 'ul' )
+			.toggleClass( 'disabled-menu', parentLi.hasClass( 'active' ) );
 	} );
 
 	/**
 	 *  Accessibility for Simple menu & Mega menu
 	 */
 	jQuery( '.menu-item-has-children > a' ).on( 'focus blur', function( event ) {
-		jQuery( this ).siblings( '.sub-menu, .mega-menu' ).toggleClass( 'focused', event.type === 'focus' );
+		jQuery( this )
+			.siblings( '.sub-menu, .mega-menu' )
+			.toggleClass( 'focused', event.type === 'focus' );
 	} );
 
 	jQuery( '.sub-menu a, .mega-menu a' ).on( 'focus blur', function( event ) {
-		jQuery( this ).closest( '.sub-menu, .mega-menu' ).toggleClass( 'focused', event.type === 'focus' );
+		jQuery( this )
+			.closest( '.sub-menu, .mega-menu' )
+			.toggleClass( 'focused', event.type === 'focus' );
 	} );
 
 	/**
 	 * Script for Accessibility of html Tags
 	 */
-	jQuery( 'h1, h2, h3, h4, h5, h6,p,li,blockquote,cite,strong,dt,dd,th,td,b,i,u,s,em,small,sup,del,ins,abbr,mark,details,pre,kbd,samp,var,address,code,q,figure,figcaption,caption,.top-bar-text,.top-bar-cross,.copy-right,.post-author-img,.post-author-name,.post-meta-date,.post-date' ).each( function() {
+	jQuery(
+		'h1, h2, h3, h4, h5, h6,p,li,blockquote,cite,strong,dt,dd,th,td,b,i,u,s,em,small,sup,del,ins,abbr,mark,details,pre,kbd,samp,var,address,code,q,figure,figcaption,caption,.top-bar-text,.top-bar-cross,.copy-right,.post-author-img,.post-author-name,.post-meta-date,.post-date',
+	).each( function() {
 		jQuery( this ).attr( {
 			tabindex: 0,
 		} );
 	} );
-	jQuery( '.header-nav li, .blog-nav li, .footer-nav li, .legal-nav li' ).each( function() {
-		const link = jQuery( this ).find( 'a' );
-		if ( link.length > 0 ) {
-			jQuery( this ).removeAttr( 'tabindex' );
-		} else {
-			jQuery( this ).attr( 'tabindex', '0' );
-		}
-	} );
+	jQuery( '.header-nav li, .blog-nav li, .footer-nav li, .legal-nav li' ).each(
+		function() {
+			const link = jQuery( this ).find( 'a' );
+			if ( link.length > 0 ) {
+				jQuery( this ).removeAttr( 'tabindex' );
+			} else {
+				jQuery( this ).attr( 'tabindex', '0' );
+			}
+		},
+	);
 	jQuery( 'form p' ).each( function() {
 		jQuery( this ).removeAttr( 'tabindex' );
 	} );
@@ -200,7 +217,8 @@ jQuery( function() {
 			}
 		}
 
-		const selector = 'input[type="text"],input[type="number"],input[type="email"],input[type="tel"],input[type="url"],input[type="search"],input[type="password"],input[type="time"],input[type="date"],input[type="datetime-local"],input[type="week"],input[type="month"],input[type="file"],input[type="range"],input[list],input[type="string"],select,textarea,.gform-text-input-reset';
+		const selector =
+			'input[type="text"],input[type="number"],input[type="email"],input[type="tel"],input[type="url"],input[type="search"],input[type="password"],input[type="time"],input[type="date"],input[type="datetime-local"],input[type="week"],input[type="month"],input[type="file"],input[type="range"],input[list],input[type="string"],select,textarea,.gform-text-input-reset';
 
 		jQuery( document ).on( 'input change blur', selector, function() {
 			const el = this;
@@ -219,14 +237,22 @@ jQuery( function() {
 
 		const observer = new MutationObserver( function( mutations ) {
 			mutations.forEach( function( mutation ) {
-				if ( mutation.type === 'childList' && mutation.addedNodes.length ) {
+				if (
+					mutation.type === 'childList' &&
+					mutation.addedNodes.length
+				) {
 					jQuery( mutation.addedNodes ).each( function() {
 						if ( this.nodeType === 1 ) {
 							scanAndAttach( this );
 						}
 					} );
 				}
-				if ( mutation.type === 'attributes' && ( mutation.attributeName === 'class' || mutation.attributeName === 'style' || mutation.attributeName === 'hidden' ) ) {
+				if (
+					mutation.type === 'attributes' &&
+					( mutation.attributeName === 'class' ||
+						mutation.attributeName === 'style' ||
+						mutation.attributeName === 'hidden' )
+				) {
 					if ( mutation.target && mutation.target.nodeType === 1 ) {
 						scanAndAttach( mutation.target );
 					}
@@ -234,7 +260,12 @@ jQuery( function() {
 			} );
 		} );
 
-		observer.observe( document.body, { childList: true, subtree: true, attributes: true, attributeFilter: [ 'class', 'style', 'hidden' ] } );
+		observer.observe( document.body, {
+			childList: true,
+			subtree: true,
+			attributes: true,
+			attributeFilter: [ 'class', 'style', 'hidden' ],
+		} );
 
 		let tries = 0;
 		var poll = setInterval( function() {
@@ -306,7 +337,6 @@ jQuery( function() {
 						},
 					},
 				],
-
 			} );
 		} );
 	}
@@ -353,8 +383,12 @@ function setupImageUpload( inputId, listId, slot ) {
 
 			const img = document.createElement( 'img' );
 			img.src = URL.createObjectURL( file );
-			img.style.width = '80px'; img.style.height = '80px'; img.style.objectFit = 'cover';
-			img.style.marginRight = '10px'; img.style.border = '1px solid #ccc'; img.style.borderRadius = '6px';
+			img.style.width = '80px';
+			img.style.height = '80px';
+			img.style.objectFit = 'cover';
+			img.style.marginRight = '10px';
+			img.style.border = '1px solid #ccc';
+			img.style.borderRadius = '6px';
 
 			const span = document.createElement( 'span' );
 			span.textContent = file.name;
@@ -364,12 +398,17 @@ function setupImageUpload( inputId, listId, slot ) {
 			status.textContent = ' – pending…';
 
 			const delBtn = document.createElement( 'button' );
-			delBtn.type = 'button'; delBtn.textContent = '❌'; delBtn.style.marginLeft = '10px';
+			delBtn.type = 'button';
+			delBtn.textContent = '❌';
+			delBtn.style.marginLeft = '10px';
 			delBtn.addEventListener( 'click', () => {
 				removeFile( index, input, list, slot );
 			} );
 
-			li.appendChild( img ); li.appendChild( span ); li.appendChild( status ); li.appendChild( delBtn );
+			li.appendChild( img );
+			li.appendChild( span );
+			li.appendChild( status );
+			li.appendChild( delBtn );
 			list.appendChild( li );
 		} );
 	}
@@ -389,7 +428,8 @@ function setupImageUpload( inputId, listId, slot ) {
 
 	function autoUpload( files, slot, list ) {
 		if ( ! files.length ) {
-			list.querySelectorAll( 'em' ).forEach( ( e ) => e.textContent = '' ); return;
+			list.querySelectorAll( 'em' ).forEach( ( e ) => ( e.textContent = '' ) );
+			return;
 		}
 
 		const fd = new FormData();
@@ -409,23 +449,31 @@ function setupImageUpload( inputId, listId, slot ) {
 				xhr.upload.addEventListener( 'progress', function( e ) {
 					if ( e.lengthComputable ) {
 						const pct = Math.round( ( e.loaded / e.total ) * 100 );
-						list.querySelectorAll( 'em' ).forEach( ( e ) => e.textContent = ' – uploading ' + pct + '%' );
+						list.querySelectorAll( 'em' ).forEach(
+							( e ) =>
+								( e.textContent = ' – uploading ' + pct + '%' ),
+						);
 					}
 				} );
 				return xhr;
 			},
-			success(resp) {
-				if (resp && resp.success) {
+			success( resp ) {
+				if ( resp && resp.success ) {
 					const data = resp.data || resp;
-					const urls = (data && data[slot]) ? data[slot].map(x => x.url) : [];
-					writeIds(slot, urls); // save URLs (instead of IDs)
-					list.querySelectorAll('em').forEach(e => e.textContent = ' – uploaded');
+					const urls =
+						data && data[ slot ] ? data[ slot ].map( ( x ) => x.url ) : [];
+					writeIds( slot, urls ); // save URLs (instead of IDs)
+					list.querySelectorAll( 'em' ).forEach(
+						( e ) => ( e.textContent = ' – uploaded' ),
+					);
 				} else {
-					alert('Upload failed');
+					alert( 'Upload failed' );
 				}
 			},
 			error() {
-				list.querySelectorAll( 'em' ).forEach( ( e ) => e.textContent = ' – network error' );
+				list.querySelectorAll( 'em' ).forEach(
+					( e ) => ( e.textContent = ' – network error' ),
+				);
 				alert( 'Network error during upload.' );
 			},
 		} );
@@ -438,44 +486,52 @@ setupImageUpload( 'photo_rear', 'list_rear', 'rear' );
 setupImageUpload( 'photo_front', 'list_front', 'front' );
 
 jQuery( function() {
-	jQuery( '.stone-stomper-supports #factory_stoneguard' ).on( 'change', function() {
-		if ( jQuery( this ).is( ':checked' ) ) {
-		  jQuery( '.toolbox-support' ).slideUp();
-		  jQuery( '.factory_stoneguard' ).slideDown();
-		} else {
-		  jQuery( '.factory_stoneguard' ).slideUp();
-		}
-	} );
+	jQuery( '.stone-stomper-supports #factory_stoneguard' ).on(
+		'change',
+		function() {
+			if ( jQuery( this ).is( ':checked' ) ) {
+				jQuery( '.toolbox-support' ).slideUp();
+				jQuery( '.factory_stoneguard' ).slideDown();
+			} else {
+				jQuery( '.factory_stoneguard' ).slideUp();
+			}
+		},
+	);
 
 	jQuery( '.stone-stomper-supports #toolbox' ).on( 'change', function() {
 		if ( jQuery( this ).is( ':checked' ) ) {
-		  jQuery( '.factory_stoneguard' ).slideUp();
-		  jQuery( '.toolbox-support' ).slideDown();
+			jQuery( '.factory_stoneguard' ).slideUp();
+			jQuery( '.toolbox-support' ).slideDown();
 		} else {
-		  jQuery( '.toolbox-support' ).slideUp();
+			jQuery( '.toolbox-support' ).slideUp();
 		}
 	} );
 
-	jQuery( '.stone-stomper-supports #support_pockets' ).on( 'change', function() {
-		if ( jQuery( this ).is( ':checked' ) ) {
-		  jQuery( '.factory_stoneguard' ).slideUp();
-		  jQuery( '.toolbox-support' ).slideUp();
-		}
-	} );
+	jQuery( '.stone-stomper-supports #support_pockets' ).on(
+		'change',
+		function() {
+			if ( jQuery( this ).is( ':checked' ) ) {
+				jQuery( '.factory_stoneguard' ).slideUp();
+				jQuery( '.toolbox-support' ).slideUp();
+			}
+		},
+	);
 
 	jQuery( '#a_frame_length' ).on( 'input change', function() {
-	// Get the input value and extract only the number part
-		const val = jQuery( this ).val().replace( /[^0-9]/g, '' );
+		// Get the input value and extract only the number part
+		const val = jQuery( this )
+			.val()
+			.replace( /[^0-9]/g, '' );
 		const num = parseInt( val, 10 );
 
 		if ( ! isNaN( num ) && num >= 1900 ) {
-	  jQuery( '.ss-support-options' ).slideDown();
+			jQuery( '.ss-support-options' ).slideDown();
 		} else {
-	  jQuery( '.ss-support-options' ).slideUp();
+			jQuery( '.ss-support-options' ).slideUp();
 		}
 	} );
 
-  	jQuery( '#final_address' ).on( 'change', function() {
+	jQuery( '#final_address' ).on( 'change', function() {
 		if ( jQuery( this ).val() === 'move' ) {
 			jQuery( '#move_note' ).show();
 		} else {
@@ -483,7 +539,7 @@ jQuery( function() {
 		}
 	} );
 
-  	jQuery( '#shipping' ).on( 'change', function() {
+	jQuery( '#shipping' ).on( 'change', function() {
 		if ( jQuery( this ).val() === 'flat_rate:5' ) {
 			jQuery( '#express_delivery_note' ).show();
 		} else {
@@ -492,3 +548,263 @@ jQuery( function() {
 	} );
 } );
 
+// Form
+
+jQuery( document ).ready( function() {
+	jQuery( '#product_type' ).on( 'change', function() {
+		const val = jQuery( this ).val();
+		if ( val ) {
+			const section = jQuery( '#jump-01' );
+			section.removeClass( 'section-disable' );
+			setTimeout( function() {
+				const target = document.querySelector( '#jump-01' );
+				if ( target ) {
+					requestAnimationFrame( function() {
+						target.scrollIntoView( {
+							behavior: 'smooth',
+							block: 'start',
+						} );
+					} );
+				}
+			}, 400 );
+		}
+	} );
+
+	function allFieldsFilled() {
+		let filled = true;
+		jQuery( '#jump-01' )
+			.find( 'input[required], select[required]' )
+			.each( function() {
+				if ( ! jQuery( this ).val().trim() ) {
+					filled = false;
+					return false;
+				}
+			} );
+		return filled;
+	}
+
+	jQuery( '#jump-01 input[required], #jump-01 select[required]' ).on(
+		'input change',
+		function() {
+			if ( allFieldsFilled() ) {
+				const section = jQuery( '#vehicle-details' );
+				if ( section.hasClass( 'section-disable' ) ) {
+					section.removeClass( 'section-disable' );
+					setTimeout( function() {
+						const target =
+							document.querySelector( '#vehicle-details' );
+						if ( target ) {
+							requestAnimationFrame( function() {
+								target.scrollIntoView( {
+									behavior: 'smooth',
+									block: 'start',
+								} );
+							} );
+						}
+					}, 600 );
+				}
+			}
+		},
+	);
+} );
+jQuery( document ).ready( function() {
+	let scrollDone = false;
+	let checkTimer;
+
+	function checkCaravanDetails() {
+		let allFilled = true;
+		jQuery(
+			'.grid.cols-2.caravan-details select[required]:visible, .grid.cols-2.caravan-details input[required]:visible',
+		).each( function() {
+			const val = jQuery( this ).val();
+			const text = jQuery( this ).find( 'option:selected' ).text().trim();
+			if ( ! val || val === '' || text.startsWith( 'Select' ) ) {
+				allFilled = false;
+				return false;
+			}
+		} );
+
+		if ( allFilled && ! scrollDone ) {
+			jQuery( '#caravan-details' ).removeClass( 'section-disable' );
+			scrollDone = true;
+			setTimeout( function() {
+				const target = document.querySelector( '#caravan-details' );
+				if ( target ) {
+					target.scrollIntoView( {
+						behavior: 'smooth',
+						block: 'start',
+					} );
+				}
+			}, 300 );
+		}
+	}
+
+	jQuery( document ).on(
+		'change input',
+		'.grid.cols-2.caravan-details select[required], .grid.cols-2.caravan-details input[required]',
+		function() {
+			clearTimeout( checkTimer );
+			checkTimer = setTimeout( checkCaravanDetails, 300 );
+		},
+	);
+} );
+
+jQuery( document ).ready( function() {
+	let hasScrolledToPhotos = false;
+	let formCheckTimer;
+
+	function verifyCaravanSection() {
+		let allRequiredFilled = true;
+
+		jQuery(
+			'#blk-caravan select[required]:visible, #blk-caravan input[required]:visible',
+		).each( function() {
+			const fieldValue = jQuery( this ).val();
+			const selectedText = jQuery( this )
+				.find( 'option:selected' )
+				.text()
+				.trim();
+			if (
+				! fieldValue ||
+				fieldValue === '' ||
+				selectedText.startsWith( 'Select' )
+			) {
+				allRequiredFilled = false;
+				return false;
+			}
+		} );
+
+		if ( allRequiredFilled && ! hasScrolledToPhotos ) {
+			jQuery( '#photographs-details' ).removeClass( 'section-disable' );
+			hasScrolledToPhotos = true;
+			setTimeout( function() {
+				const target = document.querySelector( '#photographs-details' );
+				if ( target ) {
+					target.scrollIntoView( {
+						behavior: 'smooth',
+						block: 'start',
+					} );
+				}
+			}, 300 );
+		}
+	}
+
+	jQuery( document ).on(
+		'change input',
+		'#blk-caravan select[required], #blk-caravan input[required]',
+		function() {
+			clearTimeout( formCheckTimer );
+			formCheckTimer = setTimeout( verifyCaravanSection, 300 );
+		},
+	);
+} );
+
+jQuery( document ).ready( function() {
+	let photosDone = false;
+	let timer;
+
+	function allPhotosFilled() {
+		let filled = true;
+		jQuery(
+			'#blk-photos select[required]:visible, #blk-photos input[required]:visible, #blk-photos input[type="file"][required]',
+		).each( function() {
+			const val = jQuery( this ).val();
+			const txt = jQuery( this ).find( 'option:selected' ).text().trim();
+			if ( ! val || val === '' || txt.startsWith( 'Select' ) ) {
+				filled = false;
+				return false;
+			}
+		} );
+		return filled;
+	}
+
+	function allMeasureFilled() {
+		let filled = true;
+		jQuery(
+			'#blk-measure select[required]:visible, #blk-measure input[required]:visible',
+		).each( function() {
+			const val = jQuery( this ).val();
+			const txt = jQuery( this ).find( 'option:selected' ).text().trim();
+			if ( ! val || val === '' || txt.startsWith( 'Select' ) ) {
+				filled = false;
+				return false;
+			}
+		} );
+		return filled;
+	}
+
+	function checkPhotos() {
+		if ( allPhotosFilled() ) {
+			if ( ! photosDone ) {
+				photosDone = true;
+				jQuery( '#final-measurements' ).removeClass( 'section-disable' );
+				setTimeout( () => {
+					if ( allMeasureFilled() ) {
+						jQuery( '#final-summary' ).removeClass( 'section-disable' );
+						document
+							.querySelector( '#final-summary' )
+							.scrollIntoView( {
+								behavior: 'smooth',
+								block: 'start',
+							} );
+					} else {
+						document
+							.querySelector( '#final-measurements' )
+							.scrollIntoView( {
+								behavior: 'smooth',
+								block: 'start',
+							} );
+					}
+				}, 300 );
+			}
+		} else {
+			photosDone = false;
+			jQuery( '#final-measurements, #final-summary' ).addClass(
+				'section-disable',
+			);
+		}
+	}
+
+	function checkMeasure() {
+		if ( photosDone && allMeasureFilled() ) {
+			jQuery( '#final-summary' ).removeClass( 'section-disable' );
+			setTimeout( () => {
+				document
+					.querySelector( '#final-summary' )
+					.scrollIntoView( { behavior: 'smooth', block: 'start' } );
+			}, 300 );
+		}
+	}
+
+	jQuery( document ).on(
+		'change input',
+		'#blk-photos select[required], #blk-photos input[required], #blk-photos input[type="file"][required]',
+		function() {
+			clearTimeout( timer );
+			timer = setTimeout( checkPhotos, 300 );
+		},
+	);
+
+	jQuery( document ).on(
+		'change input',
+		'#blk-measure select[required], #blk-measure input[required]',
+		function() {
+			clearTimeout( timer );
+			timer = setTimeout( checkMeasure, 300 );
+		},
+	);
+} );
+
+jQuery( document ).ready( function() {
+	jQuery( '#blk-caravan select' ).on( 'change', function() {
+		if ( jQuery( this ).val() !== '' ) {
+			jQuery( '#caravan-notice-bar' ).css( 'display', 'block' );
+		}
+	} );
+
+	jQuery( '#blk-vehicle select' ).on( 'change', function() {
+		if ( jQuery( this ).val() !== '' ) {
+			jQuery( '#vehicle-notice-bar' ).css( 'display', 'block' );
+		}
+	} );
+} );
