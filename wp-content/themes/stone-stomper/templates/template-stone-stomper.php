@@ -726,14 +726,14 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											</select>
 											<p class="note notice-bar hidden" id="move_note">Our Team will contact you once your order is ready on your given phone number</p>
 										</div>
-										<div class="field">
+										<!-- <div class="field">
 											<label class="req" for="shipping">Shipping (Australia Wide)</label>
 											<select id="shipping" name="shipping_method" required>
 											<option value="flat_rate:4">Standard Shipping $75</option>
 												<option value="flat_rate:5">Express Shipping $150</option>
 											</select>
 											<p class="note notice-bar hidden" id="express_delivery_note">Express shipping does not apply to Stonestomper products</p>
-										</div>
+										</div> -->
 									</div>
 									<div class="form-section-left column mobile-image" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 										<div class="grid cols-2 details-images ">

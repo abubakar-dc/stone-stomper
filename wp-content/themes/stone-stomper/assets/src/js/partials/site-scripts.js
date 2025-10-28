@@ -414,16 +414,14 @@ function setupImageUpload( inputId, listId, slot ) {
 				} );
 				return xhr;
 			},
-			success( resp ) {
-				if ( resp && resp.success ) {
-					// resp.data[slot] => array of {id, url}
-					const ids = ( resp.data && resp.data[ slot ] ) ? resp.data[ slot ].map( ( x ) => x.id ) : [];
-					writeIds( slot, ids );
-					list.querySelectorAll( 'em' ).forEach( ( e ) => e.textContent = ' – uploaded' );
+			success(resp) {
+				if (resp && resp.success) {
+					const data = resp.data || resp;
+					const urls = (data && data[slot]) ? data[slot].map(x => x.url) : [];
+					writeIds(slot, urls); // save URLs (instead of IDs)
+					list.querySelectorAll('em').forEach(e => e.textContent = ' – uploaded');
 				} else {
-					const msg = ( resp && resp.data && resp.data.message ) ? resp.data.message : 'Upload failed.';
-					list.querySelectorAll( 'em' ).forEach( ( e ) => e.textContent = ' – ' + msg );
-					alert( msg );
+					alert('Upload failed');
 				}
 			},
 			error() {

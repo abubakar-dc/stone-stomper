@@ -96,74 +96,72 @@ class WP_Theme_Ajax {
 	}
 
 
-	public function bst_handle_upload_order_photos() {
-		// Nonce check
+public function bst_handle_upload_order_photos() {
+	$slots  = array( 'hitch', 'rear', 'front' );
+	$result = array( 'hitch' => array(), 'rear' => array(), 'front' => array() );
 
-		$slots  = array( 'hitch', 'rear', 'front' ); // MUST match your JS "slot" keys
-		$result = array( 'hitch' => array(), 'rear' => array(), 'front' => array() );
+	require_once ABSPATH . 'wp-admin/includes/file.php';
+	require_once ABSPATH . 'wp-admin/includes/image.php';
 
-		// WordPress upload helpers
-		require_once ABSPATH . 'wp-admin/includes/file.php';
-		require_once ABSPATH . 'wp-admin/includes/image.php';
-		require_once ABSPATH . 'wp-admin/includes/media.php';
+	// 🔹 Backup original upload_dir before overriding
+	$original_upload_dir = wp_upload_dir();
 
-		// Optional: size/type limits
-		$overrides = array(
-			'test_form' => false,
-			'mimes'     => array(
-				'jpg|jpeg' => 'image/jpeg',
-				'png'      => 'image/png',
-				'gif'      => 'image/gif',
-				'webp'     => 'image/webp',
-				'heic'     => 'image/heic',
-			),
-			// 'unique_filename_callback' => 'your_custom_filename_cb', // optional
-		);
+	// Define custom filter function
+	$custom_upload_dir = function( $uploads ) {
+		$subdir             = '/order-form/' . date( 'Y/m' );
+		$uploads['subdir']  = $subdir;
+		$uploads['path']    = $uploads['basedir'] . $subdir;
+		$uploads['url']     = $uploads['baseurl'] . $subdir;
+		return $uploads;
+	};
 
-		foreach ( $slots as $slot ) {
-			if ( empty( $_FILES[ $slot ] ) ) {
-				continue;
-			}
+	// Apply temporary upload dir change
+	add_filter( 'upload_dir', $custom_upload_dir );
 
-			$files = self::bst_reformat_files_array( $_FILES[ $slot ] );
-			if ( empty( $files ) ) {
-				continue;
-			}
+	$overrides = array(
+		'test_form' => false,
+		'mimes'     => array(
+			'jpg|jpeg' => 'image/jpeg',
+			'png'      => 'image/png',
+			'gif'      => 'image/gif',
+			'webp'     => 'image/webp',
+			'heic'     => 'image/heic',
+		),
+	);
 
-			foreach ( $files as $file ) {
-				// Optional: block too-large files (e.g., > 15MB)
-				// if ( (int) $file['size'] > 15 * 1024 * 1024 ) { continue; }
-
-				$uploaded = wp_handle_upload( $file, $overrides );
-				if ( isset( $uploaded['error'] ) ) {
-					// You can collect per-file errors if desired
-					continue;
-				}
-
-				$attachment = array(
-					'post_mime_type' => $uploaded['type'],
-					'post_title'     => sanitize_file_name( wp_basename( $uploaded['file'] ) ),
-					'post_content'   => '',
-					'post_status'    => 'inherit',
-				);
-
-				$attach_id = wp_insert_attachment( $attachment, $uploaded['file'] );
-				if ( is_wp_error( $attach_id ) ) {
-					continue;
-				}
-
-				$attach_data = wp_generate_attachment_metadata( $attach_id, $uploaded['file'] );
-				wp_update_attachment_metadata( $attach_id, $attach_data );
-
-				$result[ $slot ][] = array(
-					'id'  => $attach_id,
-					'url' => wp_get_attachment_url( $attach_id ),
-				);
-			}
+	foreach ( $slots as $slot ) {
+		if ( empty( $_FILES[ $slot ] ) ) {
+			continue;
 		}
 
-		wp_send_json_success( $result );
+		$files = self::bst_reformat_files_array( $_FILES[ $slot ] );
+		if ( empty( $files ) ) {
+			continue;
+		}
+
+		foreach ( $files as $file ) {
+			$uploaded = wp_handle_upload( $file, $overrides );
+
+			if ( isset( $uploaded['error'] ) ) {
+				continue;
+			}
+
+			// Generate result with direct URL (no Media Library entry)
+			$result[ $slot ][] = array(
+				'url'  => $uploaded['url'],
+				'name' => basename( $uploaded['file'] ),
+			);
+		}
+
 	}
+
+	// 🔹 Remove filter after upload
+	remove_filter( 'upload_dir', $custom_upload_dir );
+
+	wp_send_json_success( $result );
+}
+
+
 	/**
 	 * Define ajax filter
 	 **/

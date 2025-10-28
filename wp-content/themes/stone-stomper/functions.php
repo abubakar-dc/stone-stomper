@@ -146,7 +146,6 @@ add_filter('woocommerce_add_cart_item_data', function($cart_item_data, $product_
     return $cart_item_data;
 }, 10, 3);
 
-
 // Persist to Order Items (admin)
 add_action('woocommerce_checkout_create_order_line_item', function($item, $cart_item_key, $values, $order) {
     // Simple fields (incl. support_pockets)
@@ -253,14 +252,46 @@ function sts_bool( $v ) {
 /**
  * Helper: ensure int array from mixed/stringified JSON
  */
-function sts_to_int_array( $v ) {
+/**
+ * Helper: ensure array of attachment IDs or URLs
+ */
+function sts_to_media_array( $v ) {
 	if ( is_string( $v ) ) {
 		$maybe = json_decode( $v, true );
-		if ( is_array( $maybe ) ) $v = $maybe;
+		if ( is_array( $maybe ) ) {
+			$v = $maybe;
+		} else {
+			$v = preg_split( '/[\s,|]+/', $v );
+		}
 	}
-	if ( ! is_array( $v ) ) return array();
-	return array_values( array_filter( array_map( 'intval', $v ) ) );
+
+	if ( ! is_array( $v ) ) return [];
+
+	$result = [];
+	foreach ( $v as $item ) {
+		$item = trim( $item );
+		if ( ! $item ) continue;
+
+		// If it's a numeric ID
+		if ( is_numeric( $item ) ) {
+			$result[] = intval( $item );
+			continue;
+		}
+
+		// If it's a full URL (try to find attachment ID)
+		if ( filter_var( $item, FILTER_VALIDATE_URL ) ) {
+			$id = attachment_url_to_postid( $item );
+			if ( $id ) {
+				$result[] = intval( $id );
+			} else {
+				// Fallback: keep the URL itself if no ID found
+				$result[] = esc_url_raw( $item );
+			}
+		}
+	}
+	return $result;
 }
+
 
 /**
  * Create/update a Customer CPT when an order is placed
@@ -310,9 +341,12 @@ add_action( 'woocommerce_new_order', function( $order_id ) {
 
 
 	// // Photos (hidden inputs hold JSON arrays of IDs)
-	$hitch_ids     = sts_to_int_array( $data['hitch_ids'] ?? array() );
-	$rear_ids     = sts_to_int_array( $data['rear_ids'] ?? array() );
-	$front_ids     = sts_to_int_array( $data['front_ids'] ?? array() );
+$hitch_ids = sts_to_media_array( $data['hitch_ids'] ?? [] );
+$rear_ids  = sts_to_media_array( $data['rear_ids'] ?? [] );
+$front_ids = sts_to_media_array( $data['front_ids'] ?? [] );
+
+
+// var_dump($hitch_ids);
 
 
 	// $photos = array(
@@ -509,7 +543,19 @@ add_action( 'template_redirect', function() {
 });
 
 
-function render_towing_diagram( $caravan_length_mm, $caravan_width_mm, $toolbox_height_mm, $toolbox_width_mm, $bar_width_mm, $vinyl_insert_width_mm, $vinyl_insert_height_mm, $stoneguard_width_mm, $stoneguard_height_mm ) { ?>
+function render_towing_diagram($post_id) {
+		$caravan_length_mm      = get_post_meta( $post_id, 'caravan_length_mm', true );
+		$caravan_width_mm       = get_post_meta( $post_id, 'caravan_width_mm', true );
+		$toolbox_height_mm      = get_post_meta( $post_id, 'toolbox_height_mm', true );
+		$toolbox_width_mm       = get_post_meta( $post_id, 'toolbox_width_mm', true );
+		$bar_width_mm           = get_post_meta( $post_id, 'bar_width_mm', true );
+		$vinyl_insert_width_mm  = get_post_meta( $post_id, 'vinyl_insert_width_mm', true );
+		$vinyl_insert_height_mm = get_post_meta( $post_id, 'vinyl_insert_height_mm', true );
+		$stoneguard_width_mm    = get_post_meta( $post_id, 'factory_stoneguard_width', true );
+		$stoneguard_height_mm   = get_post_meta( $post_id, 'factory_stoneguard_height', true );
+		ob_start();
+	?>
+
 
 	<div class="stone-stomper-vector-inner">
 		<?php if($caravan_length_mm < 1900 ){ ?>
@@ -764,13 +810,12 @@ function render_towing_diagram( $caravan_length_mm, $caravan_width_mm, $toolbox_
 
 		<?php } ?>
 	</div>
+	<?php return ob_get_clean(); ?>
 <?php }
-
-
 
 function show_towing_svg_in_editor( $post ) {
     // Get all meta data
-   $order_id = get_post_meta( $post->ID, 'order_id', true );
+   	$order_id = get_post_meta( $post->ID, 'order_id', true );
 	$order    = wc_get_order( $order_id );
 
 	if ( $order ) {
@@ -782,9 +827,7 @@ function show_towing_svg_in_editor( $post ) {
 		$delivery_address = $order->get_formatted_shipping_address();
 		$delivery_cost    = $order->get_shipping_total();
 		$order_total      = $order->get_total();
-			$delivery_instructions = $order->get_customer_note(); // 🟢 Add this line
-
-
+		$delivery_instructions = $order->get_customer_note(); // 🟢 Add this line
 		$products         = [];
 
 		// Loop products in the order
@@ -838,14 +881,17 @@ function show_towing_svg_in_editor( $post ) {
 	$support_pockets = get_post_meta( $post->ID, 'support_pockets', true );
 
 
+	$photo_ids = get_post_meta( $order_id, 'order_photos', true ); // Or wherever you're storing them
 
-
-	// $checked = ($support_pocket === 'yes') ? 'checked' : 'not';
-	// if($support_pockets){
-	// 	$support_pockets = 'Yes';
-	// } else {
-	// 	$support_pockets = 'No';
+	// if ( ! empty( $photo_ids['rear'] ) ) {
+	// 	foreach ( $photo_ids['rear'] as $attach_id ) {
+	// 		echo wp_get_attachment_image( $attach_id, 'medium' );
+	// 	}
 	// }
+
+
+
+
 
 	function show_meta_images( $meta_value ) {
 		if ( empty( $meta_value ) ) return;
@@ -869,80 +915,82 @@ function show_towing_svg_in_editor( $post ) {
 		}
 	}
 
-
-
-	if ( ! empty( $sts_var_proposed_date_of_delivery ) ) {
-		// Convert to timestamp
-		$sts_var_proposed_date_of_delivery = strtotime( $sts_var_proposed_date_of_delivery );
-	}
+		if ( ! empty( $sts_var_proposed_date_of_delivery ) ) {
+			// Convert to timestamp
+			$sts_var_proposed_date_of_delivery = strtotime( $sts_var_proposed_date_of_delivery );
+		}
     ?>
-		<div class="customer-upload-images">
-			<?php if ( $hitch_ids ) { ?>
-				<div class="row row-1">
-				<h3>Hitch Images</h3>
-				<div class="hitch-images image-group">
-					<?php foreach ( $hitch_ids as $id ) :
-					$img_url = wp_get_attachment_image_url( $id, 'large' ); ?>
-					<img src="<?php echo esc_url( $img_url ); ?>" alt="" class="popup-image" />
-					<?php endforeach; ?>
-				</div>
-				<div class="image-lightbox">
-					<div class="lightbox-inner">
-					<img src="" alt="" class="lightbox-img" />
-					<div class="lightbox-controls">
-						<span class="lightbox-prev">&#10094;</span>
-						<span class="lightbox-next">&#10095;</span>
-						<span class="lightbox-close">&times;</span>
-					</div>
-					</div>
-				</div>
-				</div>
-			<?php } ?>
 
-			<?php if ( $rear_ids ) { ?>
-				<div class="row row-1">
-				<h3>Rear Images</h3>
-				<div class="rear-images image-group">
-					<?php foreach ( $rear_ids as $id ) :
-					$img_url = wp_get_attachment_image_url( $id, 'large' ); ?>
-					<img src="<?php echo esc_url( $img_url ); ?>" alt="" class="popup-image" />
-					<?php endforeach; ?>
-				</div>
-				<div class="image-lightbox">
-					<div class="lightbox-inner">
-					<img src="" alt="" class="lightbox-img" />
-					<div class="lightbox-controls">
-						<span class="lightbox-prev">&#10094;</span>
-						<span class="lightbox-next">&#10095;</span>
-						<span class="lightbox-close">&times;</span>
-					</div>
-					</div>
-				</div>
-				</div>
-			<?php } ?>
+	<div class="customer-upload-images">
+		<?php if ( $hitch_ids ) { ?>
+			<div class="row row-1">
+			<h3>Hitch Images</h3>
+			<div class="hitch-images image-group">
+				<?php foreach ( $hitch_ids as $hitch_id ) :
 
-			<?php if ( $front_ids ) { ?>
-				<div class="row row-1">
-				<h3>Front Images</h3>
-				<div class="front-images image-group">
-					<?php foreach ( $front_ids as $id ) :
-					$img_url = wp_get_attachment_image_url( $id, 'large' ); ?>
-					<img src="<?php echo esc_url( $img_url ); ?>" alt="" class="popup-image" />
-					<?php endforeach; ?>
-				</div>
-				<div class="image-lightbox">
-					<div class="lightbox-inner">
-					<img src="" alt="" class="lightbox-img" />
-					<div class="lightbox-controls">
-						<span class="lightbox-prev">&#10094;</span>
-						<span class="lightbox-next">&#10095;</span>
-						<span class="lightbox-close">&times;</span>
-					</div>
-					</div>
+				$img_url = esc_url($hitch_id); ?>
+				<img src="<?php echo esc_url( $img_url ); ?>" alt="" class="popup-image" />
+				<?php endforeach; ?>
+			</div>
+			<div class="image-lightbox">
+				<div class="lightbox-inner">
+				<img src="" alt="" class="lightbox-img" />
+				<div class="lightbox-controls">
+					<span class="lightbox-prev">&#10094;</span>
+					<span class="lightbox-next">&#10095;</span>
+					<span class="lightbox-close">&times;</span>
 				</div>
 				</div>
-			<?php } ?>
-		</div>
+			</div>
+			</div>
+		<?php } ?>
+
+		<?php if ( $rear_ids ) { ?>
+			<div class="row row-1">
+			<h3>Rear Images</h3>
+			<div class="rear-images image-group">
+				<?php foreach ( $rear_ids as $hitch_id ) :
+
+				$img_url = esc_url($hitch_id); ?>
+				<img src="<?php echo esc_url( $img_url ); ?>" alt="" class="popup-image" />
+				<?php endforeach; ?>
+			</div>
+			<div class="image-lightbox">
+				<div class="lightbox-inner">
+				<img src="" alt="" class="lightbox-img" />
+				<div class="lightbox-controls">
+					<span class="lightbox-prev">&#10094;</span>
+					<span class="lightbox-next">&#10095;</span>
+					<span class="lightbox-close">&times;</span>
+				</div>
+				</div>
+			</div>
+			</div>
+		<?php } ?>
+
+		<?php if ( $front_ids ) { ?>
+			<div class="row row-1">
+			<h3>Front Images</h3>
+			<div class="front-images image-group">
+				<?php foreach ( $front_ids as $hitch_id ) :
+				$img_url = esc_url($hitch_id); ?>
+
+				<img src="<?php echo esc_url( $img_url ); ?>" alt="" class="popup-image" />
+				<?php endforeach; ?>
+			</div>
+			<div class="image-lightbox">
+				<div class="lightbox-inner">
+				<img src="" alt="" class="lightbox-img" />
+				<div class="lightbox-controls">
+					<span class="lightbox-prev">&#10094;</span>
+					<span class="lightbox-next">&#10095;</span>
+					<span class="lightbox-close">&times;</span>
+				</div>
+				</div>
+			</div>
+			</div>
+		<?php } ?>
+	</div>
 
 	<div style="margin-top:96px;"></div>
 
@@ -961,7 +1009,7 @@ function show_towing_svg_in_editor( $post ) {
 
 		<div class="stone-stomper-vector" style="display:none;">
 			<?php
-			render_towing_diagram( $caravan_length_mm, $caravan_width_mm, $toolbox_height_mm, $toolbox_width_mm, $bar_width_mm, $vinyl_insert_width_mm, $vinyl_insert_height_mm, $factory_stoneguard_width, $factory_stoneguard_height  );
+				echo render_towing_diagram( $post->ID, true );
 			?>
 		</div>
 	</div>
@@ -1162,9 +1210,7 @@ function show_towing_svg_in_editor( $post ) {
 						</tr>
 					</table>
 					<div class="stone-stomper-vector">
-
-						<?php render_towing_diagram( $caravan_length_mm, $caravan_width_mm, $toolbox_height_mm, $toolbox_width_mm, $bar_width_mm, $vinyl_insert_width_mm, $vinyl_insert_height_mm, $factory_stoneguard_width, $factory_stoneguard_height   ); ?>
-
+						<?php echo render_towing_diagram( $post->ID, true ); ?>
 					</div>
 					<div class="thanks-message">THANK YOU FOR YOUR BUSINESS</div>
 				</div>
@@ -1241,7 +1287,6 @@ function show_towing_svg_in_editor( $post ) {
 								<td style="padding:6px 15px; border:1px solid #ccc;">Towing Vehicle BarWidth (mm):</td>
 								<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $bar_width_mm ? $bar_width_mm  : '-' ); ?></td>
 							</tr>
-
 							<tr>
 								<td style="padding:6px 15px; border:1px solid #ccc;">Vinyl Insert Width (mm):</td>
 								<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $vinyl_insert_width_mm ? $vinyl_insert_width_mm  : '-' ); ?></td>
@@ -1266,8 +1311,6 @@ function show_towing_svg_in_editor( $post ) {
 								<td style="padding:6px 15px; border:1px solid #ccc;">Distance from the Caravan:</td>
 								<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $toolbox_height_mm ? $toolbox_height_mm : '-' ); ?></td>
 							</tr>
-
-
 							<tr>
 								<td style="padding:6px 15px; border:1px solid #ccc;">Bar Option</span></td>
 								<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_bar_option); ?></td>
@@ -1295,7 +1338,7 @@ function show_towing_svg_in_editor( $post ) {
 						</table>
 
 						<div class="stone-stomper-vector">
-							<?php render_towing_diagram( $caravan_length_mm, $caravan_width_mm, $toolbox_height_mm, $toolbox_width_mm, $bar_width_mm, $vinyl_insert_width_mm, $vinyl_insert_height_mm, $factory_stoneguard_width, $factory_stoneguard_height   ); ?>
+							<?php echo render_towing_diagram( $post->ID, true ); ?>
 						</div>
 					</div>
 				</div>
@@ -1304,85 +1347,84 @@ function show_towing_svg_in_editor( $post ) {
 
 	<script>
 		jQuery(document).ready(function () {
-		const allImageGroups = jQuery(".hitch-images, .rear-images, .front-images");
+			const allImageGroups = jQuery(".hitch-images, .rear-images, .front-images");
 
-		if (!jQuery(".image-lightbox").length) {
-			jQuery("body").append(`
-				<div class="image-lightbox">
-					<div class="lightbox-inner">
-						<img src="" alt="" class="lightbox-img">
-						<div class="lightbox-controls">
-							<span class="lightbox-prev">&#10094;</span>
-							<span class="lightbox-next">&#10095;</span>
-							<span class="lightbox-close">&times;</span>
+			if (!jQuery(".image-lightbox").length) {
+				jQuery("body").append(`
+					<div class="image-lightbox">
+						<div class="lightbox-inner">
+							<img src="" alt="" class="lightbox-img">
+							<div class="lightbox-controls">
+								<span class="lightbox-prev">&#10094;</span>
+								<span class="lightbox-next">&#10095;</span>
+								<span class="lightbox-close">&times;</span>
+							</div>
 						</div>
 					</div>
-				</div>
-			`);
-		}
+				`);
+			}
 
-		const lightbox = jQuery(".image-lightbox");
-		const lightboxImg = jQuery(".lightbox-img");
-		let currentGroup = null;
-		let currentIndex = 0;
+			const lightbox = jQuery(".image-lightbox");
+			const lightboxImg = jQuery(".lightbox-img");
+			let currentGroup = null;
+			let currentIndex = 0;
 
-		function showImage(index) {
-			const src = jQuery(currentGroup[index]).attr("src");
-			lightboxImg.attr("src", src);
-			currentIndex = index;
-			lightbox.addClass("active");
-		}
+			function showImage(index) {
+				const src = jQuery(currentGroup[index]).attr("src");
+				lightboxImg.attr("src", src);
+				currentIndex = index;
+				lightbox.addClass("active");
+			}
 
-		function closeLightbox() {
-			lightbox.removeClass("active");
-			setTimeout(() => {
-				lightboxImg.attr("src", "");
-				currentGroup = null;
-			}, 400);
-		}
+			function closeLightbox() {
+				lightbox.removeClass("active");
+				setTimeout(() => {
+					lightboxImg.attr("src", "");
+					currentGroup = null;
+				}, 400);
+			}
 
-		function showNext() {
-			if (!currentGroup) return;
-			currentIndex = (currentIndex + 1) % currentGroup.length;
-			showImage(currentIndex);
-		}
+			function showNext() {
+				if (!currentGroup) return;
+				currentIndex = (currentIndex + 1) % currentGroup.length;
+				showImage(currentIndex);
+			}
 
-		function showPrev() {
-			if (!currentGroup) return;
-			currentIndex = (currentIndex - 1 + currentGroup.length) % currentGroup.length;
-			showImage(currentIndex);
-		}
+			function showPrev() {
+				if (!currentGroup) return;
+				currentIndex = (currentIndex - 1 + currentGroup.length) % currentGroup.length;
+				showImage(currentIndex);
+			}
 
-		allImageGroups.each(function () {
-			const images = jQuery(this).find("img");
-			images.on("click", function () {
-				currentGroup = images;
-				showImage(images.index(this));
+			allImageGroups.each(function () {
+				const images = jQuery(this).find("img");
+				images.on("click", function () {
+					currentGroup = images;
+					showImage(images.index(this));
+				});
+			});
+
+			jQuery(".lightbox-close").on("click", closeLightbox);
+			jQuery(".lightbox-next").on("click", showNext);
+			jQuery(".lightbox-prev").on("click", showPrev);
+
+			jQuery(document).on("keydown", function (e) {
+				if (lightbox.hasClass("active")) {
+					if (e.key === "Escape") closeLightbox();
+					if (e.key === "ArrowRight") showNext();
+					if (e.key === "ArrowLeft") showPrev();
+				}
+			});
+
+			lightbox.on("click", function (e) {
+				if (jQuery(e.target).is(".image-lightbox")) closeLightbox();
+			});
+
+			// Generate Image
+			jQuery(".generate-diagram").on("click", function (e) {
+				jQuery(".stone-stomper-vector").slideDown();
 			});
 		});
-
-		jQuery(".lightbox-close").on("click", closeLightbox);
-		jQuery(".lightbox-next").on("click", showNext);
-		jQuery(".lightbox-prev").on("click", showPrev);
-
-		jQuery(document).on("keydown", function (e) {
-			if (lightbox.hasClass("active")) {
-				if (e.key === "Escape") closeLightbox();
-				if (e.key === "ArrowRight") showNext();
-				if (e.key === "ArrowLeft") showPrev();
-			}
-		});
-
-		lightbox.on("click", function (e) {
-			if (jQuery(e.target).is(".image-lightbox")) closeLightbox();
-		});
-
-		// Generate Image
-		jQuery(".generate-diagram").on("click", function (e) {
-			jQuery(".stone-stomper-vector").slideDown();
-		});
-	});
-
 
 		jQuery(document).ready(function($){
 
@@ -1404,8 +1446,6 @@ function show_towing_svg_in_editor( $post ) {
 			});
 
 		});
-
-
 	</script>
     <?php
 }
@@ -1413,14 +1453,13 @@ function show_towing_svg_in_editor( $post ) {
 add_action( 'add_meta_boxes', function() {
     add_meta_box(
         'towing_svg_preview',        // ID
-        'Stone Stomper Preview',       // Title
+        'Stone Stomper Preview',     // Title
         'show_towing_svg_in_editor', // Callback
         'customer',                  // Post type (CPT slug)
-        'normal',                      // Position (side or normal)
+        'normal',                    // Position (side or normal)
         'low'                       // Priority
     );
 });
-
 
 use Dompdf\Dompdf;
 
@@ -1430,109 +1469,253 @@ function download_customer_pdf_callback() {
         wp_die( 'Invalid request.' );
     }
 
+    // Get order id from post meta and load order
     $order_id = get_post_meta( $post_id, 'order_id', true );
-    $order    = wc_get_order( $order_id );
+    $order    = $order_id ? wc_get_order( $order_id ) : false;
 
     if ( ! $order ) {
         wp_die( 'Order not found.' );
     }
 
-    $order_date       = $order->get_date_created()->date_i18n('Y-m-d');
-    $customer_name    = $order->get_formatted_billing_full_name();
-    $customer_phone   = $order->get_billing_phone();
-    $customer_email   = $order->get_billing_email();
-    $delivery_address = $order->get_formatted_shipping_address();
-    $delivery_cost    = $order->get_shipping_total();
-    $order_total      = $order->get_total();
-    $inv_logo      = get_template_directory_uri().'/assets/src/images/invoice-gaurd.png';
+    // === Order Data ===
+    $order_date            = $order->get_date_created() ? $order->get_date_created()->date_i18n( 'Y-m-d' ) : '';
+    $customer_name         = $order->get_formatted_billing_full_name();
+    $customer_phone        = $order->get_billing_phone();
+    $customer_email        = $order->get_billing_email();
+    $delivery_address      = $order->get_formatted_shipping_address();
+    $delivery_cost         = $order->get_shipping_total();
+    $order_total           = $order->get_total();
+    $delivery_instructions = $order->get_customer_note();
 
+    // === Post meta (use $post_id consistently) ===
+    $bar_width_mm                    = get_post_meta( $post_id, 'bar_width_mm', true );
+    $caravan_length_mm               = get_post_meta( $post_id, 'caravan_length_mm', true );
+    $caravan_width_mm                = get_post_meta( $post_id, 'caravan_width_mm', true );
+    $factory_stoneguard_width        = get_post_meta( $post_id, 'factory_stoneguard_width', true );
+    $factory_stoneguard_height       = get_post_meta( $post_id, 'factory_stoneguard_height', true );
+    $vinyl_insert_width_mm           = get_post_meta( $post_id, 'vinyl_insert_width_mm', true );
+    $vinyl_insert_height_mm          = get_post_meta( $post_id, 'vinyl_insert_height_mm', true );
+    $toolbox_width_mm                = get_post_meta( $post_id, 'toolbox_width_mm', true );
+    $toolbox_height_mm               = get_post_meta( $post_id, 'toolbox_height_mm', true );
+    $vehicle_make                    = get_post_meta( $post_id, 'vehicle_make', true );
+    $caravan_make                    = get_post_meta( $post_id, 'caravan_make', true );
+    $sts_var_caravan_bar_option      = get_post_meta( $post_id, 'sts_var_caravan_bar_option', true );
+    $sts_var_caravan_bar_bend        = get_post_meta( $post_id, 'sts_var_caravan_bar_bend', true );
+    $sts_var_caravan_ss_length_adj   = get_post_meta( $post_id, 'sts_var_caravan_ss_length_adj', true );
+    $sts_var_caravan_cut_out         = get_post_meta( $post_id, 'sts_var_caravan_cut_out', true );
+    $sts_var_caravan_break_form      = get_post_meta( $post_id, 'sts_var_caravan_break_form', true );
+    $sts_var_caravan_hr_form         = get_post_meta( $post_id, 'sts_var_caravan_hr_form', true );
+    $sts_var_proposed_date_of_delivery = get_post_meta( $post_id, 'sts_var_proposed_date_of_delivery', true );
+
+    if ( $sts_var_caravan_ss_length_adj ) {
+        // numeric adjust only if numeric
+        if ( is_numeric( $sts_var_caravan_ss_length_adj ) && is_numeric( $caravan_length_mm ) ) {
+            $caravan_length_mm = $caravan_length_mm + $sts_var_caravan_ss_length_adj;
+        }
+    }
+
+    if ( ! empty( $sts_var_proposed_date_of_delivery ) ) {
+        $sts_var_proposed_date_of_delivery = strtotime( $sts_var_proposed_date_of_delivery );
+    }
+
+    // === Products rows ===
     $product_rows = '';
-    foreach ( $order->get_items() as $item ) {
-        $name     = $item->get_name();
-        $qty      = $item->get_quantity();
-        $total    = wc_format_decimal( $item->get_total(), 2 );
-        $unit     = wc_format_decimal( $item->get_total() / $qty, 2 );
+    foreach ( $order->get_items() as $index => $item ) {
+        $name  = $item->get_name();
+        $qty   = $item->get_quantity();
+        $total = wc_format_decimal( $item->get_total(), 2 );
+        $unit  = $qty ? wc_format_decimal( $item->get_total() / $qty, 2 ) : wc_format_decimal( $item->get_total(), 2 );
+
         $product_rows .= "
             <tr>
-                <td style='text-align:center;'>$qty</td>
-                <td style='text-align:center;'>$name</td>
-                <td style='text-align:center;'>$$unit</td>
-                <td style='text-align:center;'>$$total</td>
+                <td style='text-align:center;'>" . ( $index + 1 ) . "</td>
+                <td style='text-align:center;'>" . esc_html( $name ) . "</td>
+                <td style='text-align:center;'>$" . esc_html( $unit ) . "</td>
+                <td style='text-align:center;'>$" . esc_html( $total ) . "</td>
             </tr>";
     }
 
+    // invoice logo
+    $inv_logo = esc_url( get_template_directory_uri() . '/assets/src/images/invoice-gaurd.png' );
+
+    // === Build HTML (matching your popup structure) ===
     $html = "
+    <div style='font-family: Arial, Helvetica, sans-serif; font-size:12px;'>
+        <div class='inv-one'>
+            <div style='display:flex; justify-content:space-between; align-items:flex-start;'>
+                <div style='max-width:40%;'>
+                    <img src='{$inv_logo}' style='max-width:280px;' />
+                </div>
+                <div style='max-width:35%;'>
+                    <strong>Stone Stomper</strong><br/>
+                    PO Box 204, Port Noarlunga, SA 5167<br/>
+                    Factory location: Lonsdale SA<br/>
+                    <strong>Email:</strong> sales@stonestomper.com.au
+                </div>
+                <div style='text-align:right;'>
+                    <h3 style='margin:0;'>Quote/<br/>Invoice</h3>
+                    <table style='font-size:12px;'>
+                        <tr><td><strong>DATE:</strong> " . esc_html( $order_date ) . "</td></tr>
+                        <tr><td><strong>INV#:</strong> " . esc_html( $order_id ) . "</td></tr>
+                    </table>
+                </div>
+            </div>
 
-		<div class='invoice-header-section d-flex justify-content-between ' >
-				<div class='invoice-logo inv-column'>
-					<img src='{$inv_logo}' style='max-width:600px;cursor:pointer;' />
-				</div>
-				<div class='invoice-bussiness-details inv-column'>
-					<div class='h4'>Stone Stomper</div>
-					<p>PO Box 204, Port Noarlunga, SA <br> 5167 <br> Factory location:  Lonsdale SA <br>
-					<strong>
-						Email:
-					</strong>
-					<br>
-					<a href='mailto:sales@stonestomper.com.au'></a>sales@stonestomper.com.au</p>
-				</div>
-				<div class='invoice-right-column inv-column'>
-					<h3>Quote/Invoice</h2>
-					<table>
-						<tr><td><strong>DATE:</strong> <?php echo esc_html( $order_date ); ?> </td></tr>
-						<tr><td><strong>INV#:</strong> <?php echo esc_html( $order_id ); ?> </td></tr>
-						<tr><td><strong>P/O#:</strong>  </td></tr>
-					</table>
-				</div>
-			</div>
+            <br/>
 
-    <h2 style='text-align:center;'>Customer Order Summary</h2>
-    <p><strong>Date:</strong> {$order_date}<br>
-       <strong>Customer:</strong> {$customer_name}<br>
-       <strong>Email:</strong> {$customer_email}<br>
-       <strong>Phone:</strong> {$customer_phone}<br>
-       <strong>Address:</strong> {$delivery_address}</p>
+            <div>
+                <strong>Name:</strong> " . esc_html( $customer_name ) . " &nbsp;&nbsp;
+                <strong>Phone:</strong> " . esc_html( $customer_phone ) . " &nbsp;&nbsp;
+                <strong>Email:</strong> " . esc_html( $customer_email ) . "
+            </div>
 
-    <table border='1' cellspacing='0' cellpadding='5' width='100%' style='border-collapse:collapse;'>
-        <thead>
-            <tr>
-                <th>Qty</th>
-                <th>Description</th>
-                <th>Unit Price</th>
-                <th>Total</th>
-            </tr>
-        </thead>
-        <tbody>$product_rows</tbody>
-        <tfoot>
-            <tr>
-                <td colspan='3' style='text-align:right;'><strong>Delivery</strong></td>
-                <td style='text-align:center;'>$$delivery_cost</td>
-            </tr>
-            <tr>
-                <td colspan='3' style='text-align:right;'><strong>Total Due</strong></td>
-                <td style='text-align:center;'>$$order_total</td>
-            </tr>
-        </tfoot>
-    </table>";
+            <div style='margin-top:6px;'>
+                <strong>Delivery Address:</strong> " . wp_kses_post( html_entity_decode( $delivery_address ) ) . "
+            </div>
 
-    // Load Dompdf
-    require_once __DIR__ . '/vendor/autoload.php';
+            <div style='margin-top:6px;'>
+                <strong>Delivery Instructions/Authority to Leave:</strong> " . ( ! empty( $delivery_instructions ) ? esc_html( $delivery_instructions ) : 'No' ) . "
+            </div>";
 
-    $dompdf = new Dompdf();
+    if ( $caravan_make || $vehicle_make ) {
+        $html .= "<div style='margin-top:6px;'>";
+        if ( $caravan_make ) {
+            $html .= "<strong>Trailer Make:</strong> " . esc_html( $caravan_make ) . " &nbsp;&nbsp;";
+        }
+        if ( $vehicle_make ) {
+            $html .= "<strong>Vehicle Make:</strong> " . esc_html( $vehicle_make );
+        }
+        $html .= "</div>";
+    }
+
+    if ( $sts_var_proposed_date_of_delivery ) {
+        $html .= "<div style='margin-top:6px;'><strong>Date Required:</strong> " . esc_html( date( 'd-F-Y', $sts_var_proposed_date_of_delivery ) ) . "</div>";
+    }
+
+    // Products table
+    $html .= "
+        <br/>
+        <table style='width:100%; border-collapse:collapse; font-size:12px;' border='1' cellspacing='0' cellpadding='6'>
+            <thead>
+                <tr>
+                    <th style='text-align:center;'>Sr. NO</th>
+                    <th style='text-align:center;'>Description</th>
+                    <th style='text-align:center;'>Unit Price</th>
+                    <th style='text-align:center;'>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {$product_rows}
+                <tr>
+                    <td></td><td></td><td style='text-align:center;'><strong>Delivery</strong></td>
+                    <td style='text-align:center;'>" . esc_html( $delivery_cost ) . "</td>
+                </tr>
+                <tr>
+                    <td></td><td></td><td style='text-align:center;'><strong>Total Due</strong></td>
+                    <td style='text-align:center;'>" . esc_html( $order_total ) . "</td>
+                </tr>
+                <tr>
+                    <td></td><td></td><td style='text-align:center;'>GST (included)</td><td>-</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style='margin-top:12px; text-align:center; font-weight:bold;'>THANK YOU FOR YOUR BUSINESS</div>
+
+        <hr style='margin:18px 0;' />
+
+        <!-- Office use (inv-two) -->
+        <div class='inv-two'>
+            <div style='display:flex; justify-content:space-between; align-items:flex-start;'>
+                <div style='max-width:40%;'>
+                    <img src='{$inv_logo}' style='max-width:280px;' />
+                </div>
+                <div style='max-width:35%;'>
+                    <strong>Stone Stomper</strong><br/>
+                    PO Box 204, Port Noarlunga, SA 5167<br/>
+                    Factory location: Lonsdale SA<br/>
+                    <strong>Email:</strong> sales@stonestomper.com.au
+                </div>
+                <div style='text-align:right;'>
+                    <h3 style='margin:0;'>Quote/Invoice</h3>
+                    <table style='font-size:12px;'>
+                        <tr><td><strong>DATE:</strong> " . esc_html( $order_date ) . "</td></tr>
+                        <tr><td><strong>INV#:</strong> " . esc_html( $order_id ) . "</td></tr>
+                        <tr><td><strong>P/O#:</strong></td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <br/>
+
+            <div>
+                <strong>Name:</strong> " . esc_html( $customer_name ) . " &nbsp;&nbsp;
+                <strong>Phone:</strong> " . esc_html( $customer_phone ) . " &nbsp;&nbsp;
+                <strong>Email:</strong> " . esc_html( $customer_email ) . "
+            </div>
+
+            <div style='margin-top:6px;'>
+                <strong>Delivery Address:</strong> " . wp_kses_post( html_entity_decode( $delivery_address ) ) . "
+            </div>
+
+            <div style='margin-top:6px;'>
+                <strong>Delivery Instructions/Authority to Leave:</strong> " . ( ! empty( $delivery_instructions ) ? esc_html( $delivery_instructions ) : 'No' ) . "
+            </div>
+
+            <br/>
+
+            <table style='width:100%; border-collapse:collapse; font-size:12px;' border='1' cellspacing='0' cellpadding='6'>
+                <tr><td style='padding:6px 15px;'>SS Width (mm):</td><td style='padding:6px 15px;'>" . ( $caravan_width_mm ? esc_html( $caravan_width_mm ) : '-' ) . "</td></tr>
+                <tr><td style='padding:6px 15px;'>SS Length (mm):</td><td style='padding:6px 15px;'>" . ( $caravan_length_mm ? esc_html( $caravan_length_mm ) : '-' ) . "</td></tr>
+                <tr><td style='padding:6px 15px;'>Towing Vehicle BarWidth (mm):</td><td style='padding:6px 15px;'>" . ( $bar_width_mm ? esc_html( $bar_width_mm ) : '-' ) . "</td></tr>
+                <tr><td style='padding:6px 15px;'>Vinyl Insert Width (mm):</td><td style='padding:6px 15px;'>" . ( $vinyl_insert_width_mm ? esc_html( $vinyl_insert_width_mm ) : '-' ) . "</td></tr>
+                <tr><td style='padding:6px 15px;'>Vinyl Insert Length (mm):</td><td style='padding:6px 15px;'>" . ( $vinyl_insert_height_mm ? esc_html( $vinyl_insert_height_mm ) : '-' ) . "</td></tr>
+                <tr><td style='padding:6px 15px;'>Stoneguard Width (mm):</td><td style='padding:6px 15px;'>" . ( $factory_stoneguard_width ? esc_html( $factory_stoneguard_width ) : '-' ) . "</td></tr>
+                <tr><td style='padding:6px 15px;'>Stoneguard Length (mm):</td><td style='padding:6px 15px;'>" . ( $factory_stoneguard_height ? esc_html( $factory_stoneguard_height ) : '-' ) . "</td></tr>
+                <tr><td style='padding:6px 15px;'>Toolbox Length (mm):</td><td style='padding:6px 15px;'>" . ( $toolbox_width_mm ? esc_html( $toolbox_width_mm ) : '-' ) . "</td></tr>
+                <tr><td style='padding:6px 15px;'>Distance from the Caravan:</td><td style='padding:6px 15px;'>" . ( $toolbox_height_mm ? esc_html( $toolbox_height_mm ) : '-' ) . "</td></tr>
+                <tr><td style='padding:6px 15px;'>Bar Option</td><td style='padding:6px 15px;'>" . ( $sts_var_caravan_bar_option ? esc_html( $sts_var_caravan_bar_option ) : '-' ) . "</td></tr>
+                <tr><td style='padding:6px 15px;'>Bar Bend</td><td style='padding:6px 15px;'>" . ( $sts_var_caravan_bar_bend ? esc_html( $sts_var_caravan_bar_bend ) : '-' ) . "</td></tr>
+                <tr><td style='padding:6px 15px;'>SS Length Adjustment</td><td style='padding:6px 15px;'>" . ( $sts_var_caravan_ss_length_adj ? esc_html( $sts_var_caravan_ss_length_adj ) : '-' ) . "</td></tr>
+                <tr><td style='padding:6px 15px;'>Cut Out</td><td style='padding:6px 15px;'>" . ( $sts_var_caravan_cut_out ? esc_html( $sts_var_caravan_cut_out ) : '-' ) . "</td></tr>
+                <tr><td style='padding:6px 15px;'>Break Foam</td><td style='padding:6px 15px;'>" . ( $sts_var_caravan_break_form ? esc_html( $sts_var_caravan_break_form ) : '-' ) . "</td></tr>
+                <tr><td style='padding:6px 15px;'>Hr Foam</td><td style='padding:6px 15px;'>" . ( $sts_var_caravan_hr_form ? esc_html( $sts_var_caravan_hr_form ) : '-' ) . "</td></tr>
+            </table>
+
+			" . render_towing_diagram( $post_id, true ) . "
+
+        </div>
+    </div>
+    ";
+
+    // === Generate PDF with Dompdf (like you had before) ===
+    $dompdf_path = __DIR__ . '/vendor/autoload.php';
+    if ( ! file_exists( $dompdf_path ) ) {
+        wp_die( 'PDF library not found. Please install Dompdf (composer require dompdf/dompdf) in plugin folder.' );
+    }
+
+    require_once $dompdf_path;
+    // Namespaces: \Dompdf\Dompdf
+    $dompdf = new \Dompdf\Dompdf();
+    // optionally set base path for relative images (so invoice logo shows)
+    $options = $dompdf->getOptions();
+    $options->setChroot( ABSPATH ); // allow files under WP root, adjust if necessary
+    $dompdf->setOptions( $options );
+
     $dompdf->loadHtml( $html );
-    $dompdf->setPaper('A4', 'portrait');
+    $dompdf->setPaper( 'A4', 'portrait' );
     $dompdf->render();
 
-    // Output to browser
-    $dompdf->stream( "customer-order-{$post_id}.pdf", [ 'Attachment' => false ] );
+    // Stream to browser
+    $filename = "customer-order-{$order_id}.pdf";
+    $dompdf->stream( $filename, [ 'Attachment' => false ] );
     exit;
 }
 
+
+
 add_action( 'wp_ajax_download_customer_pdf', 'download_customer_pdf_callback' );
 add_action( 'wp_ajax_nopriv_download_customer_pdf', 'download_customer_pdf_callback' );
-
-
-
 
 use PhpOffice\PhpWord\PhpWord;
 use PhpOffice\PhpWord\IOFactory;
