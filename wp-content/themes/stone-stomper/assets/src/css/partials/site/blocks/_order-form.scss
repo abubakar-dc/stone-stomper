@@ -401,3 +401,31 @@
 	width: -webkit-fill-available;
 	margin-top: 10px;
 }
+
+
+
+.form-section-right{
+	input[type="text"],
+	input[type="number"],
+	input[type="email"],
+	input[type="tel"],
+	input[type="url"],
+	input[type="search"],
+	input[type="password"],
+	input[type="time"],
+	input[type="date"],
+	input[type="datetime-local"],
+	input[type="week"],
+	input[type="month"],
+	input[type="file"],
+	input[type="range"],
+	input[list],
+	input[type="string"],
+	select,
+	textarea,
+	.gform-text-input-reset {
+		&:hover{
+			border-color: var(--ss_color_primary);
+			background-color: rgba(237,23,79,.1) ;
+		}
+	}}

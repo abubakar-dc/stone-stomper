@@ -19,12 +19,65 @@ jQuery( document ).ready( function( $ ) {
 
 		if ( isValid ) {
 			jQuery( '#vehicle-details' ).removeClass( 'section-disable' );
-			// console.log( '✅ All fields filled.' );
-			// console.log( '📝 Filled field data:', fieldData );
 		} else {
 			console.log( '❌ Some required fields are still empty.' );
 		}
 	}
+	jQuery( document ).ready( function() {
+		jQuery( '#veh_make' ).on( 'change', function() {
+			if ( jQuery( this ).val() !== '' ) {
+				jQuery( '.notice-bar' ).css( 'display', 'block' );
+			}
+		} );
+	} );
+
+	jQuery( document ).ready( function() {
+	// Product select to reveal and jump
+		jQuery( '#product_type' ).on( 'change', function() {
+			const val = jQuery( this ).val();
+			if ( val ) {
+				const section = jQuery( '#jump-01' );
+				section.removeClass( 'section-disable' );
+				setTimeout( function() {
+					const target = document.querySelector( '#jump-01' );
+					if ( target ) {
+						requestAnimationFrame( function() {
+							target.scrollIntoView( { behavior: 'smooth', block: 'start' } );
+						} );
+					}
+				}, 400 );
+			}
+		} );
+
+		// Vehicle form observer
+		function allFieldsFilled() {
+			let filled = true;
+			jQuery( '#jump-01' ).find( 'input[required], select[required]' ).each( function() {
+				if ( ! jQuery( this ).val().trim() ) {
+					filled = false;
+					return false;
+				}
+			} );
+			return filled;
+		}
+
+		jQuery( '#jump-01 input[required], #jump-01 select[required]' ).on( 'input change', function() {
+			if ( allFieldsFilled() ) {
+				const section = jQuery( '#vehicle-details' );
+				if ( section.hasClass( 'section-disable' ) ) {
+					section.removeClass( 'section-disable' );
+					setTimeout( function() {
+						const target = document.querySelector( '#vehicle-details' );
+						if ( target ) {
+							requestAnimationFrame( function() {
+								target.scrollIntoView( { behavior: 'smooth', block: 'start' } );
+							} );
+						}
+					}, 600 );
+				}
+			}
+		} );
+	} );
 
 	// Listen for input and change events on required fields
 	jQuery( '#details-section' ).on( 'input change', 'input[required], select[required]', function() {
@@ -48,14 +101,6 @@ jQuery( document ).ready( function( $ ) {
 				fieldData[ fieldName ] = value;
 			}
 		} );
-
-		if ( isValid ) {
-			jQuery( '#caravan-details' ).removeClass( 'section-disable' );
-			// console.log( '✅ All vehicle fields are filled.' );
-			// console.log( '🚗 Vehicle data:', fieldData );
-		} else {
-			console.log( '❌ Some required vehicle fields are still empty.' );
-		}
 	}
 
 	// Run validation live when any input/select changes in #blk-vehicle
@@ -97,69 +142,68 @@ jQuery( document ).ready( function( $ ) {
 		validateCaravanSection();
 	} );
 
-function validatePhotoUploads() {
-	let allUploaded = true; // ✅ will only stay true if all 3 images are uploaded
-	const photoData = {};
+	function validatePhotoUploads() {
+		let allUploaded = true; // ✅ will only stay true if all 3 images are uploaded
+		const photoData = {};
 
-	const fields = [
-		{ id: 'hitch_ids', label: 'Hitch Photograph' },
-		{ id: 'rear_ids', label: 'Towing Vehicle Rear Photograph' },
-		{ id: 'front_ids', label: 'Front of Caravan Photograph' },
-	];
+		const fields = [
+			{ id: 'hitch_ids', label: 'Hitch Photograph' },
+			{ id: 'rear_ids', label: 'Towing Vehicle Rear Photograph' },
+			{ id: 'front_ids', label: 'Front of Caravan Photograph' },
+		];
 
-	fields.forEach((field) => {
-		const $input = jQuery('#' + field.id);
-		const value = $input.val()?.trim();
+		fields.forEach( ( field ) => {
+			const $input = jQuery( '#' + field.id );
+			const value = $input.val()?.trim();
 
-		// Debugging (optional)
-		console.log(`${field.label}:`, value);
+			// Debugging (optional)
+			console.log( `${ field.label }:`, value );
 
-		// Check if the field is empty or still has []
-		if (!value || value === '[]') {
-			allUploaded = false; // ❌ mark as incomplete
-			$input.addClass('field-error');
-		} else {
-			$input.removeClass('field-error');
+			// Check if the field is empty or still has []
+			if ( ! value || value === '[]' ) {
+				allUploaded = false; // ❌ mark as incomplete
+				$input.addClass( 'field-error' );
+			} else {
+				$input.removeClass( 'field-error' );
 
-			// Try to parse uploaded IDs
-			try {
-				const parsedValue = JSON.parse(value);
-				if (!Array.isArray(parsedValue) || parsedValue.length === 0) {
+				// Try to parse uploaded IDs
+				try {
+					const parsedValue = JSON.parse( value );
+					if ( ! Array.isArray( parsedValue ) || parsedValue.length === 0 ) {
+						allUploaded = false;
+						$input.addClass( 'field-error' );
+					} else {
+						photoData[ field.id ] = parsedValue;
+					}
+				} catch ( e ) {
 					allUploaded = false;
-					$input.addClass('field-error');
-				} else {
-					photoData[field.id] = parsedValue;
+					$input.addClass( 'field-error' );
+					console.warn( `⚠️ Invalid JSON for ${ field.label }` );
 				}
-			} catch (e) {
-				allUploaded = false;
-				$input.addClass('field-error');
-				console.warn(`⚠️ Invalid JSON for ${field.label}`);
 			}
-		}
-	});
+		} );
 
-	// ✅ If all 3 uploaded, enable final sections
-	if (allUploaded) {
-		jQuery('#final-measurements').removeClass('section-disable');
-		jQuery('#final-summary').removeClass('section-disable');
-		console.log('✅ All 3 photos uploaded successfully!');
-		console.log('🖼️ Photo data:', photoData);
-	} else {
+		// ✅ If all 3 uploaded, enable final sections
+		if ( allUploaded ) {
+			jQuery( '#final-measurements' ).removeClass( 'section-disable' );
+			jQuery( '#final-summary' ).removeClass( 'section-disable' );
+			console.log( '✅ All 3 photos uploaded successfully!' );
+			console.log( '🖼️ Photo data:', photoData );
+		} else {
 		// ❌ If even one missing, keep section disabled
 		// jQuery('#final-measurements').addClass('section-disable');
 		// jQuery('#final-summary').addClass('section-disable');
-		console.log('❌ One or more required photographs missing.');
+			console.log( '❌ One or more required photographs missing.' );
+		}
 	}
-}
 
+	// Run validation when photo upload completes
+	jQuery( '#blk-photos' ).on( 'change', 'input[type="file"]', function() {
+		setTimeout( validatePhotoUploads, 1500 ); // delay to allow upload script to update hidden fields
+	} );
 
-// Run validation when photo upload completes
-jQuery('#blk-photos').on('change', 'input[type="file"]', function() {
-	setTimeout(validatePhotoUploads, 1500); // delay to allow upload script to update hidden fields
-});
-
-// Also revalidate if hidden inputs change (e.g. after upload AJAX)
-jQuery('#blk-photos').on('change', 'input[type="hidden"]', function() {
-	validatePhotoUploads();
-});
+	// Also revalidate if hidden inputs change (e.g. after upload AJAX)
+	jQuery( '#blk-photos' ).on( 'change', 'input[type="hidden"]', function() {
+		validatePhotoUploads();
+	} );
 } );
