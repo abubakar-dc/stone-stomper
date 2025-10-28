@@ -6831,6 +6831,12 @@ Mixin for transition
   }
 }
 @media only screen and (min-width: 769px) and (max-width: 1003px) {
+  .editor-styles-wrapper .footer-cta-section .wp-block-button__link {
+    padding: 20px 40px !important;
+  }
+  .editor-styles-wrapper .page-id-351 .gfield.gfield--width-half {
+    width: 48%;
+  }
   .editor-styles-wrapper .woocommerce-account:not(.woocommerce-dashboard.woocommerce-account) .woocommerce-MyAccount-navigation ul li {
     font-size: 14px !important;
   }
@@ -7168,20 +7174,18 @@ Mixin for transition
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 100%;
   }
   .editor-styles-wrapper .page-id-351 .wp-block-buttons .wp-block-button {
     width: 100%;
   }
-  .editor-styles-wrapper .page-id-351 .wp-block-button .wp-block-button__link {
+  .editor-styles-wrapper .page-id-351 .wp-block-buttons .wp-block-button__link {
     padding: 18px 8px;
+    font-size: 14px;
   }
-  .editor-styles-wrapper .page-id-351 .gform-body .gfield, .editor-styles-wrapper .page-id-351 .gform-body .hs-form-field {
-    box-sizing: border-box;
-    position: relative;
+  .editor-styles-wrapper .page-id-351 .gfield {
     margin-bottom: 16px;
   }
-  .editor-styles-wrapper .page-id-351 .gform-body input, .editor-styles-wrapper .page-id-351 .gform-body select {
+  .editor-styles-wrapper .page-id-351 input, .editor-styles-wrapper .page-id-351 select {
     height: 58px;
   }
   .editor-styles-wrapper .page-id-351 #gform_submit_button_1 {
@@ -7965,8 +7969,7 @@ body.post-type-post .editor-styles-wrapper > div {
   width: 60px;
   text-align: center;
   height: 60px;
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   transition: all 0.3s ease;
   -webkit-user-select: none;
      -moz-user-select: none;
