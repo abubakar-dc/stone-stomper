@@ -8008,7 +8008,8 @@ body.post-type-post .editor-styles-wrapper > div {
   width: 60px;
   text-align: center;
   height: 60px;
-  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
   transition: all 0.3s ease;
   -webkit-user-select: none;
      -moz-user-select: none;
