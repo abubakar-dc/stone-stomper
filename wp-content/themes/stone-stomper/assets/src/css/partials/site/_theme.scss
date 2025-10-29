@@ -748,7 +748,8 @@ body {
 	.product_title {
 		margin: 0;
 	}
-	.entry-summary{
+
+	.entry-summary {
 		.woocommerce-Price-amount {
 			bdi {
 				font-size: var(--ss_font_size_28);
@@ -757,6 +758,7 @@ body {
 			}
 		}
 	}
+
 	bdi {
 		color: var(--ss_black_2);
 	}
@@ -847,7 +849,6 @@ body {
 	.wcgs-slider-image {
 		width: 100% !important;
 		height: 100% !important;
-		aspect-ratio: 700/450;
 
 		img {
 			width: 100% !important;
@@ -864,6 +865,7 @@ body {
 			height: 100% !important;
 			aspect-ratio: 140/140;
 			max-height: 160px;
+			object-fit: cover;
 		}
 	}
 

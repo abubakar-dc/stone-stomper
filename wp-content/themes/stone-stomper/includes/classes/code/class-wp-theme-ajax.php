@@ -329,9 +329,11 @@ public function bst_handle_upload_order_photos() {
 
 							$html .= '<option class="ajax-car-model" data-post-id="'.get_the_ID().'" value="' . esc_attr( $child->slug ) . '">' . esc_html( $child->name ) . ' - ' . get_the_title() . '</option>';
 						}
+
 						wp_reset_postdata();
 					}
 				}
+				$html .= '<option class="ajax-car-model other">other</option>';
 			}
 			}
 		}
@@ -340,6 +342,8 @@ public function bst_handle_upload_order_photos() {
 			$sts_var_car_year = get_field('sts_var_car_year', $post_id);
 			$year    = '<option>Select Model Year</option>';
 			$year .= '<option value="'.esc_attr($sts_var_car_year).'">'.esc_html($sts_var_car_year).'</option>';
+				$year .= '<option class="ajax-car-year other">other</option>';
+
 		} else {
 			$year    = '<option>Select Model Year</option>';
 		}

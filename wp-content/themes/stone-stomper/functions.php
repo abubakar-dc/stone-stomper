@@ -947,24 +947,24 @@ function show_towing_svg_in_editor( $post ) {
 
 		<?php if ( $rear_ids ) { ?>
 			<div class="row row-1">
-			<h3>Rear Images</h3>
-			<div class="rear-images image-group">
-				<?php foreach ( $rear_ids as $hitch_id ) :
+				<h3>Rear Images</h3>
+				<div class="rear-images image-group">
+					<?php foreach ( $rear_ids as $hitch_id ) :
 
-				$img_url = esc_url($hitch_id); ?>
-				<img src="<?php echo esc_url( $img_url ); ?>" alt="" class="popup-image" />
-				<?php endforeach; ?>
-			</div>
-			<div class="image-lightbox">
-				<div class="lightbox-inner">
-				<img src="" alt="" class="lightbox-img" />
-				<div class="lightbox-controls">
-					<span class="lightbox-prev">&#10094;</span>
-					<span class="lightbox-next">&#10095;</span>
-					<span class="lightbox-close">&times;</span>
+					$img_url = esc_url($hitch_id); ?>
+					<img src="<?php echo esc_url( $img_url ); ?>" alt="" class="popup-image" />
+					<?php endforeach; ?>
 				</div>
+				<div class="image-lightbox">
+					<div class="lightbox-inner">
+					<img src="" alt="" class="lightbox-img" />
+					<div class="lightbox-controls">
+						<span class="lightbox-prev">&#10094;</span>
+						<span class="lightbox-next">&#10095;</span>
+						<span class="lightbox-close">&times;</span>
+					</div>
+					</div>
 				</div>
-			</div>
 			</div>
 		<?php } ?>
 
