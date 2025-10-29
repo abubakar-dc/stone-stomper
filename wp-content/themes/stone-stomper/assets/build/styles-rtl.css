@@ -5194,7 +5194,6 @@ body #daextlwcnf-cookie-settings-button-2:hover {
 .single-product .wcgs-slider-image {
   width: 100% !important;
   height: 100% !important;
-  aspect-ratio: 700/450;
 }
 .single-product .wcgs-slider-image img {
   width: 100% !important;
@@ -5209,6 +5208,8 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   height: 100% !important;
   aspect-ratio: 140/140;
   max-height: 160px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .single-product #wpgs-gallery {
   margin-left: var(--ss_space_72) !important;

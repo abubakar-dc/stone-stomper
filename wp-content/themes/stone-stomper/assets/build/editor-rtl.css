@@ -3986,7 +3986,6 @@ Mixin for transition
 .editor-styles-wrapper .single-product .wcgs-slider-image {
   width: 100% !important;
   height: 100% !important;
-  aspect-ratio: 700/450;
 }
 .editor-styles-wrapper .single-product .wcgs-slider-image img {
   width: 100% !important;
@@ -4001,6 +4000,8 @@ Mixin for transition
   height: 100% !important;
   aspect-ratio: 140/140;
   max-height: 160px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .editor-styles-wrapper .single-product #wpgs-gallery {
   margin-left: var(--ss_space_72) !important;
@@ -8023,7 +8024,8 @@ body.post-type-post .editor-styles-wrapper > div {
   width: 60px;
   text-align: center;
   height: 60px;
-  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
   transition: all 0.3s ease;
   -webkit-user-select: none;
      -moz-user-select: none;

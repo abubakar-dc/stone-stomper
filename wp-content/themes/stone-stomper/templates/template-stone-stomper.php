@@ -107,7 +107,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										<?php } ?>
 									</div>
 									<div class="st-s36"></div>
-								<div id="jump-01" class="section-disable">
+								<div id="jump-01" class="section-disable-off">
 									<?php if($sts_var_section_head_notices){
 										foreach($sts_var_section_head_notices as $sts_key => $notice){
 										$sts_var_headline = $notice['headline']??null;
@@ -189,7 +189,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 							</div>
 
 							<!-- Towing Vehicle Details -->
-							<div id="vehicle-details" class="section-disable order-form-section-inner d-flex form-vehicle-section justify-content-between align-items-start image-at-left">
+							<div id="vehicle-details" class="section-disable-off order-form-section-inner d-flex form-vehicle-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 vehicle-images ">
 										<div class="towing-vehicle-image" id="towing-vehicle-image" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
@@ -293,7 +293,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 							</div>
 
 							<!-- Caravan Details -->
-							<div id="caravan-details" class="section-disable  order-form-section-inner d-flex form-carvan-section justify-content-between align-items-start image-at-left">
+							<div id="caravan-details" class="section-disable-off  order-form-section-inner d-flex form-carvan-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 vehicle-images">
 										<div class="vehicle-images mobile-image-hide" id="caravan-images" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
@@ -394,7 +394,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 							</div>
 
 							<!-- Photographs -->
-							<div id="photographs-details" class=" section-disable order-form-section-inner d-flex form-carvan-section justify-content-between align-items-start image-at-left">
+							<div id="photographs-details" class=" section-disable-off order-form-section-inner d-flex form-carvan-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="form-image-slider">
 										<?php if($sts_var_example_photographs){ ?>
@@ -497,7 +497,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 							</div>
 
 							<!-- Final Measurements -->
-							<div id="final-measurements" class=" section-disable order-form-section-inner d-flex form-measurements-section justify-content-between align-items-start image-at-left">
+							<div id="final-measurements" class=" section-disable-off order-form-section-inner d-flex form-measurements-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 measurements-images example-photographs">
 										<?php
@@ -651,7 +651,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 							</div>
 
 							<!-- Final Details & Summary -->
-							<div id="final-summary" class=" section-disable order-form-section-inner d-flex form-details-section justify-content-between align-items-start image-at-left">
+							<div id="final-summary" class=" section-disable-off order-form-section-inner d-flex form-details-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<?php
 										global $product;
