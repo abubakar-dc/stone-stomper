@@ -1840,6 +1840,84 @@ add_filter( 'wc_order_statuses', function( $statuses ) {
 
 	return $new_statuses;
 } );
+
+
+/**
+ * Add a WooCommerce Order Status meta box to single Customer (Order) edit screen
+ */
+add_action( 'add_meta_boxes', function() {
+	add_meta_box(
+		'customer_order_status_box',
+		__( 'Order Status', 'stonestomper_td' ),
+		'stonestomper_render_order_status_box',
+		'customer', // your CPT slug
+		'side',
+		'high'
+	);
+} );
+
+/**
+ * Render the status dropdown
+ */
+function stonestomper_render_order_status_box( $post ) {
+	$order_id = get_field( 'order_id', $post->ID ); // your linked WooCommerce order ID
+	if ( ! $order_id ) {
+		echo '<p><em>No linked WooCommerce order found.</em></p>';
+		return;
+	}
+
+	$order = wc_get_order( $order_id );
+	if ( ! $order ) {
+		echo '<p><em>Invalid WooCommerce order.</em></p>';
+		return;
+	}
+
+	$current_status = $order->get_status();
+	$statuses       = wc_get_order_statuses();
+
+	echo '<select name="wc_order_status" id="wc_order_status" style="width:100%;">';
+	foreach ( $statuses as $status_key => $status_label ) {
+		$selected = selected( $current_status, str_replace( 'wc-', '', $status_key ), false );
+		echo '<option value="' . esc_attr( $status_key ) . '" ' . $selected . '>' . esc_html( $status_label ) . '</option>';
+	}
+	echo '</select>';
+
+	wp_nonce_field( 'update_wc_order_status_nonce', 'wc_order_status_nonce' );
+}
+
+/**
+ * Save WooCommerce status change
+ */
+add_action( 'save_post_customer', function( $post_id, $post, $update ) {
+	// Permission + nonce check
+	if ( ! isset( $_POST['wc_order_status_nonce'] ) || ! wp_verify_nonce( $_POST['wc_order_status_nonce'], 'update_wc_order_status_nonce' ) ) {
+		return;
+	}
+
+	if ( ! current_user_can( 'edit_post', $post_id ) ) {
+		return;
+	}
+
+	if ( empty( $_POST['wc_order_status'] ) ) {
+		return;
+	}
+
+	$order_id = get_field( 'order_id', $post_id );
+	if ( ! $order_id ) {
+		return;
+	}
+
+	$order = wc_get_order( $order_id );
+	if ( ! $order ) {
+		return;
+	}
+
+	$new_status = sanitize_text_field( $_POST['wc_order_status'] );
+	$order->update_status( str_replace( 'wc-', '', $new_status ) );
+}, 10, 3 );
+
+
+
 add_filter('woocommerce_get_price_html', function($price_html, $product) {
 	$raw_price = $product->get_price();
 	if (is_numeric($raw_price)) {
