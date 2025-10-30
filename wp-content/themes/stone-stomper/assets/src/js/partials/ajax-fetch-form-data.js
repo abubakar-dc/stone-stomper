@@ -93,28 +93,24 @@ jQuery( document ).ready( function() {
 				carMake,
 				postID,
 			},
-			success( response ) {
-				// console.log( response.args );
-				if ( response ) {
-					// console.log( response.models );
-					if ( yearRequested ) {
-						jQuery( '#veh_model' ).html( response.models );
-					}
-					if ( response.barwidth ) {
-						jQuery( '#barwidth' ).val( response.barwidth );
-					}
-					jQuery( '#veh_year' ).html( response.year );
+			success(response) {
+				if (response) {
+					if (yearRequested) jQuery('#veh_model').html(response.models);
+					console.log("car make model clicked" + response.models);
+					if (response.barwidth) jQuery('#barwidth').val(response.barwidth);
+					jQuery('#veh_year').html(response.year);
 
-					jQuery( '#support_pockets' ).html( response.support_pockets );
-
-					if ( response.vehicleImage !== null ) {
-						jQuery( '#towing-vehicle-image' ).html( response.vehicleImage );
+					if (response.support_pockets) {
+						jQuery('#support_pockets').html(response.support_pockets);
 					}
 
-					jQuery( '.loader-container' ).hide();
+					if (response.vehicleImage) {
+						jQuery('#towing-vehicle-image').html(response.vehicleImage);
+					}
 				}
-				// selectModel();
+				jQuery('.loader-container').hide();
 			},
+
 			error() {
 				const htmlTag = jQuery( "<h2 class='center-align heading-5'>An error occurred while processing your request.😢</h2>" );
 				jQuery( '#news-post-container' ).html( htmlTag );

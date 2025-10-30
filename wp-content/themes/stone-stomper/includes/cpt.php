@@ -163,13 +163,14 @@ add_action( 'manage_customer_posts_custom_column', function ( $column, $post_id 
 
 		// ✅ Proposed Date Column
 		case 'proposed_date':
-			$proposed_date = get_field( 'sts_var_proposed_date_of_delivery', $post_id ); // update ACF key if needed
+			$proposed_date = get_field( 'sts_var_proposed_date_of_delivery', $post_id );
 			if ( $proposed_date ) {
-				echo esc_html( date_i18n( 'F j, Y', strtotime( $proposed_date ) ) );
+				echo esc_html( date_i18n( 'Y/m/d', strtotime( $proposed_date ) ) );
 			} else {
 				echo '<em style="color:#888;">—</em>';
 			}
-			break;
+		break;
+
 	}
 }, 10, 2 );
 
@@ -253,6 +254,12 @@ add_action( 'admin_footer-edit.php', function () {
 	<?php
 } );
 
+add_filter( 'manage_edit-customer_sortable_columns', function( $columns ) {
+	$columns['order_id']       = 'order_id';
+	$columns['proposed_date']  = 'proposed_date';
+	return $columns;
+});
+
 /**
  * Add WooCommerce-like status filter tabs in the custom Customer Orders list
  */
@@ -315,52 +322,29 @@ add_filter( 'views_edit-customer', function ( $views ) {
 /**
  * Filter the CPT query by WooCommerce order status
  */
-add_action( 'pre_get_posts', function ( $query ) {
+/**
+ * Handle sorting logic for custom columns.
+ */
+add_action( 'pre_get_posts', function( $query ) {
 	if ( ! is_admin() || ! $query->is_main_query() ) {
 		return;
 	}
 
-	// Only for your Orders (Customer CPT)
-	if ( isset( $_GET['post_type'] ) && $_GET['post_type'] === 'customer' ) {
+	$screen = get_current_screen();
+	if ( ! $screen || 'customer' !== $screen->post_type ) {
+		return;
+	}
 
-		// Default sort only if user hasn't chosen their own
-		if ( empty( $_GET['orderby'] ) ) {
-			$query->set( 'orderby', 'date' );
-			$query->set( 'order', 'DESC' );
-		}
+	// Sort by Order ID (stored in post meta)
+	if ( 'order_id' === $query->get( 'orderby' ) ) {
+		$query->set( 'meta_key', 'order_id' );
+		$query->set( 'orderby', 'meta_value_num' ); // numeric sort
+	}
 
-		// Handle WC status filter if present
-		if ( ! empty( $_GET['wc_status'] ) ) {
-			$status_filter = sanitize_text_field( $_GET['wc_status'] );
-
-			$matching_ids = [];
-			$posts = get_posts( [
-				'post_type'      => 'customer',
-				'posts_per_page' => -1,
-				'fields'         => 'ids',
-			] );
-
-			foreach ( $posts as $post_id ) {
-				$order_id = get_field( 'order_id', $post_id );
-				if ( ! $order_id ) continue;
-
-				$order = wc_get_order( $order_id );
-				if ( $order && $order->get_status() === $status_filter ) {
-					$matching_ids[] = $post_id;
-				}
-			}
-
-			$query->set( 'post__in', $matching_ids ?: [ 0 ] );
-
-			// Restore ordering so post__in doesn’t break sorting
-			if ( isset( $_GET['orderby'] ) && $_GET['orderby'] === 'title' ) {
-				$query->set( 'orderby', 'title' );
-				$query->set( 'order', strtoupper( $_GET['order'] ?? 'ASC' ) );
-			} else {
-				$query->set( 'orderby', 'date' );
-				$query->set( 'order', 'DESC' );
-			}
-		}
+	// Sort by Proposed Date (stored in post meta)
+	if ( 'proposed_date' === $query->get( 'orderby' ) ) {
+		$query->set( 'meta_key', 'proposed_date' );
+		$query->set( 'orderby', 'meta_value' ); // use 'meta_value_num' if stored as timestamp
 	}
 });
 

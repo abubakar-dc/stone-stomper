@@ -288,102 +288,139 @@ public function bst_handle_upload_order_photos() {
 	/**
 	 * Define ajax filter
 	 **/
-	public function fetch_form_data() {
+public function fetch_form_data() {
+	$post_id = $_POST['postID'] ?? null;
+	$carMake = $_POST['carMake'] ?? null;
 
-		$post_id = $_POST['postID'] ?? null;
+	$html = '<option value="">Select Model</option>';
 
-		//Getting Models
+	// ✅ Fetch the term by slug
+	if ( $carMake ) {
+		$make_term = get_term_by( 'slug', $carMake, 'car-category' );
 
-		if(isset($_POST['carMake'])) {
-			$carMake = $_POST['carMake'] ?? null;
-			$html    = '<option>Select Model Make</option>';
-			$posts   = array();
-			$carMake_terms = get_term_by( 'slug', $carMake, 'car-category' );
-			if ( $carMake_terms && ! is_wp_error( $carMake_terms ) ) {
-			$child_terms = get_terms( array(
-				'taxonomy'   => 'car-category',
-				'parent'     => $carMake_terms->term_id,
-				'hide_empty' => false,
-			) );
+		if ( $make_term && ! is_wp_error( $make_term ) ) {
 
-			if ( ! empty( $child_terms ) && ! is_wp_error( $child_terms ) ) {
-				foreach ( $child_terms as $child ) {
-					// Append term to dropdown
+			// ✅ Get ALL posts under this car-category term
+			$related_posts = get_posts( [
+				'post_type'      => 'car', // your CPT
+				'posts_per_page' => -1,
+				'tax_query'      => [
+					[
+						'taxonomy' => 'car-category',
+						'field'    => 'slug',
+						'terms'    => $carMake,
+					],
+				],
+			] );
 
-					// Fetch posts for this child term
-					$query = new \WP_Query( array(
-						'post_type'      => 'car', // 🔹 change to your custom post type if needed
-						'posts_per_page' => -1,
-						'tax_query'      => array(
-							array(
-								'taxonomy' => 'car-category',
-								'field'    => 'term_id',
-								'terms'    => $child->term_id,
-							),
-						),
-					) );
+			// ✅ If posts found, loop through all
+			if ( $related_posts ) {
+				foreach ( $related_posts as $related_post ) {
+					$related_post_id = $related_post->ID;
 
-					if ( $query->have_posts() ) {
-						while ( $query->have_posts() ) {
-							$query->the_post();
+					// 🔹 Optional: add a group label for each post (helpful if multiple models come from different posts)
 
-							$html .= '<option class="ajax-car-model" data-post-id="'.get_the_ID().'" value="' . esc_attr( $child->slug ) . '">' . esc_html( $child->name ) . ' - ' . get_the_title() . '</option>';
+					// ✅ Loop through each post’s repeater field
+					$models = get_field( 'sts_var_car_model_row', $related_post_id );
+
+					$html .= '<option class="ajax-car-model" data-post-id="' . esc_attr( $related_post_id ) . '" value="' . esc_attr( sanitize_title( get_the_title( $related_post_id ) ) ) . '">' . esc_html( get_the_title( $related_post_id ) ) . '</option>';
+				}
+			}
+			$html .= '<option class="ajax-car-model other">Other</option>';
+
+		}
+	}
+
+	// ✅ Collect all possible years for the selected make (and optionally model)
+	$year = '<option value="">Select Model Year</option>';
+
+	if ( $carMake ) {
+		$make_term = get_term_by( 'slug', $carMake, 'car-category' );
+
+		if ( $make_term && ! is_wp_error( $make_term ) ) {
+			// Get all "car" posts under this car-category
+			$related_posts = get_posts( [
+				'post_type'      => 'car',
+				'posts_per_page' => -1,
+				'tax_query'      => [
+					[
+						'taxonomy' => 'car-category',
+						'field'    => 'slug',
+						'terms'    => $carMake,
+					],
+				],
+			] );
+
+			$years = [];
+
+			if ( $related_posts ) {
+				foreach ( $related_posts as $related_post ) {
+					$related_post_id = $related_post->ID;
+
+					// Each post might have its own car year
+					$post_year = get_field( 'sts_var_car_year', $related_post_id );
+
+					if ( $post_year ) {
+						$years[] = $post_year;
+					}
+
+					// Optional: If you also store years inside repeater fields
+					$models = get_field( 'sts_var_car_model_row', $related_post_id );
+					if ( $models ) {
+						foreach ( $models as $model ) {
+							if ( ! empty( $model['sts_var_car_year'] ) ) {
+								$years[] = $model['sts_var_car_year'];
+							}
 						}
-
-						wp_reset_postdata();
 					}
 				}
-				$html .= '<option class="ajax-car-model other">other</option>';
-			}
-			}
-		}
-		//Getting Year
-		if($post_id){
-			$sts_var_car_year = get_field('sts_var_car_year', $post_id);
-			$year    = '<option>Select Model Year</option>';
-			$year .= '<option value="'.esc_attr($sts_var_car_year).'">'.esc_html($sts_var_car_year).'</option>';
-				$year .= '<option class="ajax-car-year other">other</option>';
-
-		} else {
-			$year    = '<option>Select Model Year</option>';
-		}
-
-		//Getting Vehicle Image
-		if($post_id && has_post_thumbnail( $post_id )){
-			$thumb_id   = get_post_thumbnail_id( $post_id );
-			$caption    = wp_get_attachment_caption( $thumb_id );
-
-			$vehicleImage = '<img src="'.get_the_post_thumbnail_url( $post_id, 'thumb_1000' ).'" alt="'.get_the_title($post_id).'" />';
-			if ( $caption ) {
-				$vehicleImage .= '
-					<div class="image-caption-area">
-						<div class="image-caption">
-							<p>' . esc_html( $caption ) . '</p>
-						</div>
-					</div>';
-				}
 			}
 
-		//Getting Bar Width
-		if($post_id){
-			$barwidth = get_field('sts_var_car_barwidth', $post_id);
-		} else {
-			$barwidth = '';
-		}
+			// ✅ Remove duplicates and sort (optional)
+			$years = array_unique( array_filter( $years ) );
+			sort( $years );
 
-		wp_send_json(
-		array(
-			'args'  => $child_terms,
-			'models'  => $html,
-			'vehicleImage'  => $vehicleImage,
-			'year'  => $year,
-			'barwidth'  => $barwidth,
-			'posts' => $posts,
-			'post'  => $_POST,
-		)
-		);
-		wp_die();
+			// ✅ Output options
+			foreach ( $years as $y ) {
+				$year .= '<option value="' . esc_attr( $y ) . '">' . esc_html( $y ) . '</option>';
+			}
+
+			$year .= '<option class="ajax-car-year other">Other</option>';
+		}
+	} else {
+		$year = '<option value="">Select Model Year</option>';
 	}
+
+
+	// ✅ Vehicle image
+	if ( $post_id && has_post_thumbnail( $post_id ) ) {
+		$thumb_id = get_post_thumbnail_id( $post_id );
+		$caption  = wp_get_attachment_caption( $thumb_id );
+		$vehicleImage = '<img src="' . get_the_post_thumbnail_url( $post_id, 'thumb_1000' ) . '" alt="' . get_the_title( $post_id ) . '" />';
+		if ( $caption ) {
+			$vehicleImage .= '
+				<div class="image-caption-area">
+					<div class="image-caption"><p>' . esc_html( $caption ) . '</p></div>
+				</div>';
+		}
+	} else {
+		$vehicleImage = '';
+	}
+
+	$barwidth = $post_id ? get_field( 'sts_var_car_barwidth', $post_id ) : '';
+
+	wp_send_json( [
+		'models'       => $html,
+		'vehicleImage' => $vehicleImage,
+		'year'         => $year,
+		'barwidth'     => $barwidth,
+		'post'         => $_POST,
+	] );
+
+	wp_die();
+}
+
+
 
 
 public function fetch_caravan_data() {

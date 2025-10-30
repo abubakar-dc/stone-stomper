@@ -3,88 +3,116 @@
     "title": "Single Car - Options",
     "fields": [
         {
-            "key": "field_68b5d3033c82f",
-            "label": "Model",
-            "name": "sts_var_car_model",
+            "key": "field_690344fa5e4a4",
+            "label": "Add Model",
+            "name": "sts_var_car_model_row",
             "aria-label": "",
-            "type": "text",
+            "type": "repeater",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "25",
+                "width": "",
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "maxlength": "",
-            "allow_in_bindings": 1,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_68b5d43eab053",
-            "label": "Year",
-            "name": "sts_var_car_year",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "25",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_68b5d3a7ab052",
-            "label": "Car Barwidth (mm)",
-            "name": "sts_var_car_barwidth",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "25",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_68b6c1eff5f84",
-            "label": "Manufacturer Specs Width (mm)",
-            "name": "sts_var_car_manufacturer_spec",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "25",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Add Row",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_68b5d3033c82f",
+                    "label": "Model",
+                    "name": "sts_var_car_model",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "25",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 1,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_690344fa5e4a4"
+                },
+                {
+                    "key": "field_68b5d43eab053",
+                    "label": "Year",
+                    "name": "sts_var_car_year",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "25",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_690344fa5e4a4"
+                },
+                {
+                    "key": "field_68b5d3a7ab052",
+                    "label": "Car Barwidth (mm)",
+                    "name": "sts_var_car_barwidth",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "25",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_690344fa5e4a4"
+                },
+                {
+                    "key": "field_68b6c1eff5f84",
+                    "label": "Manufacturer Specs Width (mm)",
+                    "name": "sts_var_car_manufacturer_spec",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "25",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_690344fa5e4a4"
+                }
+            ]
         }
     ],
     "location": [
@@ -105,5 +133,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1756807773
+    "modified": 1761826643
 }

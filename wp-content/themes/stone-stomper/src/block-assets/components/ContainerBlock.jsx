@@ -275,7 +275,9 @@ const ContainerBlockContent = ( {
 			) : (
 				<section className={ 'ctn ' + ContainerClasses }>
 
-					<div className="wrapper">{ children }</div>
+					<div className="wrapper">
+
+						{ children }</div>
 
 				</section>
 			) }
