@@ -9,13 +9,12 @@ jQuery( document ).ready( function() {
 	jQuery( '#van_make' ).on( 'change', function( e ) {
 		if ( e.originalEvent ) {
 			caravanMake = jQuery( this ).val();
-			// console.log( 'Selected Caravan Make:', caravanMake );
 			caravan = true;
 
-			jQuery('.van-model-group').addClass('loading');
-			setTimeout(() => {
-				jQuery('.van-model-group').removeClass('loading');
-			}, 1000);
+			jQuery( '.van-model-group' ).addClass( 'loading' );
+			setTimeout( () => {
+				jQuery( '.van-model-group' ).removeClass( 'loading' );
+			}, 1000 );
 			// Call your function to fetch form data
 			fetchCaravanData();
 		}
@@ -25,56 +24,39 @@ jQuery( document ).ready( function() {
 		if ( e.originalEvent ) {
 			const selectedOption = jQuery( this ).find( ':selected' );
 			caravanPostID = selectedOption.data( 'post-id' );
-			// console.log( 'Selected Caravan Model ID:', caravanPostID );
 			caravan = false;
-
-
 
 			// 🔹 Call your next function if needed
 			fetchCaravanData();
 		}
 	} );
 
-	// Get Category Slug on Click Start.
-	// jQuery( '#veh_make' ).on( 'change', function( e ) {
-	// 	if ( e.originalEvent ) {
-	// 		carMake = jQuery( this ).val();
-	// 		// console.log( 'Selected Car Make:', carMake );
-	// 		yearRequested = true;
-	// 		postID = '';
-	// 		// Call your function to fetch form data
-	// 		fetchFormData();
-	// 	}
-	// } );
+	jQuery( '#veh_make' ).on( 'change', function( e ) {
+		if ( e.originalEvent ) {
+			carMake = jQuery( this ).val();
+			yearRequested = true;
+			postID = '';
 
-	jQuery('#veh_make').on('change', function(e) {
-	if (e.originalEvent) {
-		carMake = jQuery(this).val();
-		yearRequested = true;
-		postID = '';
+			// Add loader
+			jQuery( '.vehicle-model-group' ).addClass( 'loading' );
+			setTimeout( () => {
+				jQuery( '.vehicle-model-group' ).removeClass( 'loading' );
+			}, 1000 );
 
-		// Add loader
-		jQuery('.vehicle-model-group').addClass('loading');
-		setTimeout(() => {
-			jQuery('.vehicle-model-group').removeClass('loading');
-		}, 1000);
-
-		fetchFormData();
-	}
-});
-
+			fetchFormData();
+		}
+	} );
 
 	jQuery( '#veh_model' ).on( 'change', function( e ) {
 		if ( e.originalEvent ) {
 			const selectedOption = jQuery( this ).find( ':selected' );
 			postID = selectedOption.data( 'post-id' );
-			console.log( 'Selected Car Model ID:', postID );
 			yearRequested = false;
 
-			jQuery('.vehicle-year-group').addClass('loading');
-			setTimeout(() => {
-				jQuery('.vehicle-year-group').removeClass('loading');
-			}, 1000);
+			jQuery( '.vehicle-year-group' ).addClass( 'loading' );
+			setTimeout( () => {
+				jQuery( '.vehicle-year-group' ).removeClass( 'loading' );
+			}, 1000 );
 
 			// 🔹 Call your next function if needed
 			fetchFormData();
@@ -93,22 +75,25 @@ jQuery( document ).ready( function() {
 				carMake,
 				postID,
 			},
-			success(response) {
-				if (response) {
-					if (yearRequested) jQuery('#veh_model').html(response.models);
-					console.log("car make model clicked" + response.models);
-					if (response.barwidth) jQuery('#barwidth').val(response.barwidth);
-					jQuery('#veh_year').html(response.year);
+			success( response ) {
+				if ( response ) {
+					if ( yearRequested ) {
+						jQuery( '#veh_model' ).html( response.models );
+					}
+					if ( response.barwidth ) {
+						jQuery( '#barwidth' ).val( response.barwidth );
+					}
+					jQuery( '#veh_year' ).html( response.year );
 
-					if (response.support_pockets) {
-						jQuery('#support_pockets').html(response.support_pockets);
+					if ( response.support_pockets ) {
+						jQuery( '#support_pockets' ).html( response.support_pockets );
 					}
 
-					if (response.vehicleImage) {
-						jQuery('#towing-vehicle-image').html(response.vehicleImage);
+					if ( response.vehicleImage ) {
+						jQuery( '#towing-vehicle-image' ).html( response.vehicleImage );
 					}
 				}
-				jQuery('.loader-container').hide();
+				jQuery( '.loader-container' ).hide();
 			},
 
 			error() {
@@ -131,14 +116,11 @@ jQuery( document ).ready( function() {
 				caravanPostID,
 			},
 			success( response ) {
-				// console.log( response.args );
 				if ( response ) {
-					// console.log( response.models );
 					if ( caravan ) {
 						jQuery( '#van_model' ).html( response.html );
-						jQuery('#van_model').append('<option value="other">Other</option>');
+						jQuery( '#van_model' ).append( '<option value="other">Other</option>' );
 					}
-					console.log( response.barheight );
 					if ( response.barheight > 1800 ) {
 						jQuery( '.extra-support' ).show();
 					}
@@ -167,10 +149,10 @@ jQuery( document ).ready( function() {
 					if ( response.vinyl_insert_height ) {
 						jQuery( '#vinyl_length' ).val( response.vinyl_insert_height ).trigger( 'change' );
 					}
-					if (response.stoneguard_image) {
-						jQuery('#caravan-images')
-							.html('<div class="vehicle-image">' + response.stoneguard_image + '</div>')
-							.trigger('change');
+					if ( response.stoneguard_image ) {
+						jQuery( '#caravan-images' )
+							.html( '<div class="vehicle-image">' + response.stoneguard_image + '</div>' )
+							.trigger( 'change' );
 					}
 
 					jQuery( '.loader-container' ).hide();
@@ -185,5 +167,4 @@ jQuery( document ).ready( function() {
 		} );
 	}
 } );
-
 

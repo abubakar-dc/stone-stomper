@@ -57,7 +57,6 @@ $sts_var_product_price = $product->get_price();
 					$price = floatval($sts_var_product_price);
 					$formatted_price = number_format($price, 2, '.', '');
 					echo wc_price($formatted_price);
-					echo "<script>console.log('Product ID: {$sts_var_product_id} | Raw: {$sts_var_product_price} | Formatted: {$formatted_price}');</script>";
 					?>
 				</h3>
 			</div>

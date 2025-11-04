@@ -3,11 +3,9 @@ jQuery( document ).ready( function() {
 	let mainProductId = [];
 	let upsellsProductId = [];
 	mainProductId.push( jQuery( '#product_type option:first' ).val() );
-	console.log( mainProductId );
 	jQuery( document ).on( 'change', '#product_type', function() {
 		mainProductId = [];
 		const productId = jQuery( this ).val();
-		console.log( 'Selected Product ID:', mainProductId );
 		mainProductId.push( productId );
 		UpdateSummary();
 	} );
@@ -19,7 +17,6 @@ jQuery( document ).ready( function() {
 				upsellsProductId.push( productId );
 			}
 		} );
-		console.log( upsellsProductId );
 		UpdateSummary(); // Call your update function
 	} );
 
@@ -46,12 +43,10 @@ jQuery( document ).ready( function() {
 					window.location.href = response.data.redirect || '/cart';
 				} else {
 					alert( 'Could not add to cart. Please try again.' );
-					console.error( 'Add to cart unexpected response:', response );
 				}
 			},
 			error( xhr ) {
 				alert( 'Something went wrong. Please try again.' );
-				console.error( 'Add to cart error:', xhr );
 			},
 		} );
 	}
@@ -60,7 +55,6 @@ jQuery( document ).ready( function() {
 		ids = jQuery.merge( [], mainProductId ); // Start with a copy of the first array
 		jQuery.merge( ids, upsellsProductId ); // Add the second array into it
 
-		console.log( ids );
 		jQuery.ajax( {
 			type: 'POST',
 			url: localVars.ajax_url,
@@ -71,18 +65,11 @@ jQuery( document ).ready( function() {
 				shipping: 'standard', // Replace with actual value
 			},
 			success( response ) {
-				console.log( response );
-				console.log( response.data.html );
-
 				if ( response.data.html ) {
 					jQuery( '#order_summary' ).html( response.data.html );
 				} else {
 					jQuery( '#order_summary' ).html( response.data.html );
 				}
-			},
-			error( xhr ) {
-				alert( 'Something went wrong. Please try again.' );
-				console.error( 'Add to cart error:', xhr );
 			},
 		} );
 	}

@@ -1923,7 +1923,6 @@ add_filter('woocommerce_get_price_html', function($price_html, $product) {
 	if (is_numeric($raw_price)) {
 		$formatted = number_format((float)$raw_price, 2, '.', '');
 		$price_html = wc_price($formatted);
-		echo "<script>console.log('Product ID: {$product->get_id()} | Raw: {$raw_price} | Formatted: {$formatted}');</script>";
 	}
 	return $price_html;
 }, 10, 2);

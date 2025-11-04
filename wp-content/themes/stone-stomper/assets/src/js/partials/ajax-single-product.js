@@ -3,12 +3,10 @@ jQuery( function( $ ) {
 		e.preventDefault();
 
 		const main_id = $( this ).data( 'main-product' );
-		console.log( main_id );
 		const upsells = [];
 
 		$( '.upsell-checkbox:checked' ).each( function() {
 			upsells.push( $( this ).val() );
-			console.log( upsells );
 		} );
 
 		$.ajax( {
@@ -24,7 +22,6 @@ jQuery( function( $ ) {
 					window.location.href = response.data.redirect || '/cart';
 				} else {
 					alert( 'Could not add to cart. Please try again.' );
-					console.error( 'Add to cart unexpected response:', response );
 				}
 			},
 		} );

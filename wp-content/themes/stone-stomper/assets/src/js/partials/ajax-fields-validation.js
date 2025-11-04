@@ -1,36 +1,4 @@
 jQuery( document ).ready( function( $ ) {
-	// function formValidationOne() {
-	// 	let isValid = true;
-	// 	const fieldData = {};
-
-	// 	jQuery( '#details-section' ).find( 'input[required], select[required]' ).each( function() {
-	// 		const $field = jQuery( this );
-	// 		const value = $field.val()?.trim();
-	// 		const fieldName = $field.attr( 'name' );
-
-	// 		if ( ! value ) {
-	// 			isValid = false;
-	// 			$field.addClass( 'field-error' );
-	// 		} else {
-	// 			$field.removeClass( 'field-error' );
-	// 			fieldData[ fieldName ] = value;
-	// 		}
-	// 	} );
-
-	// 	if ( isValid ) {
-	// 		jQuery( '#vehicle-details' ).removeClass( 'section-disable' );
-	// 	} else {
-	// 		console.log( '❌ Some required fields are still empty.' );
-	// 	}
-	// }
-	// jQuery( document ).ready( function() {
-	// 	jQuery( '#veh_make' ).on( 'change', function() {
-	// 		if ( jQuery( this ).val() !== '' ) {
-	// 			jQuery( '.notice-bar' ).css( 'display', 'block' );
-	// 		}
-	// 	} );
-	// } );
-
 	// Listen for input and change events on required fields
 	jQuery( '#details-section' ).on( 'input change', 'input[required], select[required]', function() {
 		formValidationOne();
@@ -78,13 +46,6 @@ jQuery( document ).ready( function( $ ) {
 				fieldData[ fieldName ] = value;
 			}
 		} );
-
-		if ( isValid ) {
-			console.log( '✅ All caravan fields are filled.' );
-			console.log( '🏕️ Caravan data:', fieldData );
-		} else {
-			console.log( '❌ Some required caravan fields are still empty.' );
-		}
 	}
 
 	// Auto-validate when any required input/select changes
@@ -107,7 +68,6 @@ jQuery( document ).ready( function( $ ) {
 			const value = $input.val()?.trim();
 
 			// Debugging (optional)
-			console.log( `${ field.label }:`, value );
 
 			// Check if the field is empty or still has []
 			if ( ! value || value === '[]' ) {
@@ -132,17 +92,6 @@ jQuery( document ).ready( function( $ ) {
 				}
 			}
 		} );
-
-		// ✅ If all 3 uploaded, enable final sections
-		if ( allUploaded ) {
-			console.log( '✅ All 3 photos uploaded successfully!' );
-			console.log( '🖼️ Photo data:', photoData );
-		} else {
-		// ❌ If even one missing, keep section disabled
-		// jQuery('#final-measurements').addClass('section-disable');
-		// jQuery('#final-summary').addClass('section-disable');
-			console.log( '❌ One or more required photographs missing.' );
-		}
 	}
 
 	// Run validation when photo upload completes
