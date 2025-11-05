@@ -20,6 +20,10 @@ jQuery( document ).ready( function() {
 			const vehMakeContainer = jQuery( '.veh_make_other' ); // assuming veh_year is inside a wrapper
 			const vehModelContainer = jQuery( '.veh_model_other' ); // assuming veh_year is inside a wrapper
 
+			yearContainer.empty();
+			vehMakeContainer.empty();
+			vehModelContainer.empty();
+
 			jQuery( '#veh_model' ).hide();
 			jQuery( '#veh_year' ).hide();
 
@@ -49,6 +53,9 @@ jQuery( document ).ready( function() {
 			const yearContainer = jQuery( '.veh_year_other' ); // assuming veh_year is inside a wrapper
 			const vehModelContainer = jQuery( '.veh_model_other' ); // assuming veh_year is inside a wrapper
 
+			yearContainer.empty();
+			vehModelContainer.empty();
+
 			jQuery( '#veh_year' ).hide();
 
 			vehModelContainer.append(
@@ -62,7 +69,6 @@ jQuery( document ).ready( function() {
 		} else {
 
 			jQuery( '#veh_year' ).show();
-
 			jQuery( '.veh_model_other input' ).remove();
 			jQuery( '.veh_year_other input' ).remove();
 		}
@@ -71,6 +77,8 @@ jQuery( document ).ready( function() {
 	jQuery( '#veh_year' ).on( 'change', function() {
 		if ( jQuery( this ).val() === 'other' ) {
 			const yearContainer = jQuery( '.veh_year_other' ); // assuming veh_year is inside a wrapper
+
+			yearContainer.empty();
 
 			// Append input if not already present
 			yearContainer.append(

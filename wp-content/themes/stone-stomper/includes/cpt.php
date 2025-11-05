@@ -335,21 +335,61 @@ add_action( 'pre_get_posts', function( $query ) {
 		return;
 	}
 
-	// Sort by Order ID (stored in post meta)
-	if ( 'order_id' === $query->get( 'orderby' ) ) {
-		$query->set( 'meta_key', 'order_id' );
-		$query->set( 'orderby', 'meta_value_num' ); // numeric sort
-	}
-
-	// Sort by Proposed Date (stored in post meta)
-	if ( 'proposed_date' === $query->get( 'orderby' ) ) {
-		$query->set( 'meta_key', 'proposed_date' );
-		$query->set( 'orderby', 'meta_value' ); // use 'meta_value_num' if stored as timestamp
+	// Filter by Proposed Date (month)
+	if ( ! empty( $_GET['filter_proposed_date'] ) ) {
+		$filter = sanitize_text_field( $_GET['filter_proposed_date'] );
+		$query->set( 'meta_query', [
+			[
+				'key'     => 'sts_var_proposed_date_of_delivery',
+				'value'   => [ $filter . '-01', $filter . '-31' ],
+				'compare' => 'BETWEEN',
+				'type'    => 'DATE',
+			],
+		]);
 	}
 });
 
 
+/**
+ * Add a "Filter by Proposed Date" dropdown to Customer CPT list
+ */
+add_action( 'restrict_manage_posts', function( $post_type ) {
+	if ( 'customer' !== $post_type ) {
+		return;
+	}
 
+	global $wpdb;
+
+	// Fetch distinct proposed dates (YYYY-MM format)
+	$dates = $wpdb->get_col("
+		SELECT DISTINCT DATE_FORMAT(meta_value, '%Y-%m')
+		FROM $wpdb->postmeta
+		WHERE meta_key = 'sts_var_proposed_date_of_delivery'
+		AND meta_value != ''
+		ORDER BY meta_value DESC
+	");
+
+	if ( empty( $dates ) ) {
+		return;
+	}
+
+	$current = isset( $_GET['filter_proposed_date'] ) ? sanitize_text_field( $_GET['filter_proposed_date'] ) : '';
+
+	echo '<select name="filter_proposed_date">';
+	echo '<option value="">' . esc_html__( 'All Proposed Dates', 'textdomain' ) . '</option>';
+
+	foreach ( $dates as $date ) {
+		$label = date_i18n( 'F Y', strtotime( $date . '-01' ) );
+		printf(
+			'<option value="%s" %s>%s</option>',
+			esc_attr( $date ),
+			selected( $current, $date, false ),
+			esc_html( $label )
+		);
+	}
+
+	echo '</select>';
+});
 
 
 

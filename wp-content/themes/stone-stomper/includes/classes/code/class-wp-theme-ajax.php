@@ -326,7 +326,7 @@ public function fetch_form_data() {
 					$html .= '<option class="ajax-car-model" data-post-id="' . esc_attr( $related_post_id ) . '" value="' . esc_attr( sanitize_title( get_the_title( $related_post_id ) ) ) . '">' . esc_html( get_the_title( $related_post_id ) ) . '</option>';
 				}
 			}
-			$html .= '<option class="ajax-car-model other">Other</option>';
+			$html .= '<option class="ajax-car-model other">other</option>';
 
 		}
 	}
@@ -385,7 +385,7 @@ public function fetch_form_data() {
 				$year .= '<option value="' . esc_attr( $y ) . '">' . esc_html( $y ) . '</option>';
 			}
 
-			$year .= '<option class="ajax-car-year other">Other</option>';
+			$year .= '<option class="ajax-car-year other">other</option>';
 		}
 	} else {
 		$year = '<option value="">Select Model Year</option>';
