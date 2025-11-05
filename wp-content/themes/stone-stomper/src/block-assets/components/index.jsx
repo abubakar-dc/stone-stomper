@@ -32,4 +32,3 @@ folders.forEach( ( folder ) => {
 } );
 
 // Use the imported modules
-console.log( modulesFromFolders );

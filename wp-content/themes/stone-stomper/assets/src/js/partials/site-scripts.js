@@ -65,9 +65,7 @@ jQuery( document ).ready( function() {
 			yearContainer.append(
 				'<input placeholder="Model Year" id="veh_year_other" name="vehicle_year" type="text" />'
 			);
-
 		} else {
-
 			jQuery( '#veh_year' ).show();
 			jQuery( '.veh_model_other input' ).remove();
 			jQuery( '.veh_year_other input' ).remove();
@@ -84,9 +82,7 @@ jQuery( document ).ready( function() {
 			yearContainer.append(
 				'<input placeholder="Model Year" id="veh_year_other" name="vehicle_year" type="text" />'
 			);
-
 		} else {
-
 			jQuery( '.veh_year_other input' ).remove();
 		}
 	} );
@@ -105,7 +101,6 @@ jQuery( document ).ready( function() {
 			jQuery( '.van_model_other input' ).remove();
 		}
 	} );
-
 
 	jQuery( '#van_model' ).on( 'change', function() {
 		if ( jQuery( this ).val() === 'other' ) {
@@ -393,8 +388,7 @@ jQuery( function() {
 
 // helpers to read/write hidden ids (JSON array in a hidden input)
 function getIdsField( slot ) {
-	const map = { hitch: 'hitch_ids', rear: 'rear_ids', front: 'front_ids' };
-	return document.getElementById( map[ slot ] );
+	const map = { hitch: 'hitch_ids', rear: 'rear_ids', front: 'front_ids' }; return document.getElementById( map[ slot ] );
 }
 function readIds( slot ) {
 	try {
@@ -406,30 +400,27 @@ function readIds( slot ) {
 function writeIds( slot, ids ) {
 	getIdsField( slot ).value = JSON.stringify( ids );
 }
-
 function setupImageUpload( inputId, listId, slot ) {
 	const input = document.getElementById( inputId );
 	const list = document.getElementById( listId );
-
+	if ( ! input || ! list ) {
+		return;
+	}
 	input.addEventListener( 'change', function() {
 		const files = Array.from( input.files );
-		showFiles( files, input, list, slot ); // preview
-		autoUpload( files, slot, list ); // 🔥 upload immediately
+		showFiles( files, input, list, slot );
+		autoUpload( files, slot, list );
 	} );
-
 	function showFiles( files, input, list, slot ) {
 		list.innerHTML = '';
 		files.forEach( ( file, index ) => {
 			if ( ! file.type.startsWith( 'image/' ) ) {
-				alert( file.name + ' is not an image file!' );
-				return;
+				alert( file.name + ' is not an image file!' ); return;
 			}
-
 			const li = document.createElement( 'li' );
 			li.style.display = 'flex';
 			li.style.alignItems = 'center';
 			li.style.marginBottom = '8px';
-
 			const img = document.createElement( 'img' );
 			img.src = URL.createObjectURL( file );
 			img.style.width = '80px';
@@ -438,14 +429,11 @@ function setupImageUpload( inputId, listId, slot ) {
 			img.style.marginRight = '10px';
 			img.style.border = '1px solid #ccc';
 			img.style.borderRadius = '6px';
-
 			const span = document.createElement( 'span' );
 			span.textContent = file.name;
-
-			const status = document.createElement( 'em' ); // upload status
+			const status = document.createElement( 'em' );
 			status.style.marginLeft = '8px';
 			status.textContent = ' – pending…';
-
 			const delBtn = document.createElement( 'button' );
 			delBtn.type = 'button';
 			delBtn.textContent = '❌';
@@ -453,7 +441,6 @@ function setupImageUpload( inputId, listId, slot ) {
 			delBtn.addEventListener( 'click', () => {
 				removeFile( index, input, list, slot );
 			} );
-
 			li.appendChild( img );
 			li.appendChild( span );
 			li.appendChild( status );
@@ -461,7 +448,6 @@ function setupImageUpload( inputId, listId, slot ) {
 			list.appendChild( li );
 		} );
 	}
-
 	function removeFile( index, input, list, slot ) {
 		const dt = new DataTransfer();
 		const files = Array.from( input.files );
@@ -469,24 +455,16 @@ function setupImageUpload( inputId, listId, slot ) {
 		files.forEach( ( f ) => dt.items.add( f ) );
 		input.files = dt.files;
 		showFiles( Array.from( input.files ), input, list, slot );
-		// NOTE: We’re not deleting uploaded media from the server here (needs auth/cap).
-		// If you want to also remove uploaded IDs when removing from preview, clear the hidden field and re-upload remaining files:
 		writeIds( slot, [] );
 		autoUpload( Array.from( input.files ), slot, list );
 	}
-
 	function autoUpload( files, slot, list ) {
 		if ( ! files.length ) {
-			list.querySelectorAll( 'em' ).forEach( ( e ) => ( e.textContent = '' ) );
-			return;
+			list.querySelectorAll( 'em' ).forEach( ( e ) => e.textContent = '' ); return;
 		}
-
 		const fd = new FormData();
 		fd.append( 'action', 'bst_handle_upload_order_photos' );
-		// fd.append( '_ajax_nonce', bstUpload.nonce );
-		// send only this slot’s files so PHP can bucket them correctly
 		files.forEach( ( file ) => fd.append( slot + '[]', file, file.name ) );
-
 		jQuery.ajax( {
 			url: localVars.ajax_url,
 			method: 'POST',
@@ -498,10 +476,7 @@ function setupImageUpload( inputId, listId, slot ) {
 				xhr.upload.addEventListener( 'progress', function( e ) {
 					if ( e.lengthComputable ) {
 						const pct = Math.round( ( e.loaded / e.total ) * 100 );
-						list.querySelectorAll( 'em' ).forEach(
-							( e ) =>
-								( e.textContent = ' – uploading ' + pct + '%' ),
-						);
+						list.querySelectorAll( 'em' ).forEach( ( e ) => e.textContent = ' – uploading ' + pct + '%' );
 					}
 				} );
 				return xhr;
@@ -509,20 +484,15 @@ function setupImageUpload( inputId, listId, slot ) {
 			success( resp ) {
 				if ( resp && resp.success ) {
 					const data = resp.data || resp;
-					const urls =
-						data && data[ slot ] ? data[ slot ].map( ( x ) => x.url ) : [];
-					writeIds( slot, urls ); // save URLs (instead of IDs)
-					list.querySelectorAll( 'em' ).forEach(
-						( e ) => ( e.textContent = ' – uploaded' ),
-					);
+					const urls = data && data[ slot ] ? data[ slot ].map( ( x ) => x.url ) : [];
+					writeIds( slot, urls );
+					list.querySelectorAll( 'em' ).forEach( ( e ) => e.textContent = ' – uploaded' );
 				} else {
 					alert( 'Upload failed' );
 				}
 			},
 			error() {
-				list.querySelectorAll( 'em' ).forEach(
-					( e ) => ( e.textContent = ' – network error' ),
-				);
+				list.querySelectorAll( 'em' ).forEach( ( e ) => e.textContent = ' – network error' );
 				alert( 'Network error during upload.' );
 			},
 		} );
@@ -787,41 +757,23 @@ jQuery( document ).ready( function() {
 			if ( ! photosDone ) {
 				photosDone = true;
 				jQuery( '#final-measurements' ).removeClass( 'section-disable' );
+				jQuery( '#final-summary' ).removeClass( 'section-disable' );
 				setTimeout( () => {
-					if ( allMeasureFilled() ) {
-						jQuery( '#final-summary' ).removeClass( 'section-disable' );
-						document
-							.querySelector( '#final-summary' )
-							.scrollIntoView( {
-								behavior: 'smooth',
-								block: 'start',
-							} );
-					} else {
-						document
-							.querySelector( '#final-measurements' )
-							.scrollIntoView( {
-								behavior: 'smooth',
-								block: 'start',
-							} );
-					}
+					document.querySelector( '#final-measurements' ).scrollIntoView( {
+						behavior: 'smooth',
+						block: 'start',
+					} );
 				}, 300 );
 			}
 		} else {
 			photosDone = false;
-			jQuery( '#final-measurements, #final-summary' ).addClass(
-				'section-disable',
-			);
+			jQuery( '#final-measurements, #final-summary' ).addClass( 'section-disable' );
 		}
 	}
 
 	function checkMeasure() {
 		if ( photosDone && allMeasureFilled() ) {
 			jQuery( '#final-summary' ).removeClass( 'section-disable' );
-			setTimeout( () => {
-				document
-					.querySelector( '#final-summary' )
-					.scrollIntoView( { behavior: 'smooth', block: 'start' } );
-			}, 300 );
 		}
 	}
 
@@ -854,6 +806,59 @@ jQuery( document ).ready( function() {
 	jQuery( '#blk-vehicle select' ).on( 'change', function() {
 		if ( jQuery( this ).val() !== '' ) {
 			jQuery( '#vehicle-notice-bar' ).css( 'display', 'block' );
+		}
+	} );
+} );
+
+jQuery( document ).ready( function() {
+	jQuery( '.gfield-choice-input' ).on( 'change', function() {
+		jQuery( '.toolbox-support, .factory_stoneguard' ).hide().find( 'input[type="text"]' ).val( '' );
+		if ( jQuery( this ).is( '#toolbox' ) ) {
+			jQuery( '.toolbox-support' ).show();
+		}
+		if ( jQuery( this ).is( '#factory_stoneguard' ) ) {
+			jQuery( '.factory_stoneguard' ).show();
+		}
+	} );
+} );
+
+jQuery( document ).ready( function() {
+	jQuery( '.account-icon' ).each( function() {
+		const $el = jQuery( this );
+		if ( $el.text().trim() === '' && ! $el.attr( 'aria-label' ) && ! $el.attr( 'title' ) ) {
+			$el.attr( 'aria-label', 'My account' );
+			$el.attr( 'title', 'My account' );
+		}
+	} );
+} );
+jQuery( document ).ready( function() {
+	jQuery( '.product-image a' ).each( function() {
+		const $link = jQuery( this );
+		const $img = $link.find( 'img' );
+		const altText = $img.attr( 'alt' ) || '';
+		const titleText = $img.attr( 'title' ) || '';
+		let label = altText || titleText;
+
+		if ( ! label ) {
+			const src = $img.attr( 'src' );
+			if ( src ) {
+				label = src.split( '/' ).pop().split( '.' )[ 0 ].replace( /[-_]/g, ' ' );
+			}
+		}
+
+		if ( $link.text().trim() === '' && label ) {
+			$link.attr( 'aria-label', label );
+			$link.attr( 'title', label );
+		}
+	} );
+} );
+jQuery( document ).ready( function() {
+	jQuery( '.play-icon a' ).each( function() {
+		const $link = jQuery( this );
+
+		if ( $link.text().trim() === '' && ! $link.attr( 'aria-label' ) ) {
+			$link.attr( 'aria-label', 'Play video' );
+			$link.attr( 'title', 'Play video' );
 		}
 	} );
 } );

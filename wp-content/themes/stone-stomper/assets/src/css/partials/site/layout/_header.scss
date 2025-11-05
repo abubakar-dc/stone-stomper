@@ -175,6 +175,7 @@ header {
 		height: 34px;
 		background-size: 28px;
 		margin-left: 8px;
+		display: block;
 
 		svg {
 			margin-bottom: 0;
@@ -187,4 +188,19 @@ div#menuiconwrap.icons02 span.cart_count_header {
 	top: -40px;
 	right: -18px;
 	left: auto;
+}
+
+.header-btns{
+	ul{
+		display: flex;
+		align-items: center;
+
+		margin:0;
+		padding:0;
+		list-style:none;
+		li{
+			margin: 0;
+			padding: 0;
+		}
+	}
 }

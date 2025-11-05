@@ -9,7 +9,6 @@ const UseImage = ( fileName ) => {
 		const fetchImage = async () => {
 			try {
 				const response = await require( `../images/${ fileName }` ); // change relative path to suit your needs
-				console.log( response );
 				setImage( response );
 			} catch ( err ) {
 				setError( err );

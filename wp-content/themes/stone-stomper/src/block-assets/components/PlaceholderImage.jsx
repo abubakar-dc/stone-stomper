@@ -7,7 +7,6 @@ import {
 } from '@wordpress/block-editor';
 import apiFetch from '@wordpress/api-fetch';
 const PlaceholderImage = ( { props, valueImage, attrImage, style = 'default' } ) => {
-
 	const {
 		setAttributes,
 	} = props;
@@ -17,29 +16,25 @@ const PlaceholderImage = ( { props, valueImage, attrImage, style = 'default' } )
 				<MediaUploadCheck>
 					<MediaUpload
 						onSelect={ ( media ) => {
-							if (media && media.id) {
-								apiFetch({ path: `wp/v2/media/${media.id}` })
-									.then((data) => {
-										setAttributes({ [attrImage]: data });
-									})
-									.catch(() => {
-										setAttributes({ [attrImage]: {} });
-									});
+							if ( media && media.id ) {
+								apiFetch( { path: `wp/v2/media/${ media.id }` } )
+									.then( ( data ) => {
+										setAttributes( { [ attrImage ]: data } );
+									} )
+									.catch( () => {
+										setAttributes( { [ attrImage ]: {} } );
+									} );
 							} else {
-								setAttributes({ [attrImage]: {} });
+								setAttributes( { [ attrImage ]: {} } );
 							}
-						}}
+						} }
 						allowedTypes={ [ 'image' ] }
 						multiple={ false }
 						gallery={ false }
 						addToGallery={ false }
 						value={ valueImage?.id || '' }
 						render={ ( { open } ) => {
-							console.log(valueImage);
-
-								if ( valueImage && valueImage.source_url ) {
-
-
+							if ( valueImage && valueImage.source_url ) {
 								return (
 									<>
 
@@ -89,14 +84,10 @@ const PlaceholderImage = ( { props, valueImage, attrImage, style = 'default' } )
 
 		</>
 	);
-
-
 };
 const Image = ( { value, thumb } ) => {
-	// console.log( value.media_details );
 	if ( value.media_details ) {
 		const image = value.media_details.sizes[ thumb ] ?? null;
-		// console.log( image );
 		if ( image ) {
 			return (
 				<>

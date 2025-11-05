@@ -111,9 +111,7 @@ $sts_var_tbar_btn      = $sts_option_fields['sts_var_tbar_btn'] ?? null;
 	<?php wp_head(); ?> <script>
 	"serviceWorker" in navigator && window.addEventListener("load", function() {
 		navigator.serviceWorker.register("/sw.js").then(function(e) {
-			console.log("ServiceWorker registration successful with scope: ", e.scope)
 		}, function(e) {
-			console.log("ServiceWorker registration failed: ", e)
 		})
 	});
 	jQuery(document).ready(function() {
@@ -207,18 +205,24 @@ $sts_var_tbar_btn      = $sts_option_fields['sts_var_tbar_btn'] ?? null;
 				</div>
 			</div>
 			<div class="header-btns">
+				<nav>
+					<ul>
+						<li>
+							<?php echo do_shortcode('[whmc_mini_cart]'); ?>
+						</li>
 
-				<?php echo do_shortcode('[whmc_mini_cart]');
-				if ( function_exists( 'wc_get_page_id' ) ) {
-				$account_page_url = get_permalink( wc_get_page_id( 'myaccount' ) );
-				?>
-				<a href="<?php echo esc_url( $account_page_url ); ?>" class="account-icon">
-				</a>
-				<?php
-				}
-				?>
-
+						<?php
+						if ( function_exists( 'wc_get_page_id' ) ) {
+							$account_page_url = get_permalink( wc_get_page_id( 'myaccount' ) );
+						?>
+							<li>
+								<a href="<?php echo esc_url( $account_page_url ); ?>" class="account-icon"></a>
+							</li>
+						<?php } ?>
+					</ul>
+				</nav>
 			</div>
+
 			<!-- header buttons -->
 		</div>
 		<!-- Header End -->

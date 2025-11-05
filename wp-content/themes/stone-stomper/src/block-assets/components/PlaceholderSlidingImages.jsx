@@ -18,7 +18,6 @@ const PlaceholderSlidingImages = ( { props, valueImage, attrImage } ) => {
 			<MediaUploadCheck>
 				<MediaUpload
 					onSelect={ ( media ) => {
-						// console.log( media );
 						const newMedia = [];
 						media.map( ( item ) => {
 							apiFetch( { path: 'wp/v2/media/' + item.id } ).then( ( data ) => {
