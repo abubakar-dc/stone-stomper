@@ -341,19 +341,12 @@ add_action( 'woocommerce_new_order', function( $order_id ) {
 
 
 	// // Photos (hidden inputs hold JSON arrays of IDs)
-$hitch_ids = sts_to_media_array( $data['hitch_ids'] ?? [] );
-$rear_ids  = sts_to_media_array( $data['rear_ids'] ?? [] );
-$front_ids = sts_to_media_array( $data['front_ids'] ?? [] );
+	$hitch_ids = sts_to_media_array( $data['hitch_ids'] ?? [] );
+	$rear_ids  = sts_to_media_array( $data['rear_ids'] ?? [] );
+	$front_ids = sts_to_media_array( $data['front_ids'] ?? [] );
 
+	$final_delivery  = isset( $data['final_delivery'] )  ? sanitize_text_field( $data['final_delivery'] )  : ( isset( $data['final_address'] ) ? sanitize_text_field( $data['final_address'] ) : '' );
 
-// var_dump($hitch_ids);
-
-
-	// $photos = array(
-	// 	'hitch_ids' => sts_to_int_array( $data['hitch_ids'] ?? array() ),
-	// 	'rear_ids'  => sts_to_int_array( $data['rear_ids'] ?? array() ),
-	// 	'front_ids' => sts_to_int_array( $data['front_ids'] ?? array() ),
-	// );
 
 	// Final details
 	$final = array(
@@ -553,6 +546,11 @@ function render_towing_diagram($post_id) {
 		$vinyl_insert_height_mm = get_post_meta( $post_id, 'vinyl_insert_height_mm', true );
 		$stoneguard_width_mm    = get_post_meta( $post_id, 'factory_stoneguard_width', true );
 		$stoneguard_height_mm   = get_post_meta( $post_id, 'factory_stoneguard_height', true );
+
+		$sts_var_caravan_ss_length_adj  = get_post_meta( $post_id, 'sts_var_caravan_ss_length_adj', true );
+		if($sts_var_caravan_ss_length_adj){
+			$caravan_length_mm = $caravan_length_mm + $sts_var_caravan_ss_length_adj;
+		}
 		ob_start();
 	?>
 
@@ -880,14 +878,8 @@ function show_towing_svg_in_editor( $post ) {
 	$front_ids = get_post_meta( $post->ID, 'front_ids', true );
 	$support_pockets = get_post_meta( $post->ID, 'support_pockets', true );
 
+	var_dump(get_post_meta( $post->ID));
 
-	$photo_ids = get_post_meta( $order_id, 'order_photos', true ); // Or wherever you're storing them
-
-	// if ( ! empty( $photo_ids['rear'] ) ) {
-	// 	foreach ( $photo_ids['rear'] as $attach_id ) {
-	// 		echo wp_get_attachment_image( $attach_id, 'medium' );
-	// 	}
-	// }
 
 
 

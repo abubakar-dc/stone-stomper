@@ -7944,10 +7944,10 @@ body.post-type-post .editor-styles-wrapper > div {
   width: 30%;
 }
 .postbox-container .customer-upload-images img {
-  max-width: 180px !important;
-  width: 180px;
-  height: 180px;
-  aspect-ratio: 180/180;
+  max-width: 90px !important;
+  width: 90px;
+  height: 90px;
+  aspect-ratio: 90/90;
   -o-object-fit: cover;
      object-fit: cover;
 }

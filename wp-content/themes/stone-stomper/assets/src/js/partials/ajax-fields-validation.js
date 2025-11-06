@@ -1,8 +1,8 @@
 jQuery( document ).ready( function( $ ) {
 	// Listen for input and change events on required fields
-	jQuery( '#details-section' ).on( 'input change', 'input[required], select[required]', function() {
-		formValidationOne();
-	} );
+	// jQuery( '#details-section' ).on( 'input change', 'input[required], select[required]', function() {
+	// 	formValidationOne();
+	// } );
 
 	function validateVehicleSection() {
 		let isValid = true;

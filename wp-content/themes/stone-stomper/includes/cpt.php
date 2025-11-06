@@ -39,7 +39,7 @@ new WP_Theme_CPT(
 			'register_key'       => 'caravan',
 			'slug'               => 'caravan',
 		),
-		'supports'     => array( 'title', 'thumbnail', 'author' ),
+		'supports'     => array( 'title', 'author' ),
 		'menu_icon'    => 'dashicons-columns',
 		'public'       => false,
 		'show_in_menu' => true,
@@ -348,6 +348,7 @@ add_action( 'pre_get_posts', function( $query ) {
 		]);
 	}
 });
+
 
 
 /**
