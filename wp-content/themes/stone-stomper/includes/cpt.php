@@ -80,11 +80,12 @@ new WP_Theme_CPT(
 		 ),
 	)
 );
+
 new WP_Theme_CPT(
 	array(
 		'labels'    => array(
 			'singular_capital'   => 'Order',
-			'plural_capital'     => 'Orders',
+			'plural_capital'     => 'SS Orders',
 			'singular_lowercase' => 'order',
 			'plural_lowercase'   => 'orders',
 			'register_key'       => 'customer',
@@ -102,6 +103,7 @@ new WP_Theme_CPT(
 /**
  * Add WooCommerce-related columns to the custom Order CPT
  */
+
 add_filter( 'manage_customer_posts_columns', function ( $columns ) {
 
 	$new_columns = [];
@@ -330,24 +332,48 @@ add_action( 'pre_get_posts', function( $query ) {
 		return;
 	}
 
-	$screen = get_current_screen();
-	if ( ! $screen || 'customer' !== $screen->post_type ) {
-		return;
+	// Sirf Customer CPT ke liye
+	if ( isset( $_GET['post_type'] ) && $_GET['post_type'] === 'customer' ) {
+
+		// ✅ Jab user ne manually sort nahi kiya ho to default date DESC
+		if ( empty( $_GET['orderby'] ) ) {
+			$query->set( 'orderby', 'date' );
+			$query->set( 'order', 'DESC' );
+		}
+
+		// ✅ Agar WC status filter apply ho
+		if ( ! empty( $_GET['wc_status'] ) ) {
+
+			$status_filter = sanitize_text_field( $_GET['wc_status'] );
+
+			$matching_ids = [];
+			$posts = get_posts( [
+				'post_type'      => 'customer',
+				'posts_per_page' => -1,
+				'fields'         => 'ids',
+			] );
+
+			foreach ( $posts as $post_id ) {
+				$order_id = get_field( 'order_id', $post_id );
+				if ( ! $order_id ) continue;
+
+				$order = wc_get_order( $order_id );
+				if ( $order && $order->get_status() === $status_filter ) {
+					$matching_ids[] = $post_id;
+				}
+			}
+
+			$query->set( 'post__in', $matching_ids ?: [ 0 ] );
+
+			// ✅ Restore correct sorting so post__in na random karay
+			$query->set( 'orderby', 'date' );
+			$query->set( 'order', 'DESC' );
+		}
 	}
 
-	// Filter by Proposed Date (month)
-	if ( ! empty( $_GET['filter_proposed_date'] ) ) {
-		$filter = sanitize_text_field( $_GET['filter_proposed_date'] );
-		$query->set( 'meta_query', [
-			[
-				'key'     => 'sts_var_proposed_date_of_delivery',
-				'value'   => [ $filter . '-01', $filter . '-31' ],
-				'compare' => 'BETWEEN',
-				'type'    => 'DATE',
-			],
-		]);
-	}
 });
+
+
 
 
 
