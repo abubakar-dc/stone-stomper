@@ -5837,6 +5837,9 @@ Mixin for transition
   border-color: var(--ss_color_primary);
   background-color: rgba(237, 23, 79, 0.1);
 }
+.editor-styles-wrapper #caravan-details .van_model_other {
+  margin-top: 30px;
+}
 .editor-styles-wrapper .wp-block-button .wp-block-button__link {
   box-sizing: border-box;
   position: relative;
@@ -5954,6 +5957,7 @@ Mixin for transition
   box-sizing: border-box;
   transition: all 0.4s ease-in-out;
   opacity: 0.5;
+  text-transform: capitalize;
 }
 .editor-styles-wrapper input[type=text]:focus,
 .editor-styles-wrapper input[type=number]:focus,
@@ -8101,4 +8105,10 @@ body.post-type-post .editor-styles-wrapper > div {
 
 .popup-image {
   cursor: pointer;
+}
+
+.functional-buttons span.button.button-primary.save-chnages {
+  padding-inline: 20px;
+  padding-block: 0;
+  font-size: 16px;
 }
