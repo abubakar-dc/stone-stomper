@@ -7224,6 +7224,10 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   background-color: rgba(237, 23, 79, 0.1);
 }
 
+#caravan-details .van_model_other {
+  margin-top: 30px;
+}
+
 /*-------------------------------------------------
 >> Styles for Wp Buttons
 -------------------------------------------------*/

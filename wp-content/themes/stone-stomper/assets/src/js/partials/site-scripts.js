@@ -12,109 +12,369 @@ jQuery( document ).on( 'scroll', function() {
 		jQuery( 'header, body' ).removeClass( 'shrink' );
 	}
 } );
-
 jQuery( document ).ready( function() {
-	jQuery( '#veh_make' ).on( 'change', function() {
-		if ( jQuery( this ).val() === 'other' ) {
-			const yearContainer = jQuery( '.veh_year_other' ); // assuming veh_year is inside a wrapper
-			const vehMakeContainer = jQuery( '.veh_make_other' ); // assuming veh_year is inside a wrapper
-			const vehModelContainer = jQuery( '.veh_model_other' ); // assuming veh_year is inside a wrapper
-
-			yearContainer.empty();
-			vehMakeContainer.empty();
-			vehModelContainer.empty();
-
-			jQuery( '#veh_model' ).hide();
-			jQuery( '#veh_year' ).hide();
-
-			vehMakeContainer.append(
-				'<input placeholder="Other Make" id="veh_make_other" name="vehicle_make_other" type="text" />',
-			);
-			vehModelContainer.append(
-				'<input style="margin-top:10px" placeholder="Vehicle Model" id="vehicle_model_other" name="vehicle_model" type="text" />',
-			);
-			// Append input if not already present
-			yearContainer.append(
-				'<input placeholder="Model Year" id="veh_year_other" name="vehicle_year" type="text" />',
-			);
-		} else {
-			jQuery( '#veh_model' ).show();
-			jQuery( '#veh_year' ).show();
-
-			jQuery( '.veh_make_other input' ).remove();
-			jQuery( '.veh_model_other input' ).remove();
-			jQuery( '.veh_year_other input' ).remove();
+	jQuery( '#blk-caravan select' ).on( 'change', function() {
+		if ( jQuery( this ).val() !== '' ) {
+			jQuery( '#caravan-notice-bar' ).css( 'display', 'block' );
 		}
 	} );
 
-	// Vehicle Model Change
-	jQuery( '#veh_model' ).on( 'change', function() {
+	jQuery( '#blk-vehicle select' ).on( 'change', function() {
+		if ( jQuery( this ).val() !== '' ) {
+			jQuery( '#vehicle-notice-bar' ).css( 'display', 'block' );
+		}
+	} );
+} );
+
+// jQuery( document ).ready( function() {
+// 	function scrollToSection( id ) {
+// 		const target = document.querySelector( id );
+// 		if ( target ) {
+// 			requestAnimationFrame( function() {
+// 				target.scrollIntoView( { behavior: 'smooth', block: 'start' } );
+// 			} );
+// 		}
+// 	}
+
+// 	function allRequiredFilled( section ) {
+// 		let filled = true;
+// 		jQuery( section )
+// 			.find( 'input:visible[required], select:visible[required], textarea:visible[required]' )
+// 			.each( function() {
+// 				const el = jQuery( this );
+// 				const value = el.val();
+// 				if ( ! value || value.trim() === '' ) {
+// 					filled = false;
+// 					return false;
+// 				}
+// 				if ( el.is( 'select' ) && ( value === '' || value === '0' || el.find( 'option:selected' ).text().trim().toLowerCase().includes( 'select' ) ) ) {
+// 					filled = false;
+// 					return false;
+// 				}
+// 			} );
+// 		return filled;
+// 	}
+
+// 	function handleFormSection( currentSection, nextSection ) {
+// 		const typingTimers = {};
+// 		const typingDelay = 1000; // wait 1s after user stops typing
+// 		const postTypingDelay = 500; // additional delay before moving
+
+// 		function validateAndMove( e ) {
+// 			const field = e.target;
+// 			const fieldId = jQuery( field ).attr( 'id' ) || jQuery( field ).attr( 'name' );
+// 			if ( typingTimers[ fieldId ] ) {
+// 				clearTimeout( typingTimers[ fieldId ] );
+// 			}
+
+// 			typingTimers[ fieldId ] = setTimeout( function() {
+// 				if ( allRequiredFilled( currentSection ) ) {
+// 					setTimeout( function() {
+// 						const section = jQuery( nextSection );
+// 						if ( section.hasClass( 'section-disable' ) ) {
+// 							section.removeClass( 'section-disable' );
+// 							scrollToSection( nextSection );
+// 						}
+// 					}, postTypingDelay );
+// 				}
+// 			}, typingDelay );
+// 		}
+
+// 		const target = document.querySelector( currentSection );
+// 		if ( target ) {
+// 			const observer = new MutationObserver( function() {
+// 				validateAndMove( { target } );
+// 			} );
+// 			observer.observe( target, { childList: true, subtree: true, attributes: true } );
+// 		}
+
+// 		jQuery( document ).on( 'input change', currentSection + ' input, ' + currentSection + ' select, ' + currentSection + ' textarea', validateAndMove );
+// 		return validateAndMove;
+// 	}
+
+// 	const validateJump01 = handleFormSection( '#jump-01', '#vehicle-details' );
+// 	const validateVehicleDetails = handleFormSection( '#vehicle-details', '#caravan-details' );
+// 	const validateCaravanDetails = handleFormSection( '#caravan-details', '#photographs-details' );
+
+// 	jQuery( '#product_type' ).on( 'change', function() {
+// 		const val = jQuery( this ).val();
+// 		if ( val ) {
+// 			jQuery( '#jump-01' ).removeClass( 'section-disable' );
+// 			setTimeout( function() {
+// 				scrollToSection( '#jump-01' );
+// 			}, 400 );
+// 		}
+// 	} );
+
+// 	function checkFinalSections() {
+// 		setTimeout( function() {
+// 			if ( allRequiredFilled( '#caravan-details' ) ) {
+// 				jQuery( '#photographs-details, #final-measurements, #final-summary' ).removeClass( 'section-disable' );
+// 				scrollToSection( '#photographs-details' );
+// 			}
+// 		}, 100 );
+// 	}
+
+// 	const finalTarget = document.querySelector( '#caravan-details' );
+// 	if ( finalTarget ) {
+// 		const observer = new MutationObserver( function() {
+// 			checkFinalSections();
+// 		} );
+// 		observer.observe( finalTarget, { childList: true, subtree: true, attributes: true } );
+// 	}
+
+// 	jQuery( document ).on( 'input change', '#caravan-details input, #caravan-details select, #caravan-details textarea', checkFinalSections );
+
+// 	jQuery( '#veh_make' ).on( 'change', function() {
+// 		const yearContainer = jQuery( '.veh_year_other' );
+// 		const vehMakeContainer = jQuery( '.veh_make_other' );
+// 		const vehModelContainer = jQuery( '.veh_model_other' );
+
+// 		if ( jQuery( this ).val() === 'other' ) {
+// 			jQuery( '#veh_model, #veh_year' ).hide();
+// 			vehMakeContainer.html( '<input placeholder="Other Make" id="veh_make_other" name="vehicle_make_other" required type="text" />' );
+// 			vehModelContainer.html( '<input style="margin-top:30px" placeholder="Vehicle Model" id="vehicle_model_other" name="vehicle_model" required type="text" />' );
+// 			yearContainer.html( '<input  style="margin-top:30px" placeholder="Model Year" id="veh_year_other" name="vehicle_year" required type="text" />' );
+// 		} else {
+// 			jQuery( '#veh_model, #veh_year' ).show();
+// 			vehMakeContainer.empty();
+// 			vehModelContainer.empty();
+// 			yearContainer.empty();
+// 		}
+// 		validateVehicleDetails();
+// 	} );
+
+// 	jQuery( '#veh_model' ).on( 'change', function() {
+// 		const yearContainer = jQuery( '.veh_year_other' );
+// 		const vehModelContainer = jQuery( '.veh_model_other' );
+
+// 		if ( jQuery( this ).val() === 'other' ) {
+// 			jQuery( '#veh_year' ).hide();
+// 			vehModelContainer.html( '<input style="margin-top:30px" placeholder="Vehicle Model" id="vehicle_model_other" name="vehicle_model" required type="text" />' );
+// 			yearContainer.html( '<input  style="margin-top:30px" placeholder="Model Year" id="veh_year_other" name="vehicle_year" required type="text" />' );
+// 		} else {
+// 			jQuery( '#veh_year' ).show();
+// 			vehModelContainer.empty();
+// 			yearContainer.empty();
+// 		}
+// 		validateVehicleDetails();
+// 	} );
+
+// 	jQuery( '#veh_year' ).on( 'change', function() {
+// 		const yearContainer = jQuery( '.veh_year_other' );
+// 		if ( jQuery( this ).val() === 'other' ) {
+// 			yearContainer.html( '<input style="margin-top:30px"  placeholder="Model Year" id="veh_year_other" name="vehicle_year" required type="text" />' );
+// 		} else {
+// 			yearContainer.empty();
+// 		}
+// 		validateVehicleDetails();
+// 	} );
+
+// 	jQuery( '#van_make' ).on( 'change', function() {
+// 		const vanModelContainer = jQuery( '.van_model_other' );
+// 		if ( jQuery( this ).val() === 'other' ) {
+// 			jQuery( '#van_model' ).hide();
+// 			vanModelContainer.html( '<input placeholder="Caravan Model" id="van_model_other" name="caravan_model" required type="text" />' );
+// 		} else {
+// 			jQuery( '#van_model' ).show();
+// 			vanModelContainer.empty();
+// 		}
+// 		validateCaravanDetails();
+// 	} );
+
+// 	jQuery( '#van_model' ).on( 'change', function() {
+// 		const vanModelContainer = jQuery( '.van_model_other' );
+// 		if ( jQuery( this ).val() === 'other' ) {
+// 			vanModelContainer.html( '<input placeholder="Caravan Model" id="van_model_other" name="caravan_model" required type="text" />' );
+// 		} else {
+// 			vanModelContainer.empty();
+// 		}
+// 		validateCaravanDetails();
+// 	} );
+
+// 	jQuery( '#veh_make' ).trigger( 'change' );
+// 	jQuery( '#van_make' ).trigger( 'change' );
+
+// 	validateJump01();
+// 	validateVehicleDetails();
+// 	validateCaravanDetails();
+// } );
+jQuery( document ).ready( function() {
+	function scrollToSection( id ) {
+		const target = document.querySelector( id );
+		if ( target ) {
+			requestAnimationFrame( function() {
+				target.scrollIntoView( { behavior: 'smooth', block: 'start' } );
+			} );
+		}
+	}
+
+	function allRequiredFilled( section ) {
+		let filled = true;
+		jQuery( section )
+			.find( 'input:visible[required], select:visible[required], textarea:visible[required]' )
+			.each( function() {
+				const el = jQuery( this );
+				const value = el.val();
+				if ( ! value || value.trim() === '' ) {
+					filled = false;
+					return false;
+				}
+				if ( el.is( 'select' ) && ( value === '' || value === '0' || el.find( 'option:selected' ).text().trim().toLowerCase().includes( 'select' ) ) ) {
+					filled = false;
+					return false;
+				}
+			} );
+		return filled;
+	}
+
+	function handleFormSection( currentSection, nextSection ) {
+		const typingTimers = {};
+		const typingDelay = 1500;
+		const postTypingDelay = 500;
+
+		function validateAndMove( e ) {
+			const field = e.target;
+			const fieldId = jQuery( field ).attr( 'id' ) || jQuery( field ).attr( 'name' );
+			if ( typingTimers[ fieldId ] ) {
+				clearTimeout( typingTimers[ fieldId ] );
+			}
+			const delay = ( fieldId === 'van_model_other' ) ? 2500 : typingDelay;
+			typingTimers[ fieldId ] = setTimeout( function() {
+				if ( allRequiredFilled( currentSection ) ) {
+					setTimeout( function() {
+						const section = jQuery( nextSection );
+						if ( section.hasClass( 'section-disable' ) ) {
+							section.removeClass( 'section-disable' );
+							scrollToSection( nextSection );
+						}
+					}, postTypingDelay );
+				}
+			}, delay );
+		}
+
+		const target = document.querySelector( currentSection );
+		if ( target ) {
+			const observer = new MutationObserver( function() {
+				validateAndMove( { target } );
+			} );
+			observer.observe( target, { childList: true, subtree: true, attributes: true } );
+		}
+
+		jQuery( document ).on( 'input change', currentSection + ' input, ' + currentSection + ' select, ' + currentSection + ' textarea', validateAndMove );
+		return validateAndMove;
+	}
+
+	const validateJump01 = handleFormSection( '#jump-01', '#vehicle-details' );
+	const validateVehicleDetails = handleFormSection( '#vehicle-details', '#caravan-details' );
+	const validateCaravanDetails = handleFormSection( '#caravan-details', '#photographs-details' );
+
+	jQuery( '#product_type' ).on( 'change', function() {
+		const val = jQuery( this ).val();
+		if ( val ) {
+			jQuery( '#jump-01' ).removeClass( 'section-disable' );
+			setTimeout( function() {
+				scrollToSection( '#jump-01' );
+			}, 400 );
+		}
+	} );
+
+	function checkFinalSections() {
+		setTimeout( function() {
+			if ( allRequiredFilled( '#caravan-details' ) ) {
+				jQuery( '#photographs-details, #final-measurements, #final-summary' ).removeClass( 'section-disable' );
+				scrollToSection( '#photographs-details' );
+			}
+		}, 100 );
+	}
+
+	const finalTarget = document.querySelector( '#caravan-details' );
+	if ( finalTarget ) {
+		const observer = new MutationObserver( function() {
+			checkFinalSections();
+		} );
+		observer.observe( finalTarget, { childList: true, subtree: true, attributes: true } );
+	}
+
+	jQuery( document ).on( 'input change', '#caravan-details input, #caravan-details select, #caravan-details textarea', checkFinalSections );
+
+	jQuery( '#veh_make' ).on( 'change', function() {
+		const yearContainer = jQuery( '.veh_year_other' );
+		const vehMakeContainer = jQuery( '.veh_make_other' );
+		const vehModelContainer = jQuery( '.veh_model_other' );
+
 		if ( jQuery( this ).val() === 'other' ) {
-			const yearContainer = jQuery( '.veh_year_other' ); // assuming veh_year is inside a wrapper
-			const vehModelContainer = jQuery( '.veh_model_other' ); // assuming veh_year is inside a wrapper
-
-			yearContainer.empty();
+			jQuery( '#veh_model, #veh_year' ).hide();
+			vehMakeContainer.html( '<input placeholder="Other Make" id="veh_make_other" name="vehicle_make_other" required type="text" />' );
+			vehModelContainer.html( '<input style="margin-top:30px" placeholder="Vehicle Model" id="vehicle_model_other" name="vehicle_model" required type="text" />' );
+			yearContainer.html( '<input style="margin-top:30px" placeholder="Model Year" id="veh_year_other" name="vehicle_year" required type="text" />' );
+		} else {
+			jQuery( '#veh_model, #veh_year' ).show();
+			vehMakeContainer.empty();
 			vehModelContainer.empty();
+			yearContainer.empty();
+		}
+		validateVehicleDetails();
+	} );
 
+	jQuery( '#veh_model' ).on( 'change', function() {
+		const yearContainer = jQuery( '.veh_year_other' );
+		const vehModelContainer = jQuery( '.veh_model_other' );
+
+		if ( jQuery( this ).val() === 'other' ) {
 			jQuery( '#veh_year' ).hide();
-
-			vehModelContainer.append(
-				'<input style="margin-top:10px" placeholder="Vehicle Model" id="vehicle_model_other" name="vehicle_model" type="text" />'
-			);
-			// Append input if not already present
-			yearContainer.append(
-				'<input placeholder="Model Year" id="veh_year_other" name="vehicle_year" type="text" />'
-			);
+			vehModelContainer.html( '<input style="margin-top:30px" placeholder="Vehicle Model" id="vehicle_model_other" name="vehicle_model" required type="text" />' );
+			yearContainer.html( '<input style="margin-top:30px" placeholder="Model Year" id="veh_year_other" name="vehicle_year" required type="text" />' );
 		} else {
 			jQuery( '#veh_year' ).show();
-			jQuery( '.veh_model_other input' ).remove();
-			jQuery( '.veh_year_other input' ).remove();
+			vehModelContainer.empty();
+			yearContainer.empty();
 		}
+		validateVehicleDetails();
 	} );
 
 	jQuery( '#veh_year' ).on( 'change', function() {
+		const yearContainer = jQuery( '.veh_year_other' );
 		if ( jQuery( this ).val() === 'other' ) {
-			const yearContainer = jQuery( '.veh_year_other' ); // assuming veh_year is inside a wrapper
-
-			yearContainer.empty();
-
-			// Append input if not already present
-			yearContainer.append(
-				'<input placeholder="Model Year" id="veh_year_other" name="vehicle_year" type="text" />'
-			);
+			yearContainer.html( '<input style="margin-top:30px" placeholder="Model Year" id="veh_year_other" name="vehicle_year" required type="text" />' );
 		} else {
-			jQuery( '.veh_year_other input' ).remove();
+			yearContainer.empty();
 		}
+		validateVehicleDetails();
 	} );
 
 	jQuery( '#van_make' ).on( 'change', function() {
+		const vanModelContainer = jQuery( '.van_model_other' );
 		if ( jQuery( this ).val() === 'other' ) {
-			const vanModelContainer = jQuery( '.van_model_other' );
-
 			jQuery( '#van_model' ).hide();
-
-			vanModelContainer.append(
-				'<input placeholder="Caravan Model" id="van_model_other" name="caravan_model" type="text" />',
-			);
+			vanModelContainer.html( '<input placeholder="Caravan Model" id="van_model_other" name="caravan_model" required type="text" />' );
 		} else {
 			jQuery( '#van_model' ).show();
-			jQuery( '.van_model_other input' ).remove();
+			vanModelContainer.empty();
 		}
+		validateCaravanDetails();
+	} );
+
+	jQuery( document ).on( 'input change', '#van_model_other', function( e ) {
+		validateCaravanDetails( e );
 	} );
 
 	jQuery( '#van_model' ).on( 'change', function() {
+		const vanModelContainer = jQuery( '.van_model_other' );
 		if ( jQuery( this ).val() === 'other' ) {
-			const vanModelContainer = jQuery( '.van_model_other' ); // assuming veh_year is inside a wrapper
-			vanModelContainer.append(
-				'<input placeholder="Caravan Model" id="van_model_other" name="caravan_model" type="text" />',
-			);
+			vanModelContainer.html( '<input placeholder="Caravan Model" id="van_model_other" name="caravan_model" required type="text" />' );
 		} else {
-			jQuery( '.van_model_other input' ).remove();
+			vanModelContainer.empty();
 		}
+		validateCaravanDetails();
 	} );
 
-	// Optional: trigger on page load in case "Other" is pre-selected
 	jQuery( '#veh_make' ).trigger( 'change' );
+	jQuery( '#van_make' ).trigger( 'change' );
+
+	validateJump01();
+	validateVehicleDetails();
+	validateCaravanDetails();
 } );
 
 jQuery( function() {
@@ -568,337 +828,6 @@ jQuery( function() {
 } );
 
 // Form
-
-// jQuery( document ).ready( function() {
-// 	jQuery( '#product_type' ).on( 'change', function() {
-// 		const val = jQuery( this ).val();
-// 		if ( val ) {
-// 			const section = jQuery( '#jump-01' );
-// 			section.removeClass( 'section-disable' );
-// 			setTimeout( function() {
-// 				const target = document.querySelector( '#jump-01' );
-// 				if ( target ) {
-// 					requestAnimationFrame( function() {
-// 						target.scrollIntoView( {
-// 							behavior: 'smooth',
-// 							block: 'start',
-// 						} );
-// 					} );
-// 				}
-// 			}, 400 );
-// 		}
-// 	} );
-
-// 	function allFieldsFilled() {
-// 		let filled = true;
-// 		jQuery( '#jump-01' )
-// 			.find( 'input[required], select[required]' )
-// 			.each( function() {
-// 				if ( ! jQuery( this ).val().trim() ) {
-// 					filled = false;
-// 					return false;
-// 				}
-// 			} );
-// 		return filled;
-// 	}
-
-// 	jQuery( '#jump-01 input[required], #jump-01 select[required]' ).on(
-// 		'input change',
-// 		function() {
-// 			if ( allFieldsFilled() ) {
-// 				const section = jQuery( '#vehicle-details' );
-// 				if ( section.hasClass( 'section-disable' ) ) {
-// 					section.removeClass( 'section-disable' );
-// 					setTimeout( function() {
-// 						const target =
-// 							document.querySelector( '#vehicle-details' );
-// 						if ( target ) {
-// 							requestAnimationFrame( function() {
-// 								target.scrollIntoView( {
-// 									behavior: 'smooth',
-// 									block: 'start',
-// 								} );
-// 							} );
-// 						}
-// 					}, 600 );
-// 				}
-// 			}
-// 		},
-// 	);
-// } );
-// jQuery( document ).ready( function() {
-// 	let scrollDone = false;
-// 	let checkTimer;
-
-// 	function checkCaravanDetails() {
-// 		let allFilled = true;
-// 		jQuery(
-// 			'.grid.cols-2.caravan-details select[required]:visible, .grid.cols-2.caravan-details input[required]:visible',
-// 		).each( function() {
-// 			const val = jQuery( this ).val();
-// 			const text = jQuery( this ).find( 'option:selected' ).text().trim();
-// 			if ( ! val || val === '' || text.startsWith( 'Select' ) ) {
-// 				allFilled = false;
-// 				return false;
-// 			}
-// 		} );
-
-// 		if ( allFilled && ! scrollDone ) {
-// 			jQuery( '#caravan-details' ).removeClass( 'section-disable' );
-// 			scrollDone = true;
-// 			setTimeout( function() {
-// 				const target = document.querySelector( '#caravan-details' );
-// 				if ( target ) {
-// 					target.scrollIntoView( {
-// 						behavior: 'smooth',
-// 						block: 'start',
-// 					} );
-// 				}
-// 			}, 300 );
-// 		}
-// 	}
-
-// 	jQuery( document ).on(
-// 		'change input',
-// 		'.grid.cols-2.caravan-details select[required], .grid.cols-2.caravan-details input[required]',
-// 		function() {
-// 			clearTimeout( checkTimer );
-// 			checkTimer = setTimeout( checkCaravanDetails, 300 );
-// 		},
-// 	);
-// } );
-jQuery( document ).ready( function() {
-	jQuery( '#product_type' ).on( 'change', function() {
-		const val = jQuery( this ).val();
-		if ( val ) {
-			const section = jQuery( '#jump-01' );
-			section.removeClass( 'section-disable' );
-			setTimeout( function() {
-				const target = document.querySelector( '#jump-01' );
-				if ( target ) {
-					requestAnimationFrame( function() {
-						target.scrollIntoView( {
-							behavior: 'smooth',
-							block: 'start',
-						} );
-					} );
-				}
-			}, 400 );
-		}
-	} );
-
-	function allFieldsFilled() {
-		let filled = true;
-		jQuery( '#jump-01' ).find( 'input[required], select[required]' ).each( function() {
-			if ( ! jQuery( this ).val().trim() ) {
-				filled = false;
-				return false;
-			}
-		} );
-		return filled;
-	}
-
-	jQuery( '#jump-01 input[required], #jump-01 select[required]' ).on( 'input change', function() {
-		if ( allFieldsFilled() ) {
-			const section = jQuery( '#vehicle-details' );
-			if ( section.hasClass( 'section-disable' ) ) {
-				section.removeClass( 'section-disable' );
-				setTimeout( function() {
-					const target = document.querySelector( '#vehicle-details' );
-					if ( target ) {
-						requestAnimationFrame( function() {
-							target.scrollIntoView( {
-								behavior: 'smooth',
-								block: 'start',
-							} );
-						} );
-					}
-				}, 600 );
-			}
-		}
-	} );
-
-	function allVehicleFieldsFilled() {
-		let filled = true;
-		jQuery( '#vehicle-details' ).find( 'input[required], select[required]' ).each( function() {
-			if ( jQuery( this ).is( ':visible' ) && ! jQuery( this ).val().trim() ) {
-				filled = false;
-				return false;
-			}
-		} );
-
-		if ( jQuery( '#vehicle_model_other' ).is( ':visible' ) && jQuery( '#vehicle_model_other' ).val().trim() === '' ) {
-			filled = false;
-		}
-
-		if ( jQuery( '#veh_year_other' ).is( ':visible' ) && jQuery( '#veh_year_other' ).val().trim() === '' ) {
-			filled = false;
-		}
-
-		return filled;
-	}
-
-	function checkAndJumpToCaravan() {
-		if ( allVehicleFieldsFilled() ) {
-			jQuery( '#caravan-details' ).removeClass( 'section-disable' );
-			setTimeout( function() {
-				const target = document.querySelector( '#caravan-details' );
-				if ( target ) {
-					target.scrollIntoView( {
-						behavior: 'smooth',
-						block: 'start',
-					} );
-				}
-			}, 500 );
-		}
-	}
-
-	jQuery( '#vehicle-details' ).on( 'input change', 'input, select', function() {
-		checkAndJumpToCaravan();
-	} );
-} );
-
-jQuery( document ).ready( function() {
-	let hasScrolledToPhotos = false;
-	let formCheckTimer;
-
-	function verifyCaravanSection() {
-		let allRequiredFilled = true;
-
-		jQuery(
-			'#blk-caravan select[required]:visible, #blk-caravan input[required]:visible',
-		).each( function() {
-			const fieldValue = jQuery( this ).val();
-			const selectedText = jQuery( this )
-				.find( 'option:selected' )
-				.text()
-				.trim();
-			if (
-				! fieldValue ||
-				fieldValue === '' ||
-				selectedText.startsWith( 'Select' )
-			) {
-				allRequiredFilled = false;
-				return false;
-			}
-		} );
-
-		if ( allRequiredFilled && ! hasScrolledToPhotos ) {
-			jQuery( '#photographs-details' ).removeClass( 'section-disable' );
-			hasScrolledToPhotos = true;
-			setTimeout( function() {
-				const target = document.querySelector( '#photographs-details' );
-				if ( target ) {
-					target.scrollIntoView( {
-						behavior: 'smooth',
-						block: 'start',
-					} );
-				}
-			}, 300 );
-		}
-	}
-
-	jQuery( document ).on(
-		'change input',
-		'#blk-caravan select[required], #blk-caravan input[required]',
-		function() {
-			clearTimeout( formCheckTimer );
-			formCheckTimer = setTimeout( verifyCaravanSection, 300 );
-		},
-	);
-} );
-
-jQuery( document ).ready( function() {
-	let photosDone = false;
-	let timer;
-
-	function allPhotosFilled() {
-		let filled = true;
-		jQuery(
-			'#blk-photos select[required]:visible, #blk-photos input[required]:visible, #blk-photos input[type="file"][required]',
-		).each( function() {
-			const val = jQuery( this ).val();
-			const txt = jQuery( this ).find( 'option:selected' ).text().trim();
-			if ( ! val || val === '' || txt.startsWith( 'Select' ) ) {
-				filled = false;
-				return false;
-			}
-		} );
-		return filled;
-	}
-
-	function allMeasureFilled() {
-		let filled = true;
-		jQuery(
-			'#blk-measure select[required]:visible, #blk-measure input[required]:visible',
-		).each( function() {
-			const val = jQuery( this ).val();
-			const txt = jQuery( this ).find( 'option:selected' ).text().trim();
-			if ( ! val || val === '' || txt.startsWith( 'Select' ) ) {
-				filled = false;
-				return false;
-			}
-		} );
-		return filled;
-	}
-
-	function checkPhotos() {
-		if ( allPhotosFilled() ) {
-			if ( ! photosDone ) {
-				photosDone = true;
-				jQuery( '#final-measurements' ).removeClass( 'section-disable' );
-				jQuery( '#final-summary' ).removeClass( 'section-disable' );
-				setTimeout( () => {
-					document.querySelector( '#final-measurements' ).scrollIntoView( {
-						behavior: 'smooth',
-						block: 'start',
-					} );
-				}, 300 );
-			}
-		} else {
-			photosDone = false;
-			jQuery( '#final-measurements, #final-summary' ).addClass( 'section-disable' );
-		}
-	}
-
-	function checkMeasure() {
-		if ( photosDone && allMeasureFilled() ) {
-			jQuery( '#final-summary' ).removeClass( 'section-disable' );
-		}
-	}
-
-	jQuery( document ).on(
-		'change input',
-		'#blk-photos select[required], #blk-photos input[required], #blk-photos input[type="file"][required]',
-		function() {
-			clearTimeout( timer );
-			timer = setTimeout( checkPhotos, 300 );
-		},
-	);
-
-	jQuery( document ).on(
-		'change input',
-		'#blk-measure select[required], #blk-measure input[required]',
-		function() {
-			clearTimeout( timer );
-			timer = setTimeout( checkMeasure, 300 );
-		},
-	);
-} );
-
-jQuery( document ).ready( function() {
-	jQuery( '#blk-caravan select' ).on( 'change', function() {
-		if ( jQuery( this ).val() !== '' ) {
-			jQuery( '#caravan-notice-bar' ).css( 'display', 'block' );
-		}
-	} );
-
-	jQuery( '#blk-vehicle select' ).on( 'change', function() {
-		if ( jQuery( this ).val() !== '' ) {
-			jQuery( '#vehicle-notice-bar' ).css( 'display', 'block' );
-		}
-	} );
-} );
 
 jQuery( document ).ready( function() {
 	jQuery( '.gfield-choice-input' ).on( 'change', function() {

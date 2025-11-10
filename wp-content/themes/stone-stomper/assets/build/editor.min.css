@@ -5837,6 +5837,9 @@ Mixin for transition
   border-color: var(--ss_color_primary);
   background-color: rgba(237, 23, 79, 0.1);
 }
+.editor-styles-wrapper #caravan-details .van_model_other {
+  margin-top: 30px;
+}
 .editor-styles-wrapper .wp-block-button .wp-block-button__link {
   box-sizing: border-box;
   position: relative;
