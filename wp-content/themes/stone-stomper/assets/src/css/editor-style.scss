@@ -193,7 +193,6 @@
 }
 
 .components-tab-panel__tab-content {
-
 	.acf-field-block-title,
 	.acf-field-spacers {
 		padding: 0px !important;
@@ -219,7 +218,6 @@
 }
 
 .interface-interface-skeleton__sidebar {
-
 	.acf-field-block-title,
 	.acf-field-spacers {
 		padding: 0px !important;
@@ -346,7 +344,7 @@
 		max-width: 100% !important;
 	}
 
-	>figure .components-placeholder {
+	> figure .components-placeholder {
 		height: 100% !important;
 		max-height: 100% !important;
 		width: 100% !important;
@@ -365,7 +363,7 @@
 }
 
 .is-root-container {
-	&>.block-editor-block-list__block.wp-block {
+	& > .block-editor-block-list__block.wp-block {
 		margin-block-start: 40px !important;
 		margin-block-end: 40px !important;
 	}
@@ -392,7 +390,7 @@
 }
 
 body.post-type-post .editor-styles-wrapper {
-	>div {
+	> div {
 		max-width: 1160px !important;
 		margin-inline: auto !important;
 	}
@@ -727,9 +725,11 @@ body.post-type-post .editor-styles-wrapper {
 .image-lightbox {
 	position: fixed;
 	inset: 0;
-	background: radial-gradient(circle at center,
-			rgb(0 0 0 / 95%),
-			rgb(20 20 20));
+	background: radial-gradient(
+		circle at center,
+		rgb(0 0 0 / 95%),
+		rgb(20 20 20)
+	);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -901,4 +901,14 @@ body.post-type-post .editor-styles-wrapper {
 
 .popup-image {
 	cursor: pointer;
+}
+
+// SS orders Buttons
+
+.functional-buttons {
+	span.button.button-primary.save-chnages {
+		padding-inline: 20px;
+		padding-block: 0;
+		font-size: 16px;
+	}
 }

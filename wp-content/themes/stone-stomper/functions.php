@@ -565,8 +565,6 @@ function render_towing_diagram($post_id) {
 		ob_start();
 	?>
 
-
-
 	<?php if($caravan_length_mm < 1900 ){ ?>
 		<svg xmlns="http://www.w3.org/2000/svg" id="Layer_2" version="1.1" viewBox="0 0 1200 800">
 			<!-- Generator: Adobe Illustrator 29.8.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 2)  -->
@@ -577,11 +575,11 @@ function render_towing_diagram($post_id) {
 				}
 
 				.st0, .st1, .st2 {
-					fill: none;
+					fill: #ffffff;
 				}
 
 				.st3, .st4 {
-					fill: #fff;
+					fill: #ffffff;
 				}
 
 				.st3, .st1, .st2 {
@@ -590,6 +588,7 @@ function render_towing_diagram($post_id) {
 
 				.st1 {
 					stroke-width: 3px;
+					fill: #ffffff;
 				}
 
 				.st5 {
@@ -598,14 +597,18 @@ function render_towing_diagram($post_id) {
 					font-size: 15px;
 					letter-spacing: .03em;
 				}
+
+					rect {
+						fill: #ffffff;
+					}
 				</style>
 			</defs>
-			<path class="st1" d="M935.7,173.33c.12-1.09-.69-1.99-1.79-1.99H278.24c-1.1,0-1.91.9-1.79,1.99l41.6,402.61c.11,1.09,1.11,1.99,2.21,1.99h246.73c1.1,0,2-.9,2-2v-61.51c0-1.1.9-2,2-2h68.28c1.1,0,2,.9,2,2v61.51c0,1.1.9,2,2,2h247.86c1.1,0,2.09-.9,2.21-1.99l42.37-402.61Z"/>
-			<polyline class="st2" points="329.42 577.92 288.76 180.94 923.79 180.94 882.27 577.92"/>
-			<circle class="st2" cx="928.02" cy="177.82" r="5.22"/>
-			<circle class="st2" cx="283.6" cy="177.82" r="5.22"/>
-			<rect class="st2" x="390.67" y="364.08" width="438.42" height="27.06"/>
-			<rect class="st3" x="504.04" y="315.51" width="211.2" height="195.21"/>
+			<path class="st1" d="M935.7,173.33c.12-1.09-.69-1.99-1.79-1.99H278.24c-1.1,0-1.91.9-1.79,1.99l41.6,402.61c.11,1.09,1.11,1.99,2.21,1.99h246.73c1.1,0,2-.9,2-2v-61.51c0-1.1.9-2,2-2h68.28c1.1,0,2,.9,2,2v61.51c0,1.1.9,2,2,2h247.86c1.1,0,2.09-.9,2.21-1.99l42.37-402.61Z" fill="#ffffff" stroke="#000000"/>
+			<polyline class="st2" points="329.42 577.92 288.76 180.94 923.79 180.94 882.27 577.92" fill="#ffffff"/>
+			<circle class="st2" cx="928.02" cy="177.82" r="5.22" fill="#ffffff"/>
+			<circle class="st2" cx="283.6" cy="177.82" r="5.22" fill="#ffffff"/>
+			<rect class="st2" x="390.67" y="364.08" width="438.42" height="27.06" fill="#ffffff"/>
+			<rect class="st3" x="504.04" y="315.51" width="211.2" height="195.21" fill="#ffffff"/>
 			<?php if($vinyl_insert_width_mm){ ?>
 				<g transform="translate(610.76,330.99)">
 					<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0"><?php echo esc_html( $vinyl_insert_width_mm ? $vinyl_insert_width_mm.' mm' : '-' ); ?></text>
@@ -616,187 +619,184 @@ function render_towing_diagram($post_id) {
 					<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0"><?php echo esc_html( $vinyl_insert_height_mm ? $vinyl_insert_height_mm.' mm' : '-' ); ?></text>
 				</g>
 			<?php } ?>
-			<rect class="st2" x="404.09" y="381.28" width="8.47" height="196.64"/>
-			<rect class="st2" x="477.94" y="381.28" width="8.47" height="196.64"/>
-			<rect class="st2" x="732.88" y="381.28" width="8.47" height="196.64"/>
-			<rect class="st2" x="806.72" y="381.28" width="8.47" height="196.64"/>
-			<circle class="st2" cx="737.11" cy="374.25" r="4.24"/>
-			<circle class="st2" cx="810.96" cy="374.25" r="4.24"/>
-			<circle class="st2" cx="408.33" cy="374.25" r="4.24"/>
-			<circle class="st2" cx="482.17" cy="374.25" r="4.24"/>
-			<text class="st5" transform="translate(565.96 411.74)"><tspan x="0" y="0">Vinyl Insert</tspan></text>
+			<rect class="st2" x="404.09" y="381.28" width="8.47" height="196.64" fill="#ffffff"/>
+			<rect class="st2" x="477.94" y="381.28" width="8.47" height="196.64" fill="#ffffff"/>
+			<rect class="st2" x="732.88" y="381.28" width="8.47" height="196.64" fill="#ffffff"/>
+			<rect class="st2" x="806.72" y="381.28" width="8.47" height="196.64" fill="#ffffff"/>
+			<circle class="st2" cx="737.11" cy="374.25" r="4.24" fill="#ffffff"/>
+			<circle class="st2" cx="810.96" cy="374.25" r="4.24"  fill="#ffffff"/>
+			<circle class="st2" cx="408.33" cy="374.25" r="4.24"  fill="#ffffff"/>
+			<circle class="st2" cx="482.17" cy="374.25" r="4.24"  fill="#ffffff"/>
+			<text class="st5" transform="translate(565.96 411.74)"><tspan fill="#fa3232" x="0" y="0">Vinyl Insert</tspan></text>
 			<g>
-				<line class="st0" x1="274.29" y1="139.99" x2="935.24" y2="139.99"/>
+				<line class="st0" x1="274.29" y1="139.99" x2="935.24" y2="139.99" stroke="#fa3232"/>
 				<g transform="translate(604.76,139.99)">
-					<rect class="st4" x="-67.5" y="-22" width="135" height="24"/>
+					<rect class="st4" x="-67.5" y="-22" width="135" height="24" fill="#ffffff"  stroke="#ffffff"/>
 					<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0"><?php echo esc_html( $caravan_width_mm ? $caravan_width_mm.' mm' : '-' ); ?></text>
 				</g>
-				<polyline class="st0" points="278.3 143.72 274.29 139.99 278.3 136.27"/>
-				<polyline class="st0" points="931.24 136.27 935.24 140 931.24 143.72"/>
+				<polyline class="st0" points="278.3 143.72 274.29 139.99 278.3 136.27" stroke="#fa3232" fill="#ffffff"/>
+				<polyline class="st0" points="931.24 136.27 935.24 140 931.24 143.72" stroke="#fa3232"  fill="#ffffff"/>
 			</g>
 			<g>
-				<line class="st0" x1="317.29" y1="608.6" x2="894.24" y2="608.6"/>
+				<line class="st0" x1="317.29" y1="608.6" x2="894.24" y2="608.6" stroke="#fa3232"/>
 				<g transform="translate(957.8,375.13)">
-				<rect class="st4" x="10" y="-12" width="135" height="24"/>
+				<rect class="st4" x="10" y="-12" width="135" height="24" fill="#ffffff"  stroke="#ffffff"/>
 				<text class="st5" text-anchor="start" dominant-baseline="middle" x="20"><?php echo esc_html( $caravan_length_mm ? $caravan_length_mm.' mm' : '-' ); ?></text>
 				</g>
-				<polyline class="st0" points="321.3 612.33 317.29 608.6 321.3 604.88"/>
-				<polyline class="st0" points="890.24 604.88 894.24 608.6 890.24 612.33"/>
+				<polyline class="st0" points="321.3 612.33 317.29 608.6 321.3 604.88" stroke="#fa3232" fill="#ffffff"/>
+				<polyline class="st0" points="890.24 604.88 894.24 608.6 890.24 612.33" stroke="#fa3232" fill="#ffffff"/>
 			</g>
 
 
 			<g>
-				<line class="st0" x1="957.8" y1="170.34" x2="957.8" y2="579.93"/>
+				<line class="st0" x1="957.8" y1="170.34" x2="957.8" y2="579.93" stroke="#fa3232"/>
 				<g transform="translate(605.77,608.6)">
-					<rect class="st4" x="-67.5" y="-12" width="135" height="24"/>
+					<rect class="st4" x="-67.5" y="-12" width="135" height="24" fill="#ffffff" stroke="#ffffff"/>
 					<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0"><?php echo esc_html( $bar_width_mm ? $bar_width_mm.' mm' : '-' ); ?></text>
 				</g>
-				<polyline class="st0" points="954.07 174.34 957.8 170.34 961.52 174.34"/>
-				<polyline class="st0" points="961.52 575.92 957.8 579.93 954.07 575.92"/>
+				<polyline class="st0" points="954.07 174.34 957.8 170.34 961.52 174.34" stroke="#fa3232" fill="#ffffff"/>
+				<polyline class="st0" points="961.52 575.92 957.8 579.93 954.07 575.92" stroke="#fa3232" fill="#ffffff"/>
 			</g>
 		</svg>
 	<?php } else { ?>
-
-
 		<svg id="Layer_2" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1200 800">
 			<!-- Generator: Adobe Illustrator 29.8.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 2)  -->
 			<defs>
 				<style>
-				.st0, .st1, .st2 {
-					stroke: #fa3232;
-				}
+					.st0, .st1, .st2 {
+						stroke: #fa3232;
+					}
 
-				.st0, .st1, .st2, .st3, .st4 {
-					fill: none;
-				}
+					.st0, .st1, .st2, .st3, .st4 {
+						fill: #ffffff;
+					}
 
-				.st1 {
-					stroke-dasharray: 5.39 5.39;
-				}
+					.st1 {
+						stroke-dasharray: 5.39 5.39;
+					}
 
-				.st2 {
-					stroke-dasharray: 5.07 5.07;
-				}
+					.st2 {
+						stroke-dasharray: 5.07 5.07;
+					}
 
-				.st5, .st6 {
-					fill: #fa3232;
-				}
+					.st5, .st6 {
+						fill: #fa3232;
+					}
 
-				.st7, .st8 {
-					fill: #fff;
-				}
+					.st7, .st8 {
+						fill: #ffffff;
+					}
 
-				.st7, .st3, .st4 {
-					stroke: #000;
-				}
+					.st7, .st3, .st4 {
+						stroke: #000000;
+					}
 
-				.st3 {
-					stroke-width: 3px;
-				}
+					.st3 {
+						stroke-width: 3px;
+					}
 
-				.st6 {
-					font-family: OpenSans, 'Open Sans';
-					font-size: 15px;
-					letter-spacing: .03em;
-				}
+					.st6 {
+						font-family: OpenSans, 'Open Sans';
+						font-size: 15px;
+						letter-spacing: .03em;
+					}
+					rect {
+						fill: #ffffff;
+					}
 				</style>
 			</defs>
-			<path class="st3" d="M935.7,173.33c.12-1.09-.69-1.99-1.79-1.99H278.24c-1.1,0-1.91.9-1.79,1.99l41.6,402.61c.11,1.09,1.11,1.99,2.21,1.99h246.73c1.1,0,2-.9,2-2v-61.51c0-1.1.9-2,2-2h68.28c1.1,0,2,.9,2,2v61.51c0,1.1.9,2,2,2h247.86c1.1,0,2.09-.9,2.21-1.99l42.37-402.61Z"/>
-			<polyline class="st4" points="329.42 577.92 288.76 180.94 923.79 180.94 882.27 577.92"/>
-			<circle class="st4" cx="928.02" cy="177.82" r="5.22"/>
-			<circle class="st4" cx="283.6" cy="177.82" r="5.22"/>
-			<rect class="st4" x="390.67" y="364.08" width="438.42" height="27.06"/>
-			<rect class="st7" x="504.04" y="315.51" width="211.2" height="195.21"/>
+			<path class="st3" d="M935.7,173.33c.12-1.09-.69-1.99-1.79-1.99H278.24c-1.1,0-1.91.9-1.79,1.99l41.6,402.61c.11,1.09,1.11,1.99,2.21,1.99h246.73c1.1,0,2-.9,2-2v-61.51c0-1.1.9-2,2-2h68.28c1.1,0,2,.9,2,2v61.51c0,1.1.9,2,2,2h247.86c1.1,0,2.09-.9,2.21-1.99l42.37-402.61Z" fill="#ffffff"/>
+			<polyline class="st4" points="329.42 577.92 288.76 180.94 923.79 180.94 882.27 577.92" fill="#ffffff"/>
+			<circle class="st4" cx="928.02" cy="177.82" r="5.22" fill="#ffffff"/>
+			<circle class="st4" cx="283.6" cy="177.82" r="5.22" fill="#ffffff"/>
+			<rect class="st4" x="390.67" y="364.08" width="438.42" height="27.06" fill="#ffffff" />
+			<rect class="st7" x="504.04" y="315.51" width="211.2" height="195.21" fill="#ffffff"/>
 			<?php if($vinyl_insert_width_mm){ ?>
 				<g transform="translate(610.76,330.99)">
-					<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0"><?php echo esc_html( $vinyl_insert_width_mm ? $vinyl_insert_width_mm.' mm' : '-' ); ?></text>
+					<text class="st5" fill="#fa3232" text-anchor="middle" dominant-baseline="middle" y="0"><?php echo esc_html( $vinyl_insert_width_mm ? $vinyl_insert_width_mm.' mm' : '-' ); ?></text>
 				</g>
 			<?php } ?>
 			<?php if($vinyl_insert_height_mm){ ?>
 				<g transform="translate(520.76,400.99) rotate(-90)">
-					<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0"><?php echo esc_html( $vinyl_insert_height_mm ? $vinyl_insert_height_mm.' mm' : '-' ); ?></text>
+					<text class="st5" fill="#fa3232" text-anchor="middle" dominant-baseline="middle" y="0"><?php echo esc_html( $vinyl_insert_height_mm ? $vinyl_insert_height_mm.' mm' : '-' ); ?></text>
 				</g>
 			<?php } ?>
-
-			<rect class="st4" x="404.09" y="381.28" width="8.47" height="196.64"/>
-			<rect class="st4" x="477.94" y="381.28" width="8.47" height="196.64"/>
-			<rect class="st4" x="732.88" y="381.28" width="8.47" height="196.64"/>
-			<rect class="st4" x="806.72" y="381.28" width="8.47" height="196.64"/>
-			<circle class="st4" cx="737.11" cy="374.25" r="4.24"/>
-			<circle class="st4" cx="810.96" cy="374.25" r="4.24"/>
-			<circle class="st4" cx="408.33" cy="374.25" r="4.24"/>
-			<circle class="st4" cx="482.17" cy="374.25" r="4.24"/>
-			<text class="st6" transform="translate(565.96 411.74)"><tspan x="0" y="0">Vinyl Insert</tspan></text>
-
-
+			<rect class="st4" x="404.09" y="381.28" width="8.47" height="196.64" fill="#ffffff"/>
+			<rect class="st4" x="477.94" y="381.28" width="8.47" height="196.64" fill="#ffffff"/>
+			<rect class="st4" x="732.88" y="381.28" width="8.47" height="196.64" fill="#ffffff"/>
+			<rect class="st4" x="806.72" y="381.28" width="8.47" height="196.64" fill="#ffffff"/>
+			<circle class="st4" cx="737.11" cy="374.25" r="4.24" fill="#ffffff"/>
+			<circle class="st4" cx="810.96" cy="374.25" r="4.24" fill="#ffffff"/>
+			<circle class="st4" cx="408.33" cy="374.25" r="4.24" fill="#ffffff"/>
+			<circle class="st4" cx="482.17" cy="374.25" r="4.24" fill="#ffffff"/>
+			<text class="st6" transform="translate(565.96 411.74)"><tspan fill="#fa3232" x="0" y="0">Vinyl Insert</tspan></text>
 			<g>
-				<line class="st0" x1="274.29" y1="139.99" x2="935.24" y2="139.99"/>
-				<rect class="st8" x="539.36" y="127.61" width="135.53" height="22.16"/>
+				<line class="st0" x1="274.29" y1="139.99" x2="935.24" y2="139.99" fill="#ffffff" stroke="#fa3232"/>
+				<rect class="st8" x="539.36" y="127.61" width="135.53" height="22.16" fill="#ffffff" stroke="#ffffff"/>
 				<g transform="translate(604.76,139.99)">
-					<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0"><?php echo esc_html( $caravan_width_mm ? $caravan_width_mm.' mm' : '-' ); ?></text>
+					<text class="st5" fill="#fa3232" text-anchor="middle" dominant-baseline="middle" y="0"><?php echo esc_html( $caravan_width_mm ? $caravan_width_mm.' mm' : '-' ); ?></text>
 				</g>
-				<polyline class="st0" points="278.3 143.72 274.29 139.99 278.3 136.27"/>
-				<polyline class="st0" points="931.24 136.27 935.24 140 931.24 143.72"/>
+				<polyline class="st0" points="278.3 143.72 274.29 139.99 278.3 136.27" fill="#ffffff" stroke="#fa3232"/>
+				<polyline class="st0" points="931.24 136.27 935.24 140 931.24 143.72" fill="#ffffff" stroke="#fa3232"/>
 			</g>
 			<!-- Bottom Line -->
 			<g>
-				<line class="st0" x1="317.29" y1="608.6" x2="894.24" y2="608.6"/>
-				<rect class="st8" x="539.36" y="596.22" width="135.53" height="22.16"/>
+				<line class="st0" x1="317.29" y1="608.6" x2="894.24" y2="608.6" fill="#ffffff" stroke="#fa3232"/>
+				<rect class="st8" x="539.36" y="596.22" width="135.53" height="22.16" fill="#ffffff" stroke="#ffffff"/>
 				<g transform="translate(605.77,608.6)">
-					<rect class="st8" x="948.02" y="306.8" width="22.16" height="135.53"/>
-					<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0"><?php echo esc_html( $bar_width_mm ? $bar_width_mm.' mm' : '-' ); ?></text>
+					<rect class="st8" x="948.02" y="306.8" width="22.16" height="135.53" fill="#ffffff" stroke="#ffffff"/>
+					<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0"  fill="#fa3232"><?php echo esc_html( $bar_width_mm ? $bar_width_mm.' mm' : '-' ); ?></text>
 				</g>
-				<polyline class="st0" points="321.3 612.33 317.29 608.6 321.3 604.88"/>
-				<polyline class="st0" points="890.24 604.88 894.24 608.6 890.24 612.33"/>
+				<polyline class="st0" points="321.3 612.33 317.29 608.6 321.3 604.88" fill="#ffffff" stroke="#fa3232"/>
+				<polyline class="st0" points="890.24 604.88 894.24 608.6 890.24 612.33" fill="#ffffff" stroke="#fa3232"/>
 			</g>
 			<!-- Verticle line -->
-				<g>
-				<line class="st0" x1="957.8" y1="170.34" x2="957.8" y2="579.93"/>
-				<rect class="st8" x="948.02" y="306.8" width="22.16" height="135.53"/>
+			<g>
+				<line class="st0" x1="957.8" y1="170.34" x2="957.8" y2="579.93" fill="#ffffff" stroke="#fa3232"/>
+				<rect class="st8" x="948.02" y="306.8" width="22.16" height="135.53" fill="#ffffff" stroke="#ffffff"/>
 				<g transform="translate(915.8,375.13)">
-					<!-- <rect class="st4" x="10" y="-12" width="135" height="24"/> -->
-					<text class="st5" text-anchor="start" dominant-baseline="middle" x="20"><?php echo esc_html( $caravan_length_mm ? $caravan_length_mm.' mm' : '-' ); ?></text>
+					<!-- <rect class="st4" x="10" y="-12" width="135" height="24" fill="#ffffff"/> -->
+					<text class="st5" text-anchor="start" dominant-baseline="middle" x="20" fill="#fa3232"><?php echo esc_html( $caravan_length_mm ? $caravan_length_mm.' mm' : '-' ); ?></text>
 				</g>
-
-				<polyline class="st0" points="954.07 174.34 957.8 170.34 961.52 174.34"/>
-				<polyline class="st0" points="961.52 575.92 957.8 579.93 954.07 575.92"/>
+				<polyline class="st0" points="954.07 174.34 957.8 170.34 961.52 174.34" fill="#ffffff" stroke="#fa3232"/>
+				<polyline class="st0" points="961.52 575.92 957.8 579.93 954.07 575.92" fill="#ffffff" stroke="#fa3232"/>
 			</g>
-			<line class="st0" x1="884.28" y1="181.78" x2="884.28" y2="286.37"/>
-			<rect class="st8" x="873.2" y="212.51" width="22.16" height="43.67"/>
+			<line class="st0" x1="884.28" y1="181.78" x2="884.28" y2="286.37" fill="#ffffff" stroke="#fa3232"/>
+			<rect class="st8" x="873.2" y="212.51" width="22.16" height="43.67" fill="#ffffff" stroke="#ffffff"/>
 			<g transform="translate(830,240.13)">
-				<!-- <rect class="st4" x="10" y="-12" width="135" height="24"/> -->
+				<!-- <rect class="st4" x="10" y="-12" width="135" height="24" fill="#ffffff"/> -->
 
 				<!-- Stonegard Size -->
 				<?php if($stoneguard_height_mm){ ?>
-					<text class="st5" text-anchor="start" dominant-baseline="middle" y="-15" x="20"><?php echo esc_html( $stoneguard_height_mm ? 'S: '. $stoneguard_height_mm.' mm' : '-' ); ?></text>
+					<text class="st5" text-anchor="start" dominant-baseline="middle" y="-15" x="20" fill="#fa3232"><?php echo esc_html( $stoneguard_height_mm ? 'S: '. $stoneguard_height_mm.' mm' : '-' ); ?></text>
 				<?php } ?>
 
 				<!-- Toolbox Size -->
 				<?php if($toolbox_height_mm){ ?>
-					<text class="st5" text-anchor="start" dominant-baseline="middle" x="20"><?php echo esc_html( $toolbox_height_mm ? 'T: '.$toolbox_height_mm.' mm' : '-' ); ?></text>
+					<text class="st5" text-anchor="start" dominant-baseline="middle" x="20"  fill="#fa3232"><?php echo esc_html( $toolbox_height_mm ? 'T: '.$toolbox_height_mm.' mm' : '-' ); ?></text>
 				<?php } ?>
 			</g>
-			<polyline class="st0" points="880.55 185.79 884.28 181.78 888 185.79"/>
-			<polyline class="st0" points="888 282.37 884.28 286.37 880.55 282.37"/>
+			<polyline class="st0" points="880.55 185.79 884.28 181.78 888 185.79" fill="#ffffff" stroke="#fa3232"/>
+			<polyline class="st0" points="888 282.37 884.28 286.37 880.55 282.37" fill="#ffffff" stroke="#fa3232"/>
 			<g id="Toolbox">
 				<g>
-				<line class="st0" x1="352.44" y1="266.29" x2="860.13" y2="266.29"/>
-				<rect class="st8" x="539.36" y="253.9" width="135.53" height="22.16"/>
+				<line class="st0" x1="352.44" y1="266.29" x2="860.13" y2="266.29" fill="#ffffff" stroke="#fa3232"/>
+				<rect class="st8" x="539.36" y="253.9" width="135.53" height="22.16" fill="#ffffff"  stroke="#ffffff"/>
 				<g transform="translate(555,263.13)">
-					<!-- <rect class="st4" x="10" y="-12" width="135" height="24"/> -->
+					<!-- <rect class="st4" x="10" y="-12" width="135" height="24" fill="#ffffff"/> -->
 					<!-- Stonegard Size -->
 					<?php if($stoneguard_width_mm){ ?>
-					<text class="st5" text-anchor="start" dominant-baseline="middle" y="-15" x="20"><?php echo esc_html( $stoneguard_width_mm ? 'S: '. $stoneguard_width_mm.' mm' : '-' ); ?></text>
+					<text class="st5" text-anchor="start" dominant-baseline="middle" y="-15" x="20"  fill="#fa3232"><?php echo esc_html( $stoneguard_width_mm ? 'S: '. $stoneguard_width_mm.' mm' : '-' ); ?></text>
 					<?php } ?>
 					<!-- Toolbox Size -->
 					<?php if($toolbox_height_mm){ ?>
-						<text class="st5" text-anchor="start" dominant-baseline="middle" x="20"><?php echo esc_html( $toolbox_width_mm ? 'T: '. $toolbox_width_mm.' mm' : '-' ); ?></text>
+						<text class="st5" text-anchor="start" dominant-baseline="middle" x="20"  fill="#fa3232"><?php echo esc_html( $toolbox_width_mm ? 'T: '. $toolbox_width_mm.' mm' : '-' ); ?></text>
 					<?php } ?>
 				</g>
-				<polyline class="st0" points="356.43 270.01 352.42 266.29 356.43 262.56"/>
-				<polyline class="st0" points="856.13 262.56 860.13 266.29 856.13 270.01"/>
+				<polyline class="st0" points="356.43 270.01 352.42 266.29 356.43 262.56" fill="#ffffff" stroke="#fa3232"/>
+				<polyline class="st0" points="856.13 262.56 860.13 266.29 856.13 270.01" fill="#ffffff" stroke="#fa3232"/>
 				</g>
-				<path class="st0" d="M856.97,287.38h4.11v-5.28M351.16,282.1v5.28h4.11M355.27,181.78h-4.11v5.28M861.08,187.06v-5.28h-4.11"/>
+				<path class="st0" d="M856.97,287.38h4.11v-5.28M351.16,282.1v5.28h4.11M355.27,181.78h-4.11v5.28M861.08,187.06v-5.28h-4.11" fill="#ffffff" stroke="#fa3232"/>
 				<g>
 				<g>
 					<path class="st5" d="M533.06,211.74h-1.25v-9.6h-3.39v-1.11h8.03v1.11h-3.39v9.6Z"/>
@@ -817,17 +817,14 @@ function render_towing_diagram($post_id) {
 					<path class="st5" d="M663.99,211.74l-.24-1.14h-.06c-.4.5-.8.84-1.2,1.02-.4.18-.89.27-1.49.27-.8,0-1.42-.21-1.87-.62-.45-.41-.68-.99-.68-1.75,0-1.62,1.3-2.47,3.89-2.55l1.36-.04v-.5c0-.63-.14-1.09-.41-1.39-.27-.3-.7-.45-1.3-.45-.67,0-1.43.21-2.27.62l-.37-.93c.4-.21.83-.38,1.3-.51.47-.12.94-.18,1.42-.18.96,0,1.67.21,2.13.64.46.42.69,1.11.69,2.04v5.48h-.9ZM661.25,210.88c.76,0,1.35-.21,1.78-.62.43-.42.65-1,.65-1.74v-.72l-1.22.05c-.97.03-1.66.18-2.09.45-.43.27-.64.68-.64,1.24,0,.44.13.77.4,1,.27.23.64.34,1.12.34Z"/>
 					<path class="st5" d="M671.06,203.57c.36,0,.68.03.96.09l-.17,1.13c-.33-.07-.62-.11-.88-.11-.65,0-1.21.26-1.67.79-.46.53-.69,1.18-.69,1.97v4.31h-1.22v-8.03h1l.14,1.49h.06c.3-.52.66-.92,1.08-1.21s.88-.42,1.38-.42Z"/>
 					<path class="st5" d="M678.99,210.67h-.07c-.56.82-1.4,1.22-2.52,1.22-1.05,0-1.87-.36-2.45-1.08-.58-.72-.88-1.74-.88-3.06s.29-2.35.88-3.08,1.4-1.1,2.45-1.1,1.92.4,2.5,1.19h.1l-.05-.58-.03-.56v-3.27h1.22v11.4h-.99l-.16-1.08ZM676.55,210.87c.83,0,1.43-.23,1.81-.68.37-.45.56-1.18.56-2.19v-.26c0-1.14-.19-1.95-.57-2.43-.38-.49-.98-.73-1.81-.73-.71,0-1.26.28-1.64.83-.38.55-.57,1.34-.57,2.35s.19,1.8.56,2.32.93.78,1.66.78Z"/>
-
 				</g>
-				<line class="st1" x1="861.24" y1="279.7" x2="861.24" y2="190.17"/>
-				<line class="st2" x1="852.94" y1="181.78" x2="358.07" y2="181.78"/>
-				<line class="st1" x1="351.31" y1="193.86" x2="351.31" y2="276.7"/>
-				<line class="st2" x1="359.6" y1="287.38" x2="857.13" y2="287.38"/>
+				<line class="st1" x1="861.24" y1="279.7" x2="861.24" y2="190.17" fill="#ffffff" stroke="#fa3232"/>
+				<line class="st2" x1="852.94" y1="181.78" x2="358.07" y2="181.78" fill="#ffffff" stroke="#fa3232"/>
+				<line class="st1" x1="351.31" y1="193.86" x2="351.31" y2="276.7" fill="#ffffff" stroke="#fa3232"/>
+				<line class="st2" x1="359.6" y1="287.38" x2="857.13" y2="287.38" fill="#ffffff" stroke="#fa3232"/>
 				</g>
 			</g>
 		</svg>
-
-
 	<?php } ?>
 
 	<?php return ob_get_clean(); ?>
@@ -851,29 +848,18 @@ function get_towing_diagram_svg_png($post_id) {
     return false;
 }
 
-
 function svg_to_png_temp($svg_content) {
-    $tmp_svg = tempnam(sys_get_temp_dir(), 'svg_') . '.svg';
-    $tmp_png = tempnam(sys_get_temp_dir(), 'png_') . '.png';
-
-    file_put_contents($tmp_svg, $svg_content);
-
-    $img = new Imagick();
-    $img->setBackgroundColor(new ImagickPixel('transparent'));
-
-    $img->readImage($tmp_svg);
-    $img->setImageFormat("png32");
-    $img->setImageResolution(300, 300); // HIGH RES
-    $img->writeImage($tmp_png);
-
-    $img->clear();
-    $img->destroy();
+    $tmp_png = tempnam(sys_get_temp_dir(), 'diagram_') . '.png';
+    $imagick = new \Imagick();
+    $imagick->setBackgroundColor(new \ImagickPixel('white')); // white background
+    $imagick->readImageBlob($svg_content);
+    $imagick->setImageFormat("png32"); // 32-bit PNG preserves transparency
+    $imagick->writeImage($tmp_png);
+    $imagick->clear();
+    $imagick->destroy();
 
     return $tmp_png;
 }
-
-
-
 
 function show_towing_svg_in_editor( $post ) {
     // Get all meta data
@@ -1050,12 +1036,12 @@ function show_towing_svg_in_editor( $post ) {
     <div style="text-align:center; padding:20px;">
 
 		<div class="functional-buttons">
-			<span class="button button-primary save-chnages" id="save-chnages" style="margin-right:10px;">Save Changes <span class="spinner my-custom-spinner" style="float: left; margin-left: -40px;"></span> </span>
-
-			<span class="button button-primary generate-diagram" style="margin-right:10px;">Generate Diagram</span>
+				<span class="button button-primary save-chnages" id="save-chnages" style="margin-right:10px;">Save Changes <span class="spinner my-custom-spinner" style="float: left; margin-left: -40px;"></span> </span>
+				<br>
+				<br>
+			<span class="button button-secondary generate-diagram" style="margin-right:10px;">Generate Diagram</span>
 			<a href="<?php echo admin_url( 'admin-ajax.php?action=download_customer_word&post_id=' . $post->ID ); ?>" target="_blank" class="button button-secondary generate-word-doc" style="margin-right:10px;">Generate Word Document</a>
-			<a href="<?php echo admin_url( 'admin-ajax.php?action=download_customer_pdf&post_id=' . $post->ID ); ?>" target="_blank" class="button button-primary generate-pdf" style="margin-right:10px;">Generate PDF</a>
-
+			<a href="<?php echo admin_url( 'admin-ajax.php?action=download_customer_pdf&post_id=' . $post->ID ); ?>" target="_blank" class="button button-secondary generate-pdf" style="margin-right:10px; display:none;">Generate PDF</a>
 			<a href="#" class="button button-secondary email-to-manufacturer" style="margin-right:10px;">Email to Manufacturer</a>
 			<a href="#" id="show-order-popup" class="button button-secondary" style="">View Order #<?php echo esc_html( $order_id ); ?></a>
 		</div>
@@ -1193,9 +1179,9 @@ function show_towing_svg_in_editor( $post ) {
 						<br>
 					<div class="inv-order-details">
 						<div class="customer-details inv-order-row">
-							<strong>Name: </strong><?php echo esc_html( $customer_name ); ?>
+							<b>Name: </b><?php echo esc_html( $customer_name ); ?>
 							&nbsp;&nbsp;&nbsp;
-							<strong>Phone: </strong><?php echo esc_html( $customer_phone ); ?>
+							<b>Phone: </b><?php echo esc_html( $customer_phone ); ?>
 							&nbsp;&nbsp;&nbsp;
 							<strong>Email: </strong><?php echo esc_html( $customer_email ); ?>
 						</div>
@@ -1796,14 +1782,15 @@ add_action( 'wp_ajax_nopriv_download_customer_pdf', 'download_customer_pdf_callb
 
 use PhpOffice\PhpWord\PhpWord;
 use PhpOffice\PhpWord\IOFactory;
+use PhpOffice\PhpWord\Element\TextRun;
 
 function generate_customer_order_word_file($post_id) {
-    require_once __DIR__ . '/vendor/autoload.php';
+	require_once __DIR__ . '/vendor/autoload.php';
     $phpWord = new \PhpOffice\PhpWord\PhpWord();
 
     // Set Default Font
     $phpWord->setDefaultFontName('Arial');
-    $phpWord->setDefaultFontSize(11);
+    $phpWord->setDefaultFontSize(10);
 
     $order_id = get_post_meta($post_id, 'order_id', true);
     $order = wc_get_order($order_id);
@@ -1855,205 +1842,270 @@ function generate_customer_order_word_file($post_id) {
     $table = $section->addTable();
     $table->addRow();
 
-    $logo_cell = $table->addCell(5000);
+    $logo_cell = $table->addCell(5000, ['valign' => 'center']);
     $logo = get_template_directory() . '/assets/src/images/invoice-gaurd.png';
+
     if (file_exists($logo)) {
-        $logo_cell->addImage($logo, ['width' => 140]);
+        $logo_cell->addImage($logo, ['width' => 100]);
     }
 
-    $info_cell = $table->addCell(5000);
-    $info_cell->addText("ORDER DATE: $order_date", ['bold' => true]);
-    $info_cell->addText("ORDER NUMBER: $order_id", ['bold' => true]);
+	$info_cell = $table->addCell(5000, ['valign' => 'center']);
+
+	$textRun = $info_cell->addTextRun();
+	$textRun->addText("ORDER DATE: ", ['bold' => true]);
+	$textRun->addText($order_date);
+
+	$textRun = $info_cell->addTextRun();
+	$textRun->addText("ORDER NUMBER: ", ['bold' => true]);
+	$textRun->addText($order_id);
 
     $section->addTextBreak(1);
 
-  // CUSTOMER & DELIVERY + VEHICLE INFO SIDE-BY-SIDE
-	$infoTable = $section->addTable(['cellMargin' => 80]);
+	$compact = ['spaceBefore' => 0, 'spaceAfter' => 0];
 
+	// CUSTOMER & DELIVERY + VEHICLE INFO SIDE-BY-SIDE
+	$infoTable = $section->addTable(['cellMargin' => 80]);
 	$infoTable->addRow();
 
 	// LEFT COLUMN
 	$leftCell = $infoTable->addCell(5000);
-	$leftCell->addText("Name: $customer_name");
-	$leftCell->addText("Phone: $customer_phone");
-	$leftCell->addText("Email: $customer_email");
-	$leftCell->addText("Delivery Address: " . strip_tags($delivery_address));
-	$leftCell->addText("Delivery Instructions: " . ($delivery_instructions ?: 'No'));
+
+	$textRun = $leftCell->addTextRun($compact);
+	$textRun->addText("Name: ", ['bold' => true]);
+	$textRun->addText($customer_name);
+
+	$textRun = $leftCell->addTextRun($compact);
+	$textRun->addText("Phone: ", ['bold' => true]);
+	$textRun->addText($customer_phone);
+
+	$textRun = $leftCell->addTextRun($compact);
+	$textRun->addText("Email: ", ['bold' => true]);
+	$textRun->addText($customer_email);
+
+	$textRun = $leftCell->addTextRun(['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$textRun->addText("Delivery Address: ", ['bold' => true]);
+	// Nested table to restrict width
+	$addressTable = $leftCell->addTable(['cellMargin' => 0]);
+	$addressTable->addRow();
+	$addressTable->addCell(3000)->addText(strip_tags($delivery_address), [], ['spaceBefore' => 0, 'spaceAfter' => 0]); // ~50% of 6000 cell
+
+
+	$textRun = $leftCell->addTextRun($compact);
+	$textRun->addText("Delivery Instructions: ", ['bold' => true]);
+	$textRun->addText($delivery_instructions ?: 'No');
 
 	// RIGHT COLUMN
 	$rightCell = $infoTable->addCell(5000);
-	$rightCell->addText("Trailer Make: $caravan_make");
-	$rightCell->addText("Trailer Model: $caravan_model");
-	$rightCell->addText("Vehicle Make: $vehicle_make");
-	$rightCell->addText("Vehicle Make: $vehicle_model");
-	$rightCell->addText("Vehicle Year: $vehicle_year");
-	$rightCell->addText("Date Required: $proposed_date");
 
+	$textRun = $rightCell->addTextRun($compact);
+	$textRun->addText("Trailer Make: ", ['bold' => true]);
+	$textRun->addText($caravan_make);
 
+	$textRun = $rightCell->addTextRun($compact);
+	$textRun->addText("Trailer Model: ", ['bold' => true]);
+	$textRun->addText($caravan_model);
 
-    $section->addTextBreak(2);
+	$textRun = $rightCell->addTextRun($compact);
+	$textRun->addText("Vehicle Make: ", ['bold' => true]);
+	$textRun->addText($vehicle_make);
+
+	$textRun = $rightCell->addTextRun($compact);
+	$textRun->addText("Vehicle Model: ", ['bold' => true]);
+	$textRun->addText($vehicle_model);
+
+	$textRun = $rightCell->addTextRun($compact);
+	$textRun->addText("Vehicle Year: ", ['bold' => true]);
+	$textRun->addText($vehicle_year);
+
+	$textRun = $rightCell->addTextRun($compact);
+	$textRun->addText("Date Required: ", ['bold' => true]);
+	$textRun->addText($proposed_date);
+
+	$section->addTextBreak(1);
 
     // MEASUREMENTS TABLE
-    $section->addText("STONE STOMPER DETAILS", ['bold' => true, 'size' => 13]);
-    $section->addTextBreak(1);
+    $section->addText("STONE STOMPER DETAILS", ['bold' => true, 'size' => 10]);
 
-	$measure = $section->addTable(['borderSize' => 6]);
+	$measure = $section->addTable(
+		[
+			'borderSize' => 6,
+			'borderColor' => 'cdcdcd', // gray border
+			'cellMarginTop' => 0,
+			'cellMarginBottom' => 0,
+			'cellMarginLeft' => 50,
+			'cellMarginRight' => 50
+		]
+	);
 
-	$row = $measure->addRow();
-	$row->addCell(6000)->addText("SS Width (mm):");
-	$row->addCell(4000)->addText($caravan_width_mm);
+	$row = $measure->addRow(200);
+	$row->addCell(6000)->addText("SS Width (mm):", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText($caravan_width_mm, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
-	$row = $measure->addRow();
-	$row->addCell(6000)->addText("SS Length (mm):");
-	$row->addCell(4000)->addText($caravan_length_mm);
+	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6000)->addText("SS Length (mm):", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText($caravan_length_mm, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
-	$row = $measure->addRow();
-	$row->addCell(6000)->addText("Towing Vehicle Bar Width (mm):");
-	$row->addCell(4000)->addText($bar_width_mm);
+	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6000)->addText("Towing Vehicle Bar Width (mm):", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText($bar_width_mm, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
-	$row = $measure->addRow();
-	$row->addCell(6000)->addText("Vinyl Insert Width (mm):");
-	$row->addCell(4000)->addText("$vinyl_insert_width_mm");
+	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6000)->addText("Vinyl Insert Width (mm):", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText("$vinyl_insert_width_mm", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
-	$row = $measure->addRow();
-	$row->addCell(6000)->addText("Vinyl Insert Length (mm):");
-	$row->addCell(4000)->addText("$vinyl_insert_height_mm");
+	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6000)->addText("Vinyl Insert Length (mm):", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText("$vinyl_insert_height_mm", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
-	$row = $measure->addRow();
-	$row->addCell(6000)->addText("Stoneguard Length (mm):");
-	$row->addCell(4000)->addText("$factory_stoneguard_width");
+	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6000)->addText("Stoneguard Length (mm):", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText("$factory_stoneguard_width", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
-	$row = $measure->addRow();
-	$row->addCell(6000)->addText("Stoneguard Distance from Caravan");
-	$row->addCell(4000)->addText("$factory_stoneguard_height");
+	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6000)->addText("Stoneguard Distance from Caravan", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText("$factory_stoneguard_height", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
-	$row = $measure->addRow();
-	$row->addCell(6000)->addText("Toolbox Length (mm):");
-	$row->addCell(4000)->addText("$toolbox_width_mm");
+	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6000)->addText("Toolbox Length (mm):", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText("$toolbox_width_mm", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
-	$row = $measure->addRow();
-	$row->addCell(6000)->addText("Toolbox Distance from the Caravan:");
-	$row->addCell(4000)->addText("$toolbox_height_mm");
+	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6000)->addText("Toolbox Distance from the Caravan:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText("$toolbox_height_mm", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
-	$row = $measure->addRow();
-	$row->addCell(6000)->addText("Support Pockets:");
-	$row->addCell(4000)->addText($support_pockets);
+	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6000)->addText("Support Pockets:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText($support_pockets, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
-	$row = $measure->addRow();
-	$row->addCell(6000)->addText("Bar Option:");
-	$row->addCell(4000)->addText($sts_var_caravan_bar_option);
+	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6000)->addText("Bar Option:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText($sts_var_caravan_bar_option, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
-	$row = $measure->addRow();
-	$row->addCell(6000)->addText("Bar Bend:");
-	$row->addCell(4000)->addText($sts_var_caravan_bar_bend);
+	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6000)->addText("Bar Bend:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText($sts_var_caravan_bar_bend, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
-	$row = $measure->addRow();
-	$row->addCell(6000)->addText("SS Length Adjustment:");
-	$row->addCell(4000)->addText($sts_var_caravan_ss_length_adj);
+	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6000)->addText("SS Length Adjustment:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText($sts_var_caravan_ss_length_adj, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
-	$row = $measure->addRow();
-	$row->addCell(6000)->addText("Cut Out:");
-	$row->addCell(4000)->addText($sts_var_caravan_cut_out);
+	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6000)->addText("Cut Out:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText($sts_var_caravan_cut_out, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
-	$row = $measure->addRow();
-	$row->addCell(6000)->addText("Break Foam:");
-	$row->addCell(4000)->addText($sts_var_caravan_break_form);
+	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6000)->addText("Break Foam:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText($sts_var_caravan_break_form, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
-	$row = $measure->addRow();
-	$row->addCell(6000)->addText("HR Foam:");
-	$row->addCell(4000)->addText($sts_var_caravan_hr_form);
-
-
+	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6000)->addText("HR Foam:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText($sts_var_caravan_hr_form, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	// Wanna call vector svg here
-
-	$section->addTextBreak(2);
-
-    // MEASUREMENTS TABLE
-    $section->addText("STONE STOMPER preivew", ['bold' => true, 'size' => 13]);
-    $section->addTextBreak(1);
-
-
-	// Insert towing diagram
 	$svg = get_towing_diagram_svg_png($post_id);
 
 	if ($svg) {
 		$diagram_png = svg_to_png_temp($svg);
-
 		if (file_exists($diagram_png)) {
-			$section->addTextBreak(1);
-			$section->addText("TOWING DIAGRAM", ['bold' => true, 'size' => 13]);
 			$section->addImage($diagram_png, [
 				'width' => 500,
+				 'marginLeft' => -2000 // adjust this value to move left
 			]);
-			$section->addTextBreak(2);
 		}
 	}
 
+    $section->addTextBreak(0.5);
 
+	$section->addText("ORDER DETAILS:", ['bold' => true, 'size' => 10]);
 
-    $section->addTextBreak(2);
+	$items_table = $section->addTable(
+		[
+			'borderSize' => 6,
+			'borderColor' => 'cdcdcd',
+			'cellMarginTop' => 0,
+			'cellMarginBottom' => 0,
+			'cellMarginLeft' => 50,
+			'cellMarginRight' => 50
+		]
+	);
 
-    // ORDER ITEMS TABLE
-    $section->addText("ORDER DETAILS:", ['bold' => true, 'size' => 13]);
-    $items_table = $section->addTable(['borderSize' => 6]);
+	$items_table->addRow(200);
+	$items_table->addCell(1000)->addText("Quantity", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$items_table->addCell(5000)->addText("Product", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$items_table->addCell(2000)->addText("Unit Price", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$items_table->addCell(2000)->addText("Total", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
-    $items_table->addRow();
-    $items_table->addCell()->addText("Sr. No");
-    $items_table->addCell()->addText("Product");
-    $items_table->addCell()->addText("Unit Price");
-    $items_table->addCell()->addText("Total");
+	$i = 1;
 
-    $i = 1;
-    foreach ($order->get_items() as $item) {
-        $name = $item->get_name();
-        $qty = $item->get_quantity();
-        $total = wc_format_decimal($item->get_total(), 2);
-        $unit = wc_format_decimal($item->get_total() / $qty, 2);
+	foreach ($order->get_items() as $item) {
+		$name = $item->get_name();
+		$qty = $item->get_quantity();
+		$total = wc_format_decimal($item->get_total(), 2);
+		$unit = wc_format_decimal($item->get_total() / $qty, 2);
 
-        $items_table->addRow();
-        $items_table->addCell()->addText($i++);
-        $items_table->addCell()->addText($name);
-        $items_table->addCell()->addText("$" . $unit);
-        $items_table->addCell()->addText("$" . $total);
-    }
+		$items_table->addRow(200);
+		$items_table->addCell(1000)->addText($i++, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+		$items_table->addCell(5000)->addText($name, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+		$items_table->addCell(2000)->addText("$" . $unit, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+		$items_table->addCell(2000)->addText("$" . $total, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	}
 
-    $items_table->addRow();
-    $items_table->addCell()->addText('');
-    $items_table->addCell()->addText('');
-    $items_table->addCell()->addText("Delivery");
-    $items_table->addCell()->addText("$" . $delivery_cost);
+	$items_table->addRow(200);
+	$items_table->addCell(1000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$items_table->addCell(5000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$items_table->addCell(2000)->addText("Delivery:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$items_table->addCell(2000)->addText("$" . $delivery_cost, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
-    $items_table->addRow();
-    $items_table->addCell()->addText('');
-    $items_table->addCell()->addText('');
-    $items_table->addCell()->addText("Total Due");
-    $items_table->addCell()->addText("$" . $order_total);
+	$items_table->addRow(200);
+	$items_table->addCell(1000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$items_table->addCell(5000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$items_table->addCell(2000)->addText("Total Due:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$items_table->addCell(2000)->addText("$" . $order_total, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
-    $section->addTextBreak(2);
+	$items_table->addRow(200);
+	$items_table->addCell(1000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$items_table->addCell(5000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$items_table->addCell(2000)->addText('GST( Included)', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$items_table->addCell(2000)->addText("-", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+
+	$section->addTextBreak(1);
+
 
     // Customer Notes
     $section->addText("CUSTOMER ORDER NOTES:", ['bold' => true]);
     $section->addText($delivery_instructions ?: 'No notes.');
 
-    $section->addTextBreak(2);
+    $section->addTextBreak(6);
 
-    // Footer
+	// HEADER TABLE (Logo + Company Info)
+	$table = $section->addTable([
+		'borderColor' => 'cdcdcd', // gray border
+		'cellMarginTop' => 0,
+		'cellMarginBottom' => 0,
+		'cellMarginLeft' => 50,
+		'cellMarginRight' => 50
+	]);
 
-	$table = $section->addTable();
-    $table->addRow();
+	$table->addRow(300);
 
-    $logo_cell = $table->addCell(5000);
-    $logo = get_template_directory() . '/assets/src/images/invoice-gaurd.png';
-    if (file_exists($logo)) {
-        $logo_cell->addImage($logo, ['width' => 140]);
-    }
+	// LEFT CELL → LOGO (same variable you used)
+	$logo_cell = $table->addCell(3000, ['valign' => 'center']);
+	$logo = get_template_directory() . '/assets/src/images/invoice-gaurd.png';
+	if (file_exists($logo)) {
+		$logo_cell->addImage($logo, ['width' => 100]);
+	}
 
-    $section->addTextBreak(1);
+	// RIGHT CELL → TEXT (same text you used)
+	$info_cell = $table->addCell(6000,  ['valign' => 'center']);
 
-    $section->addText("Stone Stomper", ['bold' => true]);
-    $section->addText("PO Box 204, Port Noarlunga, SA 5167");
-    $section->addText("Factory location: Lonsdale SA");
-    $section->addText("Email: sales@stonestomper.com.au");
+	// Company name bold (same variable structure)
+	$info_cell->addText("Stone Stomper", ['bold' => true, 'size' => 10], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$info_cell->addText("PO Box 204, Port Noarlunga, SA 5167", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$info_cell->addText("Factory location: Lonsdale SA", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$info_cell->addText("Email: sales@stonestomper.com.au", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+
+	// Small spacing below header
+	$section->addTextBreak(1);
+
 
     // Save file
     $upload_dir = wp_upload_dir();
@@ -2063,10 +2115,6 @@ function generate_customer_order_word_file($post_id) {
 
     return $file_path;
 }
-
-
-
-
 
 function download_customer_word_callback() {
     $post_id = intval($_GET['post_id'] ?? 0);
@@ -2086,9 +2134,6 @@ function download_customer_word_callback() {
 
 add_action( 'wp_ajax_download_customer_word', 'download_customer_word_callback' );
 add_action( 'wp_ajax_nopriv_download_customer_word', 'download_customer_word_callback' );
-
-
-
 
 function email_to_manufacturer_callback() {
 	list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaults();

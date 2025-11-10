@@ -8102,3 +8102,9 @@ body.post-type-post .editor-styles-wrapper > div {
 .popup-image {
   cursor: pointer;
 }
+
+.functional-buttons span.button.button-primary.save-chnages {
+  padding-inline: 20px;
+  padding-block: 0;
+  font-size: 16px;
+}

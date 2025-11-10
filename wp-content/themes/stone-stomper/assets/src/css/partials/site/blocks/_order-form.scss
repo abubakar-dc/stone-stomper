@@ -29,9 +29,7 @@
 	opacity: 0.2;
 }
 
-
 .form-detail-section {
-
 	a,
 	a:visited {
 		border-color: var(--ss_black_1);
@@ -229,7 +227,6 @@
 	.form-section-right {
 		border: none;
 		padding: 0;
-
 	}
 
 	label {
@@ -239,7 +236,7 @@
 }
 
 #photographs-details {
-	input[type=file] {
+	input[type="file"] {
 		height: 67px;
 		padding: 21px;
 		background-image: url(../images/arrow-down.svg);
@@ -373,7 +370,6 @@
 	}
 }
 
-
 .vehicle-images,
 .example-photographs {
 	.image-caption-area {
@@ -402,9 +398,7 @@
 	margin-top: 10px;
 }
 
-
-
-.form-section-right{
+.form-section-right {
 	input[type="text"],
 	input[type="number"],
 	input[type="email"],
@@ -424,8 +418,9 @@
 	select,
 	textarea,
 	.gform-text-input-reset {
-		&:hover{
+		&:hover {
 			border-color: var(--ss_color_primary);
-			background-color: rgba(237,23,79,.1) ;
+			background-color: rgba(237, 23, 79, 0.1);
 		}
-	}}
+	}
+}
