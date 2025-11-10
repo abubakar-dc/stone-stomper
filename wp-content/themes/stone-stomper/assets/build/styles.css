@@ -1571,6 +1571,7 @@ textarea,
   box-sizing: border-box;
   transition: all 0.4s ease-in-out;
   opacity: 0.5;
+  text-transform: capitalize;
 }
 input[type=text]:focus,
 input[type=number]:focus,
