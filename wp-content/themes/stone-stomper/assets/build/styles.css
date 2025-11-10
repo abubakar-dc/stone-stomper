@@ -1571,6 +1571,7 @@ textarea,
   box-sizing: border-box;
   transition: all 0.4s ease-in-out;
   opacity: 0.5;
+  text-transform: capitalize;
 }
 input[type=text]:focus,
 input[type=number]:focus,
@@ -7222,6 +7223,10 @@ body #daextlwcnf-cookie-settings-button-2:hover {
 .form-section-right .gform-text-input-reset:hover {
   border-color: var(--ss_color_primary);
   background-color: rgba(237, 23, 79, 0.1);
+}
+
+#caravan-details .van_model_other {
+  margin-top: 30px;
 }
 
 /*-------------------------------------------------

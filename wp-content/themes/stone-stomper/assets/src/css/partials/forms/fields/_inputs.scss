@@ -58,7 +58,7 @@ textarea,
 	box-sizing: border-box;
 	@include transition(all, 0.4s, ease-in-out);
 	opacity: 0.5;
-
+	text-transform: capitalize;
 	&:focus {
 		opacity: 1;
 		border: 1px solid var(--ss_black);
@@ -197,7 +197,6 @@ textarea {
 }
 
 #orderForm {
-
 	.field {
 		margin-bottom: 30px;
 	}
@@ -214,8 +213,8 @@ textarea {
 	background-color: transparent !important;
 }
 
-.jump-01{
-	select{
+.jump-01 {
+	select {
 		opacity: 1 !important;
 	}
 }
