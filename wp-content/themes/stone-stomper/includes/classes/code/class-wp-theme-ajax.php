@@ -331,65 +331,39 @@ public function fetch_form_data() {
 		}
 	}
 
-	// ✅ Collect all possible years for the selected make (and optionally model)
-	$year = '<option value="">Select Model Year</option>';
+	// ✅ Get model selected post ID from AJAX (not the current page)
+$modelPostID = $_POST['postID'] ?? null;
 
-	if ( $carMake ) {
-		$make_term = get_term_by( 'slug', $carMake, 'car-category' );
+// ✅ Default year dropdown placeholder
+$year = '<option value="">Select Model Year</option>';
 
-		if ( $make_term && ! is_wp_error( $make_term ) ) {
-			// Get all "car" posts under this car-category
-			$related_posts = get_posts( [
-				'post_type'      => 'car',
-				'posts_per_page' => -1,
-				'tax_query'      => [
-					[
-						'taxonomy' => 'car-category',
-						'field'    => 'slug',
-						'terms'    => $carMake,
-					],
-				],
-			] );
+if ( $modelPostID ) {
 
-			$years = [];
+    $years = [];
 
-			if ( $related_posts ) {
-				foreach ( $related_posts as $related_post ) {
-					$related_post_id = $related_post->ID;
+    // ✅ Read repeater from the selected Model Post only
+    $models = get_field( 'sts_var_car_model_row', $modelPostID );
 
-					// Each post might have its own car year
-					$post_year = get_field( 'sts_var_car_year', $related_post_id );
+    if ( $models ) {
+        foreach ( $models as $model ) {
+            if ( ! empty( $model['sts_var_car_year'] ) ) {
+                $years[] = $model['sts_var_car_year'];
+            }
+        }
+    }
 
-					if ( $post_year ) {
-						$years[] = $post_year;
-					}
+    // ✅ Clean & sort
+    $years = array_unique(array_filter($years));
+    sort($years);
 
-					// Optional: If you also store years inside repeater fields
-					$models = get_field( 'sts_var_car_model_row', $related_post_id );
-					if ( $models ) {
-						foreach ( $models as $model ) {
-							if ( ! empty( $model['sts_var_car_year'] ) ) {
-								$years[] = $model['sts_var_car_year'];
-							}
-						}
-					}
-				}
-			}
+    foreach ( $years as $y ) {
+        $year .= '<option value="' . esc_attr($y) . '">' . esc_html($y) . '</option>';
+    }
 
-			// ✅ Remove duplicates and sort (optional)
-			$years = array_unique( array_filter( $years ) );
-			sort( $years );
+    // ✅ Append "Other" option
+    $year .= '<option class="ajax-car-year other">other</option>';
+}
 
-			// ✅ Output options
-			foreach ( $years as $y ) {
-				$year .= '<option value="' . esc_attr( $y ) . '">' . esc_html( $y ) . '</option>';
-			}
-
-			$year .= '<option class="ajax-car-year other">other</option>';
-		}
-	} else {
-		$year = '<option value="">Select Model Year</option>';
-	}
 
 
 	// ✅ Vehicle image

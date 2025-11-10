@@ -13,6 +13,8 @@ jQuery( document ).ready( function() {
 		upsellsProductId = [];
 		jQuery( '.acc-upsell:checked' ).each( function() {
 			const productId = jQuery( this ).data( 'product-id' );
+
+			console.log(productId);
 			if ( productId ) {
 				upsellsProductId.push( productId );
 			}

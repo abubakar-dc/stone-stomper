@@ -730,6 +730,7 @@ jQuery( document ).ready( function() {
 		if ( jQuery( '#vehicle_model_other' ).is( ':visible' ) && jQuery( '#vehicle_model_other' ).val().trim() === '' ) {
 			filled = false;
 		}
+
 		if ( jQuery( '#veh_year_other' ).is( ':visible' ) && jQuery( '#veh_year_other' ).val().trim() === '' ) {
 			filled = false;
 		}

@@ -67,6 +67,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 
 				<div class="iat-form-content">
 					<form id="orderForm" novalidate>
+						<input type="hidden" class="hidden" name="is_stone_stomper_order" value="yes">
 						<div id="form-all">
 							<!-- Your Details -->
 							 <div class="order-form-section-inner form-detail-section d-flex justify-content-between align-items-start image-at-left">
@@ -612,16 +613,16 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											</div>
 										</fieldset>
 
-										<!-- <div class="field">
+										<div class="field hidden">
 											<label class="req" for="vinyl_width">Vinyl Insert Width</label>
 											<input id="vinyl_width" name="vinyl_width_mm" type="text"
 												placeholder="e.g.600 mm" required />
 										</div>
-										<div class="field">
+										<div class="field hidden">
 											<label class="req" for="vinyl_length">Vinyl Insert Length</label>
 											<input id="vinyl_length" name="vinyl_length_mm" type="text"
 												placeholder="e.g.600 mm" required />
-										</div> -->
+										</div>
 
 										<!-- <label class="row"><input id="support_pockets" type="checkbox"
 												name="support_pockets" /> Support
@@ -741,6 +742,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 
 														$price = $upsell->get_price();
 														$title = $upsell->get_name();
+
 														echo '<div class="checkbox-item">';
 															if( has_post_thumbnail( $upsell_id ) ) {
 																echo '<div class="thumb">';
@@ -751,7 +753,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 														echo '</div>';
 													}
 												}
-												?>
+											?>
 										</div>
 									</div>
 									<!-- Section ends -->
