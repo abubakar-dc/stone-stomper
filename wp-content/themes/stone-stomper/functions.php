@@ -213,9 +213,13 @@ add_action( 'admin_init', function() {
 
 
 add_action( 'woocommerce_checkout_create_order', function( $order, $data ) {
-    if ( ! empty( $_POST['is_stone_stomper_order'] ) && $_POST['is_stone_stomper_order'] === 'yes' ) {
-        $order->update_meta_data( '_sts_order', 'yes' );
+
+    $cookie = sts_read_order_form_cookie();
+
+    if ( ! empty( $cookie['is_stone_stomper_order'] ) && $cookie['is_stone_stomper_order'] === 'yes' ) {
+        $order->update_meta_data('_sts_order', 'yes');
     }
+
 }, 10, 2 );
 
 
@@ -308,10 +312,11 @@ add_action( 'woocommerce_new_order', function( $order_id ) {
 	error_log('checked order');
 	$data = sts_read_order_form_cookie();
 
- // ✅ Only process if Stone-Stomper meta exists
-    if ( $order->get_meta('_sts_order') !== 'yes' ) {
-        return;
-    }
+
+	if ( empty($data['is_stone_stomper_order']) || $data['is_stone_stomper_order'] !== 'yes' ) {
+    return;
+}
+
 
 	error_log(print_r($data, true));
 
@@ -415,6 +420,7 @@ error_log(print_r($cust_name,true));
 	update_post_meta( $post_id, 'vinyl_insert_height_mm', $vinyl_length_mm );
 	update_post_meta( $post_id, 'toolbox_width_mm', $toolbox_width_mm );
 	update_post_meta( $post_id, 'toolbox_height_mm', $toolbox_length_mm );
+
 
 	// update_post_meta( $post_id, 'hitch_ids', $hitch_ids );
 	// update_post_meta( $post_id, 'rear_ids', $rear_ids );
@@ -2261,3 +2267,13 @@ add_filter('woocommerce_get_price_html', function($price_html, $product) {
 	}
 	return $price_html;
 }, 10, 2);
+
+
+
+add_action('init', function() {
+    if ( isset($_GET['test_sts']) ) {
+        $order = wc_get_order( 1215 ); // <-- yahan apna order ID likho
+        var_dump( $order->get_meta('_sts_order') );
+        exit;
+    }
+});
