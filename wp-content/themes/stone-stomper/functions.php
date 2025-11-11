@@ -367,7 +367,6 @@ add_action( 'woocommerce_new_order', function( $order_id ) {
 	// Final details
 	$final = array(
 		'final_delivery'  => isset( $data['final_delivery'] ) ? sanitize_text_field( $data['final_delivery'] ) : ( isset( $data['final_address'] ) ? sanitize_text_field( $data['final_address'] ) : '' ),
-		'shipping_method' => isset( $data['shipping_method'] ) ? sanitize_text_field( $data['shipping_method'] ) : ( isset( $data['shipping'] ) ? sanitize_text_field( $data['shipping'] ) : '' ),
 		'acc_upsells'     => array_values( array_unique( array_map( 'intval', $data['acc_upsells'] ?? array() ) ) ),
 	);
 
@@ -444,7 +443,7 @@ error_log(print_r($cust_name,true));
 	}
 
 
-	// update_post_meta( $post_id, 'final_details', $final );
+	update_post_meta( $post_id, 'final_details', $final );
 
 	// Optionally set a featured image from the first uploaded photo if any
 	// $first_img = 0;
@@ -935,7 +934,7 @@ function show_towing_svg_in_editor( $post ) {
 	$front_ids = get_post_meta( $post->ID, 'front_ids', true );
 	$support_pockets = get_post_meta( $post->ID, 'support_pockets', true );
 
-	// var_dump(get_post_meta( $post->ID));
+	var_dump(get_post_meta( $post->ID));
 
 	function show_meta_images( $meta_value ) {
 		if ( empty( $meta_value ) ) return;
@@ -1041,7 +1040,7 @@ function show_towing_svg_in_editor( $post ) {
 	<!-- Order Preview Image -->
     <div style="text-align:center; padding:20px;">
 
-		<div class="functional-buttons">
+		<div class="functional-buttons" id="functional-buttons">
 				<span class="button button-primary save-chnages" id="save-chnages" style="margin-right:10px;">Save Changes <span class="spinner my-custom-spinner" style="float: left; margin-left: -40px;"></span> </span>
 				<br>
 				<br>
@@ -1400,21 +1399,38 @@ function show_towing_svg_in_editor( $post ) {
 
 	<script>
 		jQuery(document).ready(function () {
+			jQuery('#save-chnages').on('click', function(e) {
+				e.preventDefault();
 
+				// Show spinner
+				jQuery(this).find('.my-custom-spinner').addClass('is-active');
 
-				jQuery('#save-chnages').on('click', function(e) {
-					e.preventDefault();
-				// Show WordPress default spinner
-					jQuery(this).find('.spinner.my-custom-spinner').addClass('is-active');
+				jQuery(this).addClass('disabled');
 
-					// Disable button to prevent multiple clicks
-					jQuery(this).addClass('disabled');
+				// Mark that we want to scroll after reload
+        		localStorage.setItem('scrollToFunctionalButtons', '1');
 
-					// Trigger real form submit
-					jQuery('#post').submit();
-				});
+				// Save the post
+				jQuery('#post').submit();
+			});
 
+			// After reload, check flag
+			if (localStorage.getItem('scrollToFunctionalButtons') === '1') {
 
+				// Scroll to section
+				jQuery('html, body').animate({
+					scrollTop: jQuery('#functional-buttons').offset().top - 50
+				}, 400);
+
+				// Remove flag so it doesn't scroll every time
+				localStorage.removeItem('scrollToFunctionalButtons');
+			}
+
+			if (window.location.hash === '#functional-buttons') {
+				jQuery('html, body').animate({
+					scrollTop: jQuery('#functional-buttons').offset().top - 60
+				}, 400);
+			}
 
 			const allImageGroups = jQuery(".hitch-images, .rear-images, .front-images");
 
@@ -1529,262 +1545,6 @@ add_action( 'add_meta_boxes', function() {
         'low'                       // Priority
     );
 });
-
-use Dompdf\Dompdf;
-
-function download_customer_pdf_callback() {
-    $post_id = intval( $_GET['post_id'] ?? 0 );
-    if ( ! $post_id ) {
-        wp_die( 'Invalid request.' );
-    }
-
-    // Get order id from post meta and load order
-    $order_id = get_post_meta( $post_id, 'order_id', true );
-    $order    = $order_id ? wc_get_order( $order_id ) : false;
-
-    if ( ! $order ) {
-        wp_die( 'Order not found.' );
-    }
-
-    // === Order Data ===
-    $order_date            = $order->get_date_created() ? $order->get_date_created()->date_i18n( 'Y-m-d' ) : '';
-    $customer_name         = $order->get_formatted_billing_full_name();
-    $customer_phone        = $order->get_billing_phone();
-    $customer_email        = $order->get_billing_email();
-    $delivery_address      = $order->get_formatted_shipping_address();
-    $delivery_cost         = $order->get_shipping_total();
-    $order_total           = $order->get_total();
-    $delivery_instructions = $order->get_customer_note();
-
-    // === Post meta (use $post_id consistently) ===
-    $bar_width_mm                    = get_post_meta( $post_id, 'bar_width_mm', true );
-    $caravan_length_mm               = get_post_meta( $post_id, 'caravan_length_mm', true );
-    $caravan_width_mm                = get_post_meta( $post_id, 'caravan_width_mm', true );
-    $factory_stoneguard_width        = get_post_meta( $post_id, 'factory_stoneguard_width', true );
-    $factory_stoneguard_height       = get_post_meta( $post_id, 'factory_stoneguard_height', true );
-    $vinyl_insert_width_mm           = get_post_meta( $post_id, 'vinyl_insert_width_mm', true );
-    $vinyl_insert_height_mm          = get_post_meta( $post_id, 'vinyl_insert_height_mm', true );
-    $toolbox_width_mm                = get_post_meta( $post_id, 'toolbox_width_mm', true );
-    $toolbox_height_mm               = get_post_meta( $post_id, 'toolbox_height_mm', true );
-    $vehicle_make                    = get_post_meta( $post_id, 'vehicle_make', true );
-    $caravan_make                    = get_post_meta( $post_id, 'caravan_make', true );
-    $sts_var_caravan_bar_option      = get_post_meta( $post_id, 'sts_var_caravan_bar_option', true );
-    $sts_var_caravan_bar_bend        = get_post_meta( $post_id, 'sts_var_caravan_bar_bend', true );
-    $sts_var_caravan_ss_length_adj   = get_post_meta( $post_id, 'sts_var_caravan_ss_length_adj', true );
-    $sts_var_caravan_cut_out         = get_post_meta( $post_id, 'sts_var_caravan_cut_out', true );
-    $sts_var_caravan_break_form      = get_post_meta( $post_id, 'sts_var_caravan_break_form', true );
-    $sts_var_caravan_hr_form         = get_post_meta( $post_id, 'sts_var_caravan_hr_form', true );
-    $sts_var_proposed_date_of_delivery = get_post_meta( $post_id, 'sts_var_proposed_date_of_delivery', true );
-
-    if ( $sts_var_caravan_ss_length_adj ) {
-        // numeric adjust only if numeric
-        if ( is_numeric( $sts_var_caravan_ss_length_adj ) && is_numeric( $caravan_length_mm ) ) {
-            $caravan_length_mm = $caravan_length_mm + $sts_var_caravan_ss_length_adj;
-        }
-    }
-
-    if ( ! empty( $sts_var_proposed_date_of_delivery ) ) {
-        $sts_var_proposed_date_of_delivery = strtotime( $sts_var_proposed_date_of_delivery );
-    }
-
-    // === Products rows ===
-    $product_rows = '';
-    foreach ( $order->get_items() as $index => $item ) {
-        $name  = $item->get_name();
-        $qty   = $item->get_quantity();
-        $total = wc_format_decimal( $item->get_total(), 2 );
-        $unit  = $qty ? wc_format_decimal( $item->get_total() / $qty, 2 ) : wc_format_decimal( $item->get_total(), 2 );
-
-        $product_rows .= "
-            <tr>
-                <td style='text-align:center;'>" . ( $index + 1 ) . "</td>
-                <td style='text-align:center;'>" . esc_html( $name ) . "</td>
-                <td style='text-align:center;'>$" . esc_html( $unit ) . "</td>
-                <td style='text-align:center;'>$" . esc_html( $total ) . "</td>
-            </tr>";
-    }
-
-    // invoice logo
-    $inv_logo = esc_url( get_template_directory_uri() . '/assets/src/images/invoice-gaurd.png' );
-
-    // === Build HTML (matching your popup structure) ===
-    $html = "
-    <div style='font-family: Arial, Helvetica, sans-serif; font-size:12px;'>
-        <div class='inv-one'>
-            <div style='display:flex; justify-content:space-between; align-items:flex-start;'>
-                <div style='max-width:40%;'>
-                    <img src='{$inv_logo}' style='max-width:280px;' />
-                </div>
-                <div style='max-width:35%;'>
-                    <strong>Stone Stomper</strong><br/>
-                    PO Box 204, Port Noarlunga, SA 5167<br/>
-                    Factory location: Lonsdale SA<br/>
-                    <strong>Email:</strong> sales@stonestomper.com.au
-                </div>
-                <div style='text-align:right;'>
-                    <h3 style='margin:0;'>Quote/<br/>Invoice</h3>
-                    <table style='font-size:12px;'>
-                        <tr><td><strong>DATE:</strong> " . esc_html( $order_date ) . "</td></tr>
-                        <tr><td><strong>INV#:</strong> " . esc_html( $order_id ) . "</td></tr>
-                    </table>
-                </div>
-            </div>
-
-            <br/>
-
-            <div>
-                <strong>Name:</strong> " . esc_html( $customer_name ) . " &nbsp;&nbsp;
-                <strong>Phone:</strong> " . esc_html( $customer_phone ) . " &nbsp;&nbsp;
-                <strong>Email:</strong> " . esc_html( $customer_email ) . "
-            </div>
-
-            <div style='margin-top:6px;'>
-                <strong>Delivery Address:</strong> " . wp_kses_post( html_entity_decode( $delivery_address ) ) . "
-            </div>
-
-            <div style='margin-top:6px;'>
-                <strong>Delivery Instructions/Authority to Leave:</strong> " . ( ! empty( $delivery_instructions ) ? esc_html( $delivery_instructions ) : 'No' ) . "
-            </div>";
-
-    if ( $caravan_make || $vehicle_make ) {
-        $html .= "<div style='margin-top:6px;'>";
-        if ( $caravan_make ) {
-            $html .= "<strong>Trailer Make:</strong> " . esc_html( $caravan_make ) . " &nbsp;&nbsp;";
-        }
-        if ( $vehicle_make ) {
-            $html .= "<strong>Vehicle Make:</strong> " . esc_html( $vehicle_make );
-        }
-        $html .= "</div>";
-    }
-
-    if ( $sts_var_proposed_date_of_delivery ) {
-        $html .= "<div style='margin-top:6px;'><strong>Date Required:</strong> " . esc_html( date( 'd-F-Y', $sts_var_proposed_date_of_delivery ) ) . "</div>";
-    }
-
-    // Products table
-    $html .= "
-        <br/>
-        <table style='width:100%; border-collapse:collapse; font-size:12px;' border='1' cellspacing='0' cellpadding='6'>
-            <thead>
-                <tr>
-                    <th style='text-align:center;'>Sr. NO</th>
-                    <th style='text-align:center;'>Description</th>
-                    <th style='text-align:center;'>Unit Price</th>
-                    <th style='text-align:center;'>Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                {$product_rows}
-                <tr>
-                    <td></td><td></td><td style='text-align:center;'><strong>Delivery</strong></td>
-                    <td style='text-align:center;'>" . esc_html( $delivery_cost ) . "</td>
-                </tr>
-                <tr>
-                    <td></td><td></td><td style='text-align:center;'><strong>Total Due</strong></td>
-                    <td style='text-align:center;'>" . esc_html( $order_total ) . "</td>
-                </tr>
-                <tr>
-                    <td></td><td></td><td style='text-align:center;'>GST (included)</td><td>-</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div style='margin-top:12px; text-align:center; font-weight:bold;'>THANK YOU FOR YOUR BUSINESS</div>
-
-        <hr style='margin:18px 0;' />
-
-        <!-- Office use (inv-two) -->
-        <div class='inv-two'>
-            <div style='display:flex; justify-content:space-between; align-items:flex-start;'>
-                <div style='max-width:40%;'>
-                    <img src='{$inv_logo}' style='max-width:280px;' />
-                </div>
-                <div style='max-width:35%;'>
-                    <strong>Stone Stomper</strong><br/>
-                    PO Box 204, Port Noarlunga, SA 5167<br/>
-                    Factory location: Lonsdale SA<br/>
-                    <strong>Email:</strong> sales@stonestomper.com.au
-                </div>
-                <div style='text-align:right;'>
-                    <h3 style='margin:0;'>Quote/Invoice</h3>
-                    <table style='font-size:12px;'>
-                        <tr><td><strong>DATE:</strong> " . esc_html( $order_date ) . "</td></tr>
-                        <tr><td><strong>INV#:</strong> " . esc_html( $order_id ) . "</td></tr>
-                        <tr><td><strong>P/O#:</strong></td></tr>
-                    </table>
-                </div>
-            </div>
-
-            <br/>
-
-            <div>
-                <strong>Name:</strong> " . esc_html( $customer_name ) . " &nbsp;&nbsp;
-                <strong>Phone:</strong> " . esc_html( $customer_phone ) . " &nbsp;&nbsp;
-                <strong>Email:</strong> " . esc_html( $customer_email ) . "
-            </div>
-
-            <div style='margin-top:6px;'>
-                <strong>Delivery Address:</strong> " . wp_kses_post( html_entity_decode( $delivery_address ) ) . "
-            </div>
-
-            <div style='margin-top:6px;'>
-                <strong>Delivery Instructions/Authority to Leave:</strong> " . ( ! empty( $delivery_instructions ) ? esc_html( $delivery_instructions ) : 'No' ) . "
-            </div>
-
-            <br/>
-
-            <table style='width:100%; border-collapse:collapse; font-size:12px;' border='1' cellspacing='0' cellpadding='6'>
-                <tr><td style='padding:6px 15px;'>SS Width (mm):</td><td style='padding:6px 15px;'>" . ( $caravan_width_mm ? esc_html( $caravan_width_mm ) : '-' ) . "</td></tr>
-                <tr><td style='padding:6px 15px;'>SS Length (mm):</td><td style='padding:6px 15px;'>" . ( $caravan_length_mm ? esc_html( $caravan_length_mm ) : '-' ) . "</td></tr>
-                <tr><td style='padding:6px 15px;'>Towing Vehicle BarWidth (mm):</td><td style='padding:6px 15px;'>" . ( $bar_width_mm ? esc_html( $bar_width_mm ) : '-' ) . "</td></tr>
-                <tr><td style='padding:6px 15px;'>Vinyl Insert Width (mm):</td><td style='padding:6px 15px;'>" . ( $vinyl_insert_width_mm ? esc_html( $vinyl_insert_width_mm ) : '-' ) . "</td></tr>
-                <tr><td style='padding:6px 15px;'>Vinyl Insert Length (mm):</td><td style='padding:6px 15px;'>" . ( $vinyl_insert_height_mm ? esc_html( $vinyl_insert_height_mm ) : '-' ) . "</td></tr>
-                <tr><td style='padding:6px 15px;'>Stoneguard Width (mm):</td><td style='padding:6px 15px;'>" . ( $factory_stoneguard_width ? esc_html( $factory_stoneguard_width ) : '-' ) . "</td></tr>
-                <tr><td style='padding:6px 15px;'>Stoneguard Length (mm):</td><td style='padding:6px 15px;'>" . ( $factory_stoneguard_height ? esc_html( $factory_stoneguard_height ) : '-' ) . "</td></tr>
-                <tr><td style='padding:6px 15px;'>Toolbox Length (mm):</td><td style='padding:6px 15px;'>" . ( $toolbox_width_mm ? esc_html( $toolbox_width_mm ) : '-' ) . "</td></tr>
-                <tr><td style='padding:6px 15px;'>Distance from the Caravan:</td><td style='padding:6px 15px;'>" . ( $toolbox_height_mm ? esc_html( $toolbox_height_mm ) : '-' ) . "</td></tr>
-                <tr><td style='padding:6px 15px;'>Bar Option</td><td style='padding:6px 15px;'>" . ( $sts_var_caravan_bar_option ? esc_html( $sts_var_caravan_bar_option ) : '-' ) . "</td></tr>
-                <tr><td style='padding:6px 15px;'>Bar Bend</td><td style='padding:6px 15px;'>" . ( $sts_var_caravan_bar_bend ? esc_html( $sts_var_caravan_bar_bend ) : '-' ) . "</td></tr>
-                <tr><td style='padding:6px 15px;'>SS Length Adjustment</td><td style='padding:6px 15px;'>" . ( $sts_var_caravan_ss_length_adj ? esc_html( $sts_var_caravan_ss_length_adj ) : '-' ) . "</td></tr>
-                <tr><td style='padding:6px 15px;'>Cut Out</td><td style='padding:6px 15px;'>" . ( $sts_var_caravan_cut_out ? esc_html( $sts_var_caravan_cut_out ) : '-' ) . "</td></tr>
-                <tr><td style='padding:6px 15px;'>Break Foam</td><td style='padding:6px 15px;'>" . ( $sts_var_caravan_break_form ? esc_html( $sts_var_caravan_break_form ) : '-' ) . "</td></tr>
-                <tr><td style='padding:6px 15px;'>Hr Foam</td><td style='padding:6px 15px;'>" . ( $sts_var_caravan_hr_form ? esc_html( $sts_var_caravan_hr_form ) : '-' ) . "</td></tr>
-            </table>
-
-			" . render_towing_diagram( $post_id, true ) . "
-
-        </div>
-    </div>
-    ";
-
-    // === Generate PDF with Dompdf (like you had before) ===
-    $dompdf_path = __DIR__ . '/vendor/autoload.php';
-    if ( ! file_exists( $dompdf_path ) ) {
-        wp_die( 'PDF library not found. Please install Dompdf (composer require dompdf/dompdf) in plugin folder.' );
-    }
-
-    require_once $dompdf_path;
-    // Namespaces: \Dompdf\Dompdf
-    $dompdf = new \Dompdf\Dompdf();
-    // optionally set base path for relative images (so invoice logo shows)
-    $options = $dompdf->getOptions();
-    $options->setChroot( ABSPATH ); // allow files under WP root, adjust if necessary
-    $dompdf->setOptions( $options );
-
-    $dompdf->loadHtml( $html );
-    $dompdf->setPaper( 'A4', 'portrait' );
-    $dompdf->render();
-
-    // Stream to browser
-    $filename = "customer-order-{$order_id}.pdf";
-    $dompdf->stream( $filename, [ 'Attachment' => false ] );
-    exit;
-}
-
-
-
-add_action( 'wp_ajax_download_customer_pdf', 'download_customer_pdf_callback' );
-add_action( 'wp_ajax_nopriv_download_customer_pdf', 'download_customer_pdf_callback' );
 
 use PhpOffice\PhpWord\PhpWord;
 use PhpOffice\PhpWord\IOFactory;
@@ -2312,8 +2072,6 @@ add_filter('woocommerce_get_price_html', function($price_html, $product) {
 	}
 	return $price_html;
 }, 10, 2);
-
-
 
 add_action('init', function() {
     if ( isset($_GET['test_sts']) ) {
