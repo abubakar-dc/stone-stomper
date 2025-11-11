@@ -902,6 +902,7 @@ function show_towing_svg_in_editor( $post ) {
 
 	$customer_phone = get_post_meta( $post->ID, 'customer_phone', true );
 	$final_details = get_post_meta( $post->ID, 'final_details', true );
+
 	// var_dump(get_post_meta( $post->ID, 'phone', true ));
 	$measure_barwidth_mm = get_post_meta( $post->ID, 'measure_barwidth_mm', true );
     $bar_width_mm        = get_post_meta( $post->ID, 'bar_width_mm', true );
@@ -1196,7 +1197,8 @@ function show_towing_svg_in_editor( $post ) {
 						<div class="customer-details inv-order-row">
 							<strong>Home Address: </strong><?php echo html_entity_decode( $delivery_address ); ?>
 						</div>
-						<?php if($final_details['final_delivery'] === 'move'){ ?>
+
+						<?php if($final_details && $final_details['final_delivery'] && $final_details['final_delivery'] === 'move'){ ?>
 							<div class="customer-details inv-order-row">
 								<strong>Delivery Address: </strong><?php echo 'I am on the move'; ?>
 							</div>
@@ -1546,7 +1548,7 @@ add_action( 'add_meta_boxes', function() {
     add_meta_box(
         'towing_svg_preview',        // ID
         'Stone Stomper Preview',     // Title
-        'show_towing_svg_in_editor', // Callback
+        'show_towing_svg_in_editor', // Callback`
         'customer',                  // Post type (CPT slug)
         'normal',                    // Position (side or normal)
         'low'                       // Priority
@@ -1607,7 +1609,7 @@ function generate_customer_order_word_file($post_id) {
 
 	$final_delivery_address = "Same As Home Address";
 
-	if($final_details['final_delivery'] === 'move' ){
+	if($final_details && $final_details['final_delivery'] === 'move' ){
 		$final_delivery_address = "I am on the Move";
 	}
 
