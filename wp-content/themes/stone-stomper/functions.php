@@ -899,6 +899,7 @@ function show_towing_svg_in_editor( $post ) {
 
 
 	$customer_phone = get_post_meta( $post->ID, 'customer_phone', true );
+	$final_details = get_post_meta( $post->ID, 'final_details', true );
 	// var_dump(get_post_meta( $post->ID, 'phone', true ));
 	$measure_barwidth_mm = get_post_meta( $post->ID, 'measure_barwidth_mm', true );
     $bar_width_mm        = get_post_meta( $post->ID, 'bar_width_mm', true );
@@ -934,7 +935,7 @@ function show_towing_svg_in_editor( $post ) {
 	$front_ids = get_post_meta( $post->ID, 'front_ids', true );
 	$support_pockets = get_post_meta( $post->ID, 'support_pockets', true );
 
-	var_dump(get_post_meta( $post->ID));
+	// var_dump($final_details['final_delivery']);
 
 	function show_meta_images( $meta_value ) {
 		if ( empty( $meta_value ) ) return;
@@ -1191,8 +1192,13 @@ function show_towing_svg_in_editor( $post ) {
 							<strong>Email: </strong><?php echo esc_html( $customer_email ); ?>
 						</div>
 						<div class="customer-details inv-order-row">
-							<strong>Delivery Address: </strong><?php echo html_entity_decode( $delivery_address ); ?>
+							<strong>Home Address: </strong><?php echo html_entity_decode( $delivery_address ); ?>
 						</div>
+						<?php if($final_details['final_delivery'] === 'move'){ ?>
+							<div class="customer-details inv-order-row">
+								<strong>Delivery Address: </strong><?php echo 'I am on the move'; ?>
+							</div>
+						<?php } ?>
 						<div class="customer-details inv-order-row">
 							<strong>Delivery Instructions/Authority to Leave:</strong>
 							<?php echo ! empty( $delivery_instructions ) ? esc_html( $delivery_instructions ) : 'No'; ?>
@@ -1211,7 +1217,6 @@ function show_towing_svg_in_editor( $post ) {
 								<strong>Date Required: </strong><?php echo date( 'd-F-Y', $sts_var_proposed_date_of_delivery ?: '-' ); ?>
 							</div>
 						<?php } ?>
-
 					</div>
 
 					<br>
@@ -1596,6 +1601,14 @@ function generate_customer_order_word_file($post_id) {
     $sts_var_caravan_cut_out        = get_post_meta($post_id, 'sts_var_caravan_cut_out', true);
     $sts_var_caravan_break_form     = get_post_meta($post_id, 'sts_var_caravan_break_form', true);
     $sts_var_caravan_hr_form        = get_post_meta($post_id, 'sts_var_caravan_hr_form', true);
+	$final_details = get_post_meta( $post_id, 'final_details', true );
+
+	$final_delivery_address = "Same As Home Address";
+
+	if($final_details['final_delivery'] === 'move' ){
+		$final_delivery_address = "I am on the Move";
+	}
+
 
     $proposed_date = get_post_meta($post_id, 'sts_var_proposed_date_of_delivery', true);
     $proposed_date = $proposed_date ? date('d-F-Y', strtotime($proposed_date)) : '-';
@@ -1649,12 +1662,18 @@ function generate_customer_order_word_file($post_id) {
 	$textRun->addText($customer_email);
 
 	$textRun = $leftCell->addTextRun(['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$textRun->addText("Delivery Address: ", ['bold' => true]);
+	$textRun->addText("Home Address: ", ['bold' => true]);
 	// Nested table to restrict width
 	$addressTable = $leftCell->addTable(['cellMargin' => 0]);
 	$addressTable->addRow();
 	$addressTable->addCell(3000)->addText(strip_tags($delivery_address), [], ['spaceBefore' => 0, 'spaceAfter' => 0]); // ~50% of 6000 cell
 
+	$textRun = $leftCell->addTextRun(['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$textRun->addText("Delivery Address: ", ['bold' => true]);
+	// Nested table to restrict width
+	$addressTable = $leftCell->addTable(['cellMargin' => 0]);
+	$addressTable->addRow();
+	$addressTable->addCell(3000)->addText(strip_tags($final_delivery_address), [], ['spaceBefore' => 0, 'spaceAfter' => 0]); // ~50% of 6000 cell
 
 	$textRun = $leftCell->addTextRun($compact);
 	$textRun->addText("Delivery Instructions: ", ['bold' => true]);
