@@ -1571,7 +1571,6 @@ textarea,
   box-sizing: border-box;
   transition: all 0.4s ease-in-out;
   opacity: 0.5;
-  text-transform: capitalize;
 }
 input[type=text]:focus,
 input[type=number]:focus,
@@ -1695,6 +1694,7 @@ select {
   background-repeat: no-repeat;
   background-position: center right 29px;
   background-size: 10px;
+  text-transform: capitalize;
 }
 
 .ginput_container_multiselect select {

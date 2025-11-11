@@ -610,11 +610,11 @@ function render_towing_diagram($post_id) {
 				</style>
 			</defs>
 			<path class="st1" d="M935.7,173.33c.12-1.09-.69-1.99-1.79-1.99H278.24c-1.1,0-1.91.9-1.79,1.99l41.6,402.61c.11,1.09,1.11,1.99,2.21,1.99h246.73c1.1,0,2-.9,2-2v-61.51c0-1.1.9-2,2-2h68.28c1.1,0,2,.9,2,2v61.51c0,1.1.9,2,2,2h247.86c1.1,0,2.09-.9,2.21-1.99l42.37-402.61Z" fill="#ffffff" stroke="#000000"/>
-			<polyline class="st2" points="329.42 577.92 288.76 180.94 923.79 180.94 882.27 577.92" fill="#ffffff"/>
-			<circle class="st2" cx="928.02" cy="177.82" r="5.22" fill="#ffffff"/>
-			<circle class="st2" cx="283.6" cy="177.82" r="5.22" fill="#ffffff"/>
-			<rect class="st2" x="390.67" y="364.08" width="438.42" height="27.06" fill="#ffffff"/>
-			<rect class="st3" x="504.04" y="315.51" width="211.2" height="195.21" fill="#ffffff"/>
+			<polyline class="st2" points="329.42 577.92 288.76 180.94 923.79 180.94 882.27 577.92" fill="#ffffff" stroke="#000000"/>
+			<circle class="st2" cx="928.02" cy="177.82" r="5.22" fill="#ffffff" stroke="#000000"/>
+			<circle class="st2" cx="283.6" cy="177.82" r="5.22" fill="#ffffff" stroke="#000000"/>
+			<rect class="st2" x="390.67" y="364.08" width="438.42" height="27.06" fill="#ffffff" stroke="#000000"/>
+			<rect class="st3" x="504.04" y="315.51" width="211.2" height="195.21" fill="#ffffff" stroke="#000000"/>
 			<?php if($vinyl_insert_width_mm){ ?>
 				<g transform="translate(610.76,330.99)">
 					<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0"><?php echo esc_html( $vinyl_insert_width_mm ? $vinyl_insert_width_mm.' mm' : '-' ); ?></text>
@@ -625,14 +625,14 @@ function render_towing_diagram($post_id) {
 					<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0"><?php echo esc_html( $vinyl_insert_height_mm ? $vinyl_insert_height_mm.' mm' : '-' ); ?></text>
 				</g>
 			<?php } ?>
-			<rect class="st2" x="404.09" y="381.28" width="8.47" height="196.64" fill="#ffffff"/>
-			<rect class="st2" x="477.94" y="381.28" width="8.47" height="196.64" fill="#ffffff"/>
-			<rect class="st2" x="732.88" y="381.28" width="8.47" height="196.64" fill="#ffffff"/>
-			<rect class="st2" x="806.72" y="381.28" width="8.47" height="196.64" fill="#ffffff"/>
-			<circle class="st2" cx="737.11" cy="374.25" r="4.24" fill="#ffffff"/>
-			<circle class="st2" cx="810.96" cy="374.25" r="4.24"  fill="#ffffff"/>
-			<circle class="st2" cx="408.33" cy="374.25" r="4.24"  fill="#ffffff"/>
-			<circle class="st2" cx="482.17" cy="374.25" r="4.24"  fill="#ffffff"/>
+			<rect class="st2" x="404.09" y="381.28" width="8.47" height="196.64" fill="#ffffff" stroke="#000000"/>
+			<rect class="st2" x="477.94" y="381.28" width="8.47" height="196.64" fill="#ffffff" stroke="#000000"/>
+			<rect class="st2" x="732.88" y="381.28" width="8.47" height="196.64" fill="#ffffff" stroke="#000000"/>
+			<rect class="st2" x="806.72" y="381.28" width="8.47" height="196.64" fill="#ffffff" stroke="#000000"/>
+			<circle class="st2" cx="737.11" cy="374.25" r="4.24" fill="#ffffff"  stroke="#000000"/>
+			<circle class="st2" cx="810.96" cy="374.25" r="4.24"  fill="#ffffff" stroke="#000000"/>
+			<circle class="st2" cx="408.33" cy="374.25" r="4.24"  fill="#ffffff" stroke="#000000"/>
+			<circle class="st2" cx="482.17" cy="374.25" r="4.24"  fill="#ffffff" stroke="#000000"/>
 			<text class="st5" transform="translate(565.96 411.74)"><tspan fill="#fa3232" x="0" y="0">Vinyl Insert</tspan></text>
 			<g>
 				<line class="st0" x1="274.29" y1="139.99" x2="935.24" y2="139.99" stroke="#fa3232"/>
@@ -711,15 +711,17 @@ function render_towing_diagram($post_id) {
 					}
 				</style>
 			</defs>
-			<path class="st3" d="M935.7,173.33c.12-1.09-.69-1.99-1.79-1.99H278.24c-1.1,0-1.91.9-1.79,1.99l41.6,402.61c.11,1.09,1.11,1.99,2.21,1.99h246.73c1.1,0,2-.9,2-2v-61.51c0-1.1.9-2,2-2h68.28c1.1,0,2,.9,2,2v61.51c0,1.1.9,2,2,2h247.86c1.1,0,2.09-.9,2.21-1.99l42.37-402.61Z" fill="#ffffff"/>
-			<polyline class="st4" points="329.42 577.92 288.76 180.94 923.79 180.94 882.27 577.92" fill="#ffffff"/>
-			<circle class="st4" cx="928.02" cy="177.82" r="5.22" fill="#ffffff"/>
-			<circle class="st4" cx="283.6" cy="177.82" r="5.22" fill="#ffffff"/>
-			<rect class="st4" x="390.67" y="364.08" width="438.42" height="27.06" fill="#ffffff" />
-			<rect class="st7" x="504.04" y="315.51" width="211.2" height="195.21" fill="#ffffff"/>
+			<path class="st3" d="M935.7,173.33c.12-1.09-.69-1.99-1.79-1.99H278.24c-1.1,0-1.91.9-1.79,1.99l41.6,402.61c.11,1.09,1.11,1.99,2.21,1.99h246.73c1.1,0,2-.9,2-2v-61.51c0-1.1.9-2,2-2h68.28c1.1,0,2,.9,2,2v61.51c0,1.1.9,2,2,2h247.86c1.1,0,2.09-.9,2.21-1.99l42.37-402.61Z" fill="#ffffff" stroke="#000000"/>
+			<polyline class="st4" points="329.42 577.92 288.76 180.94 923.79 180.94 882.27 577.92" fill="#ffffff" stroke="#000000"/>
+			<circle class="st4" cx="928.02" cy="177.82" r="5.22" fill="#ffffff" stroke="#000000"/>
+			<circle class="st4" cx="283.6" cy="177.82" r="5.22" fill="#ffffff" stroke="#000000"/>
+			<rect class="st4" x="390.67" y="364.08" width="438.42" height="27.06" fill="#ffffff" stroke="#000000"/>
+			<rect class="st7" x="504.04" y="315.51" width="211.2" height="195.21" fill="#ffffff" stroke="#000000"/>
 			<?php if($vinyl_insert_width_mm){ ?>
 				<g transform="translate(610.76,330.99)">
-					<text class="st5" fill="#fa3232" text-anchor="middle" dominant-baseline="middle" y="0"><?php echo esc_html( $vinyl_insert_width_mm ? $vinyl_insert_width_mm.' mm' : '-' ); ?></text>
+					<text class="st5" fill="#fa3232" text-anchor="middle" dominant-baseline="middle" y="0">
+						<?php echo esc_html( $vinyl_insert_width_mm ? $vinyl_insert_width_mm.' mm' : '-' ); ?>
+					</text>
 				</g>
 			<?php } ?>
 			<?php if($vinyl_insert_height_mm){ ?>
@@ -727,14 +729,14 @@ function render_towing_diagram($post_id) {
 					<text class="st5" fill="#fa3232" text-anchor="middle" dominant-baseline="middle" y="0"><?php echo esc_html( $vinyl_insert_height_mm ? $vinyl_insert_height_mm.' mm' : '-' ); ?></text>
 				</g>
 			<?php } ?>
-			<rect class="st4" x="404.09" y="381.28" width="8.47" height="196.64" fill="#ffffff"/>
-			<rect class="st4" x="477.94" y="381.28" width="8.47" height="196.64" fill="#ffffff"/>
-			<rect class="st4" x="732.88" y="381.28" width="8.47" height="196.64" fill="#ffffff"/>
-			<rect class="st4" x="806.72" y="381.28" width="8.47" height="196.64" fill="#ffffff"/>
-			<circle class="st4" cx="737.11" cy="374.25" r="4.24" fill="#ffffff"/>
-			<circle class="st4" cx="810.96" cy="374.25" r="4.24" fill="#ffffff"/>
-			<circle class="st4" cx="408.33" cy="374.25" r="4.24" fill="#ffffff"/>
-			<circle class="st4" cx="482.17" cy="374.25" r="4.24" fill="#ffffff"/>
+			<rect class="st4" x="404.09" y="381.28" width="8.47" height="196.64" fill="#ffffff" stroke="#000000"/>
+			<rect class="st4" x="477.94" y="381.28" width="8.47" height="196.64" fill="#ffffff" stroke="#000000"/>
+			<rect class="st4" x="732.88" y="381.28" width="8.47" height="196.64" fill="#ffffff" stroke="#000000"/>
+			<rect class="st4" x="806.72" y="381.28" width="8.47" height="196.64" fill="#ffffff" stroke="#000000"/>
+			<circle class="st4" cx="737.11" cy="374.25" r="4.24" fill="#ffffff" stroke="#000000"/>
+			<circle class="st4" cx="810.96" cy="374.25" r="4.24" fill="#ffffff" stroke="#000000"/>
+			<circle class="st4" cx="408.33" cy="374.25" r="4.24" fill="#ffffff" stroke="#000000"/>
+			<circle class="st4" cx="482.17" cy="374.25" r="4.24" fill="#ffffff" stroke="#000000"/>
 			<text class="st6" transform="translate(565.96 411.74)"><tspan fill="#fa3232" x="0" y="0">Vinyl Insert</tspan></text>
 			<g>
 				<line class="st0" x1="274.29" y1="139.99" x2="935.24" y2="139.99" fill="#ffffff" stroke="#fa3232"/>

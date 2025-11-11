@@ -5957,7 +5957,6 @@ Mixin for transition
   box-sizing: border-box;
   transition: all 0.4s ease-in-out;
   opacity: 0.5;
-  text-transform: capitalize;
 }
 .editor-styles-wrapper input[type=text]:focus,
 .editor-styles-wrapper input[type=number]:focus,
@@ -6062,6 +6061,7 @@ Mixin for transition
   background-repeat: no-repeat;
   background-position: center right 29px;
   background-size: 10px;
+  text-transform: capitalize;
 }
 .editor-styles-wrapper .ginput_container_multiselect select {
   min-height: 77px;
