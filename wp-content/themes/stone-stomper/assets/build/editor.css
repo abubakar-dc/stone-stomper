@@ -3106,12 +3106,12 @@ Mixin for transition
   padding: 30px 0 40px;
 }
 .editor-styles-wrapper .copy-right {
-  width: 66%;
+  width: 47%;
   color: var(--ss_copyright_color);
   font-size: 14px;
 }
 .editor-styles-wrapper .legal-nav {
-  width: 40%;
+  width: 50%;
 }
 .editor-styles-wrapper .legal-nav ul {
   margin: 0;
@@ -4103,6 +4103,14 @@ Mixin for transition
   to {
     transform: translate(-50%, -50%) rotate(360deg);
   }
+}
+.editor-styles-wrapper .cross-sells-product .wp-block-button.wc-block-components-product-button a.wp-block-button__link.wp-element-button {
+  padding: 8px 14px !important;
+  font-size: 14px !important;
+  border: 1px solid transparent;
+}
+.editor-styles-wrapper .cross-sells-product .wp-block-button.wc-block-components-product-button a.wp-block-button__link.wp-element-button:hover {
+  border-color: var(--ss_link_color_hover);
 }
 .editor-styles-wrapper .post-box .post-box-img a {
   height: 100%;
