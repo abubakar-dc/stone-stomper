@@ -5137,6 +5137,9 @@ body #daextlwcnf-cookie-settings-button-2:hover {
 .single-product bdi {
   color: var(--ss_black_2);
 }
+.single-product div.product form.cart .variations th label {
+  text-transform: capitalize;
+}
 .single-product form.cart .quantity {
   margin-left: 5px !important;
 }
@@ -5161,6 +5164,12 @@ body #daextlwcnf-cookie-settings-button-2:hover {
 .single-product form.cart .gform-text-input-reset {
   height: 50px;
   padding: 0;
+}
+.single-product form.cart .variations td.value select {
+  padding-right: 20px;
+}
+.single-product form.cart .variations td.value a.reset_variations {
+  color: gray;
 }
 .single-product form.cart input[type=submit],
 .single-product form.cart button,

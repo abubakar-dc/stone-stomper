@@ -3927,6 +3927,9 @@ Mixin for transition
 .editor-styles-wrapper .single-product bdi {
   color: var(--ss_black_2);
 }
+.editor-styles-wrapper .single-product div.product form.cart .variations th label {
+  text-transform: capitalize;
+}
 .editor-styles-wrapper .single-product form.cart .quantity {
   margin-left: 5px !important;
 }
@@ -3951,6 +3954,12 @@ Mixin for transition
 .editor-styles-wrapper .single-product form.cart .gform-text-input-reset {
   height: 50px;
   padding: 0;
+}
+.editor-styles-wrapper .single-product form.cart .variations td.value select {
+  padding-right: 20px;
+}
+.editor-styles-wrapper .single-product form.cart .variations td.value a.reset_variations {
+  color: gray;
 }
 .editor-styles-wrapper .single-product form.cart input[type=submit],
 .editor-styles-wrapper .single-product form.cart button,

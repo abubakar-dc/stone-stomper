@@ -910,6 +910,15 @@ function show_towing_svg_in_editor( $post ) {
 		// $customer_phone   = $order->get_billing_phone();
 		$customer_email   = $order->get_billing_email();
 		$delivery_address = $order->get_formatted_shipping_address();
+		$first_name   = $order->get_shipping_first_name();
+		$last_name    = $order->get_shipping_last_name();
+		$company      = $order->get_shipping_company();
+		$address_1    = $order->get_shipping_address_1();
+		$address_2    = $order->get_shipping_address_2();
+		$city         = $order->get_shipping_city();
+		$state        = $order->get_shipping_state();
+		$postcode     = $order->get_shipping_postcode();
+		$country      = $order->get_shipping_country();
 		$delivery_cost    = $order->get_shipping_total();
 		$order_total      = $order->get_total();
 		$delivery_instructions = $order->get_customer_note(); // 🟢 Add this line
@@ -1606,7 +1615,26 @@ function generate_customer_order_word_file($post_id) {
     $customer_name    = $order->get_formatted_billing_full_name();
     $customer_phone   = get_post_meta($post_id, 'customer_phone', true);
     $customer_email   = $order->get_billing_email();
-    $delivery_address = $order->get_formatted_shipping_address();
+	$first_name   = $order->get_shipping_first_name();
+	$last_name    = $order->get_shipping_last_name();
+	$company      = $order->get_shipping_company();
+    $address_1    = $order->get_shipping_address_1();
+	$address_2    = $order->get_shipping_address_2();
+	$city         = $order->get_shipping_city();
+	$state        = $order->get_shipping_state();
+	$postcode     = $order->get_shipping_postcode();
+	$country      = $order->get_shipping_country();
+	// Combine all parts with a space, ignoring empty values
+	$delivery_address = implode(' ', array_filter([
+		$first_name . ' ' . $last_name,
+		$company,
+		$address_1,
+		$address_2,
+		$city,
+		$state,
+		$postcode,
+		$country
+	]));
     $delivery_cost    = $order->get_shipping_total();
     $order_total      = $order->get_total();
     $delivery_instructions = $order->get_customer_note();

@@ -374,7 +374,6 @@ button[disabled]:hover {
 	}
 
 	ul {
-
 		display: flex;
 		flex-wrap: wrap;
 		gap: 20px;
@@ -453,7 +452,6 @@ button[disabled]:hover {
 	}
 
 	.select-dropdown__button {
-
 		&:focus,
 		&:focus-visible {
 			outline-color: black !important;
@@ -763,6 +761,12 @@ body {
 		color: var(--ss_black_2);
 	}
 
+	div.product form.cart .variations th {
+		label {
+			text-transform: capitalize;
+		}
+	}
+
 	form.cart {
 		.quantity {
 			margin-right: 5px !important;
@@ -791,6 +795,16 @@ body {
 			padding: 0;
 		}
 
+		.variations td.value {
+			select {
+				padding-left: 20px;
+			}
+
+			a.reset_variations {
+				color: gray;
+			}
+		}
+
 		input[type="submit"],
 		button,
 		input[type="button"],
@@ -809,7 +823,6 @@ body {
 	}
 
 	.product_meta {
-
 		a,
 		a:visited {
 			color: var(--ss_black_2) !important;
@@ -940,9 +953,6 @@ body {
 	}
 }
 
-
-
-
 .vehicle-model-group,
 .vehicle-year-group,
 .van-model-group {
@@ -975,12 +985,10 @@ body {
 	}
 }
 
-
 // .field.van-model-group {
 // 	display: flex;
 // 	column-gap: 10px;
 // }
-
 
 // .woocommerce ul.products li.product {
 // 	position: relative;
