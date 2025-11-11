@@ -1639,14 +1639,12 @@ function generate_customer_order_word_file($post_id) {
 
 	$final_delivery_address = "Same As Home Address";
 
-	if($final_details && $final_details['final_delivery'] === 'move' ){
+	if($final_details && $final_details['final_delivery'] === 'move' ) {
 		$final_delivery_address = "I am on the Move";
 	}
 
-
     $proposed_date = get_post_meta($post_id, 'sts_var_proposed_date_of_delivery', true);
     $proposed_date = $proposed_date ? date('d-F-Y', strtotime($proposed_date)) : '-';
-
 
     // Start Section
     $section = $phpWord->addSection();
@@ -1934,6 +1932,9 @@ function generate_customer_order_word_file($post_id) {
 
     return $file_path;
 }
+
+
+
 
 function download_customer_word_callback() {
     $post_id = intval($_GET['post_id'] ?? 0);
