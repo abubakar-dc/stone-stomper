@@ -314,8 +314,8 @@ add_action( 'woocommerce_new_order', function( $order_id ) {
 
 
 	if ( empty($data['is_stone_stomper_order']) || $data['is_stone_stomper_order'] !== 'yes' ) {
-    return;
-}
+		return;
+	}
 
 
 	error_log(print_r($data, true));
@@ -380,11 +380,11 @@ add_action( 'woocommerce_new_order', function( $order_id ) {
 
 	if ( is_wp_error( $post_id ) ) return;
 	$customer_details = array(
-    'name' => $cust_name, // or address
-    'delivery_address' => $cust_email, // or address
-);
+		'name' => $cust_name, // or address
+		'delivery_address' => $cust_email, // or address
+	);
 
-error_log(print_r($cust_name,true));
+	error_log(print_r($cust_name,true));
 	// Link to order + basic fields
 	update_post_meta( $post_id, 'order_id', $order_id );
 	update_post_meta( $post_id, 'name', $cust_name );
@@ -855,18 +855,48 @@ function get_towing_diagram_svg_png($post_id) {
     return false;
 }
 
+// function svg_to_png_temp($svg_content) {
+//     $tmp_png = tempnam(sys_get_temp_dir(), 'diagram_') . '.png';
+//     $imagick = new \Imagick();
+//     $imagick->setBackgroundColor(new \ImagickPixel('white')); // white background
+//     $imagick->readImageBlob($svg_content);
+//     $imagick->setImageFormat("png32"); // 32-bit PNG preserves transparency
+// 	$imagick->trimImage(0);
+// 	$imagick->setImagePage(0, 0, 0, 0); // reset canvas after trimming
+//     $imagick->writeImage($tmp_png);
+//     $imagick->clear();
+//     $imagick->destroy();
+
+//     return $tmp_png;
+// }
+
 function svg_to_png_temp($svg_content) {
     $tmp_png = tempnam(sys_get_temp_dir(), 'diagram_') . '.png';
+
     $imagick = new \Imagick();
-    $imagick->setBackgroundColor(new \ImagickPixel('white')); // white background
+    $imagick->setBackgroundColor(new \ImagickPixel('white'));
+
+    // very important for correct bounding box
+    $imagick->setResolution(300, 300);
+
     $imagick->readImageBlob($svg_content);
-    $imagick->setImageFormat("png32"); // 32-bit PNG preserves transparency
+
+    // flatten white instead of transparency to avoid black areas
+    $imagick->setImageAlphaChannel(\Imagick::ALPHACHANNEL_REMOVE);
+
+    $imagick->setImageFormat("png");
+
+    // trim extra whitespace
+    $imagick->trimImage(0);
+    $imagick->setImagePage(0, 0, 0, 0);
+
     $imagick->writeImage($tmp_png);
     $imagick->clear();
     $imagick->destroy();
 
     return $tmp_png;
 }
+
 
 function show_towing_svg_in_editor( $post ) {
     // Get all meta data
@@ -1587,7 +1617,7 @@ function generate_customer_order_word_file($post_id) {
     $caravan_model           = get_post_meta($post_id, 'caravan_model', true);
     $vehicle_make           = get_post_meta($post_id, 'vehicle_make', true);
     $vehicle_model           = get_post_meta($post_id, 'vehicle_model', true);
-    $vehicle_year           = get_post_meta($post_id, 'vehicle_year', true);
+    $vehicle_year           = get_post_meta($post_id, 'year_of_manufacture', true);
     $caravan_width_mm       = get_post_meta($post_id, 'caravan_width_mm', true);
     $caravan_length_mm      = get_post_meta($post_id, 'caravan_length_mm', true);
     $bar_width_mm           = get_post_meta($post_id, 'bar_width_mm', true);
@@ -1796,13 +1826,13 @@ function generate_customer_order_word_file($post_id) {
 		$diagram_png = svg_to_png_temp($svg);
 		if (file_exists($diagram_png)) {
 			$section->addImage($diagram_png, [
-				'width' => 500,
-				 'marginLeft' => -2000 // adjust this value to move left
+				'width' => 400,
+				'alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER,
 			]);
 		}
 	}
 
-    $section->addTextBreak(0.5);
+    $section->addTextBreak(2);
 
 	$section->addText("ORDER DETAILS:", ['bold' => true, 'size' => 10]);
 

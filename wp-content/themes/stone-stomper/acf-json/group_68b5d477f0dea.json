@@ -4,7 +4,7 @@
     "fields": [
         {
             "key": "field_68befb56274c2",
-            "label": "SS Measurement (Width * Height mm)",
+            "label": "SS Measurement (Width * Length mm)",
             "name": "sts_var_caravan_ss_mesurements",
             "aria-label": "",
             "type": "group",
@@ -41,7 +41,7 @@
                 },
                 {
                     "key": "field_68befb56274c4",
-                    "label": "Height",
+                    "label": "Length",
                     "name": "height",
                     "aria-label": "",
                     "type": "text",
@@ -64,7 +64,7 @@
         },
         {
             "key": "field_68befbc7274c6",
-            "label": "Factory Stoneguard (Width * Height mm)",
+            "label": "Factory Stoneguard (Width * Length mm)",
             "name": "sts_var_caravan_factory",
             "aria-label": "",
             "type": "group",
@@ -101,7 +101,7 @@
                 },
                 {
                     "key": "field_68befbc7274c8",
-                    "label": "Height",
+                    "label": "Length",
                     "name": "height",
                     "aria-label": "",
                     "type": "text",
@@ -124,7 +124,7 @@
         },
         {
             "key": "field_68befac890dcf",
-            "label": "Vinyl Insert (Width * Height mm)",
+            "label": "Vinyl Insert (Width * Length mm)",
             "name": "sts_var_caravan_vinyl_insert",
             "aria-label": "",
             "type": "group",
@@ -161,7 +161,7 @@
                 },
                 {
                     "key": "field_68bef9e890dce",
-                    "label": "Vinyl Insert (Height mm)",
+                    "label": "Vinyl Insert (Length mm)",
                     "name": "height",
                     "aria-label": "",
                     "type": "text",
@@ -184,7 +184,7 @@
         },
         {
             "key": "field_68c03c3a07fd8",
-            "label": "Toolbox (Width * Height mm)",
+            "label": "Toolbox (Width * Length mm)",
             "name": "sts_var_caravan_toolbox",
             "aria-label": "",
             "type": "group",
@@ -221,7 +221,7 @@
                 },
                 {
                     "key": "field_68c03c3a07fda",
-                    "label": "Toolbox (Height mm)",
+                    "label": "Toolbox (Length mm)",
                     "name": "height",
                     "aria-label": "",
                     "type": "text",
@@ -375,5 +375,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1761482966
+    "modified": 1762851740
 }
