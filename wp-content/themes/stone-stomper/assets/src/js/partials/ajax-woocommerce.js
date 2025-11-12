@@ -9,6 +9,7 @@ jQuery( document ).ready( function() {
 		mainProductId.push( productId );
 		UpdateSummary();
 	} );
+
 	jQuery( '.acc-upsell' ).on( 'change', function() {
 		upsellsProductId = [];
 		jQuery( '.acc-upsell:checked' ).each( function() {
@@ -28,51 +29,75 @@ jQuery( document ).ready( function() {
 	} );
 
 	function AddToCart() {
-		const ids = jQuery.merge( [], mainProductId ); // Start with a copy of the first array
-		jQuery.merge( ids, upsellsProductId ); // Add the second array into it
+	const ids = jQuery.merge([], mainProductId);
+	jQuery.merge(ids, upsellsProductId);
 
-		jQuery.ajax( {
-			type: 'POST',
-			url: localVars.ajax_url,
-			data: {
-				action: 'woocommerce_ajax_add_to_cart',
-				ids, // Serialize array
-				quantity: 1,
-				shipping: 'standard', // Replace with actual value
-			},
-			success( response ) {
-				if ( response?.success && response?.data?.added ) {
-					window.location.href = response.data.redirect || '/cart';
-				} else {
-					alert( 'Could not add to cart. Please try again.' );
-				}
-			},
-			error( xhr ) {
-				alert( 'Something went wrong. Please try again.' );
-			},
-		} );
-	}
+	const barwidth = jQuery('#barwidth').val();
+	const aFrameLength = jQuery('#a_frame_length').val();
+
+	jQuery.ajax({
+		type: 'POST',
+		url: localVars.ajax_url,
+		data: {
+			action: 'woocommerce_ajax_add_to_cart',
+			ids,
+			quantity: 1,
+			barwidth: barwidth,
+			a_frame_length: aFrameLength,
+			shipping: 'standard',
+		},
+		success(response) {
+			if (response?.success && response?.data?.added) {
+				window.location.href = response.data.redirect || '/cart';
+			} else {
+				alert('Could not add to cart. Please try again.');
+			}
+		},
+		error() {
+			alert('Something went wrong. Please try again.');
+		},
+	});
+}
+
 
 	function UpdateSummary() {
-		ids = jQuery.merge( [], mainProductId ); // Start with a copy of the first array
-		jQuery.merge( ids, upsellsProductId ); // Add the second array into it
+	  const barwidth = jQuery('#barwidth').val();
+	  const aFrame = jQuery('#a_frame_length').val();
+	  console.log('➡️ UpdateSummary triggered', { ids, barwidth, aFrame });
 
-		jQuery.ajax( {
-			type: 'POST',
-			url: localVars.ajax_url,
-			data: {
-				action: 'woocommerce_ajax_update_summary',
-				ids, // Serialize array
-				quantity: 1,
-				shipping: 'standard', // Replace with actual value
-			},
-			success( response ) {
-				if ( response.data.html ) {
-					jQuery( '#order_summary' ).html( response.data.html );
-				} else {
-					jQuery( '#order_summary' ).html( response.data.html );
-				}
-			},
-		} );
+	  ids = jQuery.merge([], mainProductId);
+	  jQuery.merge(ids, upsellsProductId);
+
+	  jQuery.ajax({
+	    type: 'POST',
+	    url: localVars.ajax_url,
+	    data: {
+	      action: 'woocommerce_ajax_update_summary',
+	      ids,
+	      quantity: 1,
+	      shipping: 'standard',
+	      barwidth: barwidth,
+	      a_frame_length: aFrame,
+	    },
+	    success(response) {
+	      console.log('✅ UpdateSummary Response:', response);
+	      if (response?.data?.html) {
+	        jQuery('#order_summary').html(response.data.html);
+	      } else {
+	        console.warn('⚠️ No HTML returned');
+	      }
+	    },
+	    error(xhr) {
+	      console.error('❌ UpdateSummary failed:', xhr.responseText);
+	    },
+	  });
 	}
+
+	// 🔹 Trigger live update on measurement input changes
+	jQuery(document).on('input change', '#barwidth, #a_frame_length', function() {
+		console.log("update input values");
+		UpdateSummary(); // Recalculate instantly on any change
+	});
+
+
 } );

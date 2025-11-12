@@ -8129,3 +8129,14 @@ body.post-type-post .editor-styles-wrapper > div {
   padding-block: 0;
   font-size: 16px;
 }
+
+.woocommerce-admin-page table.wp-list-table .column-name {
+  width: 15%;
+}
+.woocommerce-admin-page table.wp-list-table .column-sku {
+  width: 6%;
+}
+.woocommerce-admin-page table.wp-list-table .column-product_cat,
+.woocommerce-admin-page table.wp-list-table .column-product_tag {
+  width: 7% !important;
+}

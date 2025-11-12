@@ -655,17 +655,17 @@ jQuery( function() {
 
 // Form
 
-jQuery( document ).ready( function() {
-	jQuery( '.gfield-choice-input' ).on( 'change', function() {
-		jQuery( '.toolbox-support, .factory_stoneguard' ).hide().find( 'input[type="text"]' ).val( '' );
-		if ( jQuery( this ).is( '#toolbox' ) ) {
-			jQuery( '.toolbox-support' ).show();
-		}
-		if ( jQuery( this ).is( '#factory_stoneguard' ) ) {
-			jQuery( '.factory_stoneguard' ).show();
-		}
-	} );
-} );
+// jQuery( document ).ready( function() {
+// 	jQuery( '.gfield-choice-input' ).on( 'change', function() {
+// 		jQuery( '.toolbox-support, .factory_stoneguard' ).hide().find( 'input[type="text"]' ).val( '' );
+// 		if ( jQuery( this ).is( '#toolbox' ) ) {
+// 			jQuery( '.toolbox-support' ).show();
+// 		}
+// 		if ( jQuery( this ).is( '#factory_stoneguard' ) ) {
+// 			jQuery( '.factory_stoneguard' ).show();
+// 		}
+// 	} );
+// } );
 
 jQuery( document ).ready( function() {
 	jQuery( '.account-icon' ).each( function() {

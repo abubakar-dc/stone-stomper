@@ -130,6 +130,19 @@ add_filter('woocommerce_get_item_data', function($item_data, $cart_item) {
         }
     }
 
+	if (!empty($cart_item['barwidth_mm'])) {
+        $item_data[] = [
+            'key'   => __('Towing Vehicle Barwidth', 'stone-stomper'),
+            'value' => esc_html($cart_item['barwidth_mm']) . ' mm',
+        ];
+    }
+    if (!empty($cart_item['a_frame_length_mm'])) {
+        $item_data[] = [
+            'key'   => __('A-Frame Length', 'stone-stomper'),
+            'value' => esc_html($cart_item['a_frame_length_mm']) . ' mm',
+        ];
+    }
+
     return $item_data;
 }, 10, 2);
 
@@ -143,6 +156,15 @@ add_filter('woocommerce_add_cart_item_data', function($cart_item_data, $product_
     if (!empty($_POST['front_attachment_ids'])) {
         $cart_item_data['front_attachment_ids'] = sanitize_text_field($_POST['front_attachment_ids']);
     }
+
+	// --- new measurement fields ---
+    if (!empty($_POST['barwidth'])) {
+        $cart_item_data['barwidth_mm'] = floatval($_POST['barwidth']);
+    }
+    if (!empty($_POST['a_frame_length'])) {
+        $cart_item_data['a_frame_length_mm'] = floatval($_POST['a_frame_length']);
+    }
+
     return $cart_item_data;
 }, 10, 3);
 
@@ -183,6 +205,14 @@ add_action('woocommerce_checkout_create_order_line_item', function($item, $cart_
                 $item->add_meta_data($label, implode(',', $ids), true);
             }
         }
+    }
+
+	 // Add measurements to order item meta
+    if (!empty($values['barwidth_mm'])) {
+        $item->add_meta_data('Towing Vehicle Barwidth (mm)', $values['barwidth_mm']);
+    }
+    if (!empty($values['a_frame_length_mm'])) {
+        $item->add_meta_data('A-Frame Length (mm)', $values['a_frame_length_mm']);
     }
 }, 10, 4);
 
@@ -2160,5 +2190,31 @@ add_action('init', function() {
         $order = wc_get_order( 1215 ); // <-- yahan apna order ID likho
         var_dump( $order->get_meta('_sts_order') );
         exit;
+    }
+});
+
+
+
+add_action('woocommerce_cart_calculate_fees', function($cart) {
+    if (is_admin() && !defined('DOING_AJAX')) return;
+
+    // Loop through all cart items
+    foreach ($cart->get_cart() as $cart_item) {
+        $barwidth       = $cart_item['barwidth_mm'] ?? 0;
+        $a_frame_length = $cart_item['a_frame_length_mm'] ?? 0;
+
+        // --- Bar Width Extra Charges ---
+        if ($barwidth >= 1900 && $barwidth <= 2100) {
+            $cart->add_fee(__('Extra Bar Width (1900–2100mm)', 'stone-stomper'), 35);
+        } elseif ($barwidth > 2100) {
+            $cart->add_fee(__('Extra Bar Width (>2100mm)', 'stone-stomper'), 100);
+        }
+
+        // --- A-Frame Length Extra Charges ---
+        if ($a_frame_length >= 1800 && $a_frame_length <= 2300) {
+            $cart->add_fee(__('Extra Mesh Length (1800–2300mm)', 'stone-stomper'), 35);
+        } elseif ($a_frame_length > 2300) {
+            $cart->add_fee(__('Extra Mesh Length (>2300mm)', 'stone-stomper'), 100);
+        }
     }
 });
