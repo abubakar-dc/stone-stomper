@@ -434,6 +434,16 @@ add_action( 'woocommerce_new_order', function( $order_id ) {
 	update_post_meta( $post_id, 'caravan_width_mm', $caravan_width_mm );
 	update_post_meta( $post_id, 'caravan_length_mm', $a_frame_length_mm );
 	update_post_meta( $post_id, 'support_pockets', $support_pockets );
+
+	// Check condition and update Final delivery
+	if ( strtolower( $final_delivery ) === 'move' ) {
+		update_post_meta( $post_id, 'sts_var_proposed_on_the_move', 'Yes' );
+	} elseif ( strtolower( $final_delivery ) === 'same' ) {
+		update_post_meta( $post_id, 'sts_var_proposed_on_the_move', 'No' );
+	} else {
+		// Optional: if it's neither 'move' nor 'same', you can clear or skip
+		update_post_meta( $post_id, 'sts_var_proposed_on_the_move', '' );
+	}
 	// Support pockets - save in ACF-compatible format (1/0)
 	// $support_pockets_raw = $data['support_pockets'] ?? 'no';
 	// $support_pockets     = ( strtolower( $support_pockets_raw ) === 'yes' || sts_bool( $support_pockets_raw ) ) ? 1 : 0;
@@ -442,13 +452,29 @@ add_action( 'woocommerce_new_order', function( $order_id ) {
 	// $support_pocket = isset( $data['support_pocket'] ) && $data['support_pocket'] === 'yes' ? 'yes' : 'no';
 	// update_post_meta( $post_id, 'support_pocket', $support_pocket );
 
+	// Support pockets (always saved as true/false)
 
-	update_post_meta( $post_id, 'factory_stoneguard_width', $stoneguard_length_mm );
-	update_post_meta( $post_id, 'factory_stoneguard_height', $stoneguard_width_mm );
+
+	// --- Toolbox ---
+	if ( isset( $data['toolbox'] ) && sts_bool( $data['toolbox'] ) ) {
+		update_post_meta( $post_id, 'toolbox_width_mm', $toolbox_width_mm );
+		update_post_meta( $post_id, 'toolbox_height_mm', $toolbox_length_mm );
+	}
+
+	// --- Factory Stoneguard ---
+	if ( isset( $data['factory_stoneguard'] ) && sts_bool( $data['factory_stoneguard'] ) ) {
+		update_post_meta( $post_id, 'factory_stoneguard_width', $stoneguard_length_mm );
+		update_post_meta( $post_id, 'factory_stoneguard_height', $stoneguard_width_mm );
+	}
+
+
+
+	// update_post_meta( $post_id, 'factory_stoneguard_width', $stoneguard_length_mm );
+	// update_post_meta( $post_id, 'factory_stoneguard_height', $stoneguard_width_mm );
 	update_post_meta( $post_id, 'vinyl_insert_width_mm', $vinyl_width_mm );
 	update_post_meta( $post_id, 'vinyl_insert_height_mm', $vinyl_length_mm );
-	update_post_meta( $post_id, 'toolbox_width_mm', $toolbox_width_mm );
-	update_post_meta( $post_id, 'toolbox_height_mm', $toolbox_length_mm );
+	// update_post_meta( $post_id, 'toolbox_width_mm', $toolbox_width_mm );
+	// update_post_meta( $post_id, 'toolbox_height_mm', $toolbox_length_mm );
 
 
 	// update_post_meta( $post_id, 'hitch_ids', $hitch_ids );

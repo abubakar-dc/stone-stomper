@@ -170,15 +170,22 @@ jQuery( function() {
 					}
 					// 🟢 Handle radio buttons, including support options
 					else if ( t === 'radio' ) {
-					// Detect if it's one of the Stone Stomper support options
-						if ( el.closest( '.stone-stomper-supports' ).length ) {
-							const val = el.val(); // e.g. support_pockets, toolbox, factory-stoneguard
-							// set true only for the selected one, false for others
-							data.support_pockets = ( val === 'support_pockets' && el.is( ':checked' ) );
-							data.toolbox = ( val === 'toolbox' && el.is( ':checked' ) );
-							data.factory_stoneguard = ( val === 'factory-stoneguard' && el.is( ':checked' ) );
-						} else if ( this.checked ) {
-							data[ name ] = el.val();
+						if ( el.closest('.stone-stomper-supports').length ) {
+							// Initialize only once per collect()
+							if (typeof data.support_pockets === 'undefined') {
+								data.support_pockets = false;
+								data.toolbox = false;
+								data.factory_stoneguard = false;
+							}
+
+							if (el.is(':checked')) {
+								const val = el.val(); // e.g. support_pockets, toolbox, factory-stoneguard
+								if (val === 'support_pockets') data.support_pockets = true;
+								if (val === 'toolbox') data.toolbox = true;
+								if (val === 'factory-stoneguard') data.factory_stoneguard = true;
+							}
+						} else if (this.checked) {
+							data[name] = el.val();
 						}
 					} else {
 						data[ name ] = el.val();
@@ -199,6 +206,7 @@ jQuery( function() {
 
 		// 🟢 Restore support radio selections (true/false) on reload
 		const savedData = loadData();
+		console.log(savedData);
 		if ( savedData ) {
 		// Support Pockets Radios
 			if ( savedData.support_pockets === true ) {

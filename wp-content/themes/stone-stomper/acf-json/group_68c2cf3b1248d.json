@@ -464,6 +464,27 @@
             "append": ""
         },
         {
+            "key": "field_69152f798cf19",
+            "label": "Fittings",
+            "name": "sts_var_caravan_fittings",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_68ecb6b41614c",
             "label": "Bar Option",
             "name": "sts_var_caravan_bar_option",
@@ -608,6 +629,27 @@
             "first_day": 1,
             "default_to_current_date": 0,
             "allow_in_bindings": 0
+        },
+        {
+            "key": "field_69152b63bb107",
+            "label": "I Am On The Move",
+            "name": "sts_var_proposed_on_the_move",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         }
     ],
     "location": [
@@ -628,5 +670,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1761562701
+    "modified": 1762996124
 }
