@@ -21,7 +21,6 @@ $sts_var_error_text             = $sts_option_fields['sts_var_error_text'] ?? nu
 $sts_var_error_menu             = $sts_option_fields['sts_var_error_menu'] ?? null;
 $sts_var_error_menu_bottom_text = $sts_option_fields['sts_var_error_menu_bottom_text'] ?? null;
 $sts_var_error_search           = $sts_option_fields['sts_var_error_search'] ?? false;
-
 ?>
 <section id="hero-section" class="hero-section hero-section-default">
 	<!-- Hero Start -->

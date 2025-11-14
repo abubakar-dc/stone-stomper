@@ -320,6 +320,9 @@
 }
 
 @media only screen and (max-width: 747px) {
+	.social-icons{
+justify-content: center;
+}
 	.woocommerce ul.products li.product .button {
 		font-size: 12px !important;
 	}
@@ -508,7 +511,16 @@
 	.footer-bottom {
 		text-align: center;
 	}
-
+	.form-image-slider {
+		padding-bottom: 0;
+	}
+	.vehicle-images .image-caption-area,
+	.example-photographs .image-caption-area {
+		bottom: 47px;
+	}
+	.form-section-left.hide-on-mobile {
+		display: none;
+	}
 	#final-summary .form-section-right {
 		margin-bottom: 57px;
 	}
@@ -516,7 +528,11 @@
 	.image-caption {
 		width: 100%;
 	}
-
+	.image-caption-area {
+		p {
+			margin: 0 !important;
+		}
+	}
 	.thumb p {
 		top: -46px;
 		line-height: 1.7;
@@ -694,32 +710,32 @@
 }
 
 @media only screen and (max-width: 450px) {
-		.wp-block-buttons {
-			display: flex;
-			flex-direction: column;
-			gap: 10px;
+	.wp-block-buttons {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
 
-			.wp-block-button {
-				width: 100%;
-			}
-
-			.wp-block-button__link {
-				padding: 18px 8px;
-				font-size: 14px;
-			}
+		.wp-block-button {
+			width: 100%;
 		}
 
-		.gfield {
-			margin-bottom: 16px;
+		.wp-block-button__link {
+			padding: 18px 8px;
+			font-size: 14px;
 		}
-		input,
-		select {
-			height: 58px;
-		}
+	}
 
-		#gform_submit_button_1 {
-			width: 100% !important;
-		}
+	.gfield {
+		margin-bottom: 16px;
+	}
+	input,
+	select {
+		height: 58px;
+	}
+
+	#gform_submit_button_1 {
+		width: 100% !important;
+	}
 	.woocommerce-shop {
 		.woocommerce-result-count {
 			margin-right: 20px;

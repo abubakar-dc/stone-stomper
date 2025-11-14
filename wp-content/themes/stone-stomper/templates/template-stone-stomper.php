@@ -43,7 +43,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 	$sts_var_section_bar_options_description         = $sts_var_section_bar_options['description'] ?? null;
 	$sts_var_section_bar_options_bar_options         = $sts_var_section_bar_options['bar_options'] ?? null;
 	$sts_var_section_bar_options_bar_gallery         = $sts_var_section_bar_options['bar_gallery'] ?? null;
-var_dump($sts_var_section_bar_options);
 ?>
 
 
@@ -335,7 +334,7 @@ var_dump($sts_var_section_bar_options);
 										}
 											}
 										} ?>
-										<div class="vehicle-image mobile-form-image-slider mobile-image" id="caravan-images" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
+									<div class="vehicle-image mobile-form-image-slider mobile-image" id="caravan-images" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
 										<?php
 											if($sts_var_caravan_detail_factory_stoneguard ){
 												StoneStomper::the_attachment_image($sts_var_caravan_detail_factory_stoneguard,1200 );
@@ -348,7 +347,7 @@ var_dump($sts_var_section_bar_options);
 												<?php }
 											}
 										?>
-										</div>
+									</div>
 									<div class="grid cols-2 ">
 										<div class="field">
 											<label class="req" for="van_make">Caravan Make</label>
@@ -395,7 +394,7 @@ var_dump($sts_var_section_bar_options);
 
 							<!-- Bar Option -->
 							<div id="bar-options-section" class="section-disable  order-form-section-inner d-flex form-bar-options-section justify-content-between align-items-start image-at-left">
-								<div class="form-section-left mobile-hide column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
+								<div class="form-section-left hide-on-mobile column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="form-image-slider">
 										<?php if($sts_var_section_bar_options_bar_gallery){ ?>
 											<?php foreach($sts_var_section_bar_options_bar_gallery as $sts_key => $photo){
@@ -428,7 +427,7 @@ var_dump($sts_var_section_bar_options);
 									<?php } ?>
 
 									<!-- Mobile Image -->
-									<div class="vehicle-image mobile-form-image-slider mobile-image" id="caravan-images" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
+									<div class="vehicle-image mobile-form-image-slider" id="caravan-images" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
 
 										<?php if($sts_var_section_bar_options_bar_gallery){ ?>
 											<?php foreach($sts_var_section_bar_options_bar_gallery as $sts_key => $photo){
