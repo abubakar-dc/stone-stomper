@@ -378,7 +378,6 @@ public function fetch_form_data() {
 
 		// ✅ Clean & sort
 		$years = array_unique(array_filter($years));
-		sort($years);
 
 		foreach ( $years as $y ) {
 			$year .= '<option value="' . esc_attr($y) . '">' . esc_html($y) . '</option>';
@@ -405,7 +404,33 @@ public function fetch_form_data() {
 		$vehicleImage = '';
 	}
 
-	$barwidth = $post_id ? get_field( 'sts_var_car_barwidth', $post_id ) : '';
+	$barwidth = '';
+
+	if ( $modelPostID ) {
+
+		$models = get_field('sts_var_car_model_row', $modelPostID);
+
+		if ( $models ) {
+
+			$selected_year = isset( $_POST['selectedYear'] ) && $_POST['selectedYear'] !== ''
+    ? sanitize_text_field( wp_unslash( $_POST['selectedYear'] ) )
+    : ( isset( $_POST['yearRequested'] ) ? sanitize_text_field( wp_unslash( $_POST['yearRequested'] ) ) : '' );
+
+
+			foreach ( $models as $model ) {
+
+				// Match year
+				if ( isset($model['sts_var_car_year']) && $model['sts_var_car_year'] == $selected_year ) {
+
+					$barwidth = $model['sts_var_car_barwidth'] ?? '';
+					break;
+				}
+			}
+		}
+	}
+
+
+	// $barwidth = $post_id ? get_field( 'sts_var_car_barwidth', $post_id ) : '';
 
 	wp_send_json( [
 		'models'       => $html,
@@ -474,6 +499,7 @@ public function fetch_caravan_data() {
 			$sts_var_caravan_vinyl_insert_width = '';
 			$sts_var_caravan_vinyl_insert_height = '';
 		}
+
 		$sts_var_caravan_toolbox = get_field('sts_var_caravan_toolbox', $caravanPostID);
 		if($sts_var_caravan_toolbox ){
 			$sts_var_caravan_toolbox_width = $sts_var_caravan_toolbox['width'] ?? '';
@@ -483,7 +509,8 @@ public function fetch_caravan_data() {
 			$sts_var_caravan_toolbox_height = '';
 		}
 
-
+		// Support Pocket Length
+		$sts_var_caravan_support_pocket_length = get_field('sts_var_caravan_support_pocket_length', $caravanPostID);
 
 
 		$sts_var_caravan_images = get_field('sts_var_caravan_images', $caravanPostID);
@@ -530,6 +557,7 @@ public function fetch_caravan_data() {
 				'stoneguard_height'  => $sts_var_caravan_factory_height,
 				'toolbox_width'  => $sts_var_caravan_toolbox_width,
 				'toolbox_height'  => $sts_var_caravan_toolbox_height,
+				'support_pocket_length'  => $sts_var_caravan_support_pocket_length,
 				'vinyl_insert_width'  => $sts_var_caravan_vinyl_insert_width,
 				'vinyl_insert_height'  => $sts_var_caravan_vinyl_insert_height,
 				'stoneguard_image'  => $stoneguard_image,
@@ -540,7 +568,5 @@ public function fetch_caravan_data() {
 
 		wp_die();
 		}
-
-
 }
 new WP_Theme_Ajax();

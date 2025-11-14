@@ -43,7 +43,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 	$sts_var_section_bar_options_description         = $sts_var_section_bar_options['description'] ?? null;
 	$sts_var_section_bar_options_bar_options         = $sts_var_section_bar_options['bar_options'] ?? null;
 	$sts_var_section_bar_options_bar_gallery         = $sts_var_section_bar_options['bar_gallery'] ?? null;
-var_dump($sts_var_section_bar_options);
+
 ?>
 
 
@@ -688,6 +688,14 @@ var_dump($sts_var_section_bar_options);
 												<div class="gchoice stone-stomper-supports">
 													<input class="gfield-choice-input" name="input_1.3" type="radio" value="support_pockets" id="support_pockets">
 													<label for="support_pockets" id="label_4_1_3">Support Pockets</label>
+
+														<div class="support_pockets" style="display:none">
+															<div class="field extra-support">
+																<label class="req" for="support_pocket_length">Support Pocket Distance From Caravan (MM)</label>
+																<input id="support_pocket_length" name="support_pocket_length_mm" type="text"
+																	placeholder="e.g.600 mm" required />
+															</div>
+														</div>
 												</div>
 											</div>
 										</fieldset>
@@ -765,7 +773,6 @@ var_dump($sts_var_section_bar_options);
 											?>
 										</div>
 									<?php } ?>
-
 								</div>
 								<div class="form-section-right column" id="blk-final">
 									<?php if($sts_var_section_head_notices){

@@ -206,7 +206,7 @@ jQuery( function() {
 
 		// 🟢 Restore support radio selections (true/false) on reload
 		const savedData = loadData();
-		console.log(savedData);
+
 		if ( savedData ) {
 		// Support Pockets Radios
 			if ( savedData.support_pockets === true ) {

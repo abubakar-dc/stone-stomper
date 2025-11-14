@@ -317,7 +317,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "",
                 "class": "",
                 "id": ""
             },
@@ -355,6 +355,27 @@
             "toggle": 0,
             "save_custom": 0,
             "custom_choice_button_text": "Add new choice"
+        },
+        {
+            "key": "field_69171c41b6792",
+            "label": "Support Pocket Length",
+            "name": "sts_var_caravan_support_pocket_length",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         }
     ],
     "location": [
@@ -375,5 +396,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1762851740
+    "modified": 1763122570
 }

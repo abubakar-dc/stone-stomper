@@ -63,46 +63,92 @@ jQuery( document ).ready( function() {
 		}
 	} );
 
+	/* ----------------------------------------
+   ✅ ADD YEAR CHANGE LISTENER RIGHT HERE
+---------------------------------------- */
+let selectedYear = '';
+jQuery('#veh_year').on('change', function (e) {
+    if (e.originalEvent) {
+
+        selectedYear = jQuery(this).val(); // store selected year
+		console.log(selectedYear);
+        yearRequested = false;             // since user manually selected a year
+
+        jQuery('.loader-container').show();
+
+        fetchFormData(); // fetch based on year
+    }
+});
+/* ---------------------------------------- */
+
 	// Getting News
 	function fetchFormData() {
-		jQuery( '.loader-container' ).show();
-		jQuery.ajax( {
-			url: localVars.ajax_url,
-			type: 'POST',
-			data: {
-				action: 'fetch_form_data',
-				nonce: localVars.nonce,
-				carMake,
-				postID,
-			},
-			success( response ) {
-				if ( response ) {
-					if ( yearRequested ) {
-						jQuery( '#veh_model' ).html( response.models );
-					}
-					if ( response.barwidth ) {
-						jQuery( '#barwidth' ).val( response.barwidth );
-					}
-					jQuery( '#veh_year' ).html( response.year );
+	    jQuery('.loader-container').show();
 
-					if ( response.support_pockets ) {
-						jQuery( '#support_pockets' ).html( response.support_pockets );
-					}
-
-					if ( response.vehicleImage ) {
-						jQuery( '#towing-vehicle-image' ).html( response.vehicleImage );
-					}
-				}
-				jQuery( '.loader-container' ).hide();
+	    jQuery.ajax({
+	        url: localVars.ajax_url,
+	        type: 'POST',
+	       data: {
+			    action: 'fetch_form_data',
+			    nonce: localVars.nonce,
+			    carMake,
+			    postID,
+			    selectedYear,   // actual selected year value ('' when none)
+			    yearRequested   // boolean that you already use to decide which UI to update
 			},
 
-			error() {
-				const htmlTag = jQuery( "<h2 class='center-align heading-5'>An error occurred while processing your request.😢</h2>" );
-				jQuery( '#news-post-container' ).html( htmlTag );
-				jQuery( '.loader-container' ).hide();
-			},
-		} );
+	      success(response) {
+		    if (response) {
+
+		        if (yearRequested) {
+		            jQuery('#veh_model').html(response.models);
+		        }
+
+		        if (response.barwidth) {
+		            jQuery('#barwidth').val(response.barwidth);
+		        }
+
+		        // Update year dropdown BUT preserve any user selection
+		        if (response.year) {
+		            // replace the options first
+		            jQuery('#veh_year').html(response.year);
+
+		            // if user already selected a year, restore it explicitly
+		            if (selectedYear) {
+		                // if the option exists, set it, otherwise clear selectedYear
+		                if ( jQuery('#veh_year option[value="' + selectedYear + '"]').length ) {
+		                    jQuery('#veh_year').val(selectedYear);
+		                } else {
+		                    // selected year no longer present in options
+		                    selectedYear = '';
+		                }
+		            }
+		        }
+
+		        // other fields...
+		        if (response.support_pockets) {
+		            jQuery('#support_pockets').html(response.support_pockets);
+		        }
+
+		        if (response.vehicleImage) {
+		            jQuery('#towing-vehicle-image').html(response.vehicleImage);
+		        }
+		    }
+
+		    jQuery('.loader-container').hide();
+		},
+
+
+	        error() {
+	            const htmlTag = jQuery("<h2 class='center-align heading-5'>An error occurred while processing your request.😢</h2>");
+	            jQuery('#news-post-container').html(htmlTag);
+	            jQuery('.loader-container').hide();
+	        },
+	    });
 	}
+
+
+
 
 	function fetchCaravanData() {
 		jQuery( '.loader-container' ).show();
@@ -117,6 +163,7 @@ jQuery( document ).ready( function() {
 			},
 			success( response ) {
 				if ( response ) {
+					console.log(response);
 					if ( caravan ) {
 						jQuery( '#van_model' ).html( response.html );
 						jQuery( '#van_model' ).append( '<option value="other">Other</option>' );
@@ -124,6 +171,7 @@ jQuery( document ).ready( function() {
 					if ( response.barheight > 1800 ) {
 						jQuery( '.extra-support' ).show();
 					}
+
 					if ( response.barwidth ) {
 						jQuery( '#vanwidth' ).val( response.barwidth ).trigger( 'change' );
 					}
@@ -143,6 +191,12 @@ jQuery( document ).ready( function() {
 					if ( response.toolbox_height ) {
 						jQuery( '#toolbox_length' ).val( response.toolbox_height ).trigger( 'change' );
 					}
+
+					// Support Pocket Length
+					if ( response.support_pocket_length ) {
+						jQuery( '#support_pocket_length' ).val( response.support_pocket_length ).trigger( 'change' );
+					}
+
 					if ( response.vinyl_insert_width ) {
 						jQuery( '#vinyl_width' ).val( response.vinyl_insert_width ).trigger( 'change' );
 					}
@@ -166,8 +220,6 @@ jQuery( document ).ready( function() {
 			},
 		} );
 	}
-
-
 
 
 } );

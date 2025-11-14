@@ -384,6 +384,7 @@ add_action( 'woocommerce_new_order', function( $order_id ) {
 	$a_frame_length_mm   = isset( $data['a_frame_length_mm'] ) ? sanitize_text_field( $data['a_frame_length_mm'] ) : '';
 	$stoneguard_length_mm = isset( $data['stoneguard_length_mm'] ) ? sanitize_text_field( $data['stoneguard_length_mm'] ) : '';
 	$stoneguard_width_mm = isset( $data['stoneguard_width_mm'] ) ? sanitize_text_field( $data['stoneguard_width_mm'] ) : '';
+	$support_pocket_length_mm = isset( $data['support_pocket_length_mm'] ) ? sanitize_text_field( $data['support_pocket_length_mm'] ) : '';
 	$vinyl_width_mm     = isset( $data['vinyl_width_mm'] ) ? sanitize_text_field( $data['vinyl_width_mm'] ) : '';
 	$vinyl_length_mm     = isset( $data['vinyl_length_mm'] ) ? sanitize_text_field( $data['vinyl_length_mm'] ) : '';
 	$support_pockets     = sts_bool( $data['support_pockets']) ? 'yes' : 'no';
@@ -471,10 +472,11 @@ add_action( 'woocommerce_new_order', function( $order_id ) {
 		update_post_meta( $post_id, 'factory_stoneguard_height', $stoneguard_width_mm );
 	}
 
+	// --- Factory Stoneguard ---
+	if ( isset( $data['support_pockets'] ) && sts_bool( $data['support_pockets'] ) ) {
+		update_post_meta( $post_id, 'support_pockets_measurement', $support_pocket_length_mm );
+	}
 
-
-	// update_post_meta( $post_id, 'factory_stoneguard_width', $stoneguard_length_mm );
-	// update_post_meta( $post_id, 'factory_stoneguard_height', $stoneguard_width_mm );
 	update_post_meta( $post_id, 'vinyl_insert_width_mm', $vinyl_width_mm );
 	update_post_meta( $post_id, 'vinyl_insert_height_mm', $vinyl_length_mm );
 	// update_post_meta( $post_id, 'toolbox_width_mm', $toolbox_width_mm );
@@ -792,6 +794,7 @@ function render_towing_diagram($post_id) {
 			<circle class="st4" cx="283.6" cy="177.82" r="5.22" fill="#ffffff" stroke="#000000"/>
 			<rect class="st4" x="390.67" y="364.08" width="438.42" height="27.06" fill="#ffffff" stroke="#000000"/>
 			<rect class="st7" x="504.04" y="315.51" width="211.2" height="195.21" fill="#ffffff" stroke="#000000"/>
+
 			<?php if($vinyl_insert_width_mm){ ?>
 				<g transform="translate(610.76,330.99)">
 					<text class="st5" fill="#fa3232" text-anchor="middle" dominant-baseline="middle" y="0">

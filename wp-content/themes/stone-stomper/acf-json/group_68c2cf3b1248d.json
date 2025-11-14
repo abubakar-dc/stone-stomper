@@ -465,7 +465,7 @@
         },
         {
             "key": "field_691673da7de9c",
-            "label": "Support Pockets Measurement",
+            "label": "Support Pocket Distance From Caravan (mm)",
             "name": "support_pockets_measurement",
             "aria-label": "",
             "type": "text",
@@ -670,5 +670,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1763079201
+    "modified": 1763123455
 }
