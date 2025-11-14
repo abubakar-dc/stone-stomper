@@ -2233,7 +2233,7 @@ add_filter('woocommerce_get_price_html', function($price_html, $product) {
 add_action('init', function() {
     if ( isset($_GET['test_sts']) ) {
         $order = wc_get_order( 1215 ); // <-- yahan apna order ID likho
-        var_dump( $order->get_meta('_sts_order') );
+        // var_dump( $order->get_meta('_sts_order') );
         exit;
     }
 });

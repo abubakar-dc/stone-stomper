@@ -47,11 +47,19 @@ $sts_var_social_profiles = $sts_option_fields['sts_var_social_profiles'] ?? null
 	<!-- Footer Start -->
 	<div class="footer-ctn">
 		<div class="wrapper">
-			<div class="footer-bottom d-flex align-items-center justify-content-between">
-				<?php if ( $sts_var_ftrop_copyright ) { ?>
-				<div class="copy-right"><?php echo esc_html( $sts_var_ftrop_copyright ); ?></div>
-				<?php } ?>
+		<div class="footer-bottom d-flex align-items-center justify-content-between">
+				<div class="footer-left">
+					<?php if ( $sts_var_ftrop_copyright ) { ?>
+						<div class="copy-right"><?php echo esc_html( $sts_var_ftrop_copyright ); ?></div>
+					<?php } ?>
+
+
+				</div>
+
 				<div class="legal-nav">
+						<div class="social-icons d-flex">
+						<?php StoneStomper::the_social_icons( $sts_var_social_profiles, false ); ?>
+					</div>
 					<?php
 						wp_nav_menu(
 							array(
@@ -59,9 +67,10 @@ $sts_var_social_profiles = $sts_option_fields['sts_var_social_profiles'] ?? null
 								'fallback_cb'    => 'StoneStomper::nav_fallback',
 							)
 						);
-						?>
+					?>
 				</div>
 			</div>
+
 		</div>
 	</div>
 	<!-- Footer End -->
