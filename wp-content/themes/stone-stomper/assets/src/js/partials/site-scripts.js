@@ -629,7 +629,7 @@ jQuery( function() {
 			.replace( /[^0-9]/g, '' );
 		const num = parseInt( val, 10 );
 
-		if ( ! isNaN( num ) && num >= 1900 ) {
+		if ( ! isNaN( num ) && num >= 1800 ) {
 			jQuery( '.ss-support-options' ).slideDown();
 		} else {
 			jQuery( '.ss-support-options' ).slideUp();

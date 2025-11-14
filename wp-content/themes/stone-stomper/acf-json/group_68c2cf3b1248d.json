@@ -452,7 +452,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "25",
                 "class": "",
                 "id": ""
             },
@@ -464,16 +464,16 @@
             "append": ""
         },
         {
-            "key": "field_69152f798cf19",
-            "label": "Fittings",
-            "name": "sts_var_caravan_fittings",
+            "key": "field_691673da7de9c",
+            "label": "Support Pockets Measurement",
+            "name": "support_pockets_measurement",
             "aria-label": "",
             "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "50",
+                "width": "25",
                 "class": "",
                 "id": ""
             },
@@ -620,7 +620,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -640,7 +640,7 @@
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
-                "width": "",
+                "width": "50",
                 "class": "",
                 "id": ""
             },
@@ -670,5 +670,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1762996124
+    "modified": 1763079201
 }

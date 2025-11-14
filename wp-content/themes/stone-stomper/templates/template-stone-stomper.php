@@ -37,6 +37,13 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 	$sts_var_measurements_image           = $sts_fields['sts_var_measurements_image'] ?? null;
 	$sts_var_measurements_image_caption   = $sts_fields['sts_var_measurements_image_caption'] ?? null;
 	$sts_var_section_head_notices         = $sts_fields['sts_var_section_head_notices'] ?? null;
+
+	$sts_var_section_bar_options         = $sts_fields['sts_var_section_bar_options'] ?? null;
+	$sts_var_section_bar_options_title         = $sts_var_section_bar_options['title'] ?? null;
+	$sts_var_section_bar_options_description         = $sts_var_section_bar_options['description'] ?? null;
+	$sts_var_section_bar_options_bar_options         = $sts_var_section_bar_options['bar_options'] ?? null;
+	$sts_var_section_bar_options_bar_gallery         = $sts_var_section_bar_options['bar_gallery'] ?? null;
+var_dump($sts_var_section_bar_options);
 ?>
 
 
@@ -386,6 +393,80 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 								</div>
 							</div>
 
+							<!-- Bar Option -->
+							<div id="bar-options-section" class="section-disable  order-form-section-inner d-flex form-bar-options-section justify-content-between align-items-start image-at-left">
+								<div class="form-section-left mobile-hide column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
+									<div class="form-image-slider">
+										<?php if($sts_var_section_bar_options_bar_gallery){ ?>
+											<?php foreach($sts_var_section_bar_options_bar_gallery as $sts_key => $photo){
+												$caption = wp_get_attachment_caption( $photo );
+												?>
+												<div class="slick-slide">
+													<div class="slider-image">
+														<?php StoneStomper::the_attachment_image($photo,1200 ); ?>
+														<?php if ( $caption ) { ?>
+															<div class="image-caption-area">
+																<div class="image-caption">
+																	<p><?php echo esc_html( $caption ); ?></p>
+																</div>
+															</div>
+														<?php } ?>
+													</div>
+												</div>
+											<?php }
+										} ?>
+									</div>
+								</div>
+								<div class="form-section-right column photographs-details" id="blk-caravan">
+
+									<!-- Section Head -->
+									<?php if ( $sts_var_section_bar_options_title ) { ?>
+										<h3><?php echo esc_html($sts_var_section_bar_options_title); ?></h3>
+									<?php }
+									if($sts_var_section_bar_options_description){ ?>
+										<p><?php echo html_entity_decode($sts_var_section_bar_options_description); ?></p>
+									<?php } ?>
+
+									<!-- Mobile Image -->
+									<div class="vehicle-image mobile-form-image-slider mobile-image" id="caravan-images" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
+
+										<?php if($sts_var_section_bar_options_bar_gallery){ ?>
+											<?php foreach($sts_var_section_bar_options_bar_gallery as $sts_key => $photo){
+												$caption = wp_get_attachment_caption( $photo );
+												?>
+												<div class="slick-slide">
+													<div class="slider-image">
+														<?php StoneStomper::the_attachment_image($photo,1200 ); ?>
+														<?php if ( $caption ) { ?>
+															<div class="image-caption-area">
+																<div class="image-caption">
+																	<p><?php echo esc_html( $caption ); ?></p>
+																</div>
+															</div>
+														<?php } ?>
+													</div>
+												</div>
+											<?php }
+										} ?>
+									</div>
+									<?php if($sts_var_section_bar_options_bar_options){ ?>
+										<div class="grid cols-2 ">
+											<div class="field">
+												<select id="bar_options" name="bar_options" required>
+
+													<option value="">Select Bar Option</option>
+													<?php foreach ( $sts_var_section_bar_options_bar_options as $option ){
+														$single_bar_option = $option['add_option'];
+														?>
+														<option value="<?php echo esc_attr( $single_bar_option ); ?>"><?php echo esc_html( $single_bar_option ); ?></option>
+													<?php } ?>
+												</select>
+											</div>
+										</div>
+									<?php } ?>
+								</div>
+							</div>
+
 							<!-- Photographs -->
 							<div id="photographs-details" class=" section-disable order-form-section-inner d-flex form-carvan-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
@@ -555,7 +636,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										<div class="field">
 											<label class="req" for="a_frame_length">A-Frame Length (mm)</label>
 											<input id="a_frame_length" name="a_frame_length_mm" type="text"
-												placeholder="e.g. 1900" required />
+												placeholder="e.g. 1800" required />
 										</div>
 
 										<fieldset class="ss-support-options" style="display:none">
