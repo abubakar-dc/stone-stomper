@@ -5535,6 +5535,10 @@ Mixin for transition
   -o-object-fit: cover;
      object-fit: cover;
   background-color: #f7f7f7;
+  max-height: 483px;
+}
+.editor-styles-wrapper .slider-image {
+  max-height: 483px;
 }
 .editor-styles-wrapper .vehicle-images {
   display: flex;
@@ -5584,6 +5588,8 @@ Mixin for transition
   position: sticky;
   top: 140px;
   margin-bottom: 20px;
+  height: -moz-max-content;
+  height: max-content;
 }
 .editor-styles-wrapper .logged-in.admin-bar .form-section-left {
   top: 162px;

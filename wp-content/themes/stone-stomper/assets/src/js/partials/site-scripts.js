@@ -227,9 +227,9 @@ jQuery( document ).ready( function() {
 				}
 				if (
 					el.is( 'select' ) &&
-                    ( value === '' ||
-                        value === '0' ||
-                        el.find( 'option:selected' ).text().trim().toLowerCase().includes( 'select' ) )
+					( value === '' ||
+						value === '0' ||
+						el.find( 'option:selected' ).text().trim().toLowerCase().includes( 'select' ) )
 				) {
 					filled = false;
 					return false;
@@ -293,7 +293,7 @@ jQuery( document ).ready( function() {
 
 		if ( val === meshOnlyProduct ) {
 			jQuery( '#bar-options-section' ).addClass( 'section-disable' );
-			jQuery( '#photographs-details, #final-measurements, #final-summary' ).removeClass( 'section-disable' );
+			jQuery( '#photographs-details, #final-measurements, #final-summary' ).addClass( 'section-disable' );
 		}
 
 		if ( val ) {
@@ -313,6 +313,8 @@ jQuery( document ).ready( function() {
 					jQuery( '#bar-options-section' ).addClass( 'section-disable' );
 					jQuery( '#photographs-details, #final-measurements, #final-summary' ).removeClass( 'section-disable' );
 					scrollToSection( '#photographs-details' );
+				} else {
+					jQuery( '#photographs-details, #final-measurements, #final-summary' ).addClass( 'section-disable' );
 				}
 				return;
 			}
@@ -629,30 +631,41 @@ jQuery( function() {
 
 	// Slider
 
-	if ( jQuery( '.form-image-slider' ).length ) {
-		jQuery( '.form-image-slider' ).each( function() {
-			const $slider = jQuery( this );
-			$slider.slick( {
-				slidesToShow: 1,
-				slidesToScroll: 1,
-				arrows: true,
-				dots: true,
-			} );
-		} );
-	}
-	if ( jQuery( window ).width() < 1004 ) {
-		if ( jQuery( '.mobile-form-image-slider' ).length ) {
-			jQuery( '.mobile-form-image-slider' ).each( function() {
-				const $slider = jQuery( this );
-				$slider.slick( {
-					slidesToShow: 1,
-					slidesToScroll: 1,
-					arrows: true,
-					dots: true,
+	jQuery( document ).ready( function() {
+		function initSlider( selector ) {
+			if ( jQuery( selector ).length ) {
+				jQuery( selector ).each( function() {
+					const $slider = jQuery( this );
+					$slider.slick( {
+						slidesToShow: 1,
+						slidesToScroll: 1,
+						adaptiveHeight: true,
+						arrows: true,
+						dots: true,
+					} );
+
+					// Recalculate height after all images are loaded
+					$slider.find( 'img' ).each( function() {
+						if ( ! this.complete ) {
+							jQuery( this ).on( 'load', function() {
+								$slider.slick( 'setPosition' );
+							} );
+						}
+					} );
+
+					// Force initial recalculation
+					$slider.slick( 'setPosition' );
 				} );
-			} );
+			}
 		}
-	}
+
+		initSlider( '.form-image-slider' );
+
+		if ( jQuery( window ).width() < 1004 ) {
+			initSlider( '.mobile-form-image-slider' );
+		}
+	} );
+
 	if ( jQuery( '.products-teaser-slider' ).length ) {
 		jQuery( '.products-teaser-slider' ).each( function() {
 			const $slider = jQuery( this );

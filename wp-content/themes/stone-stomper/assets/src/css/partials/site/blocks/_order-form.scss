@@ -5,10 +5,13 @@
 			aspect-ratio: 4 / 2.5;
 			object-fit: cover;
 			background-color: #f7f7f7;
+			max-height: 483px;
 		}
 	}
 }
-
+.slider-image{
+	max-height: 483px;
+}
 .vehicle-images {
 	display: flex;
 }
@@ -73,6 +76,7 @@
 	position: sticky;
 	top: 140px;
 	margin-bottom: 20px;
+	height: max-content;
 }
 
 .logged-in.admin-bar {
