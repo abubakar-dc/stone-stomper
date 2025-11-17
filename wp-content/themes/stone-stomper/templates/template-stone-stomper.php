@@ -334,7 +334,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										}
 											}
 										} ?>
-									<div class="vehicle-image mobile-form-image-slider mobile-image" id="caravan-images" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
+									<div class="vehicle-image  mobile-image" id="caravan-images" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
 										<?php
 											if($sts_var_caravan_detail_factory_stoneguard ){
 												StoneStomper::the_attachment_image($sts_var_caravan_detail_factory_stoneguard,1200 );

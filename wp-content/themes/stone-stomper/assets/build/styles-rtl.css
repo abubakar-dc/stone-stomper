@@ -7679,6 +7679,14 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   }
 }
 @media only screen and (max-width: 747px) {
+  .slider-image {
+    max-height: 250px;
+    box-sizing: border-box;
+    padding-bottom: 20px;
+  }
+  .slider-image img {
+    max-height: 204px;
+  }
   .social-icons {
     justify-content: center;
   }
@@ -7867,7 +7875,7 @@ body #daextlwcnf-cookie-settings-button-2:hover {
     left: 0;
   }
   .mobile-form-image-slider {
-    padding-bottom: 50px;
+    padding-bottom: 0px;
     box-sizing: border-box;
   }
   .notice-bar {
@@ -7877,10 +7885,24 @@ body #daextlwcnf-cookie-settings-button-2:hover {
     margin: 0 !important;
   }
   .vehicle-image img {
-    aspect-ratio: 382/250;
+    aspect-ratio: 382/250 !important;
+  }
+  #caravan-details .image-caption-area, #bar-options-section .image-caption-area {
+    width: -moz-max-content;
+    width: max-content;
+    margin-bottom: -30px;
+    position: relative;
+    bottom: 44px;
   }
   #vehicle-details .form-section-right p {
     margin-bottom: 30px;
+  }
+  #vehicle-details .form-section-right .image-caption-area {
+    width: -moz-max-content;
+    width: max-content;
+    margin-bottom: -30px;
+    position: relative;
+    bottom: 44px;
   }
   .mobile-image-hide {
     display: none;

@@ -320,9 +320,17 @@
 }
 
 @media only screen and (max-width: 747px) {
-	.social-icons{
-justify-content: center;
-}
+	.slider-image {
+		max-height: 250px;
+		box-sizing: border-box;
+		padding-bottom: 20px;
+		img {
+			max-height: 204px;
+		}
+	}
+	.social-icons {
+		justify-content: center;
+	}
 	.woocommerce ul.products li.product .button {
 		font-size: 12px !important;
 	}
@@ -580,7 +588,7 @@ justify-content: center;
 	}
 
 	.mobile-form-image-slider {
-		padding-bottom: 50px;
+		padding-bottom: 0px;
 		box-sizing: border-box;
 	}
 
@@ -593,15 +601,33 @@ justify-content: center;
 	}
 
 	.vehicle-image img {
-		aspect-ratio: 382 / 250;
+		aspect-ratio: 382 / 250 !important;
 	}
+// .mobile-image .image-caption-area{
+// 		margin-bottom: 44px;
 
+// }
+#caravan-details,#bar-options-section{
+				.image-caption-area {
+    width: max-content;
+    margin-bottom: -30px;
+    position: relative;
+    bottom: 44px;
+}
+}
 	#vehicle-details {
 		.form-section-right {
 			p {
 				margin-bottom: 30px;
 			}
+			.image-caption-area {
+    width: max-content;
+    margin-bottom: -30px;
+    position: relative;
+    bottom: 44px;
+}
 		}
+
 	}
 
 	.mobile-image-hide {
