@@ -6893,6 +6893,11 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   -o-object-fit: cover;
      object-fit: cover;
   background-color: #f7f7f7;
+  max-height: 483px;
+}
+
+.slider-image {
+  max-height: 483px;
 }
 
 .vehicle-images {
@@ -6949,6 +6954,8 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   position: sticky;
   top: 140px;
   margin-bottom: 20px;
+  height: -moz-max-content;
+  height: max-content;
 }
 
 .logged-in.admin-bar .form-section-left {
