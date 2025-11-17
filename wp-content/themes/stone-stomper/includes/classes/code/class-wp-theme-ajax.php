@@ -234,6 +234,7 @@ public function bst_handle_upload_order_photos() {
 	public function woocommerce_ajax_update_summary() {
 		$product_ids = $_POST['ids'] ?? [];
 		$quantity    = 1;
+		$product_type = sanitize_text_field($_POST['product_type'] ?? '');
 		$shipping    = sanitize_text_field($_POST['shipping'] ?? '');
 		$barwidth    = floatval($_POST['barwidth'] ?? 0);
 		$a_frame_len = floatval($_POST['a_frame_length'] ?? 0);
@@ -260,33 +261,36 @@ public function bst_handle_upload_order_photos() {
 			}
 		}
 
-		// 🔹 Extra Charge Logic — Exact Ranges
-		$extra_barwidth = 0;
-		$extra_meshlen  = 0;
+		// 🔹 Extra Charges for Product Type 545
+		if ($product_type === '545') {
+			// 🔹 Extra Charge Logic — Exact Ranges
+			$extra_barwidth = 0;
+			$extra_meshlen  = 0;
 
-		// Bar Width Logic
-		if ($barwidth >= 1900 && $barwidth <= 2100) {
-			$extra_barwidth = 35;
-		} elseif ($barwidth > 2100) {
-			$extra_barwidth = 100;
-		}
+			// Bar Width Logic
+			if ($barwidth >= 1900 && $barwidth <= 2100) {
+				$extra_barwidth = 35;
+			} elseif ($barwidth > 2100) {
+				$extra_barwidth = 100;
+			}
 
-		// A-Frame Length Logic
-		if ($a_frame_len >= 1800 && $a_frame_len <= 2300) {
-			$extra_meshlen = 35;
-		} elseif ($a_frame_len > 2300) {
-			$extra_meshlen = 100;
-		}
+			// A-Frame Length Logic
+			if ($a_frame_len >= 1800 && $a_frame_len <= 2300) {
+				$extra_meshlen = 35;
+			} elseif ($a_frame_len > 2300) {
+				$extra_meshlen = 100;
+			}
 
-		// 🔹 Append extra charges if applicable
-		if ($extra_barwidth > 0) {
-			$html_output .= '<div class="line"><span>Extra Bar Width</span><strong tabindex="0">$<span data-id="extra-barwidth">' . number_format($extra_barwidth, 2) . '</span></strong></div>';
-			$total_price += $extra_barwidth;
-		}
+			// 🔹 Append extra charges if applicable
+			if ($extra_barwidth > 0) {
+				$html_output .= '<div class="line"><span>Extra Bar Width</span><strong tabindex="0">$<span data-id="extra-barwidth">' . number_format($extra_barwidth, 2) . '</span></strong></div>';
+				$total_price += $extra_barwidth;
+			}
 
-		if ($extra_meshlen > 0) {
-			$html_output .= '<div class="line"><span>Extra Mesh Length</span><strong tabindex="0">$<span data-id="extra-meshlen">' . number_format($extra_meshlen, 2) . '</span></strong></div>';
-			$total_price += $extra_meshlen;
+			if ($extra_meshlen > 0) {
+				$html_output .= '<div class="line"><span>Extra Mesh Length</span><strong tabindex="0">$<span data-id="extra-meshlen">' . number_format($extra_meshlen, 2) . '</span></strong></div>';
+				$total_price += $extra_meshlen;
+			}
 		}
 
 

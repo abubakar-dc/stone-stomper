@@ -358,6 +358,12 @@ add_action( 'woocommerce_new_order', function( $order_id ) {
 	$cust_state   = isset( $data['customer_state'] )  ? sanitize_text_field( $data['customer_state'] )  : '';
 	$product_type = isset( $data['product_type'] )    ? sanitize_text_field( $data['product_type'] )    : '';
 
+	if($product_type === "712"){
+		$product_type = "Mesh Only";
+	} else {
+		$product_type = "Stone Stomper";
+	}
+
 	$vehicle_make  = isset( $data['vehicle_make'] )  ? sanitize_text_field( $data['vehicle_make'] )  : ( isset( $data['veh_make'] ) ? sanitize_text_field( $data['veh_make'] ) : '' );
 	$vehicle_model = isset( $data['vehicle_model'] ) ? sanitize_text_field( $data['vehicle_model'] ) : ( isset( $data['veh_model'] ) ? sanitize_text_field( $data['veh_model'] ) : '' );
 	$vehicle_year  = isset( $data['vehicle_year'] )  ? sanitize_text_field( $data['vehicle_year'] )  : ( isset( $data['veh_year'] ) ? sanitize_text_field( $data['veh_year'] ) : '' );
@@ -378,6 +384,7 @@ add_action( 'woocommerce_new_order', function( $order_id ) {
 
 	// Measurements
 	$measure_barwidth_mm         = isset( $data['barwidth_mm'] ) ? sanitize_text_field( $data['barwidth_mm'] ) : '';
+	$measure_meshmeasurment_mm         = isset( $data['meshmeasurment_mm'] ) ? sanitize_text_field( $data['meshmeasurment_mm'] ) : '';
 	$toolbox_width_mm    = isset( $data['toolbox_width_mm'] ) ? sanitize_text_field( $data['toolbox_width_mm'] ) : '';
 	$toolbox_length_mm   = isset( $data['toolbox_length_mm'] ) ? sanitize_text_field( $data['toolbox_length_mm'] ) : '';
 	$caravan_width_mm    = isset( $data['caravan_width_mm'] ) ? sanitize_text_field( $data['caravan_width_mm'] ) : '';
@@ -427,7 +434,7 @@ add_action( 'woocommerce_new_order', function( $order_id ) {
 	update_post_meta( $post_id, 'delivery_address', $cust_address );
 	update_post_meta( $post_id, 'subrubs', $cust_suburb );
 	update_post_meta( $post_id, 'state', $cust_state );
-	// update_post_meta( $post_id, 'product_type', $product_type );
+	update_post_meta( $post_id, 'product_type', $product_type );
 	update_post_meta( $post_id, 'vehicle_make', $vehicle_make );
 	update_post_meta( $post_id, 'vehicle_model', $vehicle_model );
 	update_post_meta( $post_id, 'caravan_make', $caravan_make );
@@ -438,7 +445,12 @@ add_action( 'woocommerce_new_order', function( $order_id ) {
 	update_post_meta( $post_id, 'caravan_width_mm', $caravan_width_mm );
 	update_post_meta( $post_id, 'caravan_length_mm', $a_frame_length_mm );
 	update_post_meta( $post_id, 'support_pockets', $support_pockets );
-	update_post_meta( $post_id, 'sts_var_caravan_bar_option', $bar_options );
+
+	if ( $product_type === 'Mesh Only' ) {
+		update_post_meta( $post_id, 'sts_var_caravan_mesh_only_measurement', $measure_meshmeasurment_mm );
+	} else {
+		update_post_meta( $post_id, 'sts_var_caravan_bar_option', $bar_options );
+	}
 
 	// Check condition and update Final delivery
 	if ( strtolower( $final_delivery ) === 'move' ) {
@@ -590,6 +602,7 @@ function allowed_block_types( $allowed_blocks, $editor_context ) {
 function mytheme_add_woocommerce_support() {
 	add_theme_support( 'woocommerce' );
 }
+
 add_action( 'after_setup_theme', 'mytheme_add_woocommerce_support' );
 
 
@@ -978,6 +991,7 @@ function show_towing_svg_in_editor( $post ) {
    	$order_id = get_post_meta( $post->ID, 'order_id', true );
 	$order    = wc_get_order( $order_id );
 
+
 	if ( $order ) {
 		// Basic info
 		$order_date       = $order->get_date_created()->date_i18n('Y-m-d');
@@ -1043,8 +1057,10 @@ function show_towing_svg_in_editor( $post ) {
 	}
 
     $sts_var_caravan_cut_out    = get_post_meta( $post->ID, 'sts_var_caravan_cut_out', true );
+    $sts_var_caravan_mesh_only_measurement    = get_post_meta( $post->ID, 'sts_var_caravan_mesh_only_measurement', true );
     $sts_var_caravan_break_form    = get_post_meta( $post->ID, 'sts_var_caravan_break_form', true );
     $sts_var_caravan_hr_form    = get_post_meta( $post->ID, 'sts_var_caravan_hr_form', true );
+    $sts_var_caravan_eyelet_tab    = get_post_meta( $post->ID, 'sts_var_caravan_eyelet_tab', true );
     $sts_var_proposed_date_of_delivery    = get_post_meta( $post->ID, 'sts_var_proposed_date_of_delivery', true );
 
 	$hitch_ids = get_post_meta( $post->ID, 'hitch_ids', true );
@@ -1255,12 +1271,20 @@ function show_towing_svg_in_editor( $post ) {
 				<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_cut_out); ?></td>
 			</tr>
 			<tr>
+				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold; ">Mesh only Measurement</span></td>
+				<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_mesh_only_measurement); ?></td>
+			</tr>
+			<tr>
 				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold; ">Break Foam</span></td>
 				<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_break_form); ?></td>
 			</tr>
 			<tr>
 				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold; ">Hr Foam</span></td>
 				<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_hr_form); ?></td>
+			</tr>
+			<tr>
+				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold; ">Eyelet Tab</span></td>
+				<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_eyelet_tab); ?></td>
 			</tr>
 
 		</table>
@@ -1501,12 +1525,20 @@ function show_towing_svg_in_editor( $post ) {
 								<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_cut_out); ?></td>
 							</tr>
 							<tr>
+								<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold; ">Mesh only Measurement</span></td>
+								<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_mesh_only_measurement); ?></td>
+							</tr>
+							<tr>
 								<td style="padding:6px 15px; border:1px solid #ccc;">Break Foam</span></td>
 								<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_break_form); ?></td>
 							</tr>
 							<tr>
 								<td style="padding:6px 15px; border:1px solid #ccc;">Hr Foam</span></td>
 								<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_hr_form); ?></td>
+							</tr>
+							<tr>
+								<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold; ">Eyelet Tab</span></td>
+								<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_eyelet_tab); ?></td>
 							</tr>
 						</table>
 
@@ -1736,8 +1768,10 @@ function generate_customer_order_word_file($post_id) {
     $sts_var_caravan_bar_bend       = get_post_meta($post_id, 'sts_var_caravan_bar_bend', true);
     $sts_var_caravan_ss_length_adj  = get_post_meta($post_id, 'sts_var_caravan_ss_length_adj', true);
     $sts_var_caravan_cut_out        = get_post_meta($post_id, 'sts_var_caravan_cut_out', true);
+    $sts_var_caravan_mesh_only_measurement     = get_post_meta($post_id, 'sts_var_caravan_mesh_only_measurement', true);
     $sts_var_caravan_break_form     = get_post_meta($post_id, 'sts_var_caravan_break_form', true);
     $sts_var_caravan_hr_form        = get_post_meta($post_id, 'sts_var_caravan_hr_form', true);
+    $sts_var_caravan_eyelet_tab        = get_post_meta($post_id, 'sts_var_caravan_eyelet_tab', true);
 	$final_details = get_post_meta( $post_id, 'final_details', true );
 
 	$final_delivery_address = "Same As Home Address";
@@ -1914,12 +1948,20 @@ function generate_customer_order_word_file($post_id) {
 	$row->addCell(4000)->addText($sts_var_caravan_cut_out, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6000)->addText("Mesh Only Measurement:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText($sts_var_caravan_mesh_only_measurement, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+
+	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(6000)->addText("Break Foam:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(4000)->addText($sts_var_caravan_break_form, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(6000)->addText("HR Foam:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(4000)->addText($sts_var_caravan_hr_form, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+
+	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6000)->addText("Eyelet Tab:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText($sts_var_caravan_eyelet_tab, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	// Wanna call vector svg here
 	$svg = get_towing_diagram_svg_png($post_id);
 
@@ -2232,21 +2274,69 @@ add_filter('woocommerce_get_price_html', function($price_html, $product) {
 
 add_action('init', function() {
     if ( isset($_GET['test_sts']) ) {
-        $order = wc_get_order( 1215 ); // <-- yahan apna order ID likho
-        // var_dump( $order->get_meta('_sts_order') );
+        $order = wc_get_order( 1215 );
         exit;
     }
 });
 
 
 
-add_action('woocommerce_cart_calculate_fees', function($cart) {
-    if (is_admin() && !defined('DOING_AJAX')) return;
+// add_action('woocommerce_cart_calculate_fees', function($cart) {
+//     if (is_admin() && !defined('DOING_AJAX')) return;
 
-    // Loop through all cart items
+//     // Loop through all cart items
+//     foreach ($cart->get_cart() as $cart_item) {
+//         $barwidth       = $cart_item['barwidth_mm'] ?? 0;
+//         $a_frame_length = $cart_item['a_frame_length_mm'] ?? 0;
+
+//         // --- Bar Width Extra Charges ---
+//         if ($barwidth >= 1900 && $barwidth <= 2100) {
+//             $cart->add_fee(__('Extra Bar Width (1900–2100mm)', 'stone-stomper'), 35);
+//         } elseif ($barwidth > 2100) {
+//             $cart->add_fee(__('Extra Bar Width (>2100mm)', 'stone-stomper'), 100);
+//         }
+
+//         // --- A-Frame Length Extra Charges ---
+//         if ($a_frame_length >= 1800 && $a_frame_length <= 2300) {
+//             $cart->add_fee(__('Extra Mesh Length (1800–2300mm)', 'stone-stomper'), 35);
+//         } elseif ($a_frame_length > 2300) {
+//             $cart->add_fee(__('Extra Mesh Length (>2300mm)', 'stone-stomper'), 100);
+//         }
+//     }
+// });
+
+add_action('woocommerce_cart_calculate_fees', function($cart) {
+    if (is_admin() && !defined('DOING_AJAX')) {
+        return;
+    }
+
+    $has_stone_stomper = false;
+
+    // First loop — check if Stone Stomper exists in cart
     foreach ($cart->get_cart() as $cart_item) {
-        $barwidth       = $cart_item['barwidth_mm'] ?? 0;
-        $a_frame_length = $cart_item['a_frame_length_mm'] ?? 0;
+        if (!empty($cart_item['product_type']) && $cart_item['product_type'] === '545') {
+            $has_stone_stomper = true;
+            break;
+        }
+    }
+
+    // If NOT stone stomper → no fees, no extra charges
+    if (!$has_stone_stomper) {
+        return;
+    }
+
+    // Second loop — apply extra fees but ONLY for stone stomper product
+    foreach ($cart->get_cart() as $cart_item) {
+
+        if (
+            empty($cart_item['product_type']) ||
+            $cart_item['product_type'] !== '545'
+        ) {
+            continue; // skip non-stone-stomper items
+        }
+
+        $barwidth       = isset($cart_item['barwidth_mm']) ? floatval($cart_item['barwidth_mm']) : 0;
+        $a_frame_length = isset($cart_item['a_frame_length_mm']) ? floatval($cart_item['a_frame_length_mm']) : 0;
 
         // --- Bar Width Extra Charges ---
         if ($barwidth >= 1900 && $barwidth <= 2100) {
@@ -2263,3 +2353,4 @@ add_action('woocommerce_cart_calculate_fees', function($cart) {
         }
     }
 });
+

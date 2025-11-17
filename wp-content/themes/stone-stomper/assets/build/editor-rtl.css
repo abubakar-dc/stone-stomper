@@ -5534,6 +5534,7 @@ Mixin for transition
   aspect-ratio: 4/2.5;
   -o-object-fit: cover;
      object-fit: cover;
+  background-color: #f7f7f7;
 }
 .editor-styles-wrapper .vehicle-images {
   display: flex;

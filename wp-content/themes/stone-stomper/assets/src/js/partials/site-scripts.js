@@ -591,6 +591,26 @@ setupImageUpload( 'photo_rear', 'list_rear', 'rear' );
 setupImageUpload( 'photo_front', 'list_front', 'front' );
 
 jQuery( function() {
+
+	// 🟦 ADD THIS CODE
+	let meshOnlyProduct = '712'; // <-- yahan apna Mesh Only product ka ID laga dena
+
+	jQuery(document).on("change", "#product_type", function () {
+	    const selectedProd = jQuery(this).val();
+
+	    if (selectedProd === meshOnlyProduct) {
+	        // Hide full Bar Option section
+	        jQuery("#bar-options-section").hide();
+	        jQuery(".mesh-only-field").show();
+
+	    } else {
+	        // Show Bar Option section
+	        jQuery("#bar-options-section").show();
+	        jQuery(".mesh-only-field").hide();
+	    }
+	});
+
+
 	jQuery( '.stone-stomper-supports #factory_stoneguard' ).on(
 		'change',
 		function() {

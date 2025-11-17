@@ -4,6 +4,7 @@
 			width: 100%;
 			aspect-ratio: 4 / 2.5;
 			object-fit: cover;
+			background-color: #f7f7f7;
 		}
 	}
 }
@@ -30,6 +31,7 @@
 }
 
 .form-detail-section {
+
 	a,
 	a:visited {
 		border-color: var(--ss_black_1);
@@ -217,6 +219,7 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
+
 		label {
 			font-size: 14px;
 		}
@@ -399,6 +402,7 @@
 }
 
 .form-section-right {
+
 	input[type="text"],
 	input[type="number"],
 	input[type="email"],

@@ -59,11 +59,39 @@ jQuery( document ).ready( function() {
 	});
 }
 
+// function UpdateSummary() {
+
+//   const productType = jQuery('#product_type').val(); // stone-stomper OR mesh-only
+
+//   jQuery.ajax({
+//     type: 'POST',
+//     url: localVars.ajax_url,
+//     data: {
+//       action: 'woocommerce_ajax_update_summary',
+//       ids,
+//       product_type: productType,
+//       barwidth: jQuery('#vanwidth').val(),
+//       a_frame_length: jQuery('#a_frame_length').val(),
+//       shipping: 'standard',
+//     },
+//     success(response) {
+//       if (response?.data?.html) {
+//         jQuery('#order_summary').html(response.data.html);
+//       }
+//     },
+//     error(err) {
+//       console.log("UpdateSummary error", err.responseText);
+//     }
+//   });
+// }
+
 
 	function UpdateSummary() {
 	  const barwidth = jQuery('#barwidth').val();
 	  const aFrame = jQuery('#a_frame_length').val();
 	  console.log('➡️ UpdateSummary triggered', { ids, barwidth, aFrame });
+  const productType = jQuery('#product_type').val(); // stone-stomper OR mesh-only
+
 
 	  ids = jQuery.merge([], mainProductId);
 	  jQuery.merge(ids, upsellsProductId);
@@ -74,6 +102,7 @@ jQuery( document ).ready( function() {
 	    data: {
 	      action: 'woocommerce_ajax_update_summary',
 	      ids,
+      		product_type: productType,
 	      quantity: 1,
 	      shipping: 'standard',
 	      barwidth: barwidth,
