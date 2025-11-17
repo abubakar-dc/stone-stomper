@@ -1293,7 +1293,6 @@ function show_towing_svg_in_editor( $post ) {
 				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold; ">Eyelet Tab</span></td>
 				<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_eyelet_tab); ?></td>
 			</tr>
-
 		</table>
 	</div>
 
