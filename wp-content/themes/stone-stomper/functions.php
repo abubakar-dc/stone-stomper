@@ -992,6 +992,7 @@ function show_towing_svg_in_editor( $post ) {
 	$order    = wc_get_order( $order_id );
 
 
+
 	if ( $order ) {
 		// Basic info
 		$order_date       = $order->get_date_created()->date_i18n('Y-m-d');
@@ -1030,8 +1031,8 @@ function show_towing_svg_in_editor( $post ) {
 
 	$customer_phone = get_post_meta( $post->ID, 'customer_phone', true );
 	$final_details = get_post_meta( $post->ID, 'final_details', true );
+	$product_type = get_post_meta( $post->ID, 'product_type', true );
 
-	// var_dump(get_post_meta( $post->ID, 'phone', true ));
 	$measure_barwidth_mm = get_post_meta( $post->ID, 'measure_barwidth_mm', true );
     $bar_width_mm        = get_post_meta( $post->ID, 'bar_width_mm', true );
     $caravan_length_mm        = get_post_meta( $post->ID, 'caravan_length_mm', true );
@@ -1101,24 +1102,24 @@ function show_towing_svg_in_editor( $post ) {
 	<div class="customer-upload-images">
 		<?php if ( $hitch_ids ) { ?>
 			<div class="row row-1">
-			<h3>Hitch Images</h3>
-			<div class="hitch-images image-group">
-				<?php foreach ( $hitch_ids as $hitch_id ) :
+				<h3>Hitch Images</h3>
+				<div class="hitch-images image-group">
+					<?php foreach ( $hitch_ids as $hitch_id ) :
 
-				$img_url = esc_url($hitch_id); ?>
-				<img src="<?php echo esc_url( $img_url ); ?>" alt="" class="popup-image" />
-				<?php endforeach; ?>
-			</div>
-			<div class="image-lightbox">
-				<div class="lightbox-inner">
-				<img src="" alt="" class="lightbox-img" />
-				<div class="lightbox-controls">
-					<span class="lightbox-prev">&#10094;</span>
-					<span class="lightbox-next">&#10095;</span>
-					<span class="lightbox-close">&times;</span>
+					$img_url = esc_url($hitch_id); ?>
+					<img src="<?php echo esc_url( $img_url ); ?>" alt="" class="popup-image" />
+					<?php endforeach; ?>
 				</div>
+				<div class="image-lightbox">
+					<div class="lightbox-inner">
+						<img src="" alt="" class="lightbox-img" />
+						<div class="lightbox-controls">
+							<span class="lightbox-prev">&#10094;</span>
+							<span class="lightbox-next">&#10095;</span>
+							<span class="lightbox-close">&times;</span>
+						</div>
+					</div>
 				</div>
-			</div>
 			</div>
 		<?php } ?>
 
@@ -1169,7 +1170,9 @@ function show_towing_svg_in_editor( $post ) {
 		<?php } ?>
 	</div>
 
-	<div style="margin-top:96px;"></div>
+	<?php if($hitch_ids || $rear_ids || $front_ids){ ?>
+		<div style="margin-top:96px;"></div>
+	<?php } ?>
 
 	<!-- Order Preview Image -->
     <div style="text-align:center; padding:20px;">
@@ -1207,6 +1210,10 @@ function show_towing_svg_in_editor( $post ) {
 				</tr>
 			<?php } ?>
 
+			<tr>
+				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Product Type</td>
+				<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $product_type ? $product_type : '-' ); ?></td>
+			</tr>
 			<tr>
 				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Phone:</td>
 				<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $customer_phone ?: '-' ); ?></td>
@@ -1346,6 +1353,10 @@ function show_towing_svg_in_editor( $post ) {
 							<?php echo ! empty( $delivery_instructions ) ? esc_html( $delivery_instructions ) : 'No'; ?>
 						</div>
 						<div class="customer-details inv-order-row">
+							<?php if($product_type){ ?>
+								<strong>Product Type: </strong><?php echo esc_html( $product_type ); ?>
+							<?php } ?>
+							&nbsp;&nbsp;&nbsp;
 							<?php if($caravan_make){ ?>
 								<strong>Trailer Make: </strong><?php echo esc_html( $caravan_make ); ?>
 							<?php } ?>
@@ -1455,6 +1466,10 @@ function show_towing_svg_in_editor( $post ) {
 							<?php echo ! empty( $delivery_instructions ) ? esc_html( $delivery_instructions ) : 'No'; ?>
 						</div>
 						<div class="customer-details inv-order-row">
+							<?php if($product_type){ ?>
+								<strong>Product Type: </strong><?php echo esc_html( $product_type ); ?>
+							<?php } ?>
+							&nbsp;&nbsp;&nbsp;
 							<?php if($caravan_make){ ?>
 								<strong>Trailer Make: </strong><?php echo esc_html( $caravan_make ); ?>
 							<?php } ?>
@@ -1525,7 +1540,7 @@ function show_towing_svg_in_editor( $post ) {
 								<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_cut_out); ?></td>
 							</tr>
 							<tr>
-								<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold; ">Mesh only Measurement</span></td>
+								<td style="padding:6px 15px; border:1px solid #ccc; ">Mesh only Measurement</span></td>
 								<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_mesh_only_measurement); ?></td>
 							</tr>
 							<tr>
@@ -1537,7 +1552,7 @@ function show_towing_svg_in_editor( $post ) {
 								<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_hr_form); ?></td>
 							</tr>
 							<tr>
-								<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold; ">Eyelet Tab</span></td>
+								<td style="padding:6px 15px; border:1px solid #ccc; ">Eyelet Tab</span></td>
 								<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_eyelet_tab); ?></td>
 							</tr>
 						</table>
@@ -1748,6 +1763,7 @@ function generate_customer_order_word_file($post_id) {
 
 
     // Fetch custom measurement meta
+    $product_type           = get_post_meta($post_id, 'product_type', true);
     $caravan_make           = get_post_meta($post_id, 'caravan_make', true);
     $caravan_model           = get_post_meta($post_id, 'caravan_model', true);
     $vehicle_make           = get_post_meta($post_id, 'vehicle_make', true);
@@ -1850,6 +1866,10 @@ function generate_customer_order_word_file($post_id) {
 
 	// RIGHT COLUMN
 	$rightCell = $infoTable->addCell(5000);
+
+	$textRun = $rightCell->addTextRun($compact);
+	$textRun->addText("Product Type: ", ['bold' => true]);
+	$textRun->addText($product_type);
 
 	$textRun = $rightCell->addTextRun($compact);
 	$textRun->addText("Trailer Make: ", ['bold' => true]);
