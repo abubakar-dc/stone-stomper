@@ -385,36 +385,59 @@ public function fetch_form_data() {
 	$modelPostID = $_POST['postID'] ?? null;
 
 	// ✅ Default year dropdown placeholder
-	$year = '<option value="">Select Model Year</option>';
+	// $year = '<option value="">Select Model Year</option>';
 
-	if ( $modelPostID ) {
+	// if ( $modelPostID ) {
 
-		$years = [];
+	// 	$years = [];
 
-		// ✅ Read repeater from the selected Model Post only
-		$models = get_field( 'sts_var_car_model_row', $modelPostID );
+	// 	// ✅ Read repeater from the selected Model Post only
+	// 	$models = get_field( 'sts_var_car_model_row', $modelPostID );
 
-		if ( $models ) {
-			foreach ( $models as $model ) {
-				if ( ! empty( $model['sts_var_car_year'] ) ) {
-					$years[] = $model['sts_var_car_year'];
+	// 	if ( $models ) {
+	// 		foreach ( $models as $model ) {
+	// 			if ( ! empty( $model['sts_var_car_year'] ) ) {
+	// 				$years[] = $model['sts_var_car_year'];
+	// 			}
+	// 		}
+	// 	}
+
+	// 	// ✅ Clean & sort
+	// 	$years = array_unique(array_filter($years));
+
+	// 	foreach ( $years as $y ) {
+	// 		$year .= '<option value="' . esc_attr($y) . '">' . esc_html($y) . '</option>';
+	// 	}
+
+	// 	// ✅ Append "Other" option
+	// 	$year .= '<option class="ajax-car-year other">other</option>';
+	// }
+		$modelPostID = $_POST['postID'] ?? null;
+
+		$year = '<option value="">Select Model Year</option>';
+
+		if ($modelPostID) {
+
+			$years = [];
+
+			$models = get_field('sts_var_car_model_row', $modelPostID);
+
+			if ($models) {
+				foreach ($models as $model) {
+					if (!empty($model['sts_var_car_year'])) {
+						$years[] = $model['sts_var_car_year'];
+					}
 				}
 			}
+
+			$years = array_unique(array_filter($years));
+
+			foreach ($years as $y) {
+				$year .= '<option value="' . esc_attr($y) . '">' . esc_html($y) . '</option>';
+			}
+
+			$year .= '<option value="other" class="ajax-car-year other">other</option>';
 		}
-
-		// ✅ Clean & sort
-		$years = array_unique(array_filter($years));
-
-		foreach ( $years as $y ) {
-			$year .= '<option value="' . esc_attr($y) . '">' . esc_html($y) . '</option>';
-		}
-
-		// ✅ Append "Other" option
-		$year .= '<option class="ajax-car-year other">other</option>';
-	}
-
-
-
 	// ✅ Vehicle image
 	if ( $post_id && has_post_thumbnail( $post_id ) ) {
 		$thumb_id = get_post_thumbnail_id( $post_id );
