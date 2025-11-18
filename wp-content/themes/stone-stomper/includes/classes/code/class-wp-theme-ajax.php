@@ -239,11 +239,12 @@ public function bst_handle_upload_order_photos() {
 		$barwidth    = floatval($_POST['barwidth'] ?? 0);
 		$a_frame_len = floatval($_POST['a_frame_length'] ?? 0);
 
+
 		$added_any   = false;
 		$total_price = 0;
 		$html_output = '';
 
-		// 🔹 Loop through products and sum their price
+		// 🔹 Loop through selected products
 		foreach ($product_ids as $product_id) {
 			if ($product_id > 0) {
 				$product = wc_get_product($product_id);
@@ -263,33 +264,53 @@ public function bst_handle_upload_order_photos() {
 
 		// 🔹 Extra Charges for Product Type 545
 		if ($product_type === '545') {
-			// 🔹 Extra Charge Logic — Exact Ranges
 			$extra_barwidth = 0;
 			$extra_meshlen  = 0;
 
-			// Bar Width Logic
 			if ($barwidth >= 1900 && $barwidth <= 2100) {
 				$extra_barwidth = 35;
 			} elseif ($barwidth > 2100) {
 				$extra_barwidth = 100;
 			}
 
-			// A-Frame Length Logic
 			if ($a_frame_len >= 1800 && $a_frame_len <= 2300) {
 				$extra_meshlen = 35;
 			} elseif ($a_frame_len > 2300) {
 				$extra_meshlen = 100;
 			}
 
-			// 🔹 Append extra charges if applicable
 			if ($extra_barwidth > 0) {
-				$html_output .= '<div class="line"><span>Extra Bar Width</span><strong tabindex="0">$<span data-id="extra-barwidth">' . number_format($extra_barwidth, 2) . '</span></strong></div>';
+				$html_output .= '<div class="line"><span>Extra Bar Width</span><strong tabindex="0">$<span>' . number_format($extra_barwidth, 2) . '</span></strong></div>';
 				$total_price += $extra_barwidth;
 			}
 
 			if ($extra_meshlen > 0) {
-				$html_output .= '<div class="line"><span>Extra Mesh Length</span><strong tabindex="0">$<span data-id="extra-meshlen">' . number_format($extra_meshlen, 2) . '</span></strong></div>';
+				$html_output .= '<div class="line"><span>Extra Mesh Length</span><strong tabindex="0">$<span>' . number_format($extra_meshlen, 2) . '</span></strong></div>';
 				$total_price += $extra_meshlen;
+			}
+		}
+
+		if ($a_frame_len >= 1800) {
+			// NEW — Support Pockets / Toolbox Cost
+			$support_option = sanitize_text_field($_POST['support_option'] ?? '');
+			$extra_support_toolbox = 0;
+
+			// If any option is selected other than blank
+			if (!empty($support_option)) {
+
+				// Support pockets, toolbox, factory-stoneguard → all add $35
+
+				$label_text = 'Fittings Chnarges';
+
+				if ($support_option === 'toolbox' || $support_option === 'factory-stoneguard') {
+
+					$extra_support_toolbox = 35;
+
+					$html_output .= '<div class="line"><span>' . $label_text . '</span>
+						<strong tabindex="0">$<span>' . number_format($extra_support_toolbox, 2) . '</span></strong></div>';
+
+					$total_price += $extra_support_toolbox;
+				}
 			}
 		}
 
@@ -297,10 +318,10 @@ public function bst_handle_upload_order_photos() {
 		// 🔹 Shipping
 		$shipping_cost = 75.00;
 		$total_price += $shipping_cost;
-		$html_output .= '<div class="line"><span>Shipping</span><strong tabindex="0">$<span data-id="shipping">' . number_format($shipping_cost, 2) . '</span></strong></div>';
+		$html_output .= '<div class="line"><span>Shipping</span><strong tabindex="0">$<span>' . number_format($shipping_cost, 2) . '</span></strong></div>';
 
 		// 🔹 Total
-		$html_output .= '<div class="line total"><span>Total</span><strong tabindex="0">$<span data-id="total">' . number_format($total_price, 2) . '</span></strong></div>';
+		$html_output .= '<div class="line total"><span>Total</span><strong tabindex="0">$<span>' . number_format($total_price, 2) . '</span></strong></div>';
 
 		wp_send_json_success([
 			'html'  => $html_output,
@@ -309,6 +330,7 @@ public function bst_handle_upload_order_photos() {
 
 		wp_die();
 	}
+
 
 
 

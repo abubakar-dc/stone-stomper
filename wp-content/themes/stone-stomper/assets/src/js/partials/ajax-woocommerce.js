@@ -87,46 +87,51 @@ jQuery( document ).ready( function() {
 
 
 	function UpdateSummary() {
-	  const barwidth = jQuery('#barwidth').val();
-	  const aFrame = jQuery('#a_frame_length').val();
-	  console.log('➡️ UpdateSummary triggered', { ids, barwidth, aFrame });
-  const productType = jQuery('#product_type').val(); // stone-stomper OR mesh-only
+	    const barwidth = jQuery('#barwidth').val();
+	    const aFrame = jQuery('#a_frame_length').val();
+	    const support_option = jQuery('input[name="input_1.3"]:checked').val(); // 🔥 FIXED
 
+	    console.log('➡️ UpdateSummary triggered', { ids, barwidth, aFrame, support_option });
 
-	  ids = jQuery.merge([], mainProductId);
-	  jQuery.merge(ids, upsellsProductId);
+	    const productType = jQuery('#product_type').val();
 
-	  jQuery.ajax({
-	    type: 'POST',
-	    url: localVars.ajax_url,
-	    data: {
-	      action: 'woocommerce_ajax_update_summary',
-	      ids,
-      		product_type: productType,
-	      quantity: 1,
-	      shipping: 'standard',
-	      barwidth: barwidth,
-	      a_frame_length: aFrame,
-	    },
-	    success(response) {
-	      console.log('✅ UpdateSummary Response:', response);
-	      if (response?.data?.html) {
-	        jQuery('#order_summary').html(response.data.html);
-	      } else {
-	        console.warn('⚠️ No HTML returned');
-	      }
-	    },
-	    error(xhr) {
-	      console.error('❌ UpdateSummary failed:', xhr.responseText);
-	    },
-	  });
+	    ids = jQuery.merge([], mainProductId);
+	    jQuery.merge(ids, upsellsProductId);
+
+	    jQuery.ajax({
+	        type: 'POST',
+	        url: localVars.ajax_url,
+	        data: {
+	            action: 'woocommerce_ajax_update_summary',
+	            ids: ids,
+	            product_type: productType,
+	            quantity: 1,
+	            shipping: 'standard',
+	            barwidth: barwidth,
+	            a_frame_length: aFrame,
+	            support_option: support_option, // 🔥 sends support option to backend
+	        },
+	        success(response) {
+	            console.log('✅ UpdateSummary Response:', response);
+	            if (response?.data?.html) {
+	                jQuery('#order_summary').html(response.data.html);
+	            } else {
+	                console.warn('⚠️ No HTML returned');
+	            }
+	        },
+	        error(xhr) {
+	            console.error('❌ UpdateSummary failed:', xhr.responseText);
+	        },
+	    });
 	}
 
+
 	// 🔹 Trigger live update on measurement input changes
-	jQuery(document).on('input change', '#barwidth, #a_frame_length', function() {
+	jQuery(document).on('input change', '#barwidth, input[name="input_1.3"], #a_frame_length', function() {
 		console.log("update input values");
 		UpdateSummary(); // Recalculate instantly on any change
 	});
+
 
 
 } );

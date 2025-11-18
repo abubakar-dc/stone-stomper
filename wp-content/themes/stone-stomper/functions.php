@@ -1086,6 +1086,8 @@ function show_towing_svg_in_editor( $post ) {
 	$rear_ids  = get_post_meta( $post->ID, 'rear_ids', true );
 	$front_ids = get_post_meta( $post->ID, 'front_ids', true );
 	$support_pockets = get_post_meta( $post->ID, 'support_pockets', true );
+	$support_pockets_measurement    = get_post_meta( $post_id, 'support_pockets_measurement', true );
+
 
 	// var_dump($final_details['final_delivery']);
 
@@ -1277,6 +1279,10 @@ function show_towing_svg_in_editor( $post ) {
 				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Support Pockets:</td>
 
 				<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $support_pockets ?: '-' ); ?></td>
+			</tr>
+			<tr>
+				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Support Pocket Distance From Caravan (mm) :</td>
+				<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $support_pockets_measurement ?: '-' ); ?></td>
 			</tr>
 
 			<tr>
@@ -1796,6 +1802,7 @@ function generate_customer_order_word_file($post_id) {
     $toolbox_width_mm       = get_post_meta($post_id, 'toolbox_width_mm', true);
     $toolbox_height_mm      = get_post_meta($post_id, 'toolbox_height_mm', true);
     $support_pockets        = get_post_meta($post_id, 'support_pockets', true);
+    $support_pockets_measurement        = get_post_meta($post_id, 'support_pockets_measurement', true);
 
     $sts_var_caravan_bar_option     = get_post_meta($post_id, 'sts_var_caravan_bar_option', true);
     $sts_var_caravan_bar_bend       = get_post_meta($post_id, 'sts_var_caravan_bar_bend', true);
@@ -1967,6 +1974,10 @@ function generate_customer_order_word_file($post_id) {
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(6000)->addText("Support Pockets:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(4000)->addText($support_pockets, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+
+	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6000)->addText("Support Pocket Distance From Caravan:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText($support_pockets_measurement, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(6000)->addText("Bar Option:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
@@ -2321,35 +2332,48 @@ add_action('woocommerce_cart_calculate_fees', function($cart) {
     if (is_admin() && !defined('DOING_AJAX')) {
         return;
     }
+	$data = sts_read_order_form_cookie();
+
+		// if ( empty($data['is_stone_stomper_order']) || $data['is_stone_stomper_order'] !== 'yes' ) {
+		// 	return;
+		// }
+
 
     // $has_stone_stomper = false;
 
-    // // // 🔍 Check if stone stomper exists in cart
-    // // foreach ($cart->get_cart() as $cart_item) {
-    // //     if (!empty($cart_item['product_type']) && $cart_item['product_type'] == '545') {
-    // //         $has_stone_stomper = true;
-    // //         break;
-    // //     }
-    // // }
+    // // 🔍 Check if stone stomper exists in cart
+    // foreach ($cart->get_cart() as $cart_item) {
+    //     if (!empty($cart_item['product_type']) && $cart_item['product_type'] == '545') {
+    //         $has_stone_stomper = true;
+    //         break;
+    //     }
+    // }
 
-    // // // ❌ No stone stomper → NO FEES
-    // // if (!$has_stone_stomper) {
-    // //     return;
-    // // }
+    // // ❌ No stone stomper → NO FEES
+    // if (!$has_stone_stomper) {
+    //     return;
+    // }
 
     // ✅ Stone Stomper found → apply extra fees ONLY to stone-stomper items
     foreach ($cart->get_cart() as $cart_item) {
 
-        // if (empty($cart_item['product_type']) || $cart_item['product_type'] != '545') {
-        //     continue; // skip other products
-        // }
-		$Product_type = $cart_item['product_type'] ?? null;
+
+		$product_type = $data['product_type'];
+
+
+        if ($product_type != '545') {
+            continue; // skip other products
+        }
+
+		// // $productType = $cart_item['product_type'] ?? 'Stone Stomper';
+        // $cart->add_fee(__($data['is_stone_stomper_order'], 'stone-stomper'), 35);
+
         $barwidth       = $cart_item['barwidth_mm'] ?? 0;
         $a_frame_length = $cart_item['a_frame_length_mm'] ?? 0;
 
         // --- Bar Width Extra Charges ---
         if ($barwidth >= 1900 && $barwidth <= 2100) {
-            $cart->add_fee(__($Product_type, 'stone-stomper'), 35);
+            $cart->add_fee(__('Extra Bar Width (1900–2100mm)', 'stone-stomper'), 35);
         } elseif ($barwidth > 2100) {
             $cart->add_fee(__('Extra Bar Width (>2100mm)', 'stone-stomper'), 100);
         }
