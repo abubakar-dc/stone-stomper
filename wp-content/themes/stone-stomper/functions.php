@@ -2332,60 +2332,62 @@ add_action('woocommerce_cart_calculate_fees', function($cart) {
     if (is_admin() && !defined('DOING_AJAX')) {
         return;
     }
-	$data = sts_read_order_form_cookie();
 
-		// if ( empty($data['is_stone_stomper_order']) || $data['is_stone_stomper_order'] !== 'yes' ) {
-		// 	return;
-		// }
+    // Read stored cookie data
+    $data = sts_read_order_form_cookie();
 
+    // ❌ If not stone-stomper → no fees
+    if (empty($data['product_type']) || $data['product_type'] !== '545') {
+        return;
+    }
 
-    // $has_stone_stomper = false;
-
-    // // 🔍 Check if stone stomper exists in cart
-    // foreach ($cart->get_cart() as $cart_item) {
-    //     if (!empty($cart_item['product_type']) && $cart_item['product_type'] == '545') {
-    //         $has_stone_stomper = true;
-    //         break;
-    //     }
-    // }
-
-    // // ❌ No stone stomper → NO FEES
-    // if (!$has_stone_stomper) {
-    //     return;
-    // }
-
-    // ✅ Stone Stomper found → apply extra fees ONLY to stone-stomper items
+    // Loop cart items
     foreach ($cart->get_cart() as $cart_item) {
 
+        // Bar Width & A-frame values stored in cart item
+        $barwidth       = isset($cart_item['barwidth_mm']) ? floatval($cart_item['barwidth_mm']) : 0;
+        $a_frame_length = isset($cart_item['a_frame_length_mm']) ? floatval($cart_item['a_frame_length_mm']) : 0;
 
-		$product_type = $data['product_type'];
+        /*
+        |-----------------------------------------
+        |  EXTRA CHARGES — STONE STOMPER ONLY
+        |-----------------------------------------
+        */
 
-
-        if ($product_type != '545') {
-            continue; // skip other products
-        }
-
-		// // $productType = $cart_item['product_type'] ?? 'Stone Stomper';
-        // $cart->add_fee(__($data['is_stone_stomper_order'], 'stone-stomper'), 35);
-
-        $barwidth       = $cart_item['barwidth_mm'] ?? 0;
-        $a_frame_length = $cart_item['a_frame_length_mm'] ?? 0;
-
-        // --- Bar Width Extra Charges ---
+        // --- Extra Bar Width ---
         if ($barwidth >= 1900 && $barwidth <= 2100) {
             $cart->add_fee(__('Extra Bar Width (1900–2100mm)', 'stone-stomper'), 35);
         } elseif ($barwidth > 2100) {
             $cart->add_fee(__('Extra Bar Width (>2100mm)', 'stone-stomper'), 100);
         }
 
-        // --- A-Frame Length Extra Charges ---
+        // --- Extra Mesh Length ---
         if ($a_frame_length >= 1800 && $a_frame_length <= 2300) {
             $cart->add_fee(__('Extra Mesh Length (1800–2300mm)', 'stone-stomper'), 35);
         } elseif ($a_frame_length > 2300) {
             $cart->add_fee(__('Extra Mesh Length (>2300mm)', 'stone-stomper'), 100);
         }
+
+        /*
+        |-----------------------------------------
+        |  NEW — SUPPORT POCKETS / TOOLBOX COST
+        |-----------------------------------------
+        */
+        if ($a_frame_length >= 1800) {
+
+            $support_option = $data['support_option'] ?? '';
+
+            if (!empty($support_option)) {
+
+                // toolbox & factory-stoneguard → both $35
+                if ($support_option === 'toolbox' || $support_option === 'factory-stoneguard') {
+                    $cart->add_fee(__('Fittings Charges', 'stone-stomper'), 35);
+                }
+            }
+        }
     }
 });
+
 
 
 
