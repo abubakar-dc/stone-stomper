@@ -147,26 +147,38 @@ add_filter('woocommerce_get_item_data', function($item_data, $cart_item) {
 }, 10, 2);
 
 add_filter('woocommerce_add_cart_item_data', function($cart_item_data, $product_id, $variation_id) {
+
     if (!empty($_POST['hitch_attachment_ids'])) {
         $cart_item_data['hitch_attachment_ids'] = sanitize_text_field($_POST['hitch_attachment_ids']);
     }
+
     if (!empty($_POST['rear_attachment_ids'])) {
         $cart_item_data['rear_attachment_ids'] = sanitize_text_field($_POST['rear_attachment_ids']);
     }
+
     if (!empty($_POST['front_attachment_ids'])) {
         $cart_item_data['front_attachment_ids'] = sanitize_text_field($_POST['front_attachment_ids']);
     }
 
-	// --- new measurement fields ---
+    // --- SAVE PRODUCT TYPE (MOST IMPORTANT) ---
+	if (!empty($_POST['product_type'])) {
+		// Force map frontend selection to correct ID
+		$cart_item_data['product_type'] = sanitize_text_field($_POST['product_type']);
+	}
+
+
+    // --- new measurement fields ---
     if (!empty($_POST['barwidth'])) {
         $cart_item_data['barwidth_mm'] = floatval($_POST['barwidth']);
     }
+
     if (!empty($_POST['a_frame_length'])) {
         $cart_item_data['a_frame_length_mm'] = floatval($_POST['a_frame_length']);
     }
 
     return $cart_item_data;
 }, 10, 3);
+
 
 // Persist to Order Items (admin)
 add_action('woocommerce_checkout_create_order_line_item', function($item, $cart_item_key, $values, $order) {
@@ -631,6 +643,7 @@ function render_towing_diagram($post_id) {
 		$caravan_length_mm      = get_post_meta( $post_id, 'caravan_length_mm', true );
 		$caravan_width_mm       = get_post_meta( $post_id, 'caravan_width_mm', true );
 		$toolbox_height_mm      = get_post_meta( $post_id, 'toolbox_height_mm', true );
+		$support_pockets_measurement      = get_post_meta( $post_id, 'support_pockets_measurement', true );
 		$toolbox_width_mm       = get_post_meta( $post_id, 'toolbox_width_mm', true );
 		$bar_width_mm           = get_post_meta( $post_id, 'bar_width_mm', true );
 		$vinyl_insert_width_mm  = get_post_meta( $post_id, 'vinyl_insert_width_mm', true );
@@ -874,6 +887,11 @@ function render_towing_diagram($post_id) {
 				<!-- Toolbox Size -->
 				<?php if($toolbox_height_mm){ ?>
 					<text class="st5" text-anchor="start" dominant-baseline="middle" x="20"  fill="#fa3232"><?php echo esc_html( $toolbox_height_mm ? 'T: '.$toolbox_height_mm.' mm' : '-' ); ?></text>
+				<?php } ?>
+
+				<!-- Toolbox Size -->
+				<?php if($support_pockets_measurement){ ?>
+					<text class="st5" text-anchor="start" dominant-baseline="middle" x="20"  fill="#fa3232"><?php echo esc_html( $support_pockets_measurement ? 'SP: '.$support_pockets_measurement.' mm' : '-' ); ?></text>
 				<?php } ?>
 			</g>
 			<polyline class="st0" points="880.55 185.79 884.28 181.78 888 185.79" fill="#ffffff" stroke="#fa3232"/>
@@ -2299,6 +2317,53 @@ add_action('init', function() {
 });
 
 
+add_action('woocommerce_cart_calculate_fees', function($cart) {
+    if (is_admin() && !defined('DOING_AJAX')) {
+        return;
+    }
+
+    // $has_stone_stomper = false;
+
+    // // // 🔍 Check if stone stomper exists in cart
+    // // foreach ($cart->get_cart() as $cart_item) {
+    // //     if (!empty($cart_item['product_type']) && $cart_item['product_type'] == '545') {
+    // //         $has_stone_stomper = true;
+    // //         break;
+    // //     }
+    // // }
+
+    // // // ❌ No stone stomper → NO FEES
+    // // if (!$has_stone_stomper) {
+    // //     return;
+    // // }
+
+    // ✅ Stone Stomper found → apply extra fees ONLY to stone-stomper items
+    foreach ($cart->get_cart() as $cart_item) {
+
+        // if (empty($cart_item['product_type']) || $cart_item['product_type'] != '545') {
+        //     continue; // skip other products
+        // }
+		$Product_type = $cart_item['product_type'] ?? null;
+        $barwidth       = $cart_item['barwidth_mm'] ?? 0;
+        $a_frame_length = $cart_item['a_frame_length_mm'] ?? 0;
+
+        // --- Bar Width Extra Charges ---
+        if ($barwidth >= 1900 && $barwidth <= 2100) {
+            $cart->add_fee(__($Product_type, 'stone-stomper'), 35);
+        } elseif ($barwidth > 2100) {
+            $cart->add_fee(__('Extra Bar Width (>2100mm)', 'stone-stomper'), 100);
+        }
+
+        // --- A-Frame Length Extra Charges ---
+        if ($a_frame_length >= 1800 && $a_frame_length <= 2300) {
+            $cart->add_fee(__('Extra Mesh Length (1800–2300mm)', 'stone-stomper'), 35);
+        } elseif ($a_frame_length > 2300) {
+            $cart->add_fee(__('Extra Mesh Length (>2300mm)', 'stone-stomper'), 100);
+        }
+    }
+});
+
+
 
 // add_action('woocommerce_cart_calculate_fees', function($cart) {
 //     if (is_admin() && !defined('DOING_AJAX')) return;
@@ -2323,53 +2388,3 @@ add_action('init', function() {
 //         }
 //     }
 // });
-
-add_action('woocommerce_cart_calculate_fees', function($cart) {
-    if (is_admin() && !defined('DOING_AJAX')) {
-        return;
-    }
-
-    $has_stone_stomper = false;
-
-    // First loop — check if Stone Stomper exists in cart
-    foreach ($cart->get_cart() as $cart_item) {
-        if (!empty($cart_item['product_type']) && $cart_item['product_type'] === '545') {
-            $has_stone_stomper = true;
-            break;
-        }
-    }
-
-    // If NOT stone stomper → no fees, no extra charges
-    if (!$has_stone_stomper) {
-        return;
-    }
-
-    // Second loop — apply extra fees but ONLY for stone stomper product
-    foreach ($cart->get_cart() as $cart_item) {
-
-        if (
-            empty($cart_item['product_type']) ||
-            $cart_item['product_type'] !== '545'
-        ) {
-            continue; // skip non-stone-stomper items
-        }
-
-        $barwidth       = isset($cart_item['barwidth_mm']) ? floatval($cart_item['barwidth_mm']) : 0;
-        $a_frame_length = isset($cart_item['a_frame_length_mm']) ? floatval($cart_item['a_frame_length_mm']) : 0;
-
-        // --- Bar Width Extra Charges ---
-        if ($barwidth >= 1900 && $barwidth <= 2100) {
-            $cart->add_fee(__('Extra Bar Width (1900–2100mm)', 'stone-stomper'), 35);
-        } elseif ($barwidth > 2100) {
-            $cart->add_fee(__('Extra Bar Width (>2100mm)', 'stone-stomper'), 100);
-        }
-
-        // --- A-Frame Length Extra Charges ---
-        if ($a_frame_length >= 1800 && $a_frame_length <= 2300) {
-            $cart->add_fee(__('Extra Mesh Length (1800–2300mm)', 'stone-stomper'), 35);
-        } elseif ($a_frame_length > 2300) {
-            $cart->add_fee(__('Extra Mesh Length (>2300mm)', 'stone-stomper'), 100);
-        }
-    }
-});
-

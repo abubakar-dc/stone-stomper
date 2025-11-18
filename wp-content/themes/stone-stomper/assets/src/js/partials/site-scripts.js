@@ -846,7 +846,6 @@ jQuery( function() {
 		function() {
 			if ( jQuery( this ).is( ':checked' ) ) {
 				jQuery( '.toolbox-support' ).slideUp();
-				jQuery( '.support_pockets' ).slideUp();
 				jQuery( '.factory_stoneguard' ).slideDown();
 			} else {
 				jQuery( '.factory_stoneguard' ).slideUp();
@@ -857,25 +856,24 @@ jQuery( function() {
 	jQuery( '.stone-stomper-supports #toolbox' ).on( 'change', function() {
 		if ( jQuery( this ).is( ':checked' ) ) {
 			jQuery( '.factory_stoneguard' ).slideUp();
-			jQuery( '.support_pockets' ).slideUp();
 			jQuery( '.toolbox-support' ).slideDown();
 		} else {
 			jQuery( '.toolbox-support' ).slideUp();
 		}
 	} );
 
-	jQuery( '.stone-stomper-supports #support_pockets' ).on(
-		'change',
-		function() {
-			if ( jQuery( this ).is( ':checked' ) ) {
-				jQuery( '.factory_stoneguard' ).slideUp();
-				jQuery( '.toolbox-support' ).slideUp();
-				jQuery( '.support_pockets' ).slideDown();
-			} else {
-				jQuery( '.support_pockets' ).slideUp();
-			}
-		},
-	);
+	// jQuery( '.stone-stomper-supports #support_pockets' ).on(
+	// 	'change',
+	// 	function() {
+	// 		if ( jQuery( this ).is( ':checked' ) ) {
+	// 			jQuery( '.factory_stoneguard' ).slideUp();
+	// 			jQuery( '.toolbox-support' ).slideUp();
+	// 			jQuery( '.support_pockets' ).slideDown();
+	// 		} else {
+	// 			jQuery( '.support_pockets' ).slideUp();
+	// 		}
+	// 	},
+	// );
 
 	jQuery( '#a_frame_length' ).on( 'input change', function() {
 		// Get the input value and extract only the number part
