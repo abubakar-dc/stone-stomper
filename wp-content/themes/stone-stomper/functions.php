@@ -2059,9 +2059,22 @@ function generate_customer_order_word_file($post_id) {
 
 	$section->addTextBreak(1);
 
-    // MEASUREMENTS TABLE
-    $section->addText("STONE STOMPER DETAILS", ['bold' => true, 'size' => 10]);
+	// Wanna call vector svg here
+	$svg = get_towing_diagram_svg_png($post_id);
 
+	if ($svg) {
+		$diagram_png = svg_to_png_temp($svg);
+		if (file_exists($diagram_png)) {
+			$section->addImage($diagram_png, [
+				'width' => 450,
+				'alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER,
+			]);
+		}
+	}
+
+	$section->addTextBreak(1);
+
+    // MEASUREMENTS TABLE
 	$measure = $section->addTable(
 		[
 			'borderSize' => 6,
@@ -2094,19 +2107,23 @@ function generate_customer_order_word_file($post_id) {
 	$row->addCell(4000)->addText("$vinyl_insert_height_mm", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(6000)->addText("SG Distance From The Carvan (mm):", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000)->addText("$factory_stoneguard_width", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6000)->addText("Stoneguard Width (mm)", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText("$vinyl_insert_height_mm", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(6000)->addText("Stoneguard Distance from Caravan", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000)->addText("$factory_stoneguard_height", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6000)->addText("Stoneguard Length (mm)", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText("$vinyl_insert_height_mm", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+
+	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6000)->addText("Stoneguard Distance From Carvan (mm):", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText("$factory_stoneguard_width", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(6000)->addText("Toolbox Width (mm):", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(4000)->addText("$toolbox_width_mm", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(6000)->addText("Toolbox Distance from the Caravan:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6000)->addText("Toolbox Distance from the Caravan (mm):", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(4000)->addText("$toolbox_height_mm", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
@@ -2114,52 +2131,50 @@ function generate_customer_order_word_file($post_id) {
 	$row->addCell(4000)->addText($support_pockets, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(6000)->addText("Support Pocket Distance From Caravan:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6000)->addText("Support Pocket Distance from Caravan (mm)", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(4000)->addText($support_pockets_measurement, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(6000)->addText("Bar Option:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000)->addText($sts_var_caravan_bar_option, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-
-	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(6000)->addText("Bar Bend:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000)->addText($sts_var_caravan_bar_bend, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-
-	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(6000)->addText("SS Length Adjustment:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000)->addText($sts_var_caravan_ss_length_adj, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText($support_pockets_measurement, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(6000)->addText("Cut Out:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000)->addText($sts_var_caravan_cut_out, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText($support_pockets_measurement, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(6000)->addText("Mesh Only Measurement:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000)->addText($sts_var_caravan_mesh_only_measurement, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-
-	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(6000)->addText("Break Foam:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000)->addText($sts_var_caravan_break_form, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-
-	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(6000)->addText("HR Foam:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000)->addText($sts_var_caravan_hr_form, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText($support_pockets_measurement, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(6000)->addText("Eyelet Tab:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000)->addText($sts_var_caravan_eyelet_tab, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	// Wanna call vector svg here
-	$svg = get_towing_diagram_svg_png($post_id);
+	$row->addCell(4000)->addText($support_pockets_measurement, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
-	if ($svg) {
-		$diagram_png = svg_to_png_temp($svg);
-		if (file_exists($diagram_png)) {
-			$section->addImage($diagram_png, [
-				'width' => 400,
-				'alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER,
-			]);
-		}
-	}
+	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6000)->addText("Extra Bungee", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText($support_pockets_measurement, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+
+	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6000)->addText("Extra Vinyl Width (mm)", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText($support_pockets_measurement, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+
+	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6000)->addText("Extra Vinyl Length (mm)", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText($support_pockets_measurement, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+
+	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6000)->addText("Extra Vinyl Position", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText($support_pockets_measurement, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+
+	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6000)->addText("Angled Stone Guard Width (mm)", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText($support_pockets_measurement, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+
+	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6000)->addText("Angled Stone Guard Depth (mm)", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText($support_pockets_measurement, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+
+	$section->addTextBreak(2);
 
 	// HEADER TABLE (Logo + Company Info)
 	$table = $section->addTable([
