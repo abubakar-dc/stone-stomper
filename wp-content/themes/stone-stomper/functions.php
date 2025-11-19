@@ -179,8 +179,8 @@ add_filter('woocommerce_add_cart_item_data', function($cart_item_data, $product_
     return $cart_item_data;
 }, 10, 3);
 
-
 // Persist to Order Items (admin)
+
 add_action('woocommerce_checkout_create_order_line_item', function($item, $cart_item_key, $values, $order) {
     // Simple fields (incl. support_pockets)
     $fields = [
@@ -235,6 +235,7 @@ add_filter( 'use_block_editor_for_post', function( $use_block_editor, $post ) {
     }
     return $use_block_editor;
 }, 10, 2 );
+
 add_action( 'admin_init', function() {
     $post_id = isset( $_GET['post'] ) ? (int) $_GET['post'] : 0;
     if ( ! $post_id ) {
@@ -251,19 +252,12 @@ add_action( 'admin_init', function() {
     }
 });
 
-
-
-
 add_action( 'woocommerce_checkout_create_order', function( $order, $data ) {
-
     $cookie = sts_read_order_form_cookie();
-
     if ( ! empty( $cookie['is_stone_stomper_order'] ) && $cookie['is_stone_stomper_order'] === 'yes' ) {
         $order->update_meta_data('_sts_order', 'yes');
     }
-
 }, 10, 2 );
-
 
 /**
  * Read the large JSON saved across cookies:
@@ -271,6 +265,7 @@ add_action( 'woocommerce_checkout_create_order', function( $order, $data ) {
  * - order_form_parts      (count)
  * - order_form_0..N       (chunks)
  */
+
 function sts_read_order_form_cookie() {
 	$prefix = 'order_form';
 
@@ -307,6 +302,7 @@ function sts_bool( $v ) {
 /**
  * Helper: ensure array of attachment IDs or URLs
  */
+
 function sts_to_media_array( $v ) {
 	if ( is_string( $v ) ) {
 		$maybe = json_decode( $v, true );
@@ -344,10 +340,10 @@ function sts_to_media_array( $v ) {
 	return $result;
 }
 
-
 /**
  * Create/update a Customer CPT when an order is placed
  */
+
 add_action( 'woocommerce_new_order', function( $order_id ) {
 
 	$order = wc_get_order( $order_id );
@@ -608,8 +604,6 @@ function allowed_block_types( $allowed_blocks, $editor_context ) {
     return $core_blocks;
 }
 // add_filter( 'allowed_block_types_all', 'allowed_block_types', 10, 2 );
-
-
 // 🔹 Add WooCommerce support in your theme
 function mytheme_add_woocommerce_support() {
 	add_theme_support( 'woocommerce' );
@@ -1739,6 +1733,7 @@ use PhpOffice\PhpWord\PhpWord;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\Element\TextRun;
 
+
 function generate_customer_order_word_file($post_id) {
 	require_once __DIR__ . '/vendor/autoload.php';
     $phpWord = new \PhpOffice\PhpWord\PhpWord();
@@ -1749,6 +1744,7 @@ function generate_customer_order_word_file($post_id) {
 
     $order_id = get_post_meta($post_id, 'order_id', true);
     $order = wc_get_order($order_id);
+
     if (!$order) return false;
 
     // Fetch standard order data
@@ -1782,33 +1778,46 @@ function generate_customer_order_word_file($post_id) {
 
 
     // Fetch custom measurement meta
-    $product_type           = get_post_meta($post_id, 'product_type', true);
-    $caravan_make           = get_post_meta($post_id, 'caravan_make', true);
-    $caravan_model           = get_post_meta($post_id, 'caravan_model', true);
-    $vehicle_make           = get_post_meta($post_id, 'vehicle_make', true);
-    $vehicle_model           = get_post_meta($post_id, 'vehicle_model', true);
-    $vehicle_year           = get_post_meta($post_id, 'year_of_manufacture', true);
-    $caravan_width_mm       = get_post_meta($post_id, 'caravan_width_mm', true);
-    $caravan_length_mm      = get_post_meta($post_id, 'caravan_length_mm', true);
-    $bar_width_mm           = get_post_meta($post_id, 'bar_width_mm', true);
-    $vinyl_insert_width_mm  = get_post_meta($post_id, 'vinyl_insert_width_mm', true);
-    $vinyl_insert_height_mm = get_post_meta($post_id, 'vinyl_insert_height_mm', true);
-    $factory_stoneguard_width  = get_post_meta($post_id, 'factory_stoneguard_width', true);
-    $factory_stoneguard_height = get_post_meta($post_id, 'factory_stoneguard_height', true);
-    $toolbox_width_mm       = get_post_meta($post_id, 'toolbox_width_mm', true);
-    $toolbox_height_mm      = get_post_meta($post_id, 'toolbox_height_mm', true);
-    $support_pockets        = get_post_meta($post_id, 'support_pockets', true);
-    $support_pockets_measurement        = get_post_meta($post_id, 'support_pockets_measurement', true);
+    $product_type           						= get_post_meta($post_id, 'product_type', true);
+    $caravan_make           						= get_post_meta($post_id, 'caravan_make', true);
+    $caravan_model           						= get_post_meta($post_id, 'caravan_model', true);
+    $vehicle_make           						= get_post_meta($post_id, 'vehicle_make', true);
+    $vehicle_model           						= get_post_meta($post_id, 'vehicle_model', true);
+    $vehicle_year           						= get_post_meta($post_id, 'year_of_manufacture', true);
+    $caravan_width_mm       						= get_post_meta($post_id, 'caravan_width_mm', true);
+    $caravan_length_mm      						= get_post_meta($post_id, 'caravan_length_mm', true);
+    $bar_width_mm           						= get_post_meta($post_id, 'bar_width_mm', true);
+    $vinyl_insert_width_mm  						= get_post_meta($post_id, 'vinyl_insert_width_mm', true);
+    $vinyl_insert_height_mm 						= get_post_meta($post_id, 'vinyl_insert_height_mm', true);
+    $factory_stoneguard_width  						= get_post_meta($post_id, 'factory_stoneguard_width', true);
+    $factory_stoneguard_height 						= get_post_meta($post_id, 'factory_stoneguard_height', true);
+    $toolbox_width_mm       						= get_post_meta($post_id, 'toolbox_width_mm', true);
+    $toolbox_height_mm      						= get_post_meta($post_id, 'toolbox_height_mm', true);
+    $support_pockets        						= get_post_meta($post_id, 'support_pockets', true);
+    $support_pockets_measurement        			= get_post_meta($post_id, 'support_pockets_measurement', true);
 
-    $sts_var_caravan_bar_option     = get_post_meta($post_id, 'sts_var_caravan_bar_option', true);
-    $sts_var_caravan_bar_bend       = get_post_meta($post_id, 'sts_var_caravan_bar_bend', true);
-    $sts_var_caravan_ss_length_adj  = get_post_meta($post_id, 'sts_var_caravan_ss_length_adj', true);
-    $sts_var_caravan_cut_out        = get_post_meta($post_id, 'sts_var_caravan_cut_out', true);
-    $sts_var_caravan_mesh_only_measurement     = get_post_meta($post_id, 'sts_var_caravan_mesh_only_measurement', true);
-    $sts_var_caravan_break_form     = get_post_meta($post_id, 'sts_var_caravan_break_form', true);
-    $sts_var_caravan_hr_form        = get_post_meta($post_id, 'sts_var_caravan_hr_form', true);
-    $sts_var_caravan_eyelet_tab        = get_post_meta($post_id, 'sts_var_caravan_eyelet_tab', true);
-	$final_details = get_post_meta( $post_id, 'final_details', true );
+    $sts_var_caravan_bar_option     				= get_post_meta($post_id, 'sts_var_caravan_bar_option', true);
+    $sts_var_caravan_bar_bend       				= get_post_meta($post_id, 'sts_var_caravan_bar_bend', true);
+    $sts_var_caravan_ss_length_adj  				= get_post_meta($post_id, 'sts_var_caravan_ss_length_adj', true);
+    $sts_var_caravan_cut_out        				= get_post_meta($post_id, 'sts_var_caravan_cut_out', true);
+    $sts_var_caravan_mesh_only_measurement     		= get_post_meta($post_id, 'sts_var_caravan_mesh_only_measurement', true);
+    // $sts_var_caravan_break_form     				= get_post_meta($post_id, 'sts_var_caravan_break_form', true);
+    // $sts_var_caravan_hr_form        				= get_post_meta($post_id, 'sts_var_caravan_hr_form', true);
+    $sts_var_caravan_form        					= get_post_meta($post_id, 'sts_var_caravan_form', true);
+    $sts_var_caravan_eyelet_tab        				= get_post_meta($post_id, 'sts_var_caravan_eyelet_tab', true);
+    $sts_var_order_notes        					= get_post_meta($post_id, 'sts_var_order_notes', true);
+	$final_details 									= get_post_meta( $post_id, 'final_details', true );
+
+	// New fields
+    $extension_plate        = get_post_meta($post_id, 'extension_plate', true);
+    $fittings        = get_post_meta($post_id, 'fittings', true);
+    $sleeve        = get_post_meta($post_id, 'sleeve', true);
+    $extra_bungee        = get_post_meta($post_id, 'extra_bungee', true);
+    $extra_vinyl_width_mm        = get_post_meta($post_id, 'extra_vinyl_width_mm', true);
+    $extra_vinyl_length_mm        = get_post_meta($post_id, 'extra_vinyl_length_mm', true);
+    $extra_vinyl_position        = get_post_meta($post_id, 'extra_vinyl_position', true);
+    $angled_stone_guard_width_mm        = get_post_meta($post_id, 'angled_stone_guard_width_mm', true);
+    $angled_stone_guard_depth_mm        = get_post_meta($post_id, 'angled_stone_guard_depth_mm', true);
 
 	$final_delivery_address = "Same As Home Address";
 
@@ -1827,19 +1836,19 @@ function generate_customer_order_word_file($post_id) {
     $table->addRow();
 
     $logo_cell = $table->addCell(5000, ['valign' => 'center']);
-    $logo = get_template_directory() . '/assets/src/images/invoice-gaurd.png';
-
-    if (file_exists($logo)) {
-        $logo_cell->addImage($logo, ['width' => 100]);
-    }
+	$textRun = $logo_cell->addTextRun();
+	// Nested table to restrict width
+	$logoCellTitle = $logo_cell->addTable(['cellMargin' => 0]);
+	$logoCellTitle->addRow();
+	$logoCellTitle->addCell(3000)->addText("STONE STOMPER PACK SHEET", ['bold' => true, 'size' => 14]);
 
 	$info_cell = $table->addCell(5000, ['valign' => 'center']);
 
-	$textRun = $info_cell->addTextRun();
+	$textRun = $info_cell->addTextRun(['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$textRun->addText("ORDER DATE: ", ['bold' => true]);
 	$textRun->addText($order_date);
 
-	$textRun = $info_cell->addTextRun();
+	$textRun = $info_cell->addTextRun(['spaceBefore' => 1, 'spaceAfter' => 0]);
 	$textRun->addText("ORDER NUMBER: ", ['bold' => true]);
 	$textRun->addText($order_id);
 
@@ -1912,6 +1921,139 @@ function generate_customer_order_word_file($post_id) {
 	$textRun->addText($vehicle_year);
 
 	$textRun = $rightCell->addTextRun($compact);
+	$textRun->addText("Date Required: ", ['bold' => true]);
+	$textRun->addText($proposed_date);
+
+	$section->addTextBreak(1);
+
+
+	$section->addText("STONE STOMPER ACCESSORIES PACK DETAILS", ['bold' => true, 'size' => 10]);
+
+	$tableAccessories = $section->addTable(
+		[
+			'borderSize' => 6,
+			'borderColor' => 'cdcdcd', // gray border
+			'cellMarginTop' => 0,
+			'cellMarginBottom' => 0,
+			'cellMarginLeft' => 50,
+			'cellMarginRight' => 50
+		]
+	);
+
+	$row = $tableAccessories->addRow(200);
+	$row->addCell(6500)->addText("Fittings:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(3500)->addText($fittings, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+
+	$row = $tableAccessories->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6500)->addText("Extension Plate:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(3500)->addText($extension_plate , [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+
+	$row = $tableAccessories->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6500)->addText("Foam", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(3500)->addText($sts_var_caravan_form, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+
+	$row = $tableAccessories->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6500)->addText("Sleeves", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(3500)->addText("$sleeve", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+
+	$row = $tableAccessories->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6500)->addText("Towing Vehicle Bar Width (mm):", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(3500)->addText("$bar_width_mm", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+
+	$row = $tableAccessories->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6500)->addText("Bar Bend:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(3500)->addText("$sts_var_caravan_bar_bend", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+
+	$row = $tableAccessories->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6500)->addText("Bar Option:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(3500)->addText("$sts_var_caravan_bar_option", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+
+
+	$section->addTextBreak(1);
+
+
+	$section->addText("ORDER DETAILS:", ['bold' => true, 'size' => 10]);
+
+	$items_table = $section->addTable(
+		[
+			'borderSize' => 6,
+			'borderColor' => 'cdcdcd',
+			'cellMarginTop' => 0,
+			'cellMarginBottom' => 0,
+			'cellMarginLeft' => 50,
+			'cellMarginRight' => 50
+		]
+	);
+
+	$items_table->addRow(200);
+	$items_table->addCell(1000)->addText("Quantity", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$items_table->addCell(5000)->addText("Product", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$items_table->addCell(2000)->addText("Unit Price", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$items_table->addCell(2000)->addText("Total", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+
+	$i = 1;
+
+	foreach ($order->get_items() as $item) {
+		$name = $item->get_name();
+		$qty = $item->get_quantity();
+		$total = wc_format_decimal($item->get_total(), 2);
+		$unit = wc_format_decimal($item->get_total() / $qty, 2);
+
+		$items_table->addRow(200);
+		$items_table->addCell(1000)->addText($i++, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+		$items_table->addCell(5000)->addText($name, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+		$items_table->addCell(2000)->addText("$" . $unit, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+		$items_table->addCell(2000)->addText("$" . $total, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	}
+
+	$items_table->addRow(200);
+	$items_table->addCell(1000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$items_table->addCell(5000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$items_table->addCell(2000)->addText("Delivery:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$items_table->addCell(2000)->addText("$" . $delivery_cost, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+
+	$items_table->addRow(200);
+	$items_table->addCell(1000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$items_table->addCell(5000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$items_table->addCell(2000)->addText("Total Due:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$items_table->addCell(2000)->addText("$" . $order_total, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+
+	$items_table->addRow(200);
+	$items_table->addCell(1000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$items_table->addCell(5000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$items_table->addCell(2000)->addText('GST( Included)', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$items_table->addCell(2000)->addText("-", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+
+	$section->addTextBreak(1);
+
+    // Customer Notes
+    $section->addText("CUSTOMER ORDER NOTES:", ['bold' => true]);
+    $section->addText($sts_var_order_notes, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+
+    $section->addTextBreak(4);
+
+
+	 $table = $section->addTable();
+    $table->addRow();
+
+    $logo_cell = $table->addCell(5000, ['valign' => 'center']);
+	$textRun = $logo_cell->addTextRun();
+	// Nested table to restrict width
+	$logoCellTitle = $logo_cell->addTable(['cellMargin' => 0]);
+	$logoCellTitle->addRow();
+	$logoCellTitle->addCell(3000)->addText("STONE STOMPER MANUFACTURE SHEET", ['bold' => true, 'size' => 14]);
+
+	$info_cell = $table->addCell(5000, ['valign' => 'center']);
+
+	$textRun = $info_cell->addTextRun(['spaceBefore' => 1, 'spaceAfter' => 0]);
+	$textRun->addText("ORDER Name: ", ['bold' => true]);
+	$textRun->addText($customer_name);
+
+	$textRun = $info_cell->addTextRun(['spaceBefore' => 1, 'spaceAfter' => 0]);
+	$textRun->addText("ORDER NUMBER: ", ['bold' => true]);
+	$textRun->addText($order_id);
+
+	$textRun = $info_cell->addTextRun(['spaceBefore' => 1, 'spaceAfter' => 0]);
 	$textRun->addText("Date Required: ", ['bold' => true]);
 	$textRun->addText($proposed_date);
 
@@ -2019,69 +2161,6 @@ function generate_customer_order_word_file($post_id) {
 		}
 	}
 
-    $section->addTextBreak(2);
-
-	$section->addText("ORDER DETAILS:", ['bold' => true, 'size' => 10]);
-
-	$items_table = $section->addTable(
-		[
-			'borderSize' => 6,
-			'borderColor' => 'cdcdcd',
-			'cellMarginTop' => 0,
-			'cellMarginBottom' => 0,
-			'cellMarginLeft' => 50,
-			'cellMarginRight' => 50
-		]
-	);
-
-	$items_table->addRow(200);
-	$items_table->addCell(1000)->addText("Quantity", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$items_table->addCell(5000)->addText("Product", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$items_table->addCell(2000)->addText("Unit Price", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$items_table->addCell(2000)->addText("Total", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-
-	$i = 1;
-
-	foreach ($order->get_items() as $item) {
-		$name = $item->get_name();
-		$qty = $item->get_quantity();
-		$total = wc_format_decimal($item->get_total(), 2);
-		$unit = wc_format_decimal($item->get_total() / $qty, 2);
-
-		$items_table->addRow(200);
-		$items_table->addCell(1000)->addText($i++, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-		$items_table->addCell(5000)->addText($name, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-		$items_table->addCell(2000)->addText("$" . $unit, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-		$items_table->addCell(2000)->addText("$" . $total, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	}
-
-	$items_table->addRow(200);
-	$items_table->addCell(1000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$items_table->addCell(5000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$items_table->addCell(2000)->addText("Delivery:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$items_table->addCell(2000)->addText("$" . $delivery_cost, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-
-	$items_table->addRow(200);
-	$items_table->addCell(1000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$items_table->addCell(5000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$items_table->addCell(2000)->addText("Total Due:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$items_table->addCell(2000)->addText("$" . $order_total, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-
-	$items_table->addRow(200);
-	$items_table->addCell(1000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$items_table->addCell(5000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$items_table->addCell(2000)->addText('GST( Included)', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$items_table->addCell(2000)->addText("-", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-
-	$section->addTextBreak(1);
-
-
-    // Customer Notes
-    $section->addText("CUSTOMER ORDER NOTES:", ['bold' => true]);
-    $section->addText($delivery_instructions ?: 'No notes.');
-
-    $section->addTextBreak(6);
-
 	// HEADER TABLE (Logo + Company Info)
 	$table = $section->addTable([
 		'borderColor' => 'cdcdcd', // gray border
@@ -2121,9 +2200,6 @@ function generate_customer_order_word_file($post_id) {
 
     return $file_path;
 }
-
-
-
 
 function download_customer_word_callback() {
     $post_id = intval($_GET['post_id'] ?? 0);
