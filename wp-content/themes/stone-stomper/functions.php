@@ -1360,300 +1360,295 @@ function show_towing_svg_in_editor( $post ) {
 
     <!-- Popup container -->
     <div id="order-popup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:9999;">
-    	<!-- <div id="order-popup" style=""> -->
         <div class="ss-invoice-popup" style="">
             <a href="#" id="close-popup" style="position:absolute; top:15px; right:20px; font-size:20px; text-decoration:none;">✖</a>
-				<!-- popup First page -->
-
-				<div class="inv-one">
-					<div class="invoice-header-section d-flex justify-content-between " >
-						<div class="invoice-logo inv-column">
-							<img src="<?php echo get_template_directory_uri(); ?>/assets/src/images/invoice-gaurd.png" style="max-width:600px;cursor:pointer;" />
-						</div>
-						<div class="invoice-bussiness-details inv-column">
-							<div class="heading-6">Stone Stomper</div>
-							<p>PO Box 204, Port Noarlunga, SA 5167 <br> Factory location:  Lonsdale SA <br>
-							<strong>
-								Email:
-							</strong>
-							<br>
-							<a href="mailto:sales@stonestomper.com.au"></a>sales@stonestomper.com.au</p>
-						</div>
-						<div class="invoice-right-column inv-column">
-							<h3>Quote/<br>Invoice</h2>
-							<table>
-								<tr><td><strong>DATE:</strong> <?php echo esc_html( $order_date ); ?> </td></tr>
-								<tr><td><strong>INV#:</strong> <?php echo esc_html( $order_id ); ?> </td></tr>
-							</table>
-						</div>
+			<!-- popup First page -->
+			<div class="inv-one">
+				<div class="invoice-header-section d-flex justify-content-between " >
+					<div class="invoice-logo inv-column">
+						<img src="<?php echo get_template_directory_uri(); ?>/assets/src/images/invoice-gaurd.png" style="max-width:600px;cursor:pointer;" />
 					</div>
-					<br>
+					<div class="invoice-bussiness-details inv-column">
+						<div class="heading-6">Stone Stomper</div>
+						<p>PO Box 204, Port Noarlunga, SA 5167 <br> Factory location:  Lonsdale SA <br>
+						<strong>
+							Email:
+						</strong>
 						<br>
-					<div class="inv-order-details">
-						<div class="customer-details inv-order-row">
-							<b>Name: </b><?php echo esc_html( $customer_name ); ?>
-							&nbsp;&nbsp;&nbsp;
-							<b>Phone: </b><?php echo esc_html( $customer_phone ); ?>
-							&nbsp;&nbsp;&nbsp;
-							<strong>Email: </strong><?php echo esc_html( $customer_email ); ?>
-						</div>
-						<div class="customer-details inv-order-row">
-							<strong>Home Address: </strong><?php echo html_entity_decode( $delivery_address ); ?>
-						</div>
-
-						<?php if($final_details && $final_details['final_delivery'] && $final_details['final_delivery'] === 'move'){ ?>
-							<div class="customer-details inv-order-row">
-								<strong>Delivery Address: </strong><?php echo 'I am on the move'; ?>
-							</div>
-						<?php } ?>
-						<div class="customer-details inv-order-row">
-							<strong>Delivery Instructions/Authority to Leave:</strong>
-							<?php echo ! empty( $delivery_instructions ) ? esc_html( $delivery_instructions ) : 'No'; ?>
-						</div>
-						<div class="customer-details inv-order-row">
-							<?php if($product_type){ ?>
-								<strong>Product Type: </strong><?php echo esc_html( $product_type ); ?>
-							<?php } ?>
-							&nbsp;&nbsp;&nbsp;
-							<?php if($caravan_make){ ?>
-								<strong>Trailer Make: </strong><?php echo esc_html( $caravan_make ); ?>
-							<?php } ?>
-							&nbsp;&nbsp;&nbsp;
-							<?php if($vehicle_make){ ?>
-								<strong>Vehicle Make: </strong><?php echo esc_html( $vehicle_make ); ?>
-							<?php } ?>
-						</div>
-						<?php if($sts_var_proposed_date_of_delivery){ ?>
-							<div class="customer-details inv-order-row">
-								<strong>Date Required: </strong><?php echo date( 'd-F-Y', $sts_var_proposed_date_of_delivery ?: '-' ); ?>
-							</div>
-						<?php } ?>
+						<a href="mailto:sales@stonestomper.com.au"></a>sales@stonestomper.com.au</p>
+					</div>
+					<div class="invoice-right-column inv-column">
+						<h3>Quote/<br>Invoice</h2>
+						<table>
+							<tr><td><strong>DATE:</strong> <?php echo esc_html( $order_date ); ?> </td></tr>
+							<tr><td><strong>INV#:</strong> <?php echo esc_html( $order_id ); ?> </td></tr>
+						</table>
+					</div>
+				</div>
+				<br>
+				<br>
+				<div class="inv-order-details">
+					<div class="customer-details inv-order-row">
+						<b>Name: </b><?php echo esc_html( $customer_name ); ?>
+						&nbsp;&nbsp;&nbsp;
+						<b>Phone: </b><?php echo esc_html( $customer_phone ); ?>
+						&nbsp;&nbsp;&nbsp;
+						<strong>Email: </strong><?php echo esc_html( $customer_email ); ?>
+					</div>
+					<div class="customer-details inv-order-row">
+						<strong>Home Address: </strong><?php echo html_entity_decode( $delivery_address ); ?>
 					</div>
 
+					<?php if($final_details && $final_details['final_delivery'] && $final_details['final_delivery'] === 'move'){ ?>
+						<div class="customer-details inv-order-row">
+							<strong>Delivery Address: </strong><?php echo 'I am on the move'; ?>
+						</div>
+					<?php } ?>
+					<div class="customer-details inv-order-row">
+						<strong>Delivery Instructions/Authority to Leave:</strong>
+						<?php echo ! empty( $delivery_instructions ) ? esc_html( $delivery_instructions ) : 'No'; ?>
+					</div>
+					<div class="customer-details inv-order-row">
+						<?php if($product_type){ ?>
+							<strong>Product Type: </strong><?php echo esc_html( $product_type ); ?>
+						<?php } ?>
+						&nbsp;&nbsp;&nbsp;
+						<?php if($caravan_make){ ?>
+							<strong>Trailer Make: </strong><?php echo esc_html( $caravan_make ); ?>
+						<?php } ?>
+						&nbsp;&nbsp;&nbsp;
+						<?php if($vehicle_make){ ?>
+							<strong>Vehicle Make: </strong><?php echo esc_html( $vehicle_make ); ?>
+						<?php } ?>
+					</div>
+					<?php if($sts_var_proposed_date_of_delivery){ ?>
+						<div class="customer-details inv-order-row">
+							<strong>Date Required: </strong><?php echo date( 'd-F-Y', $sts_var_proposed_date_of_delivery ?: '-' ); ?>
+						</div>
+					<?php } ?>
+				</div>
+				<br>
+				<table class="order-table" style="width:100%; border-collapse:collapse;">
+					<tr>
+						<td style="text-align:center;"><strong>Sr. NO</strong></td>
+						<td style="text-align:center;"><strong>Description</strong></td>
+						<td style="text-align:center;"><strong>Unit Price</strong></td>
+						<td style="text-align:center;"><strong>Total</strong></td>
+					</tr>
+
+					<?php if ( $products ) { ?>
+
+						<?php foreach( $products as $key =>  $product ){ ?>
+							<tr>
+								<td style="text-align:center;"><?php echo ++$key; ?></td>
+								<td style="text-align:center;"><?php echo esc_html( $product['name'] ); ?></td>
+								<td style="text-align:center;">$<?php echo wc_format_decimal( $product['total'] / $product['quantity'], 2 ); ?></td>
+								<td style="text-align:center;">$<?php echo wc_format_decimal( $product['total'], 2 ); ?></td>
+							</tr>
+						<?php } ?>
+					<?php }	?>
 					<br>
 
+					<tr>
+						<td style="text-align:center;"><!-- remain empty --></td>
+						<td style="text-align:center;"><!-- remain empty --></td>
+						<td style="text-align:center;"><strong>Delivery</strong></td>
+						<td style="text-align:center;"><?php echo esc_html( $delivery_cost ); ?></td>
+					</tr>
+
+					<tr>
+						<td style="text-align:center;"><!-- remain empty --></td>
+						<td style="text-align:center;"><!-- remain empty --></td>
+						<td style="text-align:center;"><strong>Total Due</strong></td>
+						<td style="text-align:center;"><?php echo esc_html( $order_total ); ?></td>
+					</tr>
+					<tr>
+						<td style="text-align:center;"><!-- remain empty --></td>
+						<td style="text-align:center;"><!-- remain empty --></td>
+						<td style="text-align:center;">GST (included)</td>
+						<td>-</td>
+					</tr>
+				</table>
+				<div class="stone-stomper-vector">
+					<div class="stone-stomper-vector-inner">
+						<?php echo render_towing_diagram( $post->ID, true ); ?>
+					</div>
+				</div>
+				<div class="thanks-message">THANK YOU FOR YOUR BUSINESS</div>
+			</div>
+			<!-- popup second page -->
+			<hr>
+			<div class="inv-two office-use">
+				<div class="invoice-header-section d-flex justify-content-between " >
+					<div class="invoice-logo inv-column">
+						<img src="<?php echo get_template_directory_uri(); ?>/assets/src/images/invoice-gaurd.png" style="max-width:600px;cursor:pointer;" />
+					</div>
+					<div class="invoice-bussiness-details inv-column">
+						<div class="h4">Stone Stomper</div>
+						<p>PO Box 204, Port Noarlunga, SA 5167 <br> Factory location:  Lonsdale SA <br>
+						<strong>
+							Email:
+						</strong>
+						<br>
+						<a href="mailto:sales@stonestomper.com.au"></a>sales@stonestomper.com.au</p>
+					</div>
+					<div class="invoice-right-column inv-column">
+						<h3>Quote/Invoice</h2>
+						<table>
+							<tr><td><strong>DATE:</strong> <?php echo esc_html( $order_date ); ?> </td></tr>
+							<tr><td><strong>INV#:</strong> <?php echo esc_html( $order_id ); ?> </td></tr>
+							<tr><td><strong>P/O#:</strong> </td></tr>
+						</table>
+					</div>
+				</div>
+				<br>
+				<br>
+				<div class="inv-order-details">
+					<div class="customer-details inv-order-row">
+						<strong>Name: </strong><?php echo esc_html( $customer_name ); ?>
+						&nbsp;&nbsp;&nbsp;
+						<strong>Phone: </strong><?php echo esc_html( $customer_phone ); ?>
+						&nbsp;&nbsp;&nbsp;
+						<strong>Email: </strong><?php echo esc_html( $customer_email ); ?>
+					</div>
+					<div class="customer-details inv-order-row">
+						<strong>Delivery Address: </strong><?php echo html_entity_decode( $delivery_address ); ?>
+					</div>
+					<div class="customer-details inv-order-row">
+						<strong>Delivery Instructions/Authority to Leave:</strong>
+						<?php echo ! empty( $delivery_instructions ) ? esc_html( $delivery_instructions ) : 'No'; ?>
+					</div>
+					<div class="customer-details inv-order-row">
+						<?php if($product_type){ ?>
+							<strong>Product Type: </strong><?php echo esc_html( $product_type ); ?>
+						<?php } ?>
+						&nbsp;&nbsp;&nbsp;
+						<?php if($caravan_make){ ?>
+							<strong>Trailer Make: </strong><?php echo esc_html( $caravan_make ); ?>
+						<?php } ?>
+						&nbsp;&nbsp;&nbsp;
+						<?php if($vehicle_make){ ?>
+							<strong>Vehicle Make: </strong><?php echo esc_html( $vehicle_make ); ?>
+						<?php } ?>
+					</div>
+					<?php if($sts_var_proposed_date_of_delivery){ ?>
+						<div class="customer-details inv-order-row">
+							<strong>Date Required: </strong><?php echo date( 'd-F-Y', $sts_var_proposed_date_of_delivery ?: '-' ); ?>
+						</div>
+					<?php } ?>
 					<table class="order-table" style="width:100%; border-collapse:collapse;">
 						<tr>
-							<td style="text-align:center;"><strong>Sr. NO</strong></td>
-							<td style="text-align:center;"><strong>Description</strong></td>
-							<td style="text-align:center;"><strong>Unit Price</strong></td>
-							<td style="text-align:center;"><strong>Total</strong></td>
-						</tr>
-
-						<?php if ( $products ) { ?>
-
-							<?php foreach( $products as $key =>  $product ){ ?>
-								<tr>
-									<td style="text-align:center;"><?php echo ++$key; ?></td>
-									<td style="text-align:center;"><?php echo esc_html( $product['name'] ); ?></td>
-									<td style="text-align:center;">$<?php echo wc_format_decimal( $product['total'] / $product['quantity'], 2 ); ?></td>
-									<td style="text-align:center;">$<?php echo wc_format_decimal( $product['total'], 2 ); ?></td>
-								</tr>
-							<?php } ?>
-						<?php }	?>
-						<br>
-
-						<tr>
-							<td style="text-align:center;"><!-- remain empty --></td>
-							<td style="text-align:center;"><!-- remain empty --></td>
-							<td style="text-align:center;"><strong>Delivery</strong></td>
-							<td style="text-align:center;"><?php echo esc_html( $delivery_cost ); ?></td>
-						</tr>
-
-						<tr>
-							<td style="text-align:center;"><!-- remain empty --></td>
-							<td style="text-align:center;"><!-- remain empty --></td>
-							<td style="text-align:center;"><strong>Total Due</strong></td>
-							<td style="text-align:center;"><?php echo esc_html( $order_total ); ?></td>
+							<td style="padding:6px 15px; border:1px solid #ccc;">SS Width (mm):</td>
+							<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $caravan_width_mm ? $caravan_width_mm   : '-' ); ?></td>
 						</tr>
 						<tr>
-							<td style="text-align:center;"><!-- remain empty --></td>
-							<td style="text-align:center;"><!-- remain empty --></td>
-							<td style="text-align:center;">GST (included)</td>
-							<td>-</td>
+							<td style="padding:6px 15px; border:1px solid #ccc;">SS Length (mm):</td>
+							<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $caravan_length_mm ? $caravan_length_mm  : '-' ); ?></td>
+						</tr>
+						<tr>
+							<td style="padding:6px 15px; border:1px solid #ccc;">Towing Vehicle BarWidth (mm):</td>
+							<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $bar_width_mm ? $bar_width_mm  : '-' ); ?></td>
+						</tr>
+						<tr>
+							<td style="padding:6px 15px; border:1px solid #ccc;">Vinyl Insert Width (mm):</td>
+							<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $vinyl_insert_width_mm ? $vinyl_insert_width_mm  : '-' ); ?></td>
+						</tr>
+						<tr>
+							<td style="padding:6px 15px; border:1px solid #ccc;">Vinyl Insert Length (mm):</td>
+							<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $vinyl_insert_height_mm ? $vinyl_insert_height_mm : '-' ); ?></td>
+						</tr>
+						<tr>
+							<td style="padding:6px 15px; border:1px solid #ccc;">Stoneguard Width (mm):</td>
+							<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $factory_stoneguard_width ? $factory_stoneguard_width : '-' ); ?></td>
+						</tr>
+						<tr>
+							<td style="padding:6px 15px; border:1px solid #ccc;">SG Distance From The Carvan (mm):</td>
+							<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $factory_stoneguard_height ? $factory_stoneguard_height : '-' ); ?></td>
+						</tr>
+						<tr>
+							<td style="padding:6px 15px; border:1px solid #ccc;">Toolbox Width (mm):</td>
+							<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $toolbox_width_mm ? $toolbox_width_mm : '-' ); ?></td>
+						</tr>
+						<tr>
+							<td style="padding:6px 15px; border:1px solid #ccc;">Toolbox Distance from the Caravan:</td>
+							<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $toolbox_height_mm ? $toolbox_height_mm : '-' ); ?></td>
+						</tr>
+						<tr>
+							<td style="padding:6px 15px; border:1px solid #ccc;">Bar Option</span></td>
+							<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_bar_option); ?></td>
+						</tr>
+						<tr>
+							<td style="padding:6px 15px; border:1px solid #ccc;">Bar Bend</span></td>
+							<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_bar_bend); ?></td>
+						</tr>
+						<tr>
+							<td style="padding:6px 15px; border:1px solid #ccc;">SS Length Adjustment</span></td>
+							<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_ss_length_adj); ?></td>
+						</tr>
+						<tr>
+							<td style="padding:6px 15px; border:1px solid #ccc;">Cut Out</span></td>
+							<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_cut_out); ?></td>
+						</tr>
+						<tr>
+							<td style="padding:6px 15px; border:1px solid #ccc; ">Mesh only Measurement</span></td>
+							<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_mesh_only_measurement); ?></td>
+						</tr>
+						<tr>
+							<td style="padding:6px 15px; border:1px solid #ccc;">Break Foam</span></td>
+							<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_break_form); ?></td>
+						</tr>
+						<tr>
+							<td style="padding:6px 15px; border:1px solid #ccc;">Hr Foam</span></td>
+							<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_hr_form); ?></td>
+						</tr>
+						<tr>
+							<td style="padding:6px 15px; border:1px solid #ccc; ">Eyelet Tab</span></td>
+							<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_eyelet_tab); ?></td>
+						</tr>
+						<tr>
+							<td style="padding:6px 15px; border:1px solid #ccc; ">Angled Stone Guard Width (mm)</span></td>
+							<td style="padding:6px 15px; border:1px solid #ccc;"><span> <?php echo html_entity_decode($angled_stone_guard_width_mm); ?></span></td>
+						</tr>
+						<tr>
+							<td style="padding:6px 15px; border:1px solid #ccc; ">Angled Stone Guard Depth (mm)</span></td>
+							<td style="padding:6px 15px; border:1px solid #ccc;"><span> <?php echo html_entity_decode($angled_stone_guard_depth_mm); ?></span></td>
+						</tr>
+						<tr>
+							<td style="padding:6px 15px; border:1px solid #ccc; ">Extension Plate</span></td>
+							<td style="padding:6px 15px; border:1px solid #ccc;"><span> <?php echo html_entity_decode($extension_plate); ?></span></td>
+						</tr>
+						<tr>
+							<td style="padding:6px 15px; border:1px solid #ccc; ">Fittings</span></td>
+							<td style="padding:6px 15px; border:1px solid #ccc;"><span> <?php echo html_entity_decode($fittings); ?></span></td>
+						</tr>
+						<tr>
+							<td style="padding:6px 15px; border:1px solid #ccc; ">Sleeve</span></td>
+							<td style="padding:6px 15px; border:1px solid #ccc;"><span> <?php echo html_entity_decode($sleeve); ?></span></td>
+						</tr>
+						<tr>
+							<td style="padding:6px 15px; border:1px solid #ccc; ">Extra Bungee</span></td>
+							<td style="padding:6px 15px; border:1px solid #ccc;"><span> <?php echo html_entity_decode($extra_bungee); ?></span></td>
+						</tr>
+						<tr>
+							<td style="padding:6px 15px; border:1px solid #ccc; ">Extra Vinyl Width (mm)</span></td>
+							<td style="padding:6px 15px; border:1px solid #ccc;"><span> <?php echo html_entity_decode($extra_vinyl_width_mm); ?></span></td>
+						</tr>
+						<tr>
+							<td style="padding:6px 15px; border:1px solid #ccc; ">Extra Vinyl Length (mm)</span></td>
+							<td style="padding:6px 15px; border:1px solid #ccc;"><span> <?php echo html_entity_decode($extra_vinyl_length_mm); ?></span></td>
+						</tr>
+						<tr>
+							<td style="padding:6px 15px; border:1px solid #ccc; ">Extra Vinyl Position</span></td>
+							<td style="padding:6px 15px; border:1px solid #ccc;"><span> <?php echo html_entity_decode($extra_vinyl_position); ?></span></td>
 						</tr>
 					</table>
 					<div class="stone-stomper-vector">
 						<div class="stone-stomper-vector-inner">
-							<?php echo render_towing_diagram( $post->ID, true ); ?>
-						</div>
+						<?php echo render_towing_diagram( $post->ID, true ); ?>
 					</div>
-					<div class="thanks-message">THANK YOU FOR YOUR BUSINESS</div>
-				</div>
-				<!-- popup second page -->
-				 <hr>
-				<div class="inv-two office-use">
-
-					<div class="invoice-header-section d-flex justify-content-between " >
-						<div class="invoice-logo inv-column">
-							<img src="<?php echo get_template_directory_uri(); ?>/assets/src/images/invoice-gaurd.png" style="max-width:600px;cursor:pointer;" />
-						</div>
-						<div class="invoice-bussiness-details inv-column">
-							<div class="h4">Stone Stomper</div>
-							<p>PO Box 204, Port Noarlunga, SA 5167 <br> Factory location:  Lonsdale SA <br>
-							<strong>
-								Email:
-							</strong>
-							<br>
-							<a href="mailto:sales@stonestomper.com.au"></a>sales@stonestomper.com.au</p>
-						</div>
-						<div class="invoice-right-column inv-column">
-							<h3>Quote/Invoice</h2>
-							<table>
-								<tr><td><strong>DATE:</strong> <?php echo esc_html( $order_date ); ?> </td></tr>
-								<tr><td><strong>INV#:</strong> <?php echo esc_html( $order_id ); ?> </td></tr>
-								<tr><td><strong>P/O#:</strong> </td></tr>
-							</table>
-						</div>
-					</div>
-					<br>
-						<br>
-					<div class="inv-order-details">
-						<div class="customer-details inv-order-row">
-							<strong>Name: </strong><?php echo esc_html( $customer_name ); ?>
-							&nbsp;&nbsp;&nbsp;
-							<strong>Phone: </strong><?php echo esc_html( $customer_phone ); ?>
-							&nbsp;&nbsp;&nbsp;
-							<strong>Email: </strong><?php echo esc_html( $customer_email ); ?>
-						</div>
-						<div class="customer-details inv-order-row">
-							<strong>Delivery Address: </strong><?php echo html_entity_decode( $delivery_address ); ?>
-						</div>
-						<div class="customer-details inv-order-row">
-							<strong>Delivery Instructions/Authority to Leave:</strong>
-							<?php echo ! empty( $delivery_instructions ) ? esc_html( $delivery_instructions ) : 'No'; ?>
-						</div>
-						<div class="customer-details inv-order-row">
-							<?php if($product_type){ ?>
-								<strong>Product Type: </strong><?php echo esc_html( $product_type ); ?>
-							<?php } ?>
-							&nbsp;&nbsp;&nbsp;
-							<?php if($caravan_make){ ?>
-								<strong>Trailer Make: </strong><?php echo esc_html( $caravan_make ); ?>
-							<?php } ?>
-							&nbsp;&nbsp;&nbsp;
-							<?php if($vehicle_make){ ?>
-								<strong>Vehicle Make: </strong><?php echo esc_html( $vehicle_make ); ?>
-							<?php } ?>
-						</div>
-						<?php if($sts_var_proposed_date_of_delivery){ ?>
-							<div class="customer-details inv-order-row">
-								<strong>Date Required: </strong><?php echo date( 'd-F-Y', $sts_var_proposed_date_of_delivery ?: '-' ); ?>
-							</div>
-						<?php } ?>
-						<table class="order-table" style="width:100%; border-collapse:collapse;">
-							<tr>
-								<td style="padding:6px 15px; border:1px solid #ccc;">SS Width (mm):</td>
-								<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $caravan_width_mm ? $caravan_width_mm   : '-' ); ?></td>
-							</tr>
-							<tr>
-								<td style="padding:6px 15px; border:1px solid #ccc;">SS Length (mm):</td>
-								<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $caravan_length_mm ? $caravan_length_mm  : '-' ); ?></td>
-							</tr>
-							<tr>
-								<td style="padding:6px 15px; border:1px solid #ccc;">Towing Vehicle BarWidth (mm):</td>
-								<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $bar_width_mm ? $bar_width_mm  : '-' ); ?></td>
-							</tr>
-							<tr>
-								<td style="padding:6px 15px; border:1px solid #ccc;">Vinyl Insert Width (mm):</td>
-								<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $vinyl_insert_width_mm ? $vinyl_insert_width_mm  : '-' ); ?></td>
-							</tr>
-							<tr>
-								<td style="padding:6px 15px; border:1px solid #ccc;">Vinyl Insert Length (mm):</td>
-								<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $vinyl_insert_height_mm ? $vinyl_insert_height_mm : '-' ); ?></td>
-							</tr>
-							<tr>
-								<td style="padding:6px 15px; border:1px solid #ccc;">Stoneguard Width (mm):</td>
-								<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $factory_stoneguard_width ? $factory_stoneguard_width : '-' ); ?></td>
-							</tr>
-							<tr>
-								<td style="padding:6px 15px; border:1px solid #ccc;">SG Distance From The Carvan (mm):</td>
-								<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $factory_stoneguard_height ? $factory_stoneguard_height : '-' ); ?></td>
-							</tr>
-							<tr>
-								<td style="padding:6px 15px; border:1px solid #ccc;">Toolbox Width (mm):</td>
-								<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $toolbox_width_mm ? $toolbox_width_mm : '-' ); ?></td>
-							</tr>
-							<tr>
-								<td style="padding:6px 15px; border:1px solid #ccc;">Toolbox Distance from the Caravan:</td>
-								<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $toolbox_height_mm ? $toolbox_height_mm : '-' ); ?></td>
-							</tr>
-							<tr>
-								<td style="padding:6px 15px; border:1px solid #ccc;">Bar Option</span></td>
-								<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_bar_option); ?></td>
-							</tr>
-							<tr>
-								<td style="padding:6px 15px; border:1px solid #ccc;">Bar Bend</span></td>
-								<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_bar_bend); ?></td>
-							</tr>
-							<tr>
-								<td style="padding:6px 15px; border:1px solid #ccc;">SS Length Adjustment</span></td>
-								<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_ss_length_adj); ?></td>
-							</tr>
-							<tr>
-								<td style="padding:6px 15px; border:1px solid #ccc;">Cut Out</span></td>
-								<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_cut_out); ?></td>
-							</tr>
-							<tr>
-								<td style="padding:6px 15px; border:1px solid #ccc; ">Mesh only Measurement</span></td>
-								<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_mesh_only_measurement); ?></td>
-							</tr>
-							<tr>
-								<td style="padding:6px 15px; border:1px solid #ccc;">Break Foam</span></td>
-								<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_break_form); ?></td>
-							</tr>
-							<tr>
-								<td style="padding:6px 15px; border:1px solid #ccc;">Hr Foam</span></td>
-								<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_hr_form); ?></td>
-							</tr>
-							<tr>
-								<td style="padding:6px 15px; border:1px solid #ccc; ">Eyelet Tab</span></td>
-								<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_eyelet_tab); ?></td>
-							</tr>
-							<tr>
-								<td style="padding:6px 15px; border:1px solid #ccc; ">Angled Stone Guard Width (mm)</span></td>
-								<td style="padding:6px 15px; border:1px solid #ccc;"><span> <?php echo html_entity_decode($angled_stone_guard_width_mm); ?></span></td>
-							</tr>
-							<tr>
-								<td style="padding:6px 15px; border:1px solid #ccc; ">Angled Stone Guard Depth (mm)</span></td>
-								<td style="padding:6px 15px; border:1px solid #ccc;"><span> <?php echo html_entity_decode($angled_stone_guard_depth_mm); ?></span></td>
-							</tr>
-							<tr>
-								<td style="padding:6px 15px; border:1px solid #ccc; ">Extension Plate</span></td>
-								<td style="padding:6px 15px; border:1px solid #ccc;"><span> <?php echo html_entity_decode($extension_plate); ?></span></td>
-							</tr>
-							<tr>
-								<td style="padding:6px 15px; border:1px solid #ccc; ">Fittings</span></td>
-								<td style="padding:6px 15px; border:1px solid #ccc;"><span> <?php echo html_entity_decode($fittings); ?></span></td>
-							</tr>
-							<tr>
-								<td style="padding:6px 15px; border:1px solid #ccc; ">Sleeve</span></td>
-								<td style="padding:6px 15px; border:1px solid #ccc;"><span> <?php echo html_entity_decode($sleeve); ?></span></td>
-							</tr>
-							<tr>
-								<td style="padding:6px 15px; border:1px solid #ccc; ">Extra Bungee</span></td>
-								<td style="padding:6px 15px; border:1px solid #ccc;"><span> <?php echo html_entity_decode($extra_bungee); ?></span></td>
-							</tr>
-							<tr>
-								<td style="padding:6px 15px; border:1px solid #ccc; ">Extra Vinyl Width (mm)</span></td>
-								<td style="padding:6px 15px; border:1px solid #ccc;"><span> <?php echo html_entity_decode($extra_vinyl_width_mm); ?></span></td>
-							</tr>
-							<tr>
-								<td style="padding:6px 15px; border:1px solid #ccc; ">Extra Vinyl Length (mm)</span></td>
-								<td style="padding:6px 15px; border:1px solid #ccc;"><span> <?php echo html_entity_decode($extra_vinyl_length_mm); ?></span></td>
-							</tr>
-							<tr>
-								<td style="padding:6px 15px; border:1px solid #ccc; ">Extra Vinyl Position</span></td>
-								<td style="padding:6px 15px; border:1px solid #ccc;"><span> <?php echo html_entity_decode($extra_vinyl_position); ?></span></td>
-							</tr>
-						</table>
-						<div class="stone-stomper-vector">
-							<div class="stone-stomper-vector-inner">
-							<?php echo render_towing_diagram( $post->ID, true ); ?>
-						</div>
-						</div>
 					</div>
 				</div>
+			</div>
         </div>
     </div>
 
@@ -1827,7 +1822,7 @@ function generate_customer_order_word_file($post_id) {
     // Fetch standard order data
     $order_date       = $order->get_date_created()->date_i18n('d-F-Y');
     $customer_name    = $order->get_formatted_billing_full_name();
-    $customer_phone   = get_post_meta($post_id, 'customer_phone', true);
+    // $customer_phone   = get_post_meta($post_id, 'customer_phone', true);
     $customer_email   = $order->get_billing_email();
 	$first_name   = $order->get_shipping_first_name();
 	$last_name    = $order->get_shipping_last_name();
@@ -1855,6 +1850,9 @@ function generate_customer_order_word_file($post_id) {
     $delivery_instructions = $order->get_customer_note();
 
     // Fetch custom measurement meta
+    $customer_name           						= get_post_meta($post_id, 'name', true);
+    $customer_email           						= get_post_meta($post_id, 'email', true);
+    $customer_phone           						= get_post_meta($post_id, 'customer_phone', true);
     $product_type           						= get_post_meta($post_id, 'product_type', true);
     $caravan_make           						= get_post_meta($post_id, 'caravan_make', true);
     $caravan_model           						= get_post_meta($post_id, 'caravan_model', true);
