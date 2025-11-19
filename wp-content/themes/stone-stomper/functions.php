@@ -1054,6 +1054,22 @@ function show_towing_svg_in_editor( $post ) {
     $vinyl_insert_height_mm    = get_post_meta( $post->ID, 'vinyl_insert_height_mm', true );
     $toolbox_width_mm    = get_post_meta( $post->ID, 'toolbox_width_mm', true );
     $toolbox_height_mm    = get_post_meta( $post->ID, 'toolbox_height_mm', true );
+    $sts_var_caravan_foam    = get_post_meta( $post->ID, 'sts_var_caravan_foam', true );
+
+
+	// New fields
+    $extension_plate        = get_post_meta($post->ID, 'extension_plate', true);
+    $fittings        = get_post_meta($post->ID, 'fittings', true);
+    $sleeve        = get_post_meta($post->ID, 'sleeve', true);
+    $extra_bungee        = get_post_meta($post->ID, 'extra_bungee', true);
+    $extra_vinyl_width_mm        = get_post_meta($post->ID, 'extra_vinyl_width_mm', true);
+    $extra_vinyl_length_mm        = get_post_meta($post->ID, 'extra_vinyl_length_mm', true);
+    $extra_vinyl_position        = get_post_meta($post->ID, 'extra_vinyl_position', true);
+    $angled_stone_guard_width_mm        = get_post_meta($post->ID, 'angled_stone_guard_width_mm', true);
+    $angled_stone_guard_depth_mm        = get_post_meta($post->ID, 'angled_stone_guard_depth_mm', true);
+
+
+
     // $toolbox_width_mm    = get_post_meta( $post->ID, 'toolbox_width_mm', true );
     // $toolbox_height_mm    = get_post_meta( $post->ID, 'toolbox_height_mm', true );
 
@@ -1186,7 +1202,6 @@ function show_towing_svg_in_editor( $post ) {
 
 	<!-- Order Preview Image -->
     <div style="text-align:center; padding:20px;">
-
 		<div class="functional-buttons" id="functional-buttons">
 				<span class="button button-primary save-chnages" id="save-chnages" style="margin-right:10px;">Save Changes <span class="spinner my-custom-spinner" style="float: left; margin-left: -40px;"></span> </span>
 				<br>
@@ -1197,8 +1212,6 @@ function show_towing_svg_in_editor( $post ) {
 			<a href="#" class="button button-secondary email-to-manufacturer" style="margin-right:10px;">Email to Manufacturer</a>
 			<a href="#" id="show-order-popup" class="button button-secondary" style="">View Order #<?php echo esc_html( $order_id ); ?></a>
 		</div>
-
-
 		<div class="stone-stomper-vector" style="display:none;">
 			<div class="stone-stomper-vector-inner">
 				<?php
@@ -1219,7 +1232,6 @@ function show_towing_svg_in_editor( $post ) {
 					<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo date( 'd-F-Y', $sts_var_proposed_date_of_delivery ?: '-' ); ?></td>
 				</tr>
 			<?php } ?>
-
 			<tr>
 				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Product Type</td>
 				<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $product_type ? $product_type : '-' ); ?></td>
@@ -1277,36 +1289,69 @@ function show_towing_svg_in_editor( $post ) {
 
 			<tr>
 				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold; ">Bar Option</span></td>
-				<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_bar_option); ?></td>
+				<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_bar_option); ?></span></td>
 			</tr>
 			<tr>
 				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold; ">Bar Bend</span></td>
-				<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_bar_bend); ?></td>
+				<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_bar_bend); ?></span></td>
 			</tr>
 			<tr>
 				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold; ">SS Length Adjustment</span></td>
-				<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_ss_length_adj); ?></td>
+				<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_ss_length_adj); ?></span></td>
 			</tr>
 			<tr>
 				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold; ">Cut Out</span></td>
-				<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_cut_out); ?></td>
+				<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_cut_out); ?></span></td>
 			</tr>
 			<tr>
 				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold; ">Mesh only Measurement</span></td>
-				<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_mesh_only_measurement); ?></td>
+				<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_mesh_only_measurement); ?></span></td>
 			</tr>
 			<tr>
-				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold; ">Break Foam</span></td>
-				<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_break_form); ?></td>
-			</tr>
-			<tr>
-				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold; ">Hr Foam</span></td>
-				<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_hr_form); ?></td>
+				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold; ">Foam</span></td>
+				<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_foam); ?></span></td>
 			</tr>
 			<tr>
 				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold; ">Eyelet Tab</span></td>
-				<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_eyelet_tab); ?></td>
+				<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_eyelet_tab); ?></span></td>
 			</tr>
+			<tr>
+				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold; ">Angled Stone Guard Width (mm)</span></td>
+				<td style="padding:6px 15px; border:1px solid #ccc;"><span> <?php echo html_entity_decode($angled_stone_guard_width_mm); ?></span></td>
+			</tr>
+			<tr>
+				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold; ">Angled Stone Guard Depth (mm)</span></td>
+				<td style="padding:6px 15px; border:1px solid #ccc;"><span> <?php echo html_entity_decode($angled_stone_guard_depth_mm); ?></span></td>
+			</tr>
+			<tr>
+				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold; ">Extension Plate</span></td>
+				<td style="padding:6px 15px; border:1px solid #ccc;"><span> <?php echo html_entity_decode($extension_plate); ?></span></td>
+			</tr>
+			<tr>
+				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold; ">Fittings</span></td>
+				<td style="padding:6px 15px; border:1px solid #ccc;"><span> <?php echo html_entity_decode($fittings); ?></span></td>
+			</tr>
+			<tr>
+				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold; ">Sleeve</span></td>
+				<td style="padding:6px 15px; border:1px solid #ccc;"><span> <?php echo html_entity_decode($sleeve); ?></span></td>
+			</tr>
+			<tr>
+				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold; ">Extra Bungee</span></td>
+				<td style="padding:6px 15px; border:1px solid #ccc;"><span> <?php echo html_entity_decode($extra_bungee); ?></span></td>
+			</tr>
+			<tr>
+				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold; ">Extra Vinyl Width (mm)</span></td>
+				<td style="padding:6px 15px; border:1px solid #ccc;"><span> <?php echo html_entity_decode($extra_vinyl_width_mm); ?></span></td>
+			</tr>
+			<tr>
+				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold; ">Extra Vinyl Length (mm)</span></td>
+				<td style="padding:6px 15px; border:1px solid #ccc;"><span> <?php echo html_entity_decode($extra_vinyl_length_mm); ?></span></td>
+			</tr>
+			<tr>
+				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold; ">Extra Vinyl Position</span></td>
+				<td style="padding:6px 15px; border:1px solid #ccc;"><span> <?php echo html_entity_decode($extra_vinyl_position); ?></span></td>
+			</tr>
+
 		</table>
 	</div>
 
@@ -1496,10 +1541,7 @@ function show_towing_svg_in_editor( $post ) {
 								<strong>Date Required: </strong><?php echo date( 'd-F-Y', $sts_var_proposed_date_of_delivery ?: '-' ); ?>
 							</div>
 						<?php } ?>
-
-						<!-- table -->
 						<table class="order-table" style="width:100%; border-collapse:collapse;">
-							<!-- SS Width -->
 							<tr>
 								<td style="padding:6px 15px; border:1px solid #ccc;">SS Width (mm):</td>
 								<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $caravan_width_mm ? $caravan_width_mm   : '-' ); ?></td>
@@ -1568,8 +1610,43 @@ function show_towing_svg_in_editor( $post ) {
 								<td style="padding:6px 15px; border:1px solid #ccc; ">Eyelet Tab</span></td>
 								<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_eyelet_tab); ?></td>
 							</tr>
+							<tr>
+								<td style="padding:6px 15px; border:1px solid #ccc; ">Angled Stone Guard Width (mm)</span></td>
+								<td style="padding:6px 15px; border:1px solid #ccc;"><span> <?php echo html_entity_decode($angled_stone_guard_width_mm); ?></span></td>
+							</tr>
+							<tr>
+								<td style="padding:6px 15px; border:1px solid #ccc; ">Angled Stone Guard Depth (mm)</span></td>
+								<td style="padding:6px 15px; border:1px solid #ccc;"><span> <?php echo html_entity_decode($angled_stone_guard_depth_mm); ?></span></td>
+							</tr>
+							<tr>
+								<td style="padding:6px 15px; border:1px solid #ccc; ">Extension Plate</span></td>
+								<td style="padding:6px 15px; border:1px solid #ccc;"><span> <?php echo html_entity_decode($extension_plate); ?></span></td>
+							</tr>
+							<tr>
+								<td style="padding:6px 15px; border:1px solid #ccc; ">Fittings</span></td>
+								<td style="padding:6px 15px; border:1px solid #ccc;"><span> <?php echo html_entity_decode($fittings); ?></span></td>
+							</tr>
+							<tr>
+								<td style="padding:6px 15px; border:1px solid #ccc; ">Sleeve</span></td>
+								<td style="padding:6px 15px; border:1px solid #ccc;"><span> <?php echo html_entity_decode($sleeve); ?></span></td>
+							</tr>
+							<tr>
+								<td style="padding:6px 15px; border:1px solid #ccc; ">Extra Bungee</span></td>
+								<td style="padding:6px 15px; border:1px solid #ccc;"><span> <?php echo html_entity_decode($extra_bungee); ?></span></td>
+							</tr>
+							<tr>
+								<td style="padding:6px 15px; border:1px solid #ccc; ">Extra Vinyl Width (mm)</span></td>
+								<td style="padding:6px 15px; border:1px solid #ccc;"><span> <?php echo html_entity_decode($extra_vinyl_width_mm); ?></span></td>
+							</tr>
+							<tr>
+								<td style="padding:6px 15px; border:1px solid #ccc; ">Extra Vinyl Length (mm)</span></td>
+								<td style="padding:6px 15px; border:1px solid #ccc;"><span> <?php echo html_entity_decode($extra_vinyl_length_mm); ?></span></td>
+							</tr>
+							<tr>
+								<td style="padding:6px 15px; border:1px solid #ccc; ">Extra Vinyl Position</span></td>
+								<td style="padding:6px 15px; border:1px solid #ccc;"><span> <?php echo html_entity_decode($extra_vinyl_position); ?></span></td>
+							</tr>
 						</table>
-
 						<div class="stone-stomper-vector">
 							<div class="stone-stomper-vector-inner">
 							<?php echo render_towing_diagram( $post->ID, true ); ?>
@@ -1772,10 +1849,10 @@ function generate_customer_order_word_file($post_id) {
 		$postcode,
 		$country
 	]));
+
     $delivery_cost    = $order->get_shipping_total();
     $order_total      = $order->get_total();
     $delivery_instructions = $order->get_customer_note();
-
 
     // Fetch custom measurement meta
     $product_type           						= get_post_meta($post_id, 'product_type', true);
@@ -1927,6 +2004,9 @@ function generate_customer_order_word_file($post_id) {
 	$section->addTextBreak(1);
 
 
+	// Second Section: Stone Stomper Accessories Pack Details
+
+
 	$section->addText("STONE STOMPER ACCESSORIES PACK DETAILS", ['bold' => true, 'size' => 10]);
 
 	$tableAccessories = $section->addTable(
@@ -1971,6 +2051,7 @@ function generate_customer_order_word_file($post_id) {
 
 	$section->addTextBreak(1);
 
+	// Third Section: Order Details
 
 	$section->addText("ORDER DETAILS:", ['bold' => true, 'size' => 10]);
 
@@ -2023,40 +2104,34 @@ function generate_customer_order_word_file($post_id) {
 	$items_table->addCell(5000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$items_table->addCell(2000)->addText('GST( Included)', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$items_table->addCell(2000)->addText("-", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-
 	$section->addTextBreak(1);
 
-    // Customer Notes
+	// Fourth Section: Custom Order Notes
+
     $section->addText("CUSTOMER ORDER NOTES:", ['bold' => true]);
     $section->addText($sts_var_order_notes, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-
     $section->addTextBreak(4);
 
+	// Fifth Section: Manufacture Sheet
 
-	 $table = $section->addTable();
+	$table = $section->addTable();
     $table->addRow();
-
     $logo_cell = $table->addCell(5000, ['valign' => 'center']);
 	$textRun = $logo_cell->addTextRun();
 	// Nested table to restrict width
 	$logoCellTitle = $logo_cell->addTable(['cellMargin' => 0]);
 	$logoCellTitle->addRow();
-	$logoCellTitle->addCell(3000)->addText("STONE STOMPER MANUFACTURE SHEET", ['bold' => true, 'size' => 14]);
-
+	$logoCellTitle->addCell(4000)->addText("STONE STOMPER MANUFACTURE SHEET", ['bold' => true, 'size' => 14]);
 	$info_cell = $table->addCell(5000, ['valign' => 'center']);
-
 	$textRun = $info_cell->addTextRun(['spaceBefore' => 1, 'spaceAfter' => 0]);
 	$textRun->addText("ORDER Name: ", ['bold' => true]);
 	$textRun->addText($customer_name);
-
 	$textRun = $info_cell->addTextRun(['spaceBefore' => 1, 'spaceAfter' => 0]);
 	$textRun->addText("ORDER NUMBER: ", ['bold' => true]);
 	$textRun->addText($order_id);
-
 	$textRun = $info_cell->addTextRun(['spaceBefore' => 1, 'spaceAfter' => 0]);
 	$textRun->addText("Date Required: ", ['bold' => true]);
 	$textRun->addText($proposed_date);
-
 	$section->addTextBreak(1);
 
 	// Wanna call vector svg here
@@ -2066,7 +2141,7 @@ function generate_customer_order_word_file($post_id) {
 		$diagram_png = svg_to_png_temp($svg);
 		if (file_exists($diagram_png)) {
 			$section->addImage($diagram_png, [
-				'width' => 450,
+				'width' => 400,
 				'alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER,
 			]);
 		}
@@ -2108,15 +2183,15 @@ function generate_customer_order_word_file($post_id) {
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(6000)->addText("Stoneguard Width (mm)", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000)->addText("$vinyl_insert_height_mm", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText("$factory_stoneguard_width", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(6000)->addText("Stoneguard Length (mm)", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000)->addText("$vinyl_insert_height_mm", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText("$factory_stoneguard_height", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);				// this is not sure
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(6000)->addText("Stoneguard Distance From Carvan (mm):", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000)->addText("$factory_stoneguard_width", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6000)->addText("Stoneguard Distance From Carvan (mm):", [], ['spaceBefore' => 0, 'spaceAfter' => 0]); 	// this is not sure
+	$row->addCell(4000)->addText("$factory_stoneguard_height", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(6000)->addText("Toolbox Width (mm):", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
@@ -2136,76 +2211,45 @@ function generate_customer_order_word_file($post_id) {
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(6000)->addText("SS Length Adjustment:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000)->addText($support_pockets_measurement, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText($sts_var_caravan_ss_length_adj, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(6000)->addText("Cut Out:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000)->addText($support_pockets_measurement, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText($sts_var_caravan_cut_out, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(6000)->addText("Mesh Only Measurement:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000)->addText($support_pockets_measurement, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText($sts_var_caravan_mesh_only_measurement, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(6000)->addText("Eyelet Tab:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000)->addText($support_pockets_measurement, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText($sts_var_caravan_eyelet_tab, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(6000)->addText("Extra Bungee", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000)->addText($support_pockets_measurement, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText($extra_bungee, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(6000)->addText("Extra Vinyl Width (mm)", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000)->addText($support_pockets_measurement, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText($extra_vinyl_width_mm, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(6000)->addText("Extra Vinyl Length (mm)", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000)->addText($support_pockets_measurement, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText($extra_vinyl_length_mm, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(6000)->addText("Extra Vinyl Position", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000)->addText($support_pockets_measurement, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText($extra_vinyl_position, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(6000)->addText("Angled Stone Guard Width (mm)", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000)->addText($support_pockets_measurement, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText($angled_stone_guard_width_mm, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(6000)->addText("Angled Stone Guard Depth (mm)", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000)->addText($support_pockets_measurement, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText($angled_stone_guard_depth_mm, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$section->addTextBreak(2);
-
-	// HEADER TABLE (Logo + Company Info)
-	$table = $section->addTable([
-		'borderColor' => 'cdcdcd', // gray border
-		'cellMarginTop' => 0,
-		'cellMarginBottom' => 0,
-		'cellMarginLeft' => 50,
-		'cellMarginRight' => 50
-	]);
-
-	$table->addRow(300);
-
-	// LEFT CELL → LOGO (same variable you used)
-	$logo_cell = $table->addCell(3000, ['valign' => 'center']);
-	$logo = get_template_directory() . '/assets/src/images/invoice-gaurd.png';
-	if (file_exists($logo)) {
-		$logo_cell->addImage($logo, ['width' => 100]);
-	}
-
-	// RIGHT CELL → TEXT (same text you used)
-	$info_cell = $table->addCell(6000,  ['valign' => 'center']);
-
-	// Company name bold (same variable structure)
-	$info_cell->addText("Stone Stomper", ['bold' => true, 'size' => 10], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$info_cell->addText("PO Box 204, Port Noarlunga, SA 5167", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$info_cell->addText("Factory location: Lonsdale SA", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$info_cell->addText("Email: sales@stonestomper.com.au", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-
-	// Small spacing below header
-	$section->addTextBreak(1);
-
 
     // Save file
     $upload_dir = wp_upload_dir();
