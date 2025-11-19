@@ -1086,7 +1086,7 @@ function show_towing_svg_in_editor( $post ) {
 	$rear_ids  = get_post_meta( $post->ID, 'rear_ids', true );
 	$front_ids = get_post_meta( $post->ID, 'front_ids', true );
 	$support_pockets = get_post_meta( $post->ID, 'support_pockets', true );
-	$support_pockets_measurement    = get_post_meta( $post_id, 'support_pockets_measurement', true );
+	$support_pockets_measurement    = get_post_meta( $post->ID, 'support_pockets_measurement', true );
 
 
 	// var_dump($final_details['final_delivery']);
@@ -1264,15 +1264,15 @@ function show_towing_svg_in_editor( $post ) {
 				<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $factory_stoneguard_width ? $factory_stoneguard_width.' mm': '-' ); ?></td>
 			</tr>
 			<tr>
-				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Stoneguard Length (mm):</td>
+				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">SG Distance From The Carvan (mm):</td>
 				<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $factory_stoneguard_height ? $factory_stoneguard_height.' mm': '-' ); ?></td>
 			</tr>
 			<tr>
-				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Toolbox Length (mm):</td>
+				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Toolbox Width (mm):</td>
 				<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $toolbox_width_mm ? $toolbox_width_mm.' mm': '-' ); ?></td>
 			</tr>
 			<tr>
-				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Distance from the Caravan:</td>
+				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Toolbox Distance from the Caravan:</td>
 				<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $toolbox_height_mm ? $toolbox_height_mm.' mm': '-' ); ?></td>
 			</tr>
 			<tr>
@@ -1535,15 +1535,15 @@ function show_towing_svg_in_editor( $post ) {
 								<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $factory_stoneguard_width ? $factory_stoneguard_width : '-' ); ?></td>
 							</tr>
 							<tr>
-								<td style="padding:6px 15px; border:1px solid #ccc;">Stoneguard Length (mm):</td>
+								<td style="padding:6px 15px; border:1px solid #ccc;">SG Distance From The Carvan (mm):</td>
 								<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $factory_stoneguard_height ? $factory_stoneguard_height : '-' ); ?></td>
 							</tr>
 							<tr>
-								<td style="padding:6px 15px; border:1px solid #ccc;">Toolbox Length (mm):</td>
+								<td style="padding:6px 15px; border:1px solid #ccc;">Toolbox Width (mm):</td>
 								<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $toolbox_width_mm ? $toolbox_width_mm : '-' ); ?></td>
 							</tr>
 							<tr>
-								<td style="padding:6px 15px; border:1px solid #ccc;">Distance from the Caravan:</td>
+								<td style="padding:6px 15px; border:1px solid #ccc;">Toolbox Distance from the Caravan:</td>
 								<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $toolbox_height_mm ? $toolbox_height_mm : '-' ); ?></td>
 							</tr>
 							<tr>
@@ -1956,7 +1956,7 @@ function generate_customer_order_word_file($post_id) {
 	$row->addCell(4000)->addText("$vinyl_insert_height_mm", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(6000)->addText("Stoneguard Length (mm):", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6000)->addText("SG Distance From The Carvan (mm):", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(4000)->addText("$factory_stoneguard_width", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
@@ -1964,7 +1964,7 @@ function generate_customer_order_word_file($post_id) {
 	$row->addCell(4000)->addText("$factory_stoneguard_height", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(6000)->addText("Toolbox Length (mm):", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6000)->addText("Toolbox Width (mm):", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(4000)->addText("$toolbox_width_mm", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
@@ -2374,16 +2374,10 @@ add_action('woocommerce_cart_calculate_fees', function($cart) {
         |-----------------------------------------
         */
         if ($a_frame_length >= 1800) {
-
-            $support_option = $data['support_option'] ?? '';
-
-            if (!empty($support_option)) {
-
-                // toolbox & factory-stoneguard → both $35
-                if ($support_option === 'toolbox' || $support_option === 'factory-stoneguard') {
-                    $cart->add_fee(__('Fittings Charges', 'stone-stomper'), 35);
-                }
-            }
+			// toolbox & factory-stoneguard → both $35
+			if ($data['toolbox'] === true || $data['factory_stoneguard'] === true) {
+				$cart->add_fee(__('Fittings Charges', 'stone-stomper'), 35);
+			}
         }
     }
 });

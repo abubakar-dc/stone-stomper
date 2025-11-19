@@ -300,7 +300,7 @@ public function bst_handle_upload_order_photos() {
 
 				// Support pockets, toolbox, factory-stoneguard → all add $35
 
-				$label_text = 'Fittings Chnarges';
+				$label_text = 'Fittings Charges';
 
 				if ($support_option === 'toolbox' || $support_option === 'factory-stoneguard') {
 
