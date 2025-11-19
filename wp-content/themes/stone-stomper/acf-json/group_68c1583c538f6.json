@@ -527,6 +527,27 @@
             ]
         },
         {
+            "key": "field_691dbc42222ee",
+            "label": "Mesh only Measurement field Notice Text",
+            "name": "mesh_only_measurement_field_notice_text",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "allow_in_bindings": 0,
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
             "key": "field_6916561645967",
             "label": "Bar Options",
             "name": "",
@@ -697,5 +718,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1763071607
+    "modified": 1763556440
 }

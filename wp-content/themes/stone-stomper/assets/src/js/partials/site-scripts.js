@@ -25,405 +25,7 @@ jQuery( document ).ready( function() {
 		}
 	} );
 } );
-// jQuery( document ).ready( function() {
-// 	function scrollToSection( id ) {
-// 		const target = document.querySelector( id );
-// 		if ( target ) {
-// 			requestAnimationFrame( function() {
-// 				target.scrollIntoView( { behavior: 'smooth', block: 'start' } );
-// 			} );
-// 		}
-// 	}
 
-// 	function allRequiredFilled( section ) {
-// 		let filled = true;
-// 		jQuery( section )
-// 			.find( 'input:visible[required], select:visible[required], textarea:visible[required]' )
-// 			.each( function() {
-// 				const el = jQuery( this );
-// 				const value = el.val();
-// 				if ( ! value || value.trim() === '' ) {
-// 					filled = false;
-// 					return false;
-// 				}
-// 				if ( el.is( 'select' ) && ( value === '' || value === '0' || el.find( 'option:selected' ).text().trim().toLowerCase().includes( 'select' ) ) ) {
-// 					filled = false;
-// 					return false;
-// 				}
-// 			} );
-// 		return filled;
-// 	}
-
-// 	function handleFormSection( currentSection, nextSection ) {
-// 		const postCheckDelay = 300;
-// 		function attemptMove() {
-// 			if ( allRequiredFilled( currentSection ) ) {
-// 				setTimeout( function() {
-// 					const section = jQuery( nextSection );
-// 					if ( section.hasClass( 'section-disable' ) ) {
-// 						section.removeClass( 'section-disable' );
-// 						scrollToSection( nextSection );
-// 					} else {
-// 						scrollToSection( nextSection );
-// 					}
-// 				}, postCheckDelay );
-// 			}
-// 		}
-
-// 		jQuery( document ).on( 'change', currentSection + ' select', function() {
-// 			attemptMove();
-// 		} );
-
-// 		jQuery( document ).on( 'blur', currentSection + ' input[required], ' + currentSection + ' textarea[required]', function() {
-// 			attemptMove();
-// 		} );
-
-// 		return function( e ) {
-// 			if ( e && e.target ) {
-// 				attemptMove();
-// 			}
-// 		};
-// 	}
-
-// 	const validateJump01 = handleFormSection( '#jump-01', '#vehicle-details' );
-// 	const validateVehicleDetails = handleFormSection( '#vehicle-details', '#caravan-details' );
-// 	const validateCaravanDetails = handleFormSection( '#caravan-details', '#bar-options-section' );
-// 	const validateBarOptions = handleFormSection( '#bar-options-section', '#photographs-details' );
-
-// 	jQuery( '#product_type' ).on( 'change', function() {
-// 		const val = jQuery( this ).val();
-// 		if ( val ) {
-// 			jQuery( '#jump-01' ).removeClass( 'section-disable' );
-// 			setTimeout( function() {
-// 				scrollToSection( '#jump-01' );
-// 			}, 400 );
-// 		}
-// 	} );
-
-// 	function checkCaravanFinalSections() {
-// 		setTimeout( function() {
-// 			if ( allRequiredFilled( '#caravan-details' ) ) {
-// 				const section = jQuery( '#bar-options-section' );
-// 				if ( section.hasClass( 'section-disable' ) ) {
-// 					section.removeClass( 'section-disable' );
-// 				}
-// 				scrollToSection( '#bar-options-section' );
-// 			}
-// 		}, 100 );
-// 	}
-
-// 	jQuery( document ).on( 'change blur', '#caravan-details input, #caravan-details select, #caravan-details textarea', checkCaravanFinalSections );
-
-// 	jQuery( '#veh_make' ).on( 'change', function() {
-// 		const yearContainer = jQuery( '.veh_year_other' );
-// 		const vehMakeContainer = jQuery( '.veh_make_other' );
-// 		const vehModelContainer = jQuery( '.veh_model_other' );
-// 		if ( jQuery( this ).val() === 'other' ) {
-// 			jQuery( '#veh_model, #veh_year' ).hide();
-// 			vehMakeContainer.html( '<input placeholder="Other Make" id="veh_make_other" name="vehicle_make_other" required type="text" />' );
-// 			vehModelContainer.html( '<input style="margin-top:30px" placeholder="Vehicle Model" id="vehicle_model_other" name="vehicle_model" required type="text" />' );
-// 			yearContainer.html( '<input style="margin-top:0px" placeholder="Model Year" id="veh_year_other" name="vehicle_year" required type="text" />' );
-// 		} else {
-// 			jQuery( '#veh_model, #veh_year' ).show();
-// 			vehMakeContainer.empty();
-// 			vehModelContainer.empty();
-// 			yearContainer.empty();
-// 		}
-// 		validateVehicleDetails( { target: jQuery( '#veh_make' )[ 0 ] } );
-// 	} );
-
-// 	jQuery( '#veh_model' ).on( 'change', function() {
-// 		const yearContainer = jQuery( '.veh_year_other' );
-// 		const vehModelContainer = jQuery( '.veh_model_other' );
-// 		if ( jQuery( this ).val() === 'other' ) {
-// 			jQuery( '#veh_year' ).hide();
-// 			vehModelContainer.html( '<input style="margin-top:30px" placeholder="Vehicle Model" id="vehicle_model_other" name="vehicle_model" required type="text" />' );
-// 			yearContainer.html( '<input style="margin-top:0px" placeholder="Model Year" id="veh_year_other" name="vehicle_year" required type="text" />' );
-// 		} else {
-// 			jQuery( '#veh_year' ).show();
-// 			vehModelContainer.empty();
-// 			yearContainer.empty();
-// 		}
-// 		validateVehicleDetails( { target: jQuery( '#veh_model' )[ 0 ] } );
-// 	} );
-
-// 	jQuery( '#veh_year' ).on( 'change', function() {
-// 		const yearContainer = jQuery( '.veh_year_other' );
-// 		if ( jQuery( this ).val() === 'other' ) {
-// 			yearContainer.html( '<input style="margin-top:30px" placeholder="Model Year" id="veh_year_other" name="vehicle_year" required type="text" />' );
-// 		} else {
-// 			yearContainer.empty();
-// 		}
-// 		validateVehicleDetails( { target: jQuery( '#veh_year' )[ 0 ] } );
-// 	} );
-
-// 	jQuery( '#van_make' ).on( 'change', function() {
-// 		const vanModelContainer = jQuery( '.van_model_other' );
-// 		if ( jQuery( this ).val() === 'other' ) {
-// 			jQuery( '#van_model' ).hide();
-// 			vanModelContainer.html( '<input placeholder="Caravan Model" id="van_model_other" name="caravan_model" required type="text" />' );
-// 		} else {
-// 			jQuery( '#van_model' ).show();
-// 			vanModelContainer.empty();
-// 		}
-// 		validateCaravanDetails( { target: jQuery( '#van_make' )[ 0 ] } );
-// 	} );
-
-// 	jQuery( '#van_model' ).on( 'change', function() {
-// 		const vanModelContainer = jQuery( '.van_model_other' );
-// 		if ( jQuery( this ).val() === 'other' ) {
-// 			vanModelContainer.html( '<input placeholder="Caravan Model" id="van_model_other" name="caravan_model" required type="text" />' );
-// 		} else {
-// 			vanModelContainer.empty();
-// 		}
-// 		validateCaravanDetails( { target: jQuery( '#van_model' )[ 0 ] } );
-// 	} );
-
-// 	jQuery( '#veh_make' ).trigger( 'change' );
-// 	jQuery( '#van_make' ).trigger( 'change' );
-
-// 	validateJump01( { target: document.querySelector( '#jump-01' ) } );
-// 	validateVehicleDetails( { target: document.querySelector( '#vehicle-details' ) } );
-// 	validateCaravanDetails( { target: document.querySelector( '#caravan-details' ) } );
-// 	validateBarOptions( { target: document.querySelector( '#bar-options-section' ) } );
-
-// 	let finalSectionsUnlocked = false;
-
-// 	function revealFinalSections() {
-// 		if ( ! finalSectionsUnlocked && allRequiredFilled( '#bar-options-section' ) ) {
-// 			finalSectionsUnlocked = true;
-// 			const sections = jQuery( '#photographs-details, #final-measurements, #final-summary' );
-// 			sections.removeClass( 'section-disable' );
-// 			setTimeout( function() {
-// 				scrollToSection( '#photographs-details' );
-// 			}, 300 );
-// 		}
-// 	}
-
-// 	jQuery( document ).on( 'change blur', '#bar-options-section input, #bar-options-section select, #bar-options-section textarea', revealFinalSections );
-// } );
-// jQuery( document ).ready( function() {
-// 	const meshOnlyProduct = '712';
-
-// 	function scrollToSection( id ) {
-// 		const target = document.querySelector( id );
-// 		if ( target ) {
-// 			requestAnimationFrame( function() {
-// 				target.scrollIntoView( { behavior: 'smooth', block: 'start' } );
-// 			} );
-// 		}
-// 	}
-
-// 	function allRequiredFilled( section ) {
-// 		let filled = true;
-// 		jQuery( section )
-// 			.find( 'input:visible[required], select:visible[required], textarea:visible[required]' )
-// 			.each( function() {
-// 				const el = jQuery( this );
-// 				const value = el.val();
-// 				if ( ! value || value.trim() === '' ) {
-// 					filled = false;
-// 					return false;
-// 				}
-// 				if (
-// 					el.is( 'select' ) &&
-// 					( value === '' ||
-// 						value === '0' ||
-// 						el.find( 'option:selected' ).text().trim().toLowerCase().includes( 'select' ) )
-// 				) {
-// 					filled = false;
-// 					return false;
-// 				}
-// 			} );
-// 		return filled;
-// 	}
-
-// 	function handleFormSection( currentSection, nextSection ) {
-// 		const postCheckDelay = 300;
-
-// 		function attemptMove() {
-// 			if ( allRequiredFilled( currentSection ) ) {
-// 				setTimeout( function() {
-// 					const selectedProduct = jQuery( '#product_type' ).val();
-
-// 					if ( nextSection === '#bar-options-section' && selectedProduct === meshOnlyProduct ) {
-// 						jQuery( '#bar-options-section' ).addClass( 'section-disable' );
-// 						jQuery( '#photographs-details, #final-measurements, #final-summary' ).removeClass( 'section-disable' );
-// 						scrollToSection( '#photographs-details' );
-// 						return;
-// 					}
-
-// 					const section = jQuery( nextSection );
-// 					if ( section.hasClass( 'section-disable' ) ) {
-// 						section.removeClass( 'section-disable' );
-// 						scrollToSection( nextSection );
-// 					} else {
-// 						scrollToSection( nextSection );
-// 					}
-// 				}, postCheckDelay );
-// 			}
-// 		}
-
-// 		jQuery( document ).on( 'change', currentSection + ' select', function() {
-// 			attemptMove();
-// 		} );
-
-// 		jQuery( document ).on(
-// 			'blur',
-// 			currentSection + ' input[required], ' + currentSection + ' textarea[required]',
-// 			function() {
-// 				attemptMove();
-// 			}
-// 		);
-
-// 		return function( e ) {
-// 			if ( e && e.target ) {
-// 				attemptMove();
-// 			}
-// 		};
-// 	}
-
-// 	const validateJump01 = handleFormSection( '#jump-01', '#vehicle-details' );
-// 	const validateVehicleDetails = handleFormSection( '#vehicle-details', '#caravan-details' );
-// 	const validateCaravanDetails = handleFormSection( '#caravan-details', '#bar-options-section' );
-// 	const validateBarOptions = handleFormSection( '#bar-options-section', '#photographs-details' );
-
-// 	jQuery( '#product_type' ).on( 'change', function() {
-// 		const val = jQuery( this ).val();
-
-// 		if ( val === meshOnlyProduct ) {
-// 			jQuery( '#bar-options-section' ).addClass( 'section-disable' );
-// 			jQuery( '#photographs-details, #final-measurements, #final-summary' ).addClass( 'section-disable' );
-// 		}
-
-// 		if ( val ) {
-// 			jQuery( '#jump-01' ).removeClass( 'section-disable' );
-// 			setTimeout( function() {
-// 				scrollToSection( '#jump-01' );
-// 			}, 400 );
-// 		}
-// 	} );
-
-// 	function checkCaravanFinalSections() {
-// 		setTimeout( function() {
-// 			const selectedProduct = jQuery( '#product_type' ).val();
-
-// 			if ( selectedProduct === meshOnlyProduct ) {
-// 				if ( allRequiredFilled( '#caravan-details' ) ) {
-// 					jQuery( '#bar-options-section' ).addClass( 'section-disable' );
-// 					jQuery( '#photographs-details, #final-measurements, #final-summary' ).removeClass( 'section-disable' );
-// 					scrollToSection( '#photographs-details' );
-// 				} else {
-// 					jQuery( '#photographs-details, #final-measurements, #final-summary' ).addClass( 'section-disable' );
-// 				}
-// 				return;
-// 			}
-
-// 			if ( allRequiredFilled( '#caravan-details' ) ) {
-// 				const section = jQuery( '#bar-options-section' );
-// 				if ( section.hasClass( 'section-disable' ) ) {
-// 					section.removeClass( 'section-disable' );
-// 				}
-// 				scrollToSection( '#bar-options-section' );
-// 			}
-// 		}, 100 );
-// 	}
-
-// 	jQuery( document ).on( 'change blur', '#caravan-details input, #caravan-details select, #caravan-details textarea', checkCaravanFinalSections );
-
-// 	jQuery( '#veh_make' ).on( 'change', function() {
-// 		const yearContainer = jQuery( '.veh_year_other' );
-// 		const vehMakeContainer = jQuery( '.veh_make_other' );
-// 		const vehModelContainer = jQuery( '.veh_model_other' );
-
-// 		if ( jQuery( this ).val() === 'other' ) {
-// 			jQuery( '#veh_model, #veh_year' ).hide();
-// 			vehMakeContainer.html( '<input placeholder="Other Make" id="veh_make_other" name="vehicle_make_other" required type="text" />' );
-// 			vehModelContainer.html( '<input style="margin-top:30px" placeholder="Vehicle Model" id="vehicle_model_other" name="vehicle_model" required type="text" />' );
-// 			yearContainer.html( '<input style="margin-top:0px" placeholder="Model Year" id="veh_year_other" name="vehicle_year" required type="text" />' );
-// 		} else {
-// 			jQuery( '#veh_model, #veh_year' ).show();
-// 			vehMakeContainer.empty();
-// 			vehModelContainer.empty();
-// 			yearContainer.empty();
-// 		}
-// 		validateVehicleDetails( { target: jQuery( '#veh_make' )[ 0 ] } );
-// 	} );
-
-// 	jQuery( '#veh_model' ).on( 'change', function() {
-// 		const yearContainer = jQuery( '.veh_year_other' );
-// 		const vehModelContainer = jQuery( '.veh_model_other' );
-
-// 		if ( jQuery( this ).val() === 'other' ) {
-// 			jQuery( '#veh_year' ).hide();
-// 			vehModelContainer.html( '<input style="margin-top:30px" placeholder="Vehicle Model" id="vehicle_model_other" name="vehicle_model" required type="text" />' );
-// 			yearContainer.html( '<input style="margin-top:0px" placeholder="Model Year" id="veh_year_other" name="vehicle_year" required type="text" />' );
-// 		} else {
-// 			jQuery( '#veh_year' ).show();
-// 			vehModelContainer.empty();
-// 			yearContainer.empty();
-// 		}
-// 		validateVehicleDetails( { target: jQuery( '#veh_model' )[ 0 ] } );
-// 	} );
-
-// 	jQuery( '#veh_year' ).on( 'change', function() {
-// 		const yearContainer = jQuery( '.veh_year_other' );
-
-// 		if ( jQuery( this ).val() === 'other' ) {
-// 			yearContainer.html( '<input style="margin-top:30px" placeholder="Model Year" id="veh_year_other" name="vehicle_year" required type="text" />' );
-// 		} else {
-// 			yearContainer.empty();
-// 		}
-// 		validateVehicleDetails( { target: jQuery( '#veh_year' )[ 0 ] } );
-// 	} );
-
-// 	jQuery( '#van_make' ).on( 'change', function() {
-// 		const vanModelContainer = jQuery( '.van_model_other' );
-
-// 		if ( jQuery( this ).val() === 'other' ) {
-// 			jQuery( '#van_model' ).hide();
-// 			vanModelContainer.html( '<input placeholder="Caravan Model" id="van_model_other" name="caravan_model" required type="text" />' );
-// 		} else {
-// 			jQuery( '#van_model' ).show();
-// 			vanModelContainer.empty();
-// 		}
-// 		validateCaravanDetails( { target: jQuery( '#van_make' )[ 0 ] } );
-// 	} );
-
-// 	jQuery( '#van_model' ).on( 'change', function() {
-// 		const vanModelContainer = jQuery( '.van_model_other' );
-
-// 		if ( jQuery( this ).val() === 'other' ) {
-// 			vanModelContainer.html( '<input placeholder="Caravan Model" id="van_model_other" name="caravan_model" required type="text" />' );
-// 		} else {
-// 			vanModelContainer.empty();
-// 		}
-// 		validateCaravanDetails( { target: jQuery( '#van_model' )[ 0 ] } );
-// 	} );
-
-// 	jQuery( '#veh_make' ).trigger( 'change' );
-// 	jQuery( '#van_make' ).trigger( 'change' );
-
-// 	validateJump01( { target: document.querySelector( '#jump-01' ) } );
-// 	validateVehicleDetails( { target: document.querySelector( '#vehicle-details' ) } );
-// 	validateCaravanDetails( { target: document.querySelector( '#caravan-details' ) } );
-// 	validateBarOptions( { target: document.querySelector( '#bar-options-section' ) } );
-
-// 	let finalSectionsUnlocked = false;
-
-// 	function revealFinalSections() {
-// 		if ( ! finalSectionsUnlocked && allRequiredFilled( '#bar-options-section' ) ) {
-// 			finalSectionsUnlocked = true;
-// 			const sections = jQuery( '#photographs-details, #final-measurements, #final-summary' );
-// 			sections.removeClass( 'section-disable' );
-// 			setTimeout( function() {
-// 				scrollToSection( '#photographs-details' );
-// 			}, 300 );
-// 		}
-// 	}
-
-// 	jQuery( document ).on( 'change blur', '#bar-options-section input, #bar-options-section select, #bar-options-section textarea', revealFinalSections );
-// } );
 jQuery( document ).ready( function() {
 	const meshOnlyProduct = '712';
 
@@ -469,15 +71,15 @@ jQuery( document ).ready( function() {
 					const selectedProduct = jQuery( '#product_type' ).val();
 
 					if ( nextSection === '#bar-options-section' && selectedProduct === meshOnlyProduct ) {
-						jQuery( '#bar-options-section' ).addClass( 'section-disable' );
-						jQuery( '#photographs-details, #final-measurements, #final-summary' ).removeClass( 'section-disable' );
+						jQuery( '#bar-options-section' ).addClass( 'section-disable-off' );
+						jQuery( '#photographs-details, #final-measurements, #final-summary' ).removeClass( 'section-disable-off' );
 						scrollToSection( '#photographs-details' );
 						return;
 					}
 
 					const section = jQuery( nextSection );
-					if ( section.hasClass( 'section-disable' ) ) {
-						section.removeClass( 'section-disable' );
+					if ( section.hasClass( 'section-disable-off' ) ) {
+						section.removeClass( 'section-disable-off' );
 						scrollToSection( nextSection );
 					} else {
 						scrollToSection( nextSection );
@@ -514,12 +116,12 @@ jQuery( document ).ready( function() {
 		const val = jQuery( this ).val();
 
 		if ( val === meshOnlyProduct ) {
-			jQuery( '#bar-options-section' ).addClass( 'section-disable' );
-			jQuery( '#photographs-details, #final-measurements, #final-summary' ).addClass( 'section-disable' );
+			jQuery( '#bar-options-section' ).addClass( 'section-disable-off' );
+			jQuery( '#photographs-details, #final-measurements, #final-summary' ).addClass( 'section-disable-off' );
 		}
 
 		if ( val ) {
-			jQuery( '#jump-01' ).removeClass( 'section-disable' );
+			jQuery( '#jump-01' ).removeClass( 'section-disable-off' );
 			setTimeout( function() {
 				scrollToSection( '#jump-01' );
 			}, 400 );
@@ -532,19 +134,19 @@ jQuery( document ).ready( function() {
 
 			if ( selectedProduct === meshOnlyProduct ) {
 				if ( allRequiredFilled( '#caravan-details' ) ) {
-					jQuery( '#bar-options-section' ).addClass( 'section-disable' );
-					jQuery( '#photographs-details, #final-measurements, #final-summary' ).removeClass( 'section-disable' );
+					jQuery( '#bar-options-section' ).addClass( 'section-disable-off' );
+					jQuery( '#photographs-details, #final-measurements, #final-summary' ).removeClass( 'section-disable-off' );
 					scrollToSection( '#photographs-details' );
 				} else {
-					jQuery( '#photographs-details, #final-measurements, #final-summary' ).addClass( 'section-disable' );
+					jQuery( '#photographs-details, #final-measurements, #final-summary' ).addClass( 'section-disable-off' );
 				}
 				return;
 			}
 
 			if ( allRequiredFilled( '#caravan-details' ) ) {
 				const section = jQuery( '#bar-options-section' );
-				if ( section.hasClass( 'section-disable' ) ) {
-					section.removeClass( 'section-disable' );
+				if ( section.hasClass( 'section-disable-off' ) ) {
+					section.removeClass( 'section-disable-off' );
 				}
 				scrollToSection( '#bar-options-section' );
 			}
@@ -641,7 +243,7 @@ jQuery( document ).ready( function() {
 		if ( ! finalSectionsUnlocked && allRequiredFilled( '#bar-options-section' ) ) {
 			finalSectionsUnlocked = true;
 			const sections = jQuery( '#photographs-details, #final-measurements, #final-summary' );
-			sections.removeClass( 'section-disable' );
+			sections.removeClass( 'section-disable-off' );
 			setTimeout( function() {
 				scrollToSection( '#photographs-details' );
 			}, 300 );

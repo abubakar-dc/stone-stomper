@@ -43,7 +43,9 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 	$sts_var_section_bar_options_description         = $sts_var_section_bar_options['description'] ?? null;
 	$sts_var_section_bar_options_bar_options         = $sts_var_section_bar_options['bar_options'] ?? null;
 	$sts_var_section_bar_options_bar_gallery         = $sts_var_section_bar_options['bar_gallery'] ?? null;
-?>
+
+	$mesh_only_measurement_field_notice_text         = $sts_fields['mesh_only_measurement_field_notice_text'] ?? null;
+	?>
 
 
 <section id="page-section" class="page-section">
@@ -593,15 +595,13 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										$sts_var_headline = $notice['headline']??null;
 										$sts_var_text = $notice['text']??null;
 										if($sts_key === 4){ ?>
-											<?php if ( $sts_var_headline ) {
-												?>
-											<h3><?php echo esc_html($sts_var_headline); ?></h3>
+											<?php if ( $sts_var_headline ) { ?>
+												<h3><?php echo esc_html($sts_var_headline); ?></h3>
 											<?php }
 											if($sts_var_text){ ?>
 												<p><?php echo html_entity_decode($sts_var_text); ?></p>
 											<?php } ?>
-										<?php
-										}
+										<?php }
 											}
 										} ?>
 
@@ -625,6 +625,11 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											<label class="req" for="meshmeasurment">Bracket on the caravan to Stone Somper while hitched up straight</label>
 											<input id="meshmeasurment" name="meshmeasurment_mm" type="text"
 												placeholder="e.g. 1800" required />
+
+
+											<?php if ( $mesh_only_measurement_field_notice_text ) { ?>
+												<div class="note notice-bar"><?php echo html_entity_decode($mesh_only_measurement_field_notice_text); ?></div>
+											<?php } ?>
 										</div>
 										<div class="field">
 											<label class="req" for="barwidth">Towing Vehicle Barwidth (mm)</label>
@@ -720,15 +725,15 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											Pockets</label> -->
 									</div>
 									<?php
-									if($sts_var_section_head_notices){
-										foreach($sts_var_section_head_notices as $sts_key => $notice) {
-										$sts_var_notice = $notice['notice']??null;
-										if($sts_key === 4){ ?>
-										<?php if ( $sts_var_notice ) { ?>
-												<div class="note notice-bar"><?php echo html_entity_decode($sts_var_notice); ?></div>
-											<?php } ?>
-										<?php
-										}
+										if($sts_var_section_head_notices){
+											foreach($sts_var_section_head_notices as $sts_key => $notice) {
+											$sts_var_notice = $notice['notice']??null;
+											if($sts_key === 4){ ?>
+											<?php if ( $sts_var_notice ) { ?>
+													<div class="note notice-bar"><?php echo html_entity_decode($sts_var_notice); ?></div>
+												<?php } ?>
+											<?php
+											}
 											}
 										}
 									?>
@@ -805,14 +810,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											</select>
 											<p class="note notice-bar hidden" id="move_note">Our Team will contact you once your order is ready on your given phone number</p>
 										</div>
-										<!-- <div class="field">
-											<label class="req" for="shipping">Shipping (Australia Wide)</label>
-											<select id="shipping" name="shipping_method" required>
-											<option value="flat_rate:4">Standard Shipping $75</option>
-												<option value="flat_rate:5">Express Shipping $150</option>
-											</select>
-											<p class="note notice-bar hidden" id="express_delivery_note">Express shipping does not apply to Stonestomper products</p>
-										</div> -->
+
 									</div>
 									<div class="form-section-left column mobile-image" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 										<div class="grid cols-2 details-images ">
@@ -878,14 +876,9 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											<span>Stone Stomper®</span>
 											<strong id="selected-product-price" >$825.00</strong>
 										</div>
-										<!-- <div class="line" id="sum_sleeve" style="display:none"><span>Stone Stomper®
-												Bar
-												Sleeve</span><strong>$<span data-id="sleeve">95.00</span></strong>
-										</div> -->
-										<div class="line"><span>Shipping</span><strong>$<span
-													data-id="shipping">75.00</span></strong></div>
+
 										<div class="total"><span>Total</span> <strong>$<span
-													data-id="total">900.00</span></strong> <span class="muted">inc.
+													data-id="total">825.00</span></strong> <span class="muted">inc.
 												GST</span></div>
 									</div>
 

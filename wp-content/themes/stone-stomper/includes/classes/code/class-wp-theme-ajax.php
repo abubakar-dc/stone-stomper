@@ -235,7 +235,7 @@ public function bst_handle_upload_order_photos() {
 		$product_ids = $_POST['ids'] ?? [];
 		$quantity    = 1;
 		$product_type = sanitize_text_field($_POST['product_type'] ?? '');
-		$shipping    = sanitize_text_field($_POST['shipping'] ?? '');
+		// $shipping    = sanitize_text_field($_POST['shipping'] ?? '');
 		$barwidth    = floatval($_POST['barwidth'] ?? 0);
 		$a_frame_len = floatval($_POST['a_frame_length'] ?? 0);
 
@@ -288,37 +288,38 @@ public function bst_handle_upload_order_photos() {
 				$html_output .= '<div class="line"><span>Extra Mesh Length</span><strong tabindex="0">$<span>' . number_format($extra_meshlen, 2) . '</span></strong></div>';
 				$total_price += $extra_meshlen;
 			}
-		}
 
-		if ($a_frame_len >= 1800) {
-			// NEW — Support Pockets / Toolbox Cost
-			$support_option = sanitize_text_field($_POST['support_option'] ?? '');
-			$extra_support_toolbox = 0;
+			if ($a_frame_len >= 1800) {
+				// NEW — Support Pockets / Toolbox Cost
+				$support_option = sanitize_text_field($_POST['support_option'] ?? '');
+				$extra_support_toolbox = 0;
 
-			// If any option is selected other than blank
-			if (!empty($support_option)) {
+				// If any option is selected other than blank
+				if (!empty($support_option)) {
 
-				// Support pockets, toolbox, factory-stoneguard → all add $35
+					// Support pockets, toolbox, factory-stoneguard → all add $35
 
-				$label_text = 'Fittings Charges';
+					$label_text = 'Fittings Charges';
 
-				if ($support_option === 'toolbox' || $support_option === 'factory-stoneguard') {
+					if ($support_option === 'toolbox' || $support_option === 'factory-stoneguard') {
 
-					$extra_support_toolbox = 35;
+						$extra_support_toolbox = 35;
 
-					$html_output .= '<div class="line"><span>' . $label_text . '</span>
-						<strong tabindex="0">$<span>' . number_format($extra_support_toolbox, 2) . '</span></strong></div>';
+						$html_output .= '<div class="line"><span>' . $label_text . '</span>
+							<strong tabindex="0">$<span>' . number_format($extra_support_toolbox, 2) . '</span></strong></div>';
 
-					$total_price += $extra_support_toolbox;
+						$total_price += $extra_support_toolbox;
+					}
 				}
 			}
 		}
 
 
-		// 🔹 Shipping
-		$shipping_cost = 75.00;
-		$total_price += $shipping_cost;
-		$html_output .= '<div class="line"><span>Shipping</span><strong tabindex="0">$<span>' . number_format($shipping_cost, 2) . '</span></strong></div>';
+
+		// // 🔹 Shipping
+		// $shipping_cost = 75.00;
+		// $total_price += $shipping_cost;
+		// $html_output .= '<div class="line"><span>Shipping</span><strong tabindex="0">$<span>' . number_format($shipping_cost, 2) . '</span></strong></div>';
 
 		// 🔹 Total
 		$html_output .= '<div class="line total"><span>Total</span><strong tabindex="0">$<span>' . number_format($total_price, 2) . '</span></strong></div>';
