@@ -570,8 +570,8 @@
         },
         {
             "key": "field_68ecba4b597d0",
-            "label": "Brake Foam",
-            "name": "sts_var_caravan_break_form",
+            "label": "Foam",
+            "name": "sts_var_caravan_form",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -590,9 +590,9 @@
             "append": ""
         },
         {
-            "key": "field_68ecba4e597d1",
-            "label": "HR Foam",
-            "name": "sts_var_caravan_hr_form",
+            "key": "field_691b34274dc80",
+            "label": "Eyelet Tab",
+            "name": "sts_var_caravan_eyelet_tab",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -653,6 +653,48 @@
             "append": ""
         },
         {
+            "key": "field_691d7898d0890",
+            "label": "Extension Plate",
+            "name": "extension_plate",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_691d78a3d0891",
+            "label": "Fittings",
+            "name": "fittings",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_68c2cf3b15cf2",
             "label": "Vinyl Insert Width (mm)",
             "name": "vinyl_insert_width_mm",
@@ -695,6 +737,111 @@
             "append": ""
         },
         {
+            "key": "field_691d78db6404f",
+            "label": "Sleeve",
+            "name": "sleeve",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_691d78eb64050",
+            "label": "Extra Bungee",
+            "name": "extra_bungee",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_691d790c64051",
+            "label": "Extra Vinyl Width (mm)",
+            "name": "extra_vinyl_width_mm",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_691d792964052",
+            "label": "Extra Vinyl Length (mm)",
+            "name": "extra_vinyl_length_mm",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_691d79619bee2",
+            "label": "Extra Vinyl Position",
+            "name": "extra_vinyl_position",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_68f78592a01e8",
             "label": "Proposed Date of Delivery",
             "name": "sts_var_proposed_date_of_delivery",
@@ -713,27 +860,6 @@
             "first_day": 1,
             "default_to_current_date": 0,
             "allow_in_bindings": 0
-        },
-        {
-            "key": "field_691b34274dc80",
-            "label": "Eyelet Tab",
-            "name": "sts_var_caravan_eyelet_tab",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
         },
         {
             "key": "field_691b339233de7",
@@ -793,5 +919,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1763538937
+    "modified": 1763539544
 }

@@ -1009,8 +1009,6 @@ function show_towing_svg_in_editor( $post ) {
    	$order_id = get_post_meta( $post->ID, 'order_id', true );
 	$order    = wc_get_order( $order_id );
 
-
-
 	if ( $order ) {
 		// Basic info
 		$order_date       = $order->get_date_created()->date_i18n('Y-m-d');
@@ -1046,7 +1044,6 @@ function show_towing_svg_in_editor( $post ) {
 		}
 	}
 
-
 	$customer_phone = get_post_meta( $post->ID, 'customer_phone', true );
 	$final_details = get_post_meta( $post->ID, 'final_details', true );
 	$product_type = get_post_meta( $post->ID, 'product_type', true );
@@ -1071,7 +1068,8 @@ function show_towing_svg_in_editor( $post ) {
     $sts_var_caravan_bar_option    	= get_post_meta( $post->ID, 'sts_var_caravan_bar_option', true );
     $sts_var_caravan_bar_bend    	= get_post_meta( $post->ID, 'sts_var_caravan_bar_bend', true );
     $sts_var_caravan_ss_length_adj  = get_post_meta( $post->ID, 'sts_var_caravan_ss_length_adj', true );
-	if($sts_var_caravan_ss_length_adj){
+
+	if($sts_var_caravan_ss_length_adj) {
 		$caravan_length_mm = $caravan_length_mm + $sts_var_caravan_ss_length_adj;
 	}
 
@@ -1087,7 +1085,6 @@ function show_towing_svg_in_editor( $post ) {
 	$front_ids = get_post_meta( $post->ID, 'front_ids', true );
 	$support_pockets = get_post_meta( $post->ID, 'support_pockets', true );
 	$support_pockets_measurement    = get_post_meta( $post_id, 'support_pockets_measurement', true );
-
 
 	// var_dump($final_details['final_delivery']);
 
@@ -1113,11 +1110,10 @@ function show_towing_svg_in_editor( $post ) {
 		}
 	}
 
-		if ( ! empty( $sts_var_proposed_date_of_delivery ) ) {
-			// Convert to timestamp
-			$sts_var_proposed_date_of_delivery = strtotime( $sts_var_proposed_date_of_delivery );
-		}
-    ?>
+	if ( ! empty( $sts_var_proposed_date_of_delivery ) ) {
+		// Convert to timestamp
+		$sts_var_proposed_date_of_delivery = strtotime( $sts_var_proposed_date_of_delivery );
+	} ?>
 
 	<div class="customer-upload-images">
 		<?php if ( $hitch_ids ) { ?>
