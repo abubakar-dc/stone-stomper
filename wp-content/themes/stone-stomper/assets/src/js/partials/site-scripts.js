@@ -72,15 +72,15 @@ jQuery( document ).ready( function() {
 					const selectedProduct = jQuery( '#product_type' ).val();
 
 					if ( nextSection === '#bar-options-section' && selectedProduct === meshOnlyProduct ) {
-						jQuery( '#bar-options-section' ).addClass( 'section-disable-off' );
-						jQuery( '#photographs-details, #final-measurements, #final-summary' ).removeClass( 'section-disable-off' );
+						jQuery( '#bar-options-section' ).addClass( 'section-disable' );
+						jQuery( '#photographs-details, #final-measurements, #final-summary' ).removeClass( 'section-disable' );
 						scrollToSection( '#photographs-details' );
 						return;
 					}
 
 					const section = jQuery( nextSection );
-					if ( section.hasClass( 'section-disable-off' ) ) {
-						section.removeClass( 'section-disable-off' );
+					if ( section.hasClass( 'section-disable' ) ) {
+						section.removeClass( 'section-disable' );
 						scrollToSection( nextSection );
 					} else {
 						scrollToSection( nextSection );
@@ -117,12 +117,12 @@ jQuery( document ).ready( function() {
 		const val = jQuery( this ).val();
 
 		if ( val === meshOnlyProduct ) {
-			jQuery( '#bar-options-section' ).addClass( 'section-disable-off' );
-			jQuery( '#photographs-details, #final-measurements, #final-summary' ).addClass( 'section-disable-off' );
+			jQuery( '#bar-options-section' ).addClass( 'section-disable' );
+			jQuery( '#photographs-details, #final-measurements, #final-summary' ).addClass( 'section-disable' );
 		}
 
 		if ( val ) {
-			jQuery( '#jump-01' ).removeClass( 'section-disable-off' );
+			jQuery( '#jump-01' ).removeClass( 'section-disable' );
 			setTimeout( function() {
 				scrollToSection( '#jump-01' );
 			}, 400 );
@@ -135,19 +135,19 @@ jQuery( document ).ready( function() {
 
 			if ( selectedProduct === meshOnlyProduct ) {
 				if ( allRequiredFilled( '#caravan-details' ) ) {
-					jQuery( '#bar-options-section' ).addClass( 'section-disable-off' );
-					jQuery( '#photographs-details, #final-measurements, #final-summary' ).removeClass( 'section-disable-off' );
+					jQuery( '#bar-options-section' ).addClass( 'section-disable' );
+					jQuery( '#photographs-details, #final-measurements, #final-summary' ).removeClass( 'section-disable' );
 					scrollToSection( '#photographs-details' );
 				} else {
-					jQuery( '#photographs-details, #final-measurements, #final-summary' ).addClass( 'section-disable-off' );
+					jQuery( '#photographs-details, #final-measurements, #final-summary' ).addClass( 'section-disable' );
 				}
 				return;
 			}
 
 			if ( allRequiredFilled( '#caravan-details' ) ) {
 				const section = jQuery( '#bar-options-section' );
-				if ( section.hasClass( 'section-disable-off' ) ) {
-					section.removeClass( 'section-disable-off' );
+				if ( section.hasClass( 'section-disable' ) ) {
+					section.removeClass( 'section-disable' );
 				}
 				scrollToSection( '#bar-options-section' );
 			}
@@ -244,7 +244,7 @@ jQuery( document ).ready( function() {
 		if ( ! finalSectionsUnlocked && allRequiredFilled( '#bar-options-section' ) ) {
 			finalSectionsUnlocked = true;
 			const sections = jQuery( '#photographs-details, #final-measurements, #final-summary' );
-			sections.removeClass( 'section-disable-off' );
+			sections.removeClass( 'section-disable' );
 			setTimeout( function() {
 				scrollToSection( '#photographs-details' );
 			}, 300 );

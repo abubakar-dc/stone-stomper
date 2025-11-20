@@ -1128,7 +1128,6 @@ function show_towing_svg_in_editor( $post ) {
 				<h3>Hitch Images</h3>
 				<div class="hitch-images image-group">
 					<?php foreach ( $hitch_ids as $hitch_id ) :
-
 					$img_url = esc_url($hitch_id); ?>
 					<img src="<?php echo esc_url( $img_url ); ?>" alt="" class="popup-image" />
 					<?php endforeach; ?>

@@ -504,8 +504,8 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											if($sts_var_text){ ?>
 												<p><?php echo html_entity_decode($sts_var_text); ?></p>
 											<?php } ?>
-										<?php
-										}
+											<?php
+												}
 											}
 										} ?>
 									<div class="form-image-slider mobile-image">
