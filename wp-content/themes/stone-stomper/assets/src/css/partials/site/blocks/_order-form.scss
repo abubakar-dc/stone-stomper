@@ -9,7 +9,7 @@
 		}
 	}
 }
-.slider-image{
+.slider-image {
 	max-height: 483px;
 }
 .vehicle-images {
@@ -34,7 +34,6 @@
 }
 
 .form-detail-section {
-
 	a,
 	a:visited {
 		border-color: var(--ss_black_1);
@@ -307,6 +306,10 @@
 .uploads {
 	margin: 20px 0;
 
+	.file-not-uploaded {
+		margin-top: -16px !important;
+	}
+
 	li {
 		justify-content: space-between;
 		padding: 0 !important;
@@ -316,10 +319,24 @@
 			padding: 0;
 		}
 
+		span {
+			width: calc(100% - 195px);
+			display: inline-flex;
+		}
+
+		em {
+			font-style: normal !important;
+			color: var(--ss_success);
+			white-space: nowrap;
+		}
+
 		button {
 			border: none;
 			margin: 0;
 			background-color: transparent;
+			padding: 0;
+			width: 20px;
+			font-size: 10px;
 		}
 	}
 }
@@ -406,7 +423,6 @@
 }
 
 .form-section-right {
-
 	input[type="text"],
 	input[type="number"],
 	input[type="email"],

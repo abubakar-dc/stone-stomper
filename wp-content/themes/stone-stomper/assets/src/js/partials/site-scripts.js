@@ -12,6 +12,7 @@ jQuery( document ).on( 'scroll', function() {
 		jQuery( 'header, body' ).removeClass( 'shrink' );
 	}
 } );
+
 jQuery( document ).ready( function() {
 	jQuery( '#blk-caravan select' ).on( 'change', function() {
 		if ( jQuery( this ).val() !== '' ) {
@@ -340,6 +341,7 @@ jQuery( function() {
 			tabindex: 0,
 		} );
 	} );
+
 	jQuery( '.header-nav li, .blog-nav li, .footer-nav li, .legal-nav li' ).each(
 		function() {
 			const link = jQuery( this ).find( 'a' );
@@ -350,6 +352,7 @@ jQuery( function() {
 			}
 		},
 	);
+
 	jQuery( 'form p' ).each( function() {
 		jQuery( this ).removeAttr( 'tabindex' );
 	} );
@@ -537,6 +540,7 @@ jQuery( function() {
 function getIdsField( slot ) {
 	const map = { hitch: 'hitch_ids', rear: 'rear_ids', front: 'front_ids' }; return document.getElementById( map[ slot ] );
 }
+
 function readIds( slot ) {
 	try {
 		return JSON.parse( getIdsField( slot ).value || '[]' );
@@ -544,30 +548,45 @@ function readIds( slot ) {
 		return [];
 	}
 }
+
 function writeIds( slot, ids ) {
 	getIdsField( slot ).value = JSON.stringify( ids );
 }
+
 function setupImageUpload( inputId, listId, slot ) {
 	const input = document.getElementById( inputId );
 	const list = document.getElementById( listId );
 	if ( ! input || ! list ) {
 		return;
 	}
+
+	let allFiles = []; // store all selected files
+
 	input.addEventListener( 'change', function() {
-		const files = Array.from( input.files );
-		showFiles( files, input, list, slot );
-		autoUpload( files, slot, list );
+		const newFiles = Array.from( input.files );
+		allFiles = allFiles.concat( newFiles ); // merge old and new
+		showFiles( allFiles, list );
+		autoUpload( allFiles, slot, list );
 	} );
-	function showFiles( files, input, list, slot ) {
+
+	function showFiles( files, list ) {
 		list.innerHTML = '';
 		files.forEach( ( file, index ) => {
 			if ( ! file.type.startsWith( 'image/' ) ) {
-				alert( file.name + ' is not an image file!' ); return;
+				const error = document.createElement( 'p' );
+				error.classList.add( 'file-not-uploaded' );
+				error.style.color = 'red';
+				error.style.margin = '0 0 5px 0';
+				error.textContent = file.name + ' is not an image file!';
+				list.innerHTML = '';
+				list.appendChild( error );
+				return;
 			}
 			const li = document.createElement( 'li' );
 			li.style.display = 'flex';
 			li.style.alignItems = 'center';
 			li.style.marginBottom = '8px';
+
 			const img = document.createElement( 'img' );
 			img.src = URL.createObjectURL( file );
 			img.style.width = '80px';
@@ -576,18 +595,24 @@ function setupImageUpload( inputId, listId, slot ) {
 			img.style.marginRight = '10px';
 			img.style.border = '1px solid #ccc';
 			img.style.borderRadius = '6px';
+
 			const span = document.createElement( 'span' );
 			span.textContent = file.name;
+
 			const status = document.createElement( 'em' );
 			status.style.marginLeft = '8px';
-			status.textContent = ' – pending…';
+			status.textContent = ' Pending…';
+
 			const delBtn = document.createElement( 'button' );
 			delBtn.type = 'button';
 			delBtn.textContent = '❌';
 			delBtn.style.marginLeft = '10px';
 			delBtn.addEventListener( 'click', () => {
-				removeFile( index, input, list, slot );
+				allFiles.splice( index, 1 ); // remove from allFiles
+				showFiles( allFiles, list );
+				autoUpload( allFiles, slot, list );
 			} );
+
 			li.appendChild( img );
 			li.appendChild( span );
 			li.appendChild( status );
@@ -595,23 +620,17 @@ function setupImageUpload( inputId, listId, slot ) {
 			list.appendChild( li );
 		} );
 	}
-	function removeFile( index, input, list, slot ) {
-		const dt = new DataTransfer();
-		const files = Array.from( input.files );
-		files.splice( index, 1 );
-		files.forEach( ( f ) => dt.items.add( f ) );
-		input.files = dt.files;
-		showFiles( Array.from( input.files ), input, list, slot );
-		writeIds( slot, [] );
-		autoUpload( Array.from( input.files ), slot, list );
-	}
+
 	function autoUpload( files, slot, list ) {
 		if ( ! files.length ) {
-			list.querySelectorAll( 'em' ).forEach( ( e ) => e.textContent = '' ); return;
+			list.querySelectorAll( 'em' ).forEach( ( e ) => e.textContent = '' );
+			return;
 		}
+
 		const fd = new FormData();
 		fd.append( 'action', 'bst_handle_upload_order_photos' );
 		files.forEach( ( file ) => fd.append( slot + '[]', file, file.name ) );
+
 		jQuery.ajax( {
 			url: localVars.ajax_url,
 			method: 'POST',
@@ -623,7 +642,7 @@ function setupImageUpload( inputId, listId, slot ) {
 				xhr.upload.addEventListener( 'progress', function( e ) {
 					if ( e.lengthComputable ) {
 						const pct = Math.round( ( e.loaded / e.total ) * 100 );
-						list.querySelectorAll( 'em' ).forEach( ( e ) => e.textContent = ' – uploading ' + pct + '%' );
+						list.querySelectorAll( 'em' ).forEach( ( e ) => e.textContent = ' Uploading ' + pct + '%' );
 					}
 				} );
 				return xhr;
@@ -633,7 +652,7 @@ function setupImageUpload( inputId, listId, slot ) {
 					const data = resp.data || resp;
 					const urls = data && data[ slot ] ? data[ slot ].map( ( x ) => x.url ) : [];
 					writeIds( slot, urls );
-					list.querySelectorAll( 'em' ).forEach( ( e ) => e.textContent = ' – uploaded' );
+					list.querySelectorAll( 'em' ).forEach( ( e ) => e.textContent = 'Uploaded' );
 				} else {
 					alert( 'Upload failed' );
 				}
@@ -646,7 +665,6 @@ function setupImageUpload( inputId, listId, slot ) {
 	}
 }
 
-// init (note the added 3rd arg = slot key)
 setupImageUpload( 'photo_hitch', 'list_hitch', 'hitch' );
 setupImageUpload( 'photo_rear', 'list_rear', 'rear' );
 setupImageUpload( 'photo_front', 'list_front', 'front' );

@@ -5773,6 +5773,9 @@ Mixin for transition
 .editor-styles-wrapper .uploads {
   margin: 20px 0;
 }
+.editor-styles-wrapper .uploads .file-not-uploaded {
+  margin-top: -16px !important;
+}
 .editor-styles-wrapper .uploads li {
   justify-content: space-between;
   padding: 0 !important;
@@ -5781,10 +5784,22 @@ Mixin for transition
   display: none;
   padding: 0;
 }
+.editor-styles-wrapper .uploads li span {
+  width: calc(100% - 195px);
+  display: inline-flex;
+}
+.editor-styles-wrapper .uploads li em {
+  font-style: normal !important;
+  color: var(--ss_success);
+  white-space: nowrap;
+}
 .editor-styles-wrapper .uploads li button {
   border: none;
   margin: 0;
   background-color: transparent;
+  padding: 0;
+  width: 20px;
+  font-size: 10px;
 }
 .editor-styles-wrapper .mobile-image {
   display: none;

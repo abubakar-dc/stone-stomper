@@ -7153,6 +7153,9 @@ body #daextlwcnf-cookie-settings-button-2:hover {
 .uploads {
   margin: 20px 0;
 }
+.uploads .file-not-uploaded {
+  margin-top: -16px !important;
+}
 .uploads li {
   justify-content: space-between;
   padding: 0 !important;
@@ -7161,10 +7164,22 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   display: none;
   padding: 0;
 }
+.uploads li span {
+  width: calc(100% - 195px);
+  display: inline-flex;
+}
+.uploads li em {
+  font-style: normal !important;
+  color: var(--ss_success);
+  white-space: nowrap;
+}
 .uploads li button {
   border: none;
   margin: 0;
   background-color: transparent;
+  padding: 0;
+  width: 20px;
+  font-size: 10px;
 }
 
 .mobile-image {
