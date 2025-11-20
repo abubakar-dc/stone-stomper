@@ -268,6 +268,8 @@ add_action( 'woocommerce_checkout_create_order', function( $order, $data ) {
 
 function sts_read_order_form_cookie() {
 	$prefix = 'order_form';
+	$json = ''; // initialize
+
 	if ( isset( $_COOKIE[ $prefix ] ) && $_COOKIE[ $prefix ] !== '' ) {
 		$json = wp_unslash( $_COOKIE[ $prefix ] );
 	}
