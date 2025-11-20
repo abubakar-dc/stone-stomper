@@ -488,8 +488,8 @@ add_action( 'woocommerce_new_order', function( $order_id ) {
 
 	// --- Factory Stoneguard ---
 	if ( isset( $data['factory_stoneguard'] ) && sts_bool( $data['factory_stoneguard'] ) ) {
-		update_post_meta( $post_id, 'factory_stoneguard_width', $stoneguard_length_mm );
-		update_post_meta( $post_id, 'factory_stoneguard_height', $stoneguard_width_mm );
+		update_post_meta( $post_id, 'factory_stoneguard_width', $stoneguard_width_mm );
+		update_post_meta( $post_id, 'factory_stoneguard_height', $stoneguard_length_mm );
 	}
 
 	// --- Factory Stoneguard ---
@@ -885,21 +885,21 @@ function render_towing_diagram($post_id) {
 
 				<!-- Stonegard Size -->
 				<?php if($stoneguard_height_mm){ ?>
-					<text class="st5" text-anchor="start" dominant-baseline="middle" y="-15" x="20" fill="#fa3232" stroke="#fa3232" stroke-width="0.3">
+					<text class="st5" text-anchor="start" dominant-baseline="middle" y="-19" x="20" fill="#fa3232" stroke="#fa3232" stroke-width="0.3">
 						<?php echo esc_html( $stoneguard_height_mm ? 'S: '. $stoneguard_height_mm.' mm' : '-' ); ?>
 					</text>
 				<?php } ?>
 
 				<!-- Toolbox Size -->
 				<?php if($toolbox_height_mm){ ?>
-					<text class="st5" text-anchor="start" dominant-baseline="middle" x="20"  fill="#fa3232" stroke="#fa3232" stroke-width="0.3">
+					<text class="st5" text-anchor="start" dominant-baseline="middle" y="10" x="20"  fill="#fa3232" stroke="#fa3232" stroke-width="0.3">
 						<?php echo esc_html( $toolbox_height_mm ? 'T: '.$toolbox_height_mm.' mm' : '-' ); ?>
 					</text>
 				<?php } ?>
 
 				<!-- Toolbox Size -->
 				<?php if($support_pockets_measurement){ ?>
-					<text class="st5" text-anchor="start" dominant-baseline="middle" x="20"  fill="#fa3232"  stroke="#fa3232" stroke-width="0.3">
+					<text class="st5" text-anchor="start" dominant-baseline="middle" y="-5" x="20"  fill="#fa3232"  stroke="#fa3232" stroke-width="0.3">
 						<?php echo esc_html( $support_pockets_measurement ? 'SP: '.$support_pockets_measurement.' mm' : '-' ); ?>
 					</text>
 				<?php } ?>
@@ -1458,9 +1458,10 @@ function show_towing_svg_in_editor( $post ) {
 
 					<?php if ( $products ) { ?>
 
-						<?php foreach( $products as $key =>  $product ){ ?>
+						<?php foreach( $products as $key =>  $product ){
+							?>
 							<tr>
-								<td style="text-align:center;"><?php echo ++$key; ?></td>
+								<td style="text-align:center;"><?php echo wc_format_decimal($product['quantity']); ?></td>
 								<td style="text-align:center;"><?php echo esc_html( $product['name'] ); ?></td>
 								<td style="text-align:center;">$<?php echo wc_format_decimal( $product['total'] / $product['quantity'], 2 ); ?></td>
 								<td style="text-align:center;">$<?php echo wc_format_decimal( $product['total'], 2 ); ?></td>
