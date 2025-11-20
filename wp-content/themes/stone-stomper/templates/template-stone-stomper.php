@@ -43,9 +43,10 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 	$sts_var_section_bar_options_description         = $sts_var_section_bar_options['description'] ?? null;
 	$sts_var_section_bar_options_bar_options         = $sts_var_section_bar_options['bar_options'] ?? null;
 	$sts_var_section_bar_options_bar_gallery         = $sts_var_section_bar_options['bar_gallery'] ?? null;
-
 	$mesh_only_measurement_field_notice_text         = $sts_fields['mesh_only_measurement_field_notice_text'] ?? null;
-	?>
+
+	var_dump($mesh_only_measurement_field_notice_text);
+?>
 
 
 <section id="page-section" class="page-section">
@@ -65,7 +66,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 			</div>
 		</div>
 	</section>
-
 	<!-- Content Start -->
 	<div class="st-s156"></div>
 	<section>
@@ -291,10 +291,9 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											<?php if ( $sts_var_notice ) { ?>
 												<div id="vehicle-notice-bar" class="note notice-bar" style="display:none;"><?php echo html_entity_decode($sts_var_notice); ?></div>
 												<?php } ?>
-											<?php
+											<?php }
 											}
-												}
-											}
+										}
 									?>
 								</div>
 							</div>
@@ -590,18 +589,18 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 									</div>
 								</div>
 								<div class="form-section-right column" id="blk-measure">
-									<?php if($sts_var_section_head_notices){
+									<?php if($sts_var_section_head_notices) {
 										foreach($sts_var_section_head_notices as $sts_key => $notice){
-										$sts_var_headline = $notice['headline']??null;
-										$sts_var_text = $notice['text']??null;
-										if($sts_key === 4){ ?>
-											<?php if ( $sts_var_headline ) { ?>
-												<h3><?php echo esc_html($sts_var_headline); ?></h3>
+											$sts_var_headline = $notice['headline']??null;
+											$sts_var_text = $notice['text']??null;
+											if($sts_key === 4) { ?>
+												<?php if ( $sts_var_headline ) { ?>
+													<h3><?php echo esc_html($sts_var_headline); ?></h3>
+												<?php }
+												if($sts_var_text){ ?>
+													<p><?php echo html_entity_decode($sts_var_text); ?></p>
+												<?php } ?>
 											<?php }
-											if($sts_var_text){ ?>
-												<p><?php echo html_entity_decode($sts_var_text); ?></p>
-											<?php } ?>
-										<?php }
 											}
 										} ?>
 

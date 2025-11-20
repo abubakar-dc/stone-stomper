@@ -632,7 +632,6 @@ add_action( 'template_redirect', function() {
 	}
 });
 
-
 function render_towing_diagram($post_id) {
 		$caravan_length_mm      = get_post_meta( $post_id, 'caravan_length_mm', true );
 		$caravan_width_mm       = get_post_meta( $post_id, 'caravan_width_mm', true );
@@ -696,7 +695,7 @@ function render_towing_diagram($post_id) {
 			<!-- <polyline class="st2" points="329.42 577.92 288.76 180.94 923.79 180.94 882.27 577.92" fill="#ffffff" stroke="#000000"/> -->
 			 <?php if($sts_var_caravan_cut_out){ ?>
 				<g transform="translate(605.76,550.99)">
-					<text class="st5" fill="#fa3232" text-anchor="middle" dominant-baseline="middle" y="0">
+					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0">
 						<?php echo esc_html( $sts_var_caravan_cut_out ? $sts_var_caravan_cut_out.' mm' : '-' ); ?>
 					</text>
 				</g>
@@ -707,12 +706,12 @@ function render_towing_diagram($post_id) {
 			<rect class="st3" x="504.04" y="315.51" width="211.2" height="195.21" fill="#ffffff" stroke="#000000"/>
 			<?php if($vinyl_insert_width_mm){ ?>
 				<g transform="translate(610.76,330.99)">
-					<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0"><?php echo esc_html( $vinyl_insert_width_mm ? $vinyl_insert_width_mm.' mm' : '-' ); ?></text>
+					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0"><?php echo esc_html( $vinyl_insert_width_mm ? $vinyl_insert_width_mm.' mm' : '-' ); ?></text>
 				</g>
 			<?php } ?>
 			<?php if($vinyl_insert_height_mm){ ?>
 				<g transform="translate(520.76,400.99) rotate(-90)">
-					<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0"><?php echo esc_html( $vinyl_insert_height_mm ? $vinyl_insert_height_mm.' mm' : '-' ); ?></text>
+					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0"><?php echo esc_html( $vinyl_insert_height_mm ? $vinyl_insert_height_mm.' mm' : '-' ); ?></text>
 				</g>
 			<?php } ?>
 			<rect class="st2" x="404.09" y="381.28" width="8.47" height="196.64" fill="#ffffff" stroke="#000000"/>
@@ -723,12 +722,12 @@ function render_towing_diagram($post_id) {
 			<circle class="st2" cx="810.96" cy="374.25" r="4.24"  fill="#ffffff" stroke="#000000"/>
 			<circle class="st2" cx="408.33" cy="374.25" r="4.24"  fill="#ffffff" stroke="#000000"/>
 			<circle class="st2" cx="482.17" cy="374.25" r="4.24"  fill="#ffffff" stroke="#000000"/>
-			<text class="st5" transform="translate(565.96 411.74)"><tspan fill="#fa3232" x="0" y="0">Vinyl Insert</tspan></text>
+			<text class="st5" transform="translate(565.96 411.74)"><tspan fill="#fa3232" stroke="#fa3232" stroke-width="0.3" x="0" y="0">Vinyl Insert</tspan></text>
 			<g>
 				<line class="st0" x1="274.29" y1="139.99" x2="935.24" y2="139.99" stroke="#fa3232"/>
 				<g transform="translate(604.76,139.99)">
 					<rect class="st4" x="-67.5" y="-22" width="135" height="24" fill="#ffffff"  stroke="#ffffff"/>
-					<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0"><?php echo esc_html( $caravan_width_mm ? $caravan_width_mm.' mm' : '-' ); ?></text>
+					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0"><?php echo esc_html( $caravan_width_mm ? $caravan_width_mm.' mm' : '-' ); ?></text>
 				</g>
 				<polyline class="st0" points="278.3 143.72 274.29 139.99 278.3 136.27" stroke="#fa3232" fill="#ffffff"/>
 				<polyline class="st0" points="931.24 136.27 935.24 140 931.24 143.72" stroke="#fa3232"  fill="#ffffff"/>
@@ -748,7 +747,7 @@ function render_towing_diagram($post_id) {
 				<line class="st0" x1="957.8" y1="170.34" x2="957.8" y2="579.93" stroke="#fa3232"/>
 				<g transform="translate(605.77,608.6)">
 					<rect class="st4" x="-67.5" y="-12" width="135" height="24" fill="#ffffff" stroke="#ffffff"/>
-					<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0"><?php echo esc_html( $bar_width_mm ? $bar_width_mm.' mm' : '-' ); ?></text>
+					<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0" fill="#fa3232" stroke="#fa3232" stroke-width="0.3"><?php echo esc_html( $bar_width_mm ? $bar_width_mm.' mm' : '-' ); ?></text>
 				</g>
 				<polyline class="st0" points="954.07 174.34 957.8 170.34 961.52 174.34" stroke="#fa3232" fill="#ffffff"/>
 				<polyline class="st0" points="961.52 575.92 957.8 579.93 954.07 575.92" stroke="#fa3232" fill="#ffffff"/>
@@ -805,7 +804,7 @@ function render_towing_diagram($post_id) {
 			<!-- <polyline class="st4" points="329.42 577.92 288.76 180.94 923.79 180.94 882.27 577.92" fill="#ffffff" stroke="#000000"/> -->
 			 <?php if($sts_var_caravan_cut_out){ ?>
 				<g transform="translate(605.76,550.99)">
-					<text class="st5" fill="#fa3232" text-anchor="middle" dominant-baseline="middle" y="0">
+					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0">
 						<?php echo esc_html( $sts_var_caravan_cut_out ? $sts_var_caravan_cut_out.' mm' : '-' ); ?>
 					</text>
 				</g>
@@ -957,12 +956,6 @@ function render_towing_diagram($post_id) {
 	<?php return ob_get_clean(); ?>
 <?php }
 
-// function get_towing_diagram_svg_png($post_id) {
-//     ob_start();
-//     render_towing_diagram($post_id, true); // this currently echoes SVG
-//     return ob_get_clean();
-// }
-
 function get_towing_diagram_svg_png($post_id) {
     $html = render_towing_diagram($post_id);
 
@@ -974,21 +967,6 @@ function get_towing_diagram_svg_png($post_id) {
 
     return false;
 }
-
-// function svg_to_png_temp($svg_content) {
-//     $tmp_png = tempnam(sys_get_temp_dir(), 'diagram_') . '.png';
-//     $imagick = new \Imagick();
-//     $imagick->setBackgroundColor(new \ImagickPixel('white')); // white background
-//     $imagick->readImageBlob($svg_content);
-//     $imagick->setImageFormat("png32"); // 32-bit PNG preserves transparency
-// 	$imagick->trimImage(0);
-// 	$imagick->setImagePage(0, 0, 0, 0); // reset canvas after trimming
-//     $imagick->writeImage($tmp_png);
-//     $imagick->clear();
-//     $imagick->destroy();
-
-//     return $tmp_png;
-// }
 
 function svg_to_png_temp($svg_content) {
     $tmp_png = tempnam(sys_get_temp_dir(), 'diagram_') . '.png';
@@ -1016,7 +994,6 @@ function svg_to_png_temp($svg_content) {
 
     return $tmp_png;
 }
-
 
 function show_towing_svg_in_editor( $post ) {
     // Get all meta data
@@ -1074,7 +1051,7 @@ function show_towing_svg_in_editor( $post ) {
     $vinyl_insert_height_mm    = get_post_meta( $post->ID, 'vinyl_insert_height_mm', true );
     $toolbox_width_mm    = get_post_meta( $post->ID, 'toolbox_width_mm', true );
     $toolbox_height_mm    = get_post_meta( $post->ID, 'toolbox_height_mm', true );
-    $sts_var_caravan_foam    = get_post_meta( $post->ID, 'sts_var_caravan_foam', true );
+    $sts_var_caravan_foam    = get_post_meta( $post->ID, 'sts_var_caravan_crfoam', true );
 
 
 	// New fields
@@ -1450,32 +1427,28 @@ function show_towing_svg_in_editor( $post ) {
 				<br>
 				<table class="order-table" style="width:100%; border-collapse:collapse;">
 					<tr>
-						<td style="text-align:center;"><strong>Sr. NO</strong></td>
-						<td style="text-align:center;"><strong>Description</strong></td>
+						<td style="text-align:center;"><strong>Quantity</strong></td>
+						<td style="text-align:center;"><strong>Product</strong></td>
 						<td style="text-align:center;"><strong>Unit Price</strong></td>
 						<td style="text-align:center;"><strong>Total</strong></td>
 					</tr>
-
 					<?php if ( $products ) { ?>
-
 						<?php foreach( $products as $key =>  $product ){ ?>
 							<tr>
-								<td style="text-align:center;"><?php echo ++$key; ?></td>
+								<td style="text-align:center;"><?php echo esc_html( $product['quantity'] ); ?></td>
 								<td style="text-align:center;"><?php echo esc_html( $product['name'] ); ?></td>
 								<td style="text-align:center;">$<?php echo wc_format_decimal( $product['total'] / $product['quantity'], 2 ); ?></td>
 								<td style="text-align:center;">$<?php echo wc_format_decimal( $product['total'], 2 ); ?></td>
 							</tr>
-						<?php } ?>
-					<?php }	?>
+						<?php }
+					} ?>
 					<br>
-
 					<tr>
 						<td style="text-align:center;"><!-- remain empty --></td>
 						<td style="text-align:center;"><!-- remain empty --></td>
 						<td style="text-align:center;"><strong>Delivery</strong></td>
-						<td style="text-align:center;"><?php echo esc_html( $delivery_cost ); ?></td>
+						<td style="text-align:center;"><?php echo esc_html( '$' . $delivery_cost ); ?></td>
 					</tr>
-
 					<tr>
 						<td style="text-align:center;"><!-- remain empty --></td>
 						<td style="text-align:center;"><!-- remain empty --></td>
@@ -1614,13 +1587,12 @@ function show_towing_svg_in_editor( $post ) {
 							<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_mesh_only_measurement); ?></td>
 						</tr>
 						<tr>
-							<td style="padding:6px 15px; border:1px solid #ccc;">Break Foam</span></td>
-							<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_break_form); ?></td>
+							<td style="padding:6px 15px; border:1px solid #ccc;">Foam</span></td>
+							<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red">
+								<?php echo html_entity_decode($sts_var_caravan_foam);?>
+							</td>
 						</tr>
-						<tr>
-							<td style="padding:6px 15px; border:1px solid #ccc;">Hr Foam</span></td>
-							<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_hr_form); ?></td>
-						</tr>
+
 						<tr>
 							<td style="padding:6px 15px; border:1px solid #ccc; ">Eyelet Tab</span></td>
 							<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_eyelet_tab); ?></td>
@@ -1785,7 +1757,6 @@ function show_towing_svg_in_editor( $post ) {
 				jQuery(".stone-stomper-vector").slideDown();
 			});
 		});
-
 		jQuery(document).ready(function($){
 
 
@@ -1807,6 +1778,7 @@ function show_towing_svg_in_editor( $post ) {
 
 		});
 	</script>
+
     <?php
 }
 
@@ -1824,7 +1796,6 @@ add_action( 'add_meta_boxes', function() {
 use PhpOffice\PhpWord\PhpWord;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\Element\TextRun;
-
 
 function generate_customer_order_word_file($post_id) {
 	require_once __DIR__ . '/vendor/autoload.php';
@@ -1898,7 +1869,7 @@ function generate_customer_order_word_file($post_id) {
     $sts_var_caravan_mesh_only_measurement     		= get_post_meta($post_id, 'sts_var_caravan_mesh_only_measurement', true);
     // $sts_var_caravan_break_form     				= get_post_meta($post_id, 'sts_var_caravan_break_form', true);
     // $sts_var_caravan_hr_form        				= get_post_meta($post_id, 'sts_var_caravan_hr_form', true);
-    $sts_var_caravan_form        					= get_post_meta($post_id, 'sts_var_caravan_form', true);
+    $sts_var_caravan_crfoam        					= get_post_meta($post_id, 'sts_var_caravan_crfoam', true);
     $sts_var_caravan_eyelet_tab        				= get_post_meta($post_id, 'sts_var_caravan_eyelet_tab', true);
     $sts_var_order_notes        					= get_post_meta($post_id, 'sts_var_order_notes', true);
 	$final_details 									= get_post_meta( $post_id, 'final_details', true );
@@ -2021,9 +1992,7 @@ function generate_customer_order_word_file($post_id) {
 
 	$section->addTextBreak(1);
 
-
 	// Second Section: Stone Stomper Accessories Pack Details
-
 
 	$section->addText("STONE STOMPER ACCESSORIES PACK DETAILS", ['bold' => true, 'size' => 10]);
 
@@ -2048,7 +2017,7 @@ function generate_customer_order_word_file($post_id) {
 
 	$row = $tableAccessories->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(6500)->addText("Foam", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(3500)->addText($sts_var_caravan_form, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(3500)->addText($sts_var_caravan_crfoam, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $tableAccessories->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(6500)->addText("Sleeves", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
@@ -2099,7 +2068,7 @@ function generate_customer_order_word_file($post_id) {
 		$unit = wc_format_decimal($item->get_total() / $qty, 2);
 
 		$items_table->addRow(200);
-		$items_table->addCell(1000)->addText($i++, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+		$items_table->addCell(1000)->addText($qty, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 		$items_table->addCell(5000)->addText($name, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 		$items_table->addCell(2000)->addText("$" . $unit, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 		$items_table->addCell(2000)->addText("$" . $total, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
@@ -2204,10 +2173,6 @@ function generate_customer_order_word_file($post_id) {
 	$row->addCell(4000)->addText("$factory_stoneguard_width", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(6000)->addText("Stoneguard Length (mm)", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000)->addText("$factory_stoneguard_height", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);				// this is not sure
-
-	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(6000)->addText("Stoneguard Distance From Carvan (mm):", [], ['spaceBefore' => 0, 'spaceAfter' => 0]); 	// this is not sure
 	$row->addCell(4000)->addText("$factory_stoneguard_height", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
@@ -2280,7 +2245,7 @@ function generate_customer_order_word_file($post_id) {
 
 function download_customer_word_callback() {
     $post_id = intval($_GET['post_id'] ?? 0);
-
+	$order_id = get_post_meta($post_id, 'order_id', true);
     $file_path = generate_customer_order_word_file($post_id);
 
     if (!$file_path || !file_exists($file_path)) {
@@ -2288,7 +2253,7 @@ function download_customer_word_callback() {
     }
 
     header("Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document");
-    header('Content-Disposition: attachment; filename="customer-order-' . $post_id . '.docx"');
+    header('Content-Disposition: attachment; filename="customer-order-' . $order_id . '.docx"');
     readfile($file_path);
 
     exit;
@@ -2326,9 +2291,8 @@ function email_to_manufacturer_callback() {
 
     wp_send_json_success('Email Sent');
 }
+
 add_action('wp_ajax_email_to_manufacturer', 'email_to_manufacturer_callback');
-
-
 
 add_action('admin_enqueue_scripts', function($hook){
 
@@ -2350,10 +2314,6 @@ add_action('admin_enqueue_scripts', function($hook){
     );
 
 });
-
-
-
-
 
 // 1️⃣ Register the new "Manufacturing Queue" status
 add_action( 'init', function() {
