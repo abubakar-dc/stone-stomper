@@ -268,10 +268,10 @@ add_action( 'woocommerce_checkout_create_order', function( $order, $data ) {
 
 function sts_read_order_form_cookie() {
 	$prefix = 'order_form';
-
 	if ( isset( $_COOKIE[ $prefix ] ) && $_COOKIE[ $prefix ] !== '' ) {
 		$json = wp_unslash( $_COOKIE[ $prefix ] );
 	}
+
 	// } else {
 	// 	$count = isset( $_COOKIE[ $prefix . '_parts' ] ) ? intval( $_COOKIE[ $prefix . '_parts' ] ) : 0;
 	// 	$json  = '';
@@ -603,6 +603,7 @@ function allowed_block_types( $allowed_blocks, $editor_context ) {
 
     return $core_blocks;
 }
+
 // add_filter( 'allowed_block_types_all', 'allowed_block_types', 10, 2 );
 // 🔹 Add WooCommerce support in your theme
 function mytheme_add_woocommerce_support() {
@@ -2489,6 +2490,16 @@ add_action('woocommerce_cart_calculate_fees', function($cart) {
         }
     }
 });
+
+add_filter('woocommerce_is_sold_individually', 'hide_quantity_for_specific_product', 10, 2);
+
+function hide_quantity_for_specific_product($sold_individually, $product) {
+    if ($product->get_id() == 545) {
+        return true;
+    }
+    return $sold_individually;
+}
+
 
 
 
