@@ -2099,7 +2099,8 @@ function generate_customer_order_word_file($post_id) {
 
     $section->addText("CUSTOMER ORDER NOTES:", ['bold' => true]);
     $section->addText($sts_var_order_notes, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-    $section->addTextBreak(4);
+
+	$section->addPageBreak();
 
 	// Fifth Section: Manufacture Sheet
 
