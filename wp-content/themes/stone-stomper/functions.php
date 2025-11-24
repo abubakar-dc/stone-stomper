@@ -2235,7 +2235,6 @@ function generate_customer_order_word_file($post_id) {
 	$row->addCell(6000)->addText("Angled Stone Guard Depth (mm)", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(4000)->addText($angled_stone_guard_depth_mm, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
-	$section->addTextBreak(2);
 
     // Save file
     $upload_dir = wp_upload_dir();
