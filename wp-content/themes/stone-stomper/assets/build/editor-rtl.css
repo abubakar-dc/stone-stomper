@@ -8030,15 +8030,18 @@ body.post-type-post .editor-styles-wrapper > div {
   margin-top: var(--ss_space_96);
 }
 
-.postbox-container .customer-upload-images {
+.postbox-container .customer-upload-images,
+.postbox .customer-upload-images {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
 }
-.postbox-container .customer-upload-images .row {
+.postbox-container .customer-upload-images .row,
+.postbox .customer-upload-images .row {
   width: 30%;
 }
-.postbox-container .customer-upload-images img {
+.postbox-container .customer-upload-images img,
+.postbox .customer-upload-images img {
   max-width: 90px !important;
   width: 90px;
   height: 90px;

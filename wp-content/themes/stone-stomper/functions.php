@@ -647,11 +647,9 @@ function render_towing_diagram($post_id) {
 		$stoneguard_width_mm    = get_post_meta( $post_id, 'factory_stoneguard_width', true );
 		$stoneguard_height_mm   = get_post_meta( $post_id, 'factory_stoneguard_height', true );
 		$sts_var_caravan_cut_out  = get_post_meta( $post_id, 'sts_var_caravan_cut_out', true );
-
-
-		$sts_var_caravan_ss_length_adj  = get_post_meta( $post_id, 'sts_var_caravan_ss_length_adj', true );
-		if($sts_var_caravan_ss_length_adj){
-			$caravan_length_mm = $caravan_length_mm + $sts_var_caravan_ss_length_adj;
+		$sts_var_caravan_ss_length_adj = get_post_meta( $post->ID, 'sts_var_caravan_ss_length_adj', true );
+		if ( $sts_var_caravan_ss_length_adj !== '' ) {
+			$caravan_length_mm = (int) $caravan_length_mm + (int) $sts_var_caravan_ss_length_adj;
 		}
 		ob_start();
 	?>
@@ -1077,10 +1075,11 @@ function show_towing_svg_in_editor( $post ) {
     $caravan_make    = get_post_meta( $post->ID, 'caravan_make', true );
     $sts_var_caravan_bar_option    	= get_post_meta( $post->ID, 'sts_var_caravan_bar_option', true );
     $sts_var_caravan_bar_bend    	= get_post_meta( $post->ID, 'sts_var_caravan_bar_bend', true );
-    $sts_var_caravan_ss_length_adj  = get_post_meta( $post->ID, 'sts_var_caravan_ss_length_adj', true );
+	$sts_var_caravan_ss_length_adj = get_post_meta( $post->ID, 'sts_var_caravan_ss_length_adj', true );
 
-	if($sts_var_caravan_ss_length_adj) {
-		$caravan_length_mm = $caravan_length_mm + $sts_var_caravan_ss_length_adj;
+
+	if ( $sts_var_caravan_ss_length_adj !== '' ) {
+		$caravan_length_mm = (int) $caravan_length_mm + (int) $sts_var_caravan_ss_length_adj;
 	}
 
     $sts_var_caravan_cut_out    = get_post_meta( $post->ID, 'sts_var_caravan_cut_out', true );
@@ -1251,7 +1250,6 @@ function show_towing_svg_in_editor( $post ) {
 				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Towing Vehicle BarWidth (mm):</td>
 				<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $bar_width_mm ? $bar_width_mm.' mm' : '-' ); ?></td>
 			</tr>
-
 			<tr>
 				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold;">Vinyl Insert Width (mm):</td>
 				<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $vinyl_insert_width_mm ? $vinyl_insert_width_mm.' mm' : '-' ); ?></td>
@@ -1896,6 +1894,10 @@ function generate_customer_order_word_file($post_id) {
     $proposed_date = get_post_meta($post_id, 'sts_var_proposed_date_of_delivery', true);
     $proposed_date = $proposed_date ? date('d-F-Y', strtotime($proposed_date)) : '-';
 
+	if ( $sts_var_caravan_ss_length_adj !== '' ) {
+		$caravan_length_mm = (int) $caravan_length_mm + (int) $sts_var_caravan_ss_length_adj;
+	}
+
     // Start Section
     $section = $phpWord->addSection();
 
@@ -2099,7 +2101,6 @@ function generate_customer_order_word_file($post_id) {
 
     $section->addText("CUSTOMER ORDER NOTES:", ['bold' => true]);
     $section->addText($sts_var_order_notes, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-
 	$section->addPageBreak();
 
 	// Fifth Section: Manufacture Sheet
@@ -2108,7 +2109,9 @@ function generate_customer_order_word_file($post_id) {
     $table->addRow();
     $logo_cell = $table->addCell(5000, ['valign' => 'center']);
 	$textRun = $logo_cell->addTextRun();
+
 	// Nested table to restrict width
+
 	$logoCellTitle = $logo_cell->addTable(['cellMargin' => 0]);
 	$logoCellTitle->addRow();
 	$logoCellTitle->addCell(4000)->addText("STONE STOMPER MANUFACTURE SHEET", ['bold' => true, 'size' => 14]);
