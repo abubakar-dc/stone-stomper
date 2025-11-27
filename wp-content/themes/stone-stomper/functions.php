@@ -653,7 +653,6 @@ function render_towing_diagram($post_id) {
 		}
 		ob_start();
 	?>
-
 	<?php if($caravan_length_mm < 1800 ){ ?>
 		<svg xmlns="http://www.w3.org/2000/svg" id="Layer_2" version="1.1" viewBox="0 0 1200 800">
 			<!-- Generator: Adobe Illustrator 29.8.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 2)  -->
@@ -696,7 +695,7 @@ function render_towing_diagram($post_id) {
 			<!-- <polyline class="st2" points="329.42 577.92 288.76 180.94 923.79 180.94 882.27 577.92" fill="#ffffff" stroke="#000000"/> -->
 			 <?php if($sts_var_caravan_cut_out){ ?>
 				<g transform="translate(605.76,550.99)">
-					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0">
+					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500;">
 						<?php echo esc_html( $sts_var_caravan_cut_out ? $sts_var_caravan_cut_out.' mm' : '-' ); ?>
 					</text>
 				</g>
@@ -707,12 +706,12 @@ function render_towing_diagram($post_id) {
 			<rect class="st3" x="504.04" y="315.51" width="211.2" height="195.21" fill="#ffffff" stroke="#000000"/>
 			<?php if($vinyl_insert_width_mm){ ?>
 				<g transform="translate(610.76,330.99)">
-					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0"><?php echo esc_html( $vinyl_insert_width_mm ? $vinyl_insert_width_mm.' mm' : '-' ); ?></text>
+					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $vinyl_insert_width_mm ? $vinyl_insert_width_mm.' mm' : '-' ); ?></text>
 				</g>
 			<?php } ?>
 			<?php if($vinyl_insert_height_mm){ ?>
 				<g transform="translate(520.76,400.99) rotate(-90)">
-					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0"><?php echo esc_html( $vinyl_insert_height_mm ? $vinyl_insert_height_mm.' mm' : '-' ); ?></text>
+					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $vinyl_insert_height_mm ? $vinyl_insert_height_mm.' mm' : '-' ); ?></text>
 				</g>
 			<?php } ?>
 			<rect class="st2" x="404.09" y="381.28" width="8.47" height="196.64" fill="#ffffff" stroke="#000000"/>
@@ -723,12 +722,14 @@ function render_towing_diagram($post_id) {
 			<circle class="st2" cx="810.96" cy="374.25" r="4.24"  fill="#ffffff" stroke="#000000"/>
 			<circle class="st2" cx="408.33" cy="374.25" r="4.24"  fill="#ffffff" stroke="#000000"/>
 			<circle class="st2" cx="482.17" cy="374.25" r="4.24"  fill="#ffffff" stroke="#000000"/>
-			<text class="st5" transform="translate(565.96 411.74)"><tspan fill="#fa3232" stroke="#fa3232" stroke-width="0.3" x="0" y="0">Vinyl Insert</tspan></text>
+			<text class="st5" transform="translate(565.96 411.74)" style="font-size: 20px; font-weight: 500;">
+				<tspan fill="#fa3232" stroke="#fa3232" stroke-width="0.3" x="0" y="0">Vinyl Insert</tspan>
+			</text>
 			<g>
 				<line class="st0" x1="274.29" y1="139.99" x2="935.24" y2="139.99" stroke="#fa3232"/>
 				<g transform="translate(604.76,139.99)">
 					<rect class="st4" x="-67.5" y="-22" width="135" height="24" fill="#ffffff"  stroke="#ffffff"/>
-					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0"><?php echo esc_html( $caravan_width_mm ? $caravan_width_mm.' mm' : '-' ); ?></text>
+					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $caravan_width_mm ? $caravan_width_mm.' mm' : '-' ); ?></text>
 				</g>
 				<polyline class="st0" points="278.3 143.72 274.29 139.99 278.3 136.27" stroke="#fa3232" fill="#ffffff"/>
 				<polyline class="st0" points="931.24 136.27 935.24 140 931.24 143.72" stroke="#fa3232"  fill="#ffffff"/>
@@ -737,7 +738,7 @@ function render_towing_diagram($post_id) {
 				<line class="st0" x1="317.29" y1="608.6" x2="894.24" y2="608.6" stroke="#fa3232"/>
 				<g transform="translate(957.8,375.13)">
 				<rect class="st4" x="10" y="-12" width="135" height="24" fill="#ffffff"  stroke="#ffffff"/>
-				<text class="st5" text-anchor="start" dominant-baseline="middle" x="20"><?php echo esc_html( $caravan_length_mm ? $caravan_length_mm.' mm' : '-' ); ?></text>
+				<text class="st5" text-anchor="start" dominant-baseline="middle" x="20" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $caravan_length_mm ? $caravan_length_mm.' mm' : '-' ); ?></text>
 				</g>
 				<polyline class="st0" points="321.3 612.33 317.29 608.6 321.3 604.88" stroke="#fa3232" fill="#ffffff"/>
 				<polyline class="st0" points="890.24 604.88 894.24 608.6 890.24 612.33" stroke="#fa3232" fill="#ffffff"/>
@@ -748,7 +749,7 @@ function render_towing_diagram($post_id) {
 				<line class="st0" x1="957.8" y1="170.34" x2="957.8" y2="579.93" stroke="#fa3232"/>
 				<g transform="translate(605.77,608.6)">
 					<rect class="st4" x="-67.5" y="-12" width="135" height="24" fill="#ffffff" stroke="#ffffff"/>
-					<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0" fill="#fa3232" stroke="#fa3232" stroke-width="0.3"><?php echo esc_html( $bar_width_mm ? $bar_width_mm.' mm' : '-' ); ?></text>
+					<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $bar_width_mm ? $bar_width_mm.' mm' : '-' ); ?></text>
 				</g>
 				<polyline class="st0" points="954.07 174.34 957.8 170.34 961.52 174.34" stroke="#fa3232" fill="#ffffff"/>
 				<polyline class="st0" points="961.52 575.92 957.8 579.93 954.07 575.92" stroke="#fa3232" fill="#ffffff"/>
@@ -805,7 +806,7 @@ function render_towing_diagram($post_id) {
 			<!-- <polyline class="st4" points="329.42 577.92 288.76 180.94 923.79 180.94 882.27 577.92" fill="#ffffff" stroke="#000000"/> -->
 			 <?php if($sts_var_caravan_cut_out){ ?>
 				<g transform="translate(605.76,550.99)">
-					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0">
+					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500;">
 						<?php echo esc_html( $sts_var_caravan_cut_out ? $sts_var_caravan_cut_out.' mm' : '-' ); ?>
 					</text>
 				</g>
@@ -816,7 +817,7 @@ function render_towing_diagram($post_id) {
 			<rect class="st7" x="504.04" y="315.51" width="211.2" height="195.21" fill="#ffffff" stroke="#000000"/>
 			<?php if($vinyl_insert_width_mm){ ?>
 				<g transform="translate(610.76,330.99)">
-					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0">
+					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0"  style="font-size: 20px; font-weight: 500;">
 						<?php echo esc_html( $vinyl_insert_width_mm ? $vinyl_insert_width_mm.' mm' : '-' ); ?>
 					</text>
 				</g>
@@ -824,7 +825,7 @@ function render_towing_diagram($post_id) {
 
 			<?php if($vinyl_insert_height_mm){ ?>
 				<g transform="translate(520.76,400.99) rotate(-90)">
-					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0">
+					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0"  style="font-size: 20px; font-weight: 500;">
 						<?php echo esc_html( $vinyl_insert_height_mm ? $vinyl_insert_height_mm.' mm' : '-' ); ?>
 					</text>
 				</g>
@@ -842,14 +843,14 @@ function render_towing_diagram($post_id) {
 				fill="#fa3232"
 				stroke="#fa3232"
 				stroke-width="0.3"
-				stroke-linejoin="round">
+				stroke-linejoin="round" style="font-size: 20px; font-weight: 500;">
 				Vinyl Insert
 			</text>
 			<g>
 				<line class="st0" x1="274.29" y1="139.99" x2="935.24" y2="139.99" fill="#ffffff" stroke="#fa3232"/>
 				<rect class="st8" x="539.36" y="127.61" width="135.53" height="22.16" fill="#ffffff" stroke="#ffffff"/>
 				<g transform="translate(604.76,139.99)">
-					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0">
+					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500;">
 						<?php echo esc_html( $caravan_width_mm ? $caravan_width_mm.' mm' : '-' ); ?>
 					</text>
 				</g>
@@ -862,7 +863,7 @@ function render_towing_diagram($post_id) {
 				<rect class="st8" x="539.36" y="596.22" width="135.53" height="22.16" fill="#ffffff" stroke="#ffffff"/>
 				<g transform="translate(605.77,608.6)">
 					<rect class="st8" x="948.02" y="306.8" width="22.16" height="135.53" fill="#ffffff" stroke="#ffffff"/>
-					<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0"  fill="#fa3232"  stroke="#fa3232" stroke-width="0.3"><?php echo esc_html( $bar_width_mm ? $bar_width_mm.' mm' : '-' ); ?></text>
+					<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0"  fill="#fa3232"  stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $bar_width_mm ? $bar_width_mm.' mm' : '-' ); ?></text>
 				</g>
 				<polyline class="st0" points="321.3 612.33 317.29 608.6 321.3 604.88" fill="#ffffff" stroke="#fa3232"/>
 				<polyline class="st0" points="890.24 604.88 894.24 608.6 890.24 612.33" fill="#ffffff" stroke="#fa3232"/>
@@ -873,87 +874,59 @@ function render_towing_diagram($post_id) {
 				<rect class="st8" x="948.02" y="306.8" width="22.16" height="135.53" fill="#ffffff" stroke="#ffffff"/>
 				<g transform="translate(915.8,375.13)">
 					<!-- <rect class="st4" x="10" y="-12" width="135" height="24" fill="#ffffff"/> -->
-					<text class="st5" text-anchor="start" dominant-baseline="middle" x="20" fill="#fa3232"  stroke="#fa3232" stroke-width="0.3"><?php echo esc_html( $caravan_length_mm ? $caravan_length_mm.' mm' : '-' ); ?></text>
+					<text class="st5" text-anchor="start" dominant-baseline="middle" x="20" fill="#fa3232"  stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $caravan_length_mm ? $caravan_length_mm.' mm' : '-' ); ?></text>
 				</g>
 				<polyline class="st0" points="954.07 174.34 957.8 170.34 961.52 174.34" fill="#ffffff" stroke="#fa3232"/>
 				<polyline class="st0" points="961.52 575.92 957.8 579.93 954.07 575.92" fill="#ffffff" stroke="#fa3232"/>
 			</g>
-			<line class="st0" x1="884.28" y1="181.78" x2="884.28" y2="286.37" fill="#ffffff" stroke="#fa3232"/>
-			<rect class="st8" x="873.2" y="212.51" width="22.16" height="43.67" fill="#ffffff" stroke="#ffffff"/>
-			<g transform="translate(830,240.13)">
-				<!-- <rect class="st4" x="10" y="-12" width="135" height="24" fill="#ffffff"/> -->
-
-				<!-- Stonegard Size -->
+			<g transform="translate(280,220.13)">
+				<g transform="translate(-835,-220)">
+					<line class="st0" x1="884.28" y1="181.78" x2="884.28" y2="286.37" fill="#ffffff" stroke="#fa3232"/>
+					<rect class="st8" x="873.2" y="212.51" width="22.16" height="43.67" fill="#ffffff" stroke="#ffffff"/>
+					<polyline class="st0" points="880.55 185.79 884.28 181.78 888 185.79" fill="#ffffff" stroke="#fa3232"/>
+					<polyline class="st0" points="888 282.37 884.28 286.37 880.55 282.37" fill="#ffffff" stroke="#fa3232"/>
+				</g>
 				<?php if($stoneguard_height_mm){ ?>
-					<text class="st5" text-anchor="start" dominant-baseline="middle" y="-19" x="20" fill="#fa3232" stroke="#fa3232" stroke-width="0.3">
+					<text class="st5" text-anchor="start" dominant-baseline="middle" y="0" x="55" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;">
 						<?php echo esc_html( $stoneguard_height_mm ? 'S: '. $stoneguard_height_mm.' mm' : '-' ); ?>
 					</text>
 				<?php } ?>
-
-				<!-- Toolbox Size -->
 				<?php if($toolbox_height_mm){ ?>
-					<text class="st5" text-anchor="start" dominant-baseline="middle" y="10" x="20"  fill="#fa3232" stroke="#fa3232" stroke-width="0.3">
+					<text class="st5" text-anchor="start" dominant-baseline="middle" y="20" x="55"  fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;">
 						<?php echo esc_html( $toolbox_height_mm ? 'T: '.$toolbox_height_mm.' mm' : '-' ); ?>
 					</text>
 				<?php } ?>
-
-				<!-- Toolbox Size -->
 				<?php if($support_pockets_measurement){ ?>
-					<text class="st5" text-anchor="start" dominant-baseline="middle" y="-5" x="20"  fill="#fa3232"  stroke="#fa3232" stroke-width="0.3">
+					<text class="st5" text-anchor="start" dominant-baseline="middle" y="40" x="55"  fill="#fa3232"  stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;">
 						<?php echo esc_html( $support_pockets_measurement ? 'SP: '.$support_pockets_measurement.' mm' : '-' ); ?>
 					</text>
 				<?php } ?>
 			</g>
-			<polyline class="st0" points="880.55 185.79 884.28 181.78 888 185.79" fill="#ffffff" stroke="#fa3232"/>
-			<polyline class="st0" points="888 282.37 884.28 286.37 880.55 282.37" fill="#ffffff" stroke="#fa3232"/>
-			<g id="Toolbox">
+			<g id="Toolbox" transform="translate(0,30)">
 				<g>
-				<line class="st0" x1="352.44" y1="266.29" x2="860.13" y2="266.29" fill="#ffffff" stroke="#fa3232"/>
-				<rect class="st8" x="539.36" y="253.9" width="135.53" height="22.16" fill="#ffffff"  stroke="#ffffff"/>
-				<g transform="translate(555,263.13)">
-					<!-- <rect class="st4" x="10" y="-12" width="135" height="24" fill="#ffffff"/> -->
-					<!-- Stonegard Size -->
-					<?php if($stoneguard_width_mm){ ?>
-					<text class="st5" text-anchor="start" dominant-baseline="middle" y="-15" x="20"  fill="#fa3232"  stroke="#fa3232" stroke-width="0.3">
-						<?php echo esc_html( $stoneguard_width_mm ? 'S: '. $stoneguard_width_mm.' mm' : '-' ); ?>
-					</text>
-					<?php } ?>
-					<!-- Toolbox Size -->
-					<?php if($toolbox_height_mm){ ?>
-						<text class="st5" text-anchor="start" dominant-baseline="middle" x="20"  fill="#fa3232"  stroke="#fa3232" stroke-width="0.3">
-							<?php echo esc_html( $toolbox_width_mm ? 'T: '. $toolbox_width_mm.' mm' : '-' ); ?>
-						</text>
-					<?php } ?>
-				</g>
-				<polyline class="st0" points="356.43 270.01 352.42 266.29 356.43 262.56" fill="#ffffff" stroke="#fa3232"/>
-				<polyline class="st0" points="856.13 262.56 860.13 266.29 856.13 270.01" fill="#ffffff" stroke="#fa3232"/>
-				</g>
-				<g>
-					<g>
-						<path class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" d="M533.06,211.74h-1.25v-9.6h-3.39v-1.11h8.03v1.11h-3.39v9.6Z"/>
-						<path class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" d="M545.18,207.72c0,1.31-.33,2.33-.99,3.07-.66.74-1.57,1.1-2.73,1.1-.72,0-1.36-.17-1.91-.51-.56-.34-.99-.82-1.29-1.45-.3-.63-.45-1.37-.45-2.21,0-1.31.33-2.33.98-3.06.65-.73,1.56-1.09,2.72-1.09s2.02.37,2.68,1.12c.66.75.99,1.76.99,3.03ZM539.06,207.72c0,1.03.21,1.81.62,2.34.41.54,1.01.81,1.81.81s1.4-.27,1.81-.8c.41-.53.62-1.32.62-2.35s-.21-1.79-.62-2.33c-.41-.53-1.02-.79-1.83-.79s-1.4.26-1.8.78-.61,1.3-.61,2.34Z"/>
-						<path class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" d="M554.6,207.72c0,1.31-.33,2.33-.99,3.07-.66.74-1.57,1.1-2.73,1.1-.72,0-1.36-.17-1.91-.51-.56-.34-.99-.82-1.29-1.45-.3-.63-.45-1.37-.45-2.21,0-1.31.33-2.33.98-3.06.65-.73,1.56-1.09,2.72-1.09s2.02.37,2.68,1.12c.66.75.99,1.76.99,3.03ZM548.48,207.72c0,1.03.21,1.81.62,2.34.41.54,1.01.81,1.81.81s1.4-.27,1.81-.8c.41-.53.62-1.32.62-2.35s-.21-1.79-.62-2.33c-.41-.53-1.02-.79-1.83-.79s-1.4.26-1.8.78-.61,1.3-.61,2.34Z"/>
-						<path class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" d="M558.32,211.74h-1.22v-11.4h1.22v11.4Z"/>
-						<path class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" d="M565,203.58c1.05,0,1.87.36,2.46,1.08.58.72.88,1.74.88,3.06s-.29,2.34-.88,3.07c-.59.73-1.41,1.09-2.45,1.09-.52,0-1-.1-1.43-.29-.43-.19-.79-.49-1.09-.89h-.09l-.26,1.03h-.87v-11.4h1.22v2.77c0,.62-.02,1.18-.06,1.67h.06c.57-.8,1.41-1.2,2.52-1.2ZM564.82,204.6c-.83,0-1.43.24-1.79.71-.37.48-.55,1.28-.55,2.41s.19,1.94.56,2.42c.38.49.98.73,1.81.73.75,0,1.3-.27,1.67-.82.37-.54.55-1.33.55-2.35s-.18-1.82-.55-2.34-.93-.77-1.7-.77Z"/>
-						<path class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" d="M577.76,207.72c0,1.31-.33,2.33-.99,3.07-.66.74-1.57,1.1-2.73,1.1-.72,0-1.36-.17-1.91-.51-.56-.34-.99-.82-1.29-1.45-.3-.63-.45-1.37-.45-2.21,0-1.31.33-2.33.98-3.06.65-.73,1.56-1.09,2.72-1.09s2.02.37,2.68,1.12c.66.75.99,1.76.99,3.03ZM571.64,207.72c0,1.03.21,1.81.62,2.34.41.54,1.01.81,1.81.81s1.4-.27,1.81-.8c.41-.53.62-1.32.62-2.35s-.21-1.79-.62-2.33c-.41-.53-1.02-.79-1.83-.79s-1.4.26-1.8.78-.61,1.3-.61,2.34Z"/>
-						<path class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" d="M582.2,207.63l-2.79-3.92h1.38l2.12,3.08,2.11-3.08h1.37l-2.79,3.92,2.94,4.11h-1.38l-2.25-3.25-2.27,3.25h-1.38l2.94-4.11Z"/>
-						<path class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" d="M596.08,201.03l-3.99,10.71h-1.22l3.99-10.71h1.22Z"/>
-						<path class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" d="M607.65,208.89c0,.94-.34,1.68-1.03,2.21s-1.61.79-2.78.79c-1.27,0-2.25-.16-2.93-.49v-1.2c.44.19.92.33,1.44.44s1.03.16,1.54.16c.83,0,1.46-.16,1.88-.47.42-.32.63-.75.63-1.32,0-.37-.08-.67-.22-.91-.15-.24-.4-.46-.75-.66-.35-.2-.88-.43-1.59-.68-1-.36-1.71-.78-2.13-1.27-.43-.49-.64-1.12-.64-1.91,0-.83.31-1.48.93-1.97s1.44-.73,2.46-.73,2.04.2,2.94.59l-.39,1.08c-.88-.37-1.74-.56-2.58-.56-.66,0-1.17.14-1.55.42-.37.28-.56.68-.56,1.18,0,.37.07.67.21.91.14.24.37.45.69.65.32.2.82.42,1.49.66,1.12.4,1.9.83,2.32,1.29.42.46.63,1.05.63,1.79Z"/>
-						<path class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" d="M612.25,210.88c.21,0,.42-.02.62-.05.2-.03.36-.06.48-.1v.93c-.13.06-.33.12-.58.16-.26.04-.49.06-.69.06-1.55,0-2.33-.82-2.33-2.45v-4.78h-1.15v-.59l1.15-.51.51-1.71h.7v1.86h2.33v.95h-2.33v4.72c0,.48.11.85.34,1.11s.54.39.95.39Z"/>
-						<path class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" d="M621.88,207.72c0,1.31-.33,2.33-.99,3.07-.66.74-1.57,1.1-2.73,1.1-.72,0-1.35-.17-1.91-.51-.56-.34-.99-.82-1.29-1.45-.3-.63-.45-1.37-.45-2.21,0-1.31.33-2.33.98-3.06.65-.73,1.56-1.09,2.72-1.09s2.01.37,2.68,1.12c.66.75.99,1.76.99,3.03ZM615.76,207.72c0,1.03.21,1.81.62,2.34.41.54,1.01.81,1.81.81s1.4-.27,1.81-.8c.41-.53.62-1.32.62-2.35s-.21-1.79-.62-2.33c-.41-.53-1.02-.79-1.83-.79s-1.4.26-1.8.78-.61,1.3-.61,2.34Z"/>
-						<path class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" d="M629.5,211.74v-5.19c0-.65-.15-1.14-.45-1.46s-.76-.48-1.4-.48c-.84,0-1.46.23-1.85.68s-.59,1.2-.59,2.25v4.21h-1.22v-8.03h.99l.2,1.1h.06c.25-.4.6-.7,1.05-.92.45-.22.95-.33,1.5-.33.97,0,1.69.23,2.18.7.49.47.73,1.21.73,2.24v5.24h-1.22Z"/>
-						<path class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" d="M636.61,211.89c-1.19,0-2.12-.36-2.81-1.08-.69-.72-1.03-1.73-1.03-3.01s.32-2.32.96-3.08c.64-.76,1.49-1.14,2.57-1.14,1.01,0,1.8.33,2.39.99.59.66.88,1.54.88,2.62v.77h-5.53c.02.94.26,1.66.71,2.15.45.49,1.09.73,1.91.73.86,0,1.72-.18,2.56-.54v1.08c-.43.19-.84.32-1.22.4-.38.08-.85.12-1.39.12ZM636.28,204.59c-.64,0-1.16.21-1.54.63-.38.42-.61,1-.68,1.74h4.2c0-.77-.17-1.35-.51-1.76-.34-.41-.83-.61-1.46-.61Z"/>
-						<path class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" d="M648.2,203.71v.77l-1.49.18c.14.17.26.39.37.67.11.28.16.59.16.93,0,.79-.27,1.41-.81,1.88s-1.27.7-2.21.7c-.24,0-.46-.02-.67-.06-.52.27-.78.62-.78,1.03,0,.22.09.38.27.49.18.1.49.16.93.16h1.42c.87,0,1.54.18,2,.55.47.37.7.9.7,1.6,0,.89-.36,1.57-1.07,2.03-.71.47-1.75.7-3.12.7-1.05,0-1.86-.2-2.43-.59-.57-.39-.85-.94-.85-1.66,0-.49.16-.91.47-1.27.31-.36.75-.6,1.32-.73-.21-.09-.38-.24-.52-.43-.14-.19-.21-.42-.21-.68,0-.29.08-.55.23-.77.16-.22.4-.43.74-.64-.42-.17-.75-.46-1.01-.87-.26-.41-.39-.88-.39-1.41,0-.88.26-1.56.79-2.03.53-.48,1.27-.71,2.24-.71.42,0,.8.05,1.14.15h2.78ZM641.8,213.09c0,.43.18.76.55.99s.89.34,1.57.34c1.02,0,1.78-.15,2.27-.46.49-.31.74-.72.74-1.24,0-.44-.13-.74-.4-.91-.27-.17-.77-.25-1.52-.25h-1.46c-.55,0-.98.13-1.29.4s-.46.64-.46,1.13ZM642.46,206.28c0,.56.16.99.48,1.28s.76.43,1.33.43c1.19,0,1.78-.58,1.78-1.73s-.6-1.81-1.8-1.81c-.57,0-1.01.15-1.32.46s-.46.76-.46,1.37Z"/>
-						<path class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" d="M650.99,203.71v5.21c0,.66.15,1.14.45,1.46s.76.48,1.4.48c.84,0,1.45-.23,1.84-.69.39-.46.58-1.21.58-2.25v-4.22h1.22v8.03h-1l-.18-1.08h-.07c-.25.39-.59.7-1.04.91-.44.21-.95.31-1.51.31-.98,0-1.71-.23-2.19-.7-.49-.46-.73-1.21-.73-2.23v-5.25h1.23Z"/>
-						<path class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" d="M663.99,211.74l-.24-1.14h-.06c-.4.5-.8.84-1.2,1.02-.4.18-.89.27-1.49.27-.8,0-1.42-.21-1.87-.62-.45-.41-.68-.99-.68-1.75,0-1.62,1.3-2.47,3.89-2.55l1.36-.04v-.5c0-.63-.14-1.09-.41-1.39-.27-.3-.7-.45-1.3-.45-.67,0-1.43.21-2.27.62l-.37-.93c.4-.21.83-.38,1.3-.51.47-.12.94-.18,1.42-.18.96,0,1.67.21,2.13.64.46.42.69,1.11.69,2.04v5.48h-.9ZM661.25,210.88c.76,0,1.35-.21,1.78-.62.43-.42.65-1,.65-1.74v-.72l-1.22.05c-.97.03-1.66.18-2.09.45-.43.27-.64.68-.64,1.24,0,.44.13.77.4,1,.27.23.64.34,1.12.34Z"/>
-						<path class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" d="M671.06,203.57c.36,0,.68.03.96.09l-.17,1.13c-.33-.07-.62-.11-.88-.11-.65,0-1.21.26-1.67.79-.46.53-.69,1.18-.69,1.97v4.31h-1.22v-8.03h1l.14,1.49h.06c.3-.52.66-.92,1.08-1.21s.88-.42,1.38-.42Z"/>
-						<path class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" d="M678.99,210.67h-.07c-.56.82-1.4,1.22-2.52,1.22-1.05,0-1.87-.36-2.45-1.08-.58-.72-.88-1.74-.88-3.06s.29-2.35.88-3.08,1.4-1.1,2.45-1.1,1.92.4,2.5,1.19h.1l-.05-.58-.03-.56v-3.27h1.22v11.4h-.99l-.16-1.08ZM676.55,210.87c.83,0,1.43-.23,1.81-.68.37-.45.56-1.18.56-2.19v-.26c0-1.14-.19-1.95-.57-2.43-.38-.49-.98-.73-1.81-.73-.71,0-1.26.28-1.64.83-.38.55-.57,1.34-.57,2.35s.19,1.8.56,2.32.93.78,1.66.78Z"/>
+					<g transform="translate(0,-10)">
+						<line class="st0" x1="352.44" y1="266.29" x2="860.13" y2="266.29" fill="#ffffff" stroke="#fa3232"/>
+						<rect class="st8" x="539.36" y="253.9" width="135.53" height="22.16" fill="#ffffff"  stroke="#ffffff"/>
+						<polyline class="st0" points="356.43 270.01 352.42 266.29 356.43 262.56" fill="#ffffff" stroke="#fa3232"/>
+						<polyline class="st0" points="856.13 262.56 860.13 266.29 856.13 270.01" fill="#ffffff" stroke="#fa3232"/>
 					</g>
+					<g transform="translate(555,263.13)">
+						<?php if($stoneguard_width_mm){ ?>
+						<text class="st5" text-anchor="start" dominant-baseline="middle" y="-20" x="0" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;">
+							<?php echo esc_html( $stoneguard_width_mm ? 'S: '. $stoneguard_width_mm.' mm' : '-' ); ?>
+						</text>
+						<?php } ?>
+						<?php if($toolbox_height_mm){ ?>
+							<text class="st5" text-anchor="start" dominant-baseline="middle" x="0" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;">
+								<?php echo esc_html( $toolbox_width_mm ? 'T: '. $toolbox_width_mm.' mm' : '-' ); ?>
+							</text>
+						<?php } ?>
+					</g>
+
 				</g>
 			</g>
 		</svg>
 	<?php } ?>
-
 	<?php return ob_get_clean(); ?>
 <?php }
 
