@@ -647,7 +647,7 @@ function render_towing_diagram($post_id) {
 		$stoneguard_width_mm    = get_post_meta( $post_id, 'factory_stoneguard_width', true );
 		$stoneguard_height_mm   = get_post_meta( $post_id, 'factory_stoneguard_height', true );
 		$sts_var_caravan_cut_out  = get_post_meta( $post_id, 'sts_var_caravan_cut_out', true );
-		$sts_var_caravan_ss_length_adj = get_post_meta( $post->ID, 'sts_var_caravan_ss_length_adj', true );
+		$sts_var_caravan_ss_length_adj = get_post_meta( $post_id, 'sts_var_caravan_ss_length_adj', true );
 		if ( $sts_var_caravan_ss_length_adj !== '' ) {
 			$caravan_length_mm = (int) $caravan_length_mm + (int) $sts_var_caravan_ss_length_adj;
 		}
@@ -1893,6 +1893,7 @@ function generate_customer_order_word_file($post_id) {
 
     $proposed_date = get_post_meta($post_id, 'sts_var_proposed_date_of_delivery', true);
     $proposed_date = $proposed_date ? date('d-F-Y', strtotime($proposed_date)) : '-';
+
 
 	if ( $sts_var_caravan_ss_length_adj !== '' ) {
 		$caravan_length_mm = (int) $caravan_length_mm + (int) $sts_var_caravan_ss_length_adj;
