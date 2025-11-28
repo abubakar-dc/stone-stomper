@@ -197,7 +197,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 									</div>
 								</div>
 							</div>
-
 							<!-- Towing Vehicle Details -->
 							<div id="vehicle-details" class="section-disable order-form-section-inner d-flex form-vehicle-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
@@ -300,7 +299,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 									?>
 								</div>
 							</div>
-
 							<!-- Caravan Details -->
 							<div id="caravan-details" class="section-disable  order-form-section-inner d-flex form-carvan-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
@@ -395,7 +393,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 									?>
 								</div>
 							</div>
-
 							<!-- Bar Option -->
 							<div id="bar-options-section" class="section-disable  order-form-section-inner d-flex form-bar-options-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left hide-on-mobile column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
@@ -468,7 +465,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 									<?php } ?>
 								</div>
 							</div>
-
 							<!-- Photographs -->
 							<div id="photographs-details" class=" section-disable order-form-section-inner d-flex form-carvan-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
@@ -570,7 +566,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 									?>
 								</div>
 							</div>
-
 							<!-- Final Measurements -->
 							<div id="final-measurements" class=" section-disable order-form-section-inner d-flex form-measurements-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
@@ -602,24 +597,22 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 													<p><?php echo html_entity_decode($sts_var_text); ?></p>
 												<?php } ?>
 											<?php }
+										}
+									} ?>
+									<div class="grid cols-2 measurements-images mobile-image example-photographs">
+										<?php
+											if($sts_var_measurements_image){
+												StoneStomper::the_attachment_image($sts_var_measurements_image,1200 );
 											}
-										} ?>
-
-										<div class="grid cols-2 measurements-images mobile-image example-photographs">
-											<?php
-												if($sts_var_measurements_image){
-													StoneStomper::the_attachment_image($sts_var_measurements_image,1200 );
-												}
-											?>
-											<?php if($sts_var_measurements_image_caption){ ?>
-												<div class="image-caption-area">
-													<div class="image-caption">
-														<p><?php echo $sts_var_measurements_image_caption; ?></p>
-													</div>
+										?>
+										<?php if($sts_var_measurements_image_caption){ ?>
+											<div class="image-caption-area">
+												<div class="image-caption">
+													<p><?php echo $sts_var_measurements_image_caption; ?></p>
 												</div>
-											<?php } ?>
-										</div>
-
+											</div>
+										<?php } ?>
+									</div>
 									<div class="grid cols-2">
 										<div class="field mesh-only-field">
 											<label class="req" for="meshmeasurment">Bracket on the caravan to Stone Somper while hitched up straight</label>
@@ -734,10 +727,8 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											}
 										}
 									?>
-
 								</div>
 							</div>
-
 							<!-- Final Details & Summary -->
 							<div id="final-summary" class=" section-disable order-form-section-inner d-flex form-details-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">

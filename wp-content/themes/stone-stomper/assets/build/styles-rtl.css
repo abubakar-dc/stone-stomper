@@ -7289,6 +7289,10 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   color: var(--ss_button_bgcolor);
 }
 
+#blk-measure:not(:has(.mesh-only-field[style*="display: none"])) .field:has(#a_frame_length) {
+  display: none !important;
+}
+
 /*-------------------------------------------------
 >> Styles for Wp Buttons
 -------------------------------------------------*/

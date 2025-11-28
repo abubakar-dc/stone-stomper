@@ -5894,6 +5894,9 @@ Mixin for transition
   background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMCIgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiB2aWV3Qm94PSIwIDAgMTI4IDEyOCI+PGc+PHBhdGggZD0iTTc1LjQgMTI2LjYzYTExLjQzIDExLjQzIDAgMDEtMi4xLTIyLjY1IDQwLjkgNDAuOSAwIDAwMzAuNS0zMC42IDExLjQgMTEuNCAwIDExMjIuMjcgNC44N2guMDJhNjMuNzcgNjMuNzcgMCAwMS00Ny44IDQ4LjA1di0uMDJhMTEuMzggMTEuMzggMCAwMS0yLjkzLjM3eiIgZmlsbD0iI2E3YTljMSIvPjxhbmltYXRlVHJhbnNmb3JtIGF0dHJpYnV0ZU5hbWU9InRyYW5zZm9ybSIgdHlwZT0icm90YXRlIiBmcm9tPSIwIDY0IDY0IiB0bz0iMzYwIDY0IDY0IiBkdXI9IjgwMG1zIiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIvPjwvZz48L3N2Zz4=);
   color: var(--ss_button_bgcolor);
 }
+.editor-styles-wrapper #blk-measure:not(:has(.mesh-only-field[style*="display: none"])) .field:has(#a_frame_length) {
+  display: none !important;
+}
 .editor-styles-wrapper .wp-block-button .wp-block-button__link {
   box-sizing: border-box;
   position: relative;

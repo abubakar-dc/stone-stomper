@@ -696,6 +696,7 @@ jQuery( function() {
 		function() {
 			if ( jQuery( this ).is( ':checked' ) ) {
 				jQuery( '.toolbox-support' ).slideUp();
+				jQuery( '.support_pockets' ).slideUp();
 				jQuery( '.factory_stoneguard' ).slideDown();
 			} else {
 				jQuery( '.factory_stoneguard' ).slideUp();
@@ -706,6 +707,7 @@ jQuery( function() {
 	jQuery( '.stone-stomper-supports #toolbox' ).on( 'change', function() {
 		if ( jQuery( this ).is( ':checked' ) ) {
 			jQuery( '.factory_stoneguard' ).slideUp();
+			jQuery( '.support_pockets' ).slideUp();
 			jQuery( '.toolbox-support' ).slideDown();
 		} else {
 			jQuery( '.toolbox-support' ).slideUp();
@@ -779,6 +781,7 @@ jQuery( document ).ready( function() {
 		}
 	} );
 } );
+
 jQuery( document ).ready( function() {
 	jQuery( '.product-image a' ).each( function() {
 		const $link = jQuery( this );
@@ -800,6 +803,7 @@ jQuery( document ).ready( function() {
 		}
 	} );
 } );
+
 jQuery( document ).ready( function() {
 	jQuery( '.play-icon a' ).each( function() {
 		const $link = jQuery( this );

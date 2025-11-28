@@ -467,3 +467,8 @@
 	background-image: url(../images/spinner.svg);
 	color: var(--ss_button_bgcolor);
 }
+
+#blk-measure:not(:has(.mesh-only-field[style*="display: none"]))
+	.field:has(#a_frame_length) {
+	display: none !important;
+}
