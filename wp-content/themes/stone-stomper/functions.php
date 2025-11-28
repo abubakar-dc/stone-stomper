@@ -360,7 +360,9 @@ add_action( 'woocommerce_new_order', function( $order_id ) {
 
 	error_log(print_r($data, true));
 
-	$cust_name    = isset( $data['customer_name'] )   ? sanitize_text_field( $data['customer_name'] )   : '';
+	$cust_first_name    = isset( $data['customer_first_name'] )   ? sanitize_text_field( $data['customer_first_name'] )   : '';
+	$cust_last_name    = isset( $data['customer_last_name'] )   ? sanitize_text_field( $data['customer_last_name'] )   : '';
+	$cust_name         = $cust_first_name . ' ' . $cust_last_name;
 	$cust_phone    = isset( $data['customer_phone'] )   ? sanitize_text_field( $data['customer_phone'] )   : '';
 	$cust_email   = isset( $data['customer_email'] )  ? sanitize_email( $data['customer_email'] )       : '';
 	$cust_address = isset( $data['customer_address'] )? sanitize_text_field( $data['customer_address'] ): '';
@@ -681,7 +683,6 @@ function render_towing_diagram($post_id) {
 
 				.st5 {
 					fill: #fa3232;
-					font-family: OpenSans, 'Open Sans';
 					font-size: 15px;
 					letter-spacing: .03em;
 				}
@@ -793,7 +794,6 @@ function render_towing_diagram($post_id) {
 					}
 
 					.st6 {
-						font-family: OpenSans, 'Open Sans';
 						font-size: 15px;
 						letter-spacing: .03em;
 					}
@@ -2326,6 +2326,7 @@ add_filter( 'wc_order_statuses', function( $statuses ) {
 /**
  * Add a WooCommerce Order Status meta box to single Customer (Order) edit screen
  */
+
 add_action( 'add_meta_boxes', function() {
 	add_meta_box(
 		'customer_order_status_box',
@@ -2415,7 +2416,6 @@ add_action('init', function() {
     }
 });
 
-
 add_action('woocommerce_cart_calculate_fees', function($cart) {
     if (is_admin() && !defined('DOING_AJAX')) {
         return;
@@ -2479,30 +2479,10 @@ function hide_quantity_for_specific_product($sold_individually, $product) {
     return $sold_individually;
 }
 
+// Date reverse for the date
+add_filter('post_date_column_time', function($h_time, $post) {
+    $date = mysql2date('d/m/Y', $post->post_date);
+    $time = mysql2date('g:i a', $post->post_date);
+    return $date . ' at ' . $time;
+}, 10, 2);
 
-
-
-
-// add_action('woocommerce_cart_calculate_fees', function($cart) {
-//     if (is_admin() && !defined('DOING_AJAX')) return;
-
-//     // Loop through all cart items
-//     foreach ($cart->get_cart() as $cart_item) {
-//         $barwidth       = $cart_item['barwidth_mm'] ?? 0;
-//         $a_frame_length = $cart_item['a_frame_length_mm'] ?? 0;
-
-//         // --- Bar Width Extra Charges ---
-//         if ($barwidth >= 1900 && $barwidth <= 2100) {
-//             $cart->add_fee(__('Extra Bar Width (1900–2100mm)', 'stone-stomper'), 35);
-//         } elseif ($barwidth > 2100) {
-//             $cart->add_fee(__('Extra Bar Width (>2100mm)', 'stone-stomper'), 100);
-//         }
-
-//         // --- A-Frame Length Extra Charges ---
-//         if ($a_frame_length >= 1800 && $a_frame_length <= 2300) {
-//             $cart->add_fee(__('Extra Mesh Length (1800–2300mm)', 'stone-stomper'), 35);
-//         } elseif ($a_frame_length > 2300) {
-//             $cart->add_fee(__('Extra Mesh Length (>2300mm)', 'stone-stomper'), 100);
-//         }
-//     }
-// });

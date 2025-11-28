@@ -144,8 +144,11 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										<?php } ?>
 									</div>
 									<div class="grid vehicle-details cols-2">
-										<div class="field">
-											<input id="cust_name" placeholder="Name" name="customer_name" type="text" required />
+										<div class="field half-input-field">
+											<input id="first_name" placeholder="First Name" name="customer_first_name" type="text" required />
+										</div>
+										<div class="field half-input-field last">
+											<input id="last_name" placeholder="Last Name" name="customer_last_name" type="text" required />
 										</div>
 										<div class="field">
 											<input id="cust_phone" placeholder="Phone" name="customer_phone" type="text" required />
@@ -418,7 +421,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 									</div>
 								</div>
 								<div class="form-section-right column photographs-details" id="blk-caravan">
-
 									<!-- Section Head -->
 									<?php if ( $sts_var_section_bar_options_title ) { ?>
 										<h3><?php echo esc_html($sts_var_section_bar_options_title); ?></h3>
@@ -492,7 +494,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 									</div>
 								</div>
 								<div class="form-section-right column" id="blk-photos">
-									<?php if($sts_var_section_head_notices){
+									<?php if($sts_var_section_head_notices) {
 										foreach($sts_var_section_head_notices as $sts_key => $notice){
 										$sts_var_headline = $notice['headline']??null;
 										$sts_var_text = $notice['text']??null;
@@ -554,19 +556,18 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										</div>
 									</div>
 									<?php
-									if($sts_var_section_head_notices){
-										foreach($sts_var_section_head_notices as $sts_key => $notice) {
-										$sts_var_notice = $notice['notice']??null;
-										if($sts_key === 3){ ?>
-										<?php if ( $sts_var_notice ) { ?>
-												<div class="note notice-bar"><?php echo html_entity_decode($sts_var_notice); ?></div>
-											<?php } ?>
-										<?php
-										}
+										if($sts_var_section_head_notices) {
+											foreach($sts_var_section_head_notices as $sts_key => $notice) {
+												$sts_var_notice = $notice['notice']??null;
+												if($sts_key === 3){ ?>
+												<?php if ( $sts_var_notice ) { ?>
+														<div class="note notice-bar"><?php echo html_entity_decode($sts_var_notice); ?></div>
+													<?php } ?>
+												<?php
+												}
 											}
 										}
 									?>
-
 								</div>
 							</div>
 
@@ -635,7 +636,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											<input id="barwidth" name="barwidth_mm" type="text"
 												placeholder="e.g. 1800" required />
 										</div>
-
 										<div class="field" >
 											<label class="req" for="vanwidth">Caravan Width (mm)</label>
 											<input id="vanwidth" name="caravan_width_mm" type="text"
@@ -646,10 +646,8 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											<input id="a_frame_length" name="a_frame_length_mm" type="text"
 												placeholder="e.g. 1800" required />
 										</div>
-
 										<fieldset class="ss-support-options" style="display:none">
 											<div class="note notice-bar mt-0">As the A-Frame length is longer than 1800mm, we require a mid-fixing point for your Stone Stomper. Please select one of the following options. If you are unsure, please select "Support Pockets"</div>
-
 											<div  class="ginput_container ginput_container_checkbox extra-support">
 												<!-- ToolBox -->
 												<div class="gchoice stone-stomper-supports">
@@ -696,18 +694,16 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 												<div class="gchoice stone-stomper-supports">
 													<input class="gfield-choice-input" name="input_1.3" type="radio" value="support_pockets" id="support_pockets">
 													<label for="support_pockets" id="label_4_1_3">Support Pockets</label>
-
-														<div class="support_pockets" style="display:none">
-															<div class="field extra-support">
-																<label class="req" for="support_pocket_length">Support Pocket Distance From Caravan (MM)</label>
-																<input id="support_pocket_length" name="support_pocket_length_mm" type="text"
-																	placeholder="e.g.600 mm" required />
-															</div>
+													<div class="support_pockets" style="display:none">
+														<div class="field extra-support">
+															<label class="req" for="support_pocket_length">Support Pocket Distance From Caravan (MM)</label>
+															<input id="support_pocket_length" name="support_pocket_length_mm" type="text"
+																placeholder="e.g.600 mm" required />
 														</div>
+													</div>
 												</div>
 											</div>
 										</fieldset>
-
 										<div class="field hidden">
 											<label class="req" for="vinyl_width">Vinyl Insert Width</label>
 											<input id="vinyl_width" name="vinyl_width_mm" type="text"
@@ -718,10 +714,12 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											<input id="vinyl_length" name="vinyl_length_mm" type="text"
 												placeholder="e.g.600 mm" required />
 										</div>
-
-										<!-- <label class="row"><input id="support_pockets" type="checkbox"
-												name="support_pockets" /> Support
-											Pockets</label> -->
+										<!--
+											<label class="row">
+												<input id="support_pockets" type="checkbox" name="support_pockets" />
+													Support Pockets
+											</label>
+										-->
 									</div>
 									<?php
 										if($sts_var_section_head_notices){

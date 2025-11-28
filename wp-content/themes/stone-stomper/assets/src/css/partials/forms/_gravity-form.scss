@@ -33,6 +33,7 @@
 	font-size: 0.875rem;
 }
 
+.field.half-input-field,
 .gfield.half-input-field {
 	width: 48%;
 	margin-right: calc(4% - 5px);
@@ -289,31 +290,31 @@ table.ui-datepicker_calendar {
 	}
 }
 
-.gform-theme{
+.gform-theme {
 	.gform_fields {
 		column-gap: 19.5px;
 		display: flex;
 		flex-wrap: wrap;
 	}
-	.gform_heading{
+	.gform_heading {
 		display: none;
 	}
-	.gfield_label{
+	.gfield_label {
 		display: none;
 	}
 
-	::placeholder{
+	::placeholder {
 		text-transform: uppercase;
 	}
-	.gfield{
+	.gfield {
 		width: 100%;
-		&.gfield--width-half{
+		&.gfield--width-half {
 			display: inline-block;
 			vertical-align: top;
 			width: 48.8%;
 		}
 	}
-	textarea{
-		padding:20px 25px;
+	textarea {
+		padding: 20px 25px;
 	}
 }

@@ -2220,12 +2220,14 @@ button:-moz-focusring,
   font-size: 0.875rem;
 }
 
+.field.half-input-field,
 .gfield.half-input-field {
   width: 48%;
   margin-left: calc(4% - 5px);
   display: inline-block;
   vertical-align: top;
 }
+.field.half-input-field.last,
 .gfield.half-input-field.last {
   margin-left: 0;
 }

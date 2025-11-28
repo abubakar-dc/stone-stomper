@@ -6512,12 +6512,14 @@ Mixin for transition
   margin-top: 0;
   font-size: 0.875rem;
 }
+.editor-styles-wrapper .field.half-input-field,
 .editor-styles-wrapper .gfield.half-input-field {
   width: 48%;
   margin-right: calc(4% - 5px);
   display: inline-block;
   vertical-align: top;
 }
+.editor-styles-wrapper .field.half-input-field.last,
 .editor-styles-wrapper .gfield.half-input-field.last {
   margin-right: 0;
 }

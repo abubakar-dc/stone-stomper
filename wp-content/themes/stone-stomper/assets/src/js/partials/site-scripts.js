@@ -712,18 +712,18 @@ jQuery( function() {
 		}
 	} );
 
-	// jQuery( '.stone-stomper-supports #support_pockets' ).on(
-	// 	'change',
-	// 	function() {
-	// 		if ( jQuery( this ).is( ':checked' ) ) {
-	// 			jQuery( '.factory_stoneguard' ).slideUp();
-	// 			jQuery( '.toolbox-support' ).slideUp();
-	// 			jQuery( '.support_pockets' ).slideDown();
-	// 		} else {
-	// 			jQuery( '.support_pockets' ).slideUp();
-	// 		}
-	// 	},
-	// );
+	jQuery( '.stone-stomper-supports #support_pockets' ).on(
+		'change',
+		function() {
+			if ( jQuery( this ).is( ':checked' ) ) {
+				jQuery( '.factory_stoneguard' ).slideUp();
+				jQuery( '.toolbox-support' ).slideUp();
+				jQuery( '.support_pockets' ).slideDown();
+			} else {
+				jQuery( '.support_pockets' ).slideUp();
+			}
+		},
+	);
 
 	jQuery( '#a_frame_length' ).on( 'input change', function() {
 		// Get the input value and extract only the number part
