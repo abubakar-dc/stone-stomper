@@ -114,6 +114,7 @@ add_filter( 'manage_customer_posts_columns', function ( $columns ) {
 		if ( 'title' === $key ) {
 
 			// 👇 Add Order ID, WooCommerce Status, and Proposed Date after Title
+			$new_columns['email']        = __( 'Email', 'textdomain' );
 			$new_columns['order_id']       = __( 'Order ID', 'textdomain' );
 			$new_columns['order_status']   = __( 'Status', 'textdomain' );
 			$new_columns['proposed_date']  = __( 'Proposed Date', 'textdomain' );
@@ -127,10 +128,12 @@ add_action( 'manage_customer_posts_custom_column', function ( $column, $post_id 
 
 	// 🧠 Get linked WooCommerce Order ID from your ACF field
 	$order_id = get_field( 'order_id', $post_id ); // update if your ACF key is different
+	$email = get_field('email', $post_id);
+
 
 	switch ( $column ) {
 
-		// ✅ Order ID Column
+		// Order ID Column
 		case 'order_id':
 			if ( $order_id ) {
 				echo '<a href="' . esc_url( admin_url( 'post.php?post=' . $order_id . '&action=edit' ) ) . '">#' . esc_html( $order_id ) . '</a>';
@@ -139,7 +142,11 @@ add_action( 'manage_customer_posts_custom_column', function ( $column, $post_id 
 			}
 			break;
 
-		// ✅ WooCommerce Order Status Column
+		case 'email':
+            echo $email ? esc_html( $email ) : '<em style="color:#888;">—</em>';
+            break;
+
+		//  WooCommerce Order Status Column
 		case 'order_status':
 			if ( ! $order_id ) {
 				echo '<em style="color:#888;">No linked WooCommerce order</em>';
@@ -163,7 +170,7 @@ add_action( 'manage_customer_posts_custom_column', function ( $column, $post_id 
 			echo '</select>';
 			break;
 
-		// ✅ Proposed Date Column
+		//  Proposed Date Column
 		case 'proposed_date':
 			$proposed_date = get_field( 'sts_var_proposed_date_of_delivery', $post_id );
 			if ( $proposed_date ) {
@@ -175,6 +182,43 @@ add_action( 'manage_customer_posts_custom_column', function ( $column, $post_id 
 
 	}
 }, 10, 2 );
+
+add_action( 'pre_get_posts', function ( $query ) {
+    if ( ! is_admin() || ! $query->is_main_query() ) {
+        return;
+    }
+
+    global $pagenow;
+    if ( 'edit.php' !== $pagenow ) {
+        return;
+    }
+
+    if ( isset( $_GET['post_type'] ) && 'customer' === $_GET['post_type'] && ! empty( $_GET['s'] ) ) {
+        $search = sanitize_text_field( $_GET['s'] );
+
+        $meta_query = [
+            'relation' => 'OR',
+            [
+                'key'     => 'email', // your ACF email field
+                'value'   => $search,
+                'compare' => 'LIKE',
+            ],
+            [
+                'key'     => '_billing_email', // WooCommerce email
+                'value'   => $search,
+                'compare' => 'LIKE',
+            ],
+        ];
+
+        $query->set( 'meta_query', $meta_query );
+
+        // Disable default title/content search for CPT
+        $query->set( 's', '' );
+    }
+} );
+
+
+
 
 
 /**
