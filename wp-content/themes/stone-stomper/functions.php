@@ -2089,8 +2089,8 @@ function generate_customer_order_word_file($post_id) {
 	$logoCellTitle = $logo_cell->addTable(['cellMargin' => 0]);
 	$logoCellTitle->addRow();
 	$logoCellTitle->addCell(4000)->addText("STONE STOMPER MANUFACTURE SHEET", ['bold' => true, 'size' => 14]);
-	$info_cell = $table->addCell(5000, ['valign' => 'center']);
-	$textRun = $info_cell->addTextRun(['spaceBefore' => 1, 'spaceAfter' => 0]);
+	$info_cell = $table->addCell(5000, ['spaceBefore' => 2, 'spaceAfter' => 0]);
+	$textRun = $info_cell->addTextRun(['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$textRun->addText("ORDER Name: ", ['bold' => true]);
 	$textRun->addText($customer_name);
 	$textRun = $info_cell->addTextRun(['spaceBefore' => 1, 'spaceAfter' => 0]);
@@ -2099,6 +2099,9 @@ function generate_customer_order_word_file($post_id) {
 	$textRun = $info_cell->addTextRun(['spaceBefore' => 1, 'spaceAfter' => 0]);
 	$textRun->addText("Date Required: ", ['bold' => true]);
 	$textRun->addText($proposed_date);
+	$textRun = $info_cell->addTextRun(['spaceBefore' => 1, 'spaceAfter' => 0]);
+	$textRun->addText("Product Type: ", ['bold' => true]);
+	$textRun->addText($product_type);
 	$section->addTextBreak(1);
 
 	// Wanna call vector svg here
