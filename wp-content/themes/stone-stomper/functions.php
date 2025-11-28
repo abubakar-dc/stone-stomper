@@ -2427,7 +2427,7 @@ add_action('woocommerce_cart_calculate_fees', function($cart) {
     // Read stored cookie data
     $data = sts_read_order_form_cookie();
 
-    // ❌ If not stone-stomper → no fees
+    //  If not stone-stomper → no fees
     if (empty($data['product_type']) || $data['product_type'] !== '545') {
         return;
     }
