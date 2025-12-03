@@ -2033,9 +2033,7 @@ function generate_customer_order_word_file($post_id) {
 
 	$items_table->addRow(200);
 	$items_table->addCell(1000)->addText("Quantity", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$items_table->addCell(5000)->addText("Product", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$items_table->addCell(2000)->addText("Unit Price", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$items_table->addCell(2000)->addText("Total", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$items_table->addCell(9000)->addText("Product", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$i = 1;
 
@@ -2046,29 +2044,21 @@ function generate_customer_order_word_file($post_id) {
 		$unit = wc_format_decimal($item->get_total() / $qty, 2);
 
 		$items_table->addRow(200);
-		$items_table->addCell(1000)->addText($qty, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-		$items_table->addCell(5000)->addText($name, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-		$items_table->addCell(2000)->addText("$" . $unit, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-		$items_table->addCell(2000)->addText("$" . $total, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+		$items_table->addCell(2000)->addText($qty, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+		$items_table->addCell(8000)->addText($name, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	}
 
 	$items_table->addRow(200);
-	$items_table->addCell(1000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$items_table->addCell(5000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$items_table->addCell(2000)->addText("Delivery:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$items_table->addCell(2000)->addText("$" . $delivery_cost, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$items_table->addCell(2000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$items_table->addCell(8000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$items_table->addRow(200);
-	$items_table->addCell(1000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$items_table->addCell(5000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$items_table->addCell(2000)->addText("Total Due:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$items_table->addCell(2000)->addText("$" . $order_total, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$items_table->addCell(2000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$items_table->addCell(8000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$items_table->addRow(200);
-	$items_table->addCell(1000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$items_table->addCell(5000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$items_table->addCell(2000)->addText('GST( Included)', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$items_table->addCell(2000)->addText("-", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$items_table->addCell(2000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$items_table->addCell(8000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$section->addTextBreak(1);
 
 	// Fourth Section: Custom Order Notes
