@@ -174,7 +174,7 @@ add_action( 'manage_customer_posts_custom_column', function ( $column, $post_id 
 		case 'proposed_date':
 			$proposed_date = get_field( 'sts_var_proposed_date_of_delivery', $post_id );
 			if ( $proposed_date ) {
-				echo esc_html( date_i18n( 'Y/m/d', strtotime( $proposed_date ) ) );
+				echo esc_html( date_i18n( 'd/m/Y', strtotime( $proposed_date ) ) );
 			} else {
 				echo '<em style="color:#888;">—</em>';
 			}
@@ -195,6 +195,7 @@ add_action( 'pre_get_posts', function ( $query ) {
 
     if ( isset( $_GET['post_type'] ) && 'customer' === $_GET['post_type'] && ! empty( $_GET['s'] ) ) {
         $search = sanitize_text_field( $_GET['s'] );
+		$order_id = get_field( 'order_id' );
 
         $meta_query = [
             'relation' => 'OR',
@@ -208,6 +209,11 @@ add_action( 'pre_get_posts', function ( $query ) {
                 'value'   => $search,
                 'compare' => 'LIKE',
             ],
+            [
+                'key'     => 'order_id', // WooCommerce email
+                'value'   => $search,
+                'compare' => 'LIKE',
+            ],
         ];
 
         $query->set( 'meta_query', $meta_query );
@@ -216,10 +222,6 @@ add_action( 'pre_get_posts', function ( $query ) {
         $query->set( 's', '' );
     }
 } );
-
-
-
-
 
 /**
  * AJAX handler to update WooCommerce order status
@@ -417,10 +419,6 @@ add_action( 'pre_get_posts', function( $query ) {
 
 });
 
-
-
-
-
 /**
  * Add a "Filter by Proposed Date" dropdown to Customer CPT list
  */
@@ -461,7 +459,6 @@ add_action( 'restrict_manage_posts', function( $post_type ) {
 
 	echo '</select>';
 });
-
 
 
 new WP_Theme_CPT(
