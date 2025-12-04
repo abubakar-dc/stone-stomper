@@ -2297,15 +2297,23 @@ add_action('admin_enqueue_scripts', function($hook){
 
 });
 
-// 1️⃣ Register the new "Manufacturing Queue" status
+// 1️⃣ Register the new "Manufacturing L" status
 add_action( 'init', function() {
 	register_post_status( 'wc-manufacturing', array(
-		'label'                     => 'Manufacturing Queue',
+		'label'                     => 'Manufacturing L',
 		'public'                    => true,
 		'exclude_from_search'       => false,
 		'show_in_admin_all_list'    => true,
 		'show_in_admin_status_list' => true,
-		'label_count'               => _n_noop( 'Manufacturing Queue <span class="count">(%s)</span>', 'Manufacturing Queue <span class="count">(%s)</span>' ),
+		'label_count'               => _n_noop( 'Manufacturing L <span class="count">(%s)</span>', 'Manufacturing L <span class="count">(%s)</span>' ),
+	) );
+	register_post_status( 'wc-manufacturing-m', array(
+		'label'                     => 'Manufacturing M',
+		'public'                    => true,
+		'exclude_from_search'       => false,
+		'show_in_admin_all_list'    => true,
+		'show_in_admin_status_list' => true,
+		'label_count'               => _n_noop( 'Manufacturing M <span class="count">(%s)</span>', 'Manufacturing M <span class="count">(%s)</span>' ),
 	) );
 } );
 
@@ -2318,7 +2326,8 @@ add_filter( 'wc_order_statuses', function( $statuses ) {
 		$new_statuses[ $key ] = $label;
 
 		if ( 'wc-processing' === $key ) {
-			$new_statuses['wc-manufacturing'] = __( 'Manufacturing Queue', 'stonestomper_td' );
+			$new_statuses['wc-manufacturing'] = __( 'Manufacturing L', 'stonestomper_td' );
+			$new_statuses['wc-manufacturing-m'] = __( 'Manufacturing M', 'stonestomper_td' );
 		}
 	}
 
