@@ -697,7 +697,7 @@ function render_towing_diagram($post_id) {
 			 <?php if($sts_var_caravan_cut_out){ ?>
 				<g transform="translate(605.76,550.99)">
 					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500;">
-						<?php echo esc_html( $sts_var_caravan_cut_out ? $sts_var_caravan_cut_out.' mm' : '-' ); ?>
+						<?php echo esc_html( $sts_var_caravan_cut_out ? $sts_var_caravan_cut_out : '-' ); ?>
 					</text>
 				</g>
 			<?php } ?>
@@ -707,12 +707,12 @@ function render_towing_diagram($post_id) {
 			<rect class="st3" x="504.04" y="315.51" width="211.2" height="195.21" fill="#ffffff" stroke="#000000"/>
 			<?php if($vinyl_insert_width_mm){ ?>
 				<g transform="translate(610.76,330.99)">
-					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $vinyl_insert_width_mm ? $vinyl_insert_width_mm.' mm' : '-' ); ?></text>
+					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $vinyl_insert_width_mm ? $vinyl_insert_width_mm : '-' ); ?></text>
 				</g>
 			<?php } ?>
 			<?php if($vinyl_insert_height_mm){ ?>
 				<g transform="translate(520.76,400.99) rotate(-90)">
-					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $vinyl_insert_height_mm ? $vinyl_insert_height_mm.' mm' : '-' ); ?></text>
+					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $vinyl_insert_height_mm ? $vinyl_insert_height_mm : '-' ); ?></text>
 				</g>
 			<?php } ?>
 			<rect class="st2" x="404.09" y="381.28" width="8.47" height="196.64" fill="#ffffff" stroke="#000000"/>
@@ -730,7 +730,7 @@ function render_towing_diagram($post_id) {
 				<line class="st0" x1="274.29" y1="139.99" x2="935.24" y2="139.99" stroke="#fa3232"/>
 				<g transform="translate(604.76,139.99)">
 					<rect class="st4" x="-67.5" y="-22" width="135" height="24" fill="#ffffff"  stroke="#ffffff"/>
-					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $caravan_width_mm ? $caravan_width_mm.' mm' : '-' ); ?></text>
+					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $caravan_width_mm ? $caravan_width_mm : '-' ); ?></text>
 				</g>
 				<polyline class="st0" points="278.3 143.72 274.29 139.99 278.3 136.27" stroke="#fa3232" fill="#ffffff"/>
 				<polyline class="st0" points="931.24 136.27 935.24 140 931.24 143.72" stroke="#fa3232"  fill="#ffffff"/>
@@ -739,7 +739,7 @@ function render_towing_diagram($post_id) {
 				<line class="st0" x1="317.29" y1="608.6" x2="894.24" y2="608.6" stroke="#fa3232"/>
 				<g transform="translate(957.8,375.13)">
 				<rect class="st4" x="10" y="-12" width="135" height="24" fill="#ffffff"  stroke="#ffffff"/>
-				<text class="st5" text-anchor="start" dominant-baseline="middle" x="20" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $caravan_length_mm ? $caravan_length_mm.' mm' : '-' ); ?></text>
+				<text class="st5" text-anchor="start" dominant-baseline="middle" x="20" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $caravan_length_mm ? $caravan_length_mm : '-' ); ?></text>
 				</g>
 				<polyline class="st0" points="321.3 612.33 317.29 608.6 321.3 604.88" stroke="#fa3232" fill="#ffffff"/>
 				<polyline class="st0" points="890.24 604.88 894.24 608.6 890.24 612.33" stroke="#fa3232" fill="#ffffff"/>
@@ -750,7 +750,7 @@ function render_towing_diagram($post_id) {
 				<line class="st0" x1="957.8" y1="170.34" x2="957.8" y2="579.93" stroke="#fa3232"/>
 				<g transform="translate(605.77,608.6)">
 					<rect class="st4" x="-67.5" y="-12" width="135" height="24" fill="#ffffff" stroke="#ffffff"/>
-					<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $bar_width_mm ? $bar_width_mm.' mm' : '-' ); ?></text>
+					<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $bar_width_mm ? $bar_width_mm : '-' ); ?></text>
 				</g>
 				<polyline class="st0" points="954.07 174.34 957.8 170.34 961.52 174.34" stroke="#fa3232" fill="#ffffff"/>
 				<polyline class="st0" points="961.52 575.92 957.8 579.93 954.07 575.92" stroke="#fa3232" fill="#ffffff"/>
@@ -807,7 +807,7 @@ function render_towing_diagram($post_id) {
 			 <?php if($sts_var_caravan_cut_out){ ?>
 				<g transform="translate(605.76,550.99)">
 					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500;">
-						<?php echo esc_html( $sts_var_caravan_cut_out ? $sts_var_caravan_cut_out.' mm' : '-' ); ?>
+						<?php echo esc_html( $sts_var_caravan_cut_out ? $sts_var_caravan_cut_out : '-' ); ?>
 					</text>
 				</g>
 			<?php } ?>
@@ -818,7 +818,7 @@ function render_towing_diagram($post_id) {
 			<?php if($vinyl_insert_width_mm){ ?>
 				<g transform="translate(610.76,330.99)">
 					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0"  style="font-size: 20px; font-weight: 500;">
-						<?php echo esc_html( $vinyl_insert_width_mm ? $vinyl_insert_width_mm.' mm' : '-' ); ?>
+						<?php echo esc_html( $vinyl_insert_width_mm ? $vinyl_insert_width_mm : '-' ); ?>
 					</text>
 				</g>
 			<?php } ?>
@@ -826,7 +826,7 @@ function render_towing_diagram($post_id) {
 			<?php if($vinyl_insert_height_mm){ ?>
 				<g transform="translate(520.76,400.99) rotate(-90)">
 					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0"  style="font-size: 20px; font-weight: 500;">
-						<?php echo esc_html( $vinyl_insert_height_mm ? $vinyl_insert_height_mm.' mm' : '-' ); ?>
+						<?php echo esc_html( $vinyl_insert_height_mm ? $vinyl_insert_height_mm : '-' ); ?>
 					</text>
 				</g>
 			<?php } ?>
@@ -851,7 +851,7 @@ function render_towing_diagram($post_id) {
 				<rect class="st8" x="539.36" y="127.61" width="135.53" height="22.16" fill="#ffffff" stroke="#ffffff"/>
 				<g transform="translate(604.76,139.99)">
 					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500;">
-						<?php echo esc_html( $caravan_width_mm ? $caravan_width_mm.' mm' : '-' ); ?>
+						<?php echo esc_html( $caravan_width_mm ? $caravan_width_mm : '-' ); ?>
 					</text>
 				</g>
 				<polyline class="st0" points="278.3 143.72 274.29 139.99 278.3 136.27" fill="#ffffff" stroke="#fa3232"/>
@@ -863,7 +863,7 @@ function render_towing_diagram($post_id) {
 				<rect class="st8" x="539.36" y="596.22" width="135.53" height="22.16" fill="#ffffff" stroke="#ffffff"/>
 				<g transform="translate(605.77,608.6)">
 					<rect class="st8" x="948.02" y="306.8" width="22.16" height="135.53" fill="#ffffff" stroke="#ffffff"/>
-					<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0"  fill="#fa3232"  stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $bar_width_mm ? $bar_width_mm.' mm' : '-' ); ?></text>
+					<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0"  fill="#fa3232"  stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $bar_width_mm ? $bar_width_mm : '-' ); ?></text>
 				</g>
 				<polyline class="st0" points="321.3 612.33 317.29 608.6 321.3 604.88" fill="#ffffff" stroke="#fa3232"/>
 				<polyline class="st0" points="890.24 604.88 894.24 608.6 890.24 612.33" fill="#ffffff" stroke="#fa3232"/>
@@ -874,7 +874,7 @@ function render_towing_diagram($post_id) {
 				<rect class="st8" x="948.02" y="306.8" width="22.16" height="135.53" fill="#ffffff" stroke="#ffffff"/>
 				<g transform="translate(915.8,375.13)">
 					<!-- <rect class="st4" x="10" y="-12" width="135" height="24" fill="#ffffff"/> -->
-					<text class="st5" text-anchor="start" dominant-baseline="middle" x="20" fill="#fa3232"  stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $caravan_length_mm ? $caravan_length_mm.' mm' : '-' ); ?></text>
+					<text class="st5" text-anchor="start" dominant-baseline="middle" x="20" fill="#fa3232"  stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $caravan_length_mm ? $caravan_length_mm : '-' ); ?></text>
 				</g>
 				<polyline class="st0" points="954.07 174.34 957.8 170.34 961.52 174.34" fill="#ffffff" stroke="#fa3232"/>
 				<polyline class="st0" points="961.52 575.92 957.8 579.93 954.07 575.92" fill="#ffffff" stroke="#fa3232"/>
@@ -888,17 +888,17 @@ function render_towing_diagram($post_id) {
 				</g>
 				<?php if($stoneguard_height_mm){ ?>
 					<text class="st5" text-anchor="start" dominant-baseline="middle" y="0" x="55" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;">
-						<?php echo esc_html( $stoneguard_height_mm ? 'S: '. $stoneguard_height_mm.' mm' : '-' ); ?>
+						<?php echo esc_html( $stoneguard_height_mm ? 'S: '. $stoneguard_height_mm : '-' ); ?>
 					</text>
 				<?php } ?>
 				<?php if($toolbox_height_mm){ ?>
 					<text class="st5" text-anchor="start" dominant-baseline="middle" y="20" x="55"  fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;">
-						<?php echo esc_html( $toolbox_height_mm ? 'T: '.$toolbox_height_mm.' mm' : '-' ); ?>
+						<?php echo esc_html( $toolbox_height_mm ? 'T: '.$toolbox_height_mm : '-' ); ?>
 					</text>
 				<?php } ?>
 				<?php if($support_pockets_measurement){ ?>
 					<text class="st5" text-anchor="start" dominant-baseline="middle" y="40" x="55"  fill="#fa3232"  stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;">
-						<?php echo esc_html( $support_pockets_measurement ? 'SP: '.$support_pockets_measurement.' mm' : '-' ); ?>
+						<?php echo esc_html( $support_pockets_measurement ? 'SP: '.$support_pockets_measurement : '-' ); ?>
 					</text>
 				<?php } ?>
 			</g>
@@ -913,12 +913,12 @@ function render_towing_diagram($post_id) {
 					<g transform="translate(555,263.13)">
 						<?php if($stoneguard_width_mm){ ?>
 						<text class="st5" text-anchor="start" dominant-baseline="middle" y="-20" x="0" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;">
-							<?php echo esc_html( $stoneguard_width_mm ? 'S: '. $stoneguard_width_mm.' mm' : '-' ); ?>
+							<?php echo esc_html( $stoneguard_width_mm ? 'S: '. $stoneguard_width_mm : '-' ); ?>
 						</text>
 						<?php } ?>
 						<?php if($toolbox_height_mm){ ?>
 							<text class="st5" text-anchor="start" dominant-baseline="middle" x="0" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;">
-								<?php echo esc_html( $toolbox_width_mm ? 'T: '. $toolbox_width_mm.' mm' : '-' ); ?>
+								<?php echo esc_html( $toolbox_width_mm ? 'T: '. $toolbox_width_mm : '-' ); ?>
 							</text>
 						<?php } ?>
 					</g>
@@ -1786,7 +1786,7 @@ function generate_customer_order_word_file($post_id) {
     // Fetch standard order data
     $order_date       = $order->get_date_created()->date_i18n('d-F-Y');
     $customer_name    = $order->get_formatted_billing_full_name();
-    // $customer_phone   = get_post_meta($post_id, 'customer_phone', true);
+    $customer_phone   = get_post_meta($post_id, 'customer_phone', true);
     $customer_email   = $order->get_billing_email();
 	$first_name   = $order->get_shipping_first_name();
 	$last_name    = $order->get_shipping_last_name();
@@ -2220,6 +2220,10 @@ function download_customer_word_callback() {
 	$order_id = get_post_meta($post_id, 'order_id', true);
     $file_path = generate_customer_order_word_file($post_id);
 
+	if (empty($order_id)) {
+		$order_id = $post_id;
+    }
+
     if (!$file_path || !file_exists($file_path)) {
         wp_die('File generation failed.');
     }
@@ -2238,6 +2242,7 @@ function email_to_manufacturer_callback() {
 	list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaults();
 
     $post_id = intval($_POST['post_id']);
+	$order_id = get_post_meta($post_id, 'order_id', true);
     $file_path = generate_customer_order_word_file($post_id);
 
     // Get manufacturers list from option fields array
@@ -2256,7 +2261,7 @@ function email_to_manufacturer_callback() {
         $emails = ['tmaeder@boylen.com.au'];
     }
 
-    $subject = "New Customer Order Details (Order #{$post_id})";
+    $subject = "New Customer Order Details (Order #{$order_id})";
     $message = "Hello,\n\nPlease find attached the customer order details document.\n\nThanks.";
 
     wp_mail($emails, $subject, $message, [], [$file_path]);
