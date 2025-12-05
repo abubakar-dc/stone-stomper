@@ -5897,6 +5897,12 @@ Mixin for transition
 .editor-styles-wrapper #blk-measure:not(:has(.mesh-only-field[style*="display: none"])) .field:has(#a_frame_length) {
   display: none !important;
 }
+.editor-styles-wrapper .woocommerce-table__product-name.product-name > a {
+  margin-bottom: 10px;
+  display: inline-block;
+  padding: 0;
+  line-height: 1;
+}
 .editor-styles-wrapper .wp-block-button .wp-block-button__link {
   box-sizing: border-box;
   position: relative;

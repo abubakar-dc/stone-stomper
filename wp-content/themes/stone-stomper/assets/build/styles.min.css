@@ -1162,6 +1162,10 @@ svg {
   margin: 0 0 30px;
 }
 
+.wc-block-components-checkout-step__content svg {
+  margin: 0;
+}
+
 .gallery .gallery-item a {
   border-bottom: none;
 }
@@ -7291,6 +7295,13 @@ body #daextlwcnf-cookie-settings-button-2:hover {
 
 #blk-measure:not(:has(.mesh-only-field[style*="display: none"])) .field:has(#a_frame_length) {
   display: none !important;
+}
+
+.woocommerce-table__product-name.product-name > a {
+  margin-bottom: 10px;
+  display: inline-block;
+  padding: 0;
+  line-height: 1;
 }
 
 /*-------------------------------------------------

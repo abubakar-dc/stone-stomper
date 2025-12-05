@@ -2101,7 +2101,7 @@ function generate_customer_order_word_file($post_id) {
 		$diagram_png = svg_to_png_temp($svg);
 		if (file_exists($diagram_png)) {
 			$section->addImage($diagram_png, [
-				'width' => 400,
+				'width' => 390,
 				'alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER,
 			]);
 		}
@@ -2311,6 +2311,7 @@ function generate_bulk_customer_excel_file($status_key = 'all', $post_ids = []) 
 	$header_style = [
         'font' => [
             'bold' => true,
+			'size' => 14,
         ],
         'fill' => [
             'fillType' => Fill::FILL_SOLID,
@@ -2492,6 +2493,9 @@ function generate_bulk_customer_excel_file($status_key = 'all', $post_ids = []) 
 
     // Define style for left alignment
     $data_style = [
+		'font' => [
+			'size' => 14,
+		],
         'alignment' => [
             'horizontal' => Alignment::HORIZONTAL_LEFT,
         ],

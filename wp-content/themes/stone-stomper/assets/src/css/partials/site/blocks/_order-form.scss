@@ -472,3 +472,10 @@
 	.field:has(#a_frame_length) {
 	display: none !important;
 }
+
+.woocommerce-table__product-name.product-name > a {
+	margin-bottom: 10px;
+	display: inline-block;
+	padding: 0;
+	line-height: 1;
+}
