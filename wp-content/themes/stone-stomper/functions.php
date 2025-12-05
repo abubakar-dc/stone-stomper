@@ -2238,6 +2238,7 @@ function download_customer_word_callback() {
 add_action( 'wp_ajax_download_customer_word', 'download_customer_word_callback' );
 add_action( 'wp_ajax_nopriv_download_customer_word', 'download_customer_word_callback' );
 
+
 // Excel sheet
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -2322,9 +2323,10 @@ function generate_bulk_customer_excel_file($status_key = 'all', $post_ids = []) 
         ],
 		'alignment' => [
             'horizontal' => Alignment::HORIZONTAL_LEFT,
+			'indent' => 1, // adds some left spacing
         ],
     ];
-	$sheet->getStyle('A1:G1')->applyFromArray($header_style);
+	$sheet->getStyle('A1:F1')->applyFromArray($header_style);
 
     // 2. Define WP_Query Arguments
     $args = [
@@ -2403,13 +2405,11 @@ function generate_bulk_customer_excel_file($status_key = 'all', $post_ids = []) 
 
     // 3. Fetch Posts
     $customer_posts = get_posts($args);
-
     if (empty($customer_posts)) {
         wp_die('No matching customer orders found for export criteria.');
     }
 
     // 4. Populate Spreadsheet Data
-    // Prepare an array to hold the full data structure for custom sorting
     $export_data = [];
 
     foreach ($customer_posts as $post) {
@@ -2448,34 +2448,6 @@ function generate_bulk_customer_excel_file($status_key = 'all', $post_ids = []) 
         ];
     }
 
-    // 4b. Apply Custom Sorting if Export All is selected
-    // if ($status_key === 'all' && !empty($export_data)) {
-    //     // Define the explicit custom sort order (WC statuses without 'wc-')
-    //     $status_priority = [
-    //         'manufacturing'   => 1, // FIX: Updated slug for Manufacturing L
-    //         'manufacturing-m' => 2,
-    //         'processing'      => 3,
-    //         // Add any other statuses you want explicitly ordered here
-    //     ];
-    //     // Priority defaults to a high number for statuses not in the list (so they appear last)
-    //     $default_priority = 999;
-
-    //     usort($export_data, function ($a, $b) use ($status_priority, $default_priority) {
-    //         $status_a = $a['order_status_slug'];
-    //         $status_b = $b['order_status_slug'];
-    //         $priority_a = $status_priority[$status_a] ?? $default_priority;
-    //         $priority_b = $status_priority[$status_b] ?? $default_priority;
-
-    //         // Primary sort by custom status priority
-    //         if ($priority_a !== $priority_b) {
-    //             return $priority_a <=> $priority_b;
-    //         }
-
-    //         // Secondary sort by post date (newest first)
-    //         return strtotime($b['post_date']) <=> strtotime($a['post_date']);
-    //     });
-    // }
-
     // 4c. Write Sorted Data to Spreadsheet
     foreach ($export_data as $data) {
         $sheet->setCellValue('A' . $row_index, $data['order_id']);
@@ -2498,18 +2470,18 @@ function generate_bulk_customer_excel_file($status_key = 'all', $post_ids = []) 
 		],
         'alignment' => [
             'horizontal' => Alignment::HORIZONTAL_LEFT,
+			'indent' => 1, // adds some left spacing
         ],
     ];
 
     // Apply left alignment to the entire data range (A2 to G[last data row])
     if ($data_row_end >= 2) {
-        $sheet->getStyle('A2:G' . $data_row_end)->applyFromArray($data_style);
+        $sheet->getStyle('A2:F' . $data_row_end)->applyFromArray($data_style);
     }
-
 
     // 5. Finalize and Output File
     // Auto-size columns for readability
-    foreach (range('A', 'G') as $col) {
+    foreach (range('A', 'F') as $col) {
         $sheet->getColumnDimension($col)->setAutoSize(true);
     }
 
