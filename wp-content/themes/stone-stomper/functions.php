@@ -2238,6 +2238,320 @@ function download_customer_word_callback() {
 add_action( 'wp_ajax_download_customer_word', 'download_customer_word_callback' );
 add_action( 'wp_ajax_nopriv_download_customer_word', 'download_customer_word_callback' );
 
+// Excel sheet
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Style\Font;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+
+// 1. Display Date Filters and Custom Export Buttons
+add_action('restrict_manage_posts', function ($post_type) {
+    // Only display buttons on the 'customer' post type screen
+    if ($post_type !== 'customer') return;
+
+    // Define the custom buttons and their corresponding status keys
+    $buttons = [
+        'all'           => 'Export All',
+        // 'manufacturing' exports both 'manufacturing-l' and 'manufacturing-m'
+        'manufacturing' => 'Export Manufacturing',
+        'processing'    => 'Export Processing',
+    ];
+
+    // Output the HTML for the buttons
+    foreach ($buttons as $status_key => $label) {
+        $export_url = add_query_arg([
+            'export_customer_excel' => 1,
+            'order_status'          => $status_key,
+        ]);
+        echo '<a href="' . esc_url($export_url) . '" class="button" style="margin-left:6px; margin-right:6px;">' . esc_html($label) . '</a>';
+    }
+});
+
+// 2. Handle Custom Export Buttons (Status Filtered)
+add_action('admin_init', function () {
+    // Check if the custom export flag is set
+    if (!isset($_GET['export_customer_excel']) || intval($_GET['export_customer_excel']) !== 1) {
+        return;
+    }
+
+    // Security check
+    if (!current_user_can('edit_posts')) {
+        wp_die('You do not have permission to perform this action.');
+    }
+
+    $status_key = isset($_GET['order_status']) ? sanitize_key($_GET['order_status']) : 'all';
+
+    // Validate the status key to prevent unexpected file names or queries
+    $valid_statuses = ['all', 'manufacturing', 'processing'];
+    if (!in_array($status_key, $valid_statuses)) {
+        wp_die('Invalid order status for export.');
+    }
+
+    // Call the generation function. We pass the status key and an empty array for post_ids
+    generate_bulk_customer_excel_file($status_key);
+    exit;
+});
+
+function generate_bulk_customer_excel_file($status_key = 'all', $post_ids = []) {
+    // IMPORTANT: Ensure your autoloader path is correct relative to this file.
+    require_once __DIR__ . '/vendor/autoload.php';
+
+    // Global variable for WordPress database access
+    global $wpdb;
+
+    $spreadsheet = new Spreadsheet();
+    $sheet = $spreadsheet->getActiveSheet();
+    $row_index = 1;
+
+    // 1. Set Headers
+    $headers = ['Order ID', 'Customer Name', 'Email', 'Phone', 'Order Status', 'Date Created'];
+    $sheet->fromArray($headers, NULL, 'A' . $row_index++);
+	$header_style = [
+        'font' => [
+            'bold' => true,
+        ],
+        'fill' => [
+            'fillType' => Fill::FILL_SOLID,
+            // ARGB hex code for yellow (FF - opacity, FFFF00 - bright yellow)
+            'startColor' => [
+                'argb' => 'FFFFFF00',
+            ],
+        ],
+		'alignment' => [
+            'horizontal' => Alignment::HORIZONTAL_LEFT,
+        ],
+    ];
+	$sheet->getStyle('A1:G1')->applyFromArray($header_style);
+
+    // 2. Define WP_Query Arguments
+    $args = [
+        'post_type'      => 'customer',
+        'posts_per_page' => -1, // Get all matching posts
+        'post_status'    => 'any',
+    ];
+
+    if (!empty($post_ids)) {
+        // Case 1: Posts selected via checkboxes (standard bulk action)
+        $args['post__in'] = array_map('intval', $post_ids);
+        $filename_key = 'selected';
+    } else {
+        // Case 2: Custom button clicked (status filter) - REQUIRES WC ORDER LOOKUP
+
+        $statuses_to_filter_by = [];
+
+        // --- Determine Target WC Statuses (WC get_status() returns slugs without 'wc-') ---
+        switch ($status_key) {
+            case 'manufacturing':
+                // FIX: Use 'manufacturing' (for Manufacturing L) and 'manufacturing-m' (for Manufacturing M)
+                $statuses_to_filter_by = ['manufacturing', 'manufacturing-m'];
+                break;
+
+            case 'processing':
+                // Standard WC processing status
+                $statuses_to_filter_by = ['processing'];
+                break;
+            case 'all':
+            default:
+                // No status filter needed
+                break;
+        }
+
+        // --- Apply Status Filter via post__in ---
+        if (!empty($statuses_to_filter_by)) {
+
+            // Step A: Get all customer post IDs
+            $all_customer_ids = get_posts([
+                'post_type'      => 'customer',
+                'posts_per_page' => -1,
+                'fields'         => 'ids',
+                'post_status'    => 'any',
+            ]);
+
+            $matching_customer_ids = [];
+
+            // Step B: Iterate and check the status of the linked WooCommerce order
+            foreach ($all_customer_ids as $customer_id) {
+                // IMPORTANT: The linked WooCommerce Order ID is assumed to be in the 'order_id' post meta field,
+                // as suggested by the original structure of your function.
+                $wc_order_id = get_post_meta($customer_id, 'order_id', true);
+
+                if ($wc_order_id) {
+                    $order = wc_get_order($wc_order_id);
+
+                    // Check if the WooCommerce order exists and its status matches the filter list
+                    if ($order && in_array($order->get_status(), $statuses_to_filter_by)) {
+                        $matching_customer_ids[] = $customer_id;
+                    }
+                }
+            }
+
+            // Step C: Set the final query to only include the matching customer posts
+            if (!empty($matching_customer_ids)) {
+                $args['post__in'] = $matching_customer_ids;
+            } else {
+                // If no matches found, set post__in to [0] to return an empty set and trigger wp_die below.
+                $args['post__in'] = [0];
+            }
+
+        }
+
+        $filename_key = $status_key;
+    }
+
+    // 3. Fetch Posts
+    $customer_posts = get_posts($args);
+
+    if (empty($customer_posts)) {
+        wp_die('No matching customer orders found for export criteria.');
+    }
+
+    // 4. Populate Spreadsheet Data
+    // Prepare an array to hold the full data structure for custom sorting
+    $export_data = [];
+
+    foreach ($customer_posts as $post) {
+        $post_id        = $post->ID;
+        $order_id       = get_post_meta($post_id, 'order_id', true);
+        $customer_name  = get_post_meta($post_id, 'name', true);
+        $customer_email = get_post_meta($post_id, 'email', true);
+        $customer_phone = get_post_meta($post_id, 'customer_phone', true);
+
+        // --- Get Status ---
+        $order_status_slug = 'N/A';
+        $order_status_label = 'N/A';
+
+        if ($order_id) {
+            $order = wc_get_order($order_id);
+            if ($order) {
+                $order_status_slug = $order->get_status(); // e.g., 'processing'
+
+                // Ensure we use the 'wc-' prefix to get the human-readable label
+                $all_statuses = wc_get_order_statuses();
+                $wc_slug = 'wc-' . $order_status_slug;
+                $order_status_label = isset($all_statuses[$wc_slug]) ? $all_statuses[$wc_slug] : ucfirst($order_status_slug);
+            }
+        }
+
+        // Store the collected data in an array
+        $export_data[] = [
+            'post_id'            => $post_id,
+            'order_id'           => $order_id ?: $post_id,
+            'customer_name'      => $customer_name,
+            'customer_email'     => $customer_email,
+            'customer_phone'     => $customer_phone,
+            'order_status_slug'  => $order_status_slug, // Used for sorting
+            'order_status_label' => $order_status_label, // Used for export
+            'post_date'          => $post->post_date,
+        ];
+    }
+
+    // 4b. Apply Custom Sorting if Export All is selected
+    // if ($status_key === 'all' && !empty($export_data)) {
+    //     // Define the explicit custom sort order (WC statuses without 'wc-')
+    //     $status_priority = [
+    //         'manufacturing'   => 1, // FIX: Updated slug for Manufacturing L
+    //         'manufacturing-m' => 2,
+    //         'processing'      => 3,
+    //         // Add any other statuses you want explicitly ordered here
+    //     ];
+    //     // Priority defaults to a high number for statuses not in the list (so they appear last)
+    //     $default_priority = 999;
+
+    //     usort($export_data, function ($a, $b) use ($status_priority, $default_priority) {
+    //         $status_a = $a['order_status_slug'];
+    //         $status_b = $b['order_status_slug'];
+    //         $priority_a = $status_priority[$status_a] ?? $default_priority;
+    //         $priority_b = $status_priority[$status_b] ?? $default_priority;
+
+    //         // Primary sort by custom status priority
+    //         if ($priority_a !== $priority_b) {
+    //             return $priority_a <=> $priority_b;
+    //         }
+
+    //         // Secondary sort by post date (newest first)
+    //         return strtotime($b['post_date']) <=> strtotime($a['post_date']);
+    //     });
+    // }
+
+    // 4c. Write Sorted Data to Spreadsheet
+    foreach ($export_data as $data) {
+        $sheet->setCellValue('A' . $row_index, $data['order_id']);
+        $sheet->setCellValue('B' . $row_index, $data['customer_name']);
+        $sheet->setCellValue('C' . $row_index, $data['customer_email']);
+        $sheet->setCellValue('D' . $row_index, $data['customer_phone']);
+        $sheet->setCellValue('E' . $row_index, $data['order_status_label']);
+        $sheet->setCellValue('F' . $row_index, $data['post_date']);
+
+        $row_index++;
+    }
+
+	// 4d. Apply Left Alignment to All Data Cells (A2 to last row)
+    $data_row_end = $row_index - 1;
+
+    // Define style for left alignment
+    $data_style = [
+        'alignment' => [
+            'horizontal' => Alignment::HORIZONTAL_LEFT,
+        ],
+    ];
+
+    // Apply left alignment to the entire data range (A2 to G[last data row])
+    if ($data_row_end >= 2) {
+        $sheet->getStyle('A2:G' . $data_row_end)->applyFromArray($data_style);
+    }
+
+
+    // 5. Finalize and Output File
+    // Auto-size columns for readability
+    foreach (range('A', 'G') as $col) {
+        $sheet->getColumnDimension($col)->setAutoSize(true);
+    }
+
+    $filename = "customer-orders-{$filename_key}-" . date('YmdHis') . ".xlsx";
+
+    // Clean any prior output buffer to prevent corruption
+    if (ob_get_length()) ob_end_clean();
+
+    // Set headers for file download
+    header('Content-Description: File Transfer');
+    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    header('Content-Disposition: attachment; filename="' . $filename . '"');
+    header('Content-Transfer-Encoding: binary');
+    header('Expires: 0');
+    header('Cache-Control: must-revalidate');
+    header('Pragma: public');
+
+    $writer = new Xlsx($spreadsheet);
+    $writer->save('php://output');
+}
+
+// 3. Handle Bulk Export Action (for selected posts via checkboxes)
+add_filter('handle_actions-customer', function ($redirect_to, $action, $post_ids) {
+    // Only proceed if the bulk action is our custom export action
+    if ($action !== 'bulk_export_excel') {
+        return $redirect_to;
+    }
+
+    // Require posts to be selected
+    if (empty($post_ids)) {
+        return $redirect_to;
+    }
+
+    // Security check
+    if (!current_user_can('edit_posts')) {
+        wp_die('You do not have permission to perform this action.');
+    }
+
+    // Call the function with 'all' status key and the selected post IDs
+    generate_bulk_customer_excel_file('all', $post_ids);
+    exit; // Terminate script execution after file generation
+}, 10, 3);
+
+
+// Email to manufacturer
+
 function email_to_manufacturer_callback() {
 	list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaults();
 
