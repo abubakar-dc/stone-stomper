@@ -2307,7 +2307,7 @@ function generate_bulk_customer_excel_file($status_key = 'all', $post_ids = []) 
     $row_index = 1;
 
     // 1. Set Headers
-    $headers = ['Order ID', 'Customer Name', 'Email', 'Phone', 'Order Status', 'Date Created'];
+    $headers = ['Order ID', 'Customer Name', 'Email', 'Phone', 'Order Status', 'Date Created', 'Proposed Date'];
     $sheet->fromArray($headers, NULL, 'A' . $row_index++);
 	$header_style = [
         'font' => [
@@ -2326,7 +2326,7 @@ function generate_bulk_customer_excel_file($status_key = 'all', $post_ids = []) 
 			'indent' => 1, // adds some left spacing
         ],
     ];
-	$sheet->getStyle('A1:F1')->applyFromArray($header_style);
+	$sheet->getStyle('A1:G1')->applyFromArray($header_style);
 
     // 2. Define WP_Query Arguments
     $args = [
@@ -2418,6 +2418,35 @@ function generate_bulk_customer_excel_file($status_key = 'all', $post_ids = []) 
         $customer_name  = get_post_meta($post_id, 'name', true);
         $customer_email = get_post_meta($post_id, 'email', true);
         $customer_phone = get_post_meta($post_id, 'customer_phone', true);
+		$proposed_date_raw = get_post_meta($post->ID, 'sts_var_proposed_date_of_delivery', true);
+		$proposed_date_formatted = '-'; // Default value
+
+		if ($proposed_date_raw) {
+			// Attempt to create a DateTime object from the raw date string
+			$date_obj = date_create($proposed_date_raw);
+
+			// Check if the date object was successfully created
+			if ($date_obj !== false) {
+				// Format the date to day/month/year (e.g., 25/12/2025)
+				$proposed_date_formatted = date_format($date_obj, 'd/m/Y');
+			} else {
+				// If formatting fails, use the raw string
+				$proposed_date_formatted = $proposed_date_raw;
+			}
+		}
+
+		 // --- Format Date Created (YYYY-MM-DD HH:MM:SS -> DD/MM/YYYY HH:MM) ---
+        $post_date_formatted = '-';
+        if ($post->post_date && $post->post_date !== '0000-00-00 00:00:00') {
+            // Note: WordPress post_date is YYYY-MM-DD HH:MM:SS
+            $date_obj = date_create($post->post_date);
+            if ($date_obj !== false) {
+                // Format as Day/Month/Year Hour:Minute (removes seconds)
+                $post_date_formatted = date_format($date_obj, 'd/m/Y H:i');
+            } else {
+                $post_date_formatted = $post->post_date;
+            }
+        }
 
         // --- Get Status ---
         $order_status_slug = 'N/A';
@@ -2444,7 +2473,8 @@ function generate_bulk_customer_excel_file($status_key = 'all', $post_ids = []) 
             'customer_phone'     => $customer_phone,
             'order_status_slug'  => $order_status_slug, // Used for sorting
             'order_status_label' => $order_status_label, // Used for export
-            'post_date'          => $post->post_date,
+            'post_date'          => $post_date_formatted,
+			'proposed_date'      => $proposed_date_formatted, // ADD THIS LINE
         ];
     }
 
@@ -2456,6 +2486,7 @@ function generate_bulk_customer_excel_file($status_key = 'all', $post_ids = []) 
         $sheet->setCellValue('D' . $row_index, $data['customer_phone']);
         $sheet->setCellValue('E' . $row_index, $data['order_status_label']);
         $sheet->setCellValue('F' . $row_index, $data['post_date']);
+		$sheet->setCellValue('G' . $row_index, $data['proposed_date']);
 
         $row_index++;
     }
@@ -2476,12 +2507,12 @@ function generate_bulk_customer_excel_file($status_key = 'all', $post_ids = []) 
 
     // Apply left alignment to the entire data range (A2 to G[last data row])
     if ($data_row_end >= 2) {
-        $sheet->getStyle('A2:F' . $data_row_end)->applyFromArray($data_style);
+        $sheet->getStyle('A2:G' . $data_row_end)->applyFromArray($data_style);
     }
 
     // 5. Finalize and Output File
     // Auto-size columns for readability
-    foreach (range('A', 'F') as $col) {
+    foreach (range('A', 'G') as $col) {
         $sheet->getColumnDimension($col)->setAutoSize(true);
     }
 
