@@ -1774,50 +1774,49 @@ function generate_customer_order_word_file($post_id) {
 	require_once __DIR__ . '/vendor/autoload.php';
     $phpWord = new \PhpOffice\PhpWord\PhpWord();
 
-    // Set Default Font
     $phpWord->setDefaultFontName('Arial');
     $phpWord->setDefaultFontSize(10);
 
     $order_id = get_post_meta($post_id, 'order_id', true);
-    $order = wc_get_order($order_id);
+    $order = $order_id ? wc_get_order($order_id) : false;
 
-    if (!$order) return false;
+    // Fallbacks
+    $order_date = $order ? $order->get_date_created()->date_i18n('d-F-Y') : get_the_date('d-F-Y', $post_id);
+    $customer_name = $order ? $order->get_formatted_billing_full_name() : get_post_meta($post_id, 'name', true);
+    $customer_phone = get_post_meta($post_id, 'customer_phone', true);
+    $customer_email = $order ? $order->get_billing_email() : get_post_meta($post_id, 'email', true);
 
-    // Fetch standard order data
-    $order_date       = $order->get_date_created()->date_i18n('d-F-Y');
-    $customer_name    = $order->get_formatted_billing_full_name();
-    $customer_phone   = get_post_meta($post_id, 'customer_phone', true);
-    $customer_email   = $order->get_billing_email();
-	$first_name   = $order->get_shipping_first_name();
-	$last_name    = $order->get_shipping_last_name();
-	$company      = $order->get_shipping_company();
-    $address_1    = $order->get_shipping_address_1();
-	$address_2    = $order->get_shipping_address_2();
-	$city         = $order->get_shipping_city();
-	$state        = $order->get_shipping_state();
-	$postcode     = $order->get_shipping_postcode();
-	$country      = $order->get_shipping_country();
-	// Combine all parts with a space, ignoring empty values
-	$delivery_address = implode(' ', array_filter([
-		$first_name . ' ' . $last_name,
-		$company,
-		$address_1,
-		$address_2,
-		$city,
-		$state,
-		$postcode,
-		$country
-	]));
+    $first_name = $order ? $order->get_shipping_first_name() : '';
+    $last_name = $order ? $order->get_shipping_last_name() : '';
+    $company = $order ? $order->get_shipping_company() : '';
+    $address_1 = $order ? $order->get_shipping_address_1() : '';
+    $address_2 = $order ? $order->get_shipping_address_2() : '';
+    $city = $order ? $order->get_shipping_city() : '';
+    $state = $order ? $order->get_shipping_state() : '';
+    $postcode = $order ? $order->get_shipping_postcode() : '';
+    $country = $order ? $order->get_shipping_country() : '';
 
-    $delivery_cost    = $order->get_shipping_total();
-    $order_total      = $order->get_total();
-    $delivery_instructions = $order->get_customer_note();
+    $delivery_address = implode(' ', array_filter([
+        trim($first_name . ' ' . $last_name),
+        $company,
+        $address_1,
+        $address_2,
+        $city,
+        $state,
+        $postcode,
+        $country
+    ]));
+
+    $delivery_cost = $order ? $order->get_shipping_total() : '-';
+    $order_total = $order ? $order->get_total() : '-';
+    $delivery_instructions = $order ? $order->get_customer_note() : 'No';
 
     // Fetch custom measurement meta
     $customer_name           						= get_post_meta($post_id, 'name', true);
     $customer_email           						= get_post_meta($post_id, 'email', true);
     $customer_phone           						= get_post_meta($post_id, 'customer_phone', true);
     $product_type           						= get_post_meta($post_id, 'product_type', true);
+    $address_meta_address           				= get_post_meta($post_id, 'delivery_address', true);
     $caravan_make           						= get_post_meta($post_id, 'caravan_make', true);
     $caravan_model           						= get_post_meta($post_id, 'caravan_model', true);
     $vehicle_make           						= get_post_meta($post_id, 'vehicle_make', true);
@@ -1834,18 +1833,16 @@ function generate_customer_order_word_file($post_id) {
     $toolbox_height_mm      						= get_post_meta($post_id, 'toolbox_height_mm', true);
     $support_pockets        						= get_post_meta($post_id, 'support_pockets', true);
     $support_pockets_measurement        			= get_post_meta($post_id, 'support_pockets_measurement', true);
-
     $sts_var_caravan_bar_option     				= get_post_meta($post_id, 'sts_var_caravan_bar_option', true);
     $sts_var_caravan_bar_bend       				= get_post_meta($post_id, 'sts_var_caravan_bar_bend', true);
     $sts_var_caravan_ss_length_adj  				= get_post_meta($post_id, 'sts_var_caravan_ss_length_adj', true);
     $sts_var_caravan_cut_out        				= get_post_meta($post_id, 'sts_var_caravan_cut_out', true);
     $sts_var_caravan_mesh_only_measurement     		= get_post_meta($post_id, 'sts_var_caravan_mesh_only_measurement', true);
-    // $sts_var_caravan_break_form     				= get_post_meta($post_id, 'sts_var_caravan_break_form', true);
-    // $sts_var_caravan_hr_form        				= get_post_meta($post_id, 'sts_var_caravan_hr_form', true);
     $sts_var_caravan_crfoam        					= get_post_meta($post_id, 'sts_var_caravan_crfoam', true);
     $sts_var_caravan_eyelet_tab        				= get_post_meta($post_id, 'sts_var_caravan_eyelet_tab', true);
     $sts_var_order_notes        					= get_post_meta($post_id, 'sts_var_order_notes', true);
 	$final_details 									= get_post_meta( $post_id, 'final_details', true );
+
 
 	// New fields
     $extension_plate        = get_post_meta($post_id, 'extension_plate', true);
@@ -1888,9 +1885,15 @@ function generate_customer_order_word_file($post_id) {
 
 	$info_cell = $table->addCell(5000, ['valign' => 'center']);
 
-	$textRun = $info_cell->addTextRun(['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$textRun->addText("ORDER DATE: ", ['bold' => true]);
-	$textRun->addText($order_date);
+	if ( $order ) {
+		$textRun = $info_cell->addTextRun(['spaceBefore' => 0, 'spaceAfter' => 0]);
+		$textRun->addText("ORDER DATE: ", ['bold' => true]);
+		$textRun->addText($order_date);
+	} else {
+		$textRun = $info_cell->addTextRun(['spaceBefore' => 0, 'spaceAfter' => 0]);
+		$textRun->addText("Order Created: ", ['bold' => true]);
+		$textRun->addText($order_date);
+	}
 
 	$textRun = $info_cell->addTextRun(['spaceBefore' => 1, 'spaceAfter' => 0]);
 	$textRun->addText("ORDER NUMBER: ", ['bold' => true]);
@@ -1918,21 +1921,20 @@ function generate_customer_order_word_file($post_id) {
 	$textRun = $leftCell->addTextRun($compact);
 	$textRun->addText("Email: ", ['bold' => true]);
 	$textRun->addText($customer_email);
-
 	$textRun = $leftCell->addTextRun(['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$textRun->addText("Home Address: ", ['bold' => true]);
 	// Nested table to restrict width
 	$addressTable = $leftCell->addTable(['cellMargin' => 0]);
 	$addressTable->addRow();
-	$addressTable->addCell(3000)->addText(strip_tags($delivery_address), [], ['spaceBefore' => 0, 'spaceAfter' => 0]); // ~50% of 6000 cell
-
-	$textRun = $leftCell->addTextRun(['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$textRun->addText("Delivery Address: ", ['bold' => true]);
-	// Nested table to restrict width
-	$addressTable = $leftCell->addTable(['cellMargin' => 0]);
-	$addressTable->addRow();
-	$addressTable->addCell(3000)->addText(strip_tags($final_delivery_address), [], ['spaceBefore' => 0, 'spaceAfter' => 0]); // ~50% of 6000 cell
-
+	$addressTable->addCell(3000)->addText(strip_tags($delivery_address ?: $address_meta_address), [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	if ( $order ) {
+		$textRun = $leftCell->addTextRun(['spaceBefore' => 0, 'spaceAfter' => 0]);
+		$textRun->addText("Delivery Address: ", ['bold' => true]);
+		// Nested table to restrict width
+		$addressTable = $leftCell->addTable(['cellMargin' => 0]);
+		$addressTable->addRow();
+		$addressTable->addCell(3000)->addText(strip_tags($final_delivery_address), [], ['spaceBefore' => 0, 'spaceAfter' => 0]); // ~50% of 6000 cell
+	}
 	$textRun = $leftCell->addTextRun($compact);
 	$textRun->addText("Delivery Instructions: ", ['bold' => true]);
 	$textRun->addText($delivery_instructions ?: 'No');
@@ -1940,9 +1942,15 @@ function generate_customer_order_word_file($post_id) {
 	// RIGHT COLUMN
 	$rightCell = $infoTable->addCell(5000);
 
-	$textRun = $rightCell->addTextRun($compact);
-	$textRun->addText("Product Type: ", ['bold' => true]);
-	$textRun->addText($product_type);
+	if ( $order ) {
+		$textRun = $rightCell->addTextRun($compact);
+		$textRun->addText("Product Type: ", ['bold' => true]);
+		$textRun->addText($product_type);
+	} else {
+		$textRun = $rightCell->addTextRun($compact);
+		$textRun->addText("Product Type: ", ['bold' => true]);
+		$textRun->addText('Manual Order');
+	}
 
 	$textRun = $rightCell->addTextRun($compact);
 	$textRun->addText("Trailer Make: ", ['bold' => true]);
@@ -2035,31 +2043,37 @@ function generate_customer_order_word_file($post_id) {
 	$items_table->addCell(1000)->addText("Quantity", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$items_table->addCell(9000)->addText("Product", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
-	$i = 1;
+	if ( $order ) {
+		$i = 1;
+		foreach ( $order->get_items() as $item ) {
+			$name  = $item->get_name();
+			$qty   = $item->get_quantity();
+			$total = wc_format_decimal($item->get_total(), 2);
+			$unit  = wc_format_decimal($item->get_total() / $qty, 2);
 
-	foreach ($order->get_items() as $item) {
-		$name = $item->get_name();
-		$qty = $item->get_quantity();
-		$total = wc_format_decimal($item->get_total(), 2);
-		$unit = wc_format_decimal($item->get_total() / $qty, 2);
+			$items_table->addRow(200);
+			$items_table->addCell(2000)->addText($qty, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+			$items_table->addCell(8000)->addText($name, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+		}
 
 		$items_table->addRow(200);
-		$items_table->addCell(2000)->addText($qty, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-		$items_table->addCell(8000)->addText($name, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+		$items_table->addCell(2000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+		$items_table->addCell(8000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+
+		$items_table->addRow(200);
+		$items_table->addCell(2000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+		$items_table->addCell(8000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+
+		$items_table->addRow(200);
+		$items_table->addCell(2000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+		$items_table->addCell(8000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	} else {
+		$items_table->addRow(200);
+		$items_table->addCell(2000)->addText('-', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+		$items_table->addCell(8000)->addText('Manual order', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	}
-
-	$items_table->addRow(200);
-	$items_table->addCell(2000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$items_table->addCell(8000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-
-	$items_table->addRow(200);
-	$items_table->addCell(2000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$items_table->addCell(8000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-
-	$items_table->addRow(200);
-	$items_table->addCell(2000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$items_table->addCell(8000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$section->addTextBreak(1);
+
 
 	// Fourth Section: Custom Order Notes
 
@@ -2090,9 +2104,15 @@ function generate_customer_order_word_file($post_id) {
 	$textRun->addText("Date Required: ", ['bold' => true]);
 	$textRun->addText($proposed_date);
 	$textRun = $info_cell->addTextRun(['spaceBefore' => 1, 'spaceAfter' => 0]);
-	$textRun->addText("Product Type: ", ['bold' => true]);
-	$textRun->addText($product_type);
-	$section->addTextBreak(1);
+	if ( $order ) {
+		$textRun->addText("Product Type: ", ['bold' => true]);
+		$textRun->addText($product_type);
+		$section->addTextBreak(1);
+	} else {
+		$textRun->addText("Product Type: ", ['bold' => true]);
+		$textRun->addText('Manual Order');
+		$section->addTextBreak(1);
+	}
 
 	// Wanna call vector svg here
 	$svg = get_towing_diagram_svg_png($post_id);
@@ -2217,12 +2237,14 @@ function generate_customer_order_word_file($post_id) {
 
 function download_customer_word_callback() {
     $post_id = intval($_GET['post_id'] ?? 0);
-	$order_id = get_post_meta($post_id, 'order_id', true);
-    $file_path = generate_customer_order_word_file($post_id);
+	if (!$post_id) wp_die('Invalid post ID.');
 
+	$order_id = get_post_meta($post_id, 'order_id', true);
 	if (empty($order_id)) {
 		$order_id = $post_id;
     }
+
+    $file_path = generate_customer_order_word_file($post_id);
 
     if (!$file_path || !file_exists($file_path)) {
         wp_die('File generation failed.');
@@ -2231,9 +2253,9 @@ function download_customer_word_callback() {
     header("Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document");
     header('Content-Disposition: attachment; filename="customer-order-' . $order_id . '.docx"');
     readfile($file_path);
-
     exit;
 }
+
 
 add_action( 'wp_ajax_download_customer_word', 'download_customer_word_callback' );
 add_action( 'wp_ajax_nopriv_download_customer_word', 'download_customer_word_callback' );
