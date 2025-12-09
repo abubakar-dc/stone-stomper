@@ -869,10 +869,8 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 													data-id="total">825.00</span></strong> <span class="muted">inc.
 												GST</span></div>
 									</div>
-
 									<div class="actions">
-
-										<button class="btn primary" type="submit" id="btn_cart">Add to Cart</button>
+										<button class="btn primary" type="button" id="btn_cart">Add to Cart</button>
 									</div>
 
 								</div>

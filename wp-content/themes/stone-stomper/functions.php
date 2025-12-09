@@ -2329,7 +2329,7 @@ function generate_bulk_customer_excel_file($status_key = 'all', $post_ids = []) 
     $row_index = 1;
 
     // 1. Set Headers
-    $headers = ['Order ID', 'Customer Name', 'Email', 'Phone', 'Order Status', 'Date Created', 'Proposed Date'];
+    $headers = ['Order ID', 'Customer Name', 'Proposed Date'];
     $sheet->fromArray($headers, NULL, 'A' . $row_index++);
 	$header_style = [
         'font' => [
@@ -2348,7 +2348,7 @@ function generate_bulk_customer_excel_file($status_key = 'all', $post_ids = []) 
 			'indent' => 1, // adds some left spacing
         ],
     ];
-	$sheet->getStyle('A1:G1')->applyFromArray($header_style);
+	$sheet->getStyle('A1:C1')->applyFromArray($header_style);
 
     // 2. Define WP_Query Arguments
     $args = [
@@ -2383,10 +2383,8 @@ function generate_bulk_customer_excel_file($status_key = 'all', $post_ids = []) 
                 break;
         }
 
-        // --- Apply Status Filter via post__in ---
         if (!empty($statuses_to_filter_by)) {
 
-            // Step A: Get all customer post IDs
             $all_customer_ids = get_posts([
                 'post_type'      => 'customer',
                 'posts_per_page' => -1,
@@ -2396,27 +2394,21 @@ function generate_bulk_customer_excel_file($status_key = 'all', $post_ids = []) 
 
             $matching_customer_ids = [];
 
-            // Step B: Iterate and check the status of the linked WooCommerce order
             foreach ($all_customer_ids as $customer_id) {
-                // IMPORTANT: The linked WooCommerce Order ID is assumed to be in the 'order_id' post meta field,
-                // as suggested by the original structure of your function.
                 $wc_order_id = get_post_meta($customer_id, 'order_id', true);
 
                 if ($wc_order_id) {
                     $order = wc_get_order($wc_order_id);
 
-                    // Check if the WooCommerce order exists and its status matches the filter list
                     if ($order && in_array($order->get_status(), $statuses_to_filter_by)) {
                         $matching_customer_ids[] = $customer_id;
                     }
                 }
             }
 
-            // Step C: Set the final query to only include the matching customer posts
             if (!empty($matching_customer_ids)) {
                 $args['post__in'] = $matching_customer_ids;
             } else {
-                // If no matches found, set post__in to [0] to return an empty set and trigger wp_die below.
                 $args['post__in'] = [0];
             }
 
@@ -2488,14 +2480,8 @@ function generate_bulk_customer_excel_file($status_key = 'all', $post_ids = []) 
 
         // Store the collected data in an array
         $export_data[] = [
-            'post_id'            => $post_id,
             'order_id'           => $order_id ?: $post_id,
             'customer_name'      => $customer_name,
-            'customer_email'     => $customer_email,
-            'customer_phone'     => $customer_phone,
-            'order_status_slug'  => $order_status_slug, // Used for sorting
-            'order_status_label' => $order_status_label, // Used for export
-            'post_date'          => $post_date_formatted,
 			'proposed_date'      => $proposed_date_formatted, // ADD THIS LINE
         ];
     }
@@ -2504,12 +2490,7 @@ function generate_bulk_customer_excel_file($status_key = 'all', $post_ids = []) 
     foreach ($export_data as $data) {
         $sheet->setCellValue('A' . $row_index, $data['order_id']);
         $sheet->setCellValue('B' . $row_index, $data['customer_name']);
-        $sheet->setCellValue('C' . $row_index, $data['customer_email']);
-        $sheet->setCellValue('D' . $row_index, $data['customer_phone']);
-        $sheet->setCellValue('E' . $row_index, $data['order_status_label']);
-        $sheet->setCellValue('F' . $row_index, $data['post_date']);
-		$sheet->setCellValue('G' . $row_index, $data['proposed_date']);
-
+		$sheet->setCellValue('C' . $row_index, $data['proposed_date']);
         $row_index++;
     }
 
@@ -2529,12 +2510,12 @@ function generate_bulk_customer_excel_file($status_key = 'all', $post_ids = []) 
 
     // Apply left alignment to the entire data range (A2 to G[last data row])
     if ($data_row_end >= 2) {
-        $sheet->getStyle('A2:G' . $data_row_end)->applyFromArray($data_style);
+        $sheet->getStyle('A2:C' . $data_row_end)->applyFromArray($data_style);
     }
 
     // 5. Finalize and Output File
     // Auto-size columns for readability
-    foreach (range('A', 'G') as $col) {
+    foreach (range('A', 'C') as $col) {
         $sheet->getColumnDimension($col)->setAutoSize(true);
     }
 
