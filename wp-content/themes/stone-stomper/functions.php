@@ -1811,6 +1811,14 @@ function generate_customer_order_word_file($post_id) {
     $order_total = $order ? $order->get_total() : '-';
     $delivery_instructions = $order ? $order->get_customer_note() : 'No';
 
+	function wpword_escape($value) {
+		if (!is_string($value)) {
+			return $value;
+		}
+		// Strip HTML tags and escape XML entities
+		return htmlspecialchars(strip_tags($value), ENT_QUOTES | ENT_XML1, 'UTF-8');
+	}
+
     // Fetch custom measurement meta
     $customer_name           						= get_post_meta($post_id, 'name', true);
     $customer_email           						= get_post_meta($post_id, 'email', true);
@@ -1854,6 +1862,31 @@ function generate_customer_order_word_file($post_id) {
     $extra_vinyl_position        = get_post_meta($post_id, 'extra_vinyl_position', true);
     $angled_stone_guard_width_mm        = get_post_meta($post_id, 'angled_stone_guard_width_mm', true);
     $angled_stone_guard_depth_mm        = get_post_meta($post_id, 'angled_stone_guard_depth_mm', true);
+
+	$sanitize_fields = [
+		'customer_name', 'customer_email', 'customer_phone',
+		'product_type', 'address_meta_address',
+		'caravan_make', 'caravan_model', 'vehicle_make', 'vehicle_model',
+		'vehicle_year', 'caravan_width_mm', 'caravan_length_mm',
+		'bar_width_mm', 'vinyl_insert_width_mm', 'vinyl_insert_height_mm',
+		'factory_stoneguard_width', 'factory_stoneguard_height',
+		'toolbox_width_mm', 'toolbox_height_mm',
+		'support_pockets', 'support_pockets_measurement',
+		'sts_var_caravan_bar_option', 'sts_var_caravan_bar_bend',
+		'sts_var_caravan_ss_length_adj', 'sts_var_caravan_cut_out',
+		'sts_var_caravan_mesh_only_measurement', 'sts_var_caravan_crfoam',
+		'sts_var_caravan_eyelet_tab', 'sts_var_order_notes',
+		'extension_plate', 'fittings', 'sleeve', 'extra_bungee',
+		'extra_vinyl_width_mm', 'extra_vinyl_length_mm', 'extra_vinyl_position',
+		'angled_stone_guard_width_mm', 'angled_stone_guard_depth_mm'
+	];
+
+	// Sanitize everything for DOCX safety
+	foreach ($sanitize_fields as $field) {
+		if (isset($$field)) {
+			$$field = wpword_escape($$field);
+		}
+	}
 
 	$final_delivery_address = "Same As Home Address";
 

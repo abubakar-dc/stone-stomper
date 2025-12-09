@@ -8053,10 +8053,10 @@ body.post-type-post .editor-styles-wrapper > div {
 }
 .postbox-container .customer-upload-images img,
 .postbox .customer-upload-images img {
-  max-width: 90px !important;
-  width: 90px;
-  height: 90px;
-  aspect-ratio: 90/90;
+  max-width: 150px !important;
+  width: 150px;
+  height: 150px;
+  aspect-ratio: 150/150;
   -o-object-fit: cover;
      object-fit: cover;
 }
