@@ -524,62 +524,61 @@ public function fetch_caravan_data() {
 						wp_reset_postdata();
 					}
 		if($caravanPostID){
-		$sts_var_caravan_ss_mesurements = get_field('sts_var_caravan_ss_mesurements', $caravanPostID);
-		if($sts_var_caravan_ss_mesurements){
-			$sts_var_caravan_barwidth = $sts_var_caravan_ss_mesurements['width'] ?? '';
-			$sts_var_caravan_barheight = $sts_var_caravan_ss_mesurements['height'] ?? '';
+			$sts_var_caravan_ss_mesurements = get_field('sts_var_caravan_ss_mesurements', $caravanPostID);
+			if($sts_var_caravan_ss_mesurements){
+				$sts_var_caravan_barwidth = $sts_var_caravan_ss_mesurements['width'] ?? '';
+				$sts_var_caravan_barheight = $sts_var_caravan_ss_mesurements['height'] ?? '';
+			} else {
+				$sts_var_caravan_barwidth = '';
+				$sts_var_caravan_barheight = '';
+			}
+
+			$sts_var_caravan_factory = get_field('sts_var_caravan_factory', $caravanPostID);
+			if($sts_var_caravan_factory){
+				$sts_var_caravan_factory_width = $sts_var_caravan_factory['width'] ?? '';
+				$sts_var_caravan_factory_height = $sts_var_caravan_factory['height'] ?? '';
+			} else {
+				$sts_var_caravan_factory_width = '';
+				$sts_var_caravan_factory_height = '';
+			}
+
+			$sts_var_caravan_vinyl_insert = get_field('sts_var_caravan_vinyl_insert', $caravanPostID);
+			if($sts_var_caravan_vinyl_insert ){
+				$sts_var_caravan_vinyl_insert_width = $sts_var_caravan_vinyl_insert['width'] ?? '';
+				$sts_var_caravan_vinyl_insert_height = $sts_var_caravan_vinyl_insert['height'] ?? '';
+			} else {
+				$sts_var_caravan_vinyl_insert_width = 600;
+				$sts_var_caravan_vinyl_insert_height = 600;
+			}
+
+			$sts_var_caravan_toolbox = get_field('sts_var_caravan_toolbox', $caravanPostID);
+			if($sts_var_caravan_toolbox ){
+				$sts_var_caravan_toolbox_width = $sts_var_caravan_toolbox['width'] ?? '';
+				$sts_var_caravan_toolbox_height = $sts_var_caravan_toolbox['height'] ?? '';
+			} else {
+				$sts_var_caravan_toolbox_width = '';
+				$sts_var_caravan_toolbox_height = '';
+			}
+
+			// Support Pocket Length
+			$sts_var_caravan_support_pocket_length = get_field('sts_var_caravan_support_pocket_length', $caravanPostID);
+
+			$sts_var_caravan_images = get_field('sts_var_caravan_images', $caravanPostID);
+			if($sts_var_caravan_images){
+				$sts_var_factory_stoneguard_image_id = $sts_var_caravan_images['carvan'] ?? '';
+				$sts_var_carvan_image_caption = $sts_var_caravan_images['image_caption'] ?? '';
+			} else {
+				$sts_var_factory_stoneguard_image_id = '';
+				$sts_var_carvan_image_caption = '';
+			}
+
 		} else {
 			$sts_var_caravan_barwidth = '';
 			$sts_var_caravan_barheight = '';
-		}
-
-		$sts_var_caravan_factory = get_field('sts_var_caravan_factory', $caravanPostID);
-		if($sts_var_caravan_factory){
-			$sts_var_caravan_factory_width = $sts_var_caravan_factory['width'] ?? '';
-			$sts_var_caravan_factory_height = $sts_var_caravan_factory['height'] ?? '';
-		} else {
 			$sts_var_caravan_factory_width = '';
 			$sts_var_caravan_factory_height = '';
-		}
-		$sts_var_caravan_vinyl_insert = get_field('sts_var_caravan_vinyl_insert', $caravanPostID);
-		if($sts_var_caravan_vinyl_insert ){
-			$sts_var_caravan_vinyl_insert_width = $sts_var_caravan_vinyl_insert['width'] ?? '';
-			$sts_var_caravan_vinyl_insert_height = $sts_var_caravan_vinyl_insert['height'] ?? '';
-		} else {
-			$sts_var_caravan_vinyl_insert_width = '';
-			$sts_var_caravan_vinyl_insert_height = '';
-		}
-
-		$sts_var_caravan_toolbox = get_field('sts_var_caravan_toolbox', $caravanPostID);
-		if($sts_var_caravan_toolbox ){
-			$sts_var_caravan_toolbox_width = $sts_var_caravan_toolbox['width'] ?? '';
-			$sts_var_caravan_toolbox_height = $sts_var_caravan_toolbox['height'] ?? '';
-		} else {
-			$sts_var_caravan_toolbox_width = '';
-			$sts_var_caravan_toolbox_height = '';
-		}
-
-		// Support Pocket Length
-		$sts_var_caravan_support_pocket_length = get_field('sts_var_caravan_support_pocket_length', $caravanPostID);
-
-
-		$sts_var_caravan_images = get_field('sts_var_caravan_images', $caravanPostID);
-		if($sts_var_caravan_images){
-			$sts_var_factory_stoneguard_image_id = $sts_var_caravan_images['carvan'] ?? '';
-			$sts_var_carvan_image_caption = $sts_var_caravan_images['image_caption'] ?? '';
-		} else {
-			$sts_var_factory_stoneguard_image_id = '';
-			$sts_var_carvan_image_caption = '';
-		}
-
-
-		} else {
-			$sts_var_caravan_barwidth = '';
-			$sts_var_caravan_barheight = '';
-			$sts_var_caravan_factory_width = '';
-			$sts_var_caravan_factory_height = '';
-			$sts_var_caravan_vinyl_insert_width = '';
-			$sts_var_caravan_vinyl_insert_height = '';
+			$sts_var_caravan_vinyl_insert_width = 600;
+			$sts_var_caravan_vinyl_insert_height = 600;
 			$sts_var_toolbox_image_id = '';
 		}
 
