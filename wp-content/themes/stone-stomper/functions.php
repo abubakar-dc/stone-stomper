@@ -2652,29 +2652,36 @@ add_filter('post_date_column_time', function($h_time, $post) {
     return $date . ' at ' . $time;
 }, 10, 2);
 
-
 /*
 |-----------------------------------------
 |  ORDER Meta data to customer CPT Post
 |-----------------------------------------
 */
 
-add_action('woocommerce_checkout_order_processed', function ($order_id) {
 
-    $order = wc_get_order($order_id);
-    if (!$order) return;
+add_action(
+    'woocommerce_store_api_checkout_order_processed',
+    'sts_save_block_checkout_order_meta',
+    10,
+    1
+);
 
-    $cookie = sts_read_order_form_cookie();
-    if (empty($cookie['is_stone_stomper_order']) || $cookie['is_stone_stomper_order'] !== 'yes') {
+function sts_save_block_checkout_order_meta( $order ) {
+
+    if ( ! $order instanceof WC_Order ) {
         return;
     }
 
-    $order->update_meta_data('_sts_order', 'yes');
-    $order->update_meta_data('_sts_payload', wp_json_encode($cookie));
+    $cookie = sts_read_order_form_cookie();
+
+    if ( empty( $cookie['is_stone_stomper_order'] ) || $cookie['is_stone_stomper_order'] !== 'yes' ) {
+        return;
+    }
+
+    $order->update_meta_data( '_sts_order', 'yes' );
+    $order->update_meta_data( '_sts_payload', wp_json_encode( $cookie ) );
     $order->save();
-
-}, 20);
-
+}
 
 function sts_read_order_form_cookie() {
     $prefix = 'order_form'; // Expected cookie name
