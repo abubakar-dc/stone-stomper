@@ -166,7 +166,6 @@ add_filter('woocommerce_add_cart_item_data', function($cart_item_data, $product_
 		$cart_item_data['product_type'] = sanitize_text_field($_POST['product_type']);
 	}
 
-
     // --- new measurement fields ---
     if (!empty($_POST['barwidth'])) {
         $cart_item_data['barwidth_mm'] = floatval($_POST['barwidth']);
@@ -176,7 +175,16 @@ add_filter('woocommerce_add_cart_item_data', function($cart_item_data, $product_
         $cart_item_data['a_frame_length_mm'] = floatval($_POST['a_frame_length']);
     }
 
+	if (function_exists('sts_read_order_form_cookie')) {
+        $form = sts_read_order_form_cookie();
+        if (!empty($form) && is_array($form)) {
+            $cart_item_data['sts_form'] = $form;
+            $cart_item_data['sts_unique'] = md5(microtime(true) . rand());
+        }
+    }
+
     return $cart_item_data;
+
 }, 10, 3);
 
 // Persist to Order Items (admin)
@@ -2806,4 +2814,144 @@ function sts_materialize_customer_cpt($order_id) {
 
     $order->add_order_note('STS SUCCESS: Customer CPT created');
 }
+
+/*
+|---------------------------------------------------
+|  Prefill form, Clear cookies after form submission
+|---------------------------------------------------
+*/
+
+// Temporary block
+add_action('woocommerce_cart_loaded_from_session', function () {
+    error_log('CART LOADED FROM SESSION');
+    if (function_exists('WC') && WC()->cart) {
+        error_log(print_r(WC()->cart->get_cart(), true));
+    }
+});
+
+// Get data from cart → save into cookie
+add_action('wp_loaded', function () {
+
+    if (is_admin()) return;
+    if (!function_exists('WC') || !WC()->cart) return;
+
+    if (!empty($_COOKIE['order_form'])) return;
+
+    foreach (WC()->cart->get_cart() as $item) {
+        if (!empty($item['sts_form']) && is_array($item['sts_form'])) {
+
+            $json = wp_json_encode($item['sts_form']);
+
+            setcookie(
+                'order_form',
+                $json,
+                time() + (90 * DAY_IN_SECONDS),
+                COOKIEPATH ?: '/',
+                COOKIE_DOMAIN
+            );
+
+            $_COOKIE['order_form'] = $json;
+
+            break;
+        }
+    }
+});
+
+// Reset cart
+add_action('wp_loaded', function () {
+
+    if (!WC()->cart || empty($_COOKIE['order_form'])) return;
+
+    $data = json_decode(stripslashes($_COOKIE['order_form']), true);
+    if (!is_array($data)) return;
+
+    foreach (WC()->cart->get_cart() as $key => $item) {
+
+        if (
+            isset($item['sts_form']['is_stone_stomper_order']) &&
+            $item['sts_form']['is_stone_stomper_order'] === 'yes'
+        ) {
+            WC()->cart->cart_contents[$key]['sts_form'] = $data;
+            WC()->cart->set_session();
+            WC()->cart->calculate_totals();
+            break;
+        }
+    }
+});
+
+// Reset cart
+add_action('init', function () {
+
+    if ( empty($_GET['sts_reset']) ) return;
+    if ( ! function_exists('WC') || ! WC()->cart ) return;
+
+    WC()->cart->empty_cart();
+
+    foreach ($_COOKIE as $name => $value) {
+        if ( strpos($name, 'order_form') === 0 || $name === 'sts_product_type' ) {
+            setcookie(
+                $name,
+                '',
+                time() - 3600,
+                COOKIEPATH ?: '/',
+                COOKIE_DOMAIN
+            );
+            unset($_COOKIE[$name]);
+        }
+    }
+
+    wp_safe_redirect( remove_query_arg('sts_reset') );
+    exit;
+});
+
+define('STS_STONE_STOMPER_ID', 545);
+define('STS_MESH_ONLY_ID', 712);
+
+add_action('woocommerce_add_to_cart', function ($cart_item_key, $product_id) {
+
+    if (!function_exists('WC') || !WC()->cart) return;
+
+    $is_stone_stomper = ($product_id == STS_STONE_STOMPER_ID);
+    $is_mesh_only     = ($product_id == STS_MESH_ONLY_ID);
+
+    foreach (WC()->cart->get_cart() as $key => $item) {
+
+        if ($key === $cart_item_key) continue;
+
+        $existing_id = $item['product_id'];
+
+        if ($is_stone_stomper && in_array($existing_id, [STS_STONE_STOMPER_ID, STS_MESH_ONLY_ID])) {
+            WC()->cart->remove_cart_item($key);
+        }
+
+        if ($is_mesh_only && in_array($existing_id, [STS_MESH_ONLY_ID, STS_STONE_STOMPER_ID])) {
+            WC()->cart->remove_cart_item($key);
+        }
+    }
+
+    WC()->cart->set_session();
+    WC()->cart->calculate_totals();
+
+    wc_add_notice('Previous product replaced.', 'success');
+
+}, 10, 2);
+
+
+// Clear cookies on order submit
+
+add_action('woocommerce_thankyou', function () {
+    foreach ($_COOKIE as $name => $value) {
+        if (strpos($name, 'order_form') === 0) {
+            setcookie(
+                $name,
+                '',
+                time() - 3600,
+                COOKIEPATH ?: '/',
+                COOKIE_DOMAIN
+            );
+            unset($_COOKIE[$name]);
+        }
+    }
+});
+
 
