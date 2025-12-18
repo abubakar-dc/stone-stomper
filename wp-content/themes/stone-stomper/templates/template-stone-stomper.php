@@ -616,7 +616,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 									<div class="grid cols-2">
 										<div class="field mesh-only-field">
 											<label class="req" for="meshmeasurment">Bracket on the caravan to Stone Somper while hitched up straight</label>
-											<input id="meshmeasurment" name="meshmeasurment_mm" type="text"
+											<input id="meshmeasurment" name="meshmeasurment_mm" type="text" inputmode="numeric" pattern="[0-9]*"
 												placeholder="e.g. 1800" required />
 
 
@@ -626,17 +626,17 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										</div>
 										<div class="field">
 											<label class="req" for="barwidth">Towing Vehicle Barwidth (mm)</label>
-											<input id="barwidth" name="barwidth_mm" type="text"
+											<input id="barwidth" name="barwidth_mm" type="text" inputmode="numeric" pattern="[0-9]*"
 												placeholder="e.g. 1800" required />
 										</div>
 										<div class="field" >
 											<label class="req" for="vanwidth">Caravan Width (mm)</label>
-											<input id="vanwidth" name="caravan_width_mm" type="text"
+											<input id="vanwidth" name="caravan_width_mm" type="text" inputmode="numeric" pattern="[0-9]*"
 												placeholder="e.g. 1900" required />
 										</div>
 										<div class="field">
 											<label class="req" for="a_frame_length">A-Frame Length (mm)</label>
-											<input id="a_frame_length" name="a_frame_length_mm" type="text"
+											<input id="a_frame_length" name="a_frame_length_mm" type="text" inputmode="numeric" pattern="[0-9]*"
 												placeholder="e.g. 1800" required />
 										</div>
 										<fieldset class="ss-support-options" style="display:none">
@@ -652,12 +652,12 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 														<div class="factory_stoneguard_inner two-columns-fields">
 															<div class="field extra-support" >
 																<label class="req" for="toolbox_width">Width (mm)</label>
-																<input id="toolbox_width" name="toolbox_width_mm" type="text"
+																<input id="toolbox_width" name="toolbox_width_mm" type="text" inputmode="numeric" pattern="[0-9]*"
 																	placeholder="e.g. 500 mm" required />
 															</div>
 															<div class="field extra-support">
 																<label class="req" for="toolbox_length">Distance from Caravan (mm)</label>
-																<input id="toolbox_length" name="toolbox_length_mm" type="text"
+																<input id="toolbox_length" name="toolbox_length_mm" type="text" inputmode="numeric" pattern="[0-9]*"
 																	placeholder="e.g. 500 mm" required />
 															</div>
 														</div>
@@ -672,12 +672,12 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 														<div class="factory_stoneguard_inner two-columns-fields">
 															<div class="field extra-support">
 																<label class="req" for="stoneguard_width">Width (mm)</label>
-																<input id="stoneguard_width" name="stoneguard_width_mm" type="text"
+																<input id="stoneguard_width" name="stoneguard_width_mm" type="text" inputmode="numeric" pattern="[0-9]*"
 																	placeholder="e.g.600 mm" required />
 															</div>
 															<div class="field extra-support">
 																<label class="req" for="stoneguard_length">Distance from Caravan (mm)</label>
-																<input id="stoneguard_length" name="stoneguard_length_mm" type="text"
+																<input id="stoneguard_length" name="stoneguard_length_mm" type="text" inputmode="numeric" pattern="[0-9]*"
 																	placeholder="e.g.600 mm" required />
 															</div>
 														</div>
@@ -690,7 +690,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 													<div class="support_pockets" style="display:none">
 														<div class="field extra-support">
 															<label class="req" for="support_pocket_length">Support Pocket Distance From Caravan (MM)</label>
-															<input id="support_pocket_length" name="support_pocket_length_mm" type="text"
+															<input id="support_pocket_length" name="support_pocket_length_mm" type="text" inputmode="numeric" pattern="[0-9]*"
 																placeholder="e.g.600 mm" required />
 														</div>
 													</div>
@@ -699,12 +699,12 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										</fieldset>
 										<div class="field hidden">
 											<label class="req" for="vinyl_width">Vinyl Insert Width</label>
-											<input id="vinyl_width" name="vinyl_width_mm" type="text"
+											<input id="vinyl_width" name="vinyl_width_mm" type="text" inputmode="numeric" pattern="[0-9]*"
 												placeholder="e.g.600 mm" required />
 										</div>
 										<div class="field hidden">
 											<label class="req" for="vinyl_length">Vinyl Insert Length</label>
-											<input id="vinyl_length" name="vinyl_length_mm" type="text"
+											<input id="vinyl_length" name="vinyl_length_mm" type="text" inputmode="numeric" pattern="[0-9]*"
 												placeholder="e.g.600 mm" required />
 										</div>
 										<!--
@@ -789,6 +789,11 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											}
 										} ?>
 									<div class="grid cols-2">
+										<div class="field">
+											<label class="req" for="order_notes-details">Order Notes</label>
+											<textarea id="order_notes-details" name="order_notes" placeholder="Add any special notes here" maxlength="500"></textarea>
+											<p class="note notice-bar hidden" id="move_note">Our Team will contact you once your order is ready on your given phone number</p>
+										</div>
 										<div class="field">
 											<label class="req" for="final_address">Delivery Address</label>
 											<select id="final_address" name="final_delivery" required>

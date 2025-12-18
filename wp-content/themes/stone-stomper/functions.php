@@ -252,62 +252,8 @@ add_action( 'admin_init', function() {
     }
 });
 
-// add_action( 'woocommerce_checkout_create_order', function( $order, $data ) {
-
-//     $cookie = sts_read_order_form_cookie();
-
-//     if ( empty( $cookie['is_stone_stomper_order'] ) || $cookie['is_stone_stomper_order'] !== 'yes' ) {
-//         return;
-//     }
-
-//     // existing flag (keep this)
-//     $order->update_meta_data( '_sts_order', 'yes' );
-
-//     // ✅ NEW: persist full payload for retries
-//     // store raw JSON so nothing is lost
-//     $order->update_meta_data(
-//         '_sts_payload',
-//         wp_json_encode( $cookie )
-//     );
-
-// 	// Debugging logs
-//     error_log("Order meta for '$order->get_id()' saved:");
-//     error_log(print_r($cookie, true));
-// }, 10, 2 );
 
 
-
-// /**
-//  * Read the large JSON saved across cookies:
-//  * - order_form            (single)
-//  * - order_form_parts      (count)
-//  * - order_form_0..N       (chunks)
-//  */
-
-// function sts_read_order_form_cookie() {
-// 	$prefix = 'order_form';
-// 	$json = ''; // initialize
-
-// 	if ( isset( $_COOKIE[ $prefix ] ) && $_COOKIE[ $prefix ] !== '' ) {
-// 		$json = wp_unslash( $_COOKIE[ $prefix ] );
-// 	}
-
-// 	// } else {
-// 	// 	$count = isset( $_COOKIE[ $prefix . '_parts' ] ) ? intval( $_COOKIE[ $prefix . '_parts' ] ) : 0;
-// 	// 	$json  = '';
-// 	// 	if ( $count > 0 ) {
-// 	// 		for ( $i = 0; $i < $count; $i++ ) {
-// 	// 			if ( isset( $_COOKIE[ "{$prefix}_{$i}" ] ) ) {
-// 	// 				$json .= wp_unslash( $_COOKIE[ "{$prefix}_{$i}" ] );
-// 	// 			}
-// 	// 		}
-// 	// 	}
-// 	// }
-
-// 	if ( ! $json ) return null;
-// 	$decoded = json_decode( $json, true );
-// 	return is_array( $decoded ) ? $decoded : null;
-// }
 
 /**
  * Helper: normalize checkbox truthy values
@@ -829,7 +775,7 @@ function show_towing_svg_in_editor( $post ) {
     $vinyl_insert_height_mm    = get_post_meta( $post->ID, 'vinyl_insert_height_mm', true );
     $toolbox_width_mm    = get_post_meta( $post->ID, 'toolbox_width_mm', true );
     $toolbox_height_mm    = get_post_meta( $post->ID, 'toolbox_height_mm', true );
-    $sts_var_caravan_foam    = get_post_meta( $post->ID, 'sts_var_caravan_crfoam', true );
+    $sts_var_caravan_foam    = get_post_meta( $post->ID, 'sts_var_caravan_foam', true );
 
 
 	// New fields
@@ -1650,10 +1596,11 @@ function generate_customer_order_word_file($post_id) {
     $sts_var_caravan_ss_length_adj  				= get_post_meta($post_id, 'sts_var_caravan_ss_length_adj', true);
     $sts_var_caravan_cut_out        				= get_post_meta($post_id, 'sts_var_caravan_cut_out', true);
     $sts_var_caravan_mesh_only_measurement     		= get_post_meta($post_id, 'sts_var_caravan_mesh_only_measurement', true);
-    $sts_var_caravan_crfoam        					= get_post_meta($post_id, 'sts_var_caravan_crfoam', true);
+    $sts_var_caravan_crfoam        					= get_post_meta($post_id, 'sts_var_caravan_foam', true);
     $sts_var_caravan_eyelet_tab        				= get_post_meta($post_id, 'sts_var_caravan_eyelet_tab', true);
     $sts_var_order_notes        					= get_post_meta($post_id, 'sts_var_order_notes', true);
 	$final_details 									= get_post_meta( $post_id, 'final_details', true );
+	$order_notes 									= get_post_meta( $post_id, 'order_notes', true );
 
 
 	// New fields
@@ -1678,11 +1625,11 @@ function generate_customer_order_word_file($post_id) {
 		'support_pockets', 'support_pockets_measurement',
 		'sts_var_caravan_bar_option', 'sts_var_caravan_bar_bend',
 		'sts_var_caravan_ss_length_adj', 'sts_var_caravan_cut_out',
-		'sts_var_caravan_mesh_only_measurement', 'sts_var_caravan_crfoam',
+		'sts_var_caravan_mesh_only_measurement', 'sts_var_caravan_foam',
 		'sts_var_caravan_eyelet_tab', 'sts_var_order_notes',
 		'extension_plate', 'fittings', 'sleeve', 'extra_bungee',
 		'extra_vinyl_width_mm', 'extra_vinyl_length_mm', 'extra_vinyl_position',
-		'angled_stone_guard_width_mm', 'angled_stone_guard_depth_mm'
+		'angled_stone_guard_width_mm', 'angled_stone_guard_depth_mm', ''
 	];
 
 	// Sanitize everything for DOCX safety
@@ -1892,18 +1839,6 @@ function generate_customer_order_word_file($post_id) {
 			$items_table->addCell(2000)->addText($qty, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 			$items_table->addCell(8000)->addText($name, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 		}
-
-		$items_table->addRow(200);
-		$items_table->addCell(2000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-		$items_table->addCell(8000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-
-		$items_table->addRow(200);
-		$items_table->addCell(2000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-		$items_table->addCell(8000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-
-		$items_table->addRow(200);
-		$items_table->addCell(2000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-		$items_table->addCell(8000)->addText('', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	} else {
 		$items_table->addRow(200);
 		$items_table->addCell(2000)->addText('-', [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
@@ -1911,9 +1846,11 @@ function generate_customer_order_word_file($post_id) {
 	}
 	$section->addTextBreak(1);
 
-
 	// Fourth Section: Custom Order Notes
 
+    $section->addText("Order Note:", ['bold' => true]);
+    $section->addText($order_notes, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$section->addText('');
     $section->addText("CUSTOMER ORDER NOTES:", ['bold' => true]);
     $section->addText($sts_var_order_notes, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$section->addPageBreak();
@@ -2757,6 +2694,7 @@ function sts_materialize_customer_cpt($order_id) {
     $hitch_ids = sts_to_media_array($data['hitch_ids'] ?? []);
     $rear_ids  = sts_to_media_array($data['rear_ids'] ?? []);
     $front_ids = sts_to_media_array($data['front_ids'] ?? []);
+    $order_notes = sanitize_text_field($data['order_notes'] ?? []);
 
     $final = array(
         'final_delivery' => sanitize_text_field($data['final_delivery'] ?? $data['final_address'] ?? ''),
@@ -2796,101 +2734,16 @@ function sts_materialize_customer_cpt($order_id) {
     update_post_meta($post_id, 'rear_ids', $rear_ids);
     update_post_meta($post_id, 'front_ids', $front_ids);
     update_post_meta($post_id, 'final_details', $final);
+    update_post_meta($post_id, 'order_notes', $order_notes);
 
     if ($order->get_user_id()) {
         update_post_meta($post_id, '_customer_user_id', $order->get_user_id());
     }
-
     $order->update_meta_data('_sts_customer_cpt_created', 'yes');
     $order->save();
-
     $order->add_order_note('STS SUCCESS: Customer CPT created');
 }
 
-
-
-// Temporary block
-add_action('woocommerce_cart_loaded_from_session', function () {
-    error_log('CART LOADED FROM SESSION');
-    if (function_exists('WC') && WC()->cart) {
-        error_log(print_r(WC()->cart->get_cart(), true));
-    }
-});
-
-// Get data from cart → save into cookie
-add_action('wp_loaded', function () {
-
-    if (is_admin()) return;
-    if (!function_exists('WC') || !WC()->cart) return;
-
-    if (!empty($_COOKIE['order_form'])) return;
-
-    foreach (WC()->cart->get_cart() as $item) {
-        if (!empty($item['sts_form']) && is_array($item['sts_form'])) {
-
-            $json = wp_json_encode($item['sts_form']);
-
-            setcookie(
-                'order_form',
-                $json,
-                time() + (90 * DAY_IN_SECONDS),
-                COOKIEPATH ?: '/',
-                COOKIE_DOMAIN
-            );
-
-            $_COOKIE['order_form'] = $json;
-
-            break;
-        }
-    }
-});
-
-// Reset cart
-add_action('wp_loaded', function () {
-
-    if (!WC()->cart || empty($_COOKIE['order_form'])) return;
-
-    $data = json_decode(stripslashes($_COOKIE['order_form']), true);
-    if (!is_array($data)) return;
-
-    foreach (WC()->cart->get_cart() as $key => $item) {
-
-        if (
-            isset($item['sts_form']['is_stone_stomper_order']) &&
-            $item['sts_form']['is_stone_stomper_order'] === 'yes'
-        ) {
-            WC()->cart->cart_contents[$key]['sts_form'] = $data;
-            WC()->cart->set_session();
-            WC()->cart->calculate_totals();
-            break;
-        }
-    }
-});
-
-// Reset cart
-add_action('init', function () {
-
-    if ( empty($_GET['sts_reset']) ) return;
-    if ( ! function_exists('WC') || ! WC()->cart ) return;
-
-    WC()->cart->empty_cart();
-
-    foreach ($_COOKIE as $name => $value) {
-        if ( strpos($name, 'order_form') === 0 || $name === 'sts_product_type' ) {
-            setcookie(
-                $name,
-                '',
-                time() - 3600,
-                COOKIEPATH ?: '/',
-                COOKIE_DOMAIN
-            );
-            unset($_COOKIE[$name]);
-        }
-    }
-
-    wp_safe_redirect( remove_query_arg('sts_reset') );
-    exit;
-});
 
 define('STS_STONE_STOMPER_ID', 545);
 define('STS_MESH_ONLY_ID', 712);
