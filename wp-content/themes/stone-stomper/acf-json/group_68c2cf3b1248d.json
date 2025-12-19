@@ -866,7 +866,7 @@
             "label": "Order Notes",
             "name": "order_notes",
             "aria-label": "",
-            "type": "text",
+            "type": "textarea",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -878,9 +878,9 @@
             "default_value": "",
             "maxlength": "",
             "allow_in_bindings": 0,
+            "rows": "",
             "placeholder": "",
-            "prepend": "",
-            "append": ""
+            "new_lines": ""
         },
         {
             "key": "field_691b339233de7",
@@ -940,5 +940,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1766094599
+    "modified": 1766146166
 }
