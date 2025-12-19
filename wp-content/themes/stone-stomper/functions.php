@@ -2696,6 +2696,14 @@ function sts_materialize_customer_cpt($order_id) {
     $front_ids = sts_to_media_array($data['front_ids'] ?? []);
     $order_notes = sanitize_text_field($data['order_notes'] ?? []);
 
+    $toolbox_width_mm  = sanitize_text_field($data['toolbox_width_mm'] ?? '');
+    $toolbox_height_mm  = sanitize_text_field($data['toolbox_length_mm'] ?? '');
+    $factory_stoneguard_width  = sanitize_text_field($data['stoneguard_width_mm'] ?? '');
+    $factory_stoneguard_height  = sanitize_text_field($data['stoneguard_length_mm'] ?? '');
+    $stoneguard_length_mm  = sanitize_text_field($data['stoneguard_length_mm'] ?? '');
+    $support_pockets  = sanitize_text_field($data['support_pockets'] ?? '');
+    $support_pockets_measurement  = sanitize_text_field($data['support_pocket_length_mm'] ?? '');
+
     $final = array(
         'final_delivery' => sanitize_text_field($data['final_delivery'] ?? $data['final_address'] ?? ''),
         'acc_upsells'    => array_values(array_unique(array_map('intval', $data['acc_upsells'] ?? []))),
@@ -2735,6 +2743,12 @@ function sts_materialize_customer_cpt($order_id) {
     update_post_meta($post_id, 'front_ids', $front_ids);
     update_post_meta($post_id, 'final_details', $final);
     update_post_meta($post_id, 'order_notes', $order_notes);
+    update_post_meta($post_id, 'toolbox_width_mm', $toolbox_width_mm);
+    update_post_meta($post_id, 'toolbox_height_mm', $toolbox_height_mm);
+    update_post_meta($post_id, 'factory_stoneguard_width', $factory_stoneguard_width);
+    update_post_meta($post_id, 'factory_stoneguard_height', $factory_stoneguard_height);
+    update_post_meta($post_id, 'support_pockets', $support_pockets);
+    update_post_meta($post_id, 'support_pockets_measurement', $support_pockets_measurement);
 
     if ($order->get_user_id()) {
         update_post_meta($post_id, '_customer_user_id', $order->get_user_id());
