@@ -527,6 +527,27 @@
             "append": ""
         },
         {
+            "key": "field_69458924104c9",
+            "label": "Hitch Measurement",
+            "name": "hitch_measurement_field",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_68ecb6b41614c",
             "label": "Bar Option",
             "name": "sts_var_caravan_bar_option",
@@ -569,30 +590,9 @@
             "append": ""
         },
         {
-            "key": "field_68ecba4b597d0",
-            "label": "Foam",
-            "name": "sts_var_caravan_foam",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "25",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_691b34274dc80",
-            "label": "Eyelet Tab",
-            "name": "sts_var_caravan_eyelet_tab",
+            "key": "field_694588bd207e7",
+            "label": "Bar Bend Type",
+            "name": "sts_var_caravan_bar_bend_type",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -614,6 +614,69 @@
             "key": "field_68ecba2c1614f",
             "label": "Cut Out",
             "name": "sts_var_caravan_cut_out",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_69458a19e754b",
+            "label": "Tab On Back",
+            "name": "tab_on_back",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_691d78a3d0891",
+            "label": "Fittings",
+            "name": "fittings",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_694589f94c7e7",
+            "label": "Extra Fittings",
+            "name": "extra_fittings",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -674,9 +737,30 @@
             "append": ""
         },
         {
-            "key": "field_691d78a3d0891",
-            "label": "Fittings",
-            "name": "fittings",
+            "key": "field_68ecba4b597d0",
+            "label": "Foam",
+            "name": "sts_var_caravan_foam",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_691b34274dc80",
+            "label": "Eyelet Tab",
+            "name": "sts_var_caravan_eyelet_tab",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -940,5 +1024,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1766146166
+    "modified": 1766167175
 }

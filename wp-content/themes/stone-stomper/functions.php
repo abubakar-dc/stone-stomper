@@ -2764,6 +2764,15 @@ function sts_materialize_customer_cpt($order_id) {
 	update_post_meta( $post_id, 'vinyl_insert_width_mm', $vinyl_width_mm );
 	update_post_meta( $post_id, 'vinyl_insert_height_mm', $vinyl_length_mm );
 
+	if ( $product_type === 'Mesh Only' ) {
+		update_post_meta( $post_id, 'sts_var_caravan_mesh_only_measurement', $measure_meshmeasurment_mm );
+	} else {
+		update_post_meta( $post_id, 'sts_var_caravan_bar_option', $bar_options );
+	}
+
+	// if( $bar_options  === 'Option 2 Standard Post' || $bar_options === 'Option 3 Standard Shank' || $bar_options === 'Option 3 Adjustable Shank') {
+	// }
+
     if ($order->get_user_id()) {
         update_post_meta($post_id, '_customer_user_id', $order->get_user_id());
     }

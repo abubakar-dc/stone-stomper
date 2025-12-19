@@ -452,11 +452,9 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										<div class="grid cols-2 ">
 											<div class="field">
 												<select id="bar_options" name="bar_options" required>
-
 													<option value="">Select Bar Option</option>
-													<?php foreach ( $sts_var_section_bar_options_bar_options as $option ){
-														$single_bar_option = $option['add_option'];
-														?>
+													<?php foreach ( $sts_var_section_bar_options_bar_options as $option ) {
+														$single_bar_option = $option['add_option']; ?>
 														<option value="<?php echo esc_attr( $single_bar_option ); ?>"><?php echo esc_html( $single_bar_option ); ?></option>
 													<?php } ?>
 												</select>
