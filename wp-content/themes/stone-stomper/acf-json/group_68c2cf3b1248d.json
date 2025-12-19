@@ -666,7 +666,7 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
+            "default_value": 150,
             "maxlength": "",
             "allow_in_bindings": 0,
             "placeholder": "",
@@ -1024,5 +1024,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1766167175
+    "modified": 1766172021
 }

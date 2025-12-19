@@ -1600,6 +1600,10 @@ function generate_customer_order_word_file($post_id) {
 	$final_details 									= get_post_meta( $post_id, 'final_details', true );
 	$order_notes 									= get_post_meta( $post_id, 'order_notes', true );
 
+	$extra_fittings 								= get_post_meta( $post_id, 'extra_fittings', true );
+	$sts_var_caravan_bar_bend_type 					= get_post_meta( $post_id, 'sts_var_caravan_bar_bend_type', true );
+	$tab_on_back 									= get_post_meta( $post_id, 'tab_on_back', true );
+
 
 	// New fields
     $extension_plate        = get_post_meta($post_id, 'extension_plate', true);
@@ -1779,16 +1783,20 @@ function generate_customer_order_word_file($post_id) {
 	$row->addCell(6500)->addText("Fittings:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(3500)->addText($fittings, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
+	$row = $tableAccessories->addRow(200);
+	$row->addCell(6500)->addText("Extra Fittings:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(3500)->addText($extra_fittings, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+
 	$row = $tableAccessories->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(6500)->addText("Extension Plate:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(3500)->addText($extension_plate , [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $tableAccessories->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(6500)->addText("Foam", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6500)->addText("Foam:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(3500)->addText($sts_var_caravan_crfoam, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $tableAccessories->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(6500)->addText("Sleeves", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6500)->addText("Sleeves:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(3500)->addText("$sleeve", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $tableAccessories->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
@@ -1798,6 +1806,14 @@ function generate_customer_order_word_file($post_id) {
 	$row = $tableAccessories->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(6500)->addText("Bar Bend:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(3500)->addText("$sts_var_caravan_bar_bend", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+
+	$row = $tableAccessories->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6500)->addText("Bar Bend Type:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(3500)->addText("$sts_var_caravan_bar_bend_type", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+
+	$row = $tableAccessories->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6500)->addText("Tab on Back:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(3500)->addText("$tab_on_back", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $tableAccessories->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(6500)->addText("Bar Option:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
@@ -2575,7 +2591,7 @@ add_action('woocommerce_cart_calculate_fees', function($cart) {
 add_filter('woocommerce_is_sold_individually', 'hide_quantity_for_specific_product', 10, 2);
 
 function hide_quantity_for_specific_product($sold_individually, $product) {
-    if ($product->get_id() == 545) {
+    if ($product->get_id() == 545 || $product->get_id() == 712) {
         return true;
     }
     return $sold_individually;
@@ -2693,19 +2709,14 @@ function sts_materialize_customer_cpt($order_id) {
 	if ( ! empty( $data['input_1.2'] ) || ! empty( $data['toolbox'] ) ) $accessories[] = 'toolbox';
 	if ( ! empty( $data['input_1.1'] ) || ! empty( $data['factory_stoneguard'] ) ) $accessories[] = 'factory-stoneguard';
 	if ( ! empty( $data['other_a_frame'] ) ) $accessories[] = sanitize_text_field( $data['other_a_frame'] );
-
-
     $measure_barwidth_mm = sanitize_text_field($data['barwidth_mm'] ?? '');
     $caravan_width_mm   = sanitize_text_field($data['caravan_width_mm'] ?? '');
     $a_frame_length_mm  = sanitize_text_field($data['a_frame_length_mm'] ?? '');
     $support_pockets    = !empty($data['support_pockets']) ? 'yes' : 'no';
-
-
     $hitch_ids = sts_to_media_array($data['hitch_ids'] ?? []);
     $rear_ids  = sts_to_media_array($data['rear_ids'] ?? []);
     $front_ids = sts_to_media_array($data['front_ids'] ?? []);
     $order_notes = sanitize_text_field($data['order_notes'] ?? []);
-
 	$measure_meshmeasurment_mm         = isset( $data['meshmeasurment_mm'] ) ? sanitize_text_field( $data['meshmeasurment_mm'] ) : '';
     $toolbox_width_mm  = sanitize_text_field($data['toolbox_width_mm'] ?? '');
     $toolbox_height_mm  = sanitize_text_field($data['toolbox_length_mm'] ?? '');
@@ -2764,18 +2775,30 @@ function sts_materialize_customer_cpt($order_id) {
 	update_post_meta( $post_id, 'vinyl_insert_width_mm', $vinyl_width_mm );
 	update_post_meta( $post_id, 'vinyl_insert_height_mm', $vinyl_length_mm );
 
+	// Request Update -> Eyelet Tab if SS Width is greather than >2450 or SS Length is greater >2300, or both
+
+	if ( $caravan_width_mm > 2450 && $a_frame_length_mm > 2300 ) {
+		update_post_meta( $post_id, 'sts_var_caravan_eyelet_tab', 'Yes' );
+	}
+
+	// Request Update ->  Extra Bungee with Yes if SS Width is greater than >2150. Otherwise, leave blank
+
+	if ( $caravan_width_mm > 2150  ) {
+		update_post_meta( $post_id, 'extra_bungee', 'Yes' );
+	}
+
+
 	if ( $product_type === 'Mesh Only' ) {
 		update_post_meta( $post_id, 'sts_var_caravan_mesh_only_measurement', $measure_meshmeasurment_mm );
+		update_post_meta( $post_id, 'sts_var_caravan_ss_length_adj', '-120' );
 	} else {
 		update_post_meta( $post_id, 'sts_var_caravan_bar_option', $bar_options );
 	}
 
-	// if( $bar_options  === 'Option 2 Standard Post' || $bar_options === 'Option 3 Standard Shank' || $bar_options === 'Option 3 Adjustable Shank') {
-	// }
-
     if ($order->get_user_id()) {
         update_post_meta($post_id, '_customer_user_id', $order->get_user_id());
     }
+
     $order->update_meta_data('_sts_customer_cpt_created', 'yes');
     $order->save();
     $order->add_order_note('STS SUCCESS: Customer CPT created');
