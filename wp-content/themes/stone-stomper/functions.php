@@ -789,8 +789,6 @@ function show_towing_svg_in_editor( $post ) {
     $angled_stone_guard_width_mm        = get_post_meta($post->ID, 'angled_stone_guard_width_mm', true);
     $angled_stone_guard_depth_mm        = get_post_meta($post->ID, 'angled_stone_guard_depth_mm', true);
 
-
-
     // $toolbox_width_mm    = get_post_meta( $post->ID, 'toolbox_width_mm', true );
     // $toolbox_height_mm    = get_post_meta( $post->ID, 'toolbox_height_mm', true );
 
@@ -2676,8 +2674,8 @@ function sts_materialize_customer_cpt($order_id) {
     $cust_address    = sanitize_text_field($data['customer_address'] ?? '');
     $cust_suburb     = sanitize_text_field($data['customer_suburb'] ?? '');
     $cust_state      = sanitize_text_field($data['customer_state'] ?? '');
-
     $product_type = ($data['product_type'] ?? '') === '712' ? 'Mesh Only' : 'Stone Stomper';
+
 
     $vehicle_make  = sanitize_text_field($data['vehicle_make'] ?? $data['veh_make'] ?? '');
     $vehicle_model = sanitize_text_field($data['vehicle_model'] ?? $data['veh_model'] ?? '');
@@ -2686,23 +2684,37 @@ function sts_materialize_customer_cpt($order_id) {
     $caravan_make  = sanitize_text_field($data['caravan_make'] ?? $data['van_make'] ?? '');
     $caravan_model = sanitize_text_field($data['caravan_model'] ?? $data['van_model'] ?? '');
 
+	// Bar Option
+	$bar_options    = isset( $data['bar_options'] )   ? sanitize_text_field( $data['bar_options'] )   : '';
+
+
+	// Accessories: check Gravity-like names and "other"
+	$accessories = array();
+	if ( ! empty( $data['input_1.2'] ) || ! empty( $data['toolbox'] ) ) $accessories[] = 'toolbox';
+	if ( ! empty( $data['input_1.1'] ) || ! empty( $data['factory_stoneguard'] ) ) $accessories[] = 'factory-stoneguard';
+	if ( ! empty( $data['other_a_frame'] ) ) $accessories[] = sanitize_text_field( $data['other_a_frame'] );
+
+
     $measure_barwidth_mm = sanitize_text_field($data['barwidth_mm'] ?? '');
     $caravan_width_mm   = sanitize_text_field($data['caravan_width_mm'] ?? '');
     $a_frame_length_mm  = sanitize_text_field($data['a_frame_length_mm'] ?? '');
     $support_pockets    = !empty($data['support_pockets']) ? 'yes' : 'no';
+
 
     $hitch_ids = sts_to_media_array($data['hitch_ids'] ?? []);
     $rear_ids  = sts_to_media_array($data['rear_ids'] ?? []);
     $front_ids = sts_to_media_array($data['front_ids'] ?? []);
     $order_notes = sanitize_text_field($data['order_notes'] ?? []);
 
+	$measure_meshmeasurment_mm         = isset( $data['meshmeasurment_mm'] ) ? sanitize_text_field( $data['meshmeasurment_mm'] ) : '';
     $toolbox_width_mm  = sanitize_text_field($data['toolbox_width_mm'] ?? '');
     $toolbox_height_mm  = sanitize_text_field($data['toolbox_length_mm'] ?? '');
     $factory_stoneguard_width  = sanitize_text_field($data['stoneguard_width_mm'] ?? '');
     $factory_stoneguard_height  = sanitize_text_field($data['stoneguard_length_mm'] ?? '');
     $stoneguard_length_mm  = sanitize_text_field($data['stoneguard_length_mm'] ?? '');
-    $support_pockets  = sanitize_text_field($data['support_pockets'] ?? '');
     $support_pockets_measurement  = sanitize_text_field($data['support_pocket_length_mm'] ?? '');
+	$vinyl_width_mm     = isset( $data['vinyl_width_mm'] ) ? sanitize_text_field( $data['vinyl_width_mm'] ) : '';
+	$vinyl_length_mm     = isset( $data['vinyl_length_mm'] ) ? sanitize_text_field( $data['vinyl_length_mm'] ) : '';
 
     $final = array(
         'final_delivery' => sanitize_text_field($data['final_delivery'] ?? $data['final_address'] ?? ''),
@@ -2749,6 +2761,8 @@ function sts_materialize_customer_cpt($order_id) {
     update_post_meta($post_id, 'factory_stoneguard_height', $factory_stoneguard_height);
     update_post_meta($post_id, 'support_pockets', $support_pockets);
     update_post_meta($post_id, 'support_pockets_measurement', $support_pockets_measurement);
+	update_post_meta( $post_id, 'vinyl_insert_width_mm', $vinyl_width_mm );
+	update_post_meta( $post_id, 'vinyl_insert_height_mm', $vinyl_length_mm );
 
     if ($order->get_user_id()) {
         update_post_meta($post_id, '_customer_user_id', $order->get_user_id());
