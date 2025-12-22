@@ -2609,7 +2609,6 @@ add_filter('post_date_column_time', function($h_time, $post) {
 |-----------------------------------------
 */
 
-
 add_action(
     'woocommerce_store_api_checkout_order_processed',
     'sts_save_block_checkout_order_meta',
@@ -2804,10 +2803,8 @@ function sts_materialize_customer_cpt($order_id) {
     $order->add_order_note('STS SUCCESS: Customer CPT created');
 }
 
-
 define('STS_STONE_STOMPER_ID', 545);
 define('STS_MESH_ONLY_ID', 712);
-
 add_action('woocommerce_add_to_cart', function ($cart_item_key, $product_id) {
 
     if (!function_exists('WC') || !WC()->cart) return;
