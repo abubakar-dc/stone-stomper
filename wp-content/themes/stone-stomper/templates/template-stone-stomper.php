@@ -89,7 +89,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										<?php } ?>
 									<?php } ?>
 								</div>
-
 								<div class="form-section-right column" id="details-section">
 									<div class="content-head">
 										<?php if($sts_var_section_headline){ ?>
@@ -100,7 +99,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											}
 										?>
 									</div>
-
 									<div class="products-select">
 										<?php if ( $sts_var_select_products ) { ?>
 											<div class="field jump-01">
@@ -613,7 +611,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 									</div>
 									<div class="grid cols-2">
 										<div class="field mesh-only-field">
-											<label class="req" for="meshmeasurment">Bracket on the caravan to Stone Somper while hitched up straight</label>
+											<label class="req" for="meshmeasurment">Bracket on the caravan to Stone Stomper while hitched up straight</label>
 											<input id="meshmeasurment" name="meshmeasurment_mm" type="text" inputmode="numeric" pattern="[0-9]*"
 												placeholder="e.g. 1800" required />
 
@@ -880,8 +878,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 							</div>
 						</div>
 					</form>
-
-
 				</div>
 			</div>
 		</div>
