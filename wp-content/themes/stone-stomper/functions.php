@@ -2727,16 +2727,27 @@ function sts_materialize_customer_cpt( $order_id ) {
     $caravan_make  = sanitize_text_field( $data['caravan_make'] ?? $data['van_make'] ?? '' );
     $caravan_model = sanitize_text_field( $data['caravan_model'] ?? $data['van_model'] ?? '' );
 
+	// Bar Option
+	$bar_options    = isset( $data['bar_options'] )   ? sanitize_text_field( $data['bar_options'] )   : '';
+
+
+	// Accessories: check Gravity-like names and "other"
+	$accessories = array();
+	if ( ! empty( $data['input_1.2'] ) || ! empty( $data['toolbox'] ) ) $accessories[] = 'toolbox';
+	if ( ! empty( $data['input_1.1'] ) || ! empty( $data['factory_stoneguard'] ) ) $accessories[] = 'factory-stoneguard';
+	if ( ! empty( $data['other_a_frame'] ) ) $accessories[] = sanitize_text_field( $data['other_a_frame'] );
+
     $measure_barwidth_mm = sanitize_text_field( $data['barwidth_mm'] ?? '' );
     $caravan_width_mm   = sanitize_text_field( $data['caravan_width_mm'] ?? '' );
     $a_frame_length_mm  = sanitize_text_field( $data['a_frame_length_mm'] ?? '' );
-
+	$order_notes = sanitize_text_field($data['order_notes'] ?? []);
     $support_pockets = ! empty( $data['support_pockets'] ) ? 'yes' : 'no';
-
+    $measure_meshmeasurment_mm = sanitize_text_field( $data['meshmeasurment_mm'] ?? '' );
     $hitch_ids = sts_to_media_array( $data['hitch_ids'] ?? [] );
     $rear_ids  = sts_to_media_array( $data['rear_ids'] ?? [] );
     $front_ids = sts_to_media_array( $data['front_ids'] ?? [] );
     $order_notes = sanitize_text_field( $data['order_notes'] ?? '' );
+
     $toolbox_width_mm  = sanitize_text_field( $data['toolbox_width_mm'] ?? '' );
     $toolbox_height_mm = sanitize_text_field( $data['toolbox_length_mm'] ?? '' );
     $factory_stoneguard_width  = sanitize_text_field( $data['stoneguard_width_mm'] ?? '' );
