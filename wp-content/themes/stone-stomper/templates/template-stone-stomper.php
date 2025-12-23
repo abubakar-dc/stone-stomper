@@ -426,7 +426,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 
 									<!-- Mobile Image -->
 									<div class="vehicle-image mobile-form-image-slider" id="caravan-images" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
-
 										<?php if($sts_var_section_bar_options_bar_gallery){ ?>
 											<?php foreach($sts_var_section_bar_options_bar_gallery as $sts_key => $photo){
 												$caption = wp_get_attachment_caption( $photo );
@@ -457,6 +456,16 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 													<?php } ?>
 												</select>
 											</div>
+											<fieldset class="hitch_measurement_dropdown" style="display:none">
+												<div class="note notice-bar mt-0">
+													Additional Measurement required for this bar option. Please refer to the image gallery to determine how to find this length. Alternatively, view instructions for "Option 2" ( https://stonestomper.com.au/wp-admin/upload.php?item=2177 )  or Option 3" ( https://stonestomper.com.au/wp-admin/upload.php?item=2176).
+												</div>
+												<div class="field">
+													<label class="req screen-reader-text" for="additional_hitch_measurement">Additional Measurement required for this bar option.</label>
+													<input id="additional_hitch_measurement" name="additional_hitch_measurement" type="text" inputmode="numeric" pattern="[0-9]*"
+														placeholder="e.g. 1800" required />
+												</div>
+											</fieldset>
 										</div>
 									<?php } ?>
 								</div>
@@ -614,8 +623,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											<label class="req" for="meshmeasurment">Bracket on the caravan to Stone Stomper while hitched up straight</label>
 											<input id="meshmeasurment" name="meshmeasurment_mm" type="text" inputmode="numeric" pattern="[0-9]*"
 												placeholder="e.g. 1800" required />
-
-
 											<?php if ( $mesh_only_measurement_field_notice_text ) { ?>
 												<div class="note notice-bar"><?php echo html_entity_decode($mesh_only_measurement_field_notice_text); ?></div>
 											<?php } ?>
@@ -637,7 +644,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										</div>
 										<fieldset class="ss-support-options" style="display:none">
 											<div class="note notice-bar mt-0">As the A-Frame length is longer than 1800mm, we require a mid-fixing point for your Stone Stomper. Please select one of the following options. If you are unsure, please select "Support Pockets"</div>
-											<div  class="ginput_container ginput_container_checkbox extra-support">
+											<div class="ginput_container ginput_container_checkbox extra-support">
 												<!-- ToolBox -->
 												<div class="gchoice stone-stomper-supports">
 													<div class="checkbox-item">
@@ -663,7 +670,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 												<div class="gchoice stone-stomper-supports">
 													<input class="gfield-choice-input" name="input_1.3" type="radio" value="factory-stoneguard" id="factory_stoneguard">
 													<label for="factory_stoneguard" id="label_4_1_1">Factory Stoneguard</label>
-
 													<div class="factory_stoneguard" style="display:none">
 														<div class="factory_stoneguard_inner two-columns-fields">
 															<div class="field extra-support">
@@ -783,7 +789,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										<?php
 										}
 											}
-										} ?>
+									} ?>
 									<div class="grid cols-2">
 										<div class="field">
 											<label class="req" for="order_notes-details">Order Notes</label>

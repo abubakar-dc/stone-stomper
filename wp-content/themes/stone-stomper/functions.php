@@ -2768,6 +2768,32 @@ function sts_materialize_customer_cpt( $order_id ) {
         ),
     ];
 
+	// Hitch Measurements
+
+    $additional_hitch_measurement      = sanitize_text_field( $data['additional_hitch_measurement'] ?? '' );
+
+
+	// Support Accessories
+
+	$support_option = sanitize_text_field( $data['input_1.3'] ?? '' );
+	error_log( 'Support option value: ' . print_r( $support_option, true ) );
+
+	if ( $support_option === 'toolbox' ) {
+		update_post_meta( $post_id, 'toolbox_width_mm', $toolbox_width_mm );
+		update_post_meta( $post_id, 'toolbox_height_mm', $toolbox_height_mm );
+
+	} elseif ( $support_option === 'factory-stoneguard' ) {
+		update_post_meta( $post_id, 'factory_stoneguard_width', $factory_stoneguard_width );
+		update_post_meta( $post_id, 'factory_stoneguard_height', $factory_stoneguard_height );
+
+	} elseif ( $support_option === 'support_pockets' ) {
+
+		update_post_meta( $post_id, 'support_pockets_measurement', $support_pockets_measurement );
+	}
+
+
+
+
 	// Product Sleeve
 	$sleeves_value = 'No';
 	foreach ( $order->get_items() as $item ) {
@@ -2806,7 +2832,6 @@ function sts_materialize_customer_cpt( $order_id ) {
         return;
     }
 
-
     // -------------------------
     // 7. Save CPT meta
     // -------------------------
@@ -2832,13 +2857,16 @@ function sts_materialize_customer_cpt( $order_id ) {
     update_post_meta( $post_id, 'front_ids', $front_ids );
     update_post_meta( $post_id, 'final_details', $final );
     update_post_meta( $post_id, 'order_notes', $order_notes );
-    update_post_meta( $post_id, 'toolbox_width_mm', $toolbox_width_mm );
-    update_post_meta( $post_id, 'toolbox_height_mm', $toolbox_height_mm );
-    update_post_meta( $post_id, 'factory_stoneguard_width', $factory_stoneguard_width );
-    update_post_meta( $post_id, 'factory_stoneguard_height', $factory_stoneguard_height );
-    update_post_meta( $post_id, 'support_pockets_measurement', $support_pockets_measurement );
+    // update_post_meta( $post_id, 'toolbox_width_mm', $toolbox_width_mm );
+    // update_post_meta( $post_id, 'toolbox_height_mm', $toolbox_height_mm );
+    // update_post_meta( $post_id, 'factory_stoneguard_width', $factory_stoneguard_width );
+    // update_post_meta( $post_id, 'factory_stoneguard_height', $factory_stoneguard_height );
+    // update_post_meta( $post_id, 'support_pockets_measurement', $support_pockets_measurement );
 	update_post_meta( $post_id, 'vinyl_insert_width_mm', $vinyl_width_mm );
 	update_post_meta( $post_id, 'vinyl_insert_height_mm', $vinyl_length_mm );
+	// Hitch Measurement
+	update_post_meta( $post_id, 'hitch_measurement_field', $additional_hitch_measurement );
+
 
 	// Request Update -> Eyelet Tab if SS Width is greather than >2450 or SS Length is greater >2300, or both
 

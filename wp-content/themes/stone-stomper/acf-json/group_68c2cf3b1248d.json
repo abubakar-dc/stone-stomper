@@ -573,7 +573,7 @@
             "label": "Bar Bend",
             "name": "sts_var_caravan_bar_bend",
             "aria-label": "",
-            "type": "text",
+            "type": "select",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -582,12 +582,22 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "maxlength": "",
+            "choices": {
+                "0": "0",
+                "50": "50",
+                "70": "70",
+                "90": "90"
+            },
+            "default_value": false,
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
             "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
             "placeholder": "",
-            "prepend": "",
-            "append": ""
+            "create_options": 0,
+            "save_options": 0
         },
         {
             "key": "field_694588bd207e7",
@@ -1024,5 +1034,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1766172021
+    "modified": 1766493085
 }
