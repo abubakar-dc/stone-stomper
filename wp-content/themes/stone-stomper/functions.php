@@ -2747,6 +2747,33 @@ function sts_materialize_customer_cpt( $order_id ) {
         ),
     ];
 
+
+	// Product Sleeve
+	$sleeves_value = 'No';
+	foreach ( $order->get_items() as $item ) {
+		if ( ! is_a( $item, 'WC_Order_Item_Product' ) ) {
+			continue;
+		}
+		if ( (int) $item->get_product_id() === 532 ) {
+			$sleeves_value = 'Yes';
+			foreach ( $item->get_meta_data() as $meta ) {
+				$key = strtolower( $meta->key );
+				$value = trim( (string) $meta->value );
+				if ( empty( $value ) ) {
+					continue;
+				}
+				if ( strpos( $key, 'length' ) !== false ) {
+					$sleeves_value = wc_clean( $value );
+					break;
+				}
+			}
+
+			break;
+		}
+	}
+
+
+
     // -------------------------
     // 6. Create CPT
     // -------------------------
@@ -2796,12 +2823,16 @@ function sts_materialize_customer_cpt( $order_id ) {
         update_post_meta( $post_id, '_customer_user_id', $order->get_user_id() );
     }
 
+	// Sleeve added or sleeve selected value
+	update_post_meta( $post_id, 'sleeve', $sleeves_value );
+
+
     // -------------------------
     // 8. Mark order complete
     // -------------------------
     $order->update_meta_data( '_sts_customer_cpt_created', 'yes' );
-    $order->save();
     $order->add_order_note( 'STS SUCCESS: Customer CPT created' );
+    $order->save();
 }
 
 
