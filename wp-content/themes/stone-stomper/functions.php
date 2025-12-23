@@ -2062,7 +2062,6 @@ add_action('restrict_manage_posts', function ($post_type) {
     // Define the custom buttons and their corresponding status keys
     $buttons = [
         'all'           => 'Export All',
-        // 'manufacturing' exports both 'manufacturing-l' and 'manufacturing-m'
         'manufacturing' => 'Export Manufacturing',
         'processing'    => 'Export Processing',
     ];
@@ -2747,15 +2746,14 @@ function sts_materialize_customer_cpt( $order_id ) {
     $rear_ids  = sts_to_media_array( $data['rear_ids'] ?? [] );
     $front_ids = sts_to_media_array( $data['front_ids'] ?? [] );
     $order_notes = sanitize_text_field( $data['order_notes'] ?? '' );
-
     $toolbox_width_mm  = sanitize_text_field( $data['toolbox_width_mm'] ?? '' );
     $toolbox_height_mm = sanitize_text_field( $data['toolbox_length_mm'] ?? '' );
     $factory_stoneguard_width  = sanitize_text_field( $data['stoneguard_width_mm'] ?? '' );
     $factory_stoneguard_height = sanitize_text_field( $data['stoneguard_length_mm'] ?? '' );
+    $support_pockets_measurement = sanitize_text_field(  $data['support_pocket_length_mm'] ?? ''  );
+	$vinyl_width_mm     = isset( $data['vinyl_width_mm'] ) ? sanitize_text_field( $data['vinyl_width_mm'] ) : '';
+	$vinyl_length_mm     = isset( $data['vinyl_length_mm'] ) ? sanitize_text_field( $data['vinyl_length_mm'] ) : '';
 
-    $support_pockets_measurement = sanitize_text_field(
-        $data['support_pocket_length_mm'] ?? ''
-    );
 
     $final = [
         'final_delivery' => sanitize_text_field(
@@ -2771,28 +2769,6 @@ function sts_materialize_customer_cpt( $order_id ) {
 	// Hitch Measurements
 
     $additional_hitch_measurement      = sanitize_text_field( $data['additional_hitch_measurement'] ?? '' );
-
-
-	// Support Accessories
-
-	$support_option = sanitize_text_field( $data['input_1.3'] ?? '' );
-	error_log( 'Support option value: ' . print_r( $support_option, true ) );
-
-	if ( $support_option === 'toolbox' ) {
-		update_post_meta( $post_id, 'toolbox_width_mm', $toolbox_width_mm );
-		update_post_meta( $post_id, 'toolbox_height_mm', $toolbox_height_mm );
-
-	} elseif ( $support_option === 'factory-stoneguard' ) {
-		update_post_meta( $post_id, 'factory_stoneguard_width', $factory_stoneguard_width );
-		update_post_meta( $post_id, 'factory_stoneguard_height', $factory_stoneguard_height );
-
-	} elseif ( $support_option === 'support_pockets' ) {
-
-		update_post_meta( $post_id, 'support_pockets_measurement', $support_pockets_measurement );
-	}
-
-
-
 
 	// Product Sleeve
 	$sleeves_value = 'No';
@@ -2817,6 +2793,9 @@ function sts_materialize_customer_cpt( $order_id ) {
 			break;
 		}
 	}
+
+
+
 
     // -------------------------
     // 6. Create CPT
@@ -2885,8 +2864,54 @@ function sts_materialize_customer_cpt( $order_id ) {
         update_post_meta( $post_id, '_customer_user_id', $order->get_user_id() );
     }
 
+
+	// Support Accessories
+
+	$has_toolbox         = ! empty( $data['toolbox'] );
+	$has_stoneguard      = ! empty( $data['factory_stoneguard'] );
+	$has_support_pockets = ! empty( $data['support_pockets'] );
+
+	if ( $has_toolbox ) {
+		update_post_meta( $post_id, 'toolbox_width_mm', $toolbox_width_mm );
+		update_post_meta( $post_id, 'toolbox_length_mm', $toolbox_height_mm );
+		update_post_meta( $post_id, 'factory_stoneguard_width', '' );
+		update_post_meta( $post_id, 'factory_stoneguard_height', '' );
+		update_post_meta( $post_id, 'support_pockets_measurement', '' );
+	} elseif ( $has_stoneguard ) {
+		update_post_meta( $post_id, 'factory_stoneguard_width', $factory_stoneguard_width );
+		update_post_meta( $post_id, 'factory_stoneguard_height', $factory_stoneguard_height );
+		update_post_meta( $post_id, 'toolbox_width_mm', '' );
+		update_post_meta( $post_id, 'toolbox_length_mm', '' );
+		update_post_meta( $post_id, 'support_pockets_measurement', '' );
+	} elseif ( $has_support_pockets ) {
+		update_post_meta( $post_id, 'support_pockets_measurement', $support_pockets_measurement );
+		update_post_meta( $post_id, 'toolbox_width_mm', '' );
+		update_post_meta( $post_id, 'toolbox_length_mm', '' );
+		update_post_meta( $post_id, 'factory_stoneguard_width', '' );
+		update_post_meta( $post_id, 'factory_stoneguard_height', '' );
+	} else {
+		update_post_meta( $post_id, 'toolbox_width_mm', '' );
+		update_post_meta( $post_id, 'toolbox_length_mm', '' );
+		update_post_meta( $post_id, 'factory_stoneguard_width', '' );
+		update_post_meta( $post_id, 'factory_stoneguard_height', '' );
+		update_post_meta( $post_id, 'support_pockets_measurement', '' );
+	}
+
+	// Extra Fitting
+
+	$extra_fittings = '';
+
+	if ( $has_toolbox ) {
+		$extra_fittings = 'Short Bolt plus D Shackles';
+	} elseif ( $has_stoneguard ) {
+		$extra_fittings = 'Long Bolt';
+	}
+
+	update_post_meta( $post_id, 'extra_fittings', $extra_fittings );
+
 	if ( $product_type === 'Mesh Only' ) {
 		update_post_meta( $post_id, 'sts_var_caravan_mesh_only_measurement', $measure_meshmeasurment_mm );
+    	update_post_meta( $post_id, 'caravan_width_mm', $measure_meshmeasurment_mm );
 		update_post_meta( $post_id, 'sts_var_caravan_ss_length_adj', '-120' );
 	} else {
 		update_post_meta( $post_id, 'sts_var_caravan_bar_option', $bar_options );

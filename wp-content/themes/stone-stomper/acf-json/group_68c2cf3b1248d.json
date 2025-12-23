@@ -646,7 +646,7 @@
             "label": "Tab On Back",
             "name": "tab_on_back",
             "aria-label": "",
-            "type": "text",
+            "type": "select",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -655,12 +655,20 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "maxlength": "",
+            "choices": {
+                "NO": "NO",
+                "YES": "YES"
+            },
+            "default_value": false,
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
             "allow_in_bindings": 0,
+            "ui": 0,
+            "ajax": 0,
             "placeholder": "",
-            "prepend": "",
-            "append": ""
+            "create_options": 0,
+            "save_options": 0
         },
         {
             "key": "field_691d78a3d0891",
@@ -1034,5 +1042,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1766493085
+    "modified": 1766505739
 }
