@@ -2760,7 +2760,6 @@ function sts_materialize_customer_cpt( $order_id ) {
 	$vinyl_width_mm     = isset( $data['vinyl_width_mm'] ) ? sanitize_text_field( $data['vinyl_width_mm'] ) : '';
 	$vinyl_length_mm     = isset( $data['vinyl_length_mm'] ) ? sanitize_text_field( $data['vinyl_length_mm'] ) : '';
 
-
     $final = [
         'final_delivery' => sanitize_text_field(
             $data['final_delivery'] ?? $data['final_address'] ?? ''
@@ -2773,7 +2772,6 @@ function sts_materialize_customer_cpt( $order_id ) {
     ];
 
 	// Hitch Measurements
-
     $additional_hitch_measurement      = sanitize_text_field( $data['additional_hitch_measurement'] ?? '' );
 
 	// Product Sleeve
@@ -2799,8 +2797,6 @@ function sts_materialize_customer_cpt( $order_id ) {
 			break;
 		}
 	}
-
-
 
 
     // -------------------------
@@ -2842,16 +2838,11 @@ function sts_materialize_customer_cpt( $order_id ) {
     update_post_meta( $post_id, 'front_ids', $front_ids );
     update_post_meta( $post_id, 'final_details', $final );
     update_post_meta( $post_id, 'order_notes', $order_notes );
-    // update_post_meta( $post_id, 'toolbox_width_mm', $toolbox_width_mm );
-    // update_post_meta( $post_id, 'toolbox_height_mm', $toolbox_height_mm );
-    // update_post_meta( $post_id, 'factory_stoneguard_width', $factory_stoneguard_width );
-    // update_post_meta( $post_id, 'factory_stoneguard_height', $factory_stoneguard_height );
-    // update_post_meta( $post_id, 'support_pockets_measurement', $support_pockets_measurement );
 	update_post_meta( $post_id, 'vinyl_insert_width_mm', $vinyl_width_mm );
 	update_post_meta( $post_id, 'vinyl_insert_height_mm', $vinyl_length_mm );
+
 	// Hitch Measurement
 	update_post_meta( $post_id, 'hitch_measurement_field', $additional_hitch_measurement );
-
 
 	// Request Update -> Eyelet Tab if SS Width is greather than >2450 or SS Length is greater >2300, or both
 
@@ -2890,6 +2881,32 @@ function sts_materialize_customer_cpt( $order_id ) {
 		update_post_meta( $post_id, 'sts_var_caravan_cut_out', $cut_out );
 	}
 
+	// SS length adujustment for stone stomper
+	if( $product_type === 'Stone Stomper' ) {
+
+		$hitch_measurement = floatval( get_post_meta( $post_id, 'hitch_measurement_field', true ) );
+		$tab_on_back       = get_post_meta( $post_id, 'tab_on_back', true );
+		$bar_bend          = floatval( get_post_meta( $post_id, 'sts_var_caravan_bar_bend', true ) );
+
+		if ( $hitch_measurement > 0 ) {
+
+			$ss_length_adjustment = $hitch_measurement - 140;
+
+			if ( strtoupper( $tab_on_back ) === 'YES' ) {
+				$ss_length_adjustment -= 30;
+			}
+
+			$ss_length_adjustment += $bar_bend;
+
+			update_post_meta(
+				$post_id,
+				'sts_var_caravan_ss_length_adj',
+				$ss_length_adjustment
+			);
+		}
+	}
+
+
 
     if ( $order->get_user_id() ) {
         update_post_meta( $post_id, '_customer_user_id', $order->get_user_id() );
@@ -2904,7 +2921,7 @@ function sts_materialize_customer_cpt( $order_id ) {
 
 	if ( $has_toolbox ) {
 		update_post_meta( $post_id, 'toolbox_width_mm', $toolbox_width_mm );
-		update_post_meta( $post_id, 'toolbox_length_mm', $toolbox_height_mm );
+		update_post_meta( $post_id, 'toolbox_height_mm', $toolbox_height_mm );
 		update_post_meta( $post_id, 'factory_stoneguard_width', '' );
 		update_post_meta( $post_id, 'factory_stoneguard_height', '' );
 		update_post_meta( $post_id, 'support_pockets_measurement', '' );
@@ -2931,7 +2948,6 @@ function sts_materialize_customer_cpt( $order_id ) {
 	// Extra Fitting
 
 	$extra_fittings = '';
-
 	if ( $has_toolbox ) {
 		$extra_fittings = 'Short Bolt plus D Shackles';
 	} elseif ( $has_stoneguard ) {
