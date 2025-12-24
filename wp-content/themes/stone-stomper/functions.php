@@ -2866,6 +2866,31 @@ function sts_materialize_customer_cpt( $order_id ) {
 	}
 
 
+	// Auto calculate Cut Out based on Hitch Measurement
+	$cut_out = '';
+
+	if ( is_numeric( $additional_hitch_measurement ) ) {
+
+		// If hitch measurement is less than 250, set cut out to 250
+		if ( $additional_hitch_measurement < 250 ) {
+			$cut_out = 250;
+
+		// If hitch measurement is between 250 and 350, set cut out to 350
+		} elseif ( $additional_hitch_measurement >= 250 && $additional_hitch_measurement <= 350 ) {
+			$cut_out = 350;
+
+		// If hitch measurement is greater than 350, set cut out to 450
+		} elseif ( $additional_hitch_measurement > 350 ) {
+			$cut_out = 450;
+		}
+	}
+
+	// Save Cut Out value
+	if ( $cut_out !== '' ) {
+		update_post_meta( $post_id, 'sts_var_caravan_cut_out', $cut_out );
+	}
+
+
     if ( $order->get_user_id() ) {
         update_post_meta( $post_id, '_customer_user_id', $order->get_user_id() );
     }
