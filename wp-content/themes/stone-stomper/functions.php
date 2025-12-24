@@ -252,9 +252,6 @@ add_action( 'admin_init', function() {
     }
 });
 
-
-
-
 /**
  * Helper: normalize checkbox truthy values
  */
@@ -2349,7 +2346,6 @@ add_filter('handle_actions-customer', function ($redirect_to, $action, $post_ids
     exit; // Terminate script execution after file generation
 }, 10, 3);
 
-
 // Email to manufacturer
 
 function email_to_manufacturer_callback() {
@@ -2443,7 +2439,6 @@ add_filter( 'wc_order_statuses', function( $statuses ) {
 	return $new_statuses;
 } );
 
-
 /**
  * Add a WooCommerce Order Status meta box to single Customer (Order) edit screen
  */
@@ -2488,9 +2483,12 @@ function stonestomper_render_order_status_box( $post ) {
 	wp_nonce_field( 'update_wc_order_status_nonce', 'wc_order_status_nonce' );
 }
 
-/**
- * Save WooCommerce status change
- */
+/*
+|-----------------------------------------
+|  Save WooCommerce status change
+|-----------------------------------------
+*/
+
 
 add_action( 'save_post_customer', function( $post_id, $post, $update ) {
 	// Permission + nonce check
@@ -2667,6 +2665,7 @@ function sts_materialize_customer_cpt( $order_id ) {
     // -------------------------
     // 1. Order sanity check
     // -------------------------
+
     $order = wc_get_order( $order_id );
     if ( ! $order ) {
         return;
@@ -2702,16 +2701,15 @@ function sts_materialize_customer_cpt( $order_id ) {
     // -------------------------
     // 4. Business rule check
     // -------------------------
-    if (
-        empty( $data['is_stone_stomper_order'] ) ||
-        $data['is_stone_stomper_order'] !== 'yes'
-    ) {
+
+    if ( empty( $data['is_stone_stomper_order'] ) || $data['is_stone_stomper_order'] !== 'yes' ) {
         return;
     }
 
     // -------------------------
     // 5. Sanitize inputs
     // -------------------------
+
     $cust_first_name = sanitize_text_field( $data['customer_first_name'] ?? '' );
     $cust_last_name  = sanitize_text_field( $data['customer_last_name'] ?? '' );
     $cust_name       = trim( $cust_first_name . ' ' . $cust_last_name );
@@ -2721,9 +2719,7 @@ function sts_materialize_customer_cpt( $order_id ) {
     $cust_suburb     = sanitize_text_field( $data['customer_suburb'] ?? '' );
     $cust_state      = sanitize_text_field( $data['customer_state'] ?? '' );
 
-    $product_type = ( $data['product_type'] ?? '' ) === '712'
-        ? 'Mesh Only'
-        : 'Stone Stomper';
+    $product_type = ( $data['product_type'] ?? '' ) === '712'  ? 'Mesh Only' : 'Stone Stomper';
 
     $vehicle_make  = sanitize_text_field( $data['vehicle_make'] ?? $data['veh_make'] ?? '' );
     $vehicle_model = sanitize_text_field( $data['vehicle_model'] ?? $data['veh_model'] ?? '' );
@@ -2734,7 +2730,6 @@ function sts_materialize_customer_cpt( $order_id ) {
 
 	// Bar Option
 	$bar_options    = isset( $data['bar_options'] )   ? sanitize_text_field( $data['bar_options'] )   : '';
-
 
 	// Accessories: check Gravity-like names and "other"
 	$accessories = array();
@@ -2770,6 +2765,8 @@ function sts_materialize_customer_cpt( $order_id ) {
             )
         ),
     ];
+
+	error_log( print_r( $final, true ) );
 
 	// Hitch Measurements
     $additional_hitch_measurement      = sanitize_text_field( $data['additional_hitch_measurement'] ?? '' );
@@ -2842,6 +2839,7 @@ function sts_materialize_customer_cpt( $order_id ) {
 	update_post_meta( $post_id, 'vinyl_insert_height_mm', $vinyl_length_mm );
 
 	// Hitch Measurement
+
 	update_post_meta( $post_id, 'hitch_measurement_field', $additional_hitch_measurement );
 
 	// Request Update -> Eyelet Tab if SS Width is greather than >2450 or SS Length is greater >2300, or both
@@ -2856,10 +2854,9 @@ function sts_materialize_customer_cpt( $order_id ) {
 		update_post_meta( $post_id, 'extra_bungee', 'Yes' );
 	}
 
-
 	// Auto calculate Cut Out based on Hitch Measurement
-	$cut_out = '';
 
+	$cut_out = '';
 	if ( is_numeric( $additional_hitch_measurement ) ) {
 
 		// If hitch measurement is less than 250, set cut out to 250
@@ -2882,21 +2879,13 @@ function sts_materialize_customer_cpt( $order_id ) {
 	}
 
 	// SS length adujustment for stone stomper
+
 	if( $product_type === 'Stone Stomper' ) {
 
 		$hitch_measurement = floatval( get_post_meta( $post_id, 'hitch_measurement_field', true ) );
-		$tab_on_back       = get_post_meta( $post_id, 'tab_on_back', true );
-		$bar_bend          = floatval( get_post_meta( $post_id, 'sts_var_caravan_bar_bend', true ) );
-
 		if ( $hitch_measurement > 0 ) {
 
 			$ss_length_adjustment = $hitch_measurement - 140;
-
-			if ( strtoupper( $tab_on_back ) === 'YES' ) {
-				$ss_length_adjustment -= 30;
-			}
-
-			$ss_length_adjustment += $bar_bend;
 
 			update_post_meta(
 				$post_id,
@@ -2975,6 +2964,12 @@ function sts_materialize_customer_cpt( $order_id ) {
     $order->save();
 }
 
+/*
+|-----------------------------------------
+|  Add just one order to cart of same type of the product
+|-----------------------------------------
+*/
+
 define('STS_STONE_STOMPER_ID', 545);
 define('STS_MESH_ONLY_ID', 712);
 
@@ -2986,15 +2981,11 @@ add_action('woocommerce_add_to_cart', function ($cart_item_key, $product_id) {
     $is_mesh_only     = ($product_id == STS_MESH_ONLY_ID);
 
     foreach (WC()->cart->get_cart() as $key => $item) {
-
         if ($key === $cart_item_key) continue;
-
         $existing_id = $item['product_id'];
-
         if ($is_stone_stomper && in_array($existing_id, [STS_STONE_STOMPER_ID, STS_MESH_ONLY_ID])) {
             WC()->cart->remove_cart_item($key);
         }
-
         if ($is_mesh_only && in_array($existing_id, [STS_MESH_ONLY_ID, STS_STONE_STOMPER_ID])) {
             WC()->cart->remove_cart_item($key);
         }
@@ -3006,3 +2997,38 @@ add_action('woocommerce_add_to_cart', function ($cart_item_key, $product_id) {
     wc_add_notice('Previous product replaced.', 'success');
 
 }, 10, 2);
+
+/*
+|-----------------------------------------
+|  Calculation for the SS length feilds with tab on back and the bar bend values | -30 wen tab on back "Yes" , + bar bend value of dropdown
+|-----------------------------------------
+*/
+
+add_action('acf/save_post', function ($post_id) {
+
+    if (get_post_type($post_id) !== 'customer') return;
+
+    $product_type = get_post_meta($post_id, 'product_type', true);
+    if ($product_type !== 'Stone Stomper') return;
+
+    $hitch = floatval(get_post_meta($post_id, 'hitch_measurement_field', true));
+    if ($hitch <= 0) return;
+
+    $tab_on_back = get_post_meta($post_id, 'tab_on_back', true);
+    $bar_bend    = floatval(get_post_meta($post_id, 'sts_var_caravan_bar_bend', true));
+
+    $ss_length_adjustment = $hitch - 140;
+
+    if (strtoupper(trim($tab_on_back)) === 'YES') {
+        $ss_length_adjustment -= 30;
+    }
+
+    $ss_length_adjustment += $bar_bend;
+
+    update_post_meta(
+        $post_id,
+        'sts_var_caravan_ss_length_adj',
+        $ss_length_adjustment
+    );
+
+}, 20);
