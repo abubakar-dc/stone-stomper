@@ -2754,6 +2754,8 @@ function sts_materialize_customer_cpt( $order_id ) {
     $support_pockets_measurement = sanitize_text_field(  $data['support_pocket_length_mm'] ?? ''  );
 	$vinyl_width_mm     = isset( $data['vinyl_width_mm'] ) ? sanitize_text_field( $data['vinyl_width_mm'] ) : '';
 	$vinyl_length_mm     = isset( $data['vinyl_length_mm'] ) ? sanitize_text_field( $data['vinyl_length_mm'] ) : '';
+    $final_delivery  = sanitize_text_field( $data['final_delivery'] ?? '' );
+
 
     $final = [
         'final_delivery' => sanitize_text_field(
@@ -2765,8 +2767,6 @@ function sts_materialize_customer_cpt( $order_id ) {
             )
         ),
     ];
-
-	error_log( print_r( $final, true ) );
 
 	// Hitch Measurements
     $additional_hitch_measurement      = sanitize_text_field( $data['additional_hitch_measurement'] ?? '' );
@@ -2795,10 +2795,10 @@ function sts_materialize_customer_cpt( $order_id ) {
 		}
 	}
 
-
     // -------------------------
     // 6. Create CPT
     // -------------------------
+
     $post_id = wp_insert_post( [
         'post_type'   => 'customer',
         'post_status' => 'publish',
@@ -2895,12 +2895,13 @@ function sts_materialize_customer_cpt( $order_id ) {
 		}
 	}
 
-
+	if ('move' === $final_delivery) {
+	    update_post_meta( $post_id, 'sts_var_proposed_on_the_move', 'Yes' );
+    }
 
     if ( $order->get_user_id() ) {
         update_post_meta( $post_id, '_customer_user_id', $order->get_user_id() );
     }
-
 
 	// Support Accessories
 
@@ -3032,3 +3033,42 @@ add_action('acf/save_post', function ($post_id) {
     );
 
 }, 20);
+
+/*
+ |--------------------------------------------------
+ | Add "On the Move" status to the admin order screen
+ |--------------------------------------------------
+ */
+
+add_action( 'woocommerce_admin_order_data_after_order_details', 'display_on_the_move_status_admin', 10, 1 );
+
+function display_on_the_move_status_admin( $order ) {
+    if ( ! is_object( $order ) ) {
+        $order = wc_get_order( $order );
+    }
+
+    // Find the Customer CPT created for this order
+    $customer_posts = get_posts( [
+        'post_type'  => 'customer',
+        'meta_key'   => 'order_id',
+        'meta_value' => $order->get_id(),
+        'numberposts'=> 1,
+        'fields'     => 'ids',
+    ] );
+
+    if ( empty( $customer_posts ) ) {
+        return;
+    }
+
+    $customer_post_id = $customer_posts[0];
+
+    // Fetch the "On the Move" meta from the CPT
+    $on_the_move = get_post_meta( $customer_post_id, 'sts_var_proposed_on_the_move', true );
+
+    if ( 'Yes' === $on_the_move ) {
+        echo '<div class="on-the-move-alert" style="margin-top: 20px; float: left; width:100%; margin-top:20px; padding:15px; box-sizing: border-box; background-color: #fff9c4; border: 1px solid #fbc02d; border-radius: 4px; display:block;">';
+        echo '<strong style="color:#856404;"> ORDER NOTE:</strong><span style="color: #d32f2f; font-weight:bold;"> Customer is "On the Move"</span>';
+        echo '</div>';
+    }
+}
+
