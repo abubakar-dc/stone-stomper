@@ -2060,10 +2060,11 @@ add_action('restrict_manage_posts', function ($post_type) {
     if ($post_type !== 'customer') return;
 
     // Define the custom buttons and their corresponding status keys
-    $buttons = [
-        'all'           => 'Export All',
-        'manufacturing' => 'Export Manufacturing',
-        'processing'    => 'Export Processing',
+   $buttons = [
+        'all'             => 'Export All',
+        'manufacturing_l' => 'Export Manufacturing L',
+        'manufacturing_m' => 'Export Manufacturing M',
+        'processing'      => 'Export Processing',
     ];
 
     // Output the HTML for the buttons
@@ -2091,7 +2092,7 @@ add_action('admin_init', function () {
     $status_key = isset($_GET['order_status']) ? sanitize_key($_GET['order_status']) : 'all';
 
     // Validate the status key to prevent unexpected file names or queries
-    $valid_statuses = ['all', 'manufacturing', 'processing'];
+    $valid_statuses = ['all', 'manufacturing_l', 'manufacturing_m', 'processing'];
     if (!in_array($status_key, $valid_statuses)) {
         wp_die('Invalid order status for export.');
     }
@@ -2152,20 +2153,25 @@ function generate_bulk_customer_excel_file($status_key = 'all', $post_ids = []) 
 
         // --- Determine Target WC Statuses (WC get_status() returns slugs without 'wc-') ---
         switch ($status_key) {
-            case 'manufacturing':
-                // FIX: Use 'manufacturing' (for Manufacturing L) and 'manufacturing-m' (for Manufacturing M)
-                $statuses_to_filter_by = ['manufacturing', 'manufacturing-m'];
-                break;
+			case 'manufacturing_l':
+				// Targets the 'manufacturing' slug
+				$statuses_to_filter_by = ['manufacturing'];
+				break;
 
-            case 'processing':
-                // Standard WC processing status
-                $statuses_to_filter_by = ['processing'];
-                break;
-            case 'all':
-            default:
-                // No status filter needed
-                break;
-        }
+			case 'manufacturing_m':
+				// Targets the 'manufacturing-m' slug
+				$statuses_to_filter_by = ['manufacturing-m'];
+				break;
+
+			case 'processing':
+				$statuses_to_filter_by = ['processing'];
+				break;
+
+			case 'all':
+			default:
+				$statuses_to_filter_by = [];
+				break;
+		}
 
         if (!empty($statuses_to_filter_by)) {
 
