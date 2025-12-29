@@ -38,6 +38,7 @@ foreach ( $sts_folder_includes as $sts_folders ) {
  *
  * @param string $directory Folder dir path.
  */
+
 function sts_includes( $directory ) {
 	$folders = array();
 
@@ -72,6 +73,7 @@ add_action('woocommerce_before_calculate_totals', function($cart) {
         WC()->session->set('chosen_shipping_methods', [$chosen]);
     }
 });
+
 // Show details in Cart/Checkout line item
 add_filter('woocommerce_get_item_data', function($item_data, $cart_item) {
     // Simple fields (text)
@@ -180,7 +182,6 @@ add_filter('woocommerce_add_cart_item_data', function($cart_item_data, $product_
 }, 10, 3);
 
 // Persist to Order Items (admin)
-
 add_action('woocommerce_checkout_create_order_line_item', function($item, $cart_item_key, $values, $order) {
     // Simple fields (incl. support_pockets)
     $fields = [
@@ -360,7 +361,6 @@ function allowed_block_types( $allowed_blocks, $editor_context ) {
 function mytheme_add_woocommerce_support() {
 	add_theme_support( 'woocommerce' );
 }
-
 add_action( 'after_setup_theme', 'mytheme_add_woocommerce_support' );
 
 
@@ -1715,9 +1715,9 @@ function generate_customer_order_word_file($post_id) {
 		$addressTable->addRow();
 		$addressTable->addCell(3000)->addText(strip_tags($final_delivery_address), [], ['spaceBefore' => 0, 'spaceAfter' => 0]); // ~50% of 6000 cell
 	}
-	$textRun = $leftCell->addTextRun($compact);
-	$textRun->addText("Delivery Instructions: ", ['bold' => true]);
-	$textRun->addText($delivery_instructions ?: 'No');
+	// $textRun = $leftCell->addTextRun($compact);
+	// $textRun->addText("Customer Notes: ", ['bold' => true]);
+	// $textRun->addText($delivery_instructions ?: 'No');
 
 	// RIGHT COLUMN
 	$rightCell = $infoTable->addCell(5000);
@@ -1856,11 +1856,11 @@ function generate_customer_order_word_file($post_id) {
 
 	// Fourth Section: Custom Order Notes
 
-    $section->addText("Order Note:", ['bold' => true]);
-    $section->addText($order_notes, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+    $section->addText("Customer Notes:", ['bold' => true]);
+    $section->addText($sts_var_order_notes, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$section->addText('');
     $section->addText("CUSTOMER ORDER NOTES:", ['bold' => true]);
-    $section->addText($sts_var_order_notes, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+    $section->addText($order_notes, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$section->addPageBreak();
 
 	// Fifth Section: Manufacture Sheet
@@ -2381,16 +2381,12 @@ function email_to_manufacturer_callback() {
 
 add_action('wp_ajax_email_to_manufacturer', 'email_to_manufacturer_callback');
 
-add_action('admin_enqueue_scripts', function($hook){
-
+add_action('admin_enqueue_scripts', function($hook) {
     global $post;
-
     // Sirf post editor screen par run karo
     if ($hook !== 'post.php' && $hook !== 'post-new.php') return;
-
     // Sirf hamari required post type ke liye
     if (!isset($post) || $post->post_type !== 'customer') return;
-
     // Admin JS enqueue
     wp_enqueue_script(
         'customer-admin-js',
@@ -2399,7 +2395,6 @@ add_action('admin_enqueue_scripts', function($hook){
         false,
         true
     );
-
 });
 
 // 1️⃣ Register the new "Manufacturing L" status
@@ -2488,7 +2483,6 @@ function stonestomper_render_order_status_box( $post ) {
 |  Save WooCommerce status change
 |-----------------------------------------
 */
-
 
 add_action( 'save_post_customer', function( $post_id, $post, $update ) {
 	// Permission + nonce check
@@ -2757,6 +2751,8 @@ function sts_materialize_customer_cpt( $order_id ) {
     $final_delivery  = sanitize_text_field( $data['final_delivery'] ?? '' );
 
 
+	$customer_notes = sanitize_textarea_field( $order->get_customer_note() );
+
     $final = [
         'final_delivery' => sanitize_text_field(
             $data['final_delivery'] ?? $data['final_address'] ?? ''
@@ -2818,7 +2814,7 @@ function sts_materialize_customer_cpt( $order_id ) {
     update_post_meta( $post_id, 'customer_phone', $cust_phone );
     update_post_meta( $post_id, 'email', $cust_email );
     update_post_meta( $post_id, 'delivery_address', $cust_address );
-    update_post_meta( $post_id, 'suburbs', $cust_suburb );
+    update_post_meta( $post_id, 'subrubs', $cust_suburb );
     update_post_meta( $post_id, 'state', $cust_state );
     update_post_meta( $post_id, 'product_type', $product_type );
     update_post_meta( $post_id, 'vehicle_make', $vehicle_make );
@@ -2844,9 +2840,10 @@ function sts_materialize_customer_cpt( $order_id ) {
 
 	// Request Update -> Eyelet Tab if SS Width is greather than >2450 or SS Length is greater >2300, or both
 
-	if ( $caravan_width_mm > 2450 && $a_frame_length_mm > 2300 ) {
+	if ( $caravan_width_mm > 2450 || $a_frame_length_mm > 2300 ) {
 		update_post_meta( $post_id, 'sts_var_caravan_eyelet_tab', 'Yes' );
 	}
+
 
 	// Request Update ->  Extra Bungee with Yes if SS Width is greater than >2150. Otherwise, leave blank
 
@@ -2947,8 +2944,11 @@ function sts_materialize_customer_cpt( $order_id ) {
 	update_post_meta( $post_id, 'extra_fittings', $extra_fittings );
 
 	if ( $product_type === 'Mesh Only' ) {
+		// Update value into the mesh only measurement
 		update_post_meta( $post_id, 'sts_var_caravan_mesh_only_measurement', $measure_meshmeasurment_mm );
-    	update_post_meta( $post_id, 'caravan_width_mm', $measure_meshmeasurment_mm );
+		// Update value into the SS length field as well
+    	update_post_meta( $post_id, 'caravan_length_mm', $measure_meshmeasurment_mm );
+		// Update "-120" value into the SS length field as well
 		update_post_meta( $post_id, 'sts_var_caravan_ss_length_adj', '-120' );
 	} else {
 		update_post_meta( $post_id, 'sts_var_caravan_bar_option', $bar_options );
@@ -2956,6 +2956,12 @@ function sts_materialize_customer_cpt( $order_id ) {
 
 	// Sleeve added or sleeve selected value
 	update_post_meta( $post_id, 'sleeve', $sleeves_value );
+
+
+	// If order note added in the checkout
+	if ( ! empty( $customer_notes ) ) {
+		update_post_meta( $post_id, 'sts_var_order_notes', $customer_notes );
+	}
 
     // -------------------------
     // 8. Mark order complete
@@ -3072,3 +3078,30 @@ function display_on_the_move_status_admin( $order ) {
     }
 }
 
+add_action( 'init', 'register_atl_block_extension' );
+
+function register_atl_block_extension() {
+    // 1. First, we still need to register the field server-side
+    if ( function_exists( 'woocommerce_register_additional_checkout_field' ) ) {
+        woocommerce_register_additional_checkout_field( array(
+            'id'       => 'my-custom-atl/authority-to-leave',
+            'label'    => 'Authority to Leave',
+            'location' => 'order',
+            'type'     => 'select',
+            'options'  => [
+                [ 'value' => 'no', 'label' => 'No' ],
+                [ 'value' => 'yes', 'label' => 'Yes' ],
+            ],
+            'required' => true,
+        ) );
+    }
+
+    // 2. Enqueue the JS file
+    wp_enqueue_script(
+        'atl-block-js',
+        get_stylesheet_directory_uri() . '/assets/src/js/atl-block-field.js', // Adjust path
+        array( 'wc-checkout', 'wc-blocks-registry', 'wp-element' ),
+        '1.0',
+        true
+    );
+}

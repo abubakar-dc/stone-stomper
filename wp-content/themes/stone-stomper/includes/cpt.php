@@ -296,8 +296,6 @@ add_action( 'admin_footer-edit.php', function () {
 		}
 	});
 });
-
-
 	</script>
 	<?php
 } );
