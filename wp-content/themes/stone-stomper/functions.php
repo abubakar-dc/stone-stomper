@@ -854,7 +854,7 @@ function show_towing_svg_in_editor( $post ) {
 		<?php } ?>
 	</div>
 
-	<?php if($hitch_ids || $rear_ids || $front_ids){ ?>
+	<?php if($hitch_images || $rear_images || $front_images){ ?>
 		<div style="margin-top:96px;"></div>
 	<?php } ?>
 
@@ -2870,6 +2870,12 @@ function sts_materialize_customer_cpt( $order_id ) {
     $order->add_order_note( 'STS SUCCESS: Customer CPT created' );
     $order->save();
 }
+
+add_filter('woocommerce_hidden_order_itemmeta', function ($hidden) {
+    $hidden[] = '_sts_payload';
+    return $hidden;
+});
+
 
 /*
 |-----------------------------------------
