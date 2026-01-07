@@ -747,14 +747,10 @@ function show_towing_svg_in_editor( $post ) {
     $sts_var_proposed_date_of_delivery    = get_post_meta( $post->ID, 'sts_var_proposed_date_of_delivery', true );
 
 	$hitch_images = sts_get_images_from_meta( $post->ID, 'hitch_images', true );
-	$rear_ids  = sts_get_images_from_meta( $post->ID, 'rear_ids', true );
-	$front_ids = sts_get_images_from_meta( $post->ID, 'front_ids', true );
+	$rear_images  = sts_get_images_from_meta( $post->ID, 'rear_images', true );
+	$front_images = sts_get_images_from_meta( $post->ID, 'front_images', true );
 	$support_pockets = get_post_meta( $post->ID, 'support_pockets', true );
 	$support_pockets_measurement    = get_post_meta( $post->ID, 'support_pockets_measurement', true );
-
-	var_dump($hitch_images);
-	var_dump($rear_ids);
-	var_dump($front_ids);
 
 	function show_meta_images( $meta_value ) {
 		if ( empty( $meta_value ) ) return;
@@ -794,15 +790,13 @@ function show_towing_svg_in_editor( $post ) {
 
 		return false;
 	}
-
 	?>
-
 	<div class="customer-upload-images">
-		<?php if ( ! empty( $hitch_ids ) ) { ?>
+		<?php if ( ! empty( $hitch_images ) ) { ?>
 			<div class="row row-1">
 				<h3>Hitch Images</h3>
 				<div class="hitch-images image-group">
-					<?php foreach ( $hitch_ids as $id ) :
+					<?php foreach ( $hitch_images as $id ) :
 
 						$img_url = sts_get_image_url( $id );
 						if ( ! $img_url ) continue;
@@ -814,11 +808,11 @@ function show_towing_svg_in_editor( $post ) {
 				</div>
 			</div>
 		<?php } ?>
-		<?php if ( $rear_ids ) { ?>
+		<?php if ( $rear_images ) { ?>
 			<div class="row row-1">
 				<h3>Rear Images</h3>
 				<div class="rear-images image-group">
-					<?php foreach ( $rear_ids as $hitch_id ) :
+					<?php foreach ( $rear_images as $hitch_id ) :
 
 					$img_url = esc_url($hitch_id); ?>
 					<img src="<?php echo esc_url( $img_url ); ?>" alt="" class="popup-image" />
@@ -836,27 +830,26 @@ function show_towing_svg_in_editor( $post ) {
 				</div>
 			</div>
 		<?php } ?>
-
-		<?php if ( $front_ids ) { ?>
+		<?php if ( $front_images ) { ?>
 			<div class="row row-1">
-			<h3>Front Images</h3>
-			<div class="front-images image-group">
-				<?php foreach ( $front_ids as $hitch_id ) :
-				$img_url = esc_url($hitch_id); ?>
+				<h3>Front Images</h3>
+				<div class="front-images image-group">
+					<?php foreach ( $front_images as $hitch_id ) :
+					$img_url = esc_url($hitch_id); ?>
 
-				<img src="<?php echo esc_url( $img_url ); ?>" alt="" class="popup-image" />
-				<?php endforeach; ?>
-			</div>
-			<div class="image-lightbox">
-				<div class="lightbox-inner">
-				<img src="" alt="" class="lightbox-img" />
-				<div class="lightbox-controls">
-					<span class="lightbox-prev">&#10094;</span>
-					<span class="lightbox-next">&#10095;</span>
-					<span class="lightbox-close">&times;</span>
+					<img src="<?php echo esc_url( $img_url ); ?>" alt="" class="popup-image" />
+					<?php endforeach; ?>
 				</div>
+				<div class="image-lightbox">
+					<div class="lightbox-inner">
+					<img src="" alt="" class="lightbox-img" />
+					<div class="lightbox-controls">
+						<span class="lightbox-prev">&#10094;</span>
+						<span class="lightbox-next">&#10095;</span>
+						<span class="lightbox-close">&times;</span>
+					</div>
+					</div>
 				</div>
-			</div>
 			</div>
 		<?php } ?>
 	</div>

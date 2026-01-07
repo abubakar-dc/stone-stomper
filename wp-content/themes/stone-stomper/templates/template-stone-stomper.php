@@ -458,7 +458,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											</div>
 											<fieldset class="hitch_measurement_dropdown" style="display:none">
 												<div class="note notice-bar mt-0">
-													Additional Measurement required for this bar option. Please refer to the image gallery to determine how to find this length. Alternatively, view instructions for "Option 2" ( https://stonestomper.com.au/wp-admin/upload.php?item=2177 )  or Option 3" ( https://stonestomper.com.au/wp-admin/upload.php?item=2176).
+													Additional Measurement required for this bar option. Please refer to the image gallery to determine how to find this length. Alternatively, view instructions for "Option 2" ( <a href="https://stonestomper.com.au/wp-admin/upload.php?item=2177">https://stonestomper.com.au/wp-admin/upload.php?item=2177</a> )  or Option 3" ( <a href="https://stonestomper.com.au/wp-admin/upload.php?item=2176">https://stonestomper.com.au/wp-admin/upload.php?item=2176</a> ).
 												</div>
 												<div class="field">
 													<label class="req screen-reader-text" for="additional_hitch_measurement">Additional Measurement required for this bar option.</label>
