@@ -303,296 +303,298 @@ add_action( 'template_redirect', function() {
 	}
 });
 
+
 function render_towing_diagram($post_id) {
-	$caravan_length_mm      = get_post_meta( $post_id, 'caravan_length_mm', true );
-	$caravan_width_mm       = get_post_meta( $post_id, 'caravan_width_mm', true );
-	$toolbox_height_mm      = get_post_meta( $post_id, 'toolbox_height_mm', true );
-	$support_pockets_measurement      = get_post_meta( $post_id, 'support_pockets_measurement', true );
-	$toolbox_width_mm       = get_post_meta( $post_id, 'toolbox_width_mm', true );
-	$bar_width_mm           = get_post_meta( $post_id, 'bar_width_mm', true );
-	$vinyl_insert_width_mm  = get_post_meta( $post_id, 'vinyl_insert_width_mm', true );
-	$vinyl_insert_height_mm = get_post_meta( $post_id, 'vinyl_insert_height_mm', true );
-	$stoneguard_width_mm    = get_post_meta( $post_id, 'factory_stoneguard_width', true );
-	$stoneguard_height_mm   = get_post_meta( $post_id, 'factory_stoneguard_height', true );
-	$sts_var_caravan_cut_out  = get_post_meta( $post_id, 'sts_var_caravan_cut_out', true );
-	$sts_var_caravan_ss_length_adj = get_post_meta( $post_id, 'sts_var_caravan_ss_length_adj', true );
-	if ( $sts_var_caravan_ss_length_adj !== '' ) {
-		$caravan_length_mm = (int) $caravan_length_mm + (int) $sts_var_caravan_ss_length_adj;
-	}
-	ob_start();
-?>
-	<svg xmlns="http://www.w3.org/2000/svg" id="Layer_2" version="1.1" viewBox="0 0 1200 800">
-		<!-- Generator: Adobe Illustrator 29.8.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 2)  -->
-		<defs>
-			<style>
-			.st0 {
-				stroke: #fa3232;
-			}
-
-			.st0, .st1, .st2 {
-				fill: #ffffff;
-			}
-
-			.st3, .st4 {
-				fill: #ffffff;
-			}
-
-			.st3, .st1, .st2 {
-				stroke: #000;
-			}
-
-			.st1 {
-				stroke-width: 3px;
-				fill: #ffffff;
-			}
-
-			.st5 {
-				fill: #fa3232;
-				font-size: 15px;
-				letter-spacing: .03em;
-			}
-
-				rect {
-					fill: #ffffff;
-				}
-			</style>
-		</defs>
-		<path class="st1" d="M935.7,173.33c.12-1.09-.69-1.99-1.79-1.99H278.24c-1.1,0-1.91.9-1.79,1.99l41.6,402.61c.11,1.09,1.11,1.99,2.21,1.99h246.73c1.1,0,2-.9,2-2v-61.51c0-1.1.9-2,2-2h68.28c1.1,0,2,.9,2,2v61.51c0,1.1.9,2,2,2h247.86c1.1,0,2.09-.9,2.21-1.99l42.37-402.61Z" fill="#ffffff" stroke="#000000"/>
-		<!-- <polyline class="st2" points="329.42 577.92 288.76 180.94 923.79 180.94 882.27 577.92" fill="#ffffff" stroke="#000000"/> -->
-			<?php if($sts_var_caravan_cut_out){ ?>
-			<g transform="translate(605.76,550.99)">
-				<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500;">
-					<?php echo esc_html( $sts_var_caravan_cut_out ? $sts_var_caravan_cut_out : '-' ); ?>
-				</text>
-			</g>
-		<?php } ?>
-		<circle class="st2" cx="928.02" cy="177.82" r="5.22" fill="#ffffff" stroke="#000000"/>
-		<circle class="st2" cx="283.6" cy="177.82" r="5.22" fill="#ffffff" stroke="#000000"/>
-		<rect class="st2" x="390.67" y="364.08" width="438.42" height="27.06" fill="#ffffff" stroke="#000000"/>
-		<rect class="st3" x="504.04" y="315.51" width="211.2" height="195.21" fill="#ffffff" stroke="#000000"/>
-		<?php if($vinyl_insert_width_mm){ ?>
-			<g transform="translate(610.76,330.99)">
-				<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $vinyl_insert_width_mm ? $vinyl_insert_width_mm : '-' ); ?></text>
-			</g>
-		<?php } ?>
-		<?php if($vinyl_insert_height_mm){ ?>
-			<g transform="translate(520.76,400.99) rotate(-90)">
-				<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $vinyl_insert_height_mm ? $vinyl_insert_height_mm : '-' ); ?></text>
-			</g>
-		<?php } ?>
-		<rect class="st2" x="404.09" y="381.28" width="8.47" height="196.64" fill="#ffffff" stroke="#000000"/>
-		<rect class="st2" x="477.94" y="381.28" width="8.47" height="196.64" fill="#ffffff" stroke="#000000"/>
-		<rect class="st2" x="732.88" y="381.28" width="8.47" height="196.64" fill="#ffffff" stroke="#000000"/>
-		<rect class="st2" x="806.72" y="381.28" width="8.47" height="196.64" fill="#ffffff" stroke="#000000"/>
-		<circle class="st2" cx="737.11" cy="374.25" r="4.24" fill="#ffffff"  stroke="#000000"/>
-		<circle class="st2" cx="810.96" cy="374.25" r="4.24"  fill="#ffffff" stroke="#000000"/>
-		<circle class="st2" cx="408.33" cy="374.25" r="4.24"  fill="#ffffff" stroke="#000000"/>
-		<circle class="st2" cx="482.17" cy="374.25" r="4.24"  fill="#ffffff" stroke="#000000"/>
-		<text class="st5" transform="translate(565.96 411.74)" style="font-size: 20px; font-weight: 500;">
-			<tspan fill="#fa3232" stroke="#fa3232" stroke-width="0.3" x="0" y="0">Vinyl Insert</tspan>
-		</text>
-		<g>
-			<line class="st0" x1="274.29" y1="139.99" x2="935.24" y2="139.99" stroke="#fa3232"/>
-			<g transform="translate(604.76,139.99)">
-				<rect class="st4" x="-67.5" y="-22" width="135" height="24" fill="#ffffff"  stroke="#ffffff"/>
-				<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $caravan_width_mm ? $caravan_width_mm : '-' ); ?></text>
-			</g>
-			<polyline class="st0" points="278.3 143.72 274.29 139.99 278.3 136.27" stroke="#fa3232" fill="#ffffff"/>
-			<polyline class="st0" points="931.24 136.27 935.24 140 931.24 143.72" stroke="#fa3232"  fill="#ffffff"/>
-		</g>
-		<g>
-			<line class="st0" x1="317.29" y1="608.6" x2="894.24" y2="608.6" stroke="#fa3232"/>
-			<g transform="translate(957.8,375.13)">
-			<rect class="st4" x="10" y="-12" width="135" height="24" fill="#ffffff"  stroke="#ffffff"/>
-			<text class="st5" text-anchor="start" dominant-baseline="middle" x="20" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $caravan_length_mm ? $caravan_length_mm : '-' ); ?></text>
-			</g>
-			<polyline class="st0" points="321.3 612.33 317.29 608.6 321.3 604.88" stroke="#fa3232" fill="#ffffff"/>
-			<polyline class="st0" points="890.24 604.88 894.24 608.6 890.24 612.33" stroke="#fa3232" fill="#ffffff"/>
-		</g>
-
-
-		<g>
-			<line class="st0" x1="957.8" y1="170.34" x2="957.8" y2="579.93" stroke="#fa3232"/>
-			<g transform="translate(605.77,608.6)">
-				<rect class="st4" x="-67.5" y="-12" width="135" height="24" fill="#ffffff" stroke="#ffffff"/>
-				<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $bar_width_mm ? $bar_width_mm : '-' ); ?></text>
-			</g>
-			<polyline class="st0" points="954.07 174.34 957.8 170.34 961.52 174.34" stroke="#fa3232" fill="#ffffff"/>
-			<polyline class="st0" points="961.52 575.92 957.8 579.93 954.07 575.92" stroke="#fa3232" fill="#ffffff"/>
-		</g>
-	</svg>
-<?php } else { ?>
-	<svg id="Layer_2" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1200 800">
-		<!-- Generator: Adobe Illustrator 29.8.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 2)  -->
-		<defs>
-			<style>
-				.st0, .st1, .st2 {
+		$caravan_length_mm      = get_post_meta( $post_id, 'caravan_length_mm', true );
+		$caravan_width_mm       = get_post_meta( $post_id, 'caravan_width_mm', true );
+		$toolbox_height_mm      = get_post_meta( $post_id, 'toolbox_height_mm', true );
+		$support_pockets_measurement      = get_post_meta( $post_id, 'support_pockets_measurement', true );
+		$toolbox_width_mm       = get_post_meta( $post_id, 'toolbox_width_mm', true );
+		$bar_width_mm           = get_post_meta( $post_id, 'bar_width_mm', true );
+		$vinyl_insert_width_mm  = get_post_meta( $post_id, 'vinyl_insert_width_mm', true );
+		$vinyl_insert_height_mm = get_post_meta( $post_id, 'vinyl_insert_height_mm', true );
+		$stoneguard_width_mm    = get_post_meta( $post_id, 'factory_stoneguard_width', true );
+		$stoneguard_height_mm   = get_post_meta( $post_id, 'factory_stoneguard_height', true );
+		$sts_var_caravan_cut_out  = get_post_meta( $post_id, 'sts_var_caravan_cut_out', true );
+		$sts_var_caravan_ss_length_adj = get_post_meta( $post_id, 'sts_var_caravan_ss_length_adj', true );
+		if ( $sts_var_caravan_ss_length_adj !== '' ) {
+			$caravan_length_mm = (int) $caravan_length_mm + (int) $sts_var_caravan_ss_length_adj;
+		}
+		ob_start();
+	?>
+	<?php if($caravan_length_mm < 1800 ){ ?>
+		<svg xmlns="http://www.w3.org/2000/svg" id="Layer_2" version="1.1" viewBox="0 0 1200 800">
+			<!-- Generator: Adobe Illustrator 29.8.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 2)  -->
+			<defs>
+				<style>
+				.st0 {
 					stroke: #fa3232;
 				}
 
-				.st0, .st1, .st2, .st3, .st4 {
+				.st0, .st1, .st2 {
 					fill: #ffffff;
+				}
+
+				.st3, .st4 {
+					fill: #ffffff;
+				}
+
+				.st3, .st1, .st2 {
+					stroke: #000;
 				}
 
 				.st1 {
-					stroke-dasharray: 5.39 5.39;
-				}
-
-				.st2 {
-					stroke-dasharray: 5.07 5.07;
-				}
-
-				.st5, .st6 {
-					fill: #fa3232;
-				}
-
-				.st7, .st8 {
+					stroke-width: 3px;
 					fill: #ffffff;
 				}
 
-				.st7, .st3, .st4 {
-					stroke: #000000;
-				}
-
-				.st3 {
-					stroke-width: 3px;
-				}
-
-				.st6 {
+				.st5 {
+					fill: #fa3232;
 					font-size: 15px;
 					letter-spacing: .03em;
 				}
-				rect {
-					fill: #ffffff;
-				}
-			</style>
-		</defs>
-		<path class="st3" d="M935.7,173.33c.12-1.09-.69-1.99-1.79-1.99H278.24c-1.1,0-1.91.9-1.79,1.99l41.6,402.61c.11,1.09,1.11,1.99,2.21,1.99h246.73c1.1,0,2-.9,2-2v-61.51c0-1.1.9-2,2-2h68.28c1.1,0,2,.9,2,2v61.51c0,1.1.9,2,2,2h247.86c1.1,0,2.09-.9,2.21-1.99l42.37-402.61Z" fill="#ffffff" stroke="#000000"/>
-		<!-- <polyline class="st4" points="329.42 577.92 288.76 180.94 923.79 180.94 882.27 577.92" fill="#ffffff" stroke="#000000"/> -->
-			<?php if($sts_var_caravan_cut_out){ ?>
-			<g transform="translate(605.76,550.99)">
-				<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500;">
-					<?php echo esc_html( $sts_var_caravan_cut_out ? $sts_var_caravan_cut_out : '-' ); ?>
-				</text>
-			</g>
-		<?php } ?>
-		<circle class="st4" cx="928.02" cy="177.82" r="5.22" fill="#ffffff" stroke="#000000"/>
-		<circle class="st4" cx="283.6" cy="177.82" r="5.22" fill="#ffffff" stroke="#000000"/>
-		<rect class="st4" x="390.67" y="364.08" width="438.42" height="27.06" fill="#ffffff" stroke="#000000"/>
-		<rect class="st7" x="504.04" y="315.51" width="211.2" height="195.21" fill="#ffffff" stroke="#000000"/>
-		<?php if($vinyl_insert_width_mm){ ?>
-			<g transform="translate(610.76,330.99)">
-				<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0"  style="font-size: 20px; font-weight: 500;">
-					<?php echo esc_html( $vinyl_insert_width_mm ? $vinyl_insert_width_mm : '-' ); ?>
-				</text>
-			</g>
-		<?php } ?>
 
-		<?php if($vinyl_insert_height_mm){ ?>
-			<g transform="translate(520.76,400.99) rotate(-90)">
-				<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0"  style="font-size: 20px; font-weight: 500;">
-					<?php echo esc_html( $vinyl_insert_height_mm ? $vinyl_insert_height_mm : '-' ); ?>
-				</text>
-			</g>
-		<?php } ?>
-		<rect class="st4" x="404.09" y="381.28" width="8.47" height="196.64" fill="#ffffff" stroke="#000000"/>
-		<rect class="st4" x="477.94" y="381.28" width="8.47" height="196.64" fill="#ffffff" stroke="#000000"/>
-		<rect class="st4" x="732.88" y="381.28" width="8.47" height="196.64" fill="#ffffff" stroke="#000000"/>
-		<rect class="st4" x="806.72" y="381.28" width="8.47" height="196.64" fill="#ffffff" stroke="#000000"/>
-		<circle class="st4" cx="737.11" cy="374.25" r="4.24" fill="#ffffff" stroke="#000000"/>
-		<circle class="st4" cx="810.96" cy="374.25" r="4.24" fill="#ffffff" stroke="#000000"/>
-		<circle class="st4" cx="408.33" cy="374.25" r="4.24" fill="#ffffff" stroke="#000000"/>
-		<circle class="st4" cx="482.17" cy="374.25" r="4.24" fill="#ffffff" stroke="#000000"/>
-		<!-- <text class="st6" transform="translate(565.96 411.74)"><tspan fill="#fa3232" x="0" y="0" stroke="">Vinyl Insert</tspan></text> -->
-		<text transform="translate(565.96 411.74)"
-			fill="#fa3232"
-			stroke="#fa3232"
-			stroke-width="0.3"
-			stroke-linejoin="round" style="font-size: 20px; font-weight: 500;">
-			Vinyl Insert
-		</text>
-		<g>
-			<line class="st0" x1="274.29" y1="139.99" x2="935.24" y2="139.99" fill="#ffffff" stroke="#fa3232"/>
-			<rect class="st8" x="539.36" y="127.61" width="135.53" height="22.16" fill="#ffffff" stroke="#ffffff"/>
-			<g transform="translate(604.76,139.99)">
-				<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500;">
-					<?php echo esc_html( $caravan_width_mm ? $caravan_width_mm : '-' ); ?>
-				</text>
-			</g>
-			<polyline class="st0" points="278.3 143.72 274.29 139.99 278.3 136.27" fill="#ffffff" stroke="#fa3232"/>
-			<polyline class="st0" points="931.24 136.27 935.24 140 931.24 143.72" fill="#ffffff" stroke="#fa3232"/>
-		</g>
-		<!-- Bottom Line -->
-		<g>
-			<line class="st0" x1="317.29" y1="608.6" x2="894.24" y2="608.6" fill="#ffffff" stroke="#fa3232"/>
-			<rect class="st8" x="539.36" y="596.22" width="135.53" height="22.16" fill="#ffffff" stroke="#ffffff"/>
-			<g transform="translate(605.77,608.6)">
-				<rect class="st8" x="948.02" y="306.8" width="22.16" height="135.53" fill="#ffffff" stroke="#ffffff"/>
-				<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0"  fill="#fa3232"  stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $bar_width_mm ? $bar_width_mm : '-' ); ?></text>
-			</g>
-			<polyline class="st0" points="321.3 612.33 317.29 608.6 321.3 604.88" fill="#ffffff" stroke="#fa3232"/>
-			<polyline class="st0" points="890.24 604.88 894.24 608.6 890.24 612.33" fill="#ffffff" stroke="#fa3232"/>
-		</g>
-		<!-- Verticle line -->
-		<g>
-			<line class="st0" x1="957.8" y1="170.34" x2="957.8" y2="579.93" fill="#ffffff" stroke="#fa3232"/>
-			<rect class="st8" x="948.02" y="306.8" width="22.16" height="135.53" fill="#ffffff" stroke="#ffffff"/>
-			<g transform="translate(915.8,375.13)">
-				<!-- <rect class="st4" x="10" y="-12" width="135" height="24" fill="#ffffff"/> -->
-				<text class="st5" text-anchor="start" dominant-baseline="middle" x="20" fill="#fa3232"  stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $caravan_length_mm ? $caravan_length_mm : '-' ); ?></text>
-			</g>
-			<polyline class="st0" points="954.07 174.34 957.8 170.34 961.52 174.34" fill="#ffffff" stroke="#fa3232"/>
-			<polyline class="st0" points="961.52 575.92 957.8 579.93 954.07 575.92" fill="#ffffff" stroke="#fa3232"/>
-		</g>
-		<g transform="translate(280,220.13)">
-			<g transform="translate(-835,-220)">
-				<line class="st0" x1="884.28" y1="181.78" x2="884.28" y2="286.37" fill="#ffffff" stroke="#fa3232"/>
-				<rect class="st8" x="873.2" y="212.51" width="22.16" height="43.67" fill="#ffffff" stroke="#ffffff"/>
-				<polyline class="st0" points="880.55 185.79 884.28 181.78 888 185.79" fill="#ffffff" stroke="#fa3232"/>
-				<polyline class="st0" points="888 282.37 884.28 286.37 880.55 282.37" fill="#ffffff" stroke="#fa3232"/>
-			</g>
-			<?php if($stoneguard_height_mm){ ?>
-				<text class="st5" text-anchor="start" dominant-baseline="middle" y="0" x="55" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;">
-					<?php echo esc_html( $stoneguard_height_mm ? 'S: '. $stoneguard_height_mm : '-' ); ?>
-				</text>
-			<?php } ?>
-			<?php if($toolbox_height_mm){ ?>
-				<text class="st5" text-anchor="start" dominant-baseline="middle" y="20" x="55"  fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;">
-					<?php echo esc_html( $toolbox_height_mm ? 'T: '.$toolbox_height_mm : '-' ); ?>
-				</text>
-			<?php } ?>
-			<?php if($support_pockets_measurement){ ?>
-				<text class="st5" text-anchor="start" dominant-baseline="middle" y="40" x="55"  fill="#fa3232"  stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;">
-					<?php echo esc_html( $support_pockets_measurement ? 'SP: '.$support_pockets_measurement : '-' ); ?>
-				</text>
-			<?php } ?>
-		</g>
-		<g id="Toolbox" transform="translate(0,30)">
-			<g>
-				<g transform="translate(0,-10)">
-					<line class="st0" x1="352.44" y1="266.29" x2="860.13" y2="266.29" fill="#ffffff" stroke="#fa3232"/>
-					<rect class="st8" x="539.36" y="253.9" width="135.53" height="22.16" fill="#ffffff"  stroke="#ffffff"/>
-					<polyline class="st0" points="356.43 270.01 352.42 266.29 356.43 262.56" fill="#ffffff" stroke="#fa3232"/>
-					<polyline class="st0" points="856.13 262.56 860.13 266.29 856.13 270.01" fill="#ffffff" stroke="#fa3232"/>
-				</g>
-				<g transform="translate(555,263.13)">
-					<?php if($stoneguard_width_mm){ ?>
-					<text class="st5" text-anchor="start" dominant-baseline="middle" y="-20" x="0" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;">
-						<?php echo esc_html( $stoneguard_width_mm ? 'S: '. $stoneguard_width_mm : '-' ); ?>
+					rect {
+						fill: #ffffff;
+					}
+				</style>
+			</defs>
+			<path class="st1" d="M935.7,173.33c.12-1.09-.69-1.99-1.79-1.99H278.24c-1.1,0-1.91.9-1.79,1.99l41.6,402.61c.11,1.09,1.11,1.99,2.21,1.99h246.73c1.1,0,2-.9,2-2v-61.51c0-1.1.9-2,2-2h68.28c1.1,0,2,.9,2,2v61.51c0,1.1.9,2,2,2h247.86c1.1,0,2.09-.9,2.21-1.99l42.37-402.61Z" fill="#ffffff" stroke="#000000"/>
+			<!-- <polyline class="st2" points="329.42 577.92 288.76 180.94 923.79 180.94 882.27 577.92" fill="#ffffff" stroke="#000000"/> -->
+			 <?php if($sts_var_caravan_cut_out){ ?>
+				<g transform="translate(605.76,550.99)">
+					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500;">
+						<?php echo esc_html( $sts_var_caravan_cut_out ? $sts_var_caravan_cut_out : '-' ); ?>
 					</text>
-					<?php } ?>
-					<?php if($toolbox_height_mm){ ?>
-						<text class="st5" text-anchor="start" dominant-baseline="middle" x="0" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;">
-							<?php echo esc_html( $toolbox_width_mm ? 'T: '. $toolbox_width_mm : '-' ); ?>
-						</text>
-					<?php } ?>
 				</g>
-
+			<?php } ?>
+			<circle class="st2" cx="928.02" cy="177.82" r="5.22" fill="#ffffff" stroke="#000000"/>
+			<circle class="st2" cx="283.6" cy="177.82" r="5.22" fill="#ffffff" stroke="#000000"/>
+			<rect class="st2" x="390.67" y="364.08" width="438.42" height="27.06" fill="#ffffff" stroke="#000000"/>
+			<rect class="st3" x="504.04" y="315.51" width="211.2" height="195.21" fill="#ffffff" stroke="#000000"/>
+			<?php if($vinyl_insert_width_mm){ ?>
+				<g transform="translate(610.76,330.99)">
+					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $vinyl_insert_width_mm ? $vinyl_insert_width_mm : '-' ); ?></text>
+				</g>
+			<?php } ?>
+			<?php if($vinyl_insert_height_mm){ ?>
+				<g transform="translate(520.76,400.99) rotate(-90)">
+					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $vinyl_insert_height_mm ? $vinyl_insert_height_mm : '-' ); ?></text>
+				</g>
+			<?php } ?>
+			<rect class="st2" x="404.09" y="381.28" width="8.47" height="196.64" fill="#ffffff" stroke="#000000"/>
+			<rect class="st2" x="477.94" y="381.28" width="8.47" height="196.64" fill="#ffffff" stroke="#000000"/>
+			<rect class="st2" x="732.88" y="381.28" width="8.47" height="196.64" fill="#ffffff" stroke="#000000"/>
+			<rect class="st2" x="806.72" y="381.28" width="8.47" height="196.64" fill="#ffffff" stroke="#000000"/>
+			<circle class="st2" cx="737.11" cy="374.25" r="4.24" fill="#ffffff"  stroke="#000000"/>
+			<circle class="st2" cx="810.96" cy="374.25" r="4.24"  fill="#ffffff" stroke="#000000"/>
+			<circle class="st2" cx="408.33" cy="374.25" r="4.24"  fill="#ffffff" stroke="#000000"/>
+			<circle class="st2" cx="482.17" cy="374.25" r="4.24"  fill="#ffffff" stroke="#000000"/>
+			<text class="st5" transform="translate(565.96 411.74)" style="font-size: 20px; font-weight: 500;">
+				<tspan fill="#fa3232" stroke="#fa3232" stroke-width="0.3" x="0" y="0">Vinyl Insert</tspan>
+			</text>
+			<g>
+				<line class="st0" x1="274.29" y1="139.99" x2="935.24" y2="139.99" stroke="#fa3232"/>
+				<g transform="translate(604.76,139.99)">
+					<rect class="st4" x="-67.5" y="-22" width="135" height="24" fill="#ffffff"  stroke="#ffffff"/>
+					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $caravan_width_mm ? $caravan_width_mm : '-' ); ?></text>
+				</g>
+				<polyline class="st0" points="278.3 143.72 274.29 139.99 278.3 136.27" stroke="#fa3232" fill="#ffffff"/>
+				<polyline class="st0" points="931.24 136.27 935.24 140 931.24 143.72" stroke="#fa3232"  fill="#ffffff"/>
 			</g>
-		</g>
-	</svg>
-<?php } ?>
-<?php return ob_get_clean(); ?>
+			<g>
+				<line class="st0" x1="317.29" y1="608.6" x2="894.24" y2="608.6" stroke="#fa3232"/>
+				<g transform="translate(957.8,375.13)">
+				<rect class="st4" x="10" y="-12" width="135" height="24" fill="#ffffff"  stroke="#ffffff"/>
+				<text class="st5" text-anchor="start" dominant-baseline="middle" x="20" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $caravan_length_mm ? $caravan_length_mm : '-' ); ?></text>
+				</g>
+				<polyline class="st0" points="321.3 612.33 317.29 608.6 321.3 604.88" stroke="#fa3232" fill="#ffffff"/>
+				<polyline class="st0" points="890.24 604.88 894.24 608.6 890.24 612.33" stroke="#fa3232" fill="#ffffff"/>
+			</g>
+
+
+			<g>
+				<line class="st0" x1="957.8" y1="170.34" x2="957.8" y2="579.93" stroke="#fa3232"/>
+				<g transform="translate(605.77,608.6)">
+					<rect class="st4" x="-67.5" y="-12" width="135" height="24" fill="#ffffff" stroke="#ffffff"/>
+					<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $bar_width_mm ? $bar_width_mm : '-' ); ?></text>
+				</g>
+				<polyline class="st0" points="954.07 174.34 957.8 170.34 961.52 174.34" stroke="#fa3232" fill="#ffffff"/>
+				<polyline class="st0" points="961.52 575.92 957.8 579.93 954.07 575.92" stroke="#fa3232" fill="#ffffff"/>
+			</g>
+		</svg>
+	<?php } else { ?>
+		<svg id="Layer_2" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1200 800">
+			<!-- Generator: Adobe Illustrator 29.8.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 2)  -->
+			<defs>
+				<style>
+					.st0, .st1, .st2 {
+						stroke: #fa3232;
+					}
+
+					.st0, .st1, .st2, .st3, .st4 {
+						fill: #ffffff;
+					}
+
+					.st1 {
+						stroke-dasharray: 5.39 5.39;
+					}
+
+					.st2 {
+						stroke-dasharray: 5.07 5.07;
+					}
+
+					.st5, .st6 {
+						fill: #fa3232;
+					}
+
+					.st7, .st8 {
+						fill: #ffffff;
+					}
+
+					.st7, .st3, .st4 {
+						stroke: #000000;
+					}
+
+					.st3 {
+						stroke-width: 3px;
+					}
+
+					.st6 {
+						font-size: 15px;
+						letter-spacing: .03em;
+					}
+					rect {
+						fill: #ffffff;
+					}
+				</style>
+			</defs>
+			<path class="st3" d="M935.7,173.33c.12-1.09-.69-1.99-1.79-1.99H278.24c-1.1,0-1.91.9-1.79,1.99l41.6,402.61c.11,1.09,1.11,1.99,2.21,1.99h246.73c1.1,0,2-.9,2-2v-61.51c0-1.1.9-2,2-2h68.28c1.1,0,2,.9,2,2v61.51c0,1.1.9,2,2,2h247.86c1.1,0,2.09-.9,2.21-1.99l42.37-402.61Z" fill="#ffffff" stroke="#000000"/>
+			<!-- <polyline class="st4" points="329.42 577.92 288.76 180.94 923.79 180.94 882.27 577.92" fill="#ffffff" stroke="#000000"/> -->
+			 <?php if($sts_var_caravan_cut_out){ ?>
+				<g transform="translate(605.76,550.99)">
+					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500;">
+						<?php echo esc_html( $sts_var_caravan_cut_out ? $sts_var_caravan_cut_out : '-' ); ?>
+					</text>
+				</g>
+			<?php } ?>
+			<circle class="st4" cx="928.02" cy="177.82" r="5.22" fill="#ffffff" stroke="#000000"/>
+			<circle class="st4" cx="283.6" cy="177.82" r="5.22" fill="#ffffff" stroke="#000000"/>
+			<rect class="st4" x="390.67" y="364.08" width="438.42" height="27.06" fill="#ffffff" stroke="#000000"/>
+			<rect class="st7" x="504.04" y="315.51" width="211.2" height="195.21" fill="#ffffff" stroke="#000000"/>
+			<?php if($vinyl_insert_width_mm){ ?>
+				<g transform="translate(610.76,330.99)">
+					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0"  style="font-size: 20px; font-weight: 500;">
+						<?php echo esc_html( $vinyl_insert_width_mm ? $vinyl_insert_width_mm : '-' ); ?>
+					</text>
+				</g>
+			<?php } ?>
+
+			<?php if($vinyl_insert_height_mm){ ?>
+				<g transform="translate(520.76,400.99) rotate(-90)">
+					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0"  style="font-size: 20px; font-weight: 500;">
+						<?php echo esc_html( $vinyl_insert_height_mm ? $vinyl_insert_height_mm : '-' ); ?>
+					</text>
+				</g>
+			<?php } ?>
+			<rect class="st4" x="404.09" y="381.28" width="8.47" height="196.64" fill="#ffffff" stroke="#000000"/>
+			<rect class="st4" x="477.94" y="381.28" width="8.47" height="196.64" fill="#ffffff" stroke="#000000"/>
+			<rect class="st4" x="732.88" y="381.28" width="8.47" height="196.64" fill="#ffffff" stroke="#000000"/>
+			<rect class="st4" x="806.72" y="381.28" width="8.47" height="196.64" fill="#ffffff" stroke="#000000"/>
+			<circle class="st4" cx="737.11" cy="374.25" r="4.24" fill="#ffffff" stroke="#000000"/>
+			<circle class="st4" cx="810.96" cy="374.25" r="4.24" fill="#ffffff" stroke="#000000"/>
+			<circle class="st4" cx="408.33" cy="374.25" r="4.24" fill="#ffffff" stroke="#000000"/>
+			<circle class="st4" cx="482.17" cy="374.25" r="4.24" fill="#ffffff" stroke="#000000"/>
+			<!-- <text class="st6" transform="translate(565.96 411.74)"><tspan fill="#fa3232" x="0" y="0" stroke="">Vinyl Insert</tspan></text> -->
+			<text transform="translate(565.96 411.74)"
+				fill="#fa3232"
+				stroke="#fa3232"
+				stroke-width="0.3"
+				stroke-linejoin="round" style="font-size: 20px; font-weight: 500;">
+				Vinyl Insert
+			</text>
+			<g>
+				<line class="st0" x1="274.29" y1="139.99" x2="935.24" y2="139.99" fill="#ffffff" stroke="#fa3232"/>
+				<rect class="st8" x="539.36" y="127.61" width="135.53" height="22.16" fill="#ffffff" stroke="#ffffff"/>
+				<g transform="translate(604.76,139.99)">
+					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500;">
+						<?php echo esc_html( $caravan_width_mm ? $caravan_width_mm : '-' ); ?>
+					</text>
+				</g>
+				<polyline class="st0" points="278.3 143.72 274.29 139.99 278.3 136.27" fill="#ffffff" stroke="#fa3232"/>
+				<polyline class="st0" points="931.24 136.27 935.24 140 931.24 143.72" fill="#ffffff" stroke="#fa3232"/>
+			</g>
+			<!-- Bottom Line -->
+			<g>
+				<line class="st0" x1="317.29" y1="608.6" x2="894.24" y2="608.6" fill="#ffffff" stroke="#fa3232"/>
+				<rect class="st8" x="539.36" y="596.22" width="135.53" height="22.16" fill="#ffffff" stroke="#ffffff"/>
+				<g transform="translate(605.77,608.6)">
+					<rect class="st8" x="948.02" y="306.8" width="22.16" height="135.53" fill="#ffffff" stroke="#ffffff"/>
+					<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0"  fill="#fa3232"  stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $bar_width_mm ? $bar_width_mm : '-' ); ?></text>
+				</g>
+				<polyline class="st0" points="321.3 612.33 317.29 608.6 321.3 604.88" fill="#ffffff" stroke="#fa3232"/>
+				<polyline class="st0" points="890.24 604.88 894.24 608.6 890.24 612.33" fill="#ffffff" stroke="#fa3232"/>
+			</g>
+			<!-- Verticle line -->
+			<g>
+				<line class="st0" x1="957.8" y1="170.34" x2="957.8" y2="579.93" fill="#ffffff" stroke="#fa3232"/>
+				<rect class="st8" x="948.02" y="306.8" width="22.16" height="135.53" fill="#ffffff" stroke="#ffffff"/>
+				<g transform="translate(915.8,375.13)">
+					<!-- <rect class="st4" x="10" y="-12" width="135" height="24" fill="#ffffff"/> -->
+					<text class="st5" text-anchor="start" dominant-baseline="middle" x="20" fill="#fa3232"  stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $caravan_length_mm ? $caravan_length_mm : '-' ); ?></text>
+				</g>
+				<polyline class="st0" points="954.07 174.34 957.8 170.34 961.52 174.34" fill="#ffffff" stroke="#fa3232"/>
+				<polyline class="st0" points="961.52 575.92 957.8 579.93 954.07 575.92" fill="#ffffff" stroke="#fa3232"/>
+			</g>
+			<g transform="translate(280,220.13)">
+				<g transform="translate(-835,-220)">
+					<line class="st0" x1="884.28" y1="181.78" x2="884.28" y2="286.37" fill="#ffffff" stroke="#fa3232"/>
+					<rect class="st8" x="873.2" y="212.51" width="22.16" height="43.67" fill="#ffffff" stroke="#ffffff"/>
+					<polyline class="st0" points="880.55 185.79 884.28 181.78 888 185.79" fill="#ffffff" stroke="#fa3232"/>
+					<polyline class="st0" points="888 282.37 884.28 286.37 880.55 282.37" fill="#ffffff" stroke="#fa3232"/>
+				</g>
+				<?php if($stoneguard_height_mm){ ?>
+					<text class="st5" text-anchor="start" dominant-baseline="middle" y="0" x="55" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;">
+						<?php echo esc_html( $stoneguard_height_mm ? 'S: '. $stoneguard_height_mm : '-' ); ?>
+					</text>
+				<?php } ?>
+				<?php if($toolbox_height_mm){ ?>
+					<text class="st5" text-anchor="start" dominant-baseline="middle" y="20" x="55"  fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;">
+						<?php echo esc_html( $toolbox_height_mm ? 'T: '.$toolbox_height_mm : '-' ); ?>
+					</text>
+				<?php } ?>
+				<?php if($support_pockets_measurement){ ?>
+					<text class="st5" text-anchor="start" dominant-baseline="middle" y="40" x="55"  fill="#fa3232"  stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;">
+						<?php echo esc_html( $support_pockets_measurement ? 'SP: '.$support_pockets_measurement : '-' ); ?>
+					</text>
+				<?php } ?>
+			</g>
+			<g id="Toolbox" transform="translate(0,30)">
+				<g>
+					<g transform="translate(0,-10)">
+						<line class="st0" x1="352.44" y1="266.29" x2="860.13" y2="266.29" fill="#ffffff" stroke="#fa3232"/>
+						<rect class="st8" x="539.36" y="253.9" width="135.53" height="22.16" fill="#ffffff"  stroke="#ffffff"/>
+						<polyline class="st0" points="356.43 270.01 352.42 266.29 356.43 262.56" fill="#ffffff" stroke="#fa3232"/>
+						<polyline class="st0" points="856.13 262.56 860.13 266.29 856.13 270.01" fill="#ffffff" stroke="#fa3232"/>
+					</g>
+					<g transform="translate(555,263.13)">
+						<?php if($stoneguard_width_mm){ ?>
+						<text class="st5" text-anchor="start" dominant-baseline="middle" y="-20" x="0" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;">
+							<?php echo esc_html( $stoneguard_width_mm ? 'S: '. $stoneguard_width_mm : '-' ); ?>
+						</text>
+						<?php } ?>
+						<?php if($toolbox_height_mm){ ?>
+							<text class="st5" text-anchor="start" dominant-baseline="middle" x="0" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;">
+								<?php echo esc_html( $toolbox_width_mm ? 'T: '. $toolbox_width_mm : '-' ); ?>
+							</text>
+						<?php } ?>
+					</g>
+
+				</g>
+			</g>
+		</svg>
+	<?php } ?>
+	<?php return ob_get_clean(); ?>
 <?php }
 
 function get_towing_diagram_svg_png($post_id) {
@@ -633,6 +635,28 @@ function svg_to_png_temp($svg_content) {
 
     return $tmp_png;
 }
+
+function sts_get_images_from_meta( $post_id, $meta_key ) {
+	$raw = get_post_meta( $post_id, $meta_key, true );
+
+	if ( empty( $raw ) ) {
+		return [];
+	}
+
+	if ( is_string( $raw ) ) {
+		$decoded = json_decode( $raw, true );
+		if ( is_array( $decoded ) ) {
+			return $decoded;
+		}
+	}
+
+	if ( is_array( $raw ) ) {
+		return $raw;
+	}
+
+	return [];
+}
+
 
 function show_towing_svg_in_editor( $post ) {
     // Get all meta data
@@ -722,13 +746,15 @@ function show_towing_svg_in_editor( $post ) {
     $sts_var_caravan_eyelet_tab    = get_post_meta( $post->ID, 'sts_var_caravan_eyelet_tab', true );
     $sts_var_proposed_date_of_delivery    = get_post_meta( $post->ID, 'sts_var_proposed_date_of_delivery', true );
 
-	$hitch_ids = get_post_meta( $post->ID, 'hitch_ids', true );
-	$rear_ids  = get_post_meta( $post->ID, 'rear_ids', true );
-	$front_ids = get_post_meta( $post->ID, 'front_ids', true );
+	$hitch_images = sts_get_images_from_meta( $post->ID, 'hitch_images', true );
+	$rear_ids  = sts_get_images_from_meta( $post->ID, 'rear_ids', true );
+	$front_ids = sts_get_images_from_meta( $post->ID, 'front_ids', true );
 	$support_pockets = get_post_meta( $post->ID, 'support_pockets', true );
 	$support_pockets_measurement    = get_post_meta( $post->ID, 'support_pockets_measurement', true );
 
-	// var_dump($final_details['final_delivery']);
+	var_dump($hitch_images);
+	var_dump($rear_ids);
+	var_dump($front_ids);
 
 	function show_meta_images( $meta_value ) {
 		if ( empty( $meta_value ) ) return;
@@ -2377,6 +2403,7 @@ add_action( 'add_meta_boxes', function() {
 /**
  * Render the status dropdown
  */
+
 function stonestomper_render_order_status_box( $post ) {
 	$order_id = get_field( 'order_id', $post->ID ); // your linked WooCommerce order ID
 	if ( ! $order_id ) {
@@ -2733,12 +2760,34 @@ function sts_materialize_customer_cpt( $order_id ) {
     update_post_meta( $post_id, 'caravan_width_mm', $caravan_width );
     update_post_meta( $post_id, 'caravan_length_mm', $a_frame );
 
-
 	// Images
+	$hitch_images = [];
+	$rear_images  = [];
+	$front_images = [];
 
-	$hitch_ids = sts_to_media_array( get_post_meta( $post_id, 'hitch_images', true ) );
-	$rear_ids  = sts_to_media_array( get_post_meta( $post_id, 'rear_images', true ) );
-	$front_ids = sts_to_media_array( get_post_meta( $post_id, 'front_images', true ) );
+	if (!empty($data['hitch_ids'])) {
+		$hitch_images = $data['hitch_ids'];
+	}
+
+	if (!empty($data['rear_ids'])) {
+		$rear_images = $data['rear_ids'];
+	}
+
+	if (!empty($data['front_ids'])) {
+		$front_images = $data['front_ids'];
+	}
+
+	if ($hitch_images) {
+		update_post_meta($post_id, 'hitch_images', $hitch_images);
+	}
+
+	if ($rear_images) {
+		update_post_meta($post_id, 'rear_images', $rear_images);
+	}
+
+	if ($front_images) {
+		update_post_meta($post_id, 'front_images', $front_images);
+	}
 
 	// Addional Hitch Measurements
     update_post_meta( $post_id, 'hitch_measurement_field', $hitch_measure );
@@ -2828,7 +2877,6 @@ function sts_materialize_customer_cpt( $order_id ) {
     $order->add_order_note( 'STS SUCCESS: Customer CPT created' );
     $order->save();
 }
-
 
 /*
 |-----------------------------------------
@@ -2936,6 +2984,13 @@ function display_on_the_move_status_admin( $order ) {
         echo '</div>';
     }
 }
+
+/*
+ |--------------------------------------------------
+ | Authority to leave
+ |--------------------------------------------------
+ */
+
 
 add_action( 'init', 'register_atl_block_extension' );
 
