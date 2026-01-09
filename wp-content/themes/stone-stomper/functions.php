@@ -2558,6 +2558,7 @@ add_filter('woocommerce_add_cart_item_data', function ($cart_item_data, $product
 
 // Persist to Order Items (admin)
 add_action('woocommerce_checkout_create_order_line_item', function($item, $cart_item_key, $values, $order) {
+
     // Simple fields (incl. support_pockets)
     $fields = [
         'barwidth_mm'              => 'Towing Vehicle Barwidth',
@@ -2595,74 +2596,114 @@ add_action('woocommerce_checkout_create_order_line_item', function($item, $cart_
         }
     }
 
-	 // Add measurements to order item meta
+	// Add measurements to order item meta
     if (!empty($values['barwidth_mm'])) {
         $item->add_meta_data('Towing Vehicle Barwidth (mm)', $values['barwidth_mm']);
     }
+
     if (!empty($values['a_frame_length_mm'])) {
         $item->add_meta_data('A-Frame Length (mm)', $values['a_frame_length_mm']);
     }
+
 }, 10, 4);
 
-add_action( 'woocommerce_checkout_create_order_line_item',
-	function ( $item, $cart_item_key, $values, $order ) {
+add_action('woocommerce_checkout_create_order_line_item', function ($item, $cart_item_key, $values, $order) {
+    // Get product ID from cart item
+    $product_id = $values['product_id'];
 
-		if ( empty( $values['sts_payload'] ) || ! is_array( $values['sts_payload'] ) ) {
-			return;
-		}
+    // Skip non–Stone Stomper products
+    if (!has_term('stone-stomper', 'product_cat', $product_id)) {
+        return;
+    }
 
-		$item->add_meta_data(
-			'_sts_payload',
-			wp_json_encode( $values['sts_payload'] ),
-			true
-		);
+    // Stop if payload is missing for Stone Stomper
+    if (empty($values['sts_payload']) || !is_array($values['sts_payload'])) {
+        error_log('STS DEBUG: payload missing for Stone Stomper product');
+        return;
+    }
 
-	},
-	20,
-	4
-);
+    // Save payload into order item meta
+    $item->add_meta_data(
+        '_sts_payload',
+        wp_json_encode($values['sts_payload']),
+        true
+    );
+
+}, 20, 4);
+
+add_action('woocommerce_checkout_process', function () {
+
+    foreach (WC()->cart->get_cart() as $item) {
+
+        // Skip non–Stone Stomper products
+        if (!has_term('stone-stomper', 'product_cat', $item['product_id'])) {
+            continue;
+        }
+
+        // Block checkout if payload is missing
+        if (empty($item['sts_payload'])) {
+            wc_add_notice('Configuration data missing. Please refresh the page and try again.', 'error');
+            return;
+        }
+    }
+});
+
+// add_action(
+//     'woocommerce_checkout_create_order',
+//     function ($order) {
+
+//         $payload_raw = $order->get_meta('_sts_payload', true);
+//         if (empty($payload_raw)) {
+//             return;
+//         }
+
+//         $data = json_decode($payload_raw, true);
+//         if (!is_array($data)) {
+//             return;
+//         }
+
+//         if (empty($data['product_type']) || (string) $data['product_type'] !== '545') {
+//             return;
+//         }
+
+//         $barwidth = isset($data['barwidth_mm']) ? floatval($data['barwidth_mm']) : 0;
+//         $a_frame  = isset($data['a_frame_length_mm']) ? floatval($data['a_frame_length_mm']) : 0;
+
+//         if ($barwidth >= 1900 && $barwidth <= 2100) {
+//             $order->add_fee('Extra Bar Width (1900–2100mm)', 35);
+//         } elseif ($barwidth > 2100) {
+//             $order->add_fee('Extra Bar Width (>2100mm)', 100);
+//         }
+
+//         if ($a_frame >= 1800 && $a_frame <= 2300) {
+//             $order->add_fee('Extra Mesh Length (1800–2300mm)', 35);
+//         } elseif ($a_frame > 2300) {
+//             $order->add_fee('Extra Mesh Length (>2300mm)', 100);
+//         }
+
+//         if ($a_frame >= 1800) {
+//             if (!empty($data['toolbox']) || !empty($data['factory_stoneguard'])) {
+//                 $order->add_fee('Fittings Charges', 35);
+//             }
+//         }
+//     },
+//     20,
+//     1
+// );
 
 add_action(
-    'woocommerce_checkout_create_order',
-    function ($order) {
+    'woocommerce_get_cart_item_from_session',
+    function ( $cart_item, $values ) {
 
-        $payload_raw = $order->get_meta('_sts_payload', true);
-        if (empty($payload_raw)) {
-            return;
+        // Restore STS payload from session into cart item
+        if ( isset( $values['sts_payload'] ) ) {
+            $cart_item['sts_payload'] = $values['sts_payload'];
         }
 
-        $data = json_decode($payload_raw, true);
-        if (!is_array($data)) {
-            return;
-        }
-
-        if (empty($data['product_type']) || (string) $data['product_type'] !== '545') {
-            return;
-        }
-
-        $barwidth = isset($data['barwidth_mm']) ? floatval($data['barwidth_mm']) : 0;
-        $a_frame  = isset($data['a_frame_length_mm']) ? floatval($data['a_frame_length_mm']) : 0;
-
-        if ($barwidth >= 1900 && $barwidth <= 2100) {
-            $order->add_fee('Extra Bar Width (1900–2100mm)', 35);
-        } elseif ($barwidth > 2100) {
-            $order->add_fee('Extra Bar Width (>2100mm)', 100);
-        }
-
-        if ($a_frame >= 1800 && $a_frame <= 2300) {
-            $order->add_fee('Extra Mesh Length (1800–2300mm)', 35);
-        } elseif ($a_frame > 2300) {
-            $order->add_fee('Extra Mesh Length (>2300mm)', 100);
-        }
-
-        if ($a_frame >= 1800) {
-            if (!empty($data['toolbox']) || !empty($data['factory_stoneguard'])) {
-                $order->add_fee('Fittings Charges', 35);
-            }
-        }
+        return $cart_item;
     },
     20,
-    1
+    2
 );
 
 add_action(
@@ -2867,14 +2908,14 @@ function sts_materialize_customer_cpt( $order_id ) {
     }
 
     $order->update_meta_data( '_sts_customer_cpt_created', 'yes' );
-    $order->add_order_note( 'STS SUCCESS: Customer CPT created' );
+    $order->add_order_note( 'Customer CPT created' );
     $order->save();
 }
 
-add_filter('woocommerce_hidden_order_itemmeta', function ($hidden) {
-    $hidden[] = '_sts_payload';
-    return $hidden;
-});
+// add_filter('woocommerce_hidden_order_itemmeta', function ($hidden) {
+//     $hidden[] = '_sts_payload';
+//     return $hidden;
+// });
 
 
 /*
