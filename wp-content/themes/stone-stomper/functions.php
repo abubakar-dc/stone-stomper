@@ -2496,44 +2496,65 @@ add_filter('post_date_column_time', function($h_time, $post) {
 
 add_action('woocommerce_cart_calculate_fees', function ($cart) {
 
-    if (is_admin() && !defined('DOING_AJAX')) {
-        return;
-    }
+	if (is_admin() && !defined('DOING_AJAX')) {
+		return;
+	}
 
-    foreach ($cart->get_cart() as $cart_item) {
+	$is_free_order = false;
 
-        if (empty($cart_item['sts_payload']) || !is_array($cart_item['sts_payload'])) {
-            continue;
-        }
+	foreach ($cart->get_applied_coupons() as $code) {
+		$coupon = new WC_Coupon($code);
 
-        $data = $cart_item['sts_payload'];
+		if ($coupon->get_discount_type() === 'percent' && (float) $coupon->get_amount() === 100.0) {
+			$is_free_order = true;
+			break;
+		}
+	}
 
-        if (empty($data['product_type']) || (string) $data['product_type'] !== '545') {
-            continue;
-        }
+	foreach ($cart->get_cart() as $cart_item) {
 
-        $barwidth = isset($data['barwidth_mm']) ? floatval($data['barwidth_mm']) : 0;
-        $a_frame  = isset($data['a_frame_length_mm']) ? floatval($data['a_frame_length_mm']) : 0;
+		if (empty($cart_item['sts_payload']) || !is_array($cart_item['sts_payload'])) {
+			continue;
+		}
 
-        if ($barwidth >= 1900 && $barwidth <= 2100) {
-            $cart->add_fee('Extra Bar Width (1900–2100mm)', 35);
-        } elseif ($barwidth > 2100) {
-            $cart->add_fee('Extra Bar Width (>2100mm)', 100);
-        }
+		$data = $cart_item['sts_payload'];
 
-        if ($a_frame >= 1800 && $a_frame <= 2300) {
-            $cart->add_fee('Extra Mesh Length (1800–2300mm)', 35);
-        } elseif ($a_frame > 2300) {
-            $cart->add_fee('Extra Mesh Length (>2300mm)', 100);
-        }
+		if (empty($data['product_type']) || (string) $data['product_type'] !== '545') {
+			continue;
+		}
 
-        if ($a_frame >= 1800) {
-            if (!empty($data['toolbox']) || !empty($data['factory_stoneguard'])) {
-                $cart->add_fee('Fittings Charges', 35);
-            }
-        }
-    }
+		$barwidth = isset($data['barwidth_mm']) ? floatval($data['barwidth_mm']) : 0;
+		$a_frame  = isset($data['a_frame_length_mm']) ? floatval($data['a_frame_length_mm']) : 0;
+
+		$fee_amount = $is_free_order ? 0 : null;
+
+		if ($barwidth >= 1900 && $barwidth <= 2100) {
+			$cart->add_fee(
+				'Extra Bar Width (1900–2100mm)',
+				$fee_amount !== null ? $fee_amount : 35
+			);
+		} elseif ($barwidth > 2100) {
+			$cart->add_fee(
+				'Extra Bar Width (>2100mm)',
+				$fee_amount !== null ? $fee_amount : 100
+			);
+		}
+
+		if ($a_frame >= 1800 && $a_frame <= 2300) {
+			$cart->add_fee(
+				'Extra Mesh Length (1800–2300mm)',
+				$fee_amount !== null ? $fee_amount : 35
+			);
+		} elseif ($a_frame > 2300) {
+			$cart->add_fee(
+				'Extra Mesh Length (>2300mm)',
+				$fee_amount !== null ? $fee_amount : 100
+			);
+		}
+	}
 });
+
+
 
 add_filter('woocommerce_add_cart_item_data', function ($cart_item_data, $product_id) {
 
