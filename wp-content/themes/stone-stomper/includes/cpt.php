@@ -189,39 +189,37 @@ add_action( 'pre_get_posts', function ( $query ) {
     }
 
     global $pagenow;
-    if ( 'edit.php' !== $pagenow ) {
+    if ( $pagenow !== 'edit.php' ) {
         return;
     }
 
-    if ( isset( $_GET['post_type'] ) && 'customer' === $_GET['post_type'] && ! empty( $_GET['s'] ) ) {
+    if ( isset( $_GET['post_type'], $_GET['s'] ) && $_GET['post_type'] === 'customer' && $_GET['s'] !== '' ) {
         $search = sanitize_text_field( $_GET['s'] );
-		$order_id = get_field( 'order_id' );
 
-        $meta_query = [
-            'relation' => 'OR',
-            [
-                'key'     => 'email', // your ACF email field
-                'value'   => $search,
-                'compare' => 'LIKE',
-            ],
-            [
-                'key'     => '_billing_email', // WooCommerce email
-                'value'   => $search,
-                'compare' => 'LIKE',
-            ],
-            [
-                'key'     => 'order_id', // WooCommerce email
-                'value'   => $search,
-                'compare' => 'LIKE',
-            ],
-        ];
+        add_filter( 'posts_search', function ( $search_sql, $wp_query ) use ( $search ) {
+            global $wpdb;
 
-        $query->set( 'meta_query', $meta_query );
+            if ( ! is_admin() || ! $wp_query->is_main_query() ) {
+                return $search_sql;
+            }
 
-        // Disable default title/content search for CPT
-        $query->set( 's', '' );
+            return $wpdb->prepare(
+                " AND (
+                    {$wpdb->posts}.post_title LIKE %s
+                    OR EXISTS (
+                        SELECT 1 FROM {$wpdb->postmeta}
+                        WHERE {$wpdb->postmeta}.post_id = {$wpdb->posts}.ID
+                        AND {$wpdb->postmeta}.meta_key IN ('email','_billing_email','order_id')
+                        AND {$wpdb->postmeta}.meta_value LIKE %s
+                    )
+                )",
+                '%' . $wpdb->esc_like( $search ) . '%',
+                '%' . $wpdb->esc_like( $search ) . '%'
+            );
+        }, 10, 2 );
     }
-} );
+});
+
 
 /**
  * AJAX handler to update WooCommerce order status
@@ -378,14 +376,11 @@ add_action( 'pre_get_posts', function( $query ) {
 
 	// Sirf Customer CPT ke liye
 	if ( isset( $_GET['post_type'] ) && $_GET['post_type'] === 'customer' ) {
-
-		// ✅ Jab user ne manually sort nahi kiya ho to default date DESC
 		if ( empty( $_GET['orderby'] ) ) {
 			$query->set( 'orderby', 'date' );
 			$query->set( 'order', 'DESC' );
 		}
 
-		// ✅ Agar WC status filter apply ho
 		if ( ! empty( $_GET['wc_status'] ) ) {
 
 			$status_filter = sanitize_text_field( $_GET['wc_status'] );

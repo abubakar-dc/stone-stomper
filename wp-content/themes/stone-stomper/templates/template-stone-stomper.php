@@ -149,7 +149,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											<input id="last_name" placeholder="Last Name" name="customer_last_name" type="text" required />
 										</div>
 										<div class="field">
-											<input id="cust_phone" placeholder="Phone" name="customer_phone" type="text" required />
+											<input id="cust_phone" placeholder="Phone" name="customer_phone" type="text" required inputmode="numeric" pattern="[0-9]*"/>
 										</div>
 										<div class="field">
 											<input id="cust_address" placeholder="Home Address" name="customer_address" type="text" required />
@@ -461,9 +461,9 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 													Additional Measurement required for this bar option. Please refer to the image gallery to determine how to find this length. Alternatively, view instructions for "Option 2" ( <a href="https://stonestomper.com.au/wp-content/uploads/2025/12/Option-2-Measurement.png" target="_blank">Link</a> )  or Option 3" ( <a href="https://stonestomper.com.au/wp-content/uploads/2025/12/Option-3-Measurement.jpg" target="_blank">Link</a> ).
 												</div>
 												<div class="field">
-													<label class="req screen-reader-text" for="additional_hitch_measurement">Additional Measurement required for this bar option.</label>
+													<label class="req" for="additional_hitch_measurement">Mesurement  (mm)</label>
 													<input id="additional_hitch_measurement" name="additional_hitch_measurement" type="text" inputmode="numeric" pattern="[0-9]*"
-														placeholder="e.g. 1800" required />
+														placeholder="eg. 300 mm" required />
 												</div>
 											</fieldset>
 										</div>

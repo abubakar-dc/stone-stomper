@@ -2502,6 +2502,10 @@ add_action('woocommerce_cart_calculate_fees', function ($cart) {
 
 	$is_free_order = false;
 
+	if ($cart->get_subtotal() <= 0) {
+		$is_free_order = true;
+	}
+
 	foreach ($cart->get_applied_coupons() as $code) {
 		$coupon = new WC_Coupon($code);
 
@@ -2526,35 +2530,48 @@ add_action('woocommerce_cart_calculate_fees', function ($cart) {
 		$barwidth = isset($data['barwidth_mm']) ? floatval($data['barwidth_mm']) : 0;
 		$a_frame  = isset($data['a_frame_length_mm']) ? floatval($data['a_frame_length_mm']) : 0;
 
-		$fee_amount = $is_free_order ? 0 : null;
+		$amount_35  = $is_free_order ? 0.01 : 35;
+		$amount_100 = $is_free_order ? 0.01 : 100;
 
 		if ($barwidth >= 1900 && $barwidth <= 2100) {
-			$cart->add_fee(
-				'Extra Bar Width (1900–2100mm)',
-				$fee_amount !== null ? $fee_amount : 35
-			);
+			$cart->add_fee('Extra Bar Width (1900–2100mm)', $amount_35);
 		} elseif ($barwidth > 2100) {
-			$cart->add_fee(
-				'Extra Bar Width (>2100mm)',
-				$fee_amount !== null ? $fee_amount : 100
-			);
+			$cart->add_fee('Extra Bar Width (>2100mm)', $amount_100);
 		}
 
 		if ($a_frame >= 1800 && $a_frame <= 2300) {
-			$cart->add_fee(
-				'Extra Mesh Length (1800–2300mm)',
-				$fee_amount !== null ? $fee_amount : 35
-			);
+			$cart->add_fee('Extra Mesh Length (1800–2300mm)', $amount_35);
 		} elseif ($a_frame > 2300) {
-			$cart->add_fee(
-				'Extra Mesh Length (>2300mm)',
-				$fee_amount !== null ? $fee_amount : 100
-			);
+			$cart->add_fee('Extra Mesh Length (>2300mm)', $amount_100);
+		}
+
+		if ($a_frame >= 1800) {
+			if (!empty($data['toolbox']) || !empty($data['factory_stoneguard'])) {
+				$cart->add_fee('Fittings Charges', $is_free_order ? 0 : 35);
+			}
 		}
 	}
 });
 
+add_action('woocommerce_cart_calculate_fees', function ($cart) {
 
+	if (is_admin() && !defined('DOING_AJAX')) {
+		return;
+	}
+
+	$adjustment = 0;
+
+	foreach ($cart->get_fees() as $fee) {
+		if ((float) $fee->amount === 0.01) {
+			$adjustment += 0.01;
+		}
+	}
+
+	if ($adjustment > 0) {
+		$cart->add_fee('Discount Adjustment', -$adjustment);
+	}
+
+}, 99);
 
 add_filter('woocommerce_add_cart_item_data', function ($cart_item_data, $product_id) {
 
@@ -2669,48 +2686,6 @@ add_action('woocommerce_checkout_process', function () {
     }
 });
 
-// add_action(
-//     'woocommerce_checkout_create_order',
-//     function ($order) {
-
-//         $payload_raw = $order->get_meta('_sts_payload', true);
-//         if (empty($payload_raw)) {
-//             return;
-//         }
-
-//         $data = json_decode($payload_raw, true);
-//         if (!is_array($data)) {
-//             return;
-//         }
-
-//         if (empty($data['product_type']) || (string) $data['product_type'] !== '545') {
-//             return;
-//         }
-
-//         $barwidth = isset($data['barwidth_mm']) ? floatval($data['barwidth_mm']) : 0;
-//         $a_frame  = isset($data['a_frame_length_mm']) ? floatval($data['a_frame_length_mm']) : 0;
-
-//         if ($barwidth >= 1900 && $barwidth <= 2100) {
-//             $order->add_fee('Extra Bar Width (1900–2100mm)', 35);
-//         } elseif ($barwidth > 2100) {
-//             $order->add_fee('Extra Bar Width (>2100mm)', 100);
-//         }
-
-//         if ($a_frame >= 1800 && $a_frame <= 2300) {
-//             $order->add_fee('Extra Mesh Length (1800–2300mm)', 35);
-//         } elseif ($a_frame > 2300) {
-//             $order->add_fee('Extra Mesh Length (>2300mm)', 100);
-//         }
-
-//         if ($a_frame >= 1800) {
-//             if (!empty($data['toolbox']) || !empty($data['factory_stoneguard'])) {
-//                 $order->add_fee('Fittings Charges', 35);
-//             }
-//         }
-//     },
-//     20,
-//     1
-// );
 
 add_action(
     'woocommerce_get_cart_item_from_session',
@@ -2844,9 +2819,6 @@ function sts_materialize_customer_cpt( $order_id ) {
 		update_post_meta($post_id, 'front_images', $front_images);
 	}
 
-	// Addional Hitch Measurements
-    update_post_meta( $post_id, 'hitch_measurement_field', $hitch_measure );
-
 	// Standard Order Notes
 	update_post_meta( $post_id, 'order_notes', sanitize_text_field( $data['order_notes'] ?? '' ) );
 
@@ -2908,6 +2880,19 @@ function sts_materialize_customer_cpt( $order_id ) {
     } else {
         update_post_meta( $post_id, 'sts_var_caravan_bar_option', sanitize_text_field( $data['bar_options'] ?? '' ) );
     }
+
+	$sts_var_caravan_bar_option = sanitize_text_field( $data['bar_options'] ?? '' );
+	$bar_option = trim( $sts_var_caravan_bar_option );
+
+	if (
+		$bar_option === 'Option 1 Large Angle' ||
+		$bar_option === 'Cut Out Angle'
+	) {
+		update_post_meta( $post_id, 'hitch_measurement_field', 100 );
+	} else {
+		update_post_meta( $post_id, 'hitch_measurement_field', $hitch_measure );
+	}
+
 
    	$sleeve = 'No';
 
