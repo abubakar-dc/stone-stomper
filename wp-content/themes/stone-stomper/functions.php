@@ -714,7 +714,6 @@ function show_towing_svg_in_editor( $post ) {
     $vinyl_insert_height_mm    = get_post_meta( $post->ID, 'vinyl_insert_height_mm', true );
     $toolbox_width_mm    = get_post_meta( $post->ID, 'toolbox_width_mm', true );
     $toolbox_height_mm    = get_post_meta( $post->ID, 'toolbox_height_mm', true );
-    $sts_var_caravan_foam    = get_post_meta( $post->ID, 'sts_var_caravan_foam', true );
 
 
 	// New fields
@@ -741,8 +740,8 @@ function show_towing_svg_in_editor( $post ) {
 
     $sts_var_caravan_cut_out    = get_post_meta( $post->ID, 'sts_var_caravan_cut_out', true );
     $sts_var_caravan_mesh_only_measurement    = get_post_meta( $post->ID, 'sts_var_caravan_mesh_only_measurement', true );
-    $sts_var_caravan_break_form    = get_post_meta( $post->ID, 'sts_var_caravan_break_form', true );
-    $sts_var_caravan_hr_form    = get_post_meta( $post->ID, 'sts_var_caravan_hr_form', true );
+    $sts_var_caravan_foam    = get_post_meta( $post->ID, 'sts_var_caravan_foam', true );
+
     $sts_var_caravan_eyelet_tab    = get_post_meta( $post->ID, 'sts_var_caravan_eyelet_tab', true );
     $sts_var_proposed_date_of_delivery    = get_post_meta( $post->ID, 'sts_var_proposed_date_of_delivery', true );
 
@@ -2501,18 +2500,17 @@ add_action('woocommerce_cart_calculate_fees', function ($cart) {
 	}
 
 	$is_free_order = false;
+	$discount_percent = 0;
 
-	if ($cart->get_subtotal() <= 0) {
-		$is_free_order = true;
+	$subtotal = (float) $cart->get_subtotal();
+	$discount = (float) $cart->get_discount_total();
+
+	if ($subtotal > 0 && $discount > 0) {
+		$discount_percent = ($discount / $subtotal) * 100;
 	}
 
-	foreach ($cart->get_applied_coupons() as $code) {
-		$coupon = new WC_Coupon($code);
-
-		if ($coupon->get_discount_type() === 'percent' && (float) $coupon->get_amount() === 100.0) {
-			$is_free_order = true;
-			break;
-		}
+	if ($subtotal - $discount <= 0) {
+		$is_free_order = true;
 	}
 
 	foreach ($cart->get_cart() as $cart_item) {
@@ -2527,51 +2525,109 @@ add_action('woocommerce_cart_calculate_fees', function ($cart) {
 			continue;
 		}
 
-		$barwidth = isset($data['barwidth_mm']) ? floatval($data['barwidth_mm']) : 0;
-		$a_frame  = isset($data['a_frame_length_mm']) ? floatval($data['a_frame_length_mm']) : 0;
+		$barwidth = isset($data['barwidth_mm']) ? (float) $data['barwidth_mm'] : 0;
+		$a_frame  = isset($data['a_frame_length_mm']) ? (float) $data['a_frame_length_mm'] : 0;
 
-		$amount_35  = $is_free_order ? 0.01 : 35;
-		$amount_100 = $is_free_order ? 0.01 : 100;
+		$base_35  = 35;
+		$base_100 = 100;
+
+		if ($discount_percent > 0 && !$is_free_order) {
+			$base_35  -= $base_35 * ($discount_percent / 100);
+			$base_100 -= $base_100 * ($discount_percent / 100);
+		}
+
+		if ($is_free_order) {
+			$base_35 = 0.01;
+			$base_100 = 0.01;
+		}
 
 		if ($barwidth >= 1900 && $barwidth <= 2100) {
-			$cart->add_fee('Extra Bar Width (1900–2100mm)', $amount_35);
+			$cart->add_fee('Extra Bar Width (1900–2100mm)', $base_35);
 		} elseif ($barwidth > 2100) {
-			$cart->add_fee('Extra Bar Width (>2100mm)', $amount_100);
+			$cart->add_fee('Extra Bar Width (>2100mm)', $base_100);
 		}
 
 		if ($a_frame >= 1800 && $a_frame <= 2300) {
-			$cart->add_fee('Extra Mesh Length (1800–2300mm)', $amount_35);
+			$cart->add_fee('Extra Mesh Length (1800–2300mm)', $base_35);
 		} elseif ($a_frame > 2300) {
-			$cart->add_fee('Extra Mesh Length (>2300mm)', $amount_100);
+			$cart->add_fee('Extra Mesh Length (>2300mm)', $base_100);
 		}
 
-		if ($a_frame >= 1800) {
-			if (!empty($data['toolbox']) || !empty($data['factory_stoneguard'])) {
-				$cart->add_fee('Fittings Charges', $is_free_order ? 0 : 35);
+		if ($a_frame >= 1800 && (!empty($data['toolbox']) || !empty($data['factory_stoneguard']))) {
+
+			$fit_fee = 35;
+
+			if ($discount_percent > 0 && !$is_free_order) {
+				$fit_fee -= $fit_fee * ($discount_percent / 100);
+			}
+
+			if ($is_free_order) {
+				$fit_fee = 0.01;
+			}
+
+			$cart->add_fee('Fittings Charges', $fit_fee);
+		}
+	}
+
+	if ($is_free_order) {
+		$adjustment = 0;
+
+		foreach ($cart->get_fees() as $fee) {
+			if ((float) $fee->amount === 0.01) {
+				$adjustment += 0.01;
 			}
 		}
-	}
-});
 
-add_action('woocommerce_cart_calculate_fees', function ($cart) {
-
-	if (is_admin() && !defined('DOING_AJAX')) {
-		return;
-	}
-
-	$adjustment = 0;
-
-	foreach ($cart->get_fees() as $fee) {
-		if ((float) $fee->amount === 0.01) {
-			$adjustment += 0.01;
+		if ($adjustment > 0) {
+			$cart->add_fee('Promotion Adjustment', -$adjustment);
 		}
 	}
 
-	if ($adjustment > 0) {
-		$cart->add_fee('Discount Adjustment', -$adjustment);
-	}
+}, 20);
 
-}, 99);
+add_filter( 'woocommerce_cart_item_name', 'sts_show_fees_only_in_mini_cart', 20, 3 );
+
+function sts_show_fees_only_in_mini_cart( $name, $cart_item, $cart_item_key ) {
+
+    if ( ! wp_doing_ajax() ) {
+        return $name;
+    }
+
+    static $shown = false;
+
+    if ( $shown ) {
+        return $name;
+    }
+
+    $fees = WC()->cart->get_fees();
+	$shipping_total = WC()->cart->get_shipping_total();
+
+	if ( empty( $fees  ) ) {
+        return $name;
+    }
+
+    $output = '<div class="mini-cart-extra-fees">';
+
+    foreach ( $fees as $fee ) {
+        $output .= '<div class="fee-row">';
+        $output .= '<span>' . esc_html( $fee->name ) . '</span>';
+        $output .= '<span>' . wc_price( $fee->amount ) . '</span>';
+        $output .= '</div>';
+    }
+
+	if ( $shipping_total > 0 ) {
+        $output .= '<div class="fee-row">';
+        $output .= '<span>Delivery</span>';
+        $output .= '<span>' . wc_price( $shipping_total ) . '</span>';
+        $output .= '</div>';
+    }
+
+    $output .= '</div>';
+
+    $shown = true;
+
+    return $name . $output;
+}
 
 add_filter('woocommerce_add_cart_item_data', function ($cart_item_data, $product_id) {
 
@@ -2685,7 +2741,6 @@ add_action('woocommerce_checkout_process', function () {
         }
     }
 });
-
 
 add_action(
     'woocommerce_get_cart_item_from_session',
@@ -2918,10 +2973,93 @@ function sts_materialize_customer_cpt( $order_id ) {
     $order->save();
 }
 
-// add_filter('woocommerce_hidden_order_itemmeta', function ($hidden) {
-//     $hidden[] = '_sts_payload';
-//     return $hidden;
-// });
+add_filter('woocommerce_hidden_order_itemmeta', function ($hidden) {
+    $hidden[] = '_sts_payload';
+    return $hidden;
+});
+
+add_action('woocommerce_after_order_itemmeta', function ($item_id, $item, $product) {
+
+    $raw = $item->get_meta('_sts_payload');
+    if (!$raw) return;
+
+    $data = json_decode($raw, true);
+    if (!is_array($data)) return;
+
+    echo '<div class="sts-admin-inline">';
+    $sections = [
+        'Customer' => [
+            'customer_first_name' => 'First Name',
+            'customer_last_name'  => 'Last Name',
+            'customer_phone'      => 'Phone',
+            'customer_email'      => 'Email',
+        ],
+        'Vehicle' => [
+            'vehicle_make'  => 'Make',
+            'vehicle_model' => 'Model',
+            'vehicle_year'  => 'Year',
+        ],
+        'Measurements' => [
+            'barwidth_mm'       => 'Bar Width (mm)',
+            'caravan_width_mm'  => 'Caravan Width (mm)',
+            'a_frame_length_mm' => 'A-Frame Length (mm)',
+        ],
+        'Options' => [
+            'vinyl_inserts'   => 'Vinyl Inserts',
+            'support_pockets' => 'Support Pockets',
+            'final_delivery'  => 'Delivery',
+        ],
+    ];
+
+    foreach ($sections as $title => $fields) {
+
+        $parts = [];
+
+        foreach ($fields as $key => $label) {
+            if (empty($data[$key])) continue;
+            $parts[] = '<strong>' . esc_html($label) . ':</strong> ' . esc_html($data[$key]);
+        }
+
+        if ($parts) {
+            echo '<p><em>' . esc_html($title) . '</em> — ' . implode(' | ', $parts) . '</p>';
+        }
+    }
+
+    echo '</div>';
+}, 10, 3);
+
+add_action('admin_head', function () {
+    echo '
+    <style>
+        .sts-admin-inline {
+            background: #f8f9fa;
+            padding: 8px 10px;
+            margin-top: 6px;
+            border-left: 3px solid #2271b1;
+            font-size: 13px;
+        }
+
+        .sts-admin-inline p {
+            margin: 4px 0;
+        }
+
+        .sts-admin-inline em {
+            font-style: normal;
+            font-weight: 600;
+			width: 140px;
+			display: inline-block;
+			font-size: 110%;
+        }
+
+        .sts-admin-inline img {
+            margin: 2px;
+            border: 1px solid #ddd;
+        }
+    </style>';
+});
+
+
+
 
 
 /*

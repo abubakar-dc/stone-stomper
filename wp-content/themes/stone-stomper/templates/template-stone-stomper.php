@@ -51,14 +51,11 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 
 <section id="page-section" class="page-section">
 	<section id="hero-section" class="hero-section hero-section-default">
-		<!-- hero start -->
 		<div class="hero-default">
 			<div class="wp-block-cover has-custom-content-position is-position-bottom-left">
-
 				<?php if(has_post_thumbnail($sts_var_post_id)){
 					StoneStomper::the_featured_image($sts_var_post_id,2000,   array(  'class' => 'wp-block-cover__image-background wp-image-342 size-large' ) );
 				}  ?>
-
 				<span aria-hidden="true" class="wp-block-cover__background has-background-dim"></span>
 				<div class="wp-block-cover__inner-container is-layout-constrained wp-block-cover-is-layout-constrained">
 					<h1 class="" tabindex="0"><?php echo esc_html(get_the_title($sts_var_post_id)); ?></h1>
@@ -66,7 +63,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 			</div>
 		</div>
 	</section>
-	<!-- Content Start -->
 	<div class="st-s156"></div>
 	<section>
 		<div class="wrapper">
@@ -143,13 +139,13 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 									</div>
 									<div class="grid vehicle-details cols-2">
 										<div class="field half-input-field">
-											<input id="first_name" placeholder="First Name" name="customer_first_name" type="text" required />
+											<input id="first_name" placeholder="First Name (Required)" name="customer_first_name" type="text" required />
 										</div>
 										<div class="field half-input-field last">
-											<input id="last_name" placeholder="Last Name" name="customer_last_name" type="text" required />
+											<input id="last_name" placeholder="Last Name (Required)" name="customer_last_name" type="text" required />
 										</div>
 										<div class="field">
-											<input id="cust_phone" placeholder="Phone" name="customer_phone" type="text" required inputmode="numeric" pattern="[0-9]*"/>
+											<input id="cust_phone" placeholder="Phone (Required)" name="customer_phone" type="text" required inputmode="numeric" pattern="[0-9]*"/>
 										</div>
 										<div class="field">
 											<input id="cust_address" placeholder="Home Address" name="customer_address" type="text" required />
@@ -896,8 +892,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 		}
 	?>
 	<div class="ts-80 mobile-image-hide"></div>
-	<!-- Content End -->
 	<div class="st-s200 mobile-image-hide"></div>
-
 </section>
 <?php get_footer(); ?>

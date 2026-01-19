@@ -838,3 +838,23 @@ jQuery( document ).ready( function() {
 	} );
 } );
 
+jQuery( document ).on( 'click ajaxComplete', function() {
+	const $fees = jQuery( '.mini-cart-extra-fees' );
+
+	if ( ! $fees.length ) {
+		return;
+	}
+
+	const $totalWrap = jQuery( '.whmc-cart-total-wrap' );
+
+	if ( ! $totalWrap.length ) {
+		return;
+	}
+
+	if ( jQuery( '.whmc-bottom-part .mini-cart-extra-fees' ).length ) {
+		return;
+	}
+
+	$totalWrap.before( $fees );
+} );
+

@@ -768,7 +768,7 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
+            "default_value": "Brake",
             "maxlength": "",
             "allow_in_bindings": 0,
             "placeholder": "",
@@ -891,6 +891,27 @@
             "conditional_logic": 0,
             "wrapper": {
                 "width": "25",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_694473974843d",
+            "label": "Order Notes",
+            "name": "order_notes",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
                 "class": "",
                 "id": ""
             },
@@ -1042,5 +1063,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1766505739
+    "modified": 1768840190
 }
