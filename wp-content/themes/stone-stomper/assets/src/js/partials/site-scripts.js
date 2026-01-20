@@ -29,6 +29,7 @@ jQuery( document ).ready( function() {
 
 jQuery( document ).ready( function() {
 	const meshOnlyProduct = '712';
+	const barAndBracketProduct = '2664';
 
 	function scrollToSection( id ) {
 		const target = document.querySelector( id );
@@ -115,7 +116,6 @@ jQuery( document ).ready( function() {
 
 	jQuery( '#product_type' ).on( 'change', function() {
 		const val = jQuery( this ).val();
-
 		if ( val === meshOnlyProduct ) {
 			jQuery( '#bar-options-section' ).addClass( 'section-disable' );
 			jQuery( '#photographs-details, #final-measurements, #final-summary' ).addClass( 'section-disable' );
@@ -132,7 +132,6 @@ jQuery( document ).ready( function() {
 	function checkCaravanFinalSections() {
 		setTimeout( function() {
 			const selectedProduct = jQuery( '#product_type' ).val();
-
 			if ( selectedProduct === meshOnlyProduct ) {
 				if ( allRequiredFilled( '#caravan-details' ) ) {
 					jQuery( '#bar-options-section' ).addClass( 'section-disable' );
@@ -675,7 +674,7 @@ setupImageUpload( 'photo_front', 'list_front', 'front' );
 
 jQuery( function() {
 	// 🟦 ADD THIS CODE
-	const meshOnlyProduct = '712'; // <-- yahan apna Mesh Only product ka ID laga dena
+	const meshOnlyProduct = '712';
 
 	jQuery( document ).on( 'change', '#product_type', function() {
 	    const selectedProd = jQuery( this ).val();
@@ -778,23 +777,7 @@ jQuery( function() {
 			jQuery( '#express_delivery_note' ).hide();
 		}
 	} );
-} );
 
-// Form
-
-// jQuery( document ).ready( function() {
-// 	jQuery( '.gfield-choice-input' ).on( 'change', function() {
-// 		jQuery( '.toolbox-support, .factory_stoneguard' ).hide().find( 'input[type="text"]' ).val( '' );
-// 		if ( jQuery( this ).is( '#toolbox' ) ) {
-// 			jQuery( '.toolbox-support' ).show();
-// 		}
-// 		if ( jQuery( this ).is( '#factory_stoneguard' ) ) {
-// 			jQuery( '.factory_stoneguard' ).show();
-// 		}
-// 	} );
-// } );
-
-jQuery( document ).ready( function() {
 	jQuery( '.account-icon' ).each( function() {
 		const $el = jQuery( this );
 		if ( $el.text().trim() === '' && ! $el.attr( 'aria-label' ) && ! $el.attr( 'title' ) ) {
@@ -802,9 +785,7 @@ jQuery( document ).ready( function() {
 			$el.attr( 'title', 'My account' );
 		}
 	} );
-} );
 
-jQuery( document ).ready( function() {
 	jQuery( '.product-image a' ).each( function() {
 		const $link = jQuery( this );
 		const $img = $link.find( 'img' );
@@ -824,9 +805,7 @@ jQuery( document ).ready( function() {
 			$link.attr( 'title', label );
 		}
 	} );
-} );
 
-jQuery( document ).ready( function() {
 	jQuery( '.play-icon a' ).each( function() {
 		const $link = jQuery( this );
 

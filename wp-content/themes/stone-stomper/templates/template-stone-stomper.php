@@ -111,7 +111,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 									</div>
 									<div class="st-s36"></div>
 								<div id="jump-01" class="section-disable">
-									<?php if($sts_var_section_head_notices){
+									<?php if($sts_var_section_head_notices) {
 										foreach($sts_var_section_head_notices as $sts_key => $notice){
 										$sts_var_headline = $notice['headline']??null;
 										$sts_var_text = $notice['text']??null;
@@ -198,18 +198,18 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 vehicle-images ">
 										<div class="towing-vehicle-image" id="towing-vehicle-image" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
-												<?php
-													if($sts_var_vichle_detail_image ){
-													 	StoneStomper::the_attachment_image($sts_var_vichle_detail_image,1200 );
-														if($sts_var_vichle_image_caption){ ?>
-															 <div class="image-caption-area">
-																 <div class="image-caption">
-																	 <p><?php echo $sts_var_vichle_image_caption; ?></p>
-																 </div>
-															 </div>
-														 <?php }
-													}
-												?>
+											<?php
+												if($sts_var_vichle_detail_image ){
+													StoneStomper::the_attachment_image($sts_var_vichle_detail_image,1200 );
+													if($sts_var_vichle_image_caption){ ?>
+															<div class="image-caption-area">
+																<div class="image-caption">
+																	<p><?php echo $sts_var_vichle_image_caption; ?></p>
+																</div>
+															</div>
+														<?php }
+												}
+											?>
 										</div>
 									</div>
 								</div>
@@ -218,7 +218,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										foreach($sts_var_section_head_notices as $sts_key => $notice){
 											$sts_var_headline = $notice['headline']??null;
 											$sts_var_text = $notice['text']??null;
-
 											if($sts_key === 1){ ?>
 												<?php if ( $sts_var_headline ) { ?>
 													<h3><?php echo esc_html($sts_var_headline); ?></h3>
@@ -421,7 +420,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 									if($sts_var_section_bar_options_description){ ?>
 										<p><?php echo html_entity_decode($sts_var_section_bar_options_description); ?></p>
 									<?php } ?>
-
 									<!-- Mobile Image -->
 									<div class="vehicle-image mobile-form-image-slider" id="caravan-images" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
 										<?php if($sts_var_section_bar_options_bar_gallery){ ?>
@@ -443,8 +441,8 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											<?php }
 										} ?>
 									</div>
-									<?php if($sts_var_section_bar_options_bar_options){ ?>
-										<div class="grid cols-2 ">
+									<?php if($sts_var_section_bar_options_bar_options) { ?>
+										<div class="grid cols-2">
 											<div class="field">
 												<select id="bar_options" name="bar_options" required>
 													<option value="">Select Bar Option</option>
