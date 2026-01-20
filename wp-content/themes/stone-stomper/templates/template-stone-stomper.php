@@ -41,6 +41,8 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 	$sts_var_section_bar_options         = $sts_fields['sts_var_section_bar_options'] ?? null;
 	$sts_var_section_bar_options_title         = $sts_var_section_bar_options['title'] ?? null;
 	$sts_var_section_bar_options_description         = $sts_var_section_bar_options['description'] ?? null;
+	$sts_var_section_bar_options_description_option_two         	= $sts_var_section_bar_options['option_two_description'] ?? null;
+	$sts_var_section_bar_options_description_option_three         	= $sts_var_section_bar_options['option_three_description'] ?? null;
 	$sts_var_section_bar_options_bar_options         = $sts_var_section_bar_options['bar_options'] ?? null;
 	$sts_var_section_bar_options_bar_gallery         = $sts_var_section_bar_options['bar_gallery'] ?? null;
 	$mesh_only_measurement_field_notice_text         = $sts_fields['mesh_only_measurement_field_notice_text'] ?? null;
@@ -453,9 +455,16 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 												</select>
 											</div>
 											<fieldset class="hitch_measurement_dropdown" style="display:none">
-												<div class="note notice-bar mt-0">
-													Additional Measurement required for this bar option. Please refer to the image gallery to determine how to find this length. Alternatively, view instructions for "Option 2" ( <a href="https://stonestomper.com.au/wp-content/uploads/2025/12/Option-2-Measurement.png" target="_blank">Link</a> )  or Option 3" ( <a href="https://stonestomper.com.au/wp-content/uploads/2025/12/Option-3-Measurement.jpg" target="_blank">Link</a> ).
-												</div>
+												<?php if($sts_var_section_bar_options_description_option_two){ ?>
+													<div id="option-two-description" class="note notice-bar option-two-description mt-0"  style="display:none">
+														<?php echo html_entity_decode( $sts_var_section_bar_options_description_option_two ); ?>
+													</div>
+												<?php } ?>
+												<?php if($sts_var_section_bar_options_description_option_three){ ?>
+													<div id="option-three-description" class="note notice-bar option-three-description mt-0"  style="display:none">
+														<?php echo html_entity_decode( $sts_var_section_bar_options_description_option_three ); ?>
+													</div>
+												<?php } ?>
 												<div class="field">
 													<label class="req" for="additional_hitch_measurement">Mesurement  (mm)</label>
 													<input id="additional_hitch_measurement" name="additional_hitch_measurement" type="text" inputmode="numeric" pattern="[0-9]*"
