@@ -1459,7 +1459,6 @@ use PhpOffice\PhpWord\Element\TextRun;
 function generate_customer_order_word_file($post_id) {
 	require_once __DIR__ . '/vendor/autoload.php';
     $phpWord = new \PhpOffice\PhpWord\PhpWord();
-
     $phpWord->setDefaultFontName('Arial');
     $phpWord->setDefaultFontSize(10);
 
@@ -1537,11 +1536,9 @@ function generate_customer_order_word_file($post_id) {
     $sts_var_order_notes        					= get_post_meta($post_id, 'sts_var_order_notes', true);
 	$final_details 									= get_post_meta( $post_id, 'final_details', true );
 	$order_notes 									= get_post_meta( $post_id, 'order_notes', true );
-
 	$extra_fittings 								= get_post_meta( $post_id, 'extra_fittings', true );
 	$sts_var_caravan_bar_bend_type 					= get_post_meta( $post_id, 'sts_var_caravan_bar_bend_type', true );
 	$tab_on_back 									= get_post_meta( $post_id, 'tab_on_back', true );
-
 
 	// New fields
     $extension_plate        = get_post_meta($post_id, 'extension_plate', true);
@@ -1581,7 +1578,7 @@ function generate_customer_order_word_file($post_id) {
 
 	$final_delivery_address = "Same As Home Address";
 
-	if($final_details && $final_details['final_delivery'] === 'move' ) {
+	if( $final_details && $final_details['final_delivery'] === 'move' ) {
 		$final_delivery_address = "I am on the Move";
 	}
 
@@ -1633,12 +1630,12 @@ function generate_customer_order_word_file($post_id) {
 
 	// LEFT COLUMN
 	$leftCell = $infoTable->addCell(5000);
-
 	$textRun = $leftCell->addTextRun($compact);
+
 	$textRun->addText("Name: ", ['bold' => true]);
 	$textRun->addText($customer_name);
-
 	$textRun = $leftCell->addTextRun($compact);
+
 	$textRun->addText("Phone: ", ['bold' => true]);
 	$textRun->addText($customer_phone);
 
@@ -1650,7 +1647,7 @@ function generate_customer_order_word_file($post_id) {
 	// Nested table to restrict width
 	$addressTable = $leftCell->addTable(['cellMargin' => 0]);
 	$addressTable->addRow();
-	$addressTable->addCell(3000)->addText(strip_tags($delivery_address ?: $address_meta_address), [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$addressTable->addCell(3000)->addText(strip_tags($address_meta_address ?: $address_meta_address), [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	if ( $order ) {
 		$textRun = $leftCell->addTextRun(['spaceBefore' => 0, 'spaceAfter' => 0]);
 		$textRun->addText("Delivery Address: ", ['bold' => true]);
@@ -2651,6 +2648,7 @@ add_filter('woocommerce_add_cart_item_data', function ($cart_item_data, $product
 }, 10, 2);
 
 // Persist to Order Items (admin)
+
 add_action('woocommerce_checkout_create_order_line_item', function($item, $cart_item_key, $values, $order) {
 
     // Simple fields (incl. support_pockets)
@@ -3057,9 +3055,6 @@ add_action('admin_head', function () {
         }
     </style>';
 });
-
-
-
 
 
 /*
