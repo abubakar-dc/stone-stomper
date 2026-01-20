@@ -741,6 +741,28 @@ jQuery( function() {
 		}
 	} );
 
+	jQuery( '#bar_options' ).on( 'change', function() {
+		const selected = jQuery( this ).val();
+		const optionTwo = 'Option 2 Standard Post';
+		const optionThree = [
+			'Option 3 Standard Shank',
+			'Option 3 Adjustable Shank',
+		];
+
+		jQuery( '.option-two-description, .option-three-description' ).hide();
+
+		if ( selected === optionTwo ) {
+			jQuery( '.hitch_measurement_dropdown' ).slideDown();
+			jQuery( '#option-two-description' ).slideDown();
+		} else if ( optionThree.includes( selected ) ) {
+			jQuery( '.hitch_measurement_dropdown' ).slideDown();
+			jQuery( '#option-three-description' ).slideDown();
+		} else {
+			jQuery( '.hitch_measurement_dropdown' ).slideUp();
+			jQuery( '#additional_hitch_measurement' ).val( '' );
+		}
+	} );
+
 	jQuery( '#final_address' ).on( 'change', function() {
 		if ( jQuery( this ).val() === 'move' ) {
 			jQuery( '#move_note' ).show();
@@ -819,5 +841,25 @@ jQuery( document ).ready( function() {
 			e.target.value = e.target.value.replace( /[^0-9]/g, '' );
 		}
 	} );
+} );
+
+jQuery( document ).on( 'click ajaxComplete', function() {
+	const $fees = jQuery( '.mini-cart-extra-fees' );
+
+	if ( ! $fees.length ) {
+		return;
+	}
+
+	const $totalWrap = jQuery( '.whmc-cart-total-wrap' );
+
+	if ( ! $totalWrap.length ) {
+		return;
+	}
+
+	if ( jQuery( '.whmc-bottom-part .mini-cart-extra-fees' ).length ) {
+		return;
+	}
+
+	$totalWrap.before( $fees );
 } );
 

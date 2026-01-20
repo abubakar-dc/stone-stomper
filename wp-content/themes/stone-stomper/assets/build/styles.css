@@ -5628,7 +5628,7 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   fill: var(--ss_black_2);
   height: 12px;
   margin-left: 0;
-  margin-top: 28px;
+  margin-top: 0;
   pointer-events: none;
   position: absolute;
   width: 12px;
@@ -5703,6 +5703,26 @@ body #daextlwcnf-cookie-settings-button-2:hover {
 
 .wc-block-components-express-payment__event-buttons li::before {
   display: none;
+}
+
+ul.wc-block-components-totals-discount__coupon-list li::before {
+  display: none;
+}
+ul.wc-block-components-totals-discount__coupon-list li.wc-block-components-chip.wc-block-components-chip--radius-large {
+  padding-right: 0.45em;
+}
+ul.wc-block-components-totals-discount__coupon-list button.wc-block-components-chip__remove {
+  transition: none !important;
+}
+ul.wc-block-components-totals-discount__coupon-list button.wc-block-components-chip__remove:hover {
+  background-color: var(--ss_black_2);
+}
+
+.fee-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+  font-weight: 600;
 }
 
 /*-------------------------------------------------
@@ -5902,9 +5922,14 @@ body #daextlwcnf-cookie-settings-button-2:hover {
 .whmc-body .amounts {
   display: none;
 }
-.whmc-body #totalcla .woocommerce-Price-amount bdi, .whmc-body #totalcla .woocommerce-Price-amount .woocommerce-Price-currencySymbol {
+.whmc-body #totalcla .woocommerce-Price-amount bdi,
+.whmc-body #totalcla .woocommerce-Price-amount .woocommerce-Price-currencySymbol {
   font-size: var(--ss_font_size_28) !important;
   font-weight: 600;
+}
+
+.whmc-cart-items-inner .mini-cart-extra-fees {
+  display: none;
 }
 
 /*-------------------------------------------------

@@ -41,6 +41,8 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 	$sts_var_section_bar_options         = $sts_fields['sts_var_section_bar_options'] ?? null;
 	$sts_var_section_bar_options_title         = $sts_var_section_bar_options['title'] ?? null;
 	$sts_var_section_bar_options_description         = $sts_var_section_bar_options['description'] ?? null;
+	$sts_var_section_bar_options_description_option_two         	= $sts_var_section_bar_options['option_two_description'] ?? null;
+	$sts_var_section_bar_options_description_option_three         	= $sts_var_section_bar_options['option_three_description'] ?? null;
 	$sts_var_section_bar_options_bar_options         = $sts_var_section_bar_options['bar_options'] ?? null;
 	$sts_var_section_bar_options_bar_gallery         = $sts_var_section_bar_options['bar_gallery'] ?? null;
 	$mesh_only_measurement_field_notice_text         = $sts_fields['mesh_only_measurement_field_notice_text'] ?? null;
@@ -51,14 +53,11 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 
 <section id="page-section" class="page-section">
 	<section id="hero-section" class="hero-section hero-section-default">
-		<!-- hero start -->
 		<div class="hero-default">
 			<div class="wp-block-cover has-custom-content-position is-position-bottom-left">
-
 				<?php if(has_post_thumbnail($sts_var_post_id)){
 					StoneStomper::the_featured_image($sts_var_post_id,2000,   array(  'class' => 'wp-block-cover__image-background wp-image-342 size-large' ) );
 				}  ?>
-
 				<span aria-hidden="true" class="wp-block-cover__background has-background-dim"></span>
 				<div class="wp-block-cover__inner-container is-layout-constrained wp-block-cover-is-layout-constrained">
 					<h1 class="" tabindex="0"><?php echo esc_html(get_the_title($sts_var_post_id)); ?></h1>
@@ -66,7 +65,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 			</div>
 		</div>
 	</section>
-	<!-- Content Start -->
 	<div class="st-s156"></div>
 	<section>
 		<div class="wrapper">
@@ -89,7 +87,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										<?php } ?>
 									<?php } ?>
 								</div>
-
 								<div class="form-section-right column" id="details-section">
 									<div class="content-head">
 										<?php if($sts_var_section_headline){ ?>
@@ -100,7 +97,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											}
 										?>
 									</div>
-
 									<div class="products-select">
 										<?php if ( $sts_var_select_products ) { ?>
 											<div class="field jump-01">
@@ -145,13 +141,13 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 									</div>
 									<div class="grid vehicle-details cols-2">
 										<div class="field half-input-field">
-											<input id="first_name" placeholder="First Name" name="customer_first_name" type="text" required />
+											<input id="first_name" placeholder="First Name (Required)" name="customer_first_name" type="text" required />
 										</div>
 										<div class="field half-input-field last">
-											<input id="last_name" placeholder="Last Name" name="customer_last_name" type="text" required />
+											<input id="last_name" placeholder="Last Name (Required)" name="customer_last_name" type="text" required />
 										</div>
 										<div class="field">
-											<input id="cust_phone" placeholder="Phone" name="customer_phone" type="text" required />
+											<input id="cust_phone" placeholder="Phone (Required)" name="customer_phone" type="text" required inputmode="numeric" pattern="[0-9]*"/>
 										</div>
 										<div class="field">
 											<input id="cust_address" placeholder="Home Address" name="customer_address" type="text" required />
@@ -428,7 +424,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 
 									<!-- Mobile Image -->
 									<div class="vehicle-image mobile-form-image-slider" id="caravan-images" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
-
 										<?php if($sts_var_section_bar_options_bar_gallery){ ?>
 											<?php foreach($sts_var_section_bar_options_bar_gallery as $sts_key => $photo){
 												$caption = wp_get_attachment_caption( $photo );
@@ -452,15 +447,30 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										<div class="grid cols-2 ">
 											<div class="field">
 												<select id="bar_options" name="bar_options" required>
-
 													<option value="">Select Bar Option</option>
-													<?php foreach ( $sts_var_section_bar_options_bar_options as $option ){
-														$single_bar_option = $option['add_option'];
-														?>
+													<?php foreach ( $sts_var_section_bar_options_bar_options as $option ) {
+														$single_bar_option = $option['add_option']; ?>
 														<option value="<?php echo esc_attr( $single_bar_option ); ?>"><?php echo esc_html( $single_bar_option ); ?></option>
 													<?php } ?>
 												</select>
 											</div>
+											<fieldset class="hitch_measurement_dropdown" style="display:none">
+												<?php if($sts_var_section_bar_options_description_option_two){ ?>
+													<div id="option-two-description" class="note notice-bar option-two-description mt-0"  style="display:none">
+														<?php echo html_entity_decode( $sts_var_section_bar_options_description_option_two ); ?>
+													</div>
+												<?php } ?>
+												<?php if($sts_var_section_bar_options_description_option_three){ ?>
+													<div id="option-three-description" class="note notice-bar option-three-description mt-0"  style="display:none">
+														<?php echo html_entity_decode( $sts_var_section_bar_options_description_option_three ); ?>
+													</div>
+												<?php } ?>
+												<div class="field">
+													<label class="req" for="additional_hitch_measurement">Mesurement  (mm)</label>
+													<input id="additional_hitch_measurement" name="additional_hitch_measurement" type="text" inputmode="numeric" pattern="[0-9]*"
+														placeholder="eg. 300 mm" required />
+												</div>
+											</fieldset>
 										</div>
 									<?php } ?>
 								</div>
@@ -615,11 +625,9 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 									</div>
 									<div class="grid cols-2">
 										<div class="field mesh-only-field">
-											<label class="req" for="meshmeasurment">Bracket on the caravan to Stone Somper while hitched up straight</label>
+											<label class="req" for="meshmeasurment">Bracket on the caravan to Stone Stomper while hitched up straight</label>
 											<input id="meshmeasurment" name="meshmeasurment_mm" type="text" inputmode="numeric" pattern="[0-9]*"
 												placeholder="e.g. 1800" required />
-
-
 											<?php if ( $mesh_only_measurement_field_notice_text ) { ?>
 												<div class="note notice-bar"><?php echo html_entity_decode($mesh_only_measurement_field_notice_text); ?></div>
 											<?php } ?>
@@ -641,7 +649,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										</div>
 										<fieldset class="ss-support-options" style="display:none">
 											<div class="note notice-bar mt-0">As the A-Frame length is longer than 1800mm, we require a mid-fixing point for your Stone Stomper. Please select one of the following options. If you are unsure, please select "Support Pockets"</div>
-											<div  class="ginput_container ginput_container_checkbox extra-support">
+											<div class="ginput_container ginput_container_checkbox extra-support">
 												<!-- ToolBox -->
 												<div class="gchoice stone-stomper-supports">
 													<div class="checkbox-item">
@@ -667,7 +675,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 												<div class="gchoice stone-stomper-supports">
 													<input class="gfield-choice-input" name="input_1.3" type="radio" value="factory-stoneguard" id="factory_stoneguard">
 													<label for="factory_stoneguard" id="label_4_1_1">Factory Stoneguard</label>
-
 													<div class="factory_stoneguard" style="display:none">
 														<div class="factory_stoneguard_inner two-columns-fields">
 															<div class="field extra-support">
@@ -787,7 +794,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										<?php
 										}
 											}
-										} ?>
+									} ?>
 									<div class="grid cols-2">
 										<div class="field">
 											<label class="req" for="order_notes-details">Order Notes</label>
@@ -869,10 +876,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											<span>Stone Stomper®</span>
 											<strong id="selected-product-price" >$825.00</strong>
 										</div>
-
-										<div class="total"><span>Total</span> <strong>$<span
-													data-id="total">825.00</span></strong> <span class="muted">inc.
-												GST</span></div>
+										<div class="total"><span>Total</span> <strong>$<span data-id="total">825.00</span></strong> <span class="muted">inc. GST</span></div>
 									</div>
 									<div class="actions">
 										<button class="btn primary" type="button" id="btn_cart">Add to Cart</button>
@@ -882,8 +886,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 							</div>
 						</div>
 					</form>
-
-
 				</div>
 			</div>
 		</div>
@@ -899,8 +901,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 		}
 	?>
 	<div class="ts-80 mobile-image-hide"></div>
-	<!-- Content End -->
 	<div class="st-s200 mobile-image-hide"></div>
-
 </section>
 <?php get_footer(); ?>

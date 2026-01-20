@@ -38,6 +38,7 @@ foreach ( $sts_folder_includes as $sts_folders ) {
  *
  * @param string $directory Folder dir path.
  */
+
 function sts_includes( $directory ) {
 	$folders = array();
 
@@ -72,6 +73,7 @@ add_action('woocommerce_before_calculate_totals', function($cart) {
         WC()->session->set('chosen_shipping_methods', [$chosen]);
     }
 });
+
 // Show details in Cart/Checkout line item
 add_filter('woocommerce_get_item_data', function($item_data, $cart_item) {
     // Simple fields (text)
@@ -146,87 +148,6 @@ add_filter('woocommerce_get_item_data', function($item_data, $cart_item) {
     return $item_data;
 }, 10, 2);
 
-add_filter('woocommerce_add_cart_item_data', function($cart_item_data, $product_id, $variation_id) {
-
-    if (!empty($_POST['hitch_attachment_ids'])) {
-        $cart_item_data['hitch_attachment_ids'] = sanitize_text_field($_POST['hitch_attachment_ids']);
-    }
-
-    if (!empty($_POST['rear_attachment_ids'])) {
-        $cart_item_data['rear_attachment_ids'] = sanitize_text_field($_POST['rear_attachment_ids']);
-    }
-
-    if (!empty($_POST['front_attachment_ids'])) {
-        $cart_item_data['front_attachment_ids'] = sanitize_text_field($_POST['front_attachment_ids']);
-    }
-
-    // --- SAVE PRODUCT TYPE (MOST IMPORTANT) ---
-	if (!empty($_POST['product_type'])) {
-		// Force map frontend selection to correct ID
-		$cart_item_data['product_type'] = sanitize_text_field($_POST['product_type']);
-	}
-
-
-    // --- new measurement fields ---
-    if (!empty($_POST['barwidth'])) {
-        $cart_item_data['barwidth_mm'] = floatval($_POST['barwidth']);
-    }
-
-    if (!empty($_POST['a_frame_length'])) {
-        $cart_item_data['a_frame_length_mm'] = floatval($_POST['a_frame_length']);
-    }
-
-    return $cart_item_data;
-}, 10, 3);
-
-// Persist to Order Items (admin)
-
-add_action('woocommerce_checkout_create_order_line_item', function($item, $cart_item_key, $values, $order) {
-    // Simple fields (incl. support_pockets)
-    $fields = [
-        'barwidth_mm'              => 'Towing Vehicle Barwidth',
-        'caravan_width_mm'         => 'Caravan Width',
-        'caravan_clearance_gap_mm' => 'Caravan Clearance Gap',
-        'vinyl_inserts'            => 'Vinyl Inserts',
-        'support_pockets'          => 'Support Pockets',
-    ];
-
-    // Helper: parse JSON/CSV to clean int IDs
-    $parse_ids = static function($raw) {
-        if (empty($raw)) return [];
-        if (is_string($raw) && strpos(trim($raw), '[') === 0) {
-            $raw = json_decode($raw, true);
-        }
-        if (is_string($raw)) {
-            $raw = preg_split('/[\s,|]+/', $raw);
-        }
-        return array_values(array_filter(array_map('intval', (array) $raw)));
-    };
-
-    // Save photo IDs using the same labels your admin renderer reads
-    $attachments = [
-        'hitch_attachment_ids' => 'Hitch Attachment Ids',
-        'rear_attachment_ids'  => 'Rear Attachment Ids',
-        'front_attachment_ids' => 'Front Attachment Ids',
-    ];
-
-    foreach ($attachments as $key => $label) {
-        if (!empty($values[$key])) {
-            $ids = $parse_ids($values[$key]);
-            if ($ids) {
-                $item->add_meta_data($label, implode(',', $ids), true);
-            }
-        }
-    }
-
-	 // Add measurements to order item meta
-    if (!empty($values['barwidth_mm'])) {
-        $item->add_meta_data('Towing Vehicle Barwidth (mm)', $values['barwidth_mm']);
-    }
-    if (!empty($values['a_frame_length_mm'])) {
-        $item->add_meta_data('A-Frame Length (mm)', $values['a_frame_length_mm']);
-    }
-}, 10, 4);
 
 add_filter( 'use_block_editor_for_post', function( $use_block_editor, $post ) {
 
@@ -251,9 +172,6 @@ add_action( 'admin_init', function() {
         remove_post_type_support( 'page', 'editor' );
     }
 });
-
-
-
 
 /**
  * Helper: normalize checkbox truthy values
@@ -363,9 +281,7 @@ function allowed_block_types( $allowed_blocks, $editor_context ) {
 function mytheme_add_woocommerce_support() {
 	add_theme_support( 'woocommerce' );
 }
-
 add_action( 'after_setup_theme', 'mytheme_add_woocommerce_support' );
-
 
 // Handle upsell + main product add to cart
 add_action( 'template_redirect', function() {
@@ -386,6 +302,7 @@ add_action( 'template_redirect', function() {
 		exit;
 	}
 });
+
 
 function render_towing_diagram($post_id) {
 		$caravan_length_mm      = get_post_meta( $post_id, 'caravan_length_mm', true );
@@ -719,6 +636,28 @@ function svg_to_png_temp($svg_content) {
     return $tmp_png;
 }
 
+function sts_get_images_from_meta( $post_id, $meta_key ) {
+	$raw = get_post_meta( $post_id, $meta_key, true );
+
+	if ( empty( $raw ) ) {
+		return [];
+	}
+
+	if ( is_string( $raw ) ) {
+		$decoded = json_decode( $raw, true );
+		if ( is_array( $decoded ) ) {
+			return $decoded;
+		}
+	}
+
+	if ( is_array( $raw ) ) {
+		return $raw;
+	}
+
+	return [];
+}
+
+
 function show_towing_svg_in_editor( $post ) {
     // Get all meta data
    	$order_id = get_post_meta( $post->ID, 'order_id', true );
@@ -775,7 +714,6 @@ function show_towing_svg_in_editor( $post ) {
     $vinyl_insert_height_mm    = get_post_meta( $post->ID, 'vinyl_insert_height_mm', true );
     $toolbox_width_mm    = get_post_meta( $post->ID, 'toolbox_width_mm', true );
     $toolbox_height_mm    = get_post_meta( $post->ID, 'toolbox_height_mm', true );
-    $sts_var_caravan_foam    = get_post_meta( $post->ID, 'sts_var_caravan_foam', true );
 
 
 	// New fields
@@ -788,11 +726,6 @@ function show_towing_svg_in_editor( $post ) {
     $extra_vinyl_position        = get_post_meta($post->ID, 'extra_vinyl_position', true);
     $angled_stone_guard_width_mm        = get_post_meta($post->ID, 'angled_stone_guard_width_mm', true);
     $angled_stone_guard_depth_mm        = get_post_meta($post->ID, 'angled_stone_guard_depth_mm', true);
-
-
-
-    // $toolbox_width_mm    = get_post_meta( $post->ID, 'toolbox_width_mm', true );
-    // $toolbox_height_mm    = get_post_meta( $post->ID, 'toolbox_height_mm', true );
 
     $vehicle_make    = get_post_meta( $post->ID, 'vehicle_make', true );
     $caravan_make    = get_post_meta( $post->ID, 'caravan_make', true );
@@ -807,18 +740,16 @@ function show_towing_svg_in_editor( $post ) {
 
     $sts_var_caravan_cut_out    = get_post_meta( $post->ID, 'sts_var_caravan_cut_out', true );
     $sts_var_caravan_mesh_only_measurement    = get_post_meta( $post->ID, 'sts_var_caravan_mesh_only_measurement', true );
-    $sts_var_caravan_break_form    = get_post_meta( $post->ID, 'sts_var_caravan_break_form', true );
-    $sts_var_caravan_hr_form    = get_post_meta( $post->ID, 'sts_var_caravan_hr_form', true );
+    $sts_var_caravan_foam    = get_post_meta( $post->ID, 'sts_var_caravan_foam', true );
+
     $sts_var_caravan_eyelet_tab    = get_post_meta( $post->ID, 'sts_var_caravan_eyelet_tab', true );
     $sts_var_proposed_date_of_delivery    = get_post_meta( $post->ID, 'sts_var_proposed_date_of_delivery', true );
 
-	$hitch_ids = get_post_meta( $post->ID, 'hitch_ids', true );
-	$rear_ids  = get_post_meta( $post->ID, 'rear_ids', true );
-	$front_ids = get_post_meta( $post->ID, 'front_ids', true );
+	$hitch_images = sts_get_images_from_meta( $post->ID, 'hitch_images', true );
+	$rear_images  = sts_get_images_from_meta( $post->ID, 'rear_images', true );
+	$front_images = sts_get_images_from_meta( $post->ID, 'front_images', true );
 	$support_pockets = get_post_meta( $post->ID, 'support_pockets', true );
 	$support_pockets_measurement    = get_post_meta( $post->ID, 'support_pockets_measurement', true );
-
-	// var_dump($final_details['final_delivery']);
 
 	function show_meta_images( $meta_value ) {
 		if ( empty( $meta_value ) ) return;
@@ -845,36 +776,42 @@ function show_towing_svg_in_editor( $post ) {
 	if ( ! empty( $sts_var_proposed_date_of_delivery ) ) {
 		// Convert to timestamp
 		$sts_var_proposed_date_of_delivery = strtotime( $sts_var_proposed_date_of_delivery );
-	} ?>
+	}
 
+	function sts_get_image_url( $value ) {
+		if ( is_numeric( $value ) ) {
+			return wp_get_attachment_url( (int) $value );
+		}
+
+		if ( filter_var( $value, FILTER_VALIDATE_URL ) ) {
+			return esc_url( $value );
+		}
+
+		return false;
+	}
+	?>
 	<div class="customer-upload-images">
-		<?php if ( $hitch_ids ) { ?>
+		<?php if ( ! empty( $hitch_images ) ) { ?>
 			<div class="row row-1">
 				<h3>Hitch Images</h3>
 				<div class="hitch-images image-group">
-					<?php foreach ( $hitch_ids as $hitch_id ) :
-					$img_url = esc_url($hitch_id); ?>
-					<img src="<?php echo esc_url( $img_url ); ?>" alt="" class="popup-image" />
+					<?php foreach ( $hitch_images as $id ) :
+
+						$img_url = sts_get_image_url( $id );
+						if ( ! $img_url ) continue;
+					?>
+
+						<img src="<?php echo esc_url( $img_url ); ?>" alt="" class="popup-image" />
+
 					<?php endforeach; ?>
-				</div>
-				<div class="image-lightbox">
-					<div class="lightbox-inner">
-						<img src="" alt="" class="lightbox-img" />
-						<div class="lightbox-controls">
-							<span class="lightbox-prev">&#10094;</span>
-							<span class="lightbox-next">&#10095;</span>
-							<span class="lightbox-close">&times;</span>
-						</div>
-					</div>
 				</div>
 			</div>
 		<?php } ?>
-
-		<?php if ( $rear_ids ) { ?>
+		<?php if ( $rear_images ) { ?>
 			<div class="row row-1">
 				<h3>Rear Images</h3>
 				<div class="rear-images image-group">
-					<?php foreach ( $rear_ids as $hitch_id ) :
+					<?php foreach ( $rear_images as $hitch_id ) :
 
 					$img_url = esc_url($hitch_id); ?>
 					<img src="<?php echo esc_url( $img_url ); ?>" alt="" class="popup-image" />
@@ -892,32 +829,31 @@ function show_towing_svg_in_editor( $post ) {
 				</div>
 			</div>
 		<?php } ?>
-
-		<?php if ( $front_ids ) { ?>
+		<?php if ( $front_images ) { ?>
 			<div class="row row-1">
-			<h3>Front Images</h3>
-			<div class="front-images image-group">
-				<?php foreach ( $front_ids as $hitch_id ) :
-				$img_url = esc_url($hitch_id); ?>
+				<h3>Front Images</h3>
+				<div class="front-images image-group">
+					<?php foreach ( $front_images as $hitch_id ) :
+					$img_url = esc_url($hitch_id); ?>
 
-				<img src="<?php echo esc_url( $img_url ); ?>" alt="" class="popup-image" />
-				<?php endforeach; ?>
-			</div>
-			<div class="image-lightbox">
-				<div class="lightbox-inner">
-				<img src="" alt="" class="lightbox-img" />
-				<div class="lightbox-controls">
-					<span class="lightbox-prev">&#10094;</span>
-					<span class="lightbox-next">&#10095;</span>
-					<span class="lightbox-close">&times;</span>
+					<img src="<?php echo esc_url( $img_url ); ?>" alt="" class="popup-image" />
+					<?php endforeach; ?>
 				</div>
+				<div class="image-lightbox">
+					<div class="lightbox-inner">
+					<img src="" alt="" class="lightbox-img" />
+					<div class="lightbox-controls">
+						<span class="lightbox-prev">&#10094;</span>
+						<span class="lightbox-next">&#10095;</span>
+						<span class="lightbox-close">&times;</span>
+					</div>
+					</div>
 				</div>
-			</div>
 			</div>
 		<?php } ?>
 	</div>
 
-	<?php if($hitch_ids || $rear_ids || $front_ids){ ?>
+	<?php if($hitch_images || $rear_images || $front_images){ ?>
 		<div style="margin-top:96px;"></div>
 	<?php } ?>
 
@@ -1523,7 +1459,6 @@ use PhpOffice\PhpWord\Element\TextRun;
 function generate_customer_order_word_file($post_id) {
 	require_once __DIR__ . '/vendor/autoload.php';
     $phpWord = new \PhpOffice\PhpWord\PhpWord();
-
     $phpWord->setDefaultFontName('Arial');
     $phpWord->setDefaultFontSize(10);
 
@@ -1601,7 +1536,9 @@ function generate_customer_order_word_file($post_id) {
     $sts_var_order_notes        					= get_post_meta($post_id, 'sts_var_order_notes', true);
 	$final_details 									= get_post_meta( $post_id, 'final_details', true );
 	$order_notes 									= get_post_meta( $post_id, 'order_notes', true );
-
+	$extra_fittings 								= get_post_meta( $post_id, 'extra_fittings', true );
+	$sts_var_caravan_bar_bend_type 					= get_post_meta( $post_id, 'sts_var_caravan_bar_bend_type', true );
+	$tab_on_back 									= get_post_meta( $post_id, 'tab_on_back', true );
 
 	// New fields
     $extension_plate        = get_post_meta($post_id, 'extension_plate', true);
@@ -1641,7 +1578,7 @@ function generate_customer_order_word_file($post_id) {
 
 	$final_delivery_address = "Same As Home Address";
 
-	if($final_details && $final_details['final_delivery'] === 'move' ) {
+	if( $final_details && $final_details['final_delivery'] === 'move' ) {
 		$final_delivery_address = "I am on the Move";
 	}
 
@@ -1693,12 +1630,12 @@ function generate_customer_order_word_file($post_id) {
 
 	// LEFT COLUMN
 	$leftCell = $infoTable->addCell(5000);
-
 	$textRun = $leftCell->addTextRun($compact);
+
 	$textRun->addText("Name: ", ['bold' => true]);
 	$textRun->addText($customer_name);
-
 	$textRun = $leftCell->addTextRun($compact);
+
 	$textRun->addText("Phone: ", ['bold' => true]);
 	$textRun->addText($customer_phone);
 
@@ -1710,7 +1647,7 @@ function generate_customer_order_word_file($post_id) {
 	// Nested table to restrict width
 	$addressTable = $leftCell->addTable(['cellMargin' => 0]);
 	$addressTable->addRow();
-	$addressTable->addCell(3000)->addText(strip_tags($delivery_address ?: $address_meta_address), [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$addressTable->addCell(3000)->addText(strip_tags($address_meta_address ?: $address_meta_address), [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	if ( $order ) {
 		$textRun = $leftCell->addTextRun(['spaceBefore' => 0, 'spaceAfter' => 0]);
 		$textRun->addText("Delivery Address: ", ['bold' => true]);
@@ -1719,9 +1656,9 @@ function generate_customer_order_word_file($post_id) {
 		$addressTable->addRow();
 		$addressTable->addCell(3000)->addText(strip_tags($final_delivery_address), [], ['spaceBefore' => 0, 'spaceAfter' => 0]); // ~50% of 6000 cell
 	}
-	$textRun = $leftCell->addTextRun($compact);
-	$textRun->addText("Delivery Instructions: ", ['bold' => true]);
-	$textRun->addText($delivery_instructions ?: 'No');
+	// $textRun = $leftCell->addTextRun($compact);
+	// $textRun->addText("Customer Notes: ", ['bold' => true]);
+	// $textRun->addText($delivery_instructions ?: 'No');
 
 	// RIGHT COLUMN
 	$rightCell = $infoTable->addCell(5000);
@@ -1781,6 +1718,10 @@ function generate_customer_order_word_file($post_id) {
 	$row->addCell(6500)->addText("Fittings:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(3500)->addText($fittings, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
+	$row = $tableAccessories->addRow(200);
+	$row->addCell(6500)->addText("Extra Fittings:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(3500)->addText($extra_fittings, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+
 	$row = $tableAccessories->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(6500)->addText("Extension Plate:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(3500)->addText($extension_plate , [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
@@ -1800,6 +1741,14 @@ function generate_customer_order_word_file($post_id) {
 	$row = $tableAccessories->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(6500)->addText("Bar Bend:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(3500)->addText("$sts_var_caravan_bar_bend", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+
+	$row = $tableAccessories->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6500)->addText("Bar Bend Type:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(3500)->addText("$sts_var_caravan_bar_bend_type", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+
+	$row = $tableAccessories->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(6500)->addText("Tab on Back:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(3500)->addText("$tab_on_back", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $tableAccessories->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(6500)->addText("Bar Option:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
@@ -1848,11 +1797,11 @@ function generate_customer_order_word_file($post_id) {
 
 	// Fourth Section: Custom Order Notes
 
-    $section->addText("Order Note:", ['bold' => true]);
-    $section->addText($order_notes, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+    $section->addText("Customer Notes:", ['bold' => true]);
+    $section->addText($sts_var_order_notes, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$section->addText('');
     $section->addText("CUSTOMER ORDER NOTES:", ['bold' => true]);
-    $section->addText($sts_var_order_notes, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+    $section->addText($order_notes, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$section->addPageBreak();
 
 	// Fifth Section: Manufacture Sheet
@@ -2030,7 +1979,6 @@ function download_customer_word_callback() {
     exit;
 }
 
-
 add_action( 'wp_ajax_download_customer_word', 'download_customer_word_callback' );
 add_action( 'wp_ajax_nopriv_download_customer_word', 'download_customer_word_callback' );
 
@@ -2049,11 +1997,11 @@ add_action('restrict_manage_posts', function ($post_type) {
     if ($post_type !== 'customer') return;
 
     // Define the custom buttons and their corresponding status keys
-    $buttons = [
-        'all'           => 'Export All',
-        // 'manufacturing' exports both 'manufacturing-l' and 'manufacturing-m'
-        'manufacturing' => 'Export Manufacturing',
-        'processing'    => 'Export Processing',
+   $buttons = [
+        'all'             => 'Export All',
+        'manufacturing_l' => 'Export Manufacturing L',
+        'manufacturing_m' => 'Export Manufacturing M',
+        'processing'      => 'Export Processing',
     ];
 
     // Output the HTML for the buttons
@@ -2081,7 +2029,7 @@ add_action('admin_init', function () {
     $status_key = isset($_GET['order_status']) ? sanitize_key($_GET['order_status']) : 'all';
 
     // Validate the status key to prevent unexpected file names or queries
-    $valid_statuses = ['all', 'manufacturing', 'processing'];
+    $valid_statuses = ['all', 'manufacturing_l', 'manufacturing_m', 'processing'];
     if (!in_array($status_key, $valid_statuses)) {
         wp_die('Invalid order status for export.');
     }
@@ -2142,20 +2090,25 @@ function generate_bulk_customer_excel_file($status_key = 'all', $post_ids = []) 
 
         // --- Determine Target WC Statuses (WC get_status() returns slugs without 'wc-') ---
         switch ($status_key) {
-            case 'manufacturing':
-                // FIX: Use 'manufacturing' (for Manufacturing L) and 'manufacturing-m' (for Manufacturing M)
-                $statuses_to_filter_by = ['manufacturing', 'manufacturing-m'];
-                break;
+			case 'manufacturing_l':
+				// Targets the 'manufacturing' slug
+				$statuses_to_filter_by = ['manufacturing'];
+				break;
 
-            case 'processing':
-                // Standard WC processing status
-                $statuses_to_filter_by = ['processing'];
-                break;
-            case 'all':
-            default:
-                // No status filter needed
-                break;
-        }
+			case 'manufacturing_m':
+				// Targets the 'manufacturing-m' slug
+				$statuses_to_filter_by = ['manufacturing-m'];
+				break;
+
+			case 'processing':
+				$statuses_to_filter_by = ['processing'];
+				break;
+
+			case 'all':
+			default:
+				$statuses_to_filter_by = [];
+				break;
+		}
 
         if (!empty($statuses_to_filter_by)) {
 
@@ -2333,7 +2286,6 @@ add_filter('handle_actions-customer', function ($redirect_to, $action, $post_ids
     exit; // Terminate script execution after file generation
 }, 10, 3);
 
-
 // Email to manufacturer
 
 function email_to_manufacturer_callback() {
@@ -2369,16 +2321,12 @@ function email_to_manufacturer_callback() {
 
 add_action('wp_ajax_email_to_manufacturer', 'email_to_manufacturer_callback');
 
-add_action('admin_enqueue_scripts', function($hook){
-
+add_action('admin_enqueue_scripts', function($hook) {
     global $post;
-
     // Sirf post editor screen par run karo
     if ($hook !== 'post.php' && $hook !== 'post-new.php') return;
-
     // Sirf hamari required post type ke liye
     if (!isset($post) || $post->post_type !== 'customer') return;
-
     // Admin JS enqueue
     wp_enqueue_script(
         'customer-admin-js',
@@ -2387,7 +2335,6 @@ add_action('admin_enqueue_scripts', function($hook){
         false,
         true
     );
-
 });
 
 // 1️⃣ Register the new "Manufacturing L" status
@@ -2427,7 +2374,6 @@ add_filter( 'wc_order_statuses', function( $statuses ) {
 	return $new_statuses;
 } );
 
-
 /**
  * Add a WooCommerce Order Status meta box to single Customer (Order) edit screen
  */
@@ -2446,6 +2392,7 @@ add_action( 'add_meta_boxes', function() {
 /**
  * Render the status dropdown
  */
+
 function stonestomper_render_order_status_box( $post ) {
 	$order_id = get_field( 'order_id', $post->ID ); // your linked WooCommerce order ID
 	if ( ! $order_id ) {
@@ -2472,9 +2419,11 @@ function stonestomper_render_order_status_box( $post ) {
 	wp_nonce_field( 'update_wc_order_status_nonce', 'wc_order_status_nonce' );
 }
 
-/**
- * Save WooCommerce status change
- */
+/*
+|-----------------------------------------
+|  Save WooCommerce status change
+|-----------------------------------------
+*/
 
 add_action( 'save_post_customer', function( $post_id, $post, $update ) {
 	// Permission + nonce check
@@ -2520,64 +2469,10 @@ add_action('init', function() {
     }
 });
 
-add_action('woocommerce_cart_calculate_fees', function($cart) {
-    if (is_admin() && !defined('DOING_AJAX')) {
-        return;
-    }
-
-    // Read stored cookie data
-    $data = sts_read_order_form_cookie();
-
-    //  If not stone-stomper → no fees
-    if (empty($data['product_type']) || $data['product_type'] !== '545') {
-        return;
-    }
-
-    // Loop cart items
-    foreach ($cart->get_cart() as $cart_item) {
-
-        // Bar Width & A-frame values stored in cart item
-        $barwidth       = isset($cart_item['barwidth_mm']) ? floatval($cart_item['barwidth_mm']) : 0;
-        $a_frame_length = isset($cart_item['a_frame_length_mm']) ? floatval($cart_item['a_frame_length_mm']) : 0;
-
-        /*
-        |-----------------------------------------
-        |  EXTRA CHARGES — STONE STOMPER ONLY
-        |-----------------------------------------
-        */
-
-        // --- Extra Bar Width ---
-        if ($barwidth >= 1900 && $barwidth <= 2100) {
-            $cart->add_fee(__('Extra Bar Width (1900–2100mm)', 'stone-stomper'), 35);
-        } elseif ($barwidth > 2100) {
-            $cart->add_fee(__('Extra Bar Width (>2100mm)', 'stone-stomper'), 100);
-        }
-
-        // --- Extra Mesh Length ---
-        if ($a_frame_length >= 1800 && $a_frame_length <= 2300) {
-            $cart->add_fee(__('Extra Mesh Length (1800–2300mm)', 'stone-stomper'), 35);
-        } elseif ($a_frame_length > 2300) {
-            $cart->add_fee(__('Extra Mesh Length (>2300mm)', 'stone-stomper'), 100);
-        }
-
-        /*
-        |-----------------------------------------
-        |  NEW — SUPPORT POCKETS / TOOLBOX COST
-        |-----------------------------------------
-        */
-        if ($a_frame_length >= 1800) {
-			// toolbox & factory-stoneguard → both $35
-			if ($data['toolbox'] === true || $data['factory_stoneguard'] === true) {
-				$cart->add_fee(__('Fittings Charges', 'stone-stomper'), 35);
-			}
-        }
-    }
-});
-
 add_filter('woocommerce_is_sold_individually', 'hide_quantity_for_specific_product', 10, 2);
 
 function hide_quantity_for_specific_product($sold_individually, $product) {
-    if ($product->get_id() == 545) {
+    if ($product->get_id() == 545 || $product->get_id() == 712) {
         return true;
     }
     return $sold_individually;
@@ -2595,246 +2490,633 @@ add_filter('post_date_column_time', function($h_time, $post) {
 |-----------------------------------------
 */
 
+add_action('woocommerce_cart_calculate_fees', function ($cart) {
+
+	if (is_admin() && !defined('DOING_AJAX')) {
+		return;
+	}
+
+	$is_free_order = false;
+	$discount_percent = 0;
+
+	$subtotal = (float) $cart->get_subtotal();
+	$discount = (float) $cart->get_discount_total();
+
+	if ($subtotal > 0 && $discount > 0) {
+		$discount_percent = ($discount / $subtotal) * 100;
+	}
+
+	if ($subtotal - $discount <= 0) {
+		$is_free_order = true;
+	}
+
+	foreach ($cart->get_cart() as $cart_item) {
+
+		if (empty($cart_item['sts_payload']) || !is_array($cart_item['sts_payload'])) {
+			continue;
+		}
+
+		$data = $cart_item['sts_payload'];
+
+		if (empty($data['product_type']) || (string) $data['product_type'] !== '545') {
+			continue;
+		}
+
+		$barwidth = isset($data['barwidth_mm']) ? (float) $data['barwidth_mm'] : 0;
+		$a_frame  = isset($data['a_frame_length_mm']) ? (float) $data['a_frame_length_mm'] : 0;
+
+		$base_35  = 35;
+		$base_100 = 100;
+
+		if ($discount_percent > 0 && !$is_free_order) {
+			$base_35  -= $base_35 * ($discount_percent / 100);
+			$base_100 -= $base_100 * ($discount_percent / 100);
+		}
+
+		if ($is_free_order) {
+			$base_35 = 0.01;
+			$base_100 = 0.01;
+		}
+
+		if ($barwidth >= 1900 && $barwidth <= 2100) {
+			$cart->add_fee('Extra Bar Width (1900–2100mm)', $base_35);
+		} elseif ($barwidth > 2100) {
+			$cart->add_fee('Extra Bar Width (>2100mm)', $base_100);
+		}
+
+		if ($a_frame >= 1800 && $a_frame <= 2300) {
+			$cart->add_fee('Extra Mesh Length (1800–2300mm)', $base_35);
+		} elseif ($a_frame > 2300) {
+			$cart->add_fee('Extra Mesh Length (>2300mm)', $base_100);
+		}
+
+		if ($a_frame >= 1800 && (!empty($data['toolbox']) || !empty($data['factory_stoneguard']))) {
+
+			$fit_fee = 35;
+
+			if ($discount_percent > 0 && !$is_free_order) {
+				$fit_fee -= $fit_fee * ($discount_percent / 100);
+			}
+
+			if ($is_free_order) {
+				$fit_fee = 0.01;
+			}
+
+			$cart->add_fee('Fittings Charges', $fit_fee);
+		}
+	}
+
+	if ($is_free_order) {
+		$adjustment = 0;
+
+		foreach ($cart->get_fees() as $fee) {
+			if ((float) $fee->amount === 0.01) {
+				$adjustment += 0.01;
+			}
+		}
+
+		if ($adjustment > 0) {
+			$cart->add_fee('Promotion Adjustment', -$adjustment);
+		}
+	}
+
+}, 20);
+
+add_filter( 'woocommerce_cart_item_name', 'sts_show_fees_only_in_mini_cart', 20, 3 );
+
+function sts_show_fees_only_in_mini_cart( $name, $cart_item, $cart_item_key ) {
+
+    if ( ! wp_doing_ajax() ) {
+        return $name;
+    }
+
+    static $shown = false;
+
+    if ( $shown ) {
+        return $name;
+    }
+
+    $fees = WC()->cart->get_fees();
+	$shipping_total = WC()->cart->get_shipping_total();
+
+	if ( empty( $fees  ) ) {
+        return $name;
+    }
+
+    $output = '<div class="mini-cart-extra-fees">';
+
+    foreach ( $fees as $fee ) {
+        $output .= '<div class="fee-row">';
+        $output .= '<span>' . esc_html( $fee->name ) . '</span>';
+        $output .= '<span>' . wc_price( $fee->amount ) . '</span>';
+        $output .= '</div>';
+    }
+
+	if ( $shipping_total > 0 ) {
+        $output .= '<div class="fee-row">';
+        $output .= '<span>Delivery</span>';
+        $output .= '<span>' . wc_price( $shipping_total ) . '</span>';
+        $output .= '</div>';
+    }
+
+    $output .= '</div>';
+
+    $shown = true;
+
+    return $name . $output;
+}
+
+add_filter('woocommerce_add_cart_item_data', function ($cart_item_data, $product_id) {
+
+	if (empty($_POST['payload']) || !is_array($_POST['payload'])) {
+		return $cart_item_data;
+	}
+
+	if (
+		empty($_POST['payload']['is_stone_stomper_order']) ||
+		$_POST['payload']['is_stone_stomper_order'] !== 'yes'
+	) {
+		return $cart_item_data;
+	}
+
+	$cart_item_data['sts_payload'] = array_map('wc_clean', $_POST['payload']);
+
+	$cart_item_data['unique_key'] = md5(microtime() . rand());
+
+	return $cart_item_data;
+
+}, 10, 2);
+
+// Persist to Order Items (admin)
+
+add_action('woocommerce_checkout_create_order_line_item', function($item, $cart_item_key, $values, $order) {
+
+    // Simple fields (incl. support_pockets)
+    $fields = [
+        'barwidth_mm'              => 'Towing Vehicle Barwidth',
+        'caravan_width_mm'         => 'Caravan Width',
+        'caravan_clearance_gap_mm' => 'Caravan Clearance Gap',
+        'vinyl_inserts'            => 'Vinyl Inserts',
+        'support_pockets'          => 'Support Pockets',
+    ];
+
+    // Helper: parse JSON/CSV to clean int IDs
+    $parse_ids = static function($raw) {
+        if (empty($raw)) return [];
+        if (is_string($raw) && strpos(trim($raw), '[') === 0) {
+            $raw = json_decode($raw, true);
+        }
+        if (is_string($raw)) {
+            $raw = preg_split('/[\s,|]+/', $raw);
+        }
+        return array_values(array_filter(array_map('intval', (array) $raw)));
+    };
+
+    // Save photo IDs using the same labels your admin renderer reads
+    $attachments = [
+        'hitch_attachment_ids' => 'Hitch Attachment Ids',
+        'rear_attachment_ids'  => 'Rear Attachment Ids',
+        'front_attachment_ids' => 'Front Attachment Ids',
+    ];
+
+    foreach ($attachments as $key => $label) {
+        if (!empty($values[$key])) {
+            $ids = $parse_ids($values[$key]);
+            if ($ids) {
+                $item->add_meta_data($label, implode(',', $ids), true);
+            }
+        }
+    }
+
+	// Add measurements to order item meta
+    if (!empty($values['barwidth_mm'])) {
+        $item->add_meta_data('Towing Vehicle Barwidth (mm)', $values['barwidth_mm']);
+    }
+
+    if (!empty($values['a_frame_length_mm'])) {
+        $item->add_meta_data('A-Frame Length (mm)', $values['a_frame_length_mm']);
+    }
+
+}, 10, 4);
+
+add_action('woocommerce_checkout_create_order_line_item', function ($item, $cart_item_key, $values, $order) {
+    // Get product ID from cart item
+    $product_id = $values['product_id'];
+
+    // Skip non–Stone Stomper products
+    if (!has_term('stone-stomper', 'product_cat', $product_id)) {
+        return;
+    }
+
+    // Stop if payload is missing for Stone Stomper
+    if (empty($values['sts_payload']) || !is_array($values['sts_payload'])) {
+        error_log('STS DEBUG: payload missing for Stone Stomper product');
+        return;
+    }
+
+    // Save payload into order item meta
+    $item->add_meta_data(
+        '_sts_payload',
+        wp_json_encode($values['sts_payload']),
+        true
+    );
+
+}, 20, 4);
+
+add_action('woocommerce_checkout_process', function () {
+
+    foreach (WC()->cart->get_cart() as $item) {
+
+        // Skip non–Stone Stomper products
+        if (!has_term('stone-stomper', 'product_cat', $item['product_id'])) {
+            continue;
+        }
+
+        // Block checkout if payload is missing
+        if (empty($item['sts_payload'])) {
+            wc_add_notice('Configuration data missing. Please refresh the page and try again.', 'error');
+            return;
+        }
+    }
+});
 
 add_action(
-    'woocommerce_store_api_checkout_order_processed',
-    'sts_save_block_checkout_order_meta',
-    10,
-    1
+    'woocommerce_get_cart_item_from_session',
+    function ( $cart_item, $values ) {
+
+        // Restore STS payload from session into cart item
+        if ( isset( $values['sts_payload'] ) ) {
+            $cart_item['sts_payload'] = $values['sts_payload'];
+        }
+
+        return $cart_item;
+    },
+    20,
+    2
 );
-
-function sts_save_block_checkout_order_meta( $order ) {
-
-    if ( ! $order instanceof WC_Order ) {
-        return;
-    }
-
-    $cookie = sts_read_order_form_cookie();
-
-    if ( empty( $cookie['is_stone_stomper_order'] ) || $cookie['is_stone_stomper_order'] !== 'yes' ) {
-        return;
-    }
-
-    $order->update_meta_data( '_sts_order', 'yes' );
-    $order->update_meta_data( '_sts_payload', wp_json_encode( $cookie ) );
-    $order->save();
-}
-
-function sts_read_order_form_cookie() {
-    $prefix = 'order_form'; // Expected cookie name
-    $json = '';
-
-    // Check if the cookie exists
-    if (!empty($_COOKIE[$prefix])) {
-        $json = wp_unslash($_COOKIE[$prefix]);
-    }
-
-    if (empty($json)) {
-        return null; // No data, cookie is empty
-    }
-
-    // Decode the cookie data
-    $decoded = json_decode($json, true);
-
-    // Ensure valid data
-    return is_array($decoded) ? $decoded : null;
-}
 
 add_action(
     'woocommerce_order_status_processing',
     'sts_materialize_customer_cpt',
-    20,
-    1
+    20
 );
 
 function sts_materialize_customer_cpt( $order_id ) {
 
-    // -------------------------
-    // 1. Order sanity check
-    // -------------------------
     $order = wc_get_order( $order_id );
     if ( ! $order ) {
         return;
     }
 
-    // -------------------------
-    // 2. Idempotency guard
-    // -------------------------
     if ( $order->get_meta( '_sts_customer_cpt_created' ) === 'yes' ) {
         return;
     }
 
-    // -------------------------
-    // 3. Readiness checks
-    // -------------------------
-    if ( empty( $order->get_items() ) ) {
-        $order->add_order_note( 'STS WAIT: Order items not ready' );
-        return;
+    $data = null;
+
+    foreach ( $order->get_items() as $item ) {
+        $raw = $item->get_meta( '_sts_payload', true );
+        if ( $raw ) {
+            $decoded = json_decode( $raw, true );
+            if ( is_array( $decoded ) ) {
+                $data = $decoded;
+                break;
+            }
+        }
     }
 
-    $payload_raw = $order->get_meta( '_sts_payload', true );
-    if ( empty( $payload_raw ) ) {
-        $order->add_order_note( 'STS WAIT: payload missing' );
-        return;
-    }
-
-    $data = json_decode( $payload_raw, true );
     if ( ! is_array( $data ) ) {
-        $order->add_order_note( 'STS ERROR: payload decode failed' );
+        $order->add_order_note( 'STS STOP: payload missing' );
         return;
     }
 
-    // -------------------------
-    // 4. Business rule check
-    // -------------------------
-    if (
-        empty( $data['is_stone_stomper_order'] ) ||
-        $data['is_stone_stomper_order'] !== 'yes'
-    ) {
+    if ( empty( $data['is_stone_stomper_order'] ) || $data['is_stone_stomper_order'] !== 'yes' ) {
         return;
     }
 
-    // -------------------------
-    // 5. Sanitize inputs
-    // -------------------------
-    $cust_first_name = sanitize_text_field( $data['customer_first_name'] ?? '' );
-    $cust_last_name  = sanitize_text_field( $data['customer_last_name'] ?? '' );
-    $cust_name       = trim( $cust_first_name . ' ' . $cust_last_name );
-    $cust_phone      = sanitize_text_field( $data['customer_phone'] ?? '' );
-    $cust_email      = sanitize_email( $data['customer_email'] ?? '' );
-    $cust_address    = sanitize_text_field( $data['customer_address'] ?? '' );
-    $cust_suburb     = sanitize_text_field( $data['customer_suburb'] ?? '' );
-    $cust_state      = sanitize_text_field( $data['customer_state'] ?? '' );
+    $cust_first = sanitize_text_field( $data['customer_first_name'] ?? '' );
+    $cust_last  = sanitize_text_field( $data['customer_last_name'] ?? '' );
+    if ( $cust_first === '' || $cust_last === '' ) {
+        $order->add_order_note( 'STS STOP: customer name missing' );
+        return;
+    }
 
-    $product_type = ( $data['product_type'] ?? '' ) === '712'
-        ? 'Mesh Only'
-        : 'Stone Stomper';
+    $cust_name = trim( $cust_first . ' ' . $cust_last );
 
-    $vehicle_make  = sanitize_text_field( $data['vehicle_make'] ?? $data['veh_make'] ?? '' );
-    $vehicle_model = sanitize_text_field( $data['vehicle_model'] ?? $data['veh_model'] ?? '' );
-    $vehicle_year  = sanitize_text_field( $data['vehicle_year'] ?? $data['veh_year'] ?? '' );
+    $post_id = wp_insert_post( [
+        'post_type'   => 'customer',
+        'post_status' => 'publish',
+        'post_title'  => $cust_name,
+    ] );
 
-    $caravan_make  = sanitize_text_field( $data['caravan_make'] ?? $data['van_make'] ?? '' );
-    $caravan_model = sanitize_text_field( $data['caravan_model'] ?? $data['van_model'] ?? '' );
+    if ( is_wp_error( $post_id ) || ! $post_id ) {
+        return;
+    }
 
-    $measure_barwidth_mm = sanitize_text_field( $data['barwidth_mm'] ?? '' );
-    $caravan_width_mm   = sanitize_text_field( $data['caravan_width_mm'] ?? '' );
-    $a_frame_length_mm  = sanitize_text_field( $data['a_frame_length_mm'] ?? '' );
+    $product_type = (string) ( $data['product_type'] ?? '' ) === '712' ? 'Mesh Only' : 'Stone Stomper';
 
-    $support_pockets = ! empty( $data['support_pockets'] ) ? 'yes' : 'no';
+	// Contact Information
+    update_post_meta( $post_id, 'order_id', $order_id );
+    update_post_meta( $post_id, 'name', $cust_name );
+    update_post_meta( $post_id, 'customer_phone', sanitize_text_field( $data['customer_phone'] ?? '' ) );
+    update_post_meta( $post_id, 'email', sanitize_email( $data['customer_email'] ?? '' ) );
+    update_post_meta( $post_id, 'delivery_address', sanitize_text_field( $data['customer_address'] ?? '' ) );
+    update_post_meta( $post_id, 'subrubs', sanitize_text_field( $data['customer_suburb'] ?? '' ) );
+    update_post_meta( $post_id, 'state', sanitize_text_field( $data['customer_state'] ?? '' ) );
+    update_post_meta( $post_id, 'product_type', $product_type );
 
-    $hitch_ids = sts_to_media_array( $data['hitch_ids'] ?? [] );
-    $rear_ids  = sts_to_media_array( $data['rear_ids'] ?? [] );
-    $front_ids = sts_to_media_array( $data['front_ids'] ?? [] );
-    $order_notes = sanitize_text_field( $data['order_notes'] ?? '' );
-    $toolbox_width_mm  = sanitize_text_field( $data['toolbox_width_mm'] ?? '' );
-    $toolbox_height_mm = sanitize_text_field( $data['toolbox_length_mm'] ?? '' );
-    $factory_stoneguard_width  = sanitize_text_field( $data['stoneguard_width_mm'] ?? '' );
-    $factory_stoneguard_height = sanitize_text_field( $data['stoneguard_length_mm'] ?? '' );
+	// Vehicle Information
+    update_post_meta( $post_id, 'vehicle_make', sanitize_text_field( $data['vehicle_make'] ?? $data['veh_make'] ?? '' ) );
+    update_post_meta( $post_id, 'vehicle_model', sanitize_text_field( $data['vehicle_model'] ?? $data['veh_model'] ?? '' ) );
+    update_post_meta( $post_id, 'year_of_manufacture', sanitize_text_field( $data['vehicle_year'] ?? $data['veh_year'] ?? '' ) );
 
-    $support_pockets_measurement = sanitize_text_field(
-        $data['support_pocket_length_mm'] ?? ''
-    );
+	// Caravan Information
+    update_post_meta( $post_id, 'caravan_make', sanitize_text_field( $data['caravan_make'] ?? $data['van_make'] ?? '' ) );
+    update_post_meta( $post_id, 'caravan_model', sanitize_text_field( $data['caravan_model'] ?? $data['van_model'] ?? '' ) );
 
-    $final = [
-        'final_delivery' => sanitize_text_field(
-            $data['final_delivery'] ?? $data['final_address'] ?? ''
-        ),
-        'acc_upsells' => array_values(
-            array_unique(
-                array_map( 'intval', $data['acc_upsells'] ?? [] )
-            )
-        ),
-    ];
+    $barwidth = floatval( $data['barwidth_mm'] ?? 0 );
+    $caravan_width = floatval( $data['caravan_width_mm'] ?? 0 );
+    $a_frame = floatval( $data['a_frame_length_mm'] ?? 0 );
+    $hitch_measure = floatval( $data['additional_hitch_measurement'] ?? 0 );
+
+    update_post_meta( $post_id, 'bar_width_mm', $barwidth );
+    update_post_meta( $post_id, 'caravan_width_mm', $caravan_width );
+    update_post_meta( $post_id, 'caravan_length_mm', $a_frame );
+
+	// Images
+	$hitch_images = [];
+	$rear_images  = [];
+	$front_images = [];
+
+	if (!empty($data['hitch_ids'])) {
+		$hitch_images = $data['hitch_ids'];
+	}
+
+	if (!empty($data['rear_ids'])) {
+		$rear_images = $data['rear_ids'];
+	}
+
+	if (!empty($data['front_ids'])) {
+		$front_images = $data['front_ids'];
+	}
+
+	if ($hitch_images) {
+		update_post_meta($post_id, 'hitch_images', $hitch_images);
+	}
+
+	if ($rear_images) {
+		update_post_meta($post_id, 'rear_images', $rear_images);
+	}
+
+	if ($front_images) {
+		update_post_meta($post_id, 'front_images', $front_images);
+	}
+
+	// Standard Order Notes
+	update_post_meta( $post_id, 'order_notes', sanitize_text_field( $data['order_notes'] ?? '' ) );
+
+    if ( $caravan_width > 2450 || $a_frame > 2300 ) {
+        update_post_meta( $post_id, 'sts_var_caravan_eyelet_tab', 'Yes' );
+    }
+
+    if ( $barwidth > 2150 ) {
+        update_post_meta( $post_id, 'extra_bungee', 'Yes' );
+    }
+
+    if ( $hitch_measure > 0 ) {
+        if ( $hitch_measure < 250 ) {
+            update_post_meta( $post_id, 'sts_var_caravan_cut_out', 250 );
+        } elseif ( $hitch_measure <= 350 ) {
+            update_post_meta( $post_id, 'sts_var_caravan_cut_out', 350 );
+        } else {
+            update_post_meta( $post_id, 'sts_var_caravan_cut_out', 450 );
+        }
+
+        if ( $product_type === 'Stone Stomper' ) {
+            update_post_meta( $post_id, 'sts_var_caravan_ss_length_adj', $hitch_measure - 140 );
+        }
+    }
+
+   	$final_delivery  = sanitize_text_field( $data['final_delivery'] ?? '' );
+	if ('move' === $final_delivery) {
+	    update_post_meta( $post_id, 'sts_var_proposed_on_the_move', 'Yes' );
+    } else {
+		update_post_meta( $post_id, 'sts_var_proposed_on_the_move', 'No' );
+	}
+
+    update_post_meta( $post_id, 'vinyl_insert_width_mm', sanitize_text_field( $data['vinyl_width_mm'] ?? '' ) );
+    update_post_meta( $post_id, 'vinyl_insert_height_mm', sanitize_text_field( $data['vinyl_length_mm'] ?? '' ) );
+
+    $support_type = $data['input_1.3'] ?? '';
+
+	update_post_meta( $post_id, 'support_pockets', 'No' );
+
+	if ( $support_type === 'toolbox' ) {
+		update_post_meta( $post_id, 'support_type', 'toolbox' );
+		update_post_meta( $post_id, 'toolbox_width_mm', sanitize_text_field( $data['toolbox_width_mm'] ?? '' ) );
+		update_post_meta( $post_id, 'toolbox_height_mm', sanitize_text_field( $data['toolbox_length_mm'] ?? '' ) );
+		update_post_meta( $post_id, 'extra_fittings', 'Short Bolt plus D Shackles' );
+	} elseif ( $support_type === 'factory-stoneguard' ) {
+		update_post_meta( $post_id, 'support_type', 'factory_stoneguard' );
+		update_post_meta( $post_id, 'factory_stoneguard_width', sanitize_text_field( $data['stoneguard_width_mm'] ?? '' ) );
+		update_post_meta( $post_id, 'factory_stoneguard_height', sanitize_text_field( $data['stoneguard_length_mm'] ?? '' ) );
+		update_post_meta( $post_id, 'extra_fittings', 'Long Bolt' );
+	} elseif ( $support_type === 'support_pockets' ) {
+		update_post_meta( $post_id, 'support_pockets', 'Yes' );
+		update_post_meta( $post_id, 'support_pockets_measurement', sanitize_text_field( $data['support_pocket_length_mm'] ?? '' ) );
+	}
+
+    if ( $product_type === 'Mesh Only' ) {
+        update_post_meta( $post_id, 'sts_var_caravan_mesh_only_measurement', sanitize_text_field( $data['meshmeasurment_mm'] ?? '' ) );
+        update_post_meta( $post_id, 'caravan_length_mm', sanitize_text_field( $data['meshmeasurment_mm'] ?? '' ) );
+        update_post_meta( $post_id, 'sts_var_caravan_ss_length_adj', '-120' );
+    } else {
+        update_post_meta( $post_id, 'sts_var_caravan_bar_option', sanitize_text_field( $data['bar_options'] ?? '' ) );
+    }
+
+	$sts_var_caravan_bar_option = sanitize_text_field( $data['bar_options'] ?? '' );
+	$bar_option = trim( $sts_var_caravan_bar_option );
+
+	if (
+		$bar_option === 'Option 1 Large Angle' ||
+		$bar_option === 'Cut Out Angle'
+	) {
+		update_post_meta( $post_id, 'hitch_measurement_field', 100 );
+	} else {
+		update_post_meta( $post_id, 'hitch_measurement_field', $hitch_measure );
+	}
 
 
-	// Product Sleeve
-	$sleeves_value = 'No';
+   	$sleeve = 'No';
+
 	foreach ( $order->get_items() as $item ) {
-		if ( ! is_a( $item, 'WC_Order_Item_Product' ) ) {
-			continue;
-		}
 		if ( (int) $item->get_product_id() === 532 ) {
-			$sleeves_value = 'Yes';
-			foreach ( $item->get_meta_data() as $meta ) {
-				$key = strtolower( $meta->key );
-				$value = trim( (string) $meta->value );
-				if ( empty( $value ) ) {
-					continue;
-				}
-				if ( strpos( $key, 'length' ) !== false ) {
-					$sleeves_value = wc_clean( $value );
-					break;
-				}
-			}
-
+			$sleeve = 'Yes';
 			break;
 		}
 	}
 
-
-
-    // -------------------------
-    // 6. Create CPT
-    // -------------------------
-    $post_id = wp_insert_post( [
-        'post_type'   => 'customer',
-        'post_status' => 'publish',
-        'post_title'  => $cust_name ?: 'Customer ' . $order_id,
-    ] );
-
-    if ( is_wp_error( $post_id ) ) {
-        $order->add_order_note( 'STS ERROR: CPT insert failed' );
-        return;
-    }
-
-    // -------------------------
-    // 7. Save CPT meta
-    // -------------------------
-    update_post_meta( $post_id, 'order_id', $order_id );
-    update_post_meta( $post_id, 'name', $cust_name );
-    update_post_meta( $post_id, 'customer_phone', $cust_phone );
-    update_post_meta( $post_id, 'email', $cust_email );
-    update_post_meta( $post_id, 'delivery_address', $cust_address );
-    update_post_meta( $post_id, 'suburbs', $cust_suburb );
-    update_post_meta( $post_id, 'state', $cust_state );
-    update_post_meta( $post_id, 'product_type', $product_type );
-    update_post_meta( $post_id, 'vehicle_make', $vehicle_make );
-    update_post_meta( $post_id, 'vehicle_model', $vehicle_model );
-    update_post_meta( $post_id, 'caravan_make', $caravan_make );
-    update_post_meta( $post_id, 'caravan_model', $caravan_model );
-    update_post_meta( $post_id, 'year_of_manufacture', $vehicle_year );
-    update_post_meta( $post_id, 'bar_width_mm', $measure_barwidth_mm );
-    update_post_meta( $post_id, 'caravan_width_mm', $caravan_width_mm );
-    update_post_meta( $post_id, 'caravan_length_mm', $a_frame_length_mm );
-    update_post_meta( $post_id, 'support_pockets', $support_pockets );
-    update_post_meta( $post_id, 'hitch_ids', $hitch_ids );
-    update_post_meta( $post_id, 'rear_ids', $rear_ids );
-    update_post_meta( $post_id, 'front_ids', $front_ids );
-    update_post_meta( $post_id, 'final_details', $final );
-    update_post_meta( $post_id, 'order_notes', $order_notes );
-    update_post_meta( $post_id, 'toolbox_width_mm', $toolbox_width_mm );
-    update_post_meta( $post_id, 'toolbox_height_mm', $toolbox_height_mm );
-    update_post_meta( $post_id, 'factory_stoneguard_width', $factory_stoneguard_width );
-    update_post_meta( $post_id, 'factory_stoneguard_height', $factory_stoneguard_height );
-    update_post_meta( $post_id, 'support_pockets_measurement', $support_pockets_measurement );
+	update_post_meta( $post_id, 'sleeve', $sleeve );
 
     if ( $order->get_user_id() ) {
         update_post_meta( $post_id, '_customer_user_id', $order->get_user_id() );
     }
 
-	// Sleeve added or sleeve selected value
-	update_post_meta( $post_id, 'sleeve', $sleeves_value );
+    if ( $order->get_customer_note() ) {
+        update_post_meta( $post_id, 'sts_var_order_notes', sanitize_textarea_field( $order->get_customer_note() ) );
+    }
 
-
-    // -------------------------
-    // 8. Mark order complete
-    // -------------------------
     $order->update_meta_data( '_sts_customer_cpt_created', 'yes' );
-    $order->add_order_note( 'STS SUCCESS: Customer CPT created' );
+    $order->add_order_note( 'Customer CPT created' );
     $order->save();
 }
 
+add_filter('woocommerce_hidden_order_itemmeta', function ($hidden) {
+    $hidden[] = '_sts_payload';
+    return $hidden;
+});
+
+add_action('woocommerce_after_order_itemmeta', function ($item_id, $item, $product) {
+
+    $raw = $item->get_meta('_sts_payload');
+    if (!$raw) return;
+
+    $data = json_decode($raw, true);
+    if (!is_array($data)) return;
+
+    echo '<div class="sts-admin-inline">';
+   $sections = [
+        'Customer' => [
+            'customer_first_name' => 'First Name',
+            'customer_last_name'  => 'Last Name',
+            'customer_phone'      => 'Phone',
+            'customer_email'      => 'Email',
+            'customer_address'    => 'Address',
+            'customer_suburb'     => 'Suburb',
+            'customer_state'      => 'State',
+        ],
+
+        'Towing Vehicle Details' => [
+            'vehicle_make'  => 'Make',
+            'vehicle_model' => 'Model',
+            'vehicle_year'  => 'Year',
+        ],
+
+        'Caravan Details' => [
+            'caravan_make'  => 'Make',
+            'caravan_model' => 'Model',
+        ],
+
+        'Bar Option' => [
+            'bar_options'                  => 'Bar Option',
+            'additional_hitch_measurement' => 'Hitch Measurement (mm)',
+        ],
+
+        'Measurements' => [
+			'barwidth_mm'                  	=> 'Bar Width (mm)',
+            'caravan_width_mm' 				=> 'Caravan Width (mm)',
+            'a_frame_length_mm' 			=> 'A-Frame Length (mm)',
+            'meshmeasurment_mm' 			=> 'Mesh Measurement (mm)',
+        ],
+
+        'Vinyl Inserts' => [
+            'vinyl_width_mm'  => 'Vinyl Width (mm)',
+            'vinyl_length_mm' => 'Vinyl Length (mm)',
+        ],
+
+        'Delivery & Notes' => [
+            'final_delivery' => 'Delivery Type',
+            'order_notes'    => 'Order Notes',
+        ],
+    ];
+
+    foreach ($sections as $title => $fields) {
+
+        $parts = [];
+
+        foreach ($fields as $key => $label) {
+            if (empty($data[$key])) continue;
+            $parts[] = '<strong>' . esc_html($label) . ':</strong> ' . esc_html($data[$key]);
+        }
+
+        if ($parts) {
+            echo '<p><em>' . esc_html($title) . '</em> — ' . implode(' | ', $parts) . '</p>';
+        }
+    }
+
+	$support_type = $data['input_1.3'] ?? '';
+
+	$parts = [];
+
+	if ($support_type === 'support_pockets') {
+		$parts[] = '<strong>Support Type:</strong> Support Pockets';
+		if (!empty($data['support_pocket_length_mm'])) {
+			$parts[] = '<strong>Pocket Length (mm):</strong> ' . esc_html($data['support_pocket_length_mm']);
+		}
+	}
+
+	if ($support_type === 'factory-stoneguard') {
+		$parts[] = '<strong>Support Type:</strong> Stone Guard';
+		if (!empty($data['stoneguard_width_mm'])) {
+			$parts[] = '<strong>Stoneguard Width (mm):</strong> ' . esc_html($data['stoneguard_width_mm']);
+		}
+		if (!empty($data['stoneguard_length_mm'])) {
+			$parts[] = '<strong>Stoneguard Length (mm):</strong> ' . esc_html($data['stoneguard_length_mm']);
+		}
+	}
+
+	if ($support_type === 'toolbox') {
+		$parts[] = '<strong>Support Type:</strong> Toolbox';
+		if (!empty($data['toolbox_width_mm'])) {
+			$parts[] = '<strong>Toolbox Width (mm):</strong> ' . esc_html($data['toolbox_width_mm']);
+		}
+		if (!empty($data['toolbox_length_mm'])) {
+			$parts[] = '<strong>Toolbox Length (mm):</strong> ' . esc_html($data['toolbox_length_mm']);
+		}
+	}
+
+	if ($parts) {
+		echo '<p><em>Support / Protection</em> — ' . implode(' | ', $parts) . '</p>';
+	}
+
+    echo '</div>';
+}, 10, 3);
+
+add_action('admin_head', function () {
+    echo '
+    <style>
+        .sts-admin-inline {
+            background: #f8f9fa;
+            padding: 8px 10px;
+            margin-top: 6px;
+            border-left: 3px solid #2271b1;
+            font-size: 13px;
+        }
+
+        .sts-admin-inline p {
+            margin: 4px 0;
+        }
+
+        .sts-admin-inline em {
+            font-style: normal;
+            font-weight: 600;
+			width: 180px;
+			display: inline-block;
+			font-size: 110%;
+        }
+
+        .sts-admin-inline img {
+            margin: 2px;
+            border: 1px solid #ddd;
+        }
+    </style>';
+});
+
+/*
+|-----------------------------------------
+|  Add just one order to cart of same type of the product
+|-----------------------------------------
+*/
 
 
 
@@ -2849,15 +3131,11 @@ add_action('woocommerce_add_to_cart', function ($cart_item_key, $product_id) {
     $is_mesh_only     = ($product_id == STS_MESH_ONLY_ID);
 
     foreach (WC()->cart->get_cart() as $key => $item) {
-
         if ($key === $cart_item_key) continue;
-
         $existing_id = $item['product_id'];
-
         if ($is_stone_stomper && in_array($existing_id, [STS_STONE_STOMPER_ID, STS_MESH_ONLY_ID])) {
             WC()->cart->remove_cart_item($key);
         }
-
         if ($is_mesh_only && in_array($existing_id, [STS_MESH_ONLY_ID, STS_STONE_STOMPER_ID])) {
             WC()->cart->remove_cart_item($key);
         }
@@ -2869,3 +3147,111 @@ add_action('woocommerce_add_to_cart', function ($cart_item_key, $product_id) {
     wc_add_notice('Previous product replaced.', 'success');
 
 }, 10, 2);
+
+/*
+|-----------------------------------------
+|  Calculation for the SS length feilds with tab on back and the bar bend values | -30 wen tab on back "Yes" , + bar bend value of dropdown
+|-----------------------------------------
+*/
+
+add_action('acf/save_post', function ($post_id) {
+
+    if (get_post_type($post_id) !== 'customer') return;
+
+    $product_type = get_post_meta($post_id, 'product_type', true);
+    if ($product_type !== 'Stone Stomper') return;
+
+    $hitch = floatval(get_post_meta($post_id, 'hitch_measurement_field', true));
+    if ($hitch <= 0) return;
+
+    $tab_on_back = get_post_meta($post_id, 'tab_on_back', true);
+    $bar_bend    = floatval(get_post_meta($post_id, 'sts_var_caravan_bar_bend', true));
+
+    $ss_length_adjustment = $hitch - 140;
+
+    if (strtoupper(trim($tab_on_back)) === 'YES') {
+        $ss_length_adjustment -= 30;
+    }
+
+    $ss_length_adjustment += $bar_bend;
+
+    update_post_meta(
+        $post_id,
+        'sts_var_caravan_ss_length_adj',
+        $ss_length_adjustment
+    );
+
+}, 20);
+
+/*
+ |--------------------------------------------------
+ | Add "On the Move" status to the admin order screen
+ |--------------------------------------------------
+ */
+
+add_action( 'woocommerce_admin_order_data_after_order_details', 'display_on_the_move_status_admin', 10, 1 );
+
+function display_on_the_move_status_admin( $order ) {
+    if ( ! is_object( $order ) ) {
+        $order = wc_get_order( $order );
+    }
+
+    // Find the Customer CPT created for this order
+    $customer_posts = get_posts( [
+        'post_type'  => 'customer',
+        'meta_key'   => 'order_id',
+        'meta_value' => $order->get_id(),
+        'numberposts'=> 1,
+        'fields'     => 'ids',
+    ] );
+
+    if ( empty( $customer_posts ) ) {
+        return;
+    }
+
+    $customer_post_id = $customer_posts[0];
+
+    // Fetch the "On the Move" meta from the CPT
+    $on_the_move = get_post_meta( $customer_post_id, 'sts_var_proposed_on_the_move', true );
+
+    if ( 'Yes' === $on_the_move ) {
+        echo '<div class="on-the-move-alert" style="margin-top: 20px; float: left; width:100%; margin-top:20px; padding:15px; box-sizing: border-box; background-color: #fff9c4; border: 1px solid #fbc02d; border-radius: 4px; display:block;">';
+        echo '<strong style="color:#856404;"> ORDER NOTE:</strong><span style="color: #d32f2f; font-weight:bold;"> Customer is "On the Move"</span>';
+        echo '</div>';
+    }
+}
+
+/*
+ |--------------------------------------------------
+ | Authority to leave
+ |--------------------------------------------------
+ */
+
+
+add_action( 'init', 'register_atl_block_extension' );
+
+function register_atl_block_extension() {
+    // 1. First, we still need to register the field server-side
+    if ( function_exists( 'woocommerce_register_additional_checkout_field' ) ) {
+        woocommerce_register_additional_checkout_field( array(
+            'id'       => 'my-custom-atl/authority-to-leave',
+            'label'    => 'Authority to Leave',
+            'location' => 'order',
+            'type'     => 'select',
+            'options'  => [
+                [ 'value' => 'no', 'label' => 'No' ],
+                [ 'value' => 'yes', 'label' => 'Yes' ],
+            ],
+            'required' => true,
+        ) );
+    }
+
+    // 2. Enqueue the JS file
+    wp_enqueue_script(
+        'atl-block-js',
+        get_stylesheet_directory_uri() . '/assets/src/js/atl-block-field.js', // Adjust path
+        array( 'wc-checkout', 'wc-blocks-registry', 'wp-element' ),
+        '1.0',
+        true
+    );
+}
