@@ -2879,7 +2879,7 @@ function sts_materialize_customer_cpt( $order_id ) {
         update_post_meta( $post_id, 'sts_var_caravan_eyelet_tab', 'Yes' );
     }
 
-    if ( $caravan_width > 2150 ) {
+    if ( $barwidth > 2150 ) {
         update_post_meta( $post_id, 'extra_bungee', 'Yes' );
     }
 
@@ -2985,27 +2985,48 @@ add_action('woocommerce_after_order_itemmeta', function ($item_id, $item, $produ
     if (!is_array($data)) return;
 
     echo '<div class="sts-admin-inline">';
-    $sections = [
+   $sections = [
         'Customer' => [
             'customer_first_name' => 'First Name',
             'customer_last_name'  => 'Last Name',
             'customer_phone'      => 'Phone',
             'customer_email'      => 'Email',
+            'customer_address'    => 'Address',
+            'customer_suburb'     => 'Suburb',
+            'customer_state'      => 'State',
         ],
-        'Vehicle' => [
+
+        'Towing Vehicle Details' => [
             'vehicle_make'  => 'Make',
             'vehicle_model' => 'Model',
             'vehicle_year'  => 'Year',
         ],
-        'Measurements' => [
-            'barwidth_mm'       => 'Bar Width (mm)',
-            'caravan_width_mm'  => 'Caravan Width (mm)',
-            'a_frame_length_mm' => 'A-Frame Length (mm)',
+
+        'Caravan Details' => [
+            'caravan_make'  => 'Make',
+            'caravan_model' => 'Model',
         ],
-        'Options' => [
-            'vinyl_inserts'   => 'Vinyl Inserts',
-            'support_pockets' => 'Support Pockets',
-            'final_delivery'  => 'Delivery',
+
+        'Bar Option' => [
+            'bar_options'                  => 'Bar Option',
+            'additional_hitch_measurement' => 'Hitch Measurement (mm)',
+        ],
+
+        'Measurements' => [
+			'barwidth_mm'                  	=> 'Bar Width (mm)',
+            'caravan_width_mm' 				=> 'Caravan Width (mm)',
+            'a_frame_length_mm' 			=> 'A-Frame Length (mm)',
+            'meshmeasurment_mm' 			=> 'Mesh Measurement (mm)',
+        ],
+
+        'Vinyl Inserts' => [
+            'vinyl_width_mm'  => 'Vinyl Width (mm)',
+            'vinyl_length_mm' => 'Vinyl Length (mm)',
+        ],
+
+        'Delivery & Notes' => [
+            'final_delivery' => 'Delivery Type',
+            'order_notes'    => 'Order Notes',
         ],
     ];
 
@@ -3022,6 +3043,41 @@ add_action('woocommerce_after_order_itemmeta', function ($item_id, $item, $produ
             echo '<p><em>' . esc_html($title) . '</em> — ' . implode(' | ', $parts) . '</p>';
         }
     }
+
+	$support_type = $data['input_1.3'] ?? '';
+
+	$parts = [];
+
+	if ($support_type === 'support_pockets') {
+		$parts[] = '<strong>Support Type:</strong> Support Pockets';
+		if (!empty($data['support_pocket_length_mm'])) {
+			$parts[] = '<strong>Pocket Length (mm):</strong> ' . esc_html($data['support_pocket_length_mm']);
+		}
+	}
+
+	if ($support_type === 'factory-stoneguard') {
+		$parts[] = '<strong>Support Type:</strong> Stone Guard';
+		if (!empty($data['stoneguard_width_mm'])) {
+			$parts[] = '<strong>Stoneguard Width (mm):</strong> ' . esc_html($data['stoneguard_width_mm']);
+		}
+		if (!empty($data['stoneguard_length_mm'])) {
+			$parts[] = '<strong>Stoneguard Length (mm):</strong> ' . esc_html($data['stoneguard_length_mm']);
+		}
+	}
+
+	if ($support_type === 'toolbox') {
+		$parts[] = '<strong>Support Type:</strong> Toolbox';
+		if (!empty($data['toolbox_width_mm'])) {
+			$parts[] = '<strong>Toolbox Width (mm):</strong> ' . esc_html($data['toolbox_width_mm']);
+		}
+		if (!empty($data['toolbox_length_mm'])) {
+			$parts[] = '<strong>Toolbox Length (mm):</strong> ' . esc_html($data['toolbox_length_mm']);
+		}
+	}
+
+	if ($parts) {
+		echo '<p><em>Support / Protection</em> — ' . implode(' | ', $parts) . '</p>';
+	}
 
     echo '</div>';
 }, 10, 3);
@@ -3044,7 +3100,7 @@ add_action('admin_head', function () {
         .sts-admin-inline em {
             font-style: normal;
             font-weight: 600;
-			width: 140px;
+			width: 180px;
 			display: inline-block;
 			font-size: 110%;
         }
@@ -3055,7 +3111,6 @@ add_action('admin_head', function () {
         }
     </style>';
 });
-
 
 /*
 |-----------------------------------------
