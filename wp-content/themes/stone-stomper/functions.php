@@ -2942,6 +2942,7 @@ function sts_materialize_customer_cpt( $order_id ) {
 		$bar_option === 'Cut Out Angle'
 	) {
 		update_post_meta( $post_id, 'hitch_measurement_field', 100 );
+		update_post_meta( $post_id, 'sts_var_caravan_cut_out', 250 );
 	} else {
 		update_post_meta( $post_id, 'hitch_measurement_field', $hitch_measure );
 	}
