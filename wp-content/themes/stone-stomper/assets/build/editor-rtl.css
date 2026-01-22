@@ -5930,6 +5930,9 @@ Mixin for transition
   padding: 0;
   line-height: 1;
 }
+.editor-styles-wrapper .ss-support-options.hide-on-bar-and-bracket {
+  display: none !important;
+}
 .editor-styles-wrapper .wp-block-button .wp-block-button__link {
   box-sizing: border-box;
   position: relative;

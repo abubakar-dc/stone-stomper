@@ -29,6 +29,25 @@ jQuery( document ).ready( function() {
 
 jQuery( document ).ready( function() {
 	const meshOnlyProduct = '712';
+	const barAndBracketProduct = '2664';
+
+	jQuery( document ).on(
+		'change blur',
+		'#vehicle-details input, #vehicle-details select, #vehicle-details textarea',
+		function() {
+			if ( jQuery( '#product_type' ).val() !== barAndBracketProduct ) {
+				return;
+			}
+
+			if ( allRequiredFilled( '#vehicle-details' ) ) {
+				const section = jQuery( '#bar-options-section' );
+				if ( section.hasClass( 'section-disable' ) ) {
+					section.removeClass( 'section-disable' );
+				}
+				scrollToSection( '#bar-options-section' );
+			}
+		}
+	);
 
 	function scrollToSection( id ) {
 		const target = document.querySelector( id );
@@ -132,6 +151,15 @@ jQuery( document ).ready( function() {
 	function checkCaravanFinalSections() {
 		setTimeout( function() {
 			const selectedProduct = jQuery( '#product_type' ).val();
+
+			if ( selectedProduct === barAndBracketProduct ) {
+				const section = jQuery( '#bar-options-section' );
+				if ( section.hasClass( 'section-disable' ) ) {
+					section.removeClass( 'section-disable' );
+				}
+				scrollToSection( '#bar-options-section' );
+				return;
+			}
 
 			if ( selectedProduct === meshOnlyProduct ) {
 				if ( allRequiredFilled( '#caravan-details' ) ) {
@@ -255,6 +283,34 @@ jQuery( document ).ready( function() {
 
 	jQuery( '.form-section-right #btn_cart' ).on( 'click', function() {
 		jQuery( this ).addClass( 'btn-loading' );
+	} );
+
+	jQuery( document ).on( 'change', '#product_type', function() {
+		const selectedProduct = jQuery( this ).val();
+		const caravanFields = '#caravan-details input, #caravan-details select, #caravan-details textarea';
+		const supportMeasurementFields =
+		'#final-measurements .ss-support-options input,' +
+		'#final-measurements .ss-support-options select,' +
+		'#final-measurements .ss-support-options textarea';
+
+		const alwaysHiddenRequired =
+	'#vinyl_width, #vinyl_length, #additional_hitch_measurement';
+
+		if ( selectedProduct === barAndBracketProduct ) {
+			jQuery( '#caravan-details' ).hide();
+			jQuery( '#final-measurements' ).find( '.ss-support-options' ).addClass( 'hide-on-bar-and-bracket' );
+			jQuery( '#final-measurements' ).find( '.hide-on-bar-and-bracket' ).hide();
+			jQuery( '.bar-length-only' ).show();
+			jQuery( caravanFields ).removeAttr( 'required' );
+			jQuery( supportMeasurementFields ).removeAttr( 'required' );
+			jQuery( alwaysHiddenRequired ).removeAttr( 'required' );
+		} else {
+			jQuery( '#caravan-details' ).show();
+			jQuery( '#final-measurements' ).find( '.hide-on-bar-and-bracket' ).show();
+			jQuery( caravanFields ).attr( 'required', 'required' );
+			jQuery( supportMeasurementFields ).attr( 'required', 'required' );
+			jQuery( alwaysHiddenRequired ).attr( 'required', 'required' );
+		}
 	} );
 } );
 

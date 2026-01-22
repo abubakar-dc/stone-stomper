@@ -632,12 +632,12 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 												<div class="note notice-bar"><?php echo html_entity_decode($mesh_only_measurement_field_notice_text); ?></div>
 											<?php } ?>
 										</div>
-										<div class="field">
+										<div class="field hide-on-bar-and-bracket">
 											<label class="req" for="barwidth">Towing Vehicle Barwidth (mm)</label>
 											<input id="barwidth" name="barwidth_mm" type="text" inputmode="numeric" pattern="[0-9]*"
 												placeholder="e.g. 1800" required />
 										</div>
-										<div class="field" >
+										<div class="field hide-on-bar-and-bracket">
 											<label class="req" for="vanwidth">Caravan Width (mm)</label>
 											<input id="vanwidth" name="caravan_width_mm" type="text" inputmode="numeric" pattern="[0-9]*"
 												placeholder="e.g. 1900" required />
