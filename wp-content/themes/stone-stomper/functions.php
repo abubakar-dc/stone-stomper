@@ -303,7 +303,6 @@ add_action( 'template_redirect', function() {
 	}
 });
 
-
 function render_towing_diagram($post_id) {
 		$caravan_length_mm      = get_post_meta( $post_id, 'caravan_length_mm', true );
 		$caravan_width_mm       = get_post_meta( $post_id, 'caravan_width_mm', true );
@@ -2337,7 +2336,7 @@ add_action('admin_enqueue_scripts', function($hook) {
     );
 });
 
-// 1️⃣ Register the new "Manufacturing L" status
+// Register the new "Manufacturing L" status
 add_action( 'init', function() {
 	register_post_status( 'wc-manufacturing', array(
 		'label'                     => 'Manufacturing L',
@@ -2357,7 +2356,7 @@ add_action( 'init', function() {
 	) );
 } );
 
-// 2️⃣ Add it to WooCommerce status dropdowns (in admin & everywhere)
+// Add it to WooCommerce status dropdowns (in admin & everywhere)
 add_filter( 'wc_order_statuses', function( $statuses ) {
 	// Insert after "processing"
 	$new_statuses = [];
@@ -2472,7 +2471,7 @@ add_action('init', function() {
 add_filter('woocommerce_is_sold_individually', 'hide_quantity_for_specific_product', 10, 2);
 
 function hide_quantity_for_specific_product($sold_individually, $product) {
-    if ($product->get_id() == 545 || $product->get_id() == 712) {
+    if ($product->get_id() == 545 || $product->get_id() == 712 || $product->get_id() == 2664) {
         return true;
     }
     return $sold_individually;
@@ -2518,7 +2517,7 @@ add_action('woocommerce_cart_calculate_fees', function ($cart) {
 
 		$data = $cart_item['sts_payload'];
 
-		if (empty($data['product_type']) || (string) $data['product_type'] !== '545') {
+		if (empty($data['product_type']) || !in_array((string) $data['product_type'], ['545', '2664'], true)) {
 			continue;
 		}
 
@@ -2704,9 +2703,13 @@ add_action('woocommerce_checkout_create_order_line_item', function ($item, $cart
     $product_id = $values['product_id'];
 
     // Skip non–Stone Stomper products
-    if (!has_term('stone-stomper', 'product_cat', $product_id)) {
-        return;
-    }
+   if (
+		!has_term('stone-stomper', 'product_cat', $product_id) &&
+		(int) $product_id !== 2664
+	) {
+		return;
+	}
+
 
     // Stop if payload is missing for Stone Stomper
     if (empty($values['sts_payload']) || !is_array($values['sts_payload'])) {
@@ -2813,7 +2816,16 @@ function sts_materialize_customer_cpt( $order_id ) {
         return;
     }
 
-    $product_type = (string) ( $data['product_type'] ?? '' ) === '712' ? 'Mesh Only' : 'Stone Stomper';
+    $product_type_id = (string) ( $data['product_type'] ?? '' );
+
+	if ($product_type_id === '712') {
+		$product_type = 'Mesh Only';
+	} elseif ($product_type_id === '2664') {
+		$product_type = 'Bar and Bracket';
+	} else {
+		$product_type = 'Stone Stomper';
+	}
+
 
 	// Contact Information
     update_post_meta( $post_id, 'order_id', $order_id );
@@ -3121,14 +3133,13 @@ add_action('admin_head', function () {
 
 define('STS_STONE_STOMPER_ID', 545);
 define('STS_MESH_ONLY_ID', 712);
+define('STS_BAR_BRACKET_ID', 2664);
 
 add_action('woocommerce_add_to_cart', function ($cart_item_key, $product_id) {
-
     if (!function_exists('WC') || !WC()->cart) return;
-
     $is_stone_stomper = ($product_id == STS_STONE_STOMPER_ID);
     $is_mesh_only     = ($product_id == STS_MESH_ONLY_ID);
-
+	$is_bar_bracket   = ($product_id == STS_BAR_BRACKET_ID);
     foreach (WC()->cart->get_cart() as $key => $item) {
         if ($key === $cart_item_key) continue;
         $existing_id = $item['product_id'];
@@ -3138,6 +3149,12 @@ add_action('woocommerce_add_to_cart', function ($cart_item_key, $product_id) {
         if ($is_mesh_only && in_array($existing_id, [STS_MESH_ONLY_ID, STS_STONE_STOMPER_ID])) {
             WC()->cart->remove_cart_item($key);
         }
+		if (
+			$is_bar_bracket &&
+			in_array($existing_id, [STS_STONE_STOMPER_ID, STS_MESH_ONLY_ID, STS_BAR_BRACKET_ID], true)
+		) {
+			WC()->cart->remove_cart_item($key);
+		}
     }
 
     WC()->cart->set_session();

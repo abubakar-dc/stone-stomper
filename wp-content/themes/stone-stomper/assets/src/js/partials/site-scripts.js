@@ -293,8 +293,7 @@ jQuery( document ).ready( function() {
 		'#final-measurements .ss-support-options select,' +
 		'#final-measurements .ss-support-options textarea';
 
-		const alwaysHiddenRequired =
-	'#vinyl_width, #vinyl_length, #additional_hitch_measurement';
+		const alwaysHiddenRequired = '#vinyl_width, #vinyl_length, #additional_hitch_measurement';
 
 		if ( selectedProduct === barAndBracketProduct ) {
 			jQuery( '#caravan-details' ).hide();
@@ -304,6 +303,7 @@ jQuery( document ).ready( function() {
 			jQuery( caravanFields ).removeAttr( 'required' );
 			jQuery( supportMeasurementFields ).removeAttr( 'required' );
 			jQuery( alwaysHiddenRequired ).removeAttr( 'required' );
+			jQuery( '#caravan-details input, #caravan-details select, #caravan-details textarea' ).val( '' );
 		} else {
 			jQuery( '#caravan-details' ).show();
 			jQuery( '#final-measurements' ).find( '.hide-on-bar-and-bracket' ).show();

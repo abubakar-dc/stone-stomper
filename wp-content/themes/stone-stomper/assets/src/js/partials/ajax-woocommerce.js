@@ -33,6 +33,11 @@ jQuery( document ).ready( function() {
 
 	function AddToCart() {
 		const ids = [];
+		const formData = jQuery( '#orderForm' ).serializeArray();
+		const payload = {};
+		jQuery.each( formData, function( _, field ) {
+			payload[ field.name ] = field.value;
+		} );
 
 		if ( mainProductId.length === 0 ) {
 			alert( 'Please select a product' );
@@ -48,6 +53,7 @@ jQuery( document ).ready( function() {
 				action: 'woocommerce_ajax_add_to_cart',
 				ids,
 				quantity: 1,
+				payload,
 			},
 			success( response ) {
 				if ( response?.success ) {
