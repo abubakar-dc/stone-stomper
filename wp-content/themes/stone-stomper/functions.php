@@ -2517,7 +2517,7 @@ add_action('woocommerce_cart_calculate_fees', function ($cart) {
 
 		$data = $cart_item['sts_payload'];
 
-		if (empty($data['product_type']) || !in_array((string) $data['product_type'], ['545', '2664'], true)) {
+		if (empty($data['product_type']) || !in_array((string) $data['product_type'], ['545'], true)) {
 			continue;
 		}
 
