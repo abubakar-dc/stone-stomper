@@ -2471,7 +2471,7 @@ add_action('init', function() {
 add_filter('woocommerce_is_sold_individually', 'hide_quantity_for_specific_product', 10, 2);
 
 function hide_quantity_for_specific_product($sold_individually, $product) {
-    if ($product->get_id() == 545 || $product->get_id() == 712 || $product->get_id() == 2664) {
+    if ($product->get_id() == 545 || $product->get_id() == 712 || $product->get_id() == 2366) {
         return true;
     }
     return $sold_individually;
@@ -2705,7 +2705,7 @@ add_action('woocommerce_checkout_create_order_line_item', function ($item, $cart
     // Skip non–Stone Stomper products
    if (
 		!has_term('stone-stomper', 'product_cat', $product_id) &&
-		(int) $product_id !== 2664
+		(int) $product_id !== 2366
 	) {
 		return;
 	}
@@ -2820,7 +2820,7 @@ function sts_materialize_customer_cpt( $order_id ) {
 
 	if ($product_type_id === '712') {
 		$product_type = 'Mesh Only';
-	} elseif ($product_type_id === '2664') {
+	} elseif ($product_type_id === '2366') {
 		$product_type = 'Bar and Bracket';
 	} else {
 		$product_type = 'Stone Stomper';
@@ -3133,7 +3133,7 @@ add_action('admin_head', function () {
 
 define('STS_STONE_STOMPER_ID', 545);
 define('STS_MESH_ONLY_ID', 712);
-define('STS_BAR_BRACKET_ID', 2664);
+define('STS_BAR_BRACKET_ID', 2366);
 
 add_action('woocommerce_add_to_cart', function ($cart_item_key, $product_id) {
     if (!function_exists('WC') || !WC()->cart) return;
