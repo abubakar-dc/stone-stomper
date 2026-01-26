@@ -29,7 +29,7 @@ jQuery( document ).ready( function() {
 
 jQuery( document ).ready( function() {
 	const meshOnlyProduct = '712';
-	const barAndBracketProduct = '2664';
+	const barAndBracketProduct = '2366';
 
 	jQuery( document ).on(
 		'change blur',
