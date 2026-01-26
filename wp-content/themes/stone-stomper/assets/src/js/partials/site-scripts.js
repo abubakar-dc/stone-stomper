@@ -29,7 +29,7 @@ jQuery( document ).ready( function() {
 
 jQuery( document ).ready( function() {
 	const meshOnlyProduct = '712';
-	const barAndBracketProduct = '2366';
+	const barAndBracketProduct = '2664';
 
 	jQuery( document ).on(
 		'change blur',
@@ -297,42 +297,31 @@ jQuery( document ).ready( function() {
 
 	jQuery( document ).on( 'change', '#product_type', function() {
 		const selectedProduct = jQuery( this ).val();
-
-		const caravanFields =
-		'#caravan-details input, #caravan-details select, #caravan-details textarea';
-
+		const caravanFields = '#caravan-details input, #caravan-details select, #caravan-details textarea';
 		const supportMeasurementFields =
 		'#final-measurements .ss-support-options input,' +
 		'#final-measurements .ss-support-options select,' +
 		'#final-measurements .ss-support-options textarea';
-
 		const alwaysHiddenRequired = '#vinyl_width, #vinyl_length';
-
 		if ( selectedProduct === barAndBracketProduct ) {
 			jQuery( '#details-section' ).addClass( 'bar-and-bracket-selected' );
 			jQuery( '#caravan-details' ).hide();
 			jQuery( '#final-measurements' ).find( '.ss-support-options' ).addClass( 'hide-on-bar-and-bracket' );
 			jQuery( '#final-measurements' ).find( '.hide-on-bar-and-bracket' ).hide();
-
-			jQuery( '#final-measurements .ss-support-options' )
-				.addClass( 'hide-on-bar-and-bracket' )
-				.hide();
-
-			jQuery( '.bar-length-only' ).show();
-
+			jQuery( '#final-measurements' ).find( '.bar-length-only' ).hide();
+			jQuery( '#final-measurements .ss-support-options' ).addClass( 'hide-on-bar-and-bracket' ).hide();
+			jQuery( '.bar-length-only' ).addClass( 'hide-on-bar-and-bracket' ).hide();
 			jQuery( caravanFields ).removeAttr( 'required' );
 			jQuery( supportMeasurementFields ).removeAttr( 'required' );
 			jQuery( alwaysHiddenRequired ).removeAttr( 'required' );
-
-			jQuery( '#caravan-details input, #caravan-details select, #caravan-details textarea' )
-				.val( '0' );
-
+			jQuery( '#caravan-details input, #caravan-details select, #caravan-details textarea' ).val( '0' );
 			forceHideOnBarAndBracketValues();
 		} else {
 			jQuery( '#details-section' ).removeClass( 'bar-and-bracket-selected' );
 			jQuery( '#caravan-details' ).show();
 			jQuery( '#final-measurements .hide-on-bar-and-bracket' ).show();
 			jQuery( '.bar-length-only' ).hide();
+			jQuery( '.bar-length-only' ).addClass( 'hide-on-bar-and-bracket' ).show();
 		}
 	} );
 

@@ -2471,7 +2471,7 @@ add_action('init', function() {
 add_filter('woocommerce_is_sold_individually', 'hide_quantity_for_specific_product', 10, 2);
 
 function hide_quantity_for_specific_product($sold_individually, $product) {
-    if ($product->get_id() == 545 || $product->get_id() == 712 || $product->get_id() == 2366) {
+    if ($product->get_id() == 545 || $product->get_id() == 712 || $product->get_id() == 2664) {
         return true;
     }
     return $sold_individually;
@@ -2705,7 +2705,7 @@ add_action('woocommerce_checkout_create_order_line_item', function ($item, $cart
     // Skip non–Stone Stomper products
    if (
 		!has_term('stone-stomper', 'product_cat', $product_id) &&
-		(int) $product_id !== 2366
+		(int) $product_id !== 2664
 	) {
 		return;
 	}
@@ -2825,7 +2825,6 @@ function sts_materialize_customer_cpt( $order_id ) {
 	} else {
 		$product_type = 'Stone Stomper';
 	}
-
 
 	// Contact Information
     update_post_meta( $post_id, 'order_id', $order_id );
