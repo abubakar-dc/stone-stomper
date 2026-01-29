@@ -29,6 +29,25 @@ jQuery( document ).ready( function() {
 
 jQuery( document ).ready( function() {
 	const meshOnlyProduct = '712';
+	const barAndBracketProduct = '2366';
+
+	jQuery( document ).on(
+		'change blur',
+		'#vehicle-details input, #vehicle-details select, #vehicle-details textarea',
+		function() {
+			if ( jQuery( '#product_type' ).val() !== barAndBracketProduct ) {
+				return;
+			}
+
+			if ( allRequiredFilled( '#vehicle-details' ) ) {
+				const section = jQuery( '#bar-options-section' );
+				if ( section.hasClass( 'section-disable' ) ) {
+					section.removeClass( 'section-disable' );
+				}
+				scrollToSection( '#bar-options-section' );
+			}
+		}
+	);
 
 	function scrollToSection( id ) {
 		const target = document.querySelector( id );
@@ -132,6 +151,15 @@ jQuery( document ).ready( function() {
 	function checkCaravanFinalSections() {
 		setTimeout( function() {
 			const selectedProduct = jQuery( '#product_type' ).val();
+
+			if ( selectedProduct === barAndBracketProduct ) {
+				const section = jQuery( '#bar-options-section' );
+				if ( section.hasClass( 'section-disable' ) ) {
+					section.removeClass( 'section-disable' );
+				}
+				scrollToSection( '#bar-options-section' );
+				return;
+			}
 
 			if ( selectedProduct === meshOnlyProduct ) {
 				if ( allRequiredFilled( '#caravan-details' ) ) {
@@ -255,6 +283,62 @@ jQuery( document ).ready( function() {
 
 	jQuery( '.form-section-right #btn_cart' ).on( 'click', function() {
 		jQuery( this ).addClass( 'btn-loading' );
+	} );
+
+	function forceHideOnBarAndBracketValues() {
+		jQuery( '.hide-on-bar-and-bracket' )
+			.find( 'input, select, textarea' )
+			.each( function() {
+				jQuery( this )
+					.val( '' )
+					.prop( 'required', false );
+			} );
+	}
+
+	jQuery( document ).on( 'change', '#product_type', function() {
+		const selectedProduct = jQuery( this ).val();
+		const caravanFields = '#caravan-details input, #caravan-details select, #caravan-details textarea';
+		const supportMeasurementFields =
+		'#final-measurements .ss-support-options input,' +
+		'#final-measurements .ss-support-options select,' +
+		'#final-measurements .ss-support-options textarea';
+		const alwaysHiddenRequired = '#vinyl_width, #vinyl_length';
+		if ( selectedProduct === barAndBracketProduct ) {
+			jQuery( '#details-section' ).addClass( 'bar-and-bracket-selected' );
+			jQuery( '#caravan-details' ).hide();
+			jQuery( '#final-measurements' ).find( '.ss-support-options' ).addClass( 'hide-on-bar-and-bracket' );
+			jQuery( '#final-measurements' ).find( '.hide-on-bar-and-bracket' ).hide();
+			jQuery( '#final-measurements' ).find( '.bar-length-only' ).hide();
+			jQuery( '#final-measurements .ss-support-options' ).addClass( 'hide-on-bar-and-bracket' ).hide();
+			jQuery( '.bar-length-only' ).addClass( 'hide-on-bar-and-bracket' ).hide();
+			jQuery( caravanFields ).removeAttr( 'required' );
+			jQuery( supportMeasurementFields ).removeAttr( 'required' );
+			jQuery( alwaysHiddenRequired ).removeAttr( 'required' );
+			jQuery( '#caravan-details input, #caravan-details select, #caravan-details textarea' ).val( '0' );
+			forceHideOnBarAndBracketValues();
+		} else {
+			jQuery( '#details-section' ).removeClass( 'bar-and-bracket-selected' );
+			jQuery( '#caravan-details' ).show();
+			jQuery( '#final-measurements .hide-on-bar-and-bracket' ).show();
+			jQuery( '.bar-length-only' ).hide();
+			jQuery( '.bar-length-only' ).addClass( 'hide-on-bar-and-bracket' ).show();
+		}
+	} );
+
+	jQuery( document ).on(
+		'input change',
+		'.hide-on-bar-and-bracket input, .hide-on-bar-and-bracket select, .hide-on-bar-and-bracket textarea',
+		function() {
+			if ( jQuery( '#details-section' ).hasClass( 'bar-and-bracket-selected' ) ) {
+				jQuery( this ).val( '0' );
+			}
+		}
+	);
+
+	jQuery( document ).on( 'change', '#bar_options', function() {
+		if ( jQuery( '#details-section' ).hasClass( 'bar-and-bracket-selected' ) ) {
+			forceHideOnBarAndBracketValues();
+		}
 	} );
 } );
 

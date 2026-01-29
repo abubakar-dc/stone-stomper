@@ -7335,6 +7335,10 @@ ul.wc-block-components-totals-discount__coupon-list button.wc-block-components-c
   line-height: 1;
 }
 
+.ss-support-options.hide-on-bar-and-bracket {
+  display: none !important;
+}
+
 /*-------------------------------------------------
 >> Styles for Wp Buttons
 -------------------------------------------------*/
