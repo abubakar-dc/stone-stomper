@@ -323,7 +323,7 @@ function render_towing_diagram($post_id) {
 		ob_start();
 	?>
 	<?php if($caravan_length_mm < 1800 ){ ?>
-		<svg xmlns="http://www.w3.org/2000/svg" id="Layer_2" version="1.1" viewBox="0 0 1200 800">
+		<svg xmlns="http://www.w3.org/2000/svg" id="towing-diagram-svg" version="1.1" viewBox="0 0 1200 800">
 			<!-- Generator: Adobe Illustrator 29.8.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 2)  -->
 			<defs>
 				<style>
@@ -411,8 +411,6 @@ function render_towing_diagram($post_id) {
 				<polyline class="st0" points="321.3 612.33 317.29 608.6 321.3 604.88" stroke="#fa3232" fill="#ffffff"/>
 				<polyline class="st0" points="890.24 604.88 894.24 608.6 890.24 612.33" stroke="#fa3232" fill="#ffffff"/>
 			</g>
-
-
 			<g>
 				<line class="st0" x1="957.8" y1="170.34" x2="957.8" y2="579.93" stroke="#fa3232"/>
 				<g transform="translate(605.77,608.6)">
@@ -424,7 +422,7 @@ function render_towing_diagram($post_id) {
 			</g>
 		</svg>
 	<?php } else { ?>
-		<svg id="Layer_2" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 1200 800">
+		<svg xmlns="http://www.w3.org/2000/svg" id="towing-diagram-svg" version="1.1" viewBox="0 0 1200 800">
 			<!-- Generator: Adobe Illustrator 29.8.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 2)  -->
 			<defs>
 				<style>
@@ -489,7 +487,6 @@ function render_towing_diagram($post_id) {
 					</text>
 				</g>
 			<?php } ?>
-
 			<?php if($vinyl_insert_height_mm){ ?>
 				<g transform="translate(520.76,400.99) rotate(-90)">
 					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0"  style="font-size: 20px; font-weight: 500;">
@@ -609,32 +606,33 @@ function get_towing_diagram_svg_png($post_id) {
     return false;
 }
 
-function svg_to_png_temp($svg_content) {
-    $tmp_png = tempnam(sys_get_temp_dir(), 'diagram_') . '.png';
+// function svg_to_png_temp($svg_content) {
+//     $tmp_png = tempnam(sys_get_temp_dir(), 'diagram_') . '.png';
 
-    $imagick = new \Imagick();
-    $imagick->setBackgroundColor(new \ImagickPixel('white'));
+//     $imagick = new \Imagick();
+//     $imagick->setBackgroundColor(new \ImagickPixel('white'));
 
-    // very important for correct bounding box
-    $imagick->setResolution(300, 300);
+//     // very important for correct bounding box
+//     $imagick->setResolution(300, 300);
 
-    $imagick->readImageBlob($svg_content);
+//     $imagick->readImageBlob($svg_content);
 
-    // flatten white instead of transparency to avoid black areas
-    $imagick->setImageAlphaChannel(\Imagick::ALPHACHANNEL_REMOVE);
+//     // flatten white instead of transparency to avoid black areas
+//     $imagick->setImageAlphaChannel(\Imagick::ALPHACHANNEL_REMOVE);
 
-    $imagick->setImageFormat("png");
+//     $imagick->setImageFormat("png");
 
-    // trim extra whitespace
-    $imagick->trimImage(0);
-    $imagick->setImagePage(0, 0, 0, 0);
+//     // trim extra whitespace
+//     $imagick->trimImage(0);
+//     $imagick->setImagePage(0, 0, 0, 0);
 
-    $imagick->writeImage($tmp_png);
-    $imagick->clear();
-    $imagick->destroy();
+//     $imagick->writeImage($tmp_png);
+//     $imagick->clear();
+//     $imagick->destroy();
 
-    return $tmp_png;
-}
+//     return $tmp_png;
+// }
+
 
 function sts_get_images_from_meta( $post_id, $meta_key ) {
 	$raw = get_post_meta( $post_id, $meta_key, true );
@@ -1452,11 +1450,36 @@ add_action( 'add_meta_boxes', function() {
     );
 });
 
+add_action( 'wp_ajax_store_diagram_png', 'store_diagram_png' );
+
+function store_diagram_png() {
+
+    if ( ! current_user_can( 'edit_posts' ) ) {
+        wp_send_json_error( 'Permission denied', 403 );
+    }
+
+    $post_id = intval( $_POST['post_id'] ?? 0 );
+    $png     = $_POST['diagram_png'] ?? '';
+
+    if ( ! $post_id || ! $png ) {
+        wp_send_json_error( 'Invalid data', 400 );
+    }
+
+    set_transient(
+        'diagram_png_' . $post_id,
+        $png,
+        5 * MINUTE_IN_SECONDS
+    );
+
+    wp_send_json_success();
+}
+
+
 use PhpOffice\PhpWord\PhpWord;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\Element\TextRun;
 
-function generate_customer_order_word_file($post_id) {
+function generate_customer_order_word_file($post_id, $diagram_png) {
 	require_once __DIR__ . '/vendor/autoload.php';
     $phpWord = new \PhpOffice\PhpWord\PhpWord();
     $phpWord->setDefaultFontName('Arial');
@@ -1837,18 +1860,16 @@ function generate_customer_order_word_file($post_id) {
 		$section->addTextBreak(1);
 	}
 
-	// Wanna call vector svg here
-	$svg = get_towing_diagram_svg_png($post_id);
+	$png_base64 = preg_replace('#^data:image/\w+;base64,#i', '', $diagram_png);
+	$png_binary = base64_decode($png_base64);
 
-	if ($svg) {
-		$diagram_png = svg_to_png_temp($svg);
-		if (file_exists($diagram_png)) {
-			$section->addImage($diagram_png, [
-				'width' => 390,
-				'alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER,
-			]);
-		}
-	}
+	$tmp_png = tempnam(sys_get_temp_dir(), 'diagram_') . '.png';
+	file_put_contents($tmp_png, $png_binary);
+
+	$section->addImage($tmp_png, [
+		'width' => 350,
+		'alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER,
+	]);
 
 	$section->addTextBreak(1);
 
@@ -1958,24 +1979,40 @@ function generate_customer_order_word_file($post_id) {
     return $file_path;
 }
 
+add_action( 'wp_ajax_download_customer_word', 'download_customer_word_callback' );
+
 function download_customer_word_callback() {
-    $post_id = intval($_GET['post_id'] ?? 0);
-	if (!$post_id) wp_die('Invalid post ID.');
 
-	$order_id = get_post_meta($post_id, 'order_id', true);
-	if (empty($order_id)) {
-		$order_id = $post_id;
+    $post_id = intval( $_GET['post_id'] ?? 0 );
+    if ( ! $post_id ) {
+        wp_die( 'Invalid post ID.' );
     }
 
-    $file_path = generate_customer_order_word_file($post_id);
-
-    if (!$file_path || !file_exists($file_path)) {
-        wp_die('File generation failed.');
+    if ( ! current_user_can( 'edit_posts' ) ) {
+        wp_die( 'Permission denied.' );
     }
 
-    header("Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document");
-    header('Content-Disposition: attachment; filename="customer-order-' . $order_id . '.docx"');
-    readfile($file_path);
+    $diagram_png = get_transient( 'diagram_png_' . $post_id );
+    if ( ! $diagram_png ) {
+        wp_die( 'Diagram image missing.' );
+    }
+
+    $order_id = get_post_meta( $post_id, 'order_id', true );
+    if ( empty( $order_id ) ) {
+        $order_id = $post_id;
+    }
+
+    $file_path = generate_customer_order_word_file( $post_id, $diagram_png );
+
+    if ( ! $file_path || ! file_exists( $file_path ) ) {
+        wp_die( 'File generation failed.' );
+    }
+
+    header( 'Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document' );
+    header( 'Content-Disposition: attachment; filename="customer-order-' . $order_id . '.docx"' );
+    header( 'Content-Length: ' . filesize( $file_path ) );
+
+    readfile( $file_path );
     exit;
 }
 
@@ -2321,13 +2358,12 @@ function email_to_manufacturer_callback() {
 
 add_action('wp_ajax_email_to_manufacturer', 'email_to_manufacturer_callback');
 
-add_action('admin_enqueue_scripts', function($hook) {
+add_action('admin_enqueue_scripts', function ($hook) {
     global $post;
-    // Sirf post editor screen par run karo
+
     if ($hook !== 'post.php' && $hook !== 'post-new.php') return;
-    // Sirf hamari required post type ke liye
     if (!isset($post) || $post->post_type !== 'customer') return;
-    // Admin JS enqueue
+
     wp_enqueue_script(
         'customer-admin-js',
         get_template_directory_uri() . '/assets/src/js/customer-admin.js',
@@ -2335,7 +2371,17 @@ add_action('admin_enqueue_scripts', function($hook) {
         false,
         true
     );
+
+    wp_localize_script(
+        'customer-admin-js',
+        'stoneStomper',
+        [
+            'ajaxurl' => admin_url('admin-ajax.php'),
+            'nonce'   => wp_create_nonce('store_diagram_png'),
+        ]
+    );
 });
+
 
 // 1️⃣ Register the new "Manufacturing L" status
 add_action( 'init', function() {

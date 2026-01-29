@@ -377,16 +377,13 @@ jQuery( function() {
 	autosize();
 	function autosize() {
 		const text = jQuery( 'textarea' );
-
 		text.each( function() {
 			jQuery( this ).attr( 'rows', 5 );
 			resize( jQuery( this ) );
 		} );
-
 		text.on( 'input', function() {
 			resize( jQuery( this ) );
 		} );
-
 		function resize( $text ) {
 			$text.css( 'min-height', 'auto' );
 			$text.css( 'min-height', $text[ 0 ].scrollHeight + 'px' );
