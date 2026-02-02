@@ -327,32 +327,32 @@ function render_towing_diagram($post_id) {
 			<!-- Generator: Adobe Illustrator 29.8.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 2)  -->
 			<defs>
 				<style>
-				.st0 {
-					stroke: #fa3232;
-				}
+					.st0 {
+						stroke: #fa3232;
+					}
 
-				.st0, .st1, .st2 {
-					fill: #ffffff;
-				}
+					.st0, .st1, .st2 {
+						fill: #ffffff;
+					}
 
-				.st3, .st4 {
-					fill: #ffffff;
-				}
+					.st3, .st4 {
+						fill: #ffffff;
+					}
 
-				.st3, .st1, .st2 {
-					stroke: #000;
-				}
+					.st3, .st1, .st2 {
+						stroke: #000;
+					}
 
-				.st1 {
-					stroke-width: 3px;
-					fill: #ffffff;
-				}
+					.st1 {
+						stroke-width: 3px;
+						fill: #ffffff;
+					}
 
-				.st5 {
-					fill: #fa3232;
-					font-size: 15px;
-					letter-spacing: .03em;
-				}
+					.st5 {
+						fill: #fa3232;
+						font-size: 15px;
+						letter-spacing: .03em;
+					}
 
 					rect {
 						fill: #ffffff;
@@ -363,7 +363,7 @@ function render_towing_diagram($post_id) {
 			<!-- <polyline class="st2" points="329.42 577.92 288.76 180.94 923.79 180.94 882.27 577.92" fill="#ffffff" stroke="#000000"/> -->
 			 <?php if($sts_var_caravan_cut_out){ ?>
 				<g transform="translate(605.76,550.99)">
-					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500;">
+					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;">
 						<?php echo esc_html( $sts_var_caravan_cut_out ? $sts_var_caravan_cut_out : '-' ); ?>
 					</text>
 				</g>
@@ -374,12 +374,12 @@ function render_towing_diagram($post_id) {
 			<rect class="st3" x="504.04" y="315.51" width="211.2" height="195.21" fill="#ffffff" stroke="#000000"/>
 			<?php if($vinyl_insert_width_mm){ ?>
 				<g transform="translate(610.76,330.99)">
-					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $vinyl_insert_width_mm ? $vinyl_insert_width_mm : '-' ); ?></text>
+					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;"><?php echo esc_html( $vinyl_insert_width_mm ? $vinyl_insert_width_mm : '-' ); ?></text>
 				</g>
 			<?php } ?>
 			<?php if($vinyl_insert_height_mm){ ?>
 				<g transform="translate(520.76,400.99) rotate(-90)">
-					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $vinyl_insert_height_mm ? $vinyl_insert_height_mm : '-' ); ?></text>
+					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;"><?php echo esc_html( $vinyl_insert_height_mm ? $vinyl_insert_height_mm : '-' ); ?></text>
 				</g>
 			<?php } ?>
 			<rect class="st2" x="404.09" y="381.28" width="8.47" height="196.64" fill="#ffffff" stroke="#000000"/>
@@ -390,14 +390,14 @@ function render_towing_diagram($post_id) {
 			<circle class="st2" cx="810.96" cy="374.25" r="4.24"  fill="#ffffff" stroke="#000000"/>
 			<circle class="st2" cx="408.33" cy="374.25" r="4.24"  fill="#ffffff" stroke="#000000"/>
 			<circle class="st2" cx="482.17" cy="374.25" r="4.24"  fill="#ffffff" stroke="#000000"/>
-			<text class="st5" transform="translate(565.96 411.74)" style="font-size: 20px; font-weight: 500;">
+			<text class="st5" transform="translate(565.96 411.74)" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;">
 				<tspan fill="#fa3232" stroke="#fa3232" stroke-width="0.3" x="0" y="0">Vinyl Insert</tspan>
 			</text>
 			<g>
 				<line class="st0" x1="274.29" y1="139.99" x2="935.24" y2="139.99" stroke="#fa3232"/>
 				<g transform="translate(604.76,139.99)">
 					<rect class="st4" x="-67.5" y="-22" width="135" height="24" fill="#ffffff"  stroke="#ffffff"/>
-					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $caravan_width_mm ? $caravan_width_mm : '-' ); ?></text>
+					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;"><?php echo esc_html( $caravan_width_mm ? $caravan_width_mm : '-' ); ?></text>
 				</g>
 				<polyline class="st0" points="278.3 143.72 274.29 139.99 278.3 136.27" stroke="#fa3232" fill="#ffffff"/>
 				<polyline class="st0" points="931.24 136.27 935.24 140 931.24 143.72" stroke="#fa3232"  fill="#ffffff"/>
@@ -406,7 +406,7 @@ function render_towing_diagram($post_id) {
 				<line class="st0" x1="317.29" y1="608.6" x2="894.24" y2="608.6" stroke="#fa3232"/>
 				<g transform="translate(957.8,375.13)">
 				<rect class="st4" x="10" y="-12" width="135" height="24" fill="#ffffff"  stroke="#ffffff"/>
-				<text class="st5" text-anchor="start" dominant-baseline="middle" x="20" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $caravan_length_mm ? $caravan_length_mm : '-' ); ?></text>
+				<text class="st5" text-anchor="start" dominant-baseline="middle" x="20" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;"><?php echo esc_html( $caravan_length_mm ? $caravan_length_mm : '-' ); ?></text>
 				</g>
 				<polyline class="st0" points="321.3 612.33 317.29 608.6 321.3 604.88" stroke="#fa3232" fill="#ffffff"/>
 				<polyline class="st0" points="890.24 604.88 894.24 608.6 890.24 612.33" stroke="#fa3232" fill="#ffffff"/>
@@ -415,7 +415,7 @@ function render_towing_diagram($post_id) {
 				<line class="st0" x1="957.8" y1="170.34" x2="957.8" y2="579.93" stroke="#fa3232"/>
 				<g transform="translate(605.77,608.6)">
 					<rect class="st4" x="-67.5" y="-12" width="135" height="24" fill="#ffffff" stroke="#ffffff"/>
-					<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $bar_width_mm ? $bar_width_mm : '-' ); ?></text>
+					<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;"><?php echo esc_html( $bar_width_mm ? $bar_width_mm : '-' ); ?></text>
 				</g>
 				<polyline class="st0" points="954.07 174.34 957.8 170.34 961.52 174.34" stroke="#fa3232" fill="#ffffff"/>
 				<polyline class="st0" points="961.52 575.92 957.8 579.93 954.07 575.92" stroke="#fa3232" fill="#ffffff"/>
@@ -461,6 +461,7 @@ function render_towing_diagram($post_id) {
 					.st6 {
 						font-size: 15px;
 						letter-spacing: .03em;
+						font-family: Arial, Helvetica, sans-serif;
 					}
 					rect {
 						fill: #ffffff;
@@ -469,9 +470,9 @@ function render_towing_diagram($post_id) {
 			</defs>
 			<path class="st3" d="M935.7,173.33c.12-1.09-.69-1.99-1.79-1.99H278.24c-1.1,0-1.91.9-1.79,1.99l41.6,402.61c.11,1.09,1.11,1.99,2.21,1.99h246.73c1.1,0,2-.9,2-2v-61.51c0-1.1.9-2,2-2h68.28c1.1,0,2,.9,2,2v61.51c0,1.1.9,2,2,2h247.86c1.1,0,2.09-.9,2.21-1.99l42.37-402.61Z" fill="#ffffff" stroke="#000000"/>
 			<!-- <polyline class="st4" points="329.42 577.92 288.76 180.94 923.79 180.94 882.27 577.92" fill="#ffffff" stroke="#000000"/> -->
-			 <?php if($sts_var_caravan_cut_out){ ?>
+			 <?php if($sts_var_caravan_cut_out) { ?>
 				<g transform="translate(605.76,550.99)">
-					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500;">
+					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;">
 						<?php echo esc_html( $sts_var_caravan_cut_out ? $sts_var_caravan_cut_out : '-' ); ?>
 					</text>
 				</g>
@@ -482,14 +483,14 @@ function render_towing_diagram($post_id) {
 			<rect class="st7" x="504.04" y="315.51" width="211.2" height="195.21" fill="#ffffff" stroke="#000000"/>
 			<?php if($vinyl_insert_width_mm){ ?>
 				<g transform="translate(610.76,330.99)">
-					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0"  style="font-size: 20px; font-weight: 500;">
+					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0"  style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;">
 						<?php echo esc_html( $vinyl_insert_width_mm ? $vinyl_insert_width_mm : '-' ); ?>
 					</text>
 				</g>
 			<?php } ?>
 			<?php if($vinyl_insert_height_mm){ ?>
 				<g transform="translate(520.76,400.99) rotate(-90)">
-					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0"  style="font-size: 20px; font-weight: 500;">
+					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0"  style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;">
 						<?php echo esc_html( $vinyl_insert_height_mm ? $vinyl_insert_height_mm : '-' ); ?>
 					</text>
 				</g>
@@ -507,14 +508,14 @@ function render_towing_diagram($post_id) {
 				fill="#fa3232"
 				stroke="#fa3232"
 				stroke-width="0.3"
-				stroke-linejoin="round" style="font-size: 20px; font-weight: 500;">
+				stroke-linejoin="round" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;">
 				Vinyl Insert
 			</text>
 			<g>
 				<line class="st0" x1="274.29" y1="139.99" x2="935.24" y2="139.99" fill="#ffffff" stroke="#fa3232"/>
 				<rect class="st8" x="539.36" y="127.61" width="135.53" height="22.16" fill="#ffffff" stroke="#ffffff"/>
 				<g transform="translate(604.76,139.99)">
-					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500;">
+					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;">
 						<?php echo esc_html( $caravan_width_mm ? $caravan_width_mm : '-' ); ?>
 					</text>
 				</g>
@@ -527,7 +528,7 @@ function render_towing_diagram($post_id) {
 				<rect class="st8" x="539.36" y="596.22" width="135.53" height="22.16" fill="#ffffff" stroke="#ffffff"/>
 				<g transform="translate(605.77,608.6)">
 					<rect class="st8" x="948.02" y="306.8" width="22.16" height="135.53" fill="#ffffff" stroke="#ffffff"/>
-					<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0"  fill="#fa3232"  stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $bar_width_mm ? $bar_width_mm : '-' ); ?></text>
+					<text class="st5" text-anchor="middle" dominant-baseline="middle" y="0"  fill="#fa3232"  stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;"><?php echo esc_html( $bar_width_mm ? $bar_width_mm : '-' ); ?></text>
 				</g>
 				<polyline class="st0" points="321.3 612.33 317.29 608.6 321.3 604.88" fill="#ffffff" stroke="#fa3232"/>
 				<polyline class="st0" points="890.24 604.88 894.24 608.6 890.24 612.33" fill="#ffffff" stroke="#fa3232"/>
@@ -538,7 +539,7 @@ function render_towing_diagram($post_id) {
 				<rect class="st8" x="948.02" y="306.8" width="22.16" height="135.53" fill="#ffffff" stroke="#ffffff"/>
 				<g transform="translate(915.8,375.13)">
 					<!-- <rect class="st4" x="10" y="-12" width="135" height="24" fill="#ffffff"/> -->
-					<text class="st5" text-anchor="start" dominant-baseline="middle" x="20" fill="#fa3232"  stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;"><?php echo esc_html( $caravan_length_mm ? $caravan_length_mm : '-' ); ?></text>
+					<text class="st5" text-anchor="start" dominant-baseline="middle" x="20" fill="#fa3232"  stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;"><?php echo esc_html( $caravan_length_mm ? $caravan_length_mm : '-' ); ?></text>
 				</g>
 				<polyline class="st0" points="954.07 174.34 957.8 170.34 961.52 174.34" fill="#ffffff" stroke="#fa3232"/>
 				<polyline class="st0" points="961.52 575.92 957.8 579.93 954.07 575.92" fill="#ffffff" stroke="#fa3232"/>
@@ -551,17 +552,17 @@ function render_towing_diagram($post_id) {
 					<polyline class="st0" points="888 282.37 884.28 286.37 880.55 282.37" fill="#ffffff" stroke="#fa3232"/>
 				</g>
 				<?php if($stoneguard_height_mm){ ?>
-					<text class="st5" text-anchor="start" dominant-baseline="middle" y="0" x="55" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;">
+					<text class="st5" text-anchor="start" dominant-baseline="middle" y="0" x="55" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;">
 						<?php echo esc_html( $stoneguard_height_mm ? 'S: '. $stoneguard_height_mm : '-' ); ?>
 					</text>
 				<?php } ?>
 				<?php if($toolbox_height_mm){ ?>
-					<text class="st5" text-anchor="start" dominant-baseline="middle" y="20" x="55"  fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;">
+					<text class="st5" text-anchor="start" dominant-baseline="middle" y="20" x="55"  fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;">
 						<?php echo esc_html( $toolbox_height_mm ? 'T: '.$toolbox_height_mm : '-' ); ?>
 					</text>
 				<?php } ?>
 				<?php if($support_pockets_measurement){ ?>
-					<text class="st5" text-anchor="start" dominant-baseline="middle" y="40" x="55"  fill="#fa3232"  stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;">
+					<text class="st5" text-anchor="start" dominant-baseline="middle" y="40" x="55"  fill="#fa3232"  stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;">
 						<?php echo esc_html( $support_pockets_measurement ? 'SP: '.$support_pockets_measurement : '-' ); ?>
 					</text>
 				<?php } ?>
@@ -576,12 +577,12 @@ function render_towing_diagram($post_id) {
 					</g>
 					<g transform="translate(555,263.13)">
 						<?php if($stoneguard_width_mm){ ?>
-						<text class="st5" text-anchor="start" dominant-baseline="middle" y="-20" x="0" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;">
+						<text class="st5" text-anchor="start" dominant-baseline="middle" y="-20" x="0" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;">
 							<?php echo esc_html( $stoneguard_width_mm ? 'S: '. $stoneguard_width_mm : '-' ); ?>
 						</text>
 						<?php } ?>
 						<?php if($toolbox_height_mm){ ?>
-							<text class="st5" text-anchor="start" dominant-baseline="middle" x="0" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500;">
+							<text class="st5" text-anchor="start" dominant-baseline="middle" x="0" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;">
 								<?php echo esc_html( $toolbox_width_mm ? 'T: '. $toolbox_width_mm : '-' ); ?>
 							</text>
 						<?php } ?>
@@ -2325,36 +2326,85 @@ add_filter('handle_actions-customer', function ($redirect_to, $action, $post_ids
 
 // Email to manufacturer
 
+// function email_to_manufacturer_callback() {
+// 	list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaults();
+
+//     $post_id = intval($_POST['post_id']);
+// 	$order_id = get_post_meta($post_id, 'order_id', true);
+//     $file_path = generate_customer_order_word_file($post_id, $diagram_png);
+
+//     // Get manufacturers list from option fields array
+//     $emails = [];
+
+//     if ( !empty($sts_option_fields['sts_var_manufacturers']) && is_array($sts_option_fields['sts_var_manufacturers']) ) {
+//         foreach ($sts_option_fields['sts_var_manufacturers'] as $manufacturer) {
+//             if (!empty($manufacturer['email'])) {
+//                 $emails[] = $manufacturer['email'];
+//             }
+//         }
+//     }
+
+//     // Fallback if no emails found
+//     if (empty($emails)) {
+//         $emails = ['tmaeder@boylen.com.au'];
+//     }
+
+//     $subject = "New Customer Order Details (Order #{$order_id})";
+//     $message = "Hello,\n\nPlease find attached the customer order details document.\n\nThanks.";
+
+//     wp_mail($emails, $subject, $message, [], [$file_path]);
+
+//     wp_send_json_success('Email Sent');
+// }
+
 function email_to_manufacturer_callback() {
-	list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaults();
 
-    $post_id = intval($_POST['post_id']);
+	if ( ! current_user_can('edit_posts') ) {
+		wp_send_json_error('Permission denied', 403);
+	}
+
+	$post_id = intval($_POST['post_id'] ?? 0);
+	if ( ! $post_id ) {
+		wp_send_json_error('Invalid post ID', 400);
+	}
+
+	$diagram_png = get_transient('diagram_png_' . $post_id);
+	if ( ! $diagram_png ) {
+		wp_send_json_error('Diagram image missing');
+	}
+
+	list($sts_var_post_id, $sts_fields, $sts_option_fields) = StoneStomper::defaults();
+
 	$order_id = get_post_meta($post_id, 'order_id', true);
-    $file_path = generate_customer_order_word_file($post_id);
 
-    // Get manufacturers list from option fields array
-    $emails = [];
+	$file_path = generate_customer_order_word_file($post_id, $diagram_png);
 
-    if ( !empty($sts_option_fields['sts_var_manufacturers']) && is_array($sts_option_fields['sts_var_manufacturers']) ) {
-        foreach ($sts_option_fields['sts_var_manufacturers'] as $manufacturer) {
-            if (!empty($manufacturer['email'])) {
-                $emails[] = $manufacturer['email'];
-            }
-        }
-    }
+	if ( ! $file_path || ! file_exists($file_path) ) {
+		wp_send_json_error('File generation failed');
+	}
 
-    // Fallback if no emails found
-    if (empty($emails)) {
-        $emails = ['tmaeder@boylen.com.au'];
-    }
+	$emails = [];
 
-    $subject = "New Customer Order Details (Order #{$order_id})";
-    $message = "Hello,\n\nPlease find attached the customer order details document.\n\nThanks.";
+	if ( ! empty($sts_option_fields['sts_var_manufacturers']) && is_array($sts_option_fields['sts_var_manufacturers']) ) {
+		foreach ($sts_option_fields['sts_var_manufacturers'] as $manufacturer) {
+			if ( ! empty($manufacturer['email']) ) {
+				$emails[] = $manufacturer['email'];
+			}
+		}
+	}
 
-    wp_mail($emails, $subject, $message, [], [$file_path]);
+	if ( empty($emails) ) {
+		$emails = ['tmaeder@boylen.com.au'];
+	}
 
-    wp_send_json_success('Email Sent');
+	$subject = "New Customer Order Details (Order #{$order_id})";
+	$message = "Hello,\n\nPlease find attached the customer order details document.\n\nThanks.";
+
+	wp_mail($emails, $subject, $message, [], [$file_path]);
+
+	wp_send_json_success('Email Sent');
 }
+
 
 add_action('wp_ajax_email_to_manufacturer', 'email_to_manufacturer_callback');
 
