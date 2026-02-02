@@ -902,27 +902,6 @@
             "append": ""
         },
         {
-            "key": "field_694473974843d",
-            "label": "Order Notes",
-            "name": "order_notes",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "allow_in_bindings": 0,
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
             "key": "field_691d792964052",
             "label": "Extra Vinyl Length (mm)",
             "name": "extra_vinyl_length_mm",
@@ -1063,5 +1042,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1768907147
+    "modified": 1770032275
 }
