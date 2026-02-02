@@ -323,8 +323,7 @@ function render_towing_diagram($post_id) {
 		ob_start();
 	?>
 	<?php if($caravan_length_mm < 1800 ){ ?>
-		<svg xmlns="http://www.w3.org/2000/svg" id="towing-diagram-svg" version="1.1" viewBox="0 0 1200 800">
-			<!-- Generator: Adobe Illustrator 29.8.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 2)  -->
+		<svg xmlns="http://www.w3.org/2000/svg" id="towing-diagram-svg" class="diagram-less-than-1800" version="1.1" viewBox="0 0 1200 800">
 			<defs>
 				<style>
 					.st0 {
@@ -360,7 +359,6 @@ function render_towing_diagram($post_id) {
 				</style>
 			</defs>
 			<path class="st1" d="M935.7,173.33c.12-1.09-.69-1.99-1.79-1.99H278.24c-1.1,0-1.91.9-1.79,1.99l41.6,402.61c.11,1.09,1.11,1.99,2.21,1.99h246.73c1.1,0,2-.9,2-2v-61.51c0-1.1.9-2,2-2h68.28c1.1,0,2,.9,2,2v61.51c0,1.1.9,2,2,2h247.86c1.1,0,2.09-.9,2.21-1.99l42.37-402.61Z" fill="#ffffff" stroke="#000000"/>
-			<!-- <polyline class="st2" points="329.42 577.92 288.76 180.94 923.79 180.94 882.27 577.92" fill="#ffffff" stroke="#000000"/> -->
 			 <?php if($sts_var_caravan_cut_out){ ?>
 				<g transform="translate(605.76,550.99)">
 					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;">
@@ -422,8 +420,7 @@ function render_towing_diagram($post_id) {
 			</g>
 		</svg>
 	<?php } else { ?>
-		<svg xmlns="http://www.w3.org/2000/svg" id="towing-diagram-svg" version="1.1" viewBox="0 0 1200 800">
-			<!-- Generator: Adobe Illustrator 29.8.1, SVG Export Plug-In . SVG Version: 2.1.1 Build 2)  -->
+		<svg xmlns="http://www.w3.org/2000/svg" id="towing-diagram-svg" class="diagram-greater-than-1800" version="1.1" viewBox="0 0 1200 800">
 			<defs>
 				<style>
 					.st0, .st1, .st2 {
@@ -469,7 +466,6 @@ function render_towing_diagram($post_id) {
 				</style>
 			</defs>
 			<path class="st3" d="M935.7,173.33c.12-1.09-.69-1.99-1.79-1.99H278.24c-1.1,0-1.91.9-1.79,1.99l41.6,402.61c.11,1.09,1.11,1.99,2.21,1.99h246.73c1.1,0,2-.9,2-2v-61.51c0-1.1.9-2,2-2h68.28c1.1,0,2,.9,2,2v61.51c0,1.1.9,2,2,2h247.86c1.1,0,2.09-.9,2.21-1.99l42.37-402.61Z" fill="#ffffff" stroke="#000000"/>
-			<!-- <polyline class="st4" points="329.42 577.92 288.76 180.94 923.79 180.94 882.27 577.92" fill="#ffffff" stroke="#000000"/> -->
 			 <?php if($sts_var_caravan_cut_out) { ?>
 				<g transform="translate(605.76,550.99)">
 					<text class="st5" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" text-anchor="middle" dominant-baseline="middle" y="0" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;">

@@ -23,42 +23,39 @@ jQuery( document ).on( 'click', '.email-to-manufacturer', function( e ) {
 } );
 
 function convertSvgToPng( svg, callback ) {
-	// Clone SVG so we can safely modify it
 	const svgClone = svg.cloneNode( true );
 
-	// Get actual drawing bounds
-	const bbox = svg.getBBox();
+	const OUTPUT_WIDTH = 1100;
+	const OUTPUT_HEIGHT = 733;
 
-	// Set tight viewBox around content
-	svgClone.setAttribute(
-		'viewBox',
-		`${ bbox.x } ${ bbox.y } ${ bbox.width } ${ bbox.height }`
-	);
-
-	// Normalize size
-	svgClone.setAttribute( 'width', bbox.width );
-	svgClone.setAttribute( 'height', bbox.height );
+	svgClone.setAttribute( 'width', OUTPUT_WIDTH );
+	svgClone.setAttribute( 'height', OUTPUT_HEIGHT );
 
 	const svgData = new XMLSerializer().serializeToString( svgClone );
 	const svgBlob = new Blob( [ svgData ], { type: 'image/svg+xml;charset=utf-8' } );
 	const url = URL.createObjectURL( svgBlob );
 
 	const img = new Image();
-	const SCALE = 2.5; // print sharpness
+
+	const SCALE = 3;
+	const ZOOM = 1.45; // slight zoom
 
 	img.onload = function() {
 		const canvas = document.createElement( 'canvas' );
 		canvas.width = img.width * SCALE;
 		canvas.height = img.height * SCALE;
-
 		const ctx = canvas.getContext( '2d' );
-		ctx.scale( 4.4, 4.4 );
+		const drawScale = SCALE * ZOOM;
+
+		const offsetX = ( canvas.width / drawScale - img.width ) / 1.6;
+		const offsetY = ( canvas.height / drawScale - img.height ) / 2;
+
+		ctx.scale( drawScale, drawScale );
 
 		ctx.fillStyle = '#ffffff';
 		ctx.fillRect( 0, 0, canvas.width, canvas.height );
 
-		// Draw perfectly cropped SVG
-		ctx.drawImage( img, 0, 0 );
+		ctx.drawImage( img, offsetX, offsetY );
 
 		const pngBase64 = canvas.toDataURL( 'image/png' );
 		URL.revokeObjectURL( url );
