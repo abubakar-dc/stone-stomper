@@ -2344,15 +2344,6 @@ add_filter('handle_actions-customer', function ($redirect_to, $action, $post_ids
 //     if (empty($emails)) {
 //         $emails = ['tmaeder@boylen.com.au'];
 //     }
-
-//     $subject = "New Customer Order Details (Order #{$order_id})";
-//     $message = "Hello,\n\nPlease find attached the customer order details document.\n\nThanks.";
-
-//     wp_mail($emails, $subject, $message, [], [$file_path]);
-
-//     wp_send_json_success('Email Sent');
-// }
-
 function email_to_manufacturer_callback() {
 
 	if ( ! current_user_can('edit_posts') ) {
@@ -2374,6 +2365,12 @@ function email_to_manufacturer_callback() {
 	$order_id = get_post_meta($post_id, 'order_id', true);
 
 	$file_path = generate_customer_order_word_file($post_id, $diagram_png);
+	$order_id = get_post_meta($post_id, 'order_id', true);
+	$upload_dir = wp_upload_dir();
+	$new_path = $upload_dir['path'] . "/Customer-Order-{$order_id}.docx";
+	rename($file_path, $new_path);
+	$file_path = $new_path;
+
 
 	if ( ! $file_path || ! file_exists($file_path) ) {
 		wp_send_json_error('File generation failed');
@@ -2400,7 +2397,6 @@ function email_to_manufacturer_callback() {
 
 	wp_send_json_success('Email Sent');
 }
-
 
 add_action('wp_ajax_email_to_manufacturer', 'email_to_manufacturer_callback');
 
