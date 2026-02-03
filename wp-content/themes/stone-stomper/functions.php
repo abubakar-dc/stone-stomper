@@ -1502,15 +1502,25 @@ function generate_customer_order_word_file($post_id, $diagram_png) {
     $country = $order ? $order->get_shipping_country() : '';
 
     $delivery_address = implode(' ', array_filter([
-        trim($first_name . ' ' . $last_name),
-        $company,
-        $address_1,
-        $address_2,
-        $city,
-        $state,
-        $postcode,
-        $country
-    ]));
+		$order->get_billing_company(),
+		$order->get_billing_address_1(),
+		$order->get_billing_address_2(),
+		$order->get_billing_city(),
+		$order->get_billing_state(),
+		$order->get_billing_postcode(),
+		$order->get_billing_country()
+	]));
+
+	$shipping_address = implode(' ', array_filter([
+		$order->get_shipping_company(),
+		$order->get_shipping_address_1(),
+		$order->get_shipping_address_2(),
+		$order->get_shipping_city(),
+		$order->get_shipping_state(),
+		$order->get_shipping_postcode(),
+		$order->get_shipping_country()
+	]));
+
 
     $delivery_cost = $order ? $order->get_shipping_total() : '-';
     $order_total = $order ? $order->get_total() : '-';
@@ -1599,12 +1609,6 @@ function generate_customer_order_word_file($post_id, $diagram_png) {
 	$order_notes             = wpword_escape($order_notes);
 	$delivery_instructions   = wpword_escape($delivery_instructions);
 
-	$final_delivery_address = "Same As Home Address";
-
-	if( $final_details && $final_details['final_delivery'] === 'move' ) {
-		$final_delivery_address = "I am on the Move";
-	}
-
     $proposed_date = get_post_meta($post_id, 'sts_var_proposed_date_of_delivery', true);
     $proposed_date = $proposed_date ? date('d-F-Y', strtotime($proposed_date)) : '-';
 
@@ -1671,14 +1675,14 @@ function generate_customer_order_word_file($post_id, $diagram_png) {
 	// Nested table to restrict width
 	$addressTable = $leftCell->addTable(['cellMargin' => 0]);
 	$addressTable->addRow();
-	$addressTable->addCell(3000)->addText(strip_tags($address_meta_address ?: $address_meta_address), [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$addressTable->addCell(3000)->addText(strip_tags($delivery_address), [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	if ( $order ) {
 		$textRun = $leftCell->addTextRun(['spaceBefore' => 0, 'spaceAfter' => 0]);
 		$textRun->addText("Delivery Address: ", ['bold' => true]);
 		// Nested table to restrict width
 		$addressTable = $leftCell->addTable(['cellMargin' => 0]);
 		$addressTable->addRow();
-		$addressTable->addCell(3000)->addText(strip_tags($final_delivery_address), [], ['spaceBefore' => 0, 'spaceAfter' => 0]); // ~50% of 6000 cell
+		$addressTable->addCell(3000)->addText(strip_tags($shipping_address), [], ['spaceBefore' => 0, 'spaceAfter' => 0]); // ~50% of 6000 cell
 	}
 	// $textRun = $leftCell->addTextRun($compact);
 	// $textRun->addText("Customer Notes: ", ['bold' => true]);
@@ -2019,7 +2023,6 @@ function download_customer_word_callback() {
 
 add_action( 'wp_ajax_download_customer_word', 'download_customer_word_callback' );
 add_action( 'wp_ajax_nopriv_download_customer_word', 'download_customer_word_callback' );
-
 
 // Excel sheet
 
@@ -2832,7 +2835,6 @@ add_action(
 );
 
 function sts_materialize_customer_cpt( $order_id ) {
-
     $order = wc_get_order( $order_id );
     if ( ! $order ) {
         return;
@@ -2890,9 +2892,25 @@ function sts_materialize_customer_cpt( $order_id ) {
     update_post_meta( $post_id, 'name', $cust_name );
     update_post_meta( $post_id, 'customer_phone', sanitize_text_field( $data['customer_phone'] ?? '' ) );
     update_post_meta( $post_id, 'email', sanitize_email( $data['customer_email'] ?? '' ) );
-    update_post_meta( $post_id, 'delivery_address', sanitize_text_field( $data['customer_address'] ?? '' ) );
-    update_post_meta( $post_id, 'subrubs', sanitize_text_field( $data['customer_suburb'] ?? '' ) );
-    update_post_meta( $post_id, 'state', sanitize_text_field( $data['customer_state'] ?? '' ) );
+	$delivery_address = implode(', ', array_filter([
+		$order->get_shipping_address_1(),
+		$order->get_shipping_address_2(),
+		$order->get_shipping_city(),
+		$order->get_shipping_state(),
+		$order->get_shipping_postcode(),
+		$order->get_shipping_country(),
+	]));
+	update_post_meta( $post_id, 'delivery_address', $delivery_address );
+	update_post_meta(
+		$post_id,
+		'subrubs',
+		$order->get_shipping_city()
+	);
+	update_post_meta(
+		$post_id,
+		'state',
+		$order->get_shipping_state()
+	);
     update_post_meta( $post_id, 'product_type', $product_type );
 
 	// Vehicle Information
@@ -2941,18 +2959,14 @@ function sts_materialize_customer_cpt( $order_id ) {
 	if ($front_images) {
 		update_post_meta($post_id, 'front_images', $front_images);
 	}
-
 	// Standard Order Notes
 	update_post_meta( $post_id, 'order_notes', sanitize_text_field( $data['order_notes'] ?? '' ) );
-
     if ( $caravan_width > 2450 || $a_frame > 2300 ) {
         update_post_meta( $post_id, 'sts_var_caravan_eyelet_tab', 'Yes' );
     }
-
     if ( $barwidth > 2150 ) {
         update_post_meta( $post_id, 'extra_bungee', 'Yes' );
     }
-
     if ( $hitch_measure > 0 ) {
         if ( $hitch_measure < 250 ) {
             update_post_meta( $post_id, 'sts_var_caravan_cut_out', 250 );
@@ -2961,24 +2975,19 @@ function sts_materialize_customer_cpt( $order_id ) {
         } else {
             update_post_meta( $post_id, 'sts_var_caravan_cut_out', 450 );
         }
-
         if ( $product_type === 'Stone Stomper' ) {
             update_post_meta( $post_id, 'sts_var_caravan_ss_length_adj', $hitch_measure - 140 );
         }
     }
-
    	$final_delivery  = sanitize_text_field( $data['final_delivery'] ?? '' );
 	if ('move' === $final_delivery) {
 	    update_post_meta( $post_id, 'sts_var_proposed_on_the_move', 'Yes' );
     } else {
 		update_post_meta( $post_id, 'sts_var_proposed_on_the_move', 'No' );
 	}
-
     update_post_meta( $post_id, 'vinyl_insert_width_mm', sanitize_text_field( $data['vinyl_width_mm'] ?? '' ) );
     update_post_meta( $post_id, 'vinyl_insert_height_mm', sanitize_text_field( $data['vinyl_length_mm'] ?? '' ) );
-
     $support_type = $data['input_1.3'] ?? '';
-
 	update_post_meta( $post_id, 'support_pockets', 'No' );
 
 	if ( $support_type === 'toolbox' ) {
@@ -2995,7 +3004,6 @@ function sts_materialize_customer_cpt( $order_id ) {
 		update_post_meta( $post_id, 'support_pockets', 'Yes' );
 		update_post_meta( $post_id, 'support_pockets_measurement', sanitize_text_field( $data['support_pocket_length_mm'] ?? '' ) );
 	}
-
     if ( $product_type === 'Mesh Only' ) {
         update_post_meta( $post_id, 'sts_var_caravan_mesh_only_measurement', sanitize_text_field( $data['meshmeasurment_mm'] ?? '' ) );
         update_post_meta( $post_id, 'caravan_length_mm', sanitize_text_field( $data['meshmeasurment_mm'] ?? '' ) );
@@ -3003,10 +3011,8 @@ function sts_materialize_customer_cpt( $order_id ) {
     } else {
         update_post_meta( $post_id, 'sts_var_caravan_bar_option', sanitize_text_field( $data['bar_options'] ?? '' ) );
     }
-
 	$sts_var_caravan_bar_option = sanitize_text_field( $data['bar_options'] ?? '' );
 	$bar_option = trim( $sts_var_caravan_bar_option );
-
 	if (
 		$bar_option === 'Option 1 Large Angle' ||
 		$bar_option === 'Cut Out Angle'
@@ -3016,27 +3022,20 @@ function sts_materialize_customer_cpt( $order_id ) {
 	} else {
 		update_post_meta( $post_id, 'hitch_measurement_field', $hitch_measure );
 	}
-
-
    	$sleeve = 'No';
-
 	foreach ( $order->get_items() as $item ) {
 		if ( (int) $item->get_product_id() === 532 ) {
 			$sleeve = 'Yes';
 			break;
 		}
 	}
-
 	update_post_meta( $post_id, 'sleeve', $sleeve );
-
     if ( $order->get_user_id() ) {
         update_post_meta( $post_id, '_customer_user_id', $order->get_user_id() );
     }
-
     if ( $order->get_customer_note() ) {
         update_post_meta( $post_id, 'sts_var_order_notes', sanitize_textarea_field( $order->get_customer_note() ) );
     }
-
     $order->update_meta_data( '_sts_customer_cpt_created', 'yes' );
     $order->add_order_note( 'Customer CPT created' );
     $order->save();

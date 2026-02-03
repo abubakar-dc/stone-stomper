@@ -5576,6 +5576,10 @@ Mixin for transition
 .editor-styles-wrapper .form-details-section .details-images img {
   width: 100%;
 }
+.editor-styles-wrapper .section-disable {
+  pointer-events: none !important;
+  opacity: 0.2;
+}
 .editor-styles-wrapper .form-detail-section a,
 .editor-styles-wrapper .form-detail-section a:visited {
   border-color: var(--ss_black_1);

@@ -161,18 +161,18 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 												<input id="cust_email" placeholder="Email Address" name="customer_email" type="email" required />
 											</div>
 											<?php
-												if($sts_var_section_head_notices){
+												if($sts_var_section_head_notices) {
 													foreach($sts_var_section_head_notices as $sts_key => $notice) {
-													$sts_var_notice = $notice['notice']??null;
-													if($sts_key === 0){ ?>
-													<?php if ( $sts_var_notice ) { ?>
-															<div class="note notice-bar"><?php echo html_entity_decode($sts_var_notice); ?></div>
-														<?php } ?>
-													<?php
-													}
+														$sts_var_notice = $notice['notice']??null;
+														if($sts_key === 0){ ?>
+															<?php if ( $sts_var_notice ) { ?>
+																	<div class="note notice-bar"><?php echo html_entity_decode($sts_var_notice); ?></div>
+																<?php } ?>
+															<?php
 														}
 													}
-												?>
+												}
+											?>
 										</div>
 									</div>
 								</div>
@@ -803,16 +803,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											<textarea id="order_notes-details" name="order_notes" placeholder="Add any special notes here" maxlength="500"></textarea>
 											<p class="note notice-bar hidden" id="move_note">Our Team will contact you once your order is ready on your given phone number</p>
 										</div>
-										<div class="field">
-											<label class="req" for="final_address">Delivery Address</label>
-											<select id="final_address" name="final_delivery" required>
-												<option value="">Select…</option>
-												<option value="same">Same as above</option>
-												<option value="move">I am on the move</option>
-											</select>
-											<p class="note notice-bar hidden" id="move_note">Our Team will contact you once your order is ready on your given phone number</p>
-										</div>
-
 									</div>
 									<div class="form-section-left column mobile-image" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 										<div class="grid cols-2 details-images ">
