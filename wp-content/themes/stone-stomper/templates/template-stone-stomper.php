@@ -158,32 +158,8 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 												<input id="cust_phone" placeholder="Phone (Required)" name="customer_phone" type="text" required inputmode="numeric" pattern="[0-9]*"/>
 											</div>
 											<div class="field">
-												<input id="cust_address" placeholder="Home Address" name="customer_address" type="text" required />
-											</div>
-											<div class="grid cols-2 two-columns-fields">
-												<div class="field">
-													<input id="cust_suburb" placeholder="Suburb" name="customer_suburb" type="text"
-														required />
-												</div>
-												<div class="field">
-													<select id="cust_state" placeholder="State" name="customer_state" required>
-														<option value="">State*</option>
-														<option>NSW</option>
-														<option>VIC</option>
-														<option>QLD</option>
-														<option>SA</option>
-														<option>WA</option>
-														<option>TAS</option>
-														<option>ACT</option>
-														<option>NT</option>
-													</select>
-												</div>
-											</div>
-											<div class="field">
 												<input id="cust_email" placeholder="Email Address" name="customer_email" type="email" required />
 											</div>
-
-
 											<?php
 												if($sts_var_section_head_notices){
 													foreach($sts_var_section_head_notices as $sts_key => $notice) {
