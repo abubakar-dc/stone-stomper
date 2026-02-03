@@ -419,6 +419,69 @@
             "append": ""
         },
         {
+            "key": "field_6981ffb4e5dd6",
+            "label": "Notice - Towing Vehicle Barwidth (mm)",
+            "name": "sts_var_notice_towing_vehicle_barwidth_mm",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "rows": "",
+            "placeholder": "",
+            "new_lines": ""
+        },
+        {
+            "key": "field_6982000ce5dd7",
+            "label": "Notice - Caravan Width (mm)",
+            "name": "sts_var_notice_caravan_width_mm",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "rows": "",
+            "placeholder": "",
+            "new_lines": ""
+        },
+        {
+            "key": "field_69820024e5dd8",
+            "label": "Notice - A Frame Length (mm)",
+            "name": "sts_var_a_frame_length_mm",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "rows": "",
+            "placeholder": "",
+            "new_lines": ""
+        },
+        {
             "key": "field_691655f145966",
             "label": "Section Head",
             "name": "",
@@ -760,5 +823,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1768908176
+    "modified": 1770127705
 }

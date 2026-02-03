@@ -47,6 +47,14 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 	$sts_var_section_bar_options_bar_gallery         = $sts_var_section_bar_options['bar_gallery'] ?? null;
 	$mesh_only_measurement_field_notice_text         = $sts_fields['mesh_only_measurement_field_notice_text'] ?? null;
 
+
+	// Final measurements notices
+
+	$sts_var_notice_towing_vehicle_barwidth_mm         = $sts_fields['sts_var_notice_towing_vehicle_barwidth_mm'] ?? null;
+	$sts_var_notice_caravan_width_mm         = $sts_fields['sts_var_notice_caravan_width_mm'] ?? null;
+	$sts_var_a_frame_length_mm         = $sts_fields['sts_var_a_frame_length_mm'] ?? null;
+
+
 	// var_dump($mesh_only_measurement_field_notice_text);
 ?>
 
@@ -110,86 +118,86 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										<?php } ?>
 									</div>
 									<div class="st-s36"></div>
-								<div id="jump-01" class="section-disable">
-									<?php if($sts_var_section_head_notices){
-										foreach($sts_var_section_head_notices as $sts_key => $notice){
-										$sts_var_headline = $notice['headline']??null;
-										$sts_var_text = $notice['text']??null;
-										if($sts_key === 0){ ?>
-											<?php if ( $sts_var_headline ) {
-												?>
-											<h3><?php echo esc_html($sts_var_headline); ?></h3>
-											<?php }
-											if($sts_var_text){ ?>
-												<p><?php echo html_entity_decode($sts_var_text); ?></p>
-											<?php } ?>
-										<?php
-										}
+									<div id="jump-01" class="section-disable">
+										<?php if($sts_var_section_head_notices){
+											foreach($sts_var_section_head_notices as $sts_key => $notice){
+											$sts_var_headline = $notice['headline']??null;
+											$sts_var_text = $notice['text']??null;
+											if($sts_key === 0){ ?>
+												<?php if ( $sts_var_headline ) {
+													?>
+												<h3><?php echo esc_html($sts_var_headline); ?></h3>
+												<?php }
+												if($sts_var_text){ ?>
+													<p><?php echo html_entity_decode($sts_var_text); ?></p>
+												<?php } ?>
+											<?php
 											}
-									} ?>
-									<div class="mobile-image example-photographs" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
-										<?php if($sts_var_section_head_image){ ?>
-											<?php StoneStomper::the_attachment_image($sts_var_section_head_image,1200 ); ?>
-											<?php if($sts_var_section_head_image_caption){ ?>
-												<div class="image-caption-area">
-													<div class="image-caption">
-														<p><?php echo $sts_var_section_head_image_caption; ?></p>
+												}
+										} ?>
+										<div class="mobile-image example-photographs" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
+											<?php if($sts_var_section_head_image){ ?>
+												<?php StoneStomper::the_attachment_image($sts_var_section_head_image,1200 ); ?>
+												<?php if($sts_var_section_head_image_caption){ ?>
+													<div class="image-caption-area">
+														<div class="image-caption">
+															<p><?php echo $sts_var_section_head_image_caption; ?></p>
+														</div>
 													</div>
-												</div>
+												<?php } ?>
 											<?php } ?>
-										<?php } ?>
-									</div>
-									<div class="grid vehicle-details cols-2">
-										<div class="field half-input-field">
-											<input id="first_name" placeholder="First Name (Required)" name="customer_first_name" type="text" required />
 										</div>
-										<div class="field half-input-field last">
-											<input id="last_name" placeholder="Last Name (Required)" name="customer_last_name" type="text" required />
-										</div>
-										<div class="field">
-											<input id="cust_phone" placeholder="Phone (Required)" name="customer_phone" type="text" required inputmode="numeric" pattern="[0-9]*"/>
-										</div>
-										<div class="field">
-											<input id="cust_address" placeholder="Home Address" name="customer_address" type="text" required />
-										</div>
-										<div class="grid cols-2 two-columns-fields">
-											<div class="field">
-												<input id="cust_suburb" placeholder="Suburb" name="customer_suburb" type="text"
-													required />
+										<div class="grid vehicle-details cols-2">
+											<div class="field half-input-field">
+												<input id="first_name" placeholder="First Name (Required)" name="customer_first_name" type="text" required />
+											</div>
+											<div class="field half-input-field last">
+												<input id="last_name" placeholder="Last Name (Required)" name="customer_last_name" type="text" required />
 											</div>
 											<div class="field">
-												<select id="cust_state" placeholder="State" name="customer_state" required>
-													<option value="">State*</option>
-													<option>NSW</option>
-													<option>VIC</option>
-													<option>QLD</option>
-													<option>SA</option>
-													<option>WA</option>
-													<option>TAS</option>
-													<option>ACT</option>
-													<option>NT</option>
-												</select>
+												<input id="cust_phone" placeholder="Phone (Required)" name="customer_phone" type="text" required inputmode="numeric" pattern="[0-9]*"/>
 											</div>
-										</div>
-										<div class="field">
-											<input id="cust_email" placeholder="Email Address" name="customer_email" type="email" required />
-										</div>
+											<div class="field">
+												<input id="cust_address" placeholder="Home Address" name="customer_address" type="text" required />
+											</div>
+											<div class="grid cols-2 two-columns-fields">
+												<div class="field">
+													<input id="cust_suburb" placeholder="Suburb" name="customer_suburb" type="text"
+														required />
+												</div>
+												<div class="field">
+													<select id="cust_state" placeholder="State" name="customer_state" required>
+														<option value="">State*</option>
+														<option>NSW</option>
+														<option>VIC</option>
+														<option>QLD</option>
+														<option>SA</option>
+														<option>WA</option>
+														<option>TAS</option>
+														<option>ACT</option>
+														<option>NT</option>
+													</select>
+												</div>
+											</div>
+											<div class="field">
+												<input id="cust_email" placeholder="Email Address" name="customer_email" type="email" required />
+											</div>
 
 
-										<?php
-											if($sts_var_section_head_notices){
-												foreach($sts_var_section_head_notices as $sts_key => $notice) {
-												$sts_var_notice = $notice['notice']??null;
-												if($sts_key === 0){ ?>
-												<?php if ( $sts_var_notice ) { ?>
-														<div class="note notice-bar"><?php echo html_entity_decode($sts_var_notice); ?></div>
-													<?php } ?>
-												<?php
-												}
+											<?php
+												if($sts_var_section_head_notices){
+													foreach($sts_var_section_head_notices as $sts_key => $notice) {
+													$sts_var_notice = $notice['notice']??null;
+													if($sts_key === 0){ ?>
+													<?php if ( $sts_var_notice ) { ?>
+															<div class="note notice-bar"><?php echo html_entity_decode($sts_var_notice); ?></div>
+														<?php } ?>
+													<?php
 													}
-												}
-											?>
-									</div>
+														}
+													}
+												?>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -375,15 +383,15 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										</div>
 									</div>
 									<?php
-									if($sts_var_section_head_notices){
-										foreach($sts_var_section_head_notices as $sts_key => $notice) {
-										$sts_var_notice = $notice['notice']??null;
-										if($sts_key === 2){ ?>
-										<?php if ( $sts_var_notice ) { ?>
-												<div id="caravan-notice-bar" class="note notice-bar" style="display:none;"><?php echo html_entity_decode($sts_var_notice); ?></div>
-											<?php } ?>
-										<?php
-										}
+										if($sts_var_section_head_notices){
+											foreach($sts_var_section_head_notices as $sts_key => $notice) {
+											$sts_var_notice = $notice['notice']??null;
+											if($sts_key === 2){ ?>
+											<?php if ( $sts_var_notice ) { ?>
+													<div id="caravan-notice-bar" class="note notice-bar" style="display:none;"><?php echo html_entity_decode($sts_var_notice); ?></div>
+												<?php } ?>
+											<?php
+											}
 											}
 										}
 									?>
@@ -504,24 +512,21 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										foreach($sts_var_section_head_notices as $sts_key => $notice){
 										$sts_var_headline = $notice['headline']??null;
 										$sts_var_text = $notice['text']??null;
-										if($sts_key === 3){ ?>
-											<?php if ( $sts_var_headline ) {
-												?>
-											<h3><?php echo esc_html($sts_var_headline); ?></h3>
+										if($sts_key === 3) { ?>
+											<?php if ( $sts_var_headline ) { ?>
+												<h3><?php echo esc_html($sts_var_headline); ?></h3>
 											<?php }
-											if($sts_var_text){ ?>
+											if($sts_var_text) { ?>
 												<p><?php echo html_entity_decode($sts_var_text); ?></p>
 											<?php } ?>
 											<?php
-												}
 											}
-										} ?>
+										}
+									} ?>
 									<div class="form-image-slider mobile-image">
 										<?php if($sts_var_example_photographs){ ?>
 											<?php foreach($sts_var_example_photographs as $sts_key => $photo){
-												$caption = wp_get_attachment_caption( $photo );
-
-												?>
+												$caption = wp_get_attachment_caption( $photo ); ?>
 												<div class="slick-slide">
 													<div class="slider-image">
 														<?php StoneStomper::the_attachment_image($photo,1200 ); ?>
@@ -623,7 +628,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											</div>
 										<?php } ?>
 									</div>
-									<div class="grid cols-2">
+									<div class="grid cols-2 final-measurements-fields">
 										<div class="field mesh-only-field">
 											<label class="req" for="meshmeasurment">Bracket on the caravan to Stone Stomper while hitched up straight</label>
 											<input id="meshmeasurment" name="meshmeasurment_mm" type="text" inputmode="numeric" pattern="[0-9]*"
@@ -634,18 +639,41 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										</div>
 										<div class="field">
 											<label class="req" for="barwidth">Towing Vehicle Barwidth (mm)</label>
-											<input id="barwidth" name="barwidth_mm" type="text" inputmode="numeric" pattern="[0-9]*"
-												placeholder="e.g. 1800" required />
-										</div>
-										<div class="field" >
-											<label class="req" for="vanwidth">Caravan Width (mm)</label>
-											<input id="vanwidth" name="caravan_width_mm" type="text" inputmode="numeric" pattern="[0-9]*"
-												placeholder="e.g. 1900" required />
+											<select id="barwidth" name="barwidth_mm">
+												<option value="1700">1700</option>
+												<option value="1800">1800</option>
+												<option value="1850">1850</option>
+												<option value="1900">1900</option>
+												<option value="1960">1960</option>
+												<option value="2000">2000</option>
+												<option value="2050">2050</option>
+												<option value="2100">2100</option>
+												<option value="2150">2150</option>
+												<option value="2200">2200</option>
+												<option value="2250">2250</option>
+												<option value="2300">2300</option>
+												<option value="2350">2350</option>
+												<option value="2400">2400</option>
+											</select>
+											<?php if ( $sts_var_notice_towing_vehicle_barwidth_mm ) { ?>
+												<div class="note notice-bar"><?php echo html_entity_decode($sts_var_notice_towing_vehicle_barwidth_mm); ?></div>
+											<?php } ?>
 										</div>
 										<div class="field">
 											<label class="req" for="a_frame_length">A-Frame Length (mm)</label>
 											<input id="a_frame_length" name="a_frame_length_mm" type="text" inputmode="numeric" pattern="[0-9]*"
 												placeholder="e.g. 1800" required />
+											<?php if ( $sts_var_a_frame_length_mm ) { ?>
+												<div class="note notice-bar"><?php echo html_entity_decode($sts_var_a_frame_length_mm); ?></div>
+											<?php } ?>
+										</div>
+										<div class="field" >
+											<label class="req" for="vanwidth">Caravan Width (mm)</label>
+											<input id="vanwidth" name="caravan_width_mm" type="text" inputmode="numeric" pattern="[0-9]*"
+												placeholder="e.g. 1900" required />
+											<?php if ( $sts_var_notice_caravan_width_mm ) { ?>
+												<div class="note notice-bar"><?php echo html_entity_decode($sts_var_notice_caravan_width_mm); ?></div>
+											<?php } ?>
 										</div>
 										<fieldset class="ss-support-options" style="display:none">
 											<div class="note notice-bar mt-0">As the A-Frame length is longer than 1800mm, we require a mid-fixing point for your Stone Stomper. Please select one of the following options. If you are unsure, please select "Support Pockets"</div>
@@ -706,13 +734,11 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										</fieldset>
 										<div class="field hidden">
 											<label class="req" for="vinyl_width">Vinyl Insert Width</label>
-											<input id="vinyl_width" name="vinyl_width_mm" type="text" inputmode="numeric" pattern="[0-9]*"
-												placeholder="e.g.600 mm" required />
+											<input id="vinyl_width" name="vinyl_width_mm" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="e.g.600 mm" required />
 										</div>
 										<div class="field hidden">
 											<label class="req" for="vinyl_length">Vinyl Insert Length</label>
-											<input id="vinyl_length" name="vinyl_length_mm" type="text" inputmode="numeric" pattern="[0-9]*"
-												placeholder="e.g.600 mm" required />
+											<input id="vinyl_length" name="vinyl_length_mm" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="e.g.600 mm" required />
 										</div>
 										<!--
 											<label class="row">
@@ -722,15 +748,15 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										-->
 									</div>
 									<?php
-										if($sts_var_section_head_notices){
+										if($sts_var_section_head_notices) {
 											foreach($sts_var_section_head_notices as $sts_key => $notice) {
-											$sts_var_notice = $notice['notice']??null;
-											if($sts_key === 4){ ?>
-											<?php if ( $sts_var_notice ) { ?>
-													<div class="note notice-bar"><?php echo html_entity_decode($sts_var_notice); ?></div>
-												<?php } ?>
-											<?php
-											}
+												$sts_var_notice = $notice['notice']??null;
+												if($sts_key === 4){ ?>
+												<?php if ( $sts_var_notice ) { ?>
+														<div class="note notice-bar"><?php echo html_entity_decode($sts_var_notice); ?></div>
+													<?php } ?>
+												<?php
+												}
 											}
 										}
 									?>

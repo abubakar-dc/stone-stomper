@@ -1697,7 +1697,7 @@ select {
   background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjIiIGhlaWdodD0iMTIiIHZpZXdCb3g9IjAgMCAyMiAxMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEuNzczOCAwLjc3Njc5NEwxMC45OTggOS45OTk4MUwyMC4yMjExIDAuNzc2Nzk0IiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjIiLz4KPC9zdmc+Cg==);
   background-repeat: no-repeat;
   background-position: center right 29px;
-  background-size: 10px;
+  background-size: 20px;
 }
 
 .ginput_container_multiselect select {
@@ -6948,11 +6948,6 @@ ul.wc-block-components-totals-discount__coupon-list button.wc-block-components-c
   width: 100%;
 }
 
-.section-disable {
-  pointer-events: none !important;
-  opacity: 0.2;
-}
-
 .form-detail-section a,
 .form-detail-section a:visited {
   border-color: var(--ss_black_1);
@@ -7333,6 +7328,16 @@ ul.wc-block-components-totals-discount__coupon-list button.wc-block-components-c
   display: inline-block;
   padding: 0;
   line-height: 1;
+}
+
+.final-measurements-fields .field .notice-bar {
+  padding: 16px 16px 16px 46px;
+  margin-top: 10px;
+}
+.final-measurements-fields .field .notice-bar::before {
+  position: absolute;
+  left: 16px;
+  top: 16px;
 }
 
 /*-------------------------------------------------

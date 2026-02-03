@@ -861,7 +861,7 @@ function show_towing_svg_in_editor( $post ) {
 			<span class="button button-secondary generate-diagram" style="margin-right:10px;">Generate Diagram</span>
 			<a href="<?php echo admin_url( 'admin-ajax.php?action=download_customer_word&post_id=' . $post->ID ); ?>" target="_blank" class="button button-secondary generate-word-doc" style="margin-right:10px;">Generate Word Document</a>
 			<a href="<?php echo admin_url( 'admin-ajax.php?action=download_customer_pdf&post_id=' . $post->ID ); ?>" target="_blank" class="button button-secondary generate-pdf" style="margin-right:10px; display:none;">Generate PDF</a>
-			<a href="#" class="button button-secondary email-to-manufacturer" style="margin-right:10px;">Email to Manufacturer</a>
+			<a href="#" class="button button-secondary email-to-manufacturer" style="margin-right:10px;">Email to Marleston</a>
 			<a href="#" id="show-order-popup" class="button button-secondary" style="">View Order #<?php echo esc_html( $order_id ); ?></a>
 		</div>
 		<div class="stone-stomper-vector" style="display:none;">
@@ -1582,8 +1582,8 @@ function generate_customer_order_word_file($post_id, $diagram_png) {
 		'support_pockets', 'support_pockets_measurement',
 		'sts_var_caravan_bar_option', 'sts_var_caravan_bar_bend',
 		'sts_var_caravan_ss_length_adj', 'sts_var_caravan_cut_out',
-		'sts_var_caravan_mesh_only_measurement', 'sts_var_caravan_foam',
-		'sts_var_caravan_eyelet_tab', 'sts_var_order_notes',
+		'sts_var_caravan_mesh_only_measurement', 'sts_var_caravan_crfoam',
+		'sts_var_caravan_eyelet_tab', 'sts_var_order_notes', 'final_details', 'extra_fittings', 'sts_var_caravan_bar_bend_type', 'tab_on_back',
 		'extension_plate', 'fittings', 'sleeve', 'extra_bungee',
 		'extra_vinyl_width_mm', 'extra_vinyl_length_mm', 'extra_vinyl_position',
 		'angled_stone_guard_width_mm', 'angled_stone_guard_depth_mm', ''
@@ -1595,6 +1595,9 @@ function generate_customer_order_word_file($post_id, $diagram_png) {
 			$$field = wpword_escape($$field);
 		}
 	}
+
+	$order_notes             = wpword_escape($order_notes);
+	$delivery_instructions   = wpword_escape($delivery_instructions);
 
 	$final_delivery_address = "Same As Home Address";
 
@@ -1609,6 +1612,7 @@ function generate_customer_order_word_file($post_id, $diagram_png) {
 	if ( $sts_var_caravan_ss_length_adj !== '' ) {
 		$caravan_length_mm = (int) $caravan_length_mm + (int) $sts_var_caravan_ss_length_adj;
 	}
+
 
     // Start Section
     $section = $phpWord->addSection();

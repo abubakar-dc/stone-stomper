@@ -28,10 +28,10 @@
 	}
 }
 
-.section-disable {
-	pointer-events: none !important;
-	opacity: 0.2;
-}
+// .section-disable {
+// 	pointer-events: none !important;
+// 	opacity: 0.2;
+// }
 
 .form-detail-section {
 	a,
@@ -478,4 +478,19 @@
 	display: inline-block;
 	padding: 0;
 	line-height: 1;
+}
+
+.final-measurements-fields {
+	.field {
+		.notice-bar {
+			padding: 16px 16px 16px 46px;
+			margin-top: 10px;
+
+			&::before {
+				position: absolute;
+				left: 16px;
+				top: 16px;
+			}
+		}
+	}
 }

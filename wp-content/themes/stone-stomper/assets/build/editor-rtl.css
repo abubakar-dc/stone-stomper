@@ -5576,10 +5576,6 @@ Mixin for transition
 .editor-styles-wrapper .form-details-section .details-images img {
   width: 100%;
 }
-.editor-styles-wrapper .section-disable {
-  pointer-events: none !important;
-  opacity: 0.2;
-}
 .editor-styles-wrapper .form-detail-section a,
 .editor-styles-wrapper .form-detail-section a:visited {
   border-color: var(--ss_black_1);
@@ -5930,6 +5926,15 @@ Mixin for transition
   padding: 0;
   line-height: 1;
 }
+.editor-styles-wrapper .final-measurements-fields .field .notice-bar {
+  padding: 16px 46px 16px 16px;
+  margin-top: 10px;
+}
+.editor-styles-wrapper .final-measurements-fields .field .notice-bar::before {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+}
 .editor-styles-wrapper .wp-block-button .wp-block-button__link {
   box-sizing: border-box;
   position: relative;
@@ -6150,7 +6155,7 @@ Mixin for transition
   background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjIiIGhlaWdodD0iMTIiIHZpZXdCb3g9IjAgMCAyMiAxMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEuNzczOCAwLjc3Njc5NEwxMC45OTggOS45OTk4MUwyMC4yMjExIDAuNzc2Nzk0IiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjIiLz4KPC9zdmc+Cg==);
   background-repeat: no-repeat;
   background-position: center left 29px;
-  background-size: 10px;
+  background-size: 20px;
 }
 .editor-styles-wrapper .ginput_container_multiselect select {
   min-height: 77px;
