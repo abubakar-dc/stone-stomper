@@ -1969,7 +1969,7 @@ function generate_customer_order_word_file($post_id, $diagram_png) {
 
     // Save file
     $upload_dir = wp_upload_dir();
-    $file_path = $upload_dir['path'] . "/customer-order-{$post_id}.docx";
+    $file_path = $upload_dir['path'] . "/customer-order-{$$order_id}.docx";
     $writer = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
     $writer->save($file_path);
 
@@ -2322,28 +2322,6 @@ add_filter('handle_actions-customer', function ($redirect_to, $action, $post_ids
 
 // Email to manufacturer
 
-// function email_to_manufacturer_callback() {
-// 	list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaults();
-
-//     $post_id = intval($_POST['post_id']);
-// 	$order_id = get_post_meta($post_id, 'order_id', true);
-//     $file_path = generate_customer_order_word_file($post_id, $diagram_png);
-
-//     // Get manufacturers list from option fields array
-//     $emails = [];
-
-//     if ( !empty($sts_option_fields['sts_var_manufacturers']) && is_array($sts_option_fields['sts_var_manufacturers']) ) {
-//         foreach ($sts_option_fields['sts_var_manufacturers'] as $manufacturer) {
-//             if (!empty($manufacturer['email'])) {
-//                 $emails[] = $manufacturer['email'];
-//             }
-//         }
-//     }
-
-//     // Fallback if no emails found
-//     if (empty($emails)) {
-//         $emails = ['tmaeder@boylen.com.au'];
-//     }
 function email_to_manufacturer_callback() {
 
 	if ( ! current_user_can('edit_posts') ) {
