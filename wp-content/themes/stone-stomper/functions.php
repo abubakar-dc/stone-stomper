@@ -2872,21 +2872,16 @@ function sts_materialize_customer_cpt( $order_id ) {
         $order->add_order_note( 'STS STOP: customer name missing' );
         return;
     }
-
     $cust_name = trim( $cust_first . ' ' . $cust_last );
-
     $post_id = wp_insert_post( [
         'post_type'   => 'customer',
         'post_status' => 'publish',
         'post_title'  => $cust_name,
     ] );
-
     if ( is_wp_error( $post_id ) || ! $post_id ) {
         return;
     }
-
     $product_type = (string) ( $data['product_type'] ?? '' ) === '712' ? 'Mesh Only' : 'Stone Stomper';
-
 	// Contact Information
     update_post_meta( $post_id, 'order_id', $order_id );
     update_post_meta( $post_id, 'name', $cust_name );
@@ -2961,6 +2956,7 @@ function sts_materialize_customer_cpt( $order_id ) {
 	}
 	// Standard Order Notes
 	update_post_meta( $post_id, 'order_notes', sanitize_text_field( $data['order_notes'] ?? '' ) );
+
     if ( $caravan_width > 2450 || $a_frame > 2300 ) {
         update_post_meta( $post_id, 'sts_var_caravan_eyelet_tab', 'Yes' );
     }
@@ -3004,6 +3000,7 @@ function sts_materialize_customer_cpt( $order_id ) {
 		update_post_meta( $post_id, 'support_pockets', 'Yes' );
 		update_post_meta( $post_id, 'support_pockets_measurement', sanitize_text_field( $data['support_pocket_length_mm'] ?? '' ) );
 	}
+
     if ( $product_type === 'Mesh Only' ) {
         update_post_meta( $post_id, 'sts_var_caravan_mesh_only_measurement', sanitize_text_field( $data['meshmeasurment_mm'] ?? '' ) );
         update_post_meta( $post_id, 'caravan_length_mm', sanitize_text_field( $data['meshmeasurment_mm'] ?? '' ) );
@@ -3190,7 +3187,6 @@ add_action('admin_head', function () {
 
 define('STS_STONE_STOMPER_ID', 545);
 define('STS_MESH_ONLY_ID', 712);
-
 add_action('woocommerce_add_to_cart', function ($cart_item_key, $product_id) {
 
     if (!function_exists('WC') || !WC()->cart) return;
@@ -3258,7 +3254,6 @@ add_action('acf/save_post', function ($post_id) {
  */
 
 add_action( 'woocommerce_admin_order_data_after_order_details', 'display_on_the_move_status_admin', 10, 1 );
-
 function display_on_the_move_status_admin( $order ) {
     if ( ! is_object( $order ) ) {
         $order = wc_get_order( $order );
@@ -3294,7 +3289,6 @@ function display_on_the_move_status_admin( $order ) {
  | Authority to leave
  |--------------------------------------------------
  */
-
 
 add_action( 'init', 'register_atl_block_extension' );
 
