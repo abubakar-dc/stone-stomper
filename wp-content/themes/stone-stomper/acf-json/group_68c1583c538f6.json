@@ -732,7 +732,7 @@
                         },
                         {
                             "key": "field_698318d28c113",
-                            "label": "Value",
+                            "label": "Hitch Measurement",
                             "name": "add_value",
                             "aria-label": "",
                             "type": "number",
@@ -847,5 +847,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1770199903
+    "modified": 1770204232
 }

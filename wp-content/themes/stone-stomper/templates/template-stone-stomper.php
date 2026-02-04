@@ -439,6 +439,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 														<option value="<?php echo esc_attr( $single_bar_option ); ?>" data-value="<?php echo esc_attr( $add_value ); ?>"><?php echo esc_html( $single_bar_option ); ?></option>
 													<?php } ?>
 												</select>
+												<input type="hidden" name="bar_option_value" id="bar_option_value" value="">
 											</div>
 											<fieldset class="hitch_measurement_dropdown" style="display:none">
 												<?php if($sts_var_section_bar_options_description_option_two){ ?>

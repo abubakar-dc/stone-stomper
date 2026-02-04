@@ -739,7 +739,11 @@ jQuery( function() {
 	} );
 
 	jQuery( '#bar_options' ).on( 'change', function() {
-		const selected = jQuery( this ).val();
+		const $select = jQuery( this );
+		const selectedText = $select.val();
+		const selectedOption = $select.find( 'option:selected' );
+		const fixedValue = parseInt( selectedOption.data( 'value' ) ) || 0;
+
 		const optionTwo = 'Option 2 Standard Post';
 		const optionThree = [
 			'Option 3 Standard Shank',
@@ -748,10 +752,12 @@ jQuery( function() {
 
 		jQuery( '.option-two-description, .option-three-description' ).hide();
 
-		if ( selected === optionTwo ) {
+		jQuery( '#bar_option_value' ).val( fixedValue || '' );
+
+		if ( selectedText === optionTwo ) {
 			jQuery( '.hitch_measurement_dropdown' ).slideDown();
 			jQuery( '#option-two-description' ).slideDown();
-		} else if ( optionThree.includes( selected ) ) {
+		} else if ( optionThree.includes( selectedText ) ) {
 			jQuery( '.hitch_measurement_dropdown' ).slideDown();
 			jQuery( '#option-three-description' ).slideDown();
 		} else {

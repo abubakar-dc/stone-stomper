@@ -2920,7 +2920,8 @@ function sts_materialize_customer_cpt( $order_id ) {
     $barwidth = floatval( $data['barwidth_mm'] ?? 0 );
     $caravan_width = floatval( $data['caravan_width_mm'] ?? 0 );
     $a_frame = floatval( $data['a_frame_length_mm'] ?? 0 );
-    $hitch_measure = floatval( $data['additional_hitch_measurement'] ?? 0 );
+    $hitch_measure = intval($data['bar_option_value'] ?? 0);
+
 
     update_post_meta( $post_id, 'bar_width_mm', $barwidth );
     update_post_meta( $post_id, 'caravan_width_mm', $caravan_width );
@@ -2963,6 +2964,13 @@ function sts_materialize_customer_cpt( $order_id ) {
     if ( $barwidth > 2150 ) {
         update_post_meta( $post_id, 'extra_bungee', 'Yes' );
     }
+
+	if ($hitch_measure <= 0) {
+		$hitch_measure = intval($data['additional_hitch_measurement'] ?? 0);
+	}
+
+ 	update_post_meta( $post_id, 'hitch_measurement_field', $hitch_measure );
+
     if ( $hitch_measure > 0 ) {
         if ( $hitch_measure < 250 ) {
             update_post_meta( $post_id, 'sts_var_caravan_cut_out', 250 );
@@ -2985,7 +2993,6 @@ function sts_materialize_customer_cpt( $order_id ) {
     update_post_meta( $post_id, 'vinyl_insert_height_mm', sanitize_text_field( $data['vinyl_length_mm'] ?? '' ) );
     $support_type = $data['input_1.3'] ?? '';
 	update_post_meta( $post_id, 'support_pockets', 'No' );
-
 	if ( $support_type === 'toolbox' ) {
 		update_post_meta( $post_id, 'support_type', 'toolbox' );
 		update_post_meta( $post_id, 'toolbox_width_mm', sanitize_text_field( $data['toolbox_width_mm'] ?? '' ) );
@@ -3000,7 +3007,6 @@ function sts_materialize_customer_cpt( $order_id ) {
 		update_post_meta( $post_id, 'support_pockets', 'Yes' );
 		update_post_meta( $post_id, 'support_pockets_measurement', sanitize_text_field( $data['support_pocket_length_mm'] ?? '' ) );
 	}
-
     if ( $product_type === 'Mesh Only' ) {
         update_post_meta( $post_id, 'sts_var_caravan_mesh_only_measurement', sanitize_text_field( $data['meshmeasurment_mm'] ?? '' ) );
         update_post_meta( $post_id, 'caravan_length_mm', sanitize_text_field( $data['meshmeasurment_mm'] ?? '' ) );
@@ -3008,17 +3014,7 @@ function sts_materialize_customer_cpt( $order_id ) {
     } else {
         update_post_meta( $post_id, 'sts_var_caravan_bar_option', sanitize_text_field( $data['bar_options'] ?? '' ) );
     }
-	$sts_var_caravan_bar_option = sanitize_text_field( $data['bar_options'] ?? '' );
-	$bar_option = trim( $sts_var_caravan_bar_option );
-	if (
-		$bar_option === 'Option 1 Large Angle' ||
-		$bar_option === 'Cut Out Angle'
-	) {
-		update_post_meta( $post_id, 'hitch_measurement_field', 100 );
-		update_post_meta( $post_id, 'sts_var_caravan_cut_out', 250 );
-	} else {
-		update_post_meta( $post_id, 'hitch_measurement_field', $hitch_measure );
-	}
+
    	$sleeve = 'No';
 	foreach ( $order->get_items() as $item ) {
 		if ( (int) $item->get_product_id() === 532 ) {
