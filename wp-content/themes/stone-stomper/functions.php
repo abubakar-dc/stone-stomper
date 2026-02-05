@@ -1872,7 +1872,7 @@ function generate_customer_order_word_file($post_id, $diagram_png) {
 	file_put_contents($tmp_png, $png_binary);
 
 	$section->addImage($tmp_png, [
-		'width' => 350,
+		'width' => 450,
 		'alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER,
 	]);
 
@@ -2918,6 +2918,21 @@ function sts_materialize_customer_cpt( $order_id ) {
     update_post_meta( $post_id, 'caravan_make', sanitize_text_field( $data['caravan_make'] ?? $data['van_make'] ?? '' ) );
     update_post_meta( $post_id, 'caravan_model', sanitize_text_field( $data['caravan_model'] ?? $data['van_model'] ?? '' ) );
 
+	$vehicle_make  = strtolower(trim($data['vehicle_make'] ?? $data['veh_make'] ?? ''));
+	$vehicle_model = strtolower(trim($data['vehicle_model'] ?? $data['veh_model'] ?? ''));
+	$van_make      = strtolower(trim($data['caravan_make'] ?? $data['van_make'] ?? ''));
+	$van_model     = strtolower(trim($data['caravan_model'] ?? $data['van_model'] ?? ''));
+
+	if (
+		$vehicle_make === 'other' ||
+		$vehicle_model === 'other' ||
+		$van_make === 'other' ||
+		$van_model === 'other'
+	) {
+		update_post_meta($post_id, '_sts_other_vehicle_used', 'yes');
+	}
+
+
     $barwidth = floatval( $data['barwidth_mm'] ?? 0 );
     $caravan_width = floatval( $data['caravan_width_mm'] ?? 0 );
     $a_frame = floatval( $data['a_frame_length_mm'] ?? 0 );
@@ -3209,6 +3224,35 @@ add_action('admin_head', function () {
         }
     </style>';
 });
+
+// Notice for other van and other vehicle
+add_action('admin_notices', 'sts_customer_cpt_other_vehicle_notice');
+
+function sts_customer_cpt_other_vehicle_notice() {
+    if ( ! is_admin() ) {
+        return;
+    }
+
+    $screen = get_current_screen();
+    if ( ! $screen || $screen->post_type !== 'customer' ) {
+        return;
+    }
+
+    if ( empty($_GET['post']) ) {
+        return;
+    }
+
+    $post_id = intval($_GET['post']);
+
+    if ( get_post_meta($post_id, '_sts_other_vehicle_used', true) !== 'yes' ) {
+        return;
+    }
+
+    echo '<div class="notice notice-warning notice-alt is-dismissible">';
+    echo '<p><strong>Stone Stomper Notice:</strong> This customer order uses an <strong>OTHER</strong> vehicle or van. Please review and add it to the vehicle directory.</p>';
+    echo '</div>';
+}
+
 
 /*
 |-----------------------------------------
