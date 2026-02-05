@@ -2836,6 +2836,7 @@ add_action(
 
 function sts_materialize_customer_cpt( $order_id ) {
     $order = wc_get_order( $order_id );
+
     if ( ! $order ) {
         return;
     }
@@ -3015,9 +3016,12 @@ function sts_materialize_customer_cpt( $order_id ) {
         update_post_meta( $post_id, 'sts_var_caravan_bar_option', sanitize_text_field( $data['bar_options'] ?? '' ) );
     }
 
+	error_log('STS Caravan ID From Payload: ' . print_r($data['caravan_id'], true));
+
 	// angled stonegaurd
 
 	$caravan_id = intval( $data['caravan_id'] ?? 0 );
+	error_log('STS Caravan ID: ' . print_r($caravan_id, true));
 
 	if ( $caravan_id > 0 && function_exists('get_field') ) {
 
