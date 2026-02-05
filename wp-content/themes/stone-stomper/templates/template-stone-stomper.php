@@ -647,7 +647,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											<?php } ?>
 										</div>
 										<div class="field" >
-											<label class="req" for="vanwidth">Caravan Width (mm)</label>
+											<label class="req" for="vanwidth">Width (mm) measured under the A-Frame</label>
 											<input id="vanwidth" name="caravan_width_mm" type="text" inputmode="numeric" pattern="[0-9]*"
 												placeholder="e.g. 1900" required />
 											<?php if ( $sts_var_notice_caravan_width_mm ) { ?>

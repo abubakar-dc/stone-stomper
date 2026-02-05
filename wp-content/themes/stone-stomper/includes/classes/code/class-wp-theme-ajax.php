@@ -66,23 +66,6 @@ class WP_Theme_Ajax {
 		wp_die();
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	public function save_order_form_cookie() {
 		error_log('save_order_form_cookie called');
 		if ( isset( $_POST['formData'] ) ) {
@@ -96,70 +79,70 @@ class WP_Theme_Ajax {
 	}
 
 
-public function bst_handle_upload_order_photos() {
-	$slots  = array( 'hitch', 'rear', 'front' );
-	$result = array( 'hitch' => array(), 'rear' => array(), 'front' => array() );
+	public function bst_handle_upload_order_photos() {
+		$slots  = array( 'hitch', 'rear', 'front' );
+		$result = array( 'hitch' => array(), 'rear' => array(), 'front' => array() );
 
-	require_once ABSPATH . 'wp-admin/includes/file.php';
-	require_once ABSPATH . 'wp-admin/includes/image.php';
+		require_once ABSPATH . 'wp-admin/includes/file.php';
+		require_once ABSPATH . 'wp-admin/includes/image.php';
 
-	// 🔹 Backup original upload_dir before overriding
-	$original_upload_dir = wp_upload_dir();
+		// 🔹 Backup original upload_dir before overriding
+		$original_upload_dir = wp_upload_dir();
 
-	// Define custom filter function
-	$custom_upload_dir = function( $uploads ) {
-		$subdir             = '/order-form/' . date( 'Y/m' );
-		$uploads['subdir']  = $subdir;
-		$uploads['path']    = $uploads['basedir'] . $subdir;
-		$uploads['url']     = $uploads['baseurl'] . $subdir;
-		return $uploads;
-	};
+		// Define custom filter function
+		$custom_upload_dir = function( $uploads ) {
+			$subdir             = '/order-form/' . date( 'Y/m' );
+			$uploads['subdir']  = $subdir;
+			$uploads['path']    = $uploads['basedir'] . $subdir;
+			$uploads['url']     = $uploads['baseurl'] . $subdir;
+			return $uploads;
+		};
 
-	// Apply temporary upload dir change
-	add_filter( 'upload_dir', $custom_upload_dir );
+		// Apply temporary upload dir change
+		add_filter( 'upload_dir', $custom_upload_dir );
 
-	$overrides = array(
-		'test_form' => false,
-		'mimes'     => array(
-			'jpg|jpeg' => 'image/jpeg',
-			'png'      => 'image/png',
-			'gif'      => 'image/gif',
-			'webp'     => 'image/webp',
-			'heic'     => 'image/heic',
-		),
-	);
+		$overrides = array(
+			'test_form' => false,
+			'mimes'     => array(
+				'jpg|jpeg' => 'image/jpeg',
+				'png'      => 'image/png',
+				'gif'      => 'image/gif',
+				'webp'     => 'image/webp',
+				'heic'     => 'image/heic',
+			),
+		);
 
-	foreach ( $slots as $slot ) {
-		if ( empty( $_FILES[ $slot ] ) ) {
-			continue;
-		}
-
-		$files = self::bst_reformat_files_array( $_FILES[ $slot ] );
-		if ( empty( $files ) ) {
-			continue;
-		}
-
-		foreach ( $files as $file ) {
-			$uploaded = wp_handle_upload( $file, $overrides );
-
-			if ( isset( $uploaded['error'] ) ) {
+		foreach ( $slots as $slot ) {
+			if ( empty( $_FILES[ $slot ] ) ) {
 				continue;
 			}
 
-			// Generate result with direct URL (no Media Library entry)
-			$result[ $slot ][] = array(
-				'url'  => $uploaded['url'],
-				'name' => basename( $uploaded['file'] ),
-			);
+			$files = self::bst_reformat_files_array( $_FILES[ $slot ] );
+			if ( empty( $files ) ) {
+				continue;
+			}
+
+			foreach ( $files as $file ) {
+				$uploaded = wp_handle_upload( $file, $overrides );
+
+				if ( isset( $uploaded['error'] ) ) {
+					continue;
+				}
+
+				// Generate result with direct URL (no Media Library entry)
+				$result[ $slot ][] = array(
+					'url'  => $uploaded['url'],
+					'name' => basename( $uploaded['file'] ),
+				);
+			}
+
 		}
 
+		// 🔹 Remove filter after upload
+		remove_filter( 'upload_dir', $custom_upload_dir );
+
+		wp_send_json_success( $result );
 	}
-
-	// 🔹 Remove filter after upload
-	remove_filter( 'upload_dir', $custom_upload_dir );
-
-	wp_send_json_success( $result );
-}
 
 
 	/**
@@ -192,18 +175,14 @@ public function bst_handle_upload_order_photos() {
 		return $files;
 	}
 
-
-
-
-
 	/**
 	 * Define ajax filter
 	 **/
+
 	public function woocommerce_ajax_add_to_cart() {
 		$product_ids  = $_POST['ids'] ?? [];
 		$quantity = 1;
 		$shipping = sanitize_text_field($_POST['shipping'] ?? '');
-
 		$added_any = false;
 
 		foreach ($product_ids as $product_id) {
@@ -227,6 +206,7 @@ public function bst_handle_upload_order_photos() {
 
 		wp_die();
 	}
+
 	/**
 	 * Stone Stomper Update Summary
 	 **/
@@ -332,290 +312,286 @@ public function bst_handle_upload_order_photos() {
 		wp_die();
 	}
 
-
-
-
-
 	/**
 	 * Define ajax filter
 	 **/
-public function fetch_form_data() {
-	$post_id = $_POST['postID'] ?? null;
-	$carMake = $_POST['carMake'] ?? null;
+	public function fetch_form_data() {
+		$post_id = $_POST['postID'] ?? null;
+		$carMake = $_POST['carMake'] ?? null;
 
-	$html = '<option value="">Select Model</option>';
+		$html = '<option value="">Select Model</option>';
 
-	// ✅ Fetch the term by slug
-	if ( $carMake ) {
-		$make_term = get_term_by( 'slug', $carMake, 'car-category' );
+		// ✅ Fetch the term by slug
+		if ( $carMake ) {
+			$make_term = get_term_by( 'slug', $carMake, 'car-category' );
 
-		if ( $make_term && ! is_wp_error( $make_term ) ) {
+			if ( $make_term && ! is_wp_error( $make_term ) ) {
 
-			// ✅ Get ALL posts under this car-category term
-			$related_posts = get_posts( [
-				'post_type'      => 'car', // your CPT
-				'posts_per_page' => -1,
-				'tax_query'      => [
-					[
-						'taxonomy' => 'car-category',
-						'field'    => 'slug',
-						'terms'    => $carMake,
+				// ✅ Get ALL posts under this car-category term
+				$related_posts = get_posts( [
+					'post_type'      => 'car', // your CPT
+					'posts_per_page' => -1,
+					'tax_query'      => [
+						[
+							'taxonomy' => 'car-category',
+							'field'    => 'slug',
+							'terms'    => $carMake,
+						],
 					],
-				],
-			] );
+				] );
 
-			// ✅ If posts found, loop through all
-			if ( $related_posts ) {
-				foreach ( $related_posts as $related_post ) {
-					$related_post_id = $related_post->ID;
+				// ✅ If posts found, loop through all
+				if ( $related_posts ) {
+					foreach ( $related_posts as $related_post ) {
+						$related_post_id = $related_post->ID;
 
-					// 🔹 Optional: add a group label for each post (helpful if multiple models come from different posts)
+						// 🔹 Optional: add a group label for each post (helpful if multiple models come from different posts)
 
-					// ✅ Loop through each post’s repeater field
-					$models = get_field( 'sts_var_car_model_row', $related_post_id );
+						// ✅ Loop through each post’s repeater field
+						$models = get_field( 'sts_var_car_model_row', $related_post_id );
 
-					$html .= '<option class="ajax-car-model" data-post-id="' . esc_attr( $related_post_id ) . '" value="' . esc_attr( sanitize_title( get_the_title( $related_post_id ) ) ) . '">' . esc_html( get_the_title( $related_post_id ) ) . '</option>';
+						$html .= '<option class="ajax-car-model" data-post-id="' . esc_attr( $related_post_id ) . '" value="' . esc_attr( sanitize_title( get_the_title( $related_post_id ) ) ) . '">' . esc_html( get_the_title( $related_post_id ) ) . '</option>';
+					}
 				}
+				$html .= '<option class="ajax-car-model other">other</option>';
+
 			}
-			$html .= '<option class="ajax-car-model other">other</option>';
-
 		}
-	}
 
-		// ✅ Get model selected post ID from AJAX (not the current page)
-	$modelPostID = $_POST['postID'] ?? null;
-
-	// ✅ Default year dropdown placeholder
-	// $year = '<option value="">Select Model Year</option>';
-
-	// if ( $modelPostID ) {
-
-	// 	$years = [];
-
-	// 	// ✅ Read repeater from the selected Model Post only
-	// 	$models = get_field( 'sts_var_car_model_row', $modelPostID );
-
-	// 	if ( $models ) {
-	// 		foreach ( $models as $model ) {
-	// 			if ( ! empty( $model['sts_var_car_year'] ) ) {
-	// 				$years[] = $model['sts_var_car_year'];
-	// 			}
-	// 		}
-	// 	}
-
-	// 	// ✅ Clean & sort
-	// 	$years = array_unique(array_filter($years));
-
-	// 	foreach ( $years as $y ) {
-	// 		$year .= '<option value="' . esc_attr($y) . '">' . esc_html($y) . '</option>';
-	// 	}
-
-	// 	// ✅ Append "Other" option
-	// 	$year .= '<option class="ajax-car-year other">other</option>';
-	// }
+			// ✅ Get model selected post ID from AJAX (not the current page)
 		$modelPostID = $_POST['postID'] ?? null;
 
-		$year = '<option value="">Select Model Year</option>';
+		// ✅ Default year dropdown placeholder
+		// $year = '<option value="">Select Model Year</option>';
 
-		if ($modelPostID) {
+		// if ( $modelPostID ) {
 
-			$years = [];
+		// 	$years = [];
+
+		// 	// ✅ Read repeater from the selected Model Post only
+		// 	$models = get_field( 'sts_var_car_model_row', $modelPostID );
+
+		// 	if ( $models ) {
+		// 		foreach ( $models as $model ) {
+		// 			if ( ! empty( $model['sts_var_car_year'] ) ) {
+		// 				$years[] = $model['sts_var_car_year'];
+		// 			}
+		// 		}
+		// 	}
+
+		// 	// ✅ Clean & sort
+		// 	$years = array_unique(array_filter($years));
+
+		// 	foreach ( $years as $y ) {
+		// 		$year .= '<option value="' . esc_attr($y) . '">' . esc_html($y) . '</option>';
+		// 	}
+
+		// 	// ✅ Append "Other" option
+		// 	$year .= '<option class="ajax-car-year other">other</option>';
+		// }
+			$modelPostID = $_POST['postID'] ?? null;
+
+			$year = '<option value="">Select Model Year</option>';
+
+			if ($modelPostID) {
+
+				$years = [];
+
+				$models = get_field('sts_var_car_model_row', $modelPostID);
+
+				if ($models) {
+					foreach ($models as $model) {
+						if (!empty($model['sts_var_car_year'])) {
+							$years[] = $model['sts_var_car_year'];
+						}
+					}
+				}
+
+				$years = array_unique(array_filter($years));
+
+				foreach ($years as $y) {
+					$year .= '<option value="' . esc_attr($y) . '">' . esc_html($y) . '</option>';
+				}
+
+				$year .= '<option value="other" class="ajax-car-year other">other</option>';
+			}
+		// ✅ Vehicle image
+		if ( $post_id && has_post_thumbnail( $post_id ) ) {
+			$thumb_id = get_post_thumbnail_id( $post_id );
+			$caption  = wp_get_attachment_caption( $thumb_id );
+			$vehicleImage = '<img src="' . get_the_post_thumbnail_url( $post_id, 'thumb_1000' ) . '" alt="' . get_the_title( $post_id ) . '" />';
+			if ( $caption ) {
+				$vehicleImage .= '
+					<div class="image-caption-area">
+						<div class="image-caption"><p>' . esc_html( $caption ) . '</p></div>
+					</div>';
+			}
+		} else {
+			$vehicleImage = '';
+		}
+
+		$barwidth = '';
+
+		if ( $modelPostID ) {
 
 			$models = get_field('sts_var_car_model_row', $modelPostID);
 
-			if ($models) {
-				foreach ($models as $model) {
-					if (!empty($model['sts_var_car_year'])) {
-						$years[] = $model['sts_var_car_year'];
+			if ( $models ) {
+
+				$selected_year = isset( $_POST['selectedYear'] ) && $_POST['selectedYear'] !== ''
+		? sanitize_text_field( wp_unslash( $_POST['selectedYear'] ) )
+		: ( isset( $_POST['yearRequested'] ) ? sanitize_text_field( wp_unslash( $_POST['yearRequested'] ) ) : '' );
+
+
+				foreach ( $models as $model ) {
+
+					// Match year
+					if ( isset($model['sts_var_car_year']) && $model['sts_var_car_year'] == $selected_year ) {
+
+						$barwidth = $model['sts_var_car_barwidth'] ?? '';
+						break;
 					}
 				}
 			}
-
-			$years = array_unique(array_filter($years));
-
-			foreach ($years as $y) {
-				$year .= '<option value="' . esc_attr($y) . '">' . esc_html($y) . '</option>';
-			}
-
-			$year .= '<option value="other" class="ajax-car-year other">other</option>';
 		}
-	// ✅ Vehicle image
-	if ( $post_id && has_post_thumbnail( $post_id ) ) {
-		$thumb_id = get_post_thumbnail_id( $post_id );
-		$caption  = wp_get_attachment_caption( $thumb_id );
-		$vehicleImage = '<img src="' . get_the_post_thumbnail_url( $post_id, 'thumb_1000' ) . '" alt="' . get_the_title( $post_id ) . '" />';
-		if ( $caption ) {
-			$vehicleImage .= '
-				<div class="image-caption-area">
-					<div class="image-caption"><p>' . esc_html( $caption ) . '</p></div>
-				</div>';
-		}
-	} else {
-		$vehicleImage = '';
-	}
-
-	$barwidth = '';
-
-	if ( $modelPostID ) {
-
-		$models = get_field('sts_var_car_model_row', $modelPostID);
-
-		if ( $models ) {
-
-			$selected_year = isset( $_POST['selectedYear'] ) && $_POST['selectedYear'] !== ''
-    ? sanitize_text_field( wp_unslash( $_POST['selectedYear'] ) )
-    : ( isset( $_POST['yearRequested'] ) ? sanitize_text_field( wp_unslash( $_POST['yearRequested'] ) ) : '' );
 
 
-			foreach ( $models as $model ) {
+		// $barwidth = $post_id ? get_field( 'sts_var_car_barwidth', $post_id ) : '';
 
-				// Match year
-				if ( isset($model['sts_var_car_year']) && $model['sts_var_car_year'] == $selected_year ) {
+		wp_send_json( [
+			'models'       => $html,
+			'vehicleImage' => $vehicleImage,
+			'year'         => $year,
+			'barwidth'     => $barwidth,
+			'post'         => $_POST,
+		] );
 
-					$barwidth = $model['sts_var_car_barwidth'] ?? '';
-					break;
-				}
-			}
-		}
+		wp_die();
 	}
 
 
-	// $barwidth = $post_id ? get_field( 'sts_var_car_barwidth', $post_id ) : '';
-
-	wp_send_json( [
-		'models'       => $html,
-		'vehicleImage' => $vehicleImage,
-		'year'         => $year,
-		'barwidth'     => $barwidth,
-		'post'         => $_POST,
-	] );
-
-	wp_die();
-}
 
 
+	public function fetch_caravan_data() {
 
+			$caravanMake = $_POST['caravanMake'] ?? null;
+			$caravanPostID = $_POST['caravanPostID'] ?? null;
 
-public function fetch_caravan_data() {
+			$html    = '<option>Select Caravan Model</option>';
 
-		$caravanMake = $_POST['caravanMake'] ?? null;
-		$caravanPostID = $_POST['caravanPostID'] ?? null;
-
-		$html    = '<option>Select Caravan Model</option>';
-
-		$query = new \WP_Query( array(
-						'post_type'      => 'caravan', // 🔹 change to your custom post type if needed
-						'posts_per_page' => -1,
-						'tax_query'      => array(
-							array(
-								'taxonomy' => 'caravan-category',
-								'field'    => 'slug',
-								'terms'    => $caravanMake,
+			$query = new \WP_Query( array(
+							'post_type'      => 'caravan', // 🔹 change to your custom post type if needed
+							'posts_per_page' => -1,
+							'tax_query'      => array(
+								array(
+									'taxonomy' => 'caravan-category',
+									'field'    => 'slug',
+									'terms'    => $caravanMake,
+								),
 							),
-						),
-					) );
+						) );
 
-					if ( $query->have_posts() ) {
-						while ( $query->have_posts() ) {
-							$query->the_post();
+						if ( $query->have_posts() ) {
+							while ( $query->have_posts() ) {
+								$query->the_post();
 
-							$html .= '<option class="ajax-caravan-model" data-post-id="'.get_the_ID().'">' . esc_html( get_the_title() ) . '</option>';
+								$html .= '<option class="ajax-caravan-model" data-post-id="'.get_the_ID().'">' . esc_html( get_the_title() ) . '</option>';
+							}
+							wp_reset_postdata();
 						}
-						wp_reset_postdata();
-					}
-		if($caravanPostID){
-			$sts_var_caravan_ss_mesurements = get_field('sts_var_caravan_ss_mesurements', $caravanPostID);
-			if($sts_var_caravan_ss_mesurements){
-				$sts_var_caravan_barwidth = $sts_var_caravan_ss_mesurements['width'] ?? '';
-				$sts_var_caravan_barheight = $sts_var_caravan_ss_mesurements['height'] ?? '';
+			if($caravanPostID){
+				$sts_var_caravan_ss_mesurements = get_field('sts_var_caravan_ss_mesurements', $caravanPostID);
+				if($sts_var_caravan_ss_mesurements){
+					$sts_var_caravan_barwidth = $sts_var_caravan_ss_mesurements['width'] ?? '';
+					$sts_var_caravan_barheight = $sts_var_caravan_ss_mesurements['height'] ?? '';
+				} else {
+					$sts_var_caravan_barwidth = '';
+					$sts_var_caravan_barheight = '';
+				}
+
+				$sts_var_caravan_factory = get_field('sts_var_caravan_factory', $caravanPostID);
+				if($sts_var_caravan_factory){
+					$sts_var_caravan_factory_width = $sts_var_caravan_factory['width'] ?? '';
+					$sts_var_caravan_factory_height = $sts_var_caravan_factory['height'] ?? '';
+				} else {
+					$sts_var_caravan_factory_width = '';
+					$sts_var_caravan_factory_height = '';
+				}
+
+				$sts_var_caravan_vinyl_insert = get_field('sts_var_caravan_vinyl_insert', $caravanPostID);
+				if($sts_var_caravan_vinyl_insert ){
+					$sts_var_caravan_vinyl_insert_width = $sts_var_caravan_vinyl_insert['width'] ?? '';
+					$sts_var_caravan_vinyl_insert_height = $sts_var_caravan_vinyl_insert['height'] ?? '';
+				} else {
+					$sts_var_caravan_vinyl_insert_width = 600;
+					$sts_var_caravan_vinyl_insert_height = 600;
+				}
+
+				$sts_var_caravan_toolbox = get_field('sts_var_caravan_toolbox', $caravanPostID);
+				if($sts_var_caravan_toolbox ){
+					$sts_var_caravan_toolbox_width = $sts_var_caravan_toolbox['width'] ?? '';
+					$sts_var_caravan_toolbox_height = $sts_var_caravan_toolbox['height'] ?? '';
+				} else {
+					$sts_var_caravan_toolbox_width = '';
+					$sts_var_caravan_toolbox_height = '';
+				}
+
+				// Support Pocket Length
+				$sts_var_caravan_support_pocket_length = get_field('sts_var_caravan_support_pocket_length', $caravanPostID);
+
+				$sts_var_caravan_images = get_field('sts_var_caravan_images', $caravanPostID);
+				if($sts_var_caravan_images){
+					$sts_var_factory_stoneguard_image_id = $sts_var_caravan_images['carvan'] ?? '';
+					$sts_var_carvan_image_caption = $sts_var_caravan_images['image_caption'] ?? '';
+				} else {
+					$sts_var_factory_stoneguard_image_id = '';
+					$sts_var_carvan_image_caption = '';
+				}
+
 			} else {
 				$sts_var_caravan_barwidth = '';
 				$sts_var_caravan_barheight = '';
-			}
-
-			$sts_var_caravan_factory = get_field('sts_var_caravan_factory', $caravanPostID);
-			if($sts_var_caravan_factory){
-				$sts_var_caravan_factory_width = $sts_var_caravan_factory['width'] ?? '';
-				$sts_var_caravan_factory_height = $sts_var_caravan_factory['height'] ?? '';
-			} else {
 				$sts_var_caravan_factory_width = '';
 				$sts_var_caravan_factory_height = '';
-			}
-
-			$sts_var_caravan_vinyl_insert = get_field('sts_var_caravan_vinyl_insert', $caravanPostID);
-			if($sts_var_caravan_vinyl_insert ){
-				$sts_var_caravan_vinyl_insert_width = $sts_var_caravan_vinyl_insert['width'] ?? '';
-				$sts_var_caravan_vinyl_insert_height = $sts_var_caravan_vinyl_insert['height'] ?? '';
-			} else {
 				$sts_var_caravan_vinyl_insert_width = 600;
 				$sts_var_caravan_vinyl_insert_height = 600;
+				$sts_var_toolbox_image_id = '';
 			}
 
-			$sts_var_caravan_toolbox = get_field('sts_var_caravan_toolbox', $caravanPostID);
-			if($sts_var_caravan_toolbox ){
-				$sts_var_caravan_toolbox_width = $sts_var_caravan_toolbox['width'] ?? '';
-				$sts_var_caravan_toolbox_height = $sts_var_caravan_toolbox['height'] ?? '';
+			if($sts_var_factory_stoneguard_image_id){
+				$stoneguard_image = '<img src="'.wp_get_attachment_url($sts_var_factory_stoneguard_image_id).'" alt="'.get_the_title($caravanPostID).'" />';
+				if($sts_var_carvan_image_caption){
+					$stoneguard_image .= '<div class="image-caption-area">
+											<div class="image-caption">
+												<p>'.esc_html($sts_var_carvan_image_caption).'</p>
+											</div>
+										</div>';
+				}
 			} else {
-				$sts_var_caravan_toolbox_width = '';
-				$sts_var_caravan_toolbox_height = '';
+				$stoneguard_image = '';
 			}
 
-			// Support Pocket Length
-			$sts_var_caravan_support_pocket_length = get_field('sts_var_caravan_support_pocket_length', $caravanPostID);
 
-			$sts_var_caravan_images = get_field('sts_var_caravan_images', $caravanPostID);
-			if($sts_var_caravan_images){
-				$sts_var_factory_stoneguard_image_id = $sts_var_caravan_images['carvan'] ?? '';
-				$sts_var_carvan_image_caption = $sts_var_caravan_images['image_caption'] ?? '';
-			} else {
-				$sts_var_factory_stoneguard_image_id = '';
-				$sts_var_carvan_image_caption = '';
+
+			wp_send_json(
+				array(
+					'html'  => $html,
+					'barwidth'  => $sts_var_caravan_barwidth,
+					'barheight'  => $sts_var_caravan_barheight,
+					'stoneguard_width'  => $sts_var_caravan_factory_width,
+					'stoneguard_height'  => $sts_var_caravan_factory_height,
+					'toolbox_width'  => $sts_var_caravan_toolbox_width,
+					'toolbox_height'  => $sts_var_caravan_toolbox_height,
+					'support_pocket_length'  => $sts_var_caravan_support_pocket_length,
+					'vinyl_insert_width'  => $sts_var_caravan_vinyl_insert_width,
+					'vinyl_insert_height'  => $sts_var_caravan_vinyl_insert_height,
+					'stoneguard_image'  => $stoneguard_image,
+					'toolbox_image'  => $toolbox_image,
+					'post'  => $_POST,
+				)
+			);
+
+			wp_die();
 			}
-
-		} else {
-			$sts_var_caravan_barwidth = '';
-			$sts_var_caravan_barheight = '';
-			$sts_var_caravan_factory_width = '';
-			$sts_var_caravan_factory_height = '';
-			$sts_var_caravan_vinyl_insert_width = 600;
-			$sts_var_caravan_vinyl_insert_height = 600;
-			$sts_var_toolbox_image_id = '';
-		}
-
-		if($sts_var_factory_stoneguard_image_id){
-			$stoneguard_image = '<img src="'.wp_get_attachment_url($sts_var_factory_stoneguard_image_id).'" alt="'.get_the_title($caravanPostID).'" />';
-			if($sts_var_carvan_image_caption){
-				$stoneguard_image .= '<div class="image-caption-area">
-										<div class="image-caption">
-											<p>'.esc_html($sts_var_carvan_image_caption).'</p>
-										</div>
-									</div>';
-			}
-		} else {
-			$stoneguard_image = '';
-		}
-
-
-
-		wp_send_json(
-			array(
-				'html'  => $html,
-				'barwidth'  => $sts_var_caravan_barwidth,
-				'barheight'  => $sts_var_caravan_barheight,
-				'stoneguard_width'  => $sts_var_caravan_factory_width,
-				'stoneguard_height'  => $sts_var_caravan_factory_height,
-				'toolbox_width'  => $sts_var_caravan_toolbox_width,
-				'toolbox_height'  => $sts_var_caravan_toolbox_height,
-				'support_pocket_length'  => $sts_var_caravan_support_pocket_length,
-				'vinyl_insert_width'  => $sts_var_caravan_vinyl_insert_width,
-				'vinyl_insert_height'  => $sts_var_caravan_vinyl_insert_height,
-				'stoneguard_image'  => $stoneguard_image,
-				'toolbox_image'  => $toolbox_image,
-				'post'  => $_POST,
-			)
-		);
-
-		wp_die();
-		}
-}
+	}
 new WP_Theme_Ajax();

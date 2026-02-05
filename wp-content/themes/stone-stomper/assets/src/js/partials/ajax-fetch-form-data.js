@@ -1,7 +1,7 @@
 jQuery( document ).ready( function() {
 	let carMake = '';
 	let postID = '';
-	let caravanPostID = '';
+	window.caravanPostID = '';
 	let yearRequested = true;
 	let caravan = true;
 	let caravanMake = '';
@@ -23,7 +23,7 @@ jQuery( document ).ready( function() {
 	jQuery( '#van_model' ).on( 'change', function( e ) {
 		if ( e.originalEvent ) {
 			const selectedOption = jQuery( this ).find( ':selected' );
-			caravanPostID = selectedOption.data( 'post-id' );
+			window.caravanPostID = selectedOption.data( 'post-id' );
 			caravan = false;
 
 			// 🔹 Call your next function if needed
@@ -64,28 +64,27 @@ jQuery( document ).ready( function() {
 	} );
 
 	/* ----------------------------------------
-   ✅ ADD YEAR CHANGE LISTENER RIGHT HERE
----------------------------------------- */
-let selectedYear = '';
-jQuery('#veh_year').on('change', function (e) {
-    if (e.originalEvent) {
+   	✅ ADD YEAR CHANGE LISTENER RIGHT HERE
+	---------------------------------------- */
+	let selectedYear = '';
+	jQuery( '#veh_year' ).on( 'change', function( e ) {
+		if ( e.originalEvent ) {
+			selectedYear = jQuery( this ).val(); // store selected year
+			console.log( selectedYear );
+			yearRequested = false; // since user manually selected a year
 
-        selectedYear = jQuery(this).val(); // store selected year
-		console.log(selectedYear);
-        yearRequested = false;             // since user manually selected a year
+			jQuery( '.loader-container' ).show();
 
-        jQuery('.loader-container').show();
-
-        fetchFormData(); // fetch based on year
-    }
-});
-/* ---------------------------------------- */
+			fetchFormData(); // fetch based on year
+		}
+	} );
+	/* ---------------------------------------- */
 
 	// Getting News
 	function fetchFormData() {
-	    jQuery('.loader-container').show();
+	    jQuery( '.loader-container' ).show();
 
-	    jQuery.ajax({
+	    jQuery.ajax( {
 	        url: localVars.ajax_url,
 	        type: 'POST',
 	       data: {
@@ -93,31 +92,30 @@ jQuery('#veh_year').on('change', function (e) {
 			    nonce: localVars.nonce,
 			    carMake,
 			    postID,
-			    selectedYear,   // actual selected year value ('' when none)
-			    yearRequested   // boolean that you already use to decide which UI to update
+			    selectedYear, // actual selected year value ('' when none)
+			    yearRequested, // boolean that you already use to decide which UI to update
 			},
 
-	      success(response) {
-		    if (response) {
-
-		        if (yearRequested) {
-		            jQuery('#veh_model').html(response.models);
+	      success( response ) {
+		    if ( response ) {
+		        if ( yearRequested ) {
+		            jQuery( '#veh_model' ).html( response.models );
 		        }
 
-		        if (response.barwidth) {
-		            jQuery('#barwidth').val(response.barwidth);
+		        if ( response.barwidth ) {
+		            jQuery( '#barwidth' ).val( response.barwidth );
 		        }
 
 		        // Update year dropdown BUT preserve any user selection
-		        if (response.year) {
+		        if ( response.year ) {
 		            // replace the options first
-		            jQuery('#veh_year').html(response.year);
+		            jQuery( '#veh_year' ).html( response.year );
 
 		            // if user already selected a year, restore it explicitly
-		            if (selectedYear) {
+		            if ( selectedYear ) {
 		                // if the option exists, set it, otherwise clear selectedYear
-		                if ( jQuery('#veh_year option[value="' + selectedYear + '"]').length ) {
-		                    jQuery('#veh_year').val(selectedYear);
+		                if ( jQuery( '#veh_year option[value="' + selectedYear + '"]' ).length ) {
+		                    jQuery( '#veh_year' ).val( selectedYear );
 		                } else {
 		                    // selected year no longer present in options
 		                    selectedYear = '';
@@ -126,29 +124,25 @@ jQuery('#veh_year').on('change', function (e) {
 		        }
 
 		        // other fields...
-		        if (response.support_pockets) {
-		            jQuery('#support_pockets').html(response.support_pockets);
+		        if ( response.support_pockets ) {
+		            jQuery( '#support_pockets' ).html( response.support_pockets );
 		        }
 
-		        if (response.vehicleImage) {
-		            jQuery('#towing-vehicle-image').html(response.vehicleImage);
+		        if ( response.vehicleImage ) {
+		            jQuery( '#towing-vehicle-image' ).html( response.vehicleImage );
 		        }
 		    }
 
-		    jQuery('.loader-container').hide();
-		},
-
+		    jQuery( '.loader-container' ).hide();
+			},
 
 	        error() {
-	            const htmlTag = jQuery("<h2 class='center-align heading-5'>An error occurred while processing your request.😢</h2>");
-	            jQuery('#news-post-container').html(htmlTag);
-	            jQuery('.loader-container').hide();
+	            const htmlTag = jQuery( "<h2 class='center-align heading-5'>An error occurred while processing your request.😢</h2>" );
+	            jQuery( '#news-post-container' ).html( htmlTag );
+	            jQuery( '.loader-container' ).hide();
 	        },
-	    });
+	    } );
 	}
-
-
-
 
 	function fetchCaravanData() {
 		jQuery( '.loader-container' ).show();
@@ -159,11 +153,10 @@ jQuery('#veh_year').on('change', function (e) {
 				action: 'fetch_caravan_data',
 				nonce: localVars.nonce,
 				caravanMake,
-				caravanPostID,
+				caravanPostID: window.caravanPostID,
 			},
 			success( response ) {
 				if ( response ) {
-					console.log(response);
 					if ( caravan ) {
 						jQuery( '#van_model' ).html( response.html );
 						jQuery( '#van_model' ).append( '<option value="other">Other</option>' );
@@ -220,7 +213,5 @@ jQuery('#veh_year').on('change', function (e) {
 			},
 		} );
 	}
-
-
 } );
 

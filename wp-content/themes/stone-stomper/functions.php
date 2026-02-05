@@ -3015,6 +3015,37 @@ function sts_materialize_customer_cpt( $order_id ) {
         update_post_meta( $post_id, 'sts_var_caravan_bar_option', sanitize_text_field( $data['bar_options'] ?? '' ) );
     }
 
+	// angled stonegaurd
+
+	$caravan_id = intval( $data['caravan_id'] ?? 0 );
+
+	if ( $caravan_id > 0 && function_exists('get_field') ) {
+
+		$angled_guard = get_field(
+			'sts_var_angled_stone_guard',
+			$caravan_id
+		);
+
+		if ( is_array( $angled_guard ) ) {
+
+			if ( ! empty( $angled_guard['width'] ) ) {
+				update_post_meta(
+					$post_id,
+					'angled_stone_guard_width_mm',
+					sanitize_text_field( $angled_guard['width'] )
+				);
+			}
+
+			if ( ! empty( $angled_guard['depth'] ) ) {
+				update_post_meta(
+					$post_id,
+					'angled_stone_guard_depth_mm',
+					sanitize_text_field( $angled_guard['depth'] )
+				);
+			}
+		}
+	}
+
    	$sleeve = 'No';
 	foreach ( $order->get_items() as $item ) {
 		if ( (int) $item->get_product_id() === 532 ) {

@@ -28,37 +28,6 @@ jQuery( document ).ready( function() {
 		AddToCart();
 	} );
 
-	// function AddToCart() {
-	// 	const ids = jQuery.merge( [], mainProductId );
-	// 	jQuery.merge( ids, upsellsProductId );
-
-	// 	const barwidth = jQuery( '#barwidth' ).val();
-	// 	const aFrameLength = jQuery( '#a_frame_length' ).val();
-
-	// 	jQuery.ajax( {
-	// 		type: 'POST',
-	// 		url: localVars.ajax_url,
-	// 		data: {
-	// 			action: 'woocommerce_ajax_add_to_cart',
-	// 			ids,
-	// 			quantity: 1,
-	// 			barwidth,
-	// 			a_frame_length: aFrameLength,
-	// 			shipping: 'standard',
-	// 		},
-	// 		success( response ) {
-	// 			if ( response?.success && response?.data?.added ) {
-	// 				window.location.href = response.data.redirect || '/cart';
-	// 			} else {
-	// 				alert( 'Could not add to cart. Please try again.' );
-	// 			}
-	// 		},
-	// 		error() {
-	// 			alert( 'Something went wrong. Please try again.' );
-	// 		},
-	// 	} );
-	// }
-
 	function AddToCart() {
 		const ids = jQuery.merge( [], mainProductId );
 		jQuery.merge( ids, upsellsProductId );
@@ -69,6 +38,10 @@ jQuery( document ).ready( function() {
 		jQuery.each( formData, function( _, field ) {
 			payload[ field.name ] = field.value;
 		} );
+
+		if ( window.caravanPostID ) {
+			payload.caravan_id = window.caravanPostID;
+		}
 
 		jQuery.ajax( {
 			type: 'POST',
