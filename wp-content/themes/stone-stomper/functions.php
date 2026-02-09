@@ -1451,32 +1451,32 @@ add_action( 'wp_ajax_store_diagram_png', 'store_diagram_png' );
 
 function store_diagram_png() {
 
-    if ( ! current_user_can( 'edit_posts' ) ) {
-        wp_send_json_error( 'Permission denied', 403 );
-    }
-
     $post_id = intval( $_POST['post_id'] ?? 0 );
-    $png     = $_POST['diagram_png'] ?? '';
+    $diagram_png = $_POST['diagram_png'] ?? '';
 
-    if ( ! $post_id || ! $png ) {
-        wp_send_json_error( 'Invalid data', 400 );
+    if ( ! $post_id || ! $diagram_png ) {
+        wp_die('Invalid data');
     }
 
-    set_transient(
-        'diagram_png_' . $post_id,
-        $png,
-        5 * MINUTE_IN_SECONDS
-    );
+    $upload_dir = wp_upload_dir();
+
+    $png_base64 = preg_replace('#^data:image/\w+;base64,#i', '', $diagram_png);
+    $png_binary = base64_decode($png_base64);
+
+    $file_path = $upload_dir['path'] . '/diagram-' . $post_id . '.png';
+
+    file_put_contents($file_path, $png_binary);
+
+    update_post_meta($post_id, '_diagram_png_path', $file_path);
 
     wp_send_json_success();
 }
-
 
 use PhpOffice\PhpWord\PhpWord;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\Element\TextRun;
 
-function generate_customer_order_word_file($post_id, $diagram_png) {
+function generate_customer_order_word_file($post_id) {
 	require_once __DIR__ . '/vendor/autoload.php';
     $phpWord = new \PhpOffice\PhpWord\PhpWord();
     $phpWord->setDefaultFontName('Arial');
@@ -1580,6 +1580,7 @@ function generate_customer_order_word_file($post_id, $diagram_png) {
     $extra_vinyl_position        = get_post_meta($post_id, 'extra_vinyl_position', true);
     $angled_stone_guard_width_mm        = get_post_meta($post_id, 'angled_stone_guard_width_mm', true);
     $angled_stone_guard_depth_mm        = get_post_meta($post_id, 'angled_stone_guard_depth_mm', true);
+
 
 	$sanitize_fields = [
 		'customer_name', 'customer_email', 'customer_phone',
@@ -1865,13 +1866,13 @@ function generate_customer_order_word_file($post_id, $diagram_png) {
 		$section->addTextBreak(1);
 	}
 
-	$png_base64 = preg_replace('#^data:image/\w+;base64,#i', '', $diagram_png);
-	$png_binary = base64_decode($png_base64);
+	$diagram_path = get_post_meta($post_id, '_diagram_png_path', true);
 
-	$tmp_png = tempnam(sys_get_temp_dir(), 'diagram_') . '.png';
-	file_put_contents($tmp_png, $png_binary);
+	if ( ! $diagram_path || ! file_exists($diagram_path) ) {
+		wp_die('Diagram image missing.');
+	}
 
-	$section->addImage($tmp_png, [
+	$section->addImage($diagram_path, [
 		'width' => 450,
 		'alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER,
 	]);
@@ -1974,10 +1975,9 @@ function generate_customer_order_word_file($post_id, $diagram_png) {
 	$row->addCell(6000)->addText("Angled Stone Guard Depth (mm)", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(4000)->addText($angled_stone_guard_depth_mm, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
-
     // Save file
     $upload_dir = wp_upload_dir();
-    $file_path = $upload_dir['path'] . "/customer-order-{$$order_id}.docx";
+    $file_path = $upload_dir['path'] . "/customer-order-{$order_id}.docx";
     $writer = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
     $writer->save($file_path);
 
@@ -1997,17 +1997,12 @@ function download_customer_word_callback() {
         wp_die( 'Permission denied.' );
     }
 
-    $diagram_png = get_transient( 'diagram_png_' . $post_id );
-    if ( ! $diagram_png ) {
-        wp_die( 'Diagram image missing.' );
-    }
-
     $order_id = get_post_meta( $post_id, 'order_id', true );
     if ( empty( $order_id ) ) {
         $order_id = $post_id;
     }
 
-    $file_path = generate_customer_order_word_file( $post_id, $diagram_png );
+    $file_path = generate_customer_order_word_file( $post_id );
 
     if ( ! $file_path || ! file_exists( $file_path ) ) {
         wp_die( 'File generation failed.' );
@@ -3036,7 +3031,6 @@ function sts_materialize_customer_cpt( $order_id ) {
 	// angled stonegaurd
 
 	$caravan_id = intval( $data['caravan_id'] ?? 0 );
-	error_log('STS Caravan ID: ' . print_r($caravan_id, true));
 
 	if ( $caravan_id > 0 && function_exists('get_field') ) {
 
