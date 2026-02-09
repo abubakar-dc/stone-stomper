@@ -4472,6 +4472,10 @@ Mixin for transition
   margin-bottom: 4px;
   font-weight: 600;
 }
+.editor-styles-wrapper .wc-block-components-address-form__my-custom-atl-is-on-the-move,
+.editor-styles-wrapper .wc-block-components-checkbox.wc-block-components-address-form__my-custom-atl-is-on-the-move {
+  margin-top: var(--ss_space_36) !important;
+}
 .editor-styles-wrapper .woocommerce-cart .wc-block-components-product-name {
   border-bottom: none;
 }

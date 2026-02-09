@@ -5725,6 +5725,11 @@ ul.wc-block-components-totals-discount__coupon-list button.wc-block-components-c
   font-weight: 600;
 }
 
+.wc-block-components-address-form__my-custom-atl-is-on-the-move,
+.wc-block-components-checkbox.wc-block-components-address-form__my-custom-atl-is-on-the-move {
+  margin-top: var(--ss_space_36) !important;
+}
+
 /*-------------------------------------------------
 >> Basic styles for Blog post
 -------------------------------------------------*/

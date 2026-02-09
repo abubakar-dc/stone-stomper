@@ -2883,6 +2883,7 @@ function sts_materialize_customer_cpt( $order_id ) {
     update_post_meta( $post_id, 'name', $cust_name );
     update_post_meta( $post_id, 'customer_phone', sanitize_text_field( $data['customer_phone'] ?? '' ) );
     update_post_meta( $post_id, 'email', sanitize_email( $data['customer_email'] ?? '' ) );
+
 	$delivery_address = implode(', ', array_filter([
 		$order->get_shipping_address_1(),
 		$order->get_shipping_address_2(),
@@ -2891,6 +2892,7 @@ function sts_materialize_customer_cpt( $order_id ) {
 		$order->get_shipping_postcode(),
 		$order->get_shipping_country(),
 	]));
+
 	update_post_meta( $post_id, 'delivery_address', $delivery_address );
 	update_post_meta(
 		$post_id,
@@ -2903,7 +2905,6 @@ function sts_materialize_customer_cpt( $order_id ) {
 		$order->get_shipping_state()
 	);
     update_post_meta( $post_id, 'product_type', $product_type );
-
 	// Vehicle Information
     update_post_meta( $post_id, 'vehicle_make', sanitize_text_field( $data['vehicle_make'] ?? $data['veh_make'] ?? '' ) );
     update_post_meta( $post_id, 'vehicle_model', sanitize_text_field( $data['vehicle_model'] ?? $data['veh_model'] ?? '' ) );
@@ -2927,12 +2928,21 @@ function sts_materialize_customer_cpt( $order_id ) {
 		update_post_meta($post_id, '_sts_other_vehicle_used', 'yes');
 	}
 
+	// is-on-the-move
+
+	$is_on_the_move = $order->get_meta( '_wc_other/my-custom-atl/authority-to-leave' );
+;
+
+	if ( $is_on_the_move == 1 ) {
+		update_post_meta( $post_id, 'sts_var_proposed_on_the_move', 'Yes' );
+	} else {
+		update_post_meta( $post_id, 'sts_var_proposed_on_the_move', 'No' );
+	}
 
     $barwidth = floatval( $data['barwidth_mm'] ?? 0 );
     $caravan_width = floatval( $data['caravan_width_mm'] ?? 0 );
     $a_frame = floatval( $data['a_frame_length_mm'] ?? 0 );
     $hitch_measure = intval($data['bar_option_value'] ?? 0);
-
 
     update_post_meta( $post_id, 'bar_width_mm', $barwidth );
     update_post_meta( $post_id, 'caravan_width_mm', $caravan_width );
@@ -3004,6 +3014,7 @@ function sts_materialize_customer_cpt( $order_id ) {
     update_post_meta( $post_id, 'vinyl_insert_height_mm', sanitize_text_field( $data['vinyl_length_mm'] ?? '' ) );
     $support_type = $data['input_1.3'] ?? '';
 	update_post_meta( $post_id, 'support_pockets', 'No' );
+
 	if ( $support_type === 'toolbox' ) {
 		update_post_meta( $post_id, 'support_type', 'toolbox' );
 		update_post_meta( $post_id, 'toolbox_width_mm', sanitize_text_field( $data['toolbox_width_mm'] ?? '' ) );
@@ -3018,6 +3029,7 @@ function sts_materialize_customer_cpt( $order_id ) {
 		update_post_meta( $post_id, 'support_pockets', 'Yes' );
 		update_post_meta( $post_id, 'support_pockets_measurement', sanitize_text_field( $data['support_pocket_length_mm'] ?? '' ) );
 	}
+
     if ( $product_type === 'Mesh Only' ) {
         update_post_meta( $post_id, 'sts_var_caravan_mesh_only_measurement', sanitize_text_field( $data['meshmeasurment_mm'] ?? '' ) );
         update_post_meta( $post_id, 'caravan_length_mm', sanitize_text_field( $data['meshmeasurment_mm'] ?? '' ) );
@@ -3247,7 +3259,6 @@ function sts_customer_cpt_other_vehicle_notice() {
     echo '</div>';
 }
 
-
 /*
 |-----------------------------------------
 |  Add just one order to cart of same type of the product
@@ -3362,27 +3373,31 @@ function display_on_the_move_status_admin( $order ) {
 add_action( 'init', 'register_atl_block_extension' );
 
 function register_atl_block_extension() {
-    // 1. First, we still need to register the field server-side
-    if ( function_exists( 'woocommerce_register_additional_checkout_field' ) ) {
-        woocommerce_register_additional_checkout_field( array(
-            'id'       => 'my-custom-atl/authority-to-leave',
-            'label'    => 'Authority to Leave',
-            'location' => 'order',
-            'type'     => 'select',
-            'options'  => [
-                [ 'value' => 'no', 'label' => 'No' ],
-                [ 'value' => 'yes', 'label' => 'Yes' ],
-            ],
-            'required' => true,
-        ) );
-    }
-
-    // 2. Enqueue the JS file
-    wp_enqueue_script(
-        'atl-block-js',
-        get_stylesheet_directory_uri() . '/assets/src/js/atl-block-field.js', // Adjust path
-        array( 'wc-checkout', 'wc-blocks-registry', 'wp-element' ),
-        '1.0',
-        true
-    );
+	if ( function_exists( 'woocommerce_register_additional_checkout_field' ) ) {
+		woocommerce_register_additional_checkout_field( array(
+			'id'       => 'my-custom-atl/authority-to-leave',
+			'label'    => 'Authority to Leave',
+			'location' => 'order',
+			'type'     => 'select',
+			'options'  => [
+				[ 'value' => 'no', 'label' => 'No' ],
+				[ 'value' => 'yes', 'label' => 'Yes' ],
+			],
+			'required' => true,
+		) );
+		woocommerce_register_additional_checkout_field( array(
+			'id'       => 'my-custom-atl/is-on-the-move',
+			'label'    => "I'm on the Move",
+			'location' => 'order',
+			'type'     => 'checkbox',
+			'required' => false,
+		) );
+	}
+	wp_enqueue_script(
+		'atl-block-js',
+		get_stylesheet_directory_uri() . '/assets/src/js/atl-block-field.js',
+		array(),
+		'1.0',
+		true
+	);
 }
