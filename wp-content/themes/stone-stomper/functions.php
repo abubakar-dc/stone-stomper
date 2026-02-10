@@ -1874,88 +1874,88 @@ function generate_customer_order_word_file($post_id) {
 	);
 
 	$row = $measure->addRow(200);
-	$row->addCell(4000, $cellGray)->addText("SS Width (mm):", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(6000, $cellGray)->addText($caravan_width_mm, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4300, $cellGray)->addText("SS Width (mm):", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(5700, $cellGray)->addText($caravan_width_mm, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000)->addText("SS Length (mm):", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(6000)->addText($caravan_length_mm, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4300)->addText("SS Length (mm):", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(5700)->addText($caravan_length_mm, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000, $cellGray)->addText("Towing Vehicle Bar Width (mm):", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(6000, $cellGray)->addText($bar_width_mm, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4300, $cellGray)->addText("Towing Vehicle Bar Width (mm):", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(5700, $cellGray)->addText($bar_width_mm, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000)->addText("Vinyl Insert Width (mm):", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(6000)->addText("$vinyl_insert_width_mm", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4300)->addText("Vinyl Insert Width (mm):", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(5700)->addText("$vinyl_insert_width_mm", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000, $cellGray)->addText("Vinyl Insert Length (mm):", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(6000, $cellGray)->addText("$vinyl_insert_height_mm", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4300, $cellGray)->addText("Vinyl Insert Length (mm):", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(5700, $cellGray)->addText("$vinyl_insert_height_mm", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000)->addText("Stoneguard Width (mm)", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(6000)->addText("$factory_stoneguard_width", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4300)->addText("Stoneguard Width (mm)", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(5700)->addText("$factory_stoneguard_width", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000, $cellGray)->addText("Stoneguard Distance From Carvan (mm):", [], ['spaceBefore' => 0, 'spaceAfter' => 0]); 	// this is not sure
-	$row->addCell(6000, $cellGray)->addText("$factory_stoneguard_height", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4300, $cellGray)->addText("Stoneguard Distance From Carvan (mm):", [], ['spaceBefore' => 0, 'spaceAfter' => 0]); 	// this is not sure
+	$row->addCell(5700, $cellGray)->addText("$factory_stoneguard_height", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000)->addText("Toolbox Width (mm):", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(6000)->addText("$toolbox_width_mm", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4300)->addText("Toolbox Width (mm):", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(5700)->addText("$toolbox_width_mm", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000, $cellGray)->addText("Toolbox Distance from the Caravan (mm):", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(6000, $cellGray)->addText("$toolbox_height_mm", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4300, $cellGray)->addText("Toolbox Distance from the Caravan (mm):", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(5700, $cellGray)->addText("$toolbox_height_mm", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000)->addText("Support Pockets:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(6000)->addText($support_pockets, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4300)->addText("Support Pockets:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(5700)->addText($support_pockets, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000, $cellGray)->addText("Support Pocket Distance from Caravan (mm)", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(6000, $cellGray)->addText($support_pockets_measurement, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4300, $cellGray)->addText("Support Pocket Distance from Caravan (mm)", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(5700, $cellGray)->addText($support_pockets_measurement, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000)->addText("SS Length Adjustment:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(6000)->addText($sts_var_caravan_ss_length_adj, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4300)->addText("SS Length Adjustment:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(5700)->addText($sts_var_caravan_ss_length_adj, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000, $cellGray)->addText("Cut Out:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(6000, $cellGray)->addText($sts_var_caravan_cut_out, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4300, $cellGray)->addText("Cut Out:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(5700, $cellGray)->addText($sts_var_caravan_cut_out, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000)->addText("Mesh Only Measurement:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(6000)->addText($sts_var_caravan_mesh_only_measurement, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4300)->addText("Mesh Only Measurement:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(5700)->addText($sts_var_caravan_mesh_only_measurement, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000, $cellGray)->addText("Eyelet Tab:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(6000, $cellGray)->addText($sts_var_caravan_eyelet_tab, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4300, $cellGray)->addText("Eyelet Tab:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(5700, $cellGray)->addText($sts_var_caravan_eyelet_tab, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000)->addText("Extra Bungee", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(6000)->addText($extra_bungee, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4300)->addText("Extra Bungee", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(5700)->addText($extra_bungee, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000, $cellGray)->addText("Extra Vinyl Width (mm)", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(6000, $cellGray)->addText($extra_vinyl_width_mm, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4300, $cellGray)->addText("Extra Vinyl Width (mm)", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(5700, $cellGray)->addText($extra_vinyl_width_mm, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000)->addText("Extra Vinyl Length (mm)", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(6000)->addText($extra_vinyl_length_mm, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4300)->addText("Extra Vinyl Length (mm)", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(5700)->addText($extra_vinyl_length_mm, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000, $cellGray)->addText("Extra Vinyl Position", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(6000, $cellGray)->addText($extra_vinyl_position, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4300, $cellGray)->addText("Extra Vinyl Position", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(5700, $cellGray)->addText($extra_vinyl_position, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000)->addText("Angled Stone Guard Width (mm)", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(6000)->addText($angled_stone_guard_width_mm, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4300)->addText("Angled Stone Guard Width (mm)", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(5700)->addText($angled_stone_guard_width_mm, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
 	$row = $measure->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000, $cellGray)->addText("Angled Stone Guard Depth (mm)", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(6000, $cellGray)->addText($angled_stone_guard_depth_mm, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4300, $cellGray)->addText("Angled Stone Guard Depth (mm)", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(5700, $cellGray)->addText($angled_stone_guard_depth_mm, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
     // Save file
     $upload_dir = wp_upload_dir();
