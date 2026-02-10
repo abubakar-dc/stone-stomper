@@ -1,6 +1,6 @@
 jQuery( function( jQuery ) {
 	const toggleATL = () => {
-		const $atl = jQuery( '.wc-block-components-select-input-my-custom-atl-authority-to-leave' );
+		const $atl = jQuery( '.wp-block-woocommerce-checkout-additional-information-block' );
 		if ( ! $atl.length ) {
 			return;
 		}
