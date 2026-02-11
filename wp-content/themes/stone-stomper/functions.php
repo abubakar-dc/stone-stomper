@@ -3263,7 +3263,7 @@ function sts_customer_cpt_other_vehicle_notice() {
     }
 
     echo '<div class="notice notice-warning notice-alt is-dismissible">';
-    echo '<p><strong>Stone Stomper Notice:</strong> This customer order uses an ' . $formatted . '. Please review and add it to the vehicle directory.</p>';
+    echo '<p><strong>Stone Stomper Notice:</strong> This customer order uses an Other ' . $formatted . '. Please review and add it to the vehicle directory.</p>';
     echo '</div>';
 }
 
