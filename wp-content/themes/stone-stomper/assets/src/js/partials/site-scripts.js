@@ -323,6 +323,7 @@ jQuery( function() {
 	/**
 	 *  Accessibility for Simple menu & Mega menu
 	 */
+
 	jQuery( '.menu-item-has-children > a' ).on( 'focus blur', function( event ) {
 		jQuery( this )
 			.siblings( '.sub-menu, .mega-menu' )
@@ -338,6 +339,7 @@ jQuery( function() {
 	/**
 	 * Script for Accessibility of html Tags
 	 */
+
 	jQuery(
 		'h1, h2, h3, h4, h5, h6,p,li,blockquote,cite,strong,dt,dd,th,td,b,i,u,s,em,small,sup,del,ins,abbr,mark,details,pre,kbd,samp,var,address,code,q,figure,figcaption,caption,.top-bar-text,.top-bar-cross,.copy-right,.post-author-img,.post-author-name,.post-meta-date,.post-date',
 	).each( function() {
@@ -781,21 +783,47 @@ jQuery( function() {
 			jQuery( '#express_delivery_note' ).hide();
 		}
 	} );
+
+	jQuery( '#veh_make' ).on( 'change', function() {
+		if ( jQuery( this ).val() === 'other' ) {
+			jQuery( '#is_vehicle_make_other' ).val( 'yes' );
+		} else {
+			jQuery( '#is_vehicle_make_other' ).val( 'no' );
+		}
+	} );
+
+	jQuery( '#veh_model' ).on( 'change', function() {
+		if ( jQuery( this ).val() === 'other' ) {
+			jQuery( '#is_vehicle_model_other' ).val( 'yes' );
+		} else {
+			jQuery( '#is_vehicle_model_other' ).val( 'no' );
+		}
+	} );
+
+	jQuery( '#veh_year' ).on( 'change', function() {
+		if ( jQuery( this ).val() === 'other' ) {
+			jQuery( '#is_vehicle_year_other' ).val( 'yes' );
+		} else {
+			jQuery( '#is_vehicle_year_other' ).val( 'no' );
+		}
+	} );
+
+	jQuery( '#van_make' ).on( 'change', function() {
+		if ( jQuery( this ).val() === 'other' ) {
+			jQuery( '#is_caravan_make_other' ).val( 'yes' );
+		} else {
+			jQuery( '#is_caravan_make_other' ).val( 'no' );
+		}
+	} );
+
+	jQuery( '#van_model' ).on( 'change', function() {
+		if ( jQuery( this ).val() === 'other' ) {
+			jQuery( '#is_caravan_model_other' ).val( 'yes' );
+		} else {
+			jQuery( '#is_caravan_model_other' ).val( 'no' );
+		}
+	} );
 } );
-
-// Form
-
-// jQuery( document ).ready( function() {
-// 	jQuery( '.gfield-choice-input' ).on( 'change', function() {
-// 		jQuery( '.toolbox-support, .factory_stoneguard' ).hide().find( 'input[type="text"]' ).val( '' );
-// 		if ( jQuery( this ).is( '#toolbox' ) ) {
-// 			jQuery( '.toolbox-support' ).show();
-// 		}
-// 		if ( jQuery( this ).is( '#factory_stoneguard' ) ) {
-// 			jQuery( '.factory_stoneguard' ).show();
-// 		}
-// 	} );
-// } );
 
 jQuery( document ).ready( function() {
 	jQuery( '.account-icon' ).each( function() {

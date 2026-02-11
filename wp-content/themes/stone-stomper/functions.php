@@ -2891,24 +2891,41 @@ function sts_materialize_customer_cpt( $order_id ) {
     update_post_meta( $post_id, 'vehicle_make', sanitize_text_field( $data['vehicle_make'] ?? $data['veh_make'] ?? '' ) );
     update_post_meta( $post_id, 'vehicle_model', sanitize_text_field( $data['vehicle_model'] ?? $data['veh_model'] ?? '' ) );
     update_post_meta( $post_id, 'year_of_manufacture', sanitize_text_field( $data['vehicle_year'] ?? $data['veh_year'] ?? '' ) );
-
 	// Caravan Information
     update_post_meta( $post_id, 'caravan_make', sanitize_text_field( $data['caravan_make'] ?? $data['van_make'] ?? '' ) );
     update_post_meta( $post_id, 'caravan_model', sanitize_text_field( $data['caravan_model'] ?? $data['van_model'] ?? '' ) );
-
 	$vehicle_make  = strtolower(trim($data['vehicle_make'] ?? $data['veh_make'] ?? ''));
 	$vehicle_model = strtolower(trim($data['vehicle_model'] ?? $data['veh_model'] ?? ''));
 	$van_make      = strtolower(trim($data['caravan_make'] ?? $data['van_make'] ?? ''));
 	$van_model     = strtolower(trim($data['caravan_model'] ?? $data['van_model'] ?? ''));
 
-	if (
-		$vehicle_make === 'other' ||
-		$vehicle_model === 'other' ||
-		$van_make === 'other' ||
-		$van_model === 'other'
-	) {
-		update_post_meta($post_id, '_sts_other_vehicle_used', 'yes');
+	$other_fields = [];
+	if (($data['is_vehicle_make_other'] ?? '') === 'yes') {
+		$other_fields[] = 'Vehicle Make';
 	}
+
+	if (($data['is_vehicle_model_other'] ?? '') === 'yes') {
+		$other_fields[] = 'Vehicle Model';
+	}
+
+	if (($data['is_vehicle_year_other'] ?? '') === 'yes') {
+		$other_fields[] = 'Vehicle Year';
+	}
+
+	if (($data['is_caravan_make_other'] ?? '') === 'yes') {
+		$other_fields[] = 'Caravan Make';
+	}
+
+	if (($data['is_caravan_model_other'] ?? '') === 'yes') {
+		$other_fields[] = 'Caravan Model';
+	}
+
+	if (!empty($other_fields)) {
+		update_post_meta($post_id, '_sts_other_vehicle_used', 'yes');
+		update_post_meta($post_id, '_sts_other_fields', $other_fields);
+	}
+
+
 
 	$is_on_the_move = $order->get_meta( '_wc_other/my-custom-atl/is-on-the-move' );
 	if ( $is_on_the_move == 1 ) {
@@ -3208,29 +3225,48 @@ add_action('admin_head', function () {
 add_action('admin_notices', 'sts_customer_cpt_other_vehicle_notice');
 
 function sts_customer_cpt_other_vehicle_notice() {
-    if ( ! is_admin() ) {
+
+    if (!is_admin()) {
         return;
     }
 
     $screen = get_current_screen();
-    if ( ! $screen || $screen->post_type !== 'customer' ) {
+    if (!$screen || $screen->post_type !== 'customer') {
         return;
     }
 
-    if ( empty($_GET['post']) ) {
+    if (empty($_GET['post'])) {
         return;
     }
 
     $post_id = intval($_GET['post']);
 
-    if ( get_post_meta($post_id, '_sts_other_vehicle_used', true) !== 'yes' ) {
+    if (get_post_meta($post_id, '_sts_other_vehicle_used', true) !== 'yes') {
         return;
     }
 
+    $fields = (array) get_post_meta($post_id, '_sts_other_fields', true);
+
+    if (empty($fields)) {
+        return;
+    }
+
+    // Format nicely: vehicle year and vehicle model
+    $formatted = '';
+
+    if (count($fields) === 1) {
+        $formatted = '<strong>' . esc_html($fields[0]) . '</strong>';
+    } else {
+        $last = array_pop($fields);
+        $formatted = '<strong>' . esc_html(implode('</strong>, <strong>', $fields)) . '</strong>';
+        $formatted .= ' and <strong>' . esc_html($last) . '</strong>';
+    }
+
     echo '<div class="notice notice-warning notice-alt is-dismissible">';
-    echo '<p><strong>Stone Stomper Notice:</strong> This customer order uses an <strong>OTHER</strong> vehicle or van. Please review and add it to the vehicle directory.</p>';
+    echo '<p><strong>Stone Stomper Notice:</strong> This customer order uses an ' . $formatted . '. Please review and add it to the vehicle directory.</p>';
     echo '</div>';
 }
+
 
 /*
 |-----------------------------------------

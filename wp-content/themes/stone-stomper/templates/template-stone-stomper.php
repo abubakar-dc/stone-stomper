@@ -262,7 +262,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											</select>
 											 <div class="veh_year_other">
 											</div>
-
 										</div>
 									</div>
 									<?php
@@ -880,6 +879,11 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 								</div>
 							</div>
 						</div>
+						<input type="hidden" name="is_vehicle_make_other" id="is_vehicle_make_other" value="no">
+						<input type="hidden" name="is_vehicle_model_other" id="is_vehicle_model_other" value="no">
+						<input type="hidden" name="is_vehicle_year_other" id="is_vehicle_year_other" value="no">
+						<input type="hidden" name="is_caravan_make_other" id="is_caravan_make_other" value="no">
+						<input type="hidden" name="is_caravan_model_other" id="is_caravan_model_other" value="no">
 					</form>
 				</div>
 			</div>
