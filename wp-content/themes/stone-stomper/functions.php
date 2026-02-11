@@ -3369,7 +3369,7 @@ function register_atl_block_extension() {
 		) );
 		woocommerce_register_additional_checkout_field( array(
 			'id'       => 'my-custom-atl/is-on-the-move',
-			'label'    => "I'm on the Move",
+			'label'    => "I'm on the move",
 			'location' => 'order',
 			'type'     => 'checkbox',
 			'required' => false,
