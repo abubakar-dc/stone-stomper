@@ -2910,11 +2910,7 @@ function sts_materialize_customer_cpt( $order_id ) {
 		update_post_meta($post_id, '_sts_other_vehicle_used', 'yes');
 	}
 
-	// is-on-the-move
-
-	$is_on_the_move = $order->get_meta( '_wc_other/my-custom-atl/authority-to-leave' );
-;
-
+	$is_on_the_move = $order->get_meta( '_wc_other/my-custom-atl/is-on-the-move' );
 	if ( $is_on_the_move == 1 ) {
 		update_post_meta( $post_id, 'sts_var_proposed_on_the_move', 'Yes' );
 	} else {
@@ -2987,11 +2983,6 @@ function sts_materialize_customer_cpt( $order_id ) {
         }
     }
    	$final_delivery  = sanitize_text_field( $data['final_delivery'] ?? '' );
-	if ('move' === $final_delivery) {
-	    update_post_meta( $post_id, 'sts_var_proposed_on_the_move', 'Yes' );
-    } else {
-		update_post_meta( $post_id, 'sts_var_proposed_on_the_move', 'No' );
-	}
     update_post_meta( $post_id, 'vinyl_insert_width_mm', sanitize_text_field( $data['vinyl_width_mm'] ?? '' ) );
     update_post_meta( $post_id, 'vinyl_insert_height_mm', sanitize_text_field( $data['vinyl_length_mm'] ?? '' ) );
     $support_type = $data['input_1.3'] ?? '';
