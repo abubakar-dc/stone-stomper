@@ -1297,7 +1297,6 @@ function show_towing_svg_in_editor( $post ) {
 			</div>
         </div>
     </div>
-
 	<script>
 		jQuery(document).ready(function () {
 			jQuery('#save-chnages').on('click', function(e) {
@@ -1432,7 +1431,6 @@ function show_towing_svg_in_editor( $post ) {
 
 		});
 	</script>
-
     <?php
 }
 
@@ -1852,14 +1850,13 @@ function generate_customer_order_word_file($post_id) {
 
 	$diagram_path = get_post_meta($post_id, '_diagram_png_path', true);
 
-	if ( ! $diagram_path || ! file_exists($diagram_path) ) {
-		wp_die('Diagram image missing.');
+	if ( $diagram_path && file_exists($diagram_path) ) {
+		$section->addImage($diagram_path, [
+			'width' => 450,
+			'alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER,
+		]);
 	}
 
-	$section->addImage($diagram_path, [
-		'width' => 450,
-		'alignment' => \PhpOffice\PhpWord\SimpleType\Jc::CENTER,
-	]);
 
 	$section->addTextBreak(1);
 
@@ -2307,7 +2304,6 @@ add_filter('handle_actions-customer', function ($redirect_to, $action, $post_ids
 // Email to manufacturer
 
 function email_to_manufacturer_callback() {
-
 	if ( ! current_user_can('edit_posts') ) {
 		wp_send_json_error('Permission denied', 403);
 	}
@@ -2317,24 +2313,13 @@ function email_to_manufacturer_callback() {
 		wp_send_json_error('Invalid post ID', 400);
 	}
 
-	$diagram_png = get_transient('diagram_png_' . $post_id);
-	if ( ! $diagram_png ) {
-		wp_send_json_error('Diagram image missing');
-	}
-
 	list($sts_var_post_id, $sts_fields, $sts_option_fields) = StoneStomper::defaults();
 
 	$order_id = get_post_meta($post_id, 'order_id', true);
 
-	$file_path = generate_customer_order_word_file($post_id, $diagram_png);
-	$order_id = get_post_meta($post_id, 'order_id', true);
-	$upload_dir = wp_upload_dir();
-	$new_path = $upload_dir['path'] . "/Customer-Order-{$order_id}.docx";
-	rename($file_path, $new_path);
-	$file_path = $new_path;
+	$file_path = generate_customer_order_word_file($post_id);
 
-
-	if ( ! $file_path || ! file_exists($file_path) ) {
+	if ( empty($file_path) || ! file_exists($file_path) ) {
 		wp_send_json_error('File generation failed');
 	}
 
@@ -2355,7 +2340,11 @@ function email_to_manufacturer_callback() {
 	$subject = "New Customer Order Details (Order #{$order_id})";
 	$message = "Hello,\n\nPlease find attached the customer order details document.\n\nThanks.";
 
-	wp_mail($emails, $subject, $message, [], [$file_path]);
+	$mail_sent = wp_mail($emails, $subject, $message, [], [$file_path]);
+
+	if ( ! $mail_sent ) {
+		wp_send_json_error('Mail failed');
+	}
 
 	wp_send_json_success('Email Sent');
 }

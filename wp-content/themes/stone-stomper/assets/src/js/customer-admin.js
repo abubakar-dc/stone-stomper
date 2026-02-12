@@ -3,34 +3,24 @@ jQuery( document ).ready( function() {
 		e.preventDefault();
 
 		const post_id = jQuery( '#post_ID' ).val();
-		const svg = document.getElementById( 'towing-diagram-svg' );
-
-		if ( ! svg ) {
-			alert( 'Diagram not found' );
-			return;
-		}
-
 		const button = jQuery( this );
+
 		button.text( 'Sending...' ).prop( 'disabled', true );
 
-		convertSvgToPng( svg, function( pngBase64 ) {
-			jQuery.post( stoneStomper.ajaxurl, {
-				action: 'store_diagram_png',
-				post_id,
-				diagram_png: pngBase64,
-				_ajax_nonce: stoneStomper.nonce,
-			} ).done( function() {
-				jQuery.post( ajaxurl, {
-					action: 'email_to_manufacturer',
-					post_id,
-				} ).done( function() {
-					alert( 'Email Sent Successfully!' );
-					location.reload();
-				} ).fail( function() {
-					alert( 'Error Sending Email' );
-					button.prop( 'disabled', false ).text( 'Email to Manufacturer' );
-				} );
-			} );
+		jQuery.post( ajaxurl, {
+			action: 'email_to_manufacturer',
+			post_id,
+		} ).done( function( res ) {
+			if ( res.success ) {
+				alert( 'Email Sent Successfully!' );
+				location.reload();
+			} else {
+				alert( res.data || 'Email failed' );
+				button.prop( 'disabled', false ).text( 'Email to Manufacturer' );
+			}
+		} ).fail( function() {
+			alert( 'Error Sending Email' );
+			button.prop( 'disabled', false ).text( 'Email to Manufacturer' );
 		} );
 	} );
 
