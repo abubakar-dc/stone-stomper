@@ -1736,6 +1736,8 @@ function generate_customer_order_word_file($post_id) {
 	$cellGray  = ['bgColor' => '#f2f2f2'];
 	$tableAccessories = $section->addTable(
 		[
+			'borderSize' => 6,
+			'borderColor' => '000000',
 			'cellMarginTop' => 0,
 			'cellMarginBottom' => 0,
 			'cellMarginLeft' => 50,
@@ -1863,6 +1865,8 @@ function generate_customer_order_word_file($post_id) {
     // MEASUREMENTS TABLE
 	$measure = $section->addTable(
 		[
+			'borderSize' => 6,
+			'borderColor' => '000000',
 			'cellMarginTop' => 0,
 			'cellMarginBottom' => 0,
 			'cellMarginLeft' => 50,
