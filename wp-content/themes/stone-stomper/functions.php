@@ -1833,6 +1833,9 @@ function generate_customer_order_word_file($post_id) {
 	$textRun = $info_cell->addTextRun(['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$textRun->addText("ORDER Name: ", ['bold' => true]);
 	$textRun->addText($customer_name);
+	$textRun = $info_cell->addTextRun(['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$textRun->addText("ORDER DATE: ", ['bold' => true]);
+	$textRun->addText($order_date);
 	$textRun = $info_cell->addTextRun(['spaceBefore' => 1, 'spaceAfter' => 0]);
 	$textRun->addText("ORDER NUMBER: ", ['bold' => true]);
 	$textRun->addText($order_id);
