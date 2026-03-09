@@ -402,7 +402,7 @@ function render_towing_diagram($post_id) {
 			</g>
 			<g>
 				<line class="st0" x1="317.29" y1="608.6" x2="894.24" y2="608.6" stroke="#fa3232"/>
-				<g transform="translate(957.8,375.13)">
+				<g transform="translate(940.8,375.13)">
 				<rect class="st4" x="10" y="-12" width="135" height="24" fill="#ffffff"  stroke="#ffffff"/>
 				<text class="st5" text-anchor="start" dominant-baseline="middle" x="20" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;"><?php echo esc_html( $caravan_length_mm ? $caravan_length_mm : '-' ); ?></text>
 				</g>
