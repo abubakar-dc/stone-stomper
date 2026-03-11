@@ -2855,6 +2855,7 @@ function sts_materialize_customer_cpt( $order_id ) {
     if ( is_wp_error( $post_id ) || ! $post_id ) {
         return;
     }
+
     $product_type = (string) ( $data['product_type'] ?? '' ) === '712' ? 'Mesh Only' : 'Stone Stomper';
 	// Contact Information
     update_post_meta( $post_id, 'order_id', $order_id );
@@ -2920,8 +2921,6 @@ function sts_materialize_customer_cpt( $order_id ) {
 		update_post_meta($post_id, '_sts_other_vehicle_used', 'yes');
 		update_post_meta($post_id, '_sts_other_fields', $other_fields);
 	}
-
-
 
 	$is_on_the_move = $order->get_meta( '_wc_other/my-custom-atl/is-on-the-move' );
 	if ( $is_on_the_move == 1 ) {
@@ -2995,6 +2994,11 @@ function sts_materialize_customer_cpt( $order_id ) {
             update_post_meta( $post_id, 'sts_var_caravan_ss_length_adj', $hitch_measure - 140 );
         }
     }
+
+	if ( $product_type === 'Mesh Only' ) {
+        update_post_meta( $post_id, 'sts_var_caravan_cut_out', 250 );
+	}
+
    	$final_delivery  = sanitize_text_field( $data['final_delivery'] ?? '' );
     update_post_meta( $post_id, 'vinyl_insert_width_mm', sanitize_text_field( $data['vinyl_width_mm'] ?? '' ) );
     update_post_meta( $post_id, 'vinyl_insert_height_mm', sanitize_text_field( $data['vinyl_length_mm'] ?? '' ) );

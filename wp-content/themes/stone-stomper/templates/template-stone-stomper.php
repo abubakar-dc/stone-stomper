@@ -523,23 +523,20 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 									<div class="grid cols-2">
 										<div class="field">
 											<label class="req" for="photo_hitch">Hitch Photograph</label>
-											<input id="photo_hitch" name="photo_hitch" required type="file" accept="image/*"
-												multiple />
+											<input id="photo_hitch" name="photo_hitch" required type="file" accept="image/*" />
 											<ul class="uploads" id="list_hitch"></ul>
 											<input type="hidden" id="hitch_ids" required name="hitch_ids" value="[]">
 										</div>
 										<div class="field">
 											<label class="req" for="photo_rear">Towing Vehicle Rear
 												Photograph</label>
-											<input id="photo_rear" name="photo_rear" required type="file" accept="image/*"
-												multiple />
+											<input id="photo_rear" name="photo_rear" required type="file" accept="image/*" />
 											<ul class="uploads" id="list_rear"></ul>
 											<input type="hidden" id="rear_ids" required name="rear_ids"  value="[]">
 										</div>
 										<div class="field">
 											<label class="req" for="photo_front">Front of Caravan Photograph</label>
-											<input id="photo_front" name="photo_front" required type="file" accept="image/*"
-												multiple />
+											<input id="photo_front" name="photo_front" required type="file" accept="image/*" />
 											<ul class="uploads" id="list_front"></ul>
 											<input type="hidden" id="front_ids" required name="front_ids" value="[]">
 										</div>
@@ -653,6 +650,10 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 												<div class="note notice-bar"><?php echo html_entity_decode($sts_var_a_frame_length_mm); ?></div>
 											<?php } ?>
 										</div>
+										<div class="field">
+											<input id="a_frame_tick" name="a_frame_tick" type="checkbox" required />
+											<label class="req a_frame_tick_label" for="a_frame_tick">I Confirm I have measured tight under the A-frame</label>
+										</div>
 										<fieldset class="ss-support-options" style="display:none">
 											<div class="note notice-bar mt-0">As the A-Frame length is longer than 1800mm, we require a mid-fixing point for your Stone Stomper. Please select one of the following options. If you are unsure, please select "Support Pockets"</div>
 											<div class="ginput_container ginput_container_checkbox extra-support">
@@ -660,14 +661,14 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 												<div class="gchoice stone-stomper-supports">
 													<div class="checkbox-item">
 														<input class="gfield-choice-input" name="input_1.3" type="radio" value="toolbox" id="toolbox">
-														<label for="toolbox" id="label_4_1_2">Toolbox</label>
+														<label for="toolbox" id="label_4_1_2">Toolbox (if 1900 mm or wider)</label>
 													</div>
 													<div class="toolbox-support" style="display:none">
 														<div class="factory_stoneguard_inner two-columns-fields">
 															<div class="field extra-support" >
 																<label class="req" for="toolbox_width">Width (mm)</label>
 																<input id="toolbox_width" name="toolbox_width_mm" type="text" inputmode="numeric" pattern="[0-9]*"
-																	placeholder="e.g. 500 mm" required />
+																	placeholder="e.g. 600mm to 1900mm" required />
 															</div>
 															<div class="field extra-support">
 																<label class="req" for="toolbox_length">Distance from Caravan (mm)</label>
