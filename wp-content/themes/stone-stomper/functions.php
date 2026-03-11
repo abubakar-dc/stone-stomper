@@ -2401,6 +2401,14 @@ add_action( 'init', function() {
 		'show_in_admin_status_list' => true,
 		'label_count'               => _n_noop( 'Manufacturing M <span class="count">(%s)</span>', 'Manufacturing M <span class="count">(%s)</span>' ),
 	) );
+	register_post_status( 'wc-ready-manu', array(
+		'label'                     => 'Ready to Manufacture',
+		'public'                    => true,
+		'exclude_from_search'       => false,
+		'show_in_admin_all_list'    => true,
+		'show_in_admin_status_list' => true,
+		'label_count'               => _n_noop( 'Ready to Manufacture <span class="count">(%s)</span>', 'Ready to Manufacture <span class="count">(%s)</span>' ),
+	) );
 } );
 
 // 2️⃣ Add it to WooCommerce status dropdowns (in admin & everywhere)
@@ -2414,6 +2422,7 @@ add_filter( 'wc_order_statuses', function( $statuses ) {
 		if ( 'wc-processing' === $key ) {
 			$new_statuses['wc-manufacturing'] = __( 'Manufacturing L', 'stonestomper_td' );
 			$new_statuses['wc-manufacturing-m'] = __( 'Manufacturing M', 'stonestomper_td' );
+			$new_statuses['wc-ready-manu'] = __( 'Ready to Manufacture', 'stonestomper_td' );
 		}
 	}
 
