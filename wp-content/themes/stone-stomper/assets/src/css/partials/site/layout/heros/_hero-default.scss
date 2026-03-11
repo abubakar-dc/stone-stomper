@@ -1,23 +1,57 @@
 .hero-section {
 	transition: all 0.3s ease-in-out;
 	background-color: var(--ss_white_1);
-	// padding-top: var(--ss_space_128);
+	position: relative;
 
-	.wp-block-cover {
+	.default-hero-cover {
 		height: 89.4vh;
 		padding: 60px 0;
+		box-sizing: border-box;
+		display: flex;
+		align-items: flex-end;
+		justify-content: center;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+
+		&::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.5);
+			z-index: 1;
+		}
 
 		h1 {
 			text-transform: uppercase;
 			letter-spacing: 10px;
 			line-height: 1.2;
+			color : var(--ss_white);
 		}
 
-		&__inner-container {
+		.default-hero-cover-content {
 			max-width: 1750px;
 			width: 87% !important;
 			margin: 0 auto !important;
+			position: relative;
+    		z-index: 2;
 		}
+	}
+}
+
+.default-hero-cover {
+	img {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
 	}
 }
 

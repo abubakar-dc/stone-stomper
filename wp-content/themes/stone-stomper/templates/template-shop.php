@@ -23,14 +23,11 @@ $sts_var_shop_sub_title = $sts_fields['sts_var_shop_sub_title'] ?? null;
 <section id="hero-section" class="hero-section hero-section-default">
 	<!-- hero start -->
 	<div class="hero-default">
-		<div class="wp-block-cover has-custom-content-position is-position-bottom-left">
-
+		<div class="default-hero-cover has-custom-content-position is-position-bottom-left">
 			<?php if(has_post_thumbnail($sts_var_post_id)){
 				StoneStomper::the_featured_image($sts_var_post_id,2000,   array(  'class' => 'wp-block-cover__image-background wp-image-342 size-large' ) );
 			}  ?>
-
-			<span aria-hidden="true" class="wp-block-cover__background has-background-dim"></span>
-			<div class="wp-block-cover__inner-container is-layout-constrained wp-block-cover-is-layout-constrained">
+			<div class="default-hero-cover-content">
 				<h1 class="" tabindex="0"><?php echo esc_html($sts_var_pagetitle); ?></h1>
 			</div>
 		</div>
