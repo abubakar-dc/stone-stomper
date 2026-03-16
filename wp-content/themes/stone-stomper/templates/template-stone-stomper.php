@@ -652,6 +652,9 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										<div class="field">
 											<input id="a_frame_tick" name="a_frame_tick" type="checkbox" required />
 											<label class="req a_frame_tick_label" for="a_frame_tick">I Confirm I have measured tight under the A-frame</label>
+											<div class="error-notes-checkbox" >
+												Please make sure this to be checked
+											</div>
 										</div>
 										<fieldset class="ss-support-options" style="display:none">
 											<div class="note notice-bar mt-0">As the A-Frame length is longer than 1800mm, we require a mid-fixing point for your Stone Stomper. Please select one of the following options. If you are unsure, please select "Support Pockets"</div>
@@ -667,7 +670,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 															<div class="field extra-support" >
 																<label class="req" for="toolbox_width">Width (mm)</label>
 																<input id="toolbox_width" name="toolbox_width_mm" type="text" inputmode="numeric" pattern="[0-9]*"
-																	placeholder="e.g. 600mm to 1900mm" required />
+																	placeholder="e.g. 1900mm" required />
 															</div>
 															<div class="field extra-support">
 																<label class="req" for="toolbox_length">Distance from Caravan (mm)</label>
@@ -686,7 +689,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 															<div class="field extra-support">
 																<label class="req" for="stoneguard_width">Width (mm)</label>
 																<input id="stoneguard_width" name="stoneguard_width_mm" type="text" inputmode="numeric" pattern="[0-9]*"
-																	placeholder="e.g.600 mm" required />
+																	placeholder="e.g. 1900mm" required />
 															</div>
 															<div class="field extra-support">
 																<label class="req" for="stoneguard_length">Distance from Caravan (mm)</label>

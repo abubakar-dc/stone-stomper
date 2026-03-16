@@ -252,10 +252,6 @@ jQuery( document ).ready( function() {
 	}
 
 	jQuery( document ).on( 'change blur', '#bar-options-section input, #bar-options-section select, #bar-options-section textarea', revealFinalSections );
-
-	jQuery( '.form-section-right #btn_cart' ).on( 'click', function() {
-		jQuery( this ).addClass( 'btn-loading' );
-	} );
 } );
 
 jQuery( function() {

@@ -6335,6 +6335,10 @@ Mixin for transition
   opacity: 1;
   transform: scale(1);
 }
+.editor-styles-wrapper .error-notes-checkbox {
+  color: #dc3545;
+  display: none;
+}
 .editor-styles-wrapper [type=radio]:checked,
 .editor-styles-wrapper [type=radio]:not(:checked) {
   position: absolute;

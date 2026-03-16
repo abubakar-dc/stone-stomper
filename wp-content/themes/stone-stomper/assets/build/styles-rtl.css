@@ -1864,6 +1864,11 @@ input[type=reset]:not(.components-button):hover, input[type=reset]:not(.componen
   transform: scale(1);
 }
 
+.error-notes-checkbox {
+  color: #dc3545;
+  display: none;
+}
+
 /* -------------------------------------------------
 >> Default styles for Radio Buttons
 ------------------------------------------------- */
