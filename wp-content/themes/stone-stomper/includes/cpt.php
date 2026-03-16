@@ -124,10 +124,61 @@ add_filter( 'manage_customer_posts_columns', function ( $columns ) {
 	return $new_columns;
 } );
 
-add_action( 'manage_customer_posts_custom_column', function ( $column, $post_id ) {
+add_filter('manage_edit-customer_sortable_columns', function($columns){
+	$columns['order_status'] = 'wc_status';
+	return $columns;
+});
 
-	// 🧠 Get linked WooCommerce Order ID from your ACF field
-	$order_id = get_field( 'order_id', $post_id ); // update if your ACF key is different
+add_action('pre_get_posts', function($query){
+
+	if (!is_admin() || !$query->is_main_query()) {
+		return;
+	}
+
+	if ($query->get('post_type') !== 'customer') {
+		return;
+	}
+
+	if ($query->get('orderby') === 'wc_status') {
+
+		$order = $query->get('order') === 'asc' ? 'ASC' : 'DESC';
+
+		$posts = get_posts([
+			'post_type' => 'customer',
+			'posts_per_page' => -1,
+			'fields' => 'ids'
+		]);
+
+		$status_map = [];
+
+		foreach ($posts as $post_id) {
+			$order_id = get_field('order_id', $post_id);
+			if (!$order_id) continue;
+
+			$order_obj = wc_get_order($order_id);
+			if (!$order_obj) continue;
+
+			$status_map[$post_id] = $order_obj->get_status();
+		}
+
+		if ($order === 'ASC') {
+			asort($status_map);
+		} else {
+			arsort($status_map);
+		}
+
+		$sorted_ids = array_keys($status_map);
+
+		if (!empty($sorted_ids)) {
+			$query->set('post__in', $sorted_ids);
+			$query->set('orderby', 'post__in');
+		}
+	}
+
+});
+
+add_action( 'manage_customer_posts_custom_column', function ( $column, $post_id ) {
+	$order_id = get_field( 'order_id', $post_id );
 	$email = get_field('email', $post_id);
 
 
@@ -374,7 +425,6 @@ add_action( 'pre_get_posts', function( $query ) {
 		return;
 	}
 
-	// Sirf Customer CPT ke liye
 	if ( isset( $_GET['post_type'] ) && $_GET['post_type'] === 'customer' ) {
 		if ( empty( $_GET['orderby'] ) ) {
 			$query->set( 'orderby', 'date' );
@@ -402,11 +452,15 @@ add_action( 'pre_get_posts', function( $query ) {
 				}
 			}
 
-			$query->set( 'post__in', $matching_ids ?: [ 0 ] );
-
-			// ✅ Restore correct sorting so post__in na random karay
-			$query->set( 'orderby', 'date' );
-			$query->set( 'order', 'DESC' );
+			$query->set( 'post__in', $matching_ids ?: [0] );
+			// Preserve column sorting if user clicked a column
+			if ( ! empty( $_GET['orderby'] ) ) {
+				$query->set( 'orderby', sanitize_text_field( $_GET['orderby'] ) );
+				$query->set( 'order', sanitize_text_field( $_GET['order'] ?? 'DESC' ) );
+			} else {
+				$query->set( 'orderby', 'date' );
+				$query->set( 'order', 'DESC' );
+			}
 		}
 	}
 
