@@ -653,7 +653,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											<input id="a_frame_tick" name="a_frame_tick" type="checkbox" required />
 											<label class="req a_frame_tick_label" for="a_frame_tick">I confirm I have measured tight under the A-frame *</label>
 											<div class="error-notes-checkbox" >
-												Please make sure this to be checked
+												This is a mandatory field - please select to confirm
 											</div>
 										</div>
 										<fieldset class="ss-support-options" style="display:none">
