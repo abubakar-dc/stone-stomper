@@ -533,6 +533,42 @@ jQuery( function() {
 			} );
 		} );
 	}
+
+	function handleSingleUpload( inputId, listId, hiddenId ) {
+		const input = document.getElementById( inputId );
+		const list = document.getElementById( listId );
+		const hidden = document.getElementById( hiddenId );
+
+		input.addEventListener( 'change', function() {
+			if ( ! this.files.length ) {
+				return;
+			}
+
+			const file = this.files[ 0 ];
+
+			// check if already has a file stored
+			const existing = JSON.parse( hidden.value || '[]' );
+
+			if ( existing.length > 0 ) {
+				alert( 'Previous image will be removed. Only 1 image is allowed.' );
+			}
+
+			// clear UI
+			list.innerHTML = '';
+
+			// replace value
+			hidden.value = JSON.stringify( [ file.name ] );
+
+			// preview
+			const li = document.createElement( 'li' );
+			li.textContent = file.name;
+			list.appendChild( li );
+		} );
+	}
+
+	handleSingleUpload( 'photo_hitch', 'list_hitch', 'hitch_ids' );
+	handleSingleUpload( 'photo_rear', 'list_rear', 'rear_ids' );
+	handleSingleUpload( 'photo_front', 'list_front', 'front_ids' );
 } );
 
 // helpers to read/write hidden ids (JSON array in a hidden input)
