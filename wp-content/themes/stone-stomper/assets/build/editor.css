@@ -6830,6 +6830,9 @@ Mixin for transition
 .editor-styles-wrapper .gform-theme textarea {
   padding: 20px 25px;
 }
+.editor-styles-wrapper .two-columns-fields label {
+  font-size: 14px;
+}
 .editor-styles-wrapper .hs-form {
   text-align: left;
 }
