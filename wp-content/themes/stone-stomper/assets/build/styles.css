@@ -5377,6 +5377,24 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   border-color: var(--ss_link_color_hover);
 }
 
+.clear-form-button {
+  text-align: right;
+  margin-bottom: 24px;
+}
+
+#clear-order-form {
+  padding: 0;
+  height: auto;
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  color: gray;
+}
+#clear-order-form:hover {
+  background-color: transparent;
+  border: 0;
+}
+
 /*-------------------------------------------------
 >> Basic styles for Blog post
 -------------------------------------------------*/

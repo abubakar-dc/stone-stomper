@@ -89,26 +89,12 @@ jQuery( document ).ready( function() {
 	}
 
 	function clearSavedOrderForm() {
-		const prefix = 'order_form';
-		const parts = parseInt( getCookie( prefix + '_parts' ) || '0', 10 );
-		if ( parts > 0 ) {
-			for ( let i = 0; i < parts; i++ ) {
-				deleteCookie( prefix + '_' + i );
-			}
-			deleteCookie( prefix + '_parts' );
+		const storageKey = 'order_form_v2';
+		try {
+			localStorage.removeItem( storageKey );
+		} catch ( e ) {
+			// ignore
 		}
-		deleteCookie( prefix );
-	}
-
-	function getCookie( name ) {
-		const m = document.cookie.match(
-			new RegExp( '(?:^|; )' + name.replace( /([.$?*|{}()\[\]\\\/\+^])/g, '\\$1' ) + '=([^;]*)' ),
-		);
-		return m ? decodeURIComponent( m[ 1 ] ) : null;
-	}
-
-	function deleteCookie( name ) {
-		document.cookie = name + '=;path=/;max-age=0';
 	}
 
 	function UpdateSummary() {

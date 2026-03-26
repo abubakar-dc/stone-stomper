@@ -104,6 +104,9 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											}
 										?>
 									</div>
+									<div class="clear-form-button">
+										<button type="button" id="clear-order-form">Clear Form</button>
+									</div>
 									<div class="products-select">
 										<?php if ( $sts_var_select_products ) { ?>
 											<div class="field jump-01">

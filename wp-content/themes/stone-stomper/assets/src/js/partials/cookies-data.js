@@ -1,59 +1,34 @@
 
 jQuery( function() {
-	const days = 7;
-	const chunkSize = 3000;
-	const prefix = 'order_form';
+	const storageKey = 'order_form_v2';
+	const ttlMs = 48 * 60 * 60 * 1000; // 48 hours
 	const restorePollMs = 200;
 	const restoreMaxTries = 25;
 	let isRestoring = false;
 
-	function setC( n, v, d ) {
-		document.cookie = n + '=' + encodeURIComponent( v ) + ';path=/;max-age=' + ( d * 86400 );
-	}
-	function getC( n ) {
-		const m = document.cookie.match( new RegExp( '(?:^|; )' + n.replace( /([.$?*|{}()\[\]\\\/\+^])/g, '\\$1' ) + '=([^;]*)' ) );
-		return m ? decodeURIComponent( m[ 1 ] ) : null;
-	}
-	function delC( n ) {
-		document.cookie = n + '=;path=/;max-age=0';
-	}
 	function saveData( data ) {
-		const json = JSON.stringify( data );
-		delC( prefix );
-		const parts = parseInt( getC( prefix + '_parts' ) || '0', 10 );
-		if ( parts > 0 ) {
-			for ( let i = 0; i < parts; i++ ) {
-				delC( prefix + '_' + i );
-			}
-			delC( prefix + '_parts' );
-		}
-		if ( json.length <= chunkSize ) {
-			setC( prefix, json, days );
-			return;
-		}
-		const count = Math.ceil( json.length / chunkSize );
-		setC( prefix + '_parts', String( count ), days );
-		for ( let i = 0; i < count; i++ ) {
-			setC( prefix + '_' + i, json.slice( i * chunkSize, ( i + 1 ) * chunkSize ), days );
+		const payload = { ts: Date.now(), data };
+		try {
+			localStorage.setItem( storageKey, JSON.stringify( payload ) );
+		} catch ( e ) {
+			// ignore storage errors (quota / private mode)
 		}
 	}
 	function loadData() {
-		let json = getC( prefix );
-		if ( ! json ) {
-			const parts = parseInt( getC( prefix + '_parts' ) || '0', 10 );
-			if ( parts > 0 ) {
-				let s = '';
-				for ( let i = 0; i < parts; i++ ) {
-					s += getC( prefix + '_' + i ) || '';
-				}
-				json = s;
-			}
-		}
-		if ( ! json ) {
-			return null;
-		}
 		try {
-			return JSON.parse( json );
+			const raw = localStorage.getItem( storageKey );
+			if ( ! raw ) {
+				return null;
+			}
+			const parsed = JSON.parse( raw );
+			if ( ! parsed || ! parsed.data || ! parsed.ts ) {
+				return null;
+			}
+			if ( Date.now() - parsed.ts > ttlMs ) {
+				localStorage.removeItem( storageKey );
+				return null;
+			}
+			return parsed.data;
 		} catch ( e ) {
 			return null;
 		}
@@ -401,6 +376,23 @@ jQuery( function() {
 	jQuery( '#orderForm' ).on( 'input change', 'input,select,textarea', autosave );
 	jQuery( '#orderForm' ).on( 'submit', function() {
 		autosave();
+	} );
+	jQuery( '#clear-order-form' ).on( 'click', function() {
+		try {
+			localStorage.removeItem( storageKey );
+		} catch ( e ) {
+			// ignore
+		}
+		const form = document.getElementById( 'orderForm' );
+		if ( form ) {
+			form.reset();
+		}
+		jQuery( '.veh_make_other, .veh_model_other, .veh_year_other, .van_model_other' ).empty();
+		jQuery( '#veh_model, #veh_year, #van_model' ).show().prop( 'required', true );
+		jQuery( '#list_hitch, #list_rear, #list_front' ).empty();
+		jQuery( '#hitch_ids, #rear_ids, #front_ids' ).val( '' ).trigger( 'change' );
+		jQuery( '#caravan-details input, #caravan-details select, #caravan-details textarea' ).trigger( 'change' );
+		jQuery( '#bar-options-section input, #bar-options-section select, #bar-options-section textarea' ).trigger( 'change' );
 	} );
 
 	restoreAll();

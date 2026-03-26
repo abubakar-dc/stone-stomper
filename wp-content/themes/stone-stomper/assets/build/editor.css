@@ -4147,6 +4147,22 @@ Mixin for transition
 .editor-styles-wrapper .cross-sells-product .wp-block-button.wc-block-components-product-button a.wp-block-button__link.wp-element-button:hover {
   border-color: var(--ss_link_color_hover);
 }
+.editor-styles-wrapper .clear-form-button {
+  text-align: right;
+  margin-bottom: 24px;
+}
+.editor-styles-wrapper #clear-order-form {
+  padding: 0;
+  height: auto;
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  color: gray;
+}
+.editor-styles-wrapper #clear-order-form:hover {
+  background-color: transparent;
+  border: 0;
+}
 .editor-styles-wrapper .post-box .post-box-img a {
   height: 100%;
   display: inline-block;
