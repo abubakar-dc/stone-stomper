@@ -76,6 +76,7 @@ jQuery( document ).ready( function() {
 			},
 			success( response ) {
 				if ( response && response.success && response.data && response.data.added ) {
+					clearSavedOrderForm();
 					window.location.href = response.data.redirect || '/cart';
 				} else {
 					alert( 'Could not add to cart. Please try again.' );
@@ -85,6 +86,29 @@ jQuery( document ).ready( function() {
 				alert( 'Something went wrong. Please try again.' );
 			},
 		} );
+	}
+
+	function clearSavedOrderForm() {
+		const prefix = 'order_form';
+		const parts = parseInt( getCookie( prefix + '_parts' ) || '0', 10 );
+		if ( parts > 0 ) {
+			for ( let i = 0; i < parts; i++ ) {
+				deleteCookie( prefix + '_' + i );
+			}
+			deleteCookie( prefix + '_parts' );
+		}
+		deleteCookie( prefix );
+	}
+
+	function getCookie( name ) {
+		const m = document.cookie.match(
+			new RegExp( '(?:^|; )' + name.replace( /([.$?*|{}()\[\]\\\/\+^])/g, '\\$1' ) + '=([^;]*)' ),
+		);
+		return m ? decodeURIComponent( m[ 1 ] ) : null;
+	}
+
+	function deleteCookie( name ) {
+		document.cookie = name + '=;path=/;max-age=0';
 	}
 
 	function UpdateSummary() {
