@@ -393,6 +393,7 @@ jQuery( function() {
 		jQuery( '#hitch_ids, #rear_ids, #front_ids' ).val( '' ).trigger( 'change' );
 		jQuery( '#caravan-details input, #caravan-details select, #caravan-details textarea' ).trigger( 'change' );
 		jQuery( '#bar-options-section input, #bar-options-section select, #bar-options-section textarea' ).trigger( 'change' );
+		jQuery( '#photographs-details, #final-measurements, #final-summary' ).removeClass( 'section-disable' );
 	} );
 
 	restoreAll();

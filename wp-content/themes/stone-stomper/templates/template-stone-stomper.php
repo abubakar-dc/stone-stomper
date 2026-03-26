@@ -676,7 +676,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 																	placeholder="e.g. 1900mm" required />
 															</div>
 															<div class="field extra-support">
-																<label class="req" for="toolbox_length">Distance from Caravan (mm)</label>
+																<label class="req" for="toolbox_length">Distance from Van Cross Beam (mm)</label>
 																<input id="toolbox_length" name="toolbox_length_mm" type="text" inputmode="numeric" pattern="[0-9]*"
 																	placeholder="e.g. 500 mm" required />
 															</div>
@@ -695,7 +695,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 																	placeholder="e.g. 1900mm" required />
 															</div>
 															<div class="field extra-support">
-																<label class="req" for="stoneguard_length">Distance from Caravan (mm)</label>
+																<label class="req" for="stoneguard_length">Distance from Van Cross Beam (mm)</label>
 																<input id="stoneguard_length" name="stoneguard_length_mm" type="text" inputmode="numeric" pattern="[0-9]*"
 																	placeholder="e.g.600 mm" required />
 															</div>
@@ -708,7 +708,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 													<label for="support_pockets" id="label_4_1_3">Support Pockets</label>
 													<div class="support_pockets" style="display:none">
 														<div class="field extra-support">
-															<label class="req" for="support_pocket_length">Support Pocket Distance From Caravan (MM)</label>
+															<label class="req" for="support_pocket_length">Distance From Van Cross Beam (Attachment Point)</label>
 															<input id="support_pocket_length" name="support_pocket_length_mm" type="text" inputmode="numeric" pattern="[0-9]*"
 																placeholder="e.g.600 mm" required />
 														</div>
