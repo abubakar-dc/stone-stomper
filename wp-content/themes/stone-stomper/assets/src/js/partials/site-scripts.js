@@ -585,7 +585,18 @@ function readIds( slot ) {
 }
 
 function writeIds( slot, ids ) {
-	getIdsField( slot ).value = JSON.stringify( ids );
+	const field = getIdsField( slot );
+	if ( ! field ) {
+		return;
+	}
+	field.value = JSON.stringify( ids );
+	// Trigger change so autosave captures uploaded image IDs
+	if ( typeof jQuery !== 'undefined' ) {
+		jQuery( field ).trigger( 'change' );
+	} else {
+		const evt = new Event( 'change', { bubbles: true } );
+		field.dispatchEvent( evt );
+	}
 }
 
 function setupImageUpload( inputId, listId, slot ) {
@@ -925,4 +936,3 @@ jQuery( document ).on( 'click ajaxComplete', function() {
 
 	$totalWrap.before( $fees );
 } );
-

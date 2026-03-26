@@ -7,7 +7,7 @@ jQuery( document ).ready( function() {
 	let caravanMake = '';
 
 	jQuery( '#van_make' ).on( 'change', function( e ) {
-		if ( e.originalEvent ) {
+		if ( e.originalEvent || e.isTrigger ) {
 			caravanMake = jQuery( this ).val();
 			caravan = true;
 
@@ -21,7 +21,7 @@ jQuery( document ).ready( function() {
 	} );
 
 	jQuery( '#van_model' ).on( 'change', function( e ) {
-		if ( e.originalEvent ) {
+		if ( e.originalEvent || e.isTrigger ) {
 			const selectedOption = jQuery( this ).find( ':selected' );
 			window.caravanPostID = selectedOption.data( 'post-id' );
 			caravan = false;
@@ -32,7 +32,7 @@ jQuery( document ).ready( function() {
 	} );
 
 	jQuery( '#veh_make' ).on( 'change', function( e ) {
-		if ( e.originalEvent ) {
+		if ( e.originalEvent || e.isTrigger ) {
 			carMake = jQuery( this ).val();
 			yearRequested = true;
 			postID = '';
@@ -48,7 +48,7 @@ jQuery( document ).ready( function() {
 	} );
 
 	jQuery( '#veh_model' ).on( 'change', function( e ) {
-		if ( e.originalEvent ) {
+		if ( e.originalEvent || e.isTrigger ) {
 			const selectedOption = jQuery( this ).find( ':selected' );
 			postID = selectedOption.data( 'post-id' );
 			yearRequested = false;
@@ -68,7 +68,7 @@ jQuery( document ).ready( function() {
 	---------------------------------------- */
 	let selectedYear = '';
 	jQuery( '#veh_year' ).on( 'change', function( e ) {
-		if ( e.originalEvent ) {
+		if ( e.originalEvent || e.isTrigger ) {
 			selectedYear = jQuery( this ).val(); // store selected year
 			console.log( selectedYear );
 			yearRequested = false; // since user manually selected a year
@@ -103,7 +103,7 @@ jQuery( document ).ready( function() {
 		        }
 
 		        if ( response.barwidth ) {
-		            jQuery( '#barwidth' ).val( response.barwidth );
+		            jQuery( '#barwidth' ).val( response.barwidth ).trigger( 'change' );
 		        }
 
 		        // Update year dropdown BUT preserve any user selection
@@ -214,4 +214,3 @@ jQuery( document ).ready( function() {
 		} );
 	}
 } );
-
