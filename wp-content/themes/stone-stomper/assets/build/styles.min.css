@@ -7038,6 +7038,11 @@ ul.wc-block-components-totals-discount__coupon-list button.wc-block-components-c
   width: 100%;
 }
 
+.section-disable {
+  pointer-events: none !important;
+  opacity: 0.2;
+}
+
 .form-detail-section a,
 .form-detail-section a:visited {
   border-color: var(--ss_black_1);
