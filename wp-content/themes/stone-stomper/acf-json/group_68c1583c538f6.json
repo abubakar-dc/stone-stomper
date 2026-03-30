@@ -419,6 +419,84 @@
             "append": ""
         },
         {
+            "key": "field_69ca3c5bd8d95",
+            "label": "Video Type",
+            "name": "sts_var_cptr_mrmnts_video_type",
+            "aria-label": "",
+            "type": "button_group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "100",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "upload": "Upload",
+                "embed": "URL"
+            },
+            "default_value": "",
+            "return_format": "value",
+            "allow_null": 0,
+            "allow_in_bindings": 0,
+            "layout": "horizontal"
+        },
+        {
+            "key": "field_69ca3b25eaee5",
+            "label": "Video URL",
+            "name": "sts_var_cptr_mrmnts_video_embed",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "",
+            "required": false,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_69ca3c5bd8d95",
+                        "operator": "==",
+                        "value": "embed"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "100",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_69ca3cc4d8d96",
+            "label": "Video Upload",
+            "name": "sts_var_cptr_mrmnts_video_upload",
+            "aria-label": "",
+            "type": "file",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_69ca3c5bd8d95",
+                        "operator": "==",
+                        "value": "upload"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "100",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "url",
+            "library": "all",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": "mp4",
+            "allow_in_bindings": 0
+        },
+        {
             "key": "field_6981ffb4e5dd6",
             "label": "Notice - Towing Vehicle Barwidth (mm)",
             "name": "sts_var_notice_towing_vehicle_barwidth_mm",
@@ -847,5 +925,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1770204232
+    "modified": 1774863964
 }

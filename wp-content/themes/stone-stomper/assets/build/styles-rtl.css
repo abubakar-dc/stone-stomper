@@ -5399,6 +5399,32 @@ body #daextlwcnf-cookie-settings-button-2:hover {
   border: 0;
 }
 
+a.video-capture-measurement,
+a.video-capture-measurement:visited {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border: 0;
+  padding: 0;
+  padding-right: 13px;
+}
+a.video-capture-measurement::before,
+a.video-capture-measurement:visited::before {
+  content: "";
+  height: 24px;
+  width: 24px;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTI5IiBoZWlnaHQ9IjkwIiB2aWV3Qm94PSIwIDAgMTI5IDkwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNMTI2LjAyNSAxNC43ODQ4QzEyNC41NTMgOS4zNTQ0NiAxMjAuMjEzIDUuMDc2ODIgMTE0LjcwMiAzLjYyNTkzQzEwNC43MTQgMC45ODc2MjMgNjQuNjY1NSAwLjk4NzYyNSA2NC42NjU1IDAuOTg3NjI1QzY0LjY2NTUgMC45ODc2MjUgMjQuNjE1MiAwLjk4NzYyMyAxNC42MjczIDMuNjI1OTNDOS4xMTgzMyA1LjA3NjgyIDQuNzc4NDkgOS4zNTQ0NiAzLjMwMzgyIDE0Ljc4NDhDMC42Mjg5MTcgMjQuNjI4MSAwLjYyODkwNiA0NS4xNjU2IDAuNjI4OTA2IDQ1LjE2NTZDMC42Mjg5MDYgNDUuMTY1NiAwLjYyODkxNyA2NS43MDQ4IDMuMzAzODIgNzUuNTQ4MkM0Ljc3ODQ5IDgwLjk3ODUgOS4xMTgzMyA4NS4wNzg3IDE0LjYyNzMgODYuNTI5NUMyNC42MTUyIDg5LjE2NiA2NC42NjU1IDg5LjE2NiA2NC42NjU1IDg5LjE2NkM2NC42NjU1IDg5LjE2NiAxMDQuNzE0IDg5LjE2NiAxMTQuNzAyIDg2LjUyOTVDMTIwLjIxMyA4NS4wNzg3IDEyNC41NTMgODAuOTc4NSAxMjYuMDI1IDc1LjU0ODJDMTI4LjcwMiA2NS43MDQ4IDEyOC43MDIgNDUuMTY1NiAxMjguNzAyIDQ1LjE2NTZDMTI4LjcwMiA0NS4xNjU2IDEyOC43MDIgMjQuNjI4MSAxMjYuMDI1IDE0Ljc4NDhaTTUxLjU2NzMgNjMuODEzVjI2LjUxOTlMODUuMDQwMSA0NS4xNjc0TDUxLjU2NzMgNjMuODEzWiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg==);
+  background-color: var(--hj_color_primary) !important;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: scale 0.3s ease-in-out;
+  will-change: transform;
+  filter: brightness(0) saturate(100%) invert(11%) sepia(81%) saturate(7497%) hue-rotate(12deg) brightness(95%) contrast(113%);
+}
+
 /*-------------------------------------------------
 >> Basic styles for Blog post
 -------------------------------------------------*/
@@ -7010,11 +7036,6 @@ ul.wc-block-components-totals-discount__coupon-list button.wc-block-components-c
 
 .form-details-section .details-images img {
   width: 100%;
-}
-
-.section-disable {
-  pointer-events: none !important;
-  opacity: 0.2;
 }
 
 .form-detail-section a,

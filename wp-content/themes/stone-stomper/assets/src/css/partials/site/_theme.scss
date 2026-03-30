@@ -1038,3 +1038,29 @@ body {
 		border: 0;
 	}
 }
+
+a.video-capture-measurement,
+a.video-capture-measurement:visited {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 12px;
+	border: 0;
+	padding: 0;
+	padding-left: 13px;
+
+	&::before {
+		content: "";
+		height: 24px;
+		width: 24px;
+		background-image: url(../images/youtube-play-icon.svg);
+		background-color: var(--hj_color_primary) !important;
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+		transition: scale 0.3s ease-in-out;
+		will-change: transform;
+		filter: brightness(0) saturate(100%) invert(11%) sepia(81%) saturate(7497%) hue-rotate(12deg) brightness(95%) contrast(113%);
+	}
+}

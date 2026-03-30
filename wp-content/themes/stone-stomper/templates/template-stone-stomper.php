@@ -48,6 +48,13 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 	$mesh_only_measurement_field_notice_text         = $sts_fields['mesh_only_measurement_field_notice_text'] ?? null;
 
 
+	// Final measurements Video
+
+	$sts_var_cptr_mrmnts_video_type 	   = $sts_fields['sts_var_cptr_mrmnts_video_type'] ?? null;
+	$sts_var_cptr_mrmnts_video_embed 	   = $sts_fields['sts_var_cptr_mrmnts_video_embed'] ?? null;
+	$sts_var_cptr_mrmnts_video_upload 	   = $sts_fields['sts_var_cptr_mrmnts_video_upload'] ?? null;
+
+
 	// Final measurements notices
 
 	$sts_var_notice_towing_vehicle_barwidth_mm         = $sts_fields['sts_var_notice_towing_vehicle_barwidth_mm'] ?? null;
@@ -575,6 +582,15 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											</div>
 										<?php } ?>
 									</div>
+									<?php if($sts_var_cptr_mrmnts_video_embed || $sts_var_cptr_mrmnts_video_upload){ ?>
+										<?php if($sts_var_cptr_mrmnts_video_type){ ?>
+											<?php if($sts_var_cptr_mrmnts_video_type === 'embed'){ ?>
+													<a class="popup-video video-capture-measurement" data-lity="true" href="<?php echo $sts_var_cptr_mrmnts_video_embed; ?>">Watch Mesurement Video</a><br>
+											<?php } elseif($sts_var_cptr_mrmnts_video_type === 'upload'){ ?>
+													<a class="popup-video video-capture-measurement" data-lity="true" href="<?php echo $sts_var_cptr_mrmnts_video_upload; ?>">Watch Mesurement Video</a><br>
+											<?php } ?>
+										<?php } ?>
+									<?php } ?>
 								</div>
 								<div class="form-section-right column" id="blk-measure">
 									<?php if($sts_var_section_head_notices) {
