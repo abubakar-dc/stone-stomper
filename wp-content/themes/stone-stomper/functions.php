@@ -1866,6 +1866,7 @@ function generate_customer_order_word_file($post_id) {
 		'cellMarginLeft' => 50,
 		'cellMarginRight' => 50
 	];
+
 	$measureRows = [
 		['SS Width (mm):', $caravan_width_mm],
 		['SS Length (mm):', $caravan_length_mm],
@@ -1894,7 +1895,6 @@ function generate_customer_order_word_file($post_id) {
 	$measureWrapper->addRow();
 	$measureLeftCell = $measureWrapper->addCell(5000, ['valign' => 'top']);
 	$measureRightCell = $measureWrapper->addCell(5000, ['valign' => 'top']);
-
 	$measureLeft = $measureLeftCell->addTable($measureStyle);
 	$measureRight = $measureRightCell->addTable($measureStyle);
 
@@ -1902,22 +1902,27 @@ function generate_customer_order_word_file($post_id) {
 	$leftRows = array_slice($measureRows, 0, $splitIndex);
 	$rightRows = array_slice($measureRows, $splitIndex);
 
-	$addMeasureRow = function ($table, $label, $value, $rowIndex) use ($cellGray) {
+	$leftLabelWidth = 8500;
+	$leftValueWidth = 1500;
+	$rightLabelWidth = 6000;
+	$rightValueWidth = 4000;
+
+	$addMeasureRow = function ($table, $label, $value, $rowIndex, $labelWidth, $valueWidth) use ($cellGray) {
 		$cellStyle = ($rowIndex % 2 === 0) ? $cellGray : [];
 		$row = $table->addRow(200);
-		$row->addCell(8500, $cellStyle)->addText($label, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-		$row->addCell(1500, $cellStyle)->addText($value, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+		$row->addCell($labelWidth, $cellStyle)->addText($label, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+		$row->addCell($valueWidth, $cellStyle)->addText($value, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	};
 
 	foreach ($leftRows as $i => $rowData) {
-		$addMeasureRow($measureLeft, $rowData[0], $rowData[1], $i);
+		$addMeasureRow($measureLeft, $rowData[0], $rowData[1], $i, $leftLabelWidth, $leftValueWidth);
 	}
 	foreach ($rightRows as $i => $rowData) {
-		$addMeasureRow($measureRight, $rowData[0], $rowData[1], $i);
+		$addMeasureRow($measureRight, $rowData[0], $rowData[1], $i, $rightLabelWidth, $rightValueWidth);
 	}
 	if (count($rightRows) < count($leftRows)) {
 		for ($i = count($rightRows); $i < count($leftRows); $i++) {
-			$addMeasureRow($measureRight, '', '', $i);
+			$addMeasureRow($measureRight, '', '', $i, $rightLabelWidth, $rightValueWidth);
 		}
 	}
 

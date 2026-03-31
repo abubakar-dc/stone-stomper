@@ -643,11 +643,11 @@ body {
 	height: 24px;
 	position: absolute;
 	right: 0;
-	background-image: url(../images/topbar-cross-icon.svg);
+	background-image: url(../images/white-cross-icon.svg);
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: 24px;
-	top: -54px;
+	top: -60px;
 	-webkit-appearance: none;
 	cursor: pointer;
 	text-decoration: none;
@@ -656,7 +656,7 @@ body {
 	border: 0;
 	outline: none;
 	background-color: transparent;
-	filter: invert(1);
+	margin: 0 !important;
 
 	&:hover {
 		background-color: transparent;
@@ -1049,18 +1049,37 @@ a.video-capture-measurement:visited {
 	border: 0;
 	padding: 0;
 	padding-left: 13px;
+}
 
-	&::before {
-		content: "";
-		height: 24px;
-		width: 24px;
-		background-image: url(../images/youtube-play-icon.svg);
-		background-color: var(--hj_color_primary) !important;
-		background-size: contain;
-		background-repeat: no-repeat;
-		background-position: center;
-		transition: scale 0.3s ease-in-out;
-		will-change: transform;
-		filter: brightness(0) saturate(100%) invert(11%) sepia(81%) saturate(7497%) hue-rotate(12deg) brightness(95%) contrast(113%);
+.video-capture-measurement {
+	margin-top: 24px;
+	margin-bottom: 24px;
+
+	a.button,
+	a.button:visited {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 16px;
+		width: 100%;
+		margin: 0;
+
+		&::before {
+			content: "";
+			display: inline-block;
+			height: 24px;
+			width: 24px;
+			background-image: url(../images/youtube-play-icon.svg);
+			background-color: var(--hj_color_primary) !important;
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-position: center;
+			transition: scale 0.3s ease-in-out;
+			will-change: transform;
+		}
+
+		&:hover::before {
+			filter: brightness(0) saturate(100%) invert(11%) sepia(81%) saturate(7497%) hue-rotate(12deg) brightness(95%) contrast(113%);
+		}
 	}
 }

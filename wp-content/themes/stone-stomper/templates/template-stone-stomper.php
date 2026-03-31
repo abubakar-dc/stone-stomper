@@ -50,9 +50,10 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 
 	// Final measurements Video
 
-	$sts_var_cptr_mrmnts_video_type 	   = $sts_fields['sts_var_cptr_mrmnts_video_type'] ?? null;
-	$sts_var_cptr_mrmnts_video_embed 	   = $sts_fields['sts_var_cptr_mrmnts_video_embed'] ?? null;
-	$sts_var_cptr_mrmnts_video_upload 	   = $sts_fields['sts_var_cptr_mrmnts_video_upload'] ?? null;
+	$sts_var_cptr_mrmnts_video_btn_text 	   	= $sts_fields['sts_var_cptr_mrmnts_video_btn_text'] ?? null;
+	$sts_var_cptr_mrmnts_video_type 	  		= $sts_fields['sts_var_cptr_mrmnts_video_type'] ?? null;
+	$sts_var_cptr_mrmnts_video_embed 	   		= $sts_fields['sts_var_cptr_mrmnts_video_embed'] ?? null;
+	$sts_var_cptr_mrmnts_video_upload 	   		= $sts_fields['sts_var_cptr_mrmnts_video_upload'] ?? null;
 
 
 	// Final measurements notices
@@ -582,19 +583,10 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											</div>
 										<?php } ?>
 									</div>
-									<?php if($sts_var_cptr_mrmnts_video_embed || $sts_var_cptr_mrmnts_video_upload){ ?>
-										<?php if($sts_var_cptr_mrmnts_video_type){ ?>
-											<?php if($sts_var_cptr_mrmnts_video_type === 'embed'){ ?>
-													<a class="popup-video video-capture-measurement" data-lity="true" href="<?php echo $sts_var_cptr_mrmnts_video_embed; ?>">Watch Mesurement Video</a><br>
-											<?php } elseif($sts_var_cptr_mrmnts_video_type === 'upload'){ ?>
-													<a class="popup-video video-capture-measurement" data-lity="true" href="<?php echo $sts_var_cptr_mrmnts_video_upload; ?>">Watch Mesurement Video</a><br>
-											<?php } ?>
-										<?php } ?>
-									<?php } ?>
 								</div>
 								<div class="form-section-right column" id="blk-measure">
 									<?php if($sts_var_section_head_notices) {
-										foreach($sts_var_section_head_notices as $sts_key => $notice){
+										foreach($sts_var_section_head_notices as $sts_key => $notice) {
 											$sts_var_headline = $notice['headline']??null;
 											$sts_var_text = $notice['text']??null;
 											if($sts_key === 4) { ?>
@@ -607,6 +599,17 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											<?php }
 										}
 									} ?>
+									<div class="video-capture-measurement">
+										<?php if($sts_var_cptr_mrmnts_video_embed || $sts_var_cptr_mrmnts_video_upload){ ?>
+											<?php if($sts_var_cptr_mrmnts_video_type){ ?>
+												<?php if($sts_var_cptr_mrmnts_video_type === 'embed'){ ?>
+														<a class="popup-video button" data-lity="true" href="<?php echo $sts_var_cptr_mrmnts_video_embed; ?>"><?php echo html_entity_decode($sts_var_cptr_mrmnts_video_btn_text); ?></a>
+												<?php } elseif($sts_var_cptr_mrmnts_video_type === 'upload'){ ?>
+														<a class="popup-video button" data-lity="true" href="<?php echo $sts_var_cptr_mrmnts_video_upload; ?>"><?php echo html_entity_decode($sts_var_cptr_mrmnts_video_btn_text); ?></a>
+												<?php } ?>
+											<?php } ?>
+										<?php } ?>
+									</div>
 									<div class="grid cols-2 measurements-images mobile-image example-photographs">
 										<?php
 											if($sts_var_measurements_image){

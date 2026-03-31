@@ -419,6 +419,27 @@
             "append": ""
         },
         {
+            "key": "field_69cbae21ca69c",
+            "label": "Video Button Text",
+            "name": "sts_var_cptr_mrmnts_video_btn_text",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "100",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_69ca3c5bd8d95",
             "label": "Video Type",
             "name": "sts_var_cptr_mrmnts_video_type",
@@ -925,5 +946,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1774863964
+    "modified": 1774956149
 }
