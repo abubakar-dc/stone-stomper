@@ -599,17 +599,23 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											<?php }
 										}
 									} ?>
-									<div class="video-capture-measurement">
-										<?php if($sts_var_cptr_mrmnts_video_embed || $sts_var_cptr_mrmnts_video_upload){ ?>
-											<?php if($sts_var_cptr_mrmnts_video_type){ ?>
-												<?php if($sts_var_cptr_mrmnts_video_type === 'embed'){ ?>
-														<a class="popup-video button" data-lity="true" href="<?php echo $sts_var_cptr_mrmnts_video_embed; ?>"><?php echo html_entity_decode($sts_var_cptr_mrmnts_video_btn_text); ?></a>
-												<?php } elseif($sts_var_cptr_mrmnts_video_type === 'upload'){ ?>
-														<a class="popup-video button" data-lity="true" href="<?php echo $sts_var_cptr_mrmnts_video_upload; ?>"><?php echo html_entity_decode($sts_var_cptr_mrmnts_video_btn_text); ?></a>
-												<?php } ?>
+									<?php
+									if (
+										($sts_var_cptr_mrmnts_video_type === 'embed' && !empty($sts_var_cptr_mrmnts_video_embed)) ||
+										($sts_var_cptr_mrmnts_video_type === 'upload' && !empty($sts_var_cptr_mrmnts_video_upload))
+									) { ?>
+										<div class="video-capture-measurement">
+											<?php if ($sts_var_cptr_mrmnts_video_type === 'embed') { ?>
+												<a class="popup-video button" data-lity="true" href="<?php echo $sts_var_cptr_mrmnts_video_embed; ?>">
+													<?php echo html_entity_decode($sts_var_cptr_mrmnts_video_btn_text); ?>
+												</a>
+											<?php } elseif ($sts_var_cptr_mrmnts_video_type === 'upload') { ?>
+												<a class="popup-video button" data-lity="true" href="<?php echo $sts_var_cptr_mrmnts_video_upload; ?>">
+													<?php echo html_entity_decode($sts_var_cptr_mrmnts_video_btn_text); ?>
+												</a>
 											<?php } ?>
-										<?php } ?>
-									</div>
+										</div>
+									<?php } ?>
 									<div class="grid cols-2 measurements-images mobile-image example-photographs">
 										<?php
 											if($sts_var_measurements_image){
