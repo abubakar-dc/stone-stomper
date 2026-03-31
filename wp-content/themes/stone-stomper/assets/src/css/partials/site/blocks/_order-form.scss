@@ -9,9 +9,11 @@
 		}
 	}
 }
+
 .slider-image {
 	max-height: 483px;
 }
+
 .vehicle-images {
 	display: flex;
 }
@@ -28,10 +30,10 @@
 	}
 }
 
-// .section-disable {
-// 	pointer-events: none !important;
-// 	opacity: 0.2;
-// }
+.section-disable {
+	pointer-events: none !important;
+	opacity: 0.2;
+}
 
 .form-detail-section {
 	a,
