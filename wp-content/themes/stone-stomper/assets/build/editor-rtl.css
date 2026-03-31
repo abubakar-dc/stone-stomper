@@ -6961,6 +6961,16 @@ Mixin for transition
   }
 }
 @media only screen and (min-width: 1180px) and (max-width: 1345px) {
+  .editor-styles-wrapper .video-capture-measurement a.button,
+  .editor-styles-wrapper .video-capture-measurement a.button:visited {
+    gap: 10px;
+  }
+  .editor-styles-wrapper a.button, .editor-styles-wrapper a.button:visited, .editor-styles-wrapper span.button, .editor-styles-wrapper .is-style-mycustomstyle .wp-element-button {
+    padding-right: 20px;
+    padding-left: 20px;
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
   .editor-styles-wrapper .legal-nav {
     width: 43%;
   }
@@ -6985,6 +6995,16 @@ Mixin for transition
   }
 }
 @media only screen and (min-width: 1004px) and (max-width: 1179px) {
+  .editor-styles-wrapper .video-capture-measurement a.button,
+  .editor-styles-wrapper .video-capture-measurement a.button:visited {
+    gap: 10px;
+  }
+  .editor-styles-wrapper a.button, .editor-styles-wrapper a.button:visited, .editor-styles-wrapper span.button, .editor-styles-wrapper .is-style-mycustomstyle .wp-element-button {
+    padding-right: 20px;
+    padding-left: 20px;
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
   .editor-styles-wrapper .nav-overlay .header-nav ul {
     margin-top: 20px;
   }
@@ -7128,6 +7148,16 @@ Mixin for transition
   }
 }
 @media only screen and (max-width: 1003px) {
+  .editor-styles-wrapper .video-capture-measurement a.button,
+  .editor-styles-wrapper .video-capture-measurement a.button:visited {
+    gap: 10px;
+  }
+  .editor-styles-wrapper a.button, .editor-styles-wrapper a.button:visited, .editor-styles-wrapper span.button, .editor-styles-wrapper .is-style-mycustomstyle .wp-element-button {
+    padding-right: 20px;
+    padding-left: 20px;
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
   .editor-styles-wrapper .error-page-hero {
     padding-top: 170px;
   }

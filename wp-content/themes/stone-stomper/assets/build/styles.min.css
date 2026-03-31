@@ -7654,6 +7654,16 @@ ul.wc-block-components-totals-discount__coupon-list button.wc-block-components-c
   }
 }
 @media only screen and (min-width: 1180px) and (max-width: 1345px) {
+  .video-capture-measurement a.button,
+  .video-capture-measurement a.button:visited {
+    gap: 10px;
+  }
+  a.button, a.button:visited, span.button, .is-style-mycustomstyle .wp-element-button {
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
   .legal-nav {
     width: 43%;
   }
@@ -7678,6 +7688,16 @@ ul.wc-block-components-totals-discount__coupon-list button.wc-block-components-c
   }
 }
 @media only screen and (min-width: 1004px) and (max-width: 1179px) {
+  .video-capture-measurement a.button,
+  .video-capture-measurement a.button:visited {
+    gap: 10px;
+  }
+  a.button, a.button:visited, span.button, .is-style-mycustomstyle .wp-element-button {
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
   .nav-overlay .header-nav ul {
     margin-top: 20px;
   }
@@ -7821,6 +7841,16 @@ ul.wc-block-components-totals-discount__coupon-list button.wc-block-components-c
   }
 }
 @media only screen and (max-width: 1003px) {
+  .video-capture-measurement a.button,
+  .video-capture-measurement a.button:visited {
+    gap: 10px;
+  }
+  a.button, a.button:visited, span.button, .is-style-mycustomstyle .wp-element-button {
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
   .error-page-hero {
     padding-top: 170px;
   }
