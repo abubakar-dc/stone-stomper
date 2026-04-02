@@ -1802,10 +1802,10 @@ function generate_customer_order_word_file($post_id) {
 
 	// Fourth Section: Custom Order Notes
 
-    $section->addText("Customer Notes:", ['bold' => true]);
+    $section->addText("ORDER CHECKOUT NOTES:", ['bold' => true]);
     $section->addText($sts_var_order_notes, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$section->addText('');
-    $section->addText("CUSTOMER ORDER NOTES:", ['bold' => true]);
+    $section->addText("SS ORDER NOTES:", ['bold' => true]);
     $section->addText($order_notes, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$section->addPageBreak();
 
@@ -1927,7 +1927,7 @@ function generate_customer_order_word_file($post_id) {
 	}
 
 	$section->addTextBreak(1);
-	$section->addText("CUSTOMER ORDER NOTES:", ['bold' => true]);
+	$section->addText("SS ORDER NOTES:", ['bold' => true]);
     $section->addText($order_notes, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 
     // Save file
@@ -2944,12 +2944,11 @@ function sts_materialize_customer_cpt( $order_id ) {
 	if ($front_images) {
 		update_post_meta($post_id, 'front_images', $front_images);
 	}
-	// Standard Order Notes
-	update_post_meta( $post_id, 'order_notes', sanitize_text_field( $data['order_notes'] ?? '' ) );
 
     if ( $caravan_width > 2450 || $a_frame > 2300 ) {
         update_post_meta( $post_id, 'sts_var_caravan_eyelet_tab', 'Yes' );
     }
+
     if ( $barwidth > 2150 ) {
         update_post_meta( $post_id, 'extra_bungee', 'Yes' );
     }
@@ -3047,6 +3046,8 @@ function sts_materialize_customer_cpt( $order_id ) {
 		}
 	}
 	update_post_meta( $post_id, 'sleeve', $sleeve );
+	// Standard Order Notes
+	update_post_meta( $post_id, 'order_notes', sanitize_text_field( $data['order_notes'] ?? '' ) );
     if ( $order->get_user_id() ) {
         update_post_meta( $post_id, '_customer_user_id', $order->get_user_id() );
     }
@@ -3118,14 +3119,11 @@ add_action('woocommerce_after_order_itemmeta', function ($item_id, $item, $produ
     ];
 
     foreach ($sections as $title => $fields) {
-
         $parts = [];
-
         foreach ($fields as $key => $label) {
             if (empty($data[$key])) continue;
             $parts[] = '<strong>' . esc_html($label) . ':</strong> ' . esc_html($data[$key]);
         }
-
         if ($parts) {
             echo '<p><em>' . esc_html($title) . '</em> — ' . implode(' | ', $parts) . '</p>';
         }
