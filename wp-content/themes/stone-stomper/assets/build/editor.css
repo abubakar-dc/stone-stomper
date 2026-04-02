@@ -3777,7 +3777,7 @@ Mixin for transition
   display: none;
 }
 .editor-styles-wrapper .lity {
-  z-index: 9990;
+  z-index: 99999;
   position: fixed;
   top: 0;
   right: 0;
