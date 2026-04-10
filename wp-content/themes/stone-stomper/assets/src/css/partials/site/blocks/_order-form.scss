@@ -30,9 +30,18 @@
 	}
 }
 
-.section-disable {
-	pointer-events: none !important;
-	opacity: 0.2;
+// .section-disable {
+// 	pointer-events: none !important;
+// 	opacity: 0.2;
+// }
+
+.wc-block-components-product-image {
+	line-height: 0.65;
+	a,
+	a:visited {
+		border: 0;
+		padding: 0;
+	}
 }
 
 .form-detail-section {
