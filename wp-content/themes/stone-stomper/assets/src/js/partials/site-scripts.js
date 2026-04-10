@@ -783,33 +783,161 @@ jQuery( function() {
 		}
 	} );
 
+	const normalizeBarText = ( text ) => String( text || '' ).toLowerCase().replace( /\s+/g, ' ' ).trim();
+
+	const setMeasurementVisibility = ( mode ) => {
+		const showOptionTwo = mode === 'option2';
+		const showOptionThree = mode === 'option3';
+
+		jQuery( '.option-two-description, .option-three-description' ).hide();
+
+		if ( showOptionTwo || showOptionThree ) {
+			jQuery( '.hitch_measurement_dropdown' ).slideDown();
+			if ( showOptionTwo ) {
+				jQuery( '#option-two-description' ).slideDown();
+			}
+			if ( showOptionThree ) {
+				jQuery( '#option-three-description' ).slideDown();
+			}
+		} else {
+			jQuery( '.hitch_measurement_dropdown' ).slideUp();
+			jQuery( '#additional_hitch_measurement' ).val( '' );
+		}
+	};
+
+	const detectMeasurementMode = ( selectedText ) => {
+		const text = normalizeBarText( selectedText );
+
+		if ( text.includes( 'option 2' ) && text.includes( 'post' ) ) {
+			return 'option2';
+		}
+
+		if ( text.includes( 'option 3' ) ) {
+			return 'option3';
+		}
+
+		return '';
+	};
+
+	const resolveBarOptionByOutcome = ( outcome ) => {
+		const outcomesMap = {
+			adjustable_option_3: [ [ 'option 3', 'adjust' ], [ 'option 3' ] ],
+			adjustable_option_2_post: [ [ 'option 2', 'post' ], [ 'option 2' ] ],
+			option_1_angle_large: [ [ 'option 1', 'angle', 'large' ], [ 'option 1' ] ],
+			cut_out_angle: [ [ 'cut out', 'angle' ], [ 'cut out' ] ],
+		};
+
+		const patterns = outcomesMap[ outcome ] || [];
+		const $options = jQuery( '#bar_options option' ).filter( function() {
+			return jQuery( this ).val() !== '';
+		} );
+
+		for ( let i = 0; i < patterns.length; i++ ) {
+			const terms = patterns[ i ];
+			const matched = $options.filter( function() {
+				const txt = normalizeBarText( jQuery( this ).text() );
+				return terms.every( ( term ) => txt.includes( term ) );
+			} ).first();
+
+			if ( matched.length ) {
+				return matched;
+			}
+		}
+
+		return jQuery();
+	};
+
+	const setBarOutcome = ( outcome, label, showMeasurement ) => {
+		const $matchedOption = resolveBarOptionByOutcome( outcome );
+		const $result = jQuery( '#bar-options-result' );
+
+		if ( $matchedOption.length ) {
+			jQuery( '#bar_options' ).val( $matchedOption.val() ).trigger( 'change' );
+			$result.html( '<strong>Selected:</strong> ' + label ).show();
+		} else {
+			jQuery( '#bar_options' ).val( '' ).trigger( 'change' );
+			$result.html( '<strong>No matching Bar Option found.</strong> Please review bar options in admin.' ).show();
+		}
+
+		setMeasurementVisibility( showMeasurement ? showMeasurement : '' );
+	};
+
+	const toggleQuestion = ( selector, shouldShow ) => {
+		const $field = jQuery( selector );
+		const $select = $field.find( 'select' );
+
+		if ( shouldShow ) {
+			$field.show();
+			$select.prop( 'required', true );
+			return;
+		}
+
+		$field.hide();
+		$select.prop( 'required', false ).val( '' );
+	};
+
+	const evaluateBarDecisionTree = () => {
+		const shank41 = jQuery( '#bar_q_shank_41' ).val();
+		const do35 = jQuery( '#bar_q_do35_do45' ).val();
+		const adjustable = jQuery( '#bar_q_adjustable_hitch' ).val();
+		const tongue85 = jQuery( '#bar_q_tongue_85' ).val();
+
+		toggleQuestion( '.bar-q-do35', shank41 === 'no' );
+		toggleQuestion( '.bar-q-adjustable', shank41 === 'no' && do35 === 'no' );
+		toggleQuestion( '.bar-q-tongue', shank41 === 'no' && do35 === 'yes' );
+
+		if ( shank41 === 'yes' ) {
+			setBarOutcome( 'adjustable_option_3', 'Adjustable Option 3', 'option3' );
+			return;
+		}
+
+		if ( shank41 !== 'no' ) {
+			jQuery( '#bar-options-result' ).hide();
+			jQuery( '#bar_options' ).val( '' ).trigger( 'change' );
+			setMeasurementVisibility( '' );
+			return;
+		}
+
+		if ( do35 === 'yes' && tongue85 === 'yes' ) {
+			setBarOutcome( 'option_1_angle_large', 'Option 1 Angle - Large', '' );
+			return;
+		}
+
+		if ( do35 === 'yes' && tongue85 === 'no' ) {
+			setBarOutcome( 'cut_out_angle', 'Cut out Angle', '' );
+			return;
+		}
+
+		if ( do35 === 'no' && adjustable === 'yes' ) {
+			setBarOutcome( 'adjustable_option_2_post', 'Adjustable Option 2 Post', 'option2' );
+			return;
+		}
+
+		if ( do35 === 'no' && adjustable === 'no' ) {
+			jQuery( '#bar-options-result' ).html( '<strong>No bar option selected.</strong> Please contact our team for a custom setup.' ).show();
+			jQuery( '#bar_options' ).val( '' ).trigger( 'change' );
+			setMeasurementVisibility( '' );
+			return;
+		}
+
+		jQuery( '#bar-options-result' ).hide();
+		jQuery( '#bar_options' ).val( '' ).trigger( 'change' );
+		setMeasurementVisibility( '' );
+	};
+
 	jQuery( '#bar_options' ).on( 'change', function() {
 		const $select = jQuery( this );
 		const selectedText = $select.val();
 		const selectedOption = $select.find( 'option:selected' );
 		const fixedValue = parseInt( selectedOption.data( 'value' ) ) || 0;
-
-		const optionTwo = 'Option 2 Standard Post';
-		const optionThree = [
-			'Option 3 Standard Shank',
-			'Option 3 Adjustable Shank',
-		];
-
-		jQuery( '.option-two-description, .option-three-description' ).hide();
+		const mode = detectMeasurementMode( selectedText );
 
 		jQuery( '#bar_option_value' ).val( fixedValue || '' );
-
-		if ( selectedText === optionTwo ) {
-			jQuery( '.hitch_measurement_dropdown' ).slideDown();
-			jQuery( '#option-two-description' ).slideDown();
-		} else if ( optionThree.includes( selectedText ) ) {
-			jQuery( '.hitch_measurement_dropdown' ).slideDown();
-			jQuery( '#option-three-description' ).slideDown();
-		} else {
-			jQuery( '.hitch_measurement_dropdown' ).slideUp();
-			jQuery( '#additional_hitch_measurement' ).val( '' );
-		}
+		setMeasurementVisibility( mode );
 	} );
+
+	jQuery( '#bar_q_shank_41, #bar_q_do35_do45, #bar_q_adjustable_hitch, #bar_q_tongue_85' ).on( 'change', evaluateBarDecisionTree );
+	evaluateBarDecisionTree();
 
 	jQuery( '#final_address' ).on( 'change', function() {
 		if ( jQuery( this ).val() === 'move' ) {

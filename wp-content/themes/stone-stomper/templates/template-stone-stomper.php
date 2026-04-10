@@ -439,7 +439,42 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 									<?php if($sts_var_section_bar_options_bar_options){ ?>
 										<div class="grid cols-2 ">
 											<div class="field">
-												<select id="bar_options" name="bar_options" required>
+												<label class="req" for="bar_q_shank_41">Do you have greater than 41mm on your shank?</label>
+												<select id="bar_q_shank_41" name="bar_q_shank_41" required>
+													<option value="">Select</option>
+													<option value="yes">Yes</option>
+													<option value="no">No</option>
+												</select>
+											</div>
+											<div class="field bar-question bar-q-do35" style="display:none;">
+												<label class="req" for="bar_q_do35_do45">Do you have a DO35 or DO45 hitch?</label>
+												<select id="bar_q_do35_do45" name="bar_q_do35_do45">
+													<option value="">Select</option>
+													<option value="yes">Yes</option>
+													<option value="no">No</option>
+												</select>
+											</div>
+											<div class="field bar-question bar-q-adjustable" style="display:none;">
+												<label class="req" for="bar_q_adjustable_hitch">Do you have an Adjustable Hitch?</label>
+												<select id="bar_q_adjustable_hitch" name="bar_q_adjustable_hitch">
+													<option value="">Select</option>
+													<option value="yes">Yes</option>
+													<option value="no">No</option>
+												</select>
+											</div>
+											<div class="field bar-question bar-q-tongue" style="display:none;">
+												<label class="req" for="bar_q_tongue_85">Do you have 85mm on your tongue?</label>
+												<select id="bar_q_tongue_85" name="bar_q_tongue_85">
+													<option value="">Select</option>
+													<option value="yes">Yes</option>
+													<option value="no">No</option>
+												</select>
+											</div>
+											<div class="field">
+												<div id="bar-options-result" class="note notice-bar mt-0" style="display:none;"></div>
+											</div>
+											<div class="field">
+												<select id="bar_options" name="bar_options" style="display:none;">
 													<option value="">Select Bar Option</option>
 													<?php foreach ( $sts_var_section_bar_options_bar_options as $option ) {
 														$single_bar_option = $option['add_option'];
