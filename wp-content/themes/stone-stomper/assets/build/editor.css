@@ -6066,13 +6066,8 @@ Mixin for transition
   background-color: #f7f7f7;
 }
 .editor-styles-wrapper label.question-label {
-  max-width: 70%;
+  max-width: 100%;
   word-wrap: break-word;
-  display: inline-block;
-  margin-right: 15px;
-}
-.editor-styles-wrapper .field select {
-  width: 30%;
   display: inline-block;
 }
 .editor-styles-wrapper .wp-block-button .wp-block-button__link {

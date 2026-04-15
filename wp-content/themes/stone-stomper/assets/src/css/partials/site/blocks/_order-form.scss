@@ -534,15 +534,7 @@
 }
 
 label.question-label {
-	max-width: 70%;
+	max-width: 100%;
 	word-wrap: break-word;
 	display: inline-block;
-	margin-right: 15px;
-}
-
-.field {
-	select {
-		width: 30%;
-		display: inline-block;
-	}
 }
