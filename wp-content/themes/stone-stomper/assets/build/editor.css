@@ -6043,6 +6043,33 @@ Mixin for transition
   left: 16px;
   top: 16px;
 }
+.editor-styles-wrapper #bar-question-image-container {
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+.editor-styles-wrapper #bar-question-image-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-height: 483px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  background-color: #f7f7f7;
+}
+.editor-styles-wrapper .bar-q-image {
+  width: 100%;
+  height: auto;
+  max-height: 483px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  background-color: #f7f7f7;
+}
+.editor-styles-wrapper label.question-label {
+  max-width: 70%;
+  word-wrap: break-word;
+  display: inline-block;
+}
 .editor-styles-wrapper .wp-block-button .wp-block-button__link {
   box-sizing: border-box;
   position: relative;

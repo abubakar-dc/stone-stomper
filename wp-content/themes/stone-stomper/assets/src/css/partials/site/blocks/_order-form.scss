@@ -509,3 +509,32 @@
 		}
 	}
 }
+
+#bar-question-image-container {
+	width: 100%;
+	height: auto;
+	margin-bottom: 20px;
+
+	img {
+		width: 100%;
+		height: auto;
+		display: block;
+		max-height: 483px;
+		object-fit: cover;
+		background-color: #f7f7f7;
+	}
+}
+
+.bar-q-image {
+	width: 100%;
+	height: auto;
+	max-height: 483px;
+	object-fit: cover;
+	background-color: #f7f7f7;
+}
+
+label.question-label {
+	max-width: 70%;
+	word-wrap: break-word;
+	display: inline-block;
+}

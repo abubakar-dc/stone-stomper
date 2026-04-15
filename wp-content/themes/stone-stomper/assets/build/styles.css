@@ -7465,6 +7465,36 @@ ul.wc-block-components-totals-discount__coupon-list button.wc-block-components-c
   top: 16px;
 }
 
+#bar-question-image-container {
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+#bar-question-image-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-height: 483px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  background-color: #f7f7f7;
+}
+
+.bar-q-image {
+  width: 100%;
+  height: auto;
+  max-height: 483px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  background-color: #f7f7f7;
+}
+
+label.question-label {
+  max-width: 70%;
+  word-wrap: break-word;
+  display: inline-block;
+}
+
 /*-------------------------------------------------
 >> Styles for Wp Buttons
 -------------------------------------------------*/
