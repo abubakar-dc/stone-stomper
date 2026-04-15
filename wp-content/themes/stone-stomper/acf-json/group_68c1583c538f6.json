@@ -940,7 +940,7 @@
                             "name": "bar_option_value",
                             "aria-label": "",
                             "type": "text",
-                            "instructions": "The bar option value for this question",
+                            "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
@@ -1026,7 +1026,7 @@
                             "name": "bar_option_value",
                             "aria-label": "",
                             "type": "text",
-                            "instructions": "The bar option value for this question",
+                            "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
@@ -1112,7 +1112,7 @@
                             "name": "bar_option_value",
                             "aria-label": "",
                             "type": "text",
-                            "instructions": "The bar option value for this question",
+                            "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
@@ -1198,7 +1198,7 @@
                             "name": "bar_option_value",
                             "aria-label": "",
                             "type": "text",
-                            "instructions": "The bar option value for this question",
+                            "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
