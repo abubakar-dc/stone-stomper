@@ -870,6 +870,23 @@ jQuery( function() {
 		setMeasurementVisibility( '' );
 	};
 
+	// Show/hide hitch measurement field based on Q1 or Q3 answers
+	const updateHitchMeasurementVisibility = () => {
+		const shank41 = jQuery( '#bar_q_shank_41' ).val();
+		const adjustable = jQuery( '#bar_q_adjustable_hitch' ).val();
+		const $measurementField = jQuery( '.hitch_measurement_dropdown' );
+		const $input = jQuery( '#additional_hitch_measurement' );
+
+		// Show field if Q1=yes OR Q3=yes
+		if ( shank41 === 'yes' || adjustable === 'yes' ) {
+			$measurementField.slideDown();
+			$input.prop( 'required', false ); // Not required
+		} else {
+			$measurementField.slideUp();
+			$input.prop( 'required', false ).val( '' ); // Clear value when hidden
+		}
+	};
+
 	const toggleQuestion = ( selector, shouldShow ) => {
 		const $field = jQuery( selector );
 		const $select = $field.find( 'select' );
@@ -1008,8 +1025,12 @@ jQuery( function() {
 		setMeasurementVisibility( mode );
 	} );
 
-	jQuery( '#bar_q_shank_41, #bar_q_do35_do45, #bar_q_adjustable_hitch, #bar_q_tongue_85' ).on( 'change', evaluateBarDecisionTree );
+	jQuery( '#bar_q_shank_41, #bar_q_do35_do45, #bar_q_adjustable_hitch, #bar_q_tongue_85' ).on( 'change', function() {
+		evaluateBarDecisionTree();
+		updateHitchMeasurementVisibility();
+	} );
 	evaluateBarDecisionTree();
+	updateHitchMeasurementVisibility();
 	handleBarQuestionImageDisplay();
 
 	// Auto-populate hitch measurement from selected question
