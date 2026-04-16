@@ -3003,9 +3003,16 @@ function sts_materialize_customer_cpt( $order_id ) {
         update_post_meta( $post_id, 'sts_var_caravan_ss_length_adj', '-120' );
     } else {
         update_post_meta( $post_id, 'sts_var_caravan_bar_option', sanitize_text_field( $data['bar_options'] ?? '' ) );
+        
+        // Debug: Log all question-related fields in payload
+        error_log('DEBUG - All payload keys: ' . print_r(array_keys($data), true));
+        error_log('DEBUG - question_bar_option_value in payload: ' . print_r($data['question_bar_option_value'] ?? 'NOT FOUND', true));
+        
         if ( ! empty( $data['question_bar_option_value'] ) ) {
             update_post_meta( $post_id, 'sts_var_question_bar_option_value', sanitize_text_field( $data['question_bar_option_value'] ) );
-            error_log('Question Bar Option Value saved: ' . $data['question_bar_option_value']);
+            error_log('✓ Question Bar Option Value SAVED: ' . $data['question_bar_option_value']);
+        } else {
+            error_log('✗ Question Bar Option Value NOT SAVED - field is empty or missing');
         }
     }
 
