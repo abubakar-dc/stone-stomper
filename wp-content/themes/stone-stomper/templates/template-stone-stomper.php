@@ -507,6 +507,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 													<?php } ?>
 												</select>
 												<input type="hidden" name="bar_option_value" id="bar_option_value" value="">
+												<input type="hidden" name="sts_var_caravan_bar_option" id="sts_var_caravan_bar_option" value="">
 											</div>
 											<fieldset class="hitch_measurement_dropdown" style="display:none">
 												<?php if($sts_var_section_bar_options_description_option_two){ ?>

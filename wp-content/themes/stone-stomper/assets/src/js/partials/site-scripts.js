@@ -977,6 +977,7 @@ jQuery( function() {
 		const mode = detectMeasurementMode( selectedText );
 
 		jQuery( '#bar_option_value' ).val( fixedValue || '' );
+		jQuery( '#sts_var_caravan_bar_option' ).val( selectedText || '' );
 		setMeasurementVisibility( mode );
 	} );
 
