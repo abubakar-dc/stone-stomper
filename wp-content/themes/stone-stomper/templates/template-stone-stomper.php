@@ -58,21 +58,25 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 	$sts_var_bar_question_1_label = $sts_var_bar_question_1['label'] ?? 'Do you have greater than 41mm on your shank?';
 	$sts_var_bar_question_1_image = $sts_var_bar_question_1['image'] ?? null;
 	$sts_var_bar_question_1_image_url = $sts_var_bar_question_1_image ? wp_get_attachment_image_url($sts_var_bar_question_1_image, 'full') : '';
+	$sts_var_bar_question_1_hitch_measurement = $sts_var_bar_question_1['hitch_measurement'] ?? null;
 
 	// Question 2
 	$sts_var_bar_question_2_label = $sts_var_bar_question_2['label'] ?? 'Do you have a DO35 or DO45 hitch?';
 	$sts_var_bar_question_2_image = $sts_var_bar_question_2['image'] ?? null;
 	$sts_var_bar_question_2_image_url = $sts_var_bar_question_2_image ? wp_get_attachment_image_url($sts_var_bar_question_2_image, 'full') : '';
+	$sts_var_bar_question_2_hitch_measurement = $sts_var_bar_question_2['hitch_measurement'] ?? null;
 
 	// Question 3
 	$sts_var_bar_question_3_label = $sts_var_bar_question_3['label'] ?? 'Do you have an Adjustable Hitch?';
 	$sts_var_bar_question_3_image = $sts_var_bar_question_3['image'] ?? null;
 	$sts_var_bar_question_3_image_url = $sts_var_bar_question_3_image ? wp_get_attachment_image_url($sts_var_bar_question_3_image, 'full') : '';
+	$sts_var_bar_question_3_hitch_measurement = $sts_var_bar_question_3['hitch_measurement'] ?? null;
 
 	// Question 4
 	$sts_var_bar_question_4_label = $sts_var_bar_question_4['label'] ?? 'Do you have 85mm on your tongue?';
 	$sts_var_bar_question_4_image = $sts_var_bar_question_4['image'] ?? null;
 	$sts_var_bar_question_4_image_url = $sts_var_bar_question_4_image ? wp_get_attachment_image_url($sts_var_bar_question_4_image, 'full') : '';
+	$sts_var_bar_question_4_hitch_measurement = $sts_var_bar_question_4['hitch_measurement'] ?? null;
 
 
 	// Final measurements Video
@@ -456,10 +460,10 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										} ?>
 									</div>
 									<?php if($sts_var_section_bar_options_bar_options){ ?>
-										<div class="grid cols-2 ">
+										<div class="grid cols-2 " data-q1-hitch="<?php echo esc_attr($sts_var_bar_question_1_hitch_measurement); ?>" data-q2-hitch="<?php echo esc_attr($sts_var_bar_question_2_hitch_measurement); ?>" data-q3-hitch="<?php echo esc_attr($sts_var_bar_question_3_hitch_measurement); ?>" data-q4-hitch="<?php echo esc_attr($sts_var_bar_question_4_hitch_measurement); ?>">
 											<div class="field">
 												<label class="req question-label" for="bar_q_shank_41"><?php echo esc_html( $sts_var_bar_question_1_label ); ?></label>
-												<select id="bar_q_shank_41" name="bar_q_shank_41" required data-question="1">
+												<select id="bar_q_shank_41" name="bar_q_shank_41" required data-question="1" data-hitch-measurement="<?php echo esc_attr($sts_var_bar_question_1_hitch_measurement); ?>">
 													<option value="">Select</option>
 													<option value="yes">Yes</option>
 													<option value="no">No</option>
@@ -467,7 +471,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											</div>
 											<div class="field bar-question bar-q-do35" style="display:none;">
 												<label class="req question-label" for="bar_q_do35_do45"><?php echo esc_html( $sts_var_bar_question_2_label ); ?></label>
-												<select id="bar_q_do35_do45" name="bar_q_do35_do45" data-question="2">
+												<select id="bar_q_do35_do45" name="bar_q_do35_do45" data-question="2" data-hitch-measurement="<?php echo esc_attr($sts_var_bar_question_2_hitch_measurement); ?>">
 													<option value="">Select</option>
 													<option value="yes">Yes</option>
 													<option value="no">No</option>
@@ -475,7 +479,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											</div>
 											<div class="field bar-question bar-q-adjustable" style="display:none;">
 												<label class="req question-label" for="bar_q_adjustable_hitch"><?php echo esc_html( $sts_var_bar_question_3_label ); ?></label>
-												<select id="bar_q_adjustable_hitch" name="bar_q_adjustable_hitch" data-question="3">
+												<select id="bar_q_adjustable_hitch" name="bar_q_adjustable_hitch" data-question="3" data-hitch-measurement="<?php echo esc_attr($sts_var_bar_question_3_hitch_measurement); ?>">
 													<option value="">Select</option>
 													<option value="yes">Yes</option>
 													<option value="no">No</option>
@@ -483,7 +487,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											</div>
 											<div class="field bar-question bar-q-tongue" style="display:none;">
 												<label class="req question-label" for="bar_q_tongue_85"><?php echo esc_html( $sts_var_bar_question_4_label ); ?></label>
-												<select id="bar_q_tongue_85" name="bar_q_tongue_85" data-question="4">
+												<select id="bar_q_tongue_85" name="bar_q_tongue_85" data-question="4" data-hitch-measurement="<?php echo esc_attr($sts_var_bar_question_4_hitch_measurement); ?>">
 													<option value="">Select</option>
 													<option value="yes">Yes</option>
 													<option value="no">No</option>
