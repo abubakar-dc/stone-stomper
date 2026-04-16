@@ -870,26 +870,6 @@ jQuery( function() {
 		setMeasurementVisibility( '' );
 	};
 
-	const displayQuestionValues = ( questionId, barOptionValue, hitchMeasurement ) => {
-		const $result = jQuery( '#bar-options-result' );
-		let displayHTML = '';
-
-		// Add bar option value if available
-		if ( barOptionValue ) {
-			displayHTML += '<strong>Bar Option Value:</strong> ' + barOptionValue;
-		}
-
-		// Add hitch measurement if available
-		if ( hitchMeasurement ) {
-			if ( displayHTML ) {
-				displayHTML += '  ';
-			}
-			displayHTML += '<strong>Hitch Measurement (mm):</strong> ' + hitchMeasurement;
-		}
-
-		$result.html( displayHTML ).show();
-	};
-
 	const toggleQuestion = ( selector, shouldShow ) => {
 		const $field = jQuery( selector );
 		const $select = $field.find( 'select' );
@@ -919,7 +899,6 @@ jQuery( function() {
 			const q1BarOptionValue = jQuery( '#bar_q_shank_41' ).data( 'bar-option-value' );
 			const q1HitchMeasurement = jQuery( '#bar_q_shank_41' ).data( 'hitch-measurement' );
 			const q1Label = jQuery( '#bar_q_shank_41 option:selected' ).text() || 'Shank Option';
-			displayQuestionValues( '#bar_q_shank_41', q1BarOptionValue, q1HitchMeasurement );
 			jQuery( '#question_bar_option_value' ).val( q1BarOptionValue );
 			jQuery( '#additional_hitch_measurement' ).val( q1HitchMeasurement );
 			setBarOutcome( 'question_1_option', q1Label, q1BarOptionValue );
@@ -927,7 +906,6 @@ jQuery( function() {
 		}
 
 		if ( shank41 !== 'no' ) {
-			jQuery( '#bar-options-result' ).hide();
 			jQuery( '#bar_options' ).val( '' ).trigger( 'change' );
 			setMeasurementVisibility( '' );
 			return;
@@ -938,7 +916,6 @@ jQuery( function() {
 			const q4BarOptionValue = jQuery( '#bar_q_tongue_85' ).data( 'bar-option-value' );
 			const q4HitchMeasurement = jQuery( '#bar_q_tongue_85' ).data( 'hitch-measurement' );
 			const q4Label = jQuery( '#bar_q_tongue_85 option:selected' ).text() || 'Tongue Option';
-			displayQuestionValues( '#bar_q_tongue_85', q4BarOptionValue, q4HitchMeasurement );
 			jQuery( '#question_bar_option_value' ).val( q4BarOptionValue );
 			jQuery( '#additional_hitch_measurement' ).val( q4HitchMeasurement );
 			setBarOutcome( 'question_4_option', q4Label, q4BarOptionValue );
@@ -950,7 +927,6 @@ jQuery( function() {
 			const q2BarOptionValue = jQuery( '#bar_q_do35_do45' ).data( 'bar-option-value' );
 			const q2HitchMeasurement = jQuery( '#bar_q_do35_do45' ).data( 'hitch-measurement' );
 			const q2Label = jQuery( '#bar_q_do35_do45 option:selected' ).text() || 'DO35 Option';
-			displayQuestionValues( '#bar_q_do35_do45', q2BarOptionValue, q2HitchMeasurement );
 			jQuery( '#question_bar_option_value' ).val( q2BarOptionValue );
 			jQuery( '#additional_hitch_measurement' ).val( q2HitchMeasurement );
 			setBarOutcome( 'question_2_option', q2Label, q2BarOptionValue );
@@ -962,7 +938,6 @@ jQuery( function() {
 			const q3BarOptionValue = jQuery( '#bar_q_adjustable_hitch' ).data( 'bar-option-value' );
 			const q3HitchMeasurement = jQuery( '#bar_q_adjustable_hitch' ).data( 'hitch-measurement' );
 			const q3Label = jQuery( '#bar_q_adjustable_hitch option:selected' ).text() || 'Adjustable Option';
-			displayQuestionValues( '#bar_q_adjustable_hitch', q3BarOptionValue, q3HitchMeasurement );
 			jQuery( '#question_bar_option_value' ).val( q3BarOptionValue );
 			jQuery( '#additional_hitch_measurement' ).val( q3HitchMeasurement );
 			setBarOutcome( 'question_3_option', q3Label, q3BarOptionValue );
@@ -970,13 +945,11 @@ jQuery( function() {
 		}
 
 		if ( do35 === 'no' && adjustable === 'no' ) {
-			jQuery( '#bar-options-result' ).html( '<strong>No bar option selected.</strong> Please contact our team for a custom setup.' ).show();
 			jQuery( '#bar_options' ).val( '' ).trigger( 'change' );
 			setMeasurementVisibility( '' );
 			return;
 		}
 
-		jQuery( '#bar-options-result' ).hide();
 		jQuery( '#bar_options' ).val( '' ).trigger( 'change' );
 		setMeasurementVisibility( '' );
 	};
@@ -1078,9 +1051,6 @@ jQuery( function() {
 					jQuery( '#additional_hitch_measurement' ).val( hitchMeasurement );
 					console.log( 'Set #additional_hitch_measurement to:', hitchMeasurement );
 				}
-
-				// Display the values on frontend
-				displayQuestionValues( '#' + $selected.attr( 'id' ), barOptionValue, hitchMeasurement );
 			}
 		} );
 	};

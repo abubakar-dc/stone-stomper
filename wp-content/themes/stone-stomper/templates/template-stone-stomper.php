@@ -498,9 +498,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 												</select>
 											</div>
 											<div class="field">
-												<div id="bar-options-result" class="note notice-bar mt-0" style="display:none;"></div>
-											</div>
-											<div class="field">
 												<select id="bar_options" name="bar_options" style="display:none;">
 													<option value="">Select Bar Option</option>
 													<?php foreach ( $sts_var_section_bar_options_bar_options as $option ) {
