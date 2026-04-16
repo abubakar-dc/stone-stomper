@@ -1003,6 +1003,24 @@ jQuery( function() {
 
 	handleHitchMeasurementAutoPopulation();
 
+	// Auto-populate bar option value from selected question
+	const handleBarOptionValueAutoPopulation = () => {
+		jQuery( '#bar_q_shank_41, #bar_q_do35_do45, #bar_q_adjustable_hitch, #bar_q_tongue_85' ).on( 'change', function() {
+			const $selected = jQuery( this );
+			const selectedValue = $selected.val();
+
+			// Only populate if a value is selected
+			if ( selectedValue ) {
+				const barOptionValue = $selected.data( 'bar-option-value' );
+				if ( barOptionValue ) {
+					jQuery( '#question_bar_option_value' ).val( barOptionValue );
+				}
+			}
+		} );
+	};
+
+	handleBarOptionValueAutoPopulation();
+
 	jQuery( '#final_address' ).on( 'change', function() {
 		if ( jQuery( this ).val() === 'move' ) {
 			jQuery( '#move_note' ).show();
