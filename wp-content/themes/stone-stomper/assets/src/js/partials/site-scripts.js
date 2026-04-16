@@ -872,7 +872,7 @@ jQuery( function() {
 
 	const displayQuestionValues = ( questionId, barOptionValue, hitchMeasurement ) => {
 		const $result = jQuery( '#bar-options-result' );
-		let displayHTML = '<strong>Selected:</strong> ';
+		let displayHTML = 'Selected: ';
 
 		// Add the question label
 		const $select = jQuery( questionId );
@@ -881,15 +881,15 @@ jQuery( function() {
 
 		// Add bar option value if available
 		if ( barOptionValue ) {
-			displayHTML += '<br><strong>Bar Option Value:</strong> ' + barOptionValue;
+			displayHTML += '<br>Bar Option Value: ' + barOptionValue;
 		}
 
 		// Add hitch measurement if available
 		if ( hitchMeasurement ) {
-			displayHTML += '<br><strong>Hitch Measurement (mm):</strong> ' + hitchMeasurement;
+			displayHTML += '<br>Hitch Measurement (mm): ' + hitchMeasurement;
 		}
 
-		$result.html( displayHTML ).show();
+		$result.html( displayHTML ).removeClass( 'notice-bar' ).css( 'padding', '0' ).css( 'background', 'none' ).css( 'border', 'none' ).show();
 	};
 
 	const toggleQuestion = ( selector, shouldShow ) => {
@@ -1070,17 +1070,17 @@ jQuery( function() {
 				const barOptionValue = $selected.data( 'bar-option-value' );
 				const hitchMeasurement = $selected.data( 'hitch-measurement' );
 				console.log( 'Question changed:', $selected.attr( 'id' ), 'Value:', selectedValue, 'Bar Option Value:', barOptionValue, 'Hitch:', hitchMeasurement );
-				
+
 				if ( barOptionValue ) {
 					jQuery( '#question_bar_option_value' ).val( barOptionValue );
 					console.log( 'Set #question_bar_option_value to:', barOptionValue );
 				}
-				
+
 				if ( hitchMeasurement ) {
 					jQuery( '#additional_hitch_measurement' ).val( hitchMeasurement );
 					console.log( 'Set #additional_hitch_measurement to:', hitchMeasurement );
 				}
-				
+
 				// Display the values on frontend
 				displayQuestionValues( '#' + $selected.attr( 'id' ), barOptionValue, hitchMeasurement );
 			}
