@@ -923,7 +923,7 @@
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "70",
+                                "width": "50",
                                 "class": "",
                                 "id": ""
                             },
@@ -944,7 +944,28 @@
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "30",
+                                "width": "25",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "allow_in_bindings": 0,
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
+                        },
+                        {
+                            "key": "field_bar_q1_additional",
+                            "label": "Hitch Measurement",
+                            "name": "hitch_measurement",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "25",
                                 "class": "",
                                 "id": ""
                             },
@@ -1009,7 +1030,7 @@
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "70",
+                                "width": "50",
                                 "class": "",
                                 "id": ""
                             },
@@ -1030,7 +1051,28 @@
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "30",
+                                "width": "25",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "allow_in_bindings": 0,
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
+                        },
+                        {
+                            "key": "field_bar_q2_additional",
+                            "label": "Hitch Measurement",
+                            "name": "hitch_measurement",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "25",
                                 "class": "",
                                 "id": ""
                             },
@@ -1095,7 +1137,7 @@
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "70",
+                                "width": "50",
                                 "class": "",
                                 "id": ""
                             },
@@ -1116,7 +1158,28 @@
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "30",
+                                "width": "25",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "allow_in_bindings": 0,
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
+                        },
+                        {
+                            "key": "field_bar_q3_additional",
+                            "label": "Hitch Measurement",
+                            "name": "hitch_measurement",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "25",
                                 "class": "",
                                 "id": ""
                             },
@@ -1181,7 +1244,7 @@
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "70",
+                                "width": "50",
                                 "class": "",
                                 "id": ""
                             },
@@ -1202,7 +1265,28 @@
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "30",
+                                "width": "25",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "allow_in_bindings": 0,
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
+                        },
+                        {
+                            "key": "field_bar_q4_additional",
+                            "label": "Hitch Measurement",
+                            "name": "hitch_measurement",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "25",
                                 "class": "",
                                 "id": ""
                             },
@@ -1240,6 +1324,27 @@
                             "preview_size": "medium"
                         }
                     ]
+                },
+                {
+                    "key": "field_bar_additional_measurement_info",
+                    "label": "Additional Measurement Description",
+                    "name": "bar_additional_measurement_description",
+                    "aria-label": "",
+                    "type": "wysiwyg",
+                    "instructions": "This description appears when users need to provide an additional hitch measurement",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "allow_in_bindings": 0,
+                    "tabs": "all",
+                    "toolbar": "full",
+                    "media_upload": 0,
+                    "delay": 0
                 },
                 {
                     "key": "field_69165402d2862",

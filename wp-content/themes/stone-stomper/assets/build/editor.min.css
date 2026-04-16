@@ -5669,10 +5669,6 @@ Mixin for transition
 .editor-styles-wrapper .form-details-section .details-images img {
   width: 100%;
 }
-.editor-styles-wrapper .section-disable {
-  pointer-events: none !important;
-  opacity: 0.2;
-}
 .editor-styles-wrapper .wc-block-components-product-image {
   line-height: 0.65;
 }
