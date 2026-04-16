@@ -1277,6 +1277,48 @@
                             "append": ""
                         },
                         {
+                            "key": "field_bar_q4_value_yes",
+                            "label": "Bar Option Value (Yes)",
+                            "name": "bar_option_value_yes",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "Value for when 85mm on tongue = YES",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "25",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "allow_in_bindings": 0,
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
+                        },
+                        {
+                            "key": "field_bar_q4_value_no",
+                            "label": "Bar Option Value (No)",
+                            "name": "bar_option_value_no",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "Value for when 85mm on tongue = NO",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "25",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "allow_in_bindings": 0,
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
+                        },
+                        {
                             "key": "field_bar_q4_additional",
                             "label": "Hitch Measurement",
                             "name": "hitch_measurement",
