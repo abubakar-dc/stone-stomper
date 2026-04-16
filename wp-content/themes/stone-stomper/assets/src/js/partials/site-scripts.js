@@ -1012,8 +1012,10 @@ jQuery( function() {
 			// Only populate if a value is selected
 			if ( selectedValue ) {
 				const barOptionValue = $selected.data( 'bar-option-value' );
+				console.log( 'Question changed:', $selected.attr( 'id' ), 'Value:', selectedValue, 'Bar Option Value:', barOptionValue );
 				if ( barOptionValue ) {
 					jQuery( '#question_bar_option_value' ).val( barOptionValue );
+					console.log( 'Set #question_bar_option_value to:', barOptionValue );
 				}
 			}
 		} );

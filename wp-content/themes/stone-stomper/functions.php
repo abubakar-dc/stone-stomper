@@ -3003,7 +3003,10 @@ function sts_materialize_customer_cpt( $order_id ) {
         update_post_meta( $post_id, 'sts_var_caravan_ss_length_adj', '-120' );
     } else {
         update_post_meta( $post_id, 'sts_var_caravan_bar_option', sanitize_text_field( $data['bar_options'] ?? '' ) );
-        update_post_meta( $post_id, 'sts_var_question_bar_option_value', sanitize_text_field( $data['question_bar_option_value'] ?? '' ) );
+        if ( ! empty( $data['question_bar_option_value'] ) ) {
+            update_post_meta( $post_id, 'sts_var_question_bar_option_value', sanitize_text_field( $data['question_bar_option_value'] ) );
+            error_log('Question Bar Option Value saved: ' . $data['question_bar_option_value']);
+        }
     }
 
 	error_log('STS Caravan ID From Payload: ' . print_r($data['caravan_id'], true));
