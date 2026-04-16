@@ -7056,6 +7056,11 @@ ul.wc-block-components-totals-discount__coupon-list button.wc-block-components-c
   width: 100%;
 }
 
+.section-disable {
+  pointer-events: none !important;
+  opacity: 0.2;
+}
+
 .wc-block-components-product-image {
   line-height: 0.65;
 }

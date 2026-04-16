@@ -789,7 +789,7 @@ jQuery( function() {
 		const showOptionTwo = mode === 'option2';
 		const showOptionThree = mode === 'option3';
 
-		jQuery( '.option-two-description, .option-three-description, .additional-measurement-description' ).hide();
+		jQuery( '.option-two-description, .option-three-description, .additional-measurement-description, .no-option-message' ).hide();
 
 		if ( showOptionTwo || showOptionThree ) {
 			jQuery( '.hitch_measurement_dropdown' ).slideDown();
@@ -963,8 +963,10 @@ jQuery( function() {
 		}
 
 		if ( do35 === 'no' && adjustable === 'no' ) {
+			console.log( 'No bar option - showing no-option-message. do35:', do35, 'adjustable:', adjustable );
 			jQuery( '#bar_options' ).val( '' ).trigger( 'change' );
 			setMeasurementVisibility( '' );
+			jQuery( '#no-option-message' ).slideDown();
 			return;
 		}
 

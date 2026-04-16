@@ -52,7 +52,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 	$sts_var_bar_question_2 = $sts_var_section_bar_options['bar_question_2'] ?? null;
 	$sts_var_bar_question_3 = $sts_var_section_bar_options['bar_question_3'] ?? null;
 	$sts_var_bar_question_4 = $sts_var_section_bar_options['bar_question_4'] ?? null;
-	$sts_var_bar_additional_measurement_description = $sts_var_section_bar_options['bar_additional_measurement_description'] ?? null;
+	$sts_var_bar_no_option_message = $sts_var_section_bar_options['bar_no_option_message'] ?? null;
 
 	// Question 1
 	$sts_var_bar_question_1_label = $sts_var_bar_question_1['label'] ?? 'Do you have greater than 41mm on your shank?';
@@ -524,9 +524,13 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 														<?php echo html_entity_decode( $sts_var_section_bar_options_description_option_three ); ?>
 													</div>
 												<?php } ?>
-												<?php if($sts_var_bar_additional_measurement_description){ ?>
-													<div id="additional-measurement-description" class="note notice-bar additional-measurement-description mt-0"  style="display:none">
-														<?php echo html_entity_decode( $sts_var_bar_additional_measurement_description ); ?>
+												<?php if($sts_var_bar_no_option_message){ ?>
+													<div id="no-option-message" class="note notice-bar no-option-message mt-0"  style="display:none">
+														<?php echo html_entity_decode( $sts_var_bar_no_option_message ); ?>
+													</div>
+												<?php } else { ?>
+													<div id="no-option-message" class="note notice-bar no-option-message mt-0"  style="display:none">
+														Please attach clear photographs in the next section and we will identify the right option for you.
 													</div>
 												<?php } ?>
 												<div class="field">
