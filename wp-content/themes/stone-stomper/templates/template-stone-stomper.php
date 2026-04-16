@@ -83,6 +83,8 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 	$sts_var_bar_question_4_image_url = $sts_var_bar_question_4_image ? wp_get_attachment_image_url($sts_var_bar_question_4_image, 'full') : '';
 	$sts_var_bar_question_4_hitch_measurement = $sts_var_bar_question_4['hitch_measurement'] ?? null;
 	$sts_var_bar_question_4_bar_option_value = $sts_var_bar_question_4['bar_option_value'] ?? null;
+	$sts_var_bar_question_4_bar_option_value_yes = $sts_var_bar_question_4['bar_option_value_yes'] ?? null;
+	$sts_var_bar_question_4_bar_option_value_no = $sts_var_bar_question_4['bar_option_value_no'] ?? null;
 
 	// Final measurements Video
 
@@ -491,10 +493,10 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											</div>
 											<div class="field bar-question bar-q-tongue" style="display:none;">
 												<label class="req question-label" for="bar_q_tongue_85"><?php echo esc_html( $sts_var_bar_question_4_label ); ?></label>
-												<select id="bar_q_tongue_85" name="bar_q_tongue_85" data-question="4" data-hitch-measurement="<?php echo esc_attr($sts_var_bar_question_4_hitch_measurement); ?>" data-bar-option-value="<?php echo esc_attr($sts_var_bar_question_4_bar_option_value); ?>">
+												<select id="bar_q_tongue_85" name="bar_q_tongue_85" data-question="4" data-hitch-measurement="<?php echo esc_attr($sts_var_bar_question_4_hitch_measurement); ?>">
 													<option value="">Select</option>
-													<option value="yes">Yes</option>
-													<option value="no">No</option>
+													<option value="yes" data-bar-option-value="<?php echo esc_attr($sts_var_bar_question_4_bar_option_value_yes); ?>">Yes</option>
+													<option value="no" data-bar-option-value="<?php echo esc_attr($sts_var_bar_question_4_bar_option_value_no); ?>">No</option>
 												</select>
 											</div>
 											<div class="field">
