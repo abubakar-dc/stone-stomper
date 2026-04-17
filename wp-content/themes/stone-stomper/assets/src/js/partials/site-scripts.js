@@ -916,6 +916,28 @@ jQuery( function() {
 		}
 	};
 
+	// Show/hide description notices based on question answers
+	const updateDescriptionNoticesVisibility = () => {
+		const shank41 = jQuery( '#bar_q_shank_41' ).val();
+		const do35 = jQuery( '#bar_q_do35_do45' ).val();
+		const adjustable = jQuery( '#bar_q_adjustable_hitch' ).val();
+		const tongue85 = jQuery( '#bar_q_tongue_85' ).val();
+
+		// Show option-two-description when Q1 = yes
+		if ( shank41 === 'yes' ) {
+			jQuery( '#option-two-description' ).slideDown();
+		} else {
+			jQuery( '#option-two-description' ).slideUp();
+		}
+
+		// Show option-three-description when Q3 = yes OR Q4 = yes
+		if ( adjustable === 'yes' || ( shank41 === 'no' && do35 === 'yes' && tongue85 === 'yes' ) ) {
+			jQuery( '#option-three-description' ).slideDown();
+		} else {
+			jQuery( '#option-three-description' ).slideUp();
+		}
+	};
+
 	const toggleQuestion = ( selector, shouldShow ) => {
 		const $field = jQuery( selector );
 		const $select = $field.find( 'select' );
@@ -1068,12 +1090,14 @@ jQuery( function() {
 	jQuery( '#bar_q_shank_41, #bar_q_do35_do45, #bar_q_adjustable_hitch, #bar_q_tongue_85' ).on( 'change', function() {
 		evaluateBarDecisionTree();
 		updateHitchMeasurementVisibility();
+		updateDescriptionNoticesVisibility();
 		// Reset the unlock flag when any question changes so validation is re-checked
 		finalSectionsUnlocked = false;
 		console.log( 'Question changed - resetting finalSectionsUnlocked' );
 	} );
 	evaluateBarDecisionTree();
 	updateHitchMeasurementVisibility();
+	updateDescriptionNoticesVisibility();
 	handleBarQuestionImageDisplay();
 
 	// Auto-populate hitch measurement from selected question
