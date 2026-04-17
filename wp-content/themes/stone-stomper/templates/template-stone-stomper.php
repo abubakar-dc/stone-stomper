@@ -519,11 +519,13 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 														<?php echo html_entity_decode( $sts_var_section_bar_options_description_option_two ); ?>
 													</div>
 												<?php } ?>
+
 												<?php if($sts_var_section_bar_options_description_option_three){ ?>
 													<div id="option-three-description" class="note notice-bar option-three-description mt-0"  style="display:none">
 														<?php echo html_entity_decode( $sts_var_section_bar_options_description_option_three ); ?>
 													</div>
 												<?php } ?>
+
 												<?php if($sts_var_bar_no_option_message){ ?>
 													<div id="no-option-message" class="note notice-bar no-option-message mt-0"  style="display:none">
 														<?php echo html_entity_decode( $sts_var_bar_no_option_message ); ?>
@@ -534,7 +536,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 													</div>
 												<?php } ?>
 												<div class="field">
-													<label class="req" for="additional_hitch_measurement">Mesurement  (mm)</label>
+													<label class="req" for="additional_hitch_measurement">Measurement  (mm)</label>
 													<input id="additional_hitch_measurement" name="additional_hitch_measurement" type="text" inputmode="numeric" pattern="[0-9]*"
 														placeholder="eg. 300 mm" required />
 												</div>

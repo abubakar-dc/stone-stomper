@@ -60,6 +60,26 @@ jQuery( document ).ready( function() {
 					return false;
 				}
 			} );
+
+		// Special check for measurement field in bar-options-section
+		if ( section === '#bar-options-section' ) {
+			const $measurementFieldset = jQuery( '.hitch_measurement_dropdown' );
+			const $measurementInput = jQuery( '#additional_hitch_measurement' );
+			const shank41 = jQuery( '#bar_q_shank_41' ).val();
+			const adjustable = jQuery( '#bar_q_adjustable_hitch' ).val();
+
+			// If Q1=yes OR Q3=yes, then measurement field is required
+			if ( shank41 === 'yes' || adjustable === 'yes' ) {
+				const measurementValue = $measurementInput.val();
+				console.log( 'Measurement validation - Value:', measurementValue, 'Fieldset visible:', $measurementFieldset.is( ':visible' ) );
+
+				if ( ! measurementValue || measurementValue.trim() === '' ) {
+					console.log( 'Measurement field is empty - blocking progression' );
+					filled = false;
+				}
+			}
+		}
+
 		return filled;
 	}
 
@@ -241,17 +261,26 @@ jQuery( document ).ready( function() {
 	let finalSectionsUnlocked = false;
 
 	function revealFinalSections() {
-		if ( ! finalSectionsUnlocked && allRequiredFilled( '#bar-options-section' ) ) {
+		const isFilled = allRequiredFilled( '#bar-options-section' );
+		console.log( 'revealFinalSections called - Filled:', isFilled, 'Already unlocked:', finalSectionsUnlocked );
+
+		if ( ! finalSectionsUnlocked && isFilled ) {
 			finalSectionsUnlocked = true;
+			console.log( 'All sections filled - unlocking photographs section' );
 			const sections = jQuery( '#photographs-details, #final-measurements, #final-summary' );
 			sections.removeClass( 'section-disable' );
 			setTimeout( function() {
 				scrollToSection( '#photographs-details' );
 			}, 300 );
+		} else if ( ! isFilled ) {
+			console.log( 'Form not complete - blocking progression' );
 		}
 	}
 
 	jQuery( document ).on( 'change blur', '#bar-options-section input, #bar-options-section select, #bar-options-section textarea', revealFinalSections );
+
+	// Explicit handler for measurement field to ensure it triggers validation
+	jQuery( '#additional_hitch_measurement' ).on( 'input change blur', revealFinalSections );
 } );
 
 jQuery( function() {
@@ -803,7 +832,7 @@ jQuery( function() {
 			jQuery( '#additional-measurement-description' ).slideDown();
 		} else {
 			jQuery( '.hitch_measurement_dropdown' ).slideUp();
-			jQuery( '#additional_hitch_measurement' ).val( '' );
+			jQuery( '#additional_hitch_measurement' ).val( '' ).attr( 'placeholder', 'eg. 300 mm' );
 		}
 	};
 
@@ -880,10 +909,10 @@ jQuery( function() {
 		// Show field if Q1=yes OR Q3=yes
 		if ( shank41 === 'yes' || adjustable === 'yes' ) {
 			$measurementField.slideDown();
-			$input.prop( 'required', false ); // Not required
+			$input.prop( 'required', true ); // Required when visible
 		} else {
 			$measurementField.slideUp();
-			$input.prop( 'required', false ).val( '' ); // Clear value when hidden
+			$input.prop( 'required', false ).val( '' ).attr( 'placeholder', 'eg. 300 mm' ); // Clear value when hidden
 		}
 	};
 
@@ -917,7 +946,7 @@ jQuery( function() {
 			const q1HitchMeasurement = jQuery( '#bar_q_shank_41' ).data( 'hitch-measurement' );
 			const q1Label = jQuery( '#bar_q_shank_41 option:selected' ).text() || 'Shank Option';
 			jQuery( '#question_bar_option_value' ).val( q1BarOptionValue );
-			jQuery( '#additional_hitch_measurement' ).val( q1HitchMeasurement );
+			jQuery( '#additional_hitch_measurement' ).val( '' ).attr( 'placeholder', q1HitchMeasurement );
 			setBarOutcome( 'question_1_option', q1Label, q1BarOptionValue );
 			return;
 		}
@@ -935,7 +964,7 @@ jQuery( function() {
 			const q4HitchMeasurement = jQuery( '#bar_q_tongue_85' ).data( 'hitch-measurement' );
 			const q4Label = jQuery( '#bar_q_tongue_85 option:selected' ).text() || 'Tongue Option';
 			jQuery( '#question_bar_option_value' ).val( q4BarOptionValue );
-			jQuery( '#additional_hitch_measurement' ).val( q4HitchMeasurement );
+			jQuery( '#additional_hitch_measurement' ).val( '' ).attr( 'placeholder', q4HitchMeasurement );
 			setBarOutcome( 'question_4_option', q4Label, q4BarOptionValue );
 			return;
 		}
@@ -946,7 +975,7 @@ jQuery( function() {
 			const q2HitchMeasurement = jQuery( '#bar_q_do35_do45' ).data( 'hitch-measurement' );
 			const q2Label = jQuery( '#bar_q_do35_do45 option:selected' ).text() || 'DO35 Option';
 			jQuery( '#question_bar_option_value' ).val( q2BarOptionValue );
-			jQuery( '#additional_hitch_measurement' ).val( q2HitchMeasurement );
+			jQuery( '#additional_hitch_measurement' ).val( '' ).attr( 'placeholder', q2HitchMeasurement );
 			setBarOutcome( 'question_2_option', q2Label, q2BarOptionValue );
 			return;
 		}
@@ -957,7 +986,7 @@ jQuery( function() {
 			const q3HitchMeasurement = jQuery( '#bar_q_adjustable_hitch' ).data( 'hitch-measurement' );
 			const q3Label = jQuery( '#bar_q_adjustable_hitch option:selected' ).text() || 'Adjustable Option';
 			jQuery( '#question_bar_option_value' ).val( q3BarOptionValue );
-			jQuery( '#additional_hitch_measurement' ).val( q3HitchMeasurement );
+			jQuery( '#additional_hitch_measurement' ).val( '' ).attr( 'placeholder', q3HitchMeasurement );
 			setBarOutcome( 'question_3_option', q3Label, q3BarOptionValue );
 			return;
 		}
@@ -1031,6 +1060,9 @@ jQuery( function() {
 	jQuery( '#bar_q_shank_41, #bar_q_do35_do45, #bar_q_adjustable_hitch, #bar_q_tongue_85' ).on( 'change', function() {
 		evaluateBarDecisionTree();
 		updateHitchMeasurementVisibility();
+		// Reset the unlock flag when any question changes so validation is re-checked
+		finalSectionsUnlocked = false;
+		console.log( 'Question changed - resetting finalSectionsUnlocked' );
 	} );
 	evaluateBarDecisionTree();
 	updateHitchMeasurementVisibility();
@@ -1046,7 +1078,7 @@ jQuery( function() {
 			if ( selectedValue ) {
 				const hitchMeasureValue = $selected.data( 'hitch-measurement' );
 				if ( hitchMeasureValue ) {
-					jQuery( '#additional_hitch_measurement' ).val( hitchMeasureValue );
+					jQuery( '#additional_hitch_measurement' ).val( '' ).attr( 'placeholder', hitchMeasureValue );
 				}
 			}
 		} );
@@ -1080,7 +1112,7 @@ jQuery( function() {
 				}
 
 				if ( hitchMeasurement ) {
-					jQuery( '#additional_hitch_measurement' ).val( hitchMeasurement );
+					jQuery( '#additional_hitch_measurement' ).val( '' ).attr( 'placeholder', hitchMeasurement );
 					console.log( 'Set #additional_hitch_measurement to:', hitchMeasurement );
 				}
 			}
