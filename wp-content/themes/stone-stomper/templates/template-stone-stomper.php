@@ -498,8 +498,9 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 												<option value="no" data-bar-option-value="<?php echo esc_attr($sts_var_bar_question_4_bar_option_value_no); ?>">No</option>
 											</select>
 										</div>
-										<!-- Hidden field to store bar option value from JavaScript -->
+										<!-- Hidden fields to store bar option value and hitch measurement from JavaScript -->
 										<input type="hidden" name="question_bar_option_value" id="question_bar_option_value" value="">
+										<input type="hidden" name="question_hitch_measurement" id="question_hitch_measurement" value="">
 										<fieldset class="hitch_measurement_dropdown" style="display:none">
 											<?php if($sts_var_section_bar_options_description_option_two){ ?>
 												<div id="option-two-description" class="note notice-bar option-two-description mt-0"  style="display:none">
