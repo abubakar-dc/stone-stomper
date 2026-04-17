@@ -948,6 +948,7 @@ jQuery( function() {
 			jQuery( '#question_bar_option_value' ).val( q1BarOptionValue );
 			jQuery( '#additional_hitch_measurement' ).val( '' ).attr( 'placeholder', q1HitchMeasurement );
 			setBarOutcome( 'question_1_option', q1Label, q1BarOptionValue );
+			updateHitchMeasurementVisibility(); // Ensure measurement field shows for Q1=Yes
 			return;
 		}
 
@@ -966,6 +967,7 @@ jQuery( function() {
 			jQuery( '#question_bar_option_value' ).val( q4BarOptionValue );
 			jQuery( '#additional_hitch_measurement' ).val( '' ).attr( 'placeholder', q4HitchMeasurement );
 			setBarOutcome( 'question_4_option', q4Label, q4BarOptionValue );
+			updateHitchMeasurementVisibility(); // Ensure measurement field shows
 			return;
 		}
 
@@ -977,6 +979,7 @@ jQuery( function() {
 			jQuery( '#question_bar_option_value' ).val( q2BarOptionValue );
 			jQuery( '#additional_hitch_measurement' ).val( '' ).attr( 'placeholder', q2HitchMeasurement );
 			setBarOutcome( 'question_2_option', q2Label, q2BarOptionValue );
+			updateHitchMeasurementVisibility(); // Ensure measurement field shows
 			return;
 		}
 
@@ -988,6 +991,7 @@ jQuery( function() {
 			jQuery( '#question_bar_option_value' ).val( q3BarOptionValue );
 			jQuery( '#additional_hitch_measurement' ).val( '' ).attr( 'placeholder', q3HitchMeasurement );
 			setBarOutcome( 'question_3_option', q3Label, q3BarOptionValue );
+			updateHitchMeasurementVisibility(); // Ensure measurement field shows for Q3=Yes
 			return;
 		}
 
@@ -1001,6 +1005,10 @@ jQuery( function() {
 
 		jQuery( '#bar_options' ).val( '' ).trigger( 'change' );
 		setMeasurementVisibility( '' );
+
+		// Always ensure measurement field visibility is correct based on Q1/Q3
+		// This needs to run at the end to override any hiding done by setMeasurementVisibility
+		updateHitchMeasurementVisibility();
 	};
 
 	const handleBarQuestionImageDisplay = () => {
