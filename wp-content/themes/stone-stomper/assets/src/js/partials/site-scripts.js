@@ -1157,8 +1157,19 @@ jQuery( function() {
 				let barOptionValue;
 				if ( questionId === 'bar_q_tongue_85' ) {
 					barOptionValue = $selected.find( 'option:selected' ).data( 'bar-option-value' );
+					// Show notice with Question 4 bar option value
+					if ( barOptionValue ) {
+						jQuery( '#question-4-bar-value-display' ).text( barOptionValue );
+						jQuery( '#question-4-bar-value-notice' ).slideDown();
+					} else {
+						jQuery( '#question-4-bar-value-notice' ).slideUp();
+					}
 				} else {
 					barOptionValue = $selected.data( 'bar-option-value' );
+					// Hide Question 4 notice for other questions
+					if ( questionId !== 'bar_q_tongue_85' ) {
+						jQuery( '#question-4-bar-value-notice' ).slideUp();
+					}
 				}
 
 				const hitchMeasurement = $selected.data( 'hitch-measurement' );
@@ -1173,6 +1184,9 @@ jQuery( function() {
 					jQuery( '#additional_hitch_measurement' ).val( '' ).attr( 'placeholder', hitchMeasurement );
 					console.log( 'Set #additional_hitch_measurement to:', hitchMeasurement );
 				}
+			} else {
+				// Hide notice when no selection is made
+				jQuery( '#question-4-bar-value-notice' ).slideUp();
 			}
 		} );
 	};
