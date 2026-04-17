@@ -540,6 +540,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 													<input id="additional_hitch_measurement" name="additional_hitch_measurement" type="text" inputmode="numeric" pattern="[0-9]*"
 														placeholder="eg. 300 mm" required />
 												</div>
+												<div id="bar-options-result" class="note notice-bar mt-10"></div>
 											</fieldset>
 										</div>
 									<?php } ?>

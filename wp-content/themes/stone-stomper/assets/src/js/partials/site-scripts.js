@@ -879,18 +879,37 @@ jQuery( function() {
 	};
 
 	const setBarOutcome = ( outcome, label, barOptionValue ) => {
-		const $matchedOption = resolveBarOptionByOutcome( outcome );
 		const $result = jQuery( '#bar-options-result' );
+		let $matchedOption = jQuery();
 
-		if ( $matchedOption.length ) {
-			jQuery( '#bar_options' ).val( $matchedOption.val() ).trigger( 'change' );
-			$result.html( '<strong>Selected:</strong> ' + label ).show();
-		} else {
-			jQuery( '#bar_options' ).val( '' ).trigger( 'change' );
-			$result.html( '<strong>No matching Bar Option found.</strong> Please review bar options in admin.' ).show();
+		// Try outcome-based matching first (for backward compatibility)
+		$matchedOption = resolveBarOptionByOutcome( outcome );
+
+		// If no match found by outcome, try to match by barOptionValue
+		if ( ! $matchedOption.length && barOptionValue ) {
+			$matchedOption = jQuery( '#bar_options option' ).filter( function() {
+				const optionValue = jQuery( this ).val();
+				const dataValue = jQuery( this ).data( 'value' );
+				// Match either by option value or data-value attribute
+				return optionValue === barOptionValue || dataValue === barOptionValue || optionValue.includes( barOptionValue ) || ( dataValue && dataValue.toString().includes( barOptionValue.toString() ) );
+			} ).first();
 		}
 
-		// Save the question's bar option value to form field
+		// Show success message with the bar option value (from question metadata)
+		// The barOptionValue is the actual option selected from ACF question config
+		if ( barOptionValue ) {
+			$result.html( '<strong>Selected:</strong> ' + barOptionValue ).show();
+			console.log( 'Bar option selected:', barOptionValue );
+		}
+
+		// If we found a matching dropdown option, select it
+		if ( $matchedOption.length ) {
+			jQuery( '#bar_options' ).val( $matchedOption.val() ).trigger( 'change' );
+		} else {
+			jQuery( '#bar_options' ).val( '' ).trigger( 'change' );
+		}
+
+		// Save the question's bar option value to form field (this is the critical part)
 		if ( barOptionValue ) {
 			jQuery( '#question_bar_option_value' ).val( barOptionValue );
 			console.log( 'Set #question_bar_option_value from decision tree:', barOptionValue );
