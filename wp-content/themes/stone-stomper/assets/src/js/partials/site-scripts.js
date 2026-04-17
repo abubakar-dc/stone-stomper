@@ -881,10 +881,8 @@ jQuery( function() {
 	const setBarOutcome = ( outcome, label, barOptionValue ) => {
 		const $result = jQuery( '#bar-options-result' );
 		let $matchedOption = jQuery();
-
 		// Try outcome-based matching first (for backward compatibility)
 		$matchedOption = resolveBarOptionByOutcome( outcome );
-
 		// If no match found by outcome, try to match by barOptionValue
 		if ( ! $matchedOption.length && barOptionValue ) {
 			$matchedOption = jQuery( '#bar_options option' ).filter( function() {
@@ -1039,7 +1037,12 @@ jQuery( function() {
 		if ( do35 === 'no' && adjustable === 'no' ) {
 			console.log( 'No bar option - showing no-option-message. do35:', do35, 'adjustable:', adjustable );
 			jQuery( '#bar_options' ).val( '' ).trigger( 'change' );
-			setMeasurementVisibility( '' );
+			// Hide the measurement field fieldset when no option matches
+			jQuery( '.hitch_measurement_dropdown' ).slideUp();
+			jQuery( '#additional_hitch_measurement' ).val( '' ).attr( 'placeholder', 'eg. 300 mm' ).prop( 'required', false );
+			// Hide any description messages
+			jQuery( '.option-two-description, .option-three-description' ).slideUp();
+			// Show the no-option message
 			jQuery( '#no-option-message' ).slideDown();
 			return;
 		}
