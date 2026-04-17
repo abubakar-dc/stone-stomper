@@ -465,85 +465,69 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											<?php }
 										} ?>
 									</div>
-									<?php if($sts_var_section_bar_options_bar_options){ ?>
-										<div class="grid cols-2 " data-q1-hitch="<?php echo esc_attr($sts_var_bar_question_1_hitch_measurement); ?>" data-q2-hitch="<?php echo esc_attr($sts_var_bar_question_2_hitch_measurement); ?>" data-q3-hitch="<?php echo esc_attr($sts_var_bar_question_3_hitch_measurement); ?>" data-q4-hitch="<?php echo esc_attr($sts_var_bar_question_4_hitch_measurement); ?>">
-											<div class="field">
-												<label class="req question-label" for="bar_q_shank_41"><?php echo esc_html( $sts_var_bar_question_1_label ); ?></label>
-												<select id="bar_q_shank_41" name="bar_q_shank_41" required data-question="1" data-hitch-measurement="<?php echo esc_attr($sts_var_bar_question_1_hitch_measurement); ?>" data-bar-option-value="<?php echo esc_attr($sts_var_bar_question_1_bar_option_value); ?>">
-													<option value="">Select</option>
-													<option value="yes">Yes</option>
-													<option value="no">No</option>
-												</select>
-											</div>
-											<div class="field bar-question bar-q-do35" style="display:none;">
-												<label class="req question-label" for="bar_q_do35_do45"><?php echo esc_html( $sts_var_bar_question_2_label ); ?></label>
-												<select id="bar_q_do35_do45" name="bar_q_do35_do45" data-question="2" data-hitch-measurement="<?php echo esc_attr($sts_var_bar_question_2_hitch_measurement); ?>" data-bar-option-value="<?php echo esc_attr($sts_var_bar_question_2_bar_option_value); ?>">
-													<option value="">Select</option>
-													<option value="yes">Yes</option>
-													<option value="no">No</option>
-												</select>
-											</div>
-											<div class="field bar-question bar-q-adjustable" style="display:none;">
-												<label class="req question-label" for="bar_q_adjustable_hitch"><?php echo esc_html( $sts_var_bar_question_3_label ); ?></label>
-												<select id="bar_q_adjustable_hitch" name="bar_q_adjustable_hitch" data-question="3" data-hitch-measurement="<?php echo esc_attr($sts_var_bar_question_3_hitch_measurement); ?>" data-bar-option-value="<?php echo esc_attr($sts_var_bar_question_3_bar_option_value); ?>">
-													<option value="">Select</option>
-													<option value="yes">Yes</option>
-													<option value="no">No</option>
-												</select>
-											</div>
-											<div class="field bar-question bar-q-tongue" style="display:none;">
-												<label class="req question-label" for="bar_q_tongue_85"><?php echo esc_html( $sts_var_bar_question_4_label ); ?></label>
-												<select id="bar_q_tongue_85" name="bar_q_tongue_85" data-question="4" data-hitch-measurement="<?php echo esc_attr($sts_var_bar_question_4_hitch_measurement); ?>">
-													<option value="">Select</option>
-													<option value="yes" data-bar-option-value="<?php echo esc_attr($sts_var_bar_question_4_bar_option_value_yes); ?>">Yes</option>
-													<option value="no" data-bar-option-value="<?php echo esc_attr($sts_var_bar_question_4_bar_option_value_no); ?>">No</option>
-												</select>
-											</div>
-											<div class="field">
-												<select id="bar_options" name="bar_options" style="display:none;">
-													<option value="">Select Bar Option</option>
-													<?php foreach ( $sts_var_section_bar_options_bar_options as $option ) {
-														$single_bar_option = $option['add_option'];
-														$add_value = $option['add_value'];
-													?>
-														<option value="<?php echo esc_attr( $single_bar_option ); ?>" data-value="<?php echo esc_attr( $add_value ); ?>"><?php echo esc_html( $single_bar_option ); ?></option>
-													<?php } ?>
-												</select>
-												<input type="hidden" name="bar_option_value" id="bar_option_value" value="">
-												<input type="hidden" name="sts_var_caravan_bar_option" id="sts_var_caravan_bar_option" value="">
-												<input type="hidden" name="question_bar_option_value" id="question_bar_option_value" value="">
-											</div>
-											<fieldset class="hitch_measurement_dropdown" style="display:none">
-												<?php if($sts_var_section_bar_options_description_option_two){ ?>
-													<div id="option-two-description" class="note notice-bar option-two-description mt-0"  style="display:none">
-														<?php echo html_entity_decode( $sts_var_section_bar_options_description_option_two ); ?>
-													</div>
-												<?php } ?>
-
-												<?php if($sts_var_section_bar_options_description_option_three){ ?>
-													<div id="option-three-description" class="note notice-bar option-three-description mt-0"  style="display:none">
-														<?php echo html_entity_decode( $sts_var_section_bar_options_description_option_three ); ?>
-													</div>
-												<?php } ?>
-
-												<div class="field">
-													<label class="req" for="additional_hitch_measurement">Measurement  (mm)</label>
-													<input id="additional_hitch_measurement" name="additional_hitch_measurement" type="text" inputmode="numeric" pattern="[0-9]*"
-														placeholder="eg. 300 mm" required />
-												</div>
-												<div id="bar-options-result" class="note notice-bar mt-10"></div>
-											</fieldset>
-											<?php if($sts_var_bar_no_option_message){ ?>
-												<div id="no-option-message" class="note notice-bar no-option-message mt-0"  style="display:none">
-													<?php echo html_entity_decode( $sts_var_bar_no_option_message ); ?>
-												</div>
-											<?php } else { ?>
-												<div id="no-option-message" class="note notice-bar no-option-message mt-0"  style="display:none">
-													Please attach clear photographs in the next section and we will identify the right option for you.
+									<div class="grid cols-2 " data-q1-hitch="<?php echo esc_attr($sts_var_bar_question_1_hitch_measurement); ?>" data-q2-hitch="<?php echo esc_attr($sts_var_bar_question_2_hitch_measurement); ?>" data-q3-hitch="<?php echo esc_attr($sts_var_bar_question_3_hitch_measurement); ?>" data-q4-hitch="<?php echo esc_attr($sts_var_bar_question_4_hitch_measurement); ?>">
+										<div class="field">
+											<label class="req question-label" for="bar_q_shank_41"><?php echo esc_html( $sts_var_bar_question_1_label ); ?></label>
+											<select id="bar_q_shank_41" name="bar_q_shank_41" required data-question="1" data-hitch-measurement="<?php echo esc_attr($sts_var_bar_question_1_hitch_measurement); ?>" data-bar-option-value="<?php echo esc_attr($sts_var_bar_question_1_bar_option_value); ?>">
+												<option value="">Select</option>
+												<option value="yes">Yes</option>
+												<option value="no">No</option>
+											</select>
+										</div>
+										<div class="field bar-question bar-q-do35" style="display:none;">
+											<label class="req question-label" for="bar_q_do35_do45"><?php echo esc_html( $sts_var_bar_question_2_label ); ?></label>
+											<select id="bar_q_do35_do45" name="bar_q_do35_do45" data-question="2" data-hitch-measurement="<?php echo esc_attr($sts_var_bar_question_2_hitch_measurement); ?>" data-bar-option-value="<?php echo esc_attr($sts_var_bar_question_2_bar_option_value); ?>">
+												<option value="">Select</option>
+												<option value="yes">Yes</option>
+												<option value="no">No</option>
+											</select>
+										</div>
+										<div class="field bar-question bar-q-adjustable" style="display:none;">
+											<label class="req question-label" for="bar_q_adjustable_hitch"><?php echo esc_html( $sts_var_bar_question_3_label ); ?></label>
+											<select id="bar_q_adjustable_hitch" name="bar_q_adjustable_hitch" data-question="3" data-hitch-measurement="<?php echo esc_attr($sts_var_bar_question_3_hitch_measurement); ?>" data-bar-option-value="<?php echo esc_attr($sts_var_bar_question_3_bar_option_value); ?>">
+												<option value="">Select</option>
+												<option value="yes">Yes</option>
+												<option value="no">No</option>
+											</select>
+										</div>
+										<div class="field bar-question bar-q-tongue" style="display:none;">
+											<label class="req question-label" for="bar_q_tongue_85"><?php echo esc_html( $sts_var_bar_question_4_label ); ?></label>
+											<select id="bar_q_tongue_85" name="bar_q_tongue_85" data-question="4" data-hitch-measurement="<?php echo esc_attr($sts_var_bar_question_4_hitch_measurement); ?>">
+												<option value="">Select</option>
+												<option value="yes" data-bar-option-value="<?php echo esc_attr($sts_var_bar_question_4_bar_option_value_yes); ?>">Yes</option>
+												<option value="no" data-bar-option-value="<?php echo esc_attr($sts_var_bar_question_4_bar_option_value_no); ?>">No</option>
+											</select>
+										</div>
+										<fieldset class="hitch_measurement_dropdown" style="display:none">
+											<?php if($sts_var_section_bar_options_description_option_two){ ?>
+												<div id="option-two-description" class="note notice-bar option-two-description mt-0"  style="display:none">
+													<?php echo html_entity_decode( $sts_var_section_bar_options_description_option_two ); ?>
 												</div>
 											<?php } ?>
-										</div>
-									<?php } ?>
+
+											<?php if($sts_var_section_bar_options_description_option_three){ ?>
+												<div id="option-three-description" class="note notice-bar option-three-description mt-0"  style="display:none">
+													<?php echo html_entity_decode( $sts_var_section_bar_options_description_option_three ); ?>
+												</div>
+											<?php } ?>
+
+											<div class="field">
+												<label class="req" for="additional_hitch_measurement">Measurement  (mm)</label>
+												<input id="additional_hitch_measurement" name="additional_hitch_measurement" type="text" inputmode="numeric" pattern="[0-9]*"
+													placeholder="eg. 300 mm" required />
+											</div>
+											<div id="bar-options-result" class="note notice-bar mt-10"></div>
+										</fieldset>
+										<?php if($sts_var_bar_no_option_message){ ?>
+											<div id="no-option-message" class="note notice-bar no-option-message mt-0"  style="display:none">
+												<?php echo html_entity_decode( $sts_var_bar_no_option_message ); ?>
+											</div>
+										<?php } else { ?>
+											<div id="no-option-message" class="note notice-bar no-option-message mt-0"  style="display:none">
+												Please attach clear photographs in the next section and we will identify the right option for you.
+											</div>
+										<?php } ?>
+									</div>
 								</div>
 							</div>
 							<!-- Photographs -->
