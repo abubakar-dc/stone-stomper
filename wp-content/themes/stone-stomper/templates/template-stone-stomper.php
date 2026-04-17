@@ -519,8 +519,9 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 												<input id="additional_hitch_measurement" name="additional_hitch_measurement" type="text" inputmode="numeric" pattern="[0-9]*"
 													placeholder="eg. 300 mm" required />
 											</div>
-											<div id="bar-options-result" class="note notice-bar mt-10"></div>
 										</fieldset>
+										<!-- Success message - shown outside fieldset for visibility - initially hidden -->
+										<div id="bar-options-result" class="note notice-bar mt-10" style="display:none;"></div>
 										<?php if($sts_var_bar_no_option_message){ ?>
 											<div id="no-option-message" class="note notice-bar no-option-message mt-0"  style="display:none">
 												<?php echo html_entity_decode( $sts_var_bar_no_option_message ); ?>
