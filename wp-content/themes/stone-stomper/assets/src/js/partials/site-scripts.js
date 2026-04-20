@@ -979,6 +979,9 @@ jQuery( function() {
 		toggleQuestion( '.bar-q-adjustable', shank41 === 'no' && do35 === 'no' );
 		toggleQuestion( '.bar-q-tongue', shank41 === 'no' && do35 === 'yes' );
 
+		// Always hide Q4 notice by default — only the specific branch below will re-show it
+		jQuery( '#question-4-bar-value-notice' ).slideUp();
+
 		if ( shank41 === 'yes' ) {
 			// Get bar option value and hitch measurement from Question 1
 			const q1BarOptionValue = jQuery( '#bar_q_shank_41' ).data( 'bar-option-value' );
@@ -1008,6 +1011,14 @@ jQuery( function() {
 			jQuery( '#question_hitch_measurement' ).val( q4HitchMeasurement );
 			jQuery( '#additional_hitch_measurement' ).val( '' ).attr( 'placeholder', q4HitchMeasurement );
 			setBarOutcome( 'question_4_option', q4Label, q4BarOptionValue );
+			// Show Q4 notice — #bar-options-result is inside .hitch_measurement_dropdown which is hidden
+			// for this path (Q1=No, Q3=No), so use the dedicated Q4 notice instead
+			if ( q4BarOptionValue ) {
+				jQuery( '#question-4-bar-value-display' ).text( q4BarOptionValue );
+				jQuery( '#question-4-bar-value-notice' ).slideDown();
+			} else {
+				jQuery( '#question-4-bar-value-notice' ).slideUp();
+			}
 			updateHitchMeasurementVisibility(); // Ensure measurement field shows
 			return;
 		}
@@ -1017,10 +1028,20 @@ jQuery( function() {
 			const q2BarOptionValue = jQuery( '#bar_q_do35_do45' ).data( 'bar-option-value' );
 			const q2HitchMeasurement = jQuery( '#bar_q_do35_do45' ).data( 'hitch-measurement' );
 			const q2Label = jQuery( '#bar_q_do35_do45 option:selected' ).text() || 'DO35 Option';
-			jQuery( '#question_bar_option_value' ).val( q2BarOptionValue );
+			// Q4=No also has its own bar option value — prefer it if set
+			const q4NoBarOptionValue = jQuery( '#bar_q_tongue_85 option:selected' ).data( 'bar-option-value' );
+			const finalBarOptionValue = q4NoBarOptionValue || q2BarOptionValue;
+			jQuery( '#question_bar_option_value' ).val( finalBarOptionValue );
 			jQuery( '#question_hitch_measurement' ).val( q2HitchMeasurement );
 			jQuery( '#additional_hitch_measurement' ).val( '' ).attr( 'placeholder', q2HitchMeasurement );
-			setBarOutcome( 'question_2_option', q2Label, q2BarOptionValue );
+			setBarOutcome( 'question_2_option', q2Label, finalBarOptionValue );
+			// Show Q4 notice with the No value
+			if ( finalBarOptionValue ) {
+				jQuery( '#question-4-bar-value-display' ).text( finalBarOptionValue );
+				jQuery( '#question-4-bar-value-notice' ).slideDown();
+			} else {
+				jQuery( '#question-4-bar-value-notice' ).slideUp();
+			}
 			updateHitchMeasurementVisibility(); // Ensure measurement field shows
 			return;
 		}
