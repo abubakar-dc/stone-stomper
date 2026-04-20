@@ -427,12 +427,10 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										data-q2-image="<?php echo esc_attr($sts_var_bar_question_2_image_url); ?>"
 										data-q3-image="<?php echo esc_attr($sts_var_bar_question_3_image_url); ?>"
 										data-q4-image="<?php echo esc_attr($sts_var_bar_question_4_image_url); ?>">
-										<?php if($sts_var_bar_question_1_image){ ?>
-											<?php StoneStomper::the_attachment_image($sts_var_bar_question_1_image, 1200, array('class' => 'bar-q-image', 'id' => 'bar-q-image-1', 'data-question' => '1')); ?>
-										<?php } ?>
-										<img id="bar-q-image-2" class="bar-q-image" data-question="2" src="<?php echo esc_attr($sts_var_bar_question_2_image_url); ?>" alt="Question 2" style="display:none;" />
-										<img id="bar-q-image-3" class="bar-q-image" data-question="3" src="<?php echo esc_attr($sts_var_bar_question_3_image_url); ?>" alt="Question 3" style="display:none;" />
-										<img id="bar-q-image-4" class="bar-q-image" data-question="4" src="<?php echo esc_attr($sts_var_bar_question_4_image_url); ?>" alt="Question 4" style="display:none;" />
+									<img id="bar-q-image-1" class="bar-q-image" data-question="1" src="<?php echo esc_attr($sts_var_bar_question_1_image_url); ?>" alt="Question 1" />
+									<img id="bar-q-image-2" class="bar-q-image bar-q-image--hidden" data-question="2" src="<?php echo esc_attr($sts_var_bar_question_2_image_url); ?>" alt="Question 2" />
+									<img id="bar-q-image-3" class="bar-q-image bar-q-image--hidden" data-question="3" src="<?php echo esc_attr($sts_var_bar_question_3_image_url); ?>" alt="Question 3" />
+									<img id="bar-q-image-4" class="bar-q-image bar-q-image--hidden" data-question="4" src="<?php echo esc_attr($sts_var_bar_question_4_image_url); ?>" alt="Question 4" />
 									</div>
 								</div>
 								<div class="form-section-right column photographs-details" id="blk-caravan">
@@ -443,7 +441,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 									if($sts_var_section_bar_options_description){ ?>
 										<p><?php echo html_entity_decode($sts_var_section_bar_options_description); ?></p>
 									<?php } ?>
-
 									<!-- Mobile Image -->
 									<div class="vehicle-image mobile-form-image-slider" id="caravan-images" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
 										<?php if($sts_var_section_bar_options_bar_gallery){ ?>

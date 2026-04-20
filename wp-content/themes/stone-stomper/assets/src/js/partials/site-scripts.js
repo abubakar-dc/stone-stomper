@@ -975,9 +975,27 @@ jQuery( function() {
 		const adjustable = jQuery( '#bar_q_adjustable_hitch' ).val();
 		const tongue85 = jQuery( '#bar_q_tongue_85' ).val();
 
+		// Update question visibility
 		toggleQuestion( '.bar-q-do35', shank41 === 'no' );
 		toggleQuestion( '.bar-q-adjustable', shank41 === 'no' && do35 === 'no' );
 		toggleQuestion( '.bar-q-tongue', shank41 === 'no' && do35 === 'yes' );
+
+		// Update corresponding question images
+		const $container = jQuery( '#bar-question-image-container' );
+		if ( $container.length ) {
+			$container.find( '.bar-q-image' ).addClass( 'bar-q-image--hidden' );
+			let imageId = '#bar-q-image-1'; // default
+			if ( shank41 === 'no' && do35 === 'yes' ) {
+				imageId = '#bar-q-image-4';
+			} else if ( shank41 === 'no' && do35 === 'no' && adjustable !== '' ) {
+				imageId = '#bar-q-image-3';
+			} else if ( shank41 === 'no' && do35 === 'no' ) {
+				imageId = '#bar-q-image-3';
+			} else if ( shank41 === 'no' && do35 === '' ) {
+				imageId = '#bar-q-image-2';
+			}
+			$container.find( imageId ).removeClass( 'bar-q-image--hidden' );
+		}
 
 		// Always hide Q4 notice by default — only the specific branch below will re-show it
 		jQuery( '#question-4-bar-value-notice' ).slideUp();
@@ -1080,48 +1098,6 @@ jQuery( function() {
 		updateHitchMeasurementVisibility();
 	};
 
-	const handleBarQuestionImageDisplay = () => {
-		const $container = jQuery( '#bar-question-image-container' );
-
-		if ( ! $container.length ) {
-			return;
-		}
-
-		// Function to update visible question image
-		const updateVisibleImage = () => {
-			const shank41 = jQuery( '#bar_q_shank_41' ).val();
-			const do35 = jQuery( '#bar_q_do35_do45' ).val();
-			const adjustable = jQuery( '#bar_q_adjustable_hitch' ).val();
-
-			// Hide all images first
-			$container.find( '.bar-q-image' ).hide();
-
-			// Determine which image should be shown based on question visibility
-			if ( shank41 === '' ) {
-				// Show question 1 image
-				$container.find( '#bar-q-image-1' ).show();
-			} else if ( shank41 === 'no' && do35 === '' ) {
-				// Show question 2 image
-				$container.find( '#bar-q-image-2' ).show();
-			} else if ( shank41 === 'no' && do35 === 'no' && adjustable === '' ) {
-				// Show question 3 image
-				$container.find( '#bar-q-image-3' ).show();
-			} else if ( shank41 === 'no' && do35 === 'yes' ) {
-				// Show question 4 image
-				$container.find( '#bar-q-image-4' ).show();
-			} else {
-				// Default to question 1 image
-				$container.find( '#bar-q-image-1' ).show();
-			}
-		};
-
-		// Handler for any bar question change
-		jQuery( '#bar_q_shank_41, #bar_q_do35_do45, #bar_q_adjustable_hitch, #bar_q_tongue_85' ).on( 'change', updateVisibleImage );
-
-		// Show first question image on page load
-		updateVisibleImage();
-	};
-
 	jQuery( '#bar_options' ).on( 'change', function() {
 		const $select = jQuery( this );
 		const selectedText = $select.val();
@@ -1145,7 +1121,6 @@ jQuery( function() {
 	evaluateBarDecisionTree();
 	updateHitchMeasurementVisibility();
 	updateDescriptionNoticesVisibility();
-	handleBarQuestionImageDisplay();
 
 	// Auto-populate hitch measurement from selected question
 	const handleHitchMeasurementAutoPopulation = () => {

@@ -523,6 +523,10 @@
 		object-fit: cover;
 		background-color: #f7f7f7;
 	}
+
+	img.bar-q-image--hidden {
+		display: none !important;
+	}
 }
 
 .bar-q-image {
