@@ -457,7 +457,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 											</figure>
 									</div>
 								</div>
-								<div class="form-section-right column photographs-details" id="blk-caravan">
+								<div class="form-section-right column photographs-details no-border-bottom" id="blk-caravan">
 									<!-- Section Head -->
 									<?php if ( $sts_var_section_bar_options_title ) { ?>
 										<h3><?php echo esc_html($sts_var_section_bar_options_title); ?></h3>

@@ -360,7 +360,8 @@
 	display: none;
 }
 
-.image-caption {
+.image-caption,
+.bar-q-figure figcaption {
 	position: relative;
 	padding: 12px 14px 10px 38px;
 	letter-spacing: 0.3px;
@@ -513,7 +514,6 @@
 #bar-question-image-container {
 	width: 100%;
 	height: auto;
-	margin-bottom: 20px;
 
 	img {
 		width: 100%;
@@ -530,8 +530,15 @@
 }
 
 .bar-q-figure {
-	.figcaption {
-		margin-top: 6px;
+	margin-bottom: 0;
+	position: relative;
+
+	figcaption {
+		margin: 0;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		line-height: 1.5;
 	}
 }
 
@@ -547,4 +554,22 @@ label.question-label {
 	max-width: 100%;
 	word-wrap: break-word;
 	display: inline-block;
+}
+
+.bar-options-continue-wrapper {
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+}
+
+button#bar-options-continue-btn {
+    max-width: max-content;
+    padding: 0 20px !important;
+    text-align: right;
+	margin: 0;
+}
+
+
+.no-border-bottom {
+	border-bottom: 0 !important;
 }

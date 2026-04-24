@@ -5935,7 +5935,8 @@ Mixin for transition
 .editor-styles-wrapper .mobile-image {
   display: none;
 }
-.editor-styles-wrapper .image-caption {
+.editor-styles-wrapper .image-caption,
+.editor-styles-wrapper .bar-q-figure figcaption {
   position: relative;
   padding: 12px 38px 10px 14px;
   letter-spacing: 0.3px;
@@ -5945,10 +5946,12 @@ Mixin for transition
   width: max-content;
   box-sizing: border-box;
 }
-.editor-styles-wrapper .image-caption p {
+.editor-styles-wrapper .image-caption p,
+.editor-styles-wrapper .bar-q-figure figcaption p {
   margin: 0;
 }
-.editor-styles-wrapper .image-caption::before {
+.editor-styles-wrapper .image-caption::before,
+.editor-styles-wrapper .bar-q-figure figcaption::before {
   content: "";
   background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgNjQwIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIHY3LjAuMSBieSBAZm9udGF3ZXNvbWUgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbSBMaWNlbnNlIC0gaHR0cHM6Ly9mb250YXdlc29tZS5jb20vbGljZW5zZS9mcmVlIENvcHlyaWdodCAyMDI1IEZvbnRpY29ucywgSW5jLi0tPjxwYXRoIGZpbGw9IiMyYzJjMmMiIGQ9Ik0zMjAgMTEyQzQzNC45IDExMiA1MjggMjA1LjEgNTI4IDMyMEM1MjggNDM0LjkgNDM0LjkgNTI4IDMyMCA1MjhDMjA1LjEgNTI4IDExMiA0MzQuOSAxMTIgMzIwQzExMiAyMDUuMSAyMDUuMSAxMTIgMzIwIDExMnpNMzIwIDU3NkM0NjEuNCA1NzYgNTc2IDQ2MS40IDU3NiAzMjBDNTc2IDE3OC42IDQ2MS40IDY0IDMyMCA2NEMxNzguNiA2NCA2NCAxNzguNiA2NCAzMjBDNjQgNDYxLjQgMTc4LjYgNTc2IDMyMCA1NzZ6TTI4MCA0MDBDMjY2LjcgNDAwIDI1NiA0MTAuNyAyNTYgNDI0QzI1NiA0MzcuMyAyNjYuNyA0NDggMjgwIDQ0OEwzNjAgNDQ4QzM3My4zIDQ0OCAzODQgNDM3LjMgMzg0IDQyNEMzODQgNDEwLjcgMzczLjMgNDAwIDM2MCA0MDBMMzUyIDQwMEwzNTIgMzEyQzM1MiAyOTguNyAzNDEuMyAyODggMzI4IDI4OEwyODAgMjg4QzI2Ni43IDI4OCAyNTYgMjk4LjcgMjU2IDMxMkMyNTYgMzI1LjMgMjY2LjcgMzM2IDI4MCAzMzZMMzA0IDMzNkwzMDQgNDAwTDI4MCA0MDB6TTMyMCAyNTZDMzM3LjcgMjU2IDM1MiAyNDEuNyAzNTIgMjI0QzM1MiAyMDYuMyAzMzcuNyAxOTIgMzIwIDE5MkMzMDIuMyAxOTIgMjg4IDIwNi4zIDI4OCAyMjRDMjg4IDI0MS43IDMwMi4zIDI1NiAzMjAgMjU2eiIvPjwvc3ZnPgo=);
   background-size: contain;
@@ -6046,7 +6049,6 @@ Mixin for transition
 .editor-styles-wrapper #bar-question-image-container {
   width: 100%;
   height: auto;
-  margin-bottom: 20px;
 }
 .editor-styles-wrapper #bar-question-image-container img {
   width: 100%;
@@ -6060,8 +6062,16 @@ Mixin for transition
 .editor-styles-wrapper #bar-question-image-container .bar-q-figure.bar-q-image--hidden {
   display: none !important;
 }
-.editor-styles-wrapper .bar-q-figure .figcaption {
-  margin-top: 6px;
+.editor-styles-wrapper .bar-q-figure {
+  margin-bottom: 0;
+  position: relative;
+}
+.editor-styles-wrapper .bar-q-figure figcaption {
+  margin: 0;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  line-height: 1.5;
 }
 .editor-styles-wrapper .bar-q-image {
   width: 100%;
@@ -6075,6 +6085,21 @@ Mixin for transition
   max-width: 100%;
   word-wrap: break-word;
   display: inline-block;
+}
+.editor-styles-wrapper .bar-options-continue-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+.editor-styles-wrapper button#bar-options-continue-btn {
+  max-width: -moz-max-content;
+  max-width: max-content;
+  padding: 0 20px !important;
+  text-align: left;
+  margin: 0;
+}
+.editor-styles-wrapper .no-border-bottom {
+  border-bottom: 0 !important;
 }
 .editor-styles-wrapper .wp-block-button .wp-block-button__link {
   box-sizing: border-box;
