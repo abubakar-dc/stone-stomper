@@ -6057,8 +6057,11 @@ Mixin for transition
      object-fit: cover;
   background-color: #f7f7f7;
 }
-.editor-styles-wrapper #bar-question-image-container img.bar-q-image--hidden {
+.editor-styles-wrapper #bar-question-image-container .bar-q-figure.bar-q-image--hidden {
   display: none !important;
+}
+.editor-styles-wrapper .bar-q-figure .figcaption {
+  margin-top: 6px;
 }
 .editor-styles-wrapper .bar-q-image {
   width: 100%;

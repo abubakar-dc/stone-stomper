@@ -5,6 +5,8 @@
 import slick from '../vendors/slick.min';
 import Lity from '../vendors/lity.js';
 
+let finalSectionsUnlocked = false;
+
 jQuery( document ).on( 'scroll', function() {
 	if ( jQuery( document ).scrollTop() > 0 ) {
 		jQuery( 'header, body' ).addClass( 'shrink' );
@@ -257,8 +259,6 @@ jQuery( document ).ready( function() {
 	validateVehicleDetails( { target: document.querySelector( '#vehicle-details' ) } );
 	validateCaravanDetails( { target: document.querySelector( '#caravan-details' ) } );
 	validateBarOptions( { target: document.querySelector( '#bar-options-section' ) } );
-
-	let finalSectionsUnlocked = false;
 
 	function revealFinalSections() {
 		const isFilled = allRequiredFilled( '#bar-options-section' );
@@ -896,8 +896,7 @@ jQuery( function() {
 		// Show success message with the bar option value (from question metadata)
 		// The barOptionValue is the actual option selected from ACF question config
 		if ( barOptionValue ) {
-			$result.html( '<strong>Selected:</strong> ' + barOptionValue ).show();
-			console.log( 'Bar option selected:', barOptionValue );
+			$result.html( 'Bar Option Selected: ' + '<strong>' + barOptionValue + '</strong>' ).show();
 		}
 
 		// If we found a matching dropdown option, select it
@@ -983,18 +982,21 @@ jQuery( function() {
 		// Update corresponding question images
 		const $container = jQuery( '#bar-question-image-container' );
 		if ( $container.length ) {
-			$container.find( '.bar-q-image' ).addClass( 'bar-q-image--hidden' );
-			let imageId = '#bar-q-image-1'; // default
+			// Hide all figures first
+			$container.find( '.bar-q-figure' ).addClass( 'bar-q-image--hidden' );
+
+			// Show the appropriate figure
+			let figureId = '#bar-q-figure-1'; // default
 			if ( shank41 === 'no' && do35 === 'yes' ) {
-				imageId = '#bar-q-image-4';
+				figureId = '#bar-q-figure-4';
 			} else if ( shank41 === 'no' && do35 === 'no' && adjustable !== '' ) {
-				imageId = '#bar-q-image-3';
+				figureId = '#bar-q-figure-3';
 			} else if ( shank41 === 'no' && do35 === 'no' ) {
-				imageId = '#bar-q-image-3';
+				figureId = '#bar-q-figure-3';
 			} else if ( shank41 === 'no' && do35 === '' ) {
-				imageId = '#bar-q-image-2';
+				figureId = '#bar-q-figure-2';
 			}
-			$container.find( imageId ).removeClass( 'bar-q-image--hidden' );
+			$container.find( figureId ).removeClass( 'bar-q-image--hidden' );
 		}
 
 		// Always hide Q4 notice by default — only the specific branch below will re-show it
@@ -1104,7 +1106,6 @@ jQuery( function() {
 		const selectedOption = $select.find( 'option:selected' );
 		const fixedValue = parseInt( selectedOption.data( 'value' ) ) || 0;
 		const mode = detectMeasurementMode( selectedText );
-
 		jQuery( '#bar_option_value' ).val( fixedValue || '' );
 		jQuery( '#sts_var_caravan_bar_option' ).val( selectedText || '' );
 		setMeasurementVisibility( mode );

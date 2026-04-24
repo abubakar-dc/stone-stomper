@@ -7479,8 +7479,12 @@ ul.wc-block-components-totals-discount__coupon-list button.wc-block-components-c
      object-fit: cover;
   background-color: #f7f7f7;
 }
-#bar-question-image-container img.bar-q-image--hidden {
+#bar-question-image-container .bar-q-figure.bar-q-image--hidden {
   display: none !important;
+}
+
+.bar-q-figure .figcaption {
+  margin-top: 6px;
 }
 
 .bar-q-image {

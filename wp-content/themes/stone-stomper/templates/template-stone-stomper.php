@@ -58,6 +58,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 	$sts_var_bar_question_1_label = $sts_var_bar_question_1['label'] ?? 'Do you have greater than 41mm on your shank?';
 	$sts_var_bar_question_1_image = $sts_var_bar_question_1['image'] ?? null;
 	$sts_var_bar_question_1_image_url = $sts_var_bar_question_1_image ? wp_get_attachment_image_url($sts_var_bar_question_1_image, 'full') : '';
+	$sts_var_bar_question_1_image_caption = $sts_var_bar_question_1_image ? wp_get_attachment_caption($sts_var_bar_question_1_image) : '';
 	$sts_var_bar_question_1_hitch_measurement = $sts_var_bar_question_1['hitch_measurement'] ?? null;
 	$sts_var_bar_question_1_bar_option_value = $sts_var_bar_question_1['bar_option_value'] ?? null;
 
@@ -65,6 +66,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 	$sts_var_bar_question_2_label = $sts_var_bar_question_2['label'] ?? 'Do you have a DO35 or DO45 hitch?';
 	$sts_var_bar_question_2_image = $sts_var_bar_question_2['image'] ?? null;
 	$sts_var_bar_question_2_image_url = $sts_var_bar_question_2_image ? wp_get_attachment_image_url($sts_var_bar_question_2_image, 'full') : '';
+	$sts_var_bar_question_2_image_caption = $sts_var_bar_question_2_image ? wp_get_attachment_caption($sts_var_bar_question_2_image) : '';
 	$sts_var_bar_question_2_hitch_measurement = $sts_var_bar_question_2['hitch_measurement'] ?? null;
 	$sts_var_bar_question_2_bar_option_value = $sts_var_bar_question_2['bar_option_value'] ?? null;
 
@@ -73,6 +75,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 	$sts_var_bar_question_3_label = $sts_var_bar_question_3['label'] ?? 'Do you have an Adjustable Hitch?';
 	$sts_var_bar_question_3_image = $sts_var_bar_question_3['image'] ?? null;
 	$sts_var_bar_question_3_image_url = $sts_var_bar_question_3_image ? wp_get_attachment_image_url($sts_var_bar_question_3_image, 'full') : '';
+	$sts_var_bar_question_3_image_caption = $sts_var_bar_question_3_image ? wp_get_attachment_caption($sts_var_bar_question_3_image) : '';
 	$sts_var_bar_question_3_hitch_measurement = $sts_var_bar_question_3['hitch_measurement'] ?? null;
 	$sts_var_bar_question_3_bar_option_value = $sts_var_bar_question_3['bar_option_value'] ?? null;
 
@@ -81,6 +84,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 	$sts_var_bar_question_4_label = $sts_var_bar_question_4['label'] ?? 'Do you have 85mm on your tongue?';
 	$sts_var_bar_question_4_image = $sts_var_bar_question_4['image'] ?? null;
 	$sts_var_bar_question_4_image_url = $sts_var_bar_question_4_image ? wp_get_attachment_image_url($sts_var_bar_question_4_image, 'full') : '';
+	$sts_var_bar_question_4_image_caption = $sts_var_bar_question_4_image ? wp_get_attachment_caption($sts_var_bar_question_4_image) : '';
 	$sts_var_bar_question_4_hitch_measurement = $sts_var_bar_question_4['hitch_measurement'] ?? null;
 	$sts_var_bar_question_4_bar_option_value = $sts_var_bar_question_4['bar_option_value'] ?? null;
 	$sts_var_bar_question_4_bar_option_value_yes = $sts_var_bar_question_4['bar_option_value_yes'] ?? null;
@@ -427,10 +431,30 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										data-q2-image="<?php echo esc_attr($sts_var_bar_question_2_image_url); ?>"
 										data-q3-image="<?php echo esc_attr($sts_var_bar_question_3_image_url); ?>"
 										data-q4-image="<?php echo esc_attr($sts_var_bar_question_4_image_url); ?>">
-									<img id="bar-q-image-1" class="bar-q-image" data-question="1" src="<?php echo esc_attr($sts_var_bar_question_1_image_url); ?>" alt="Question 1" />
-									<img id="bar-q-image-2" class="bar-q-image bar-q-image--hidden" data-question="2" src="<?php echo esc_attr($sts_var_bar_question_2_image_url); ?>" alt="Question 2" />
-									<img id="bar-q-image-3" class="bar-q-image bar-q-image--hidden" data-question="3" src="<?php echo esc_attr($sts_var_bar_question_3_image_url); ?>" alt="Question 3" />
-									<img id="bar-q-image-4" class="bar-q-image bar-q-image--hidden" data-question="4" src="<?php echo esc_attr($sts_var_bar_question_4_image_url); ?>" alt="Question 4" />
+											<figure id="bar-q-figure-1" class="bar-q-figure bar-q-image--hidden">
+												<img id="bar-q-image-1" class="bar-q-image" data-question="1" src="<?php echo esc_attr($sts_var_bar_question_1_image_url); ?>" alt="Question 1" />
+												<?php if ($sts_var_bar_question_1_image_caption) { ?>
+													<figcaption><?php echo esc_html($sts_var_bar_question_1_image_caption); ?></figcaption>
+												<?php } ?>
+											</figure>
+											<figure id="bar-q-figure-2" class="bar-q-figure bar-q-image--hidden">
+												<img id="bar-q-image-2" class="bar-q-image" data-question="2" src="<?php echo esc_attr($sts_var_bar_question_2_image_url); ?>" alt="Question 2" />
+												<?php if ($sts_var_bar_question_2_image_caption) { ?>
+													<figcaption><?php echo esc_html($sts_var_bar_question_2_image_caption); ?></figcaption>
+												<?php } ?>
+											</figure>
+											<figure id="bar-q-figure-3" class="bar-q-figure bar-q-image--hidden">
+												<img id="bar-q-image-3" class="bar-q-image" data-question="3" src="<?php echo esc_attr($sts_var_bar_question_3_image_url); ?>" alt="Question 3" />
+												<?php if ($sts_var_bar_question_3_image_caption) { ?>
+													<figcaption><?php echo esc_html($sts_var_bar_question_3_image_caption); ?></figcaption>
+												<?php } ?>
+											</figure>
+											<figure id="bar-q-figure-4" class="bar-q-figure bar-q-image--hidden">
+												<img id="bar-q-image-4" class="bar-q-image" data-question="4" src="<?php echo esc_attr($sts_var_bar_question_4_image_url); ?>" alt="Question 4" />
+												<?php if ($sts_var_bar_question_4_image_caption) { ?>
+													<figcaption><?php echo esc_html($sts_var_bar_question_4_image_caption); ?></figcaption>
+												<?php } ?>
+											</figure>
 									</div>
 								</div>
 								<div class="form-section-right column photographs-details" id="blk-caravan">
@@ -495,7 +519,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 												<option value="no" data-bar-option-value="<?php echo esc_attr($sts_var_bar_question_4_bar_option_value_no); ?>">No</option>
 											</select>
 											<div id="question-4-bar-value-notice" class="note notice-bar" style="display:none;">
-												<strong>Bar Option:</strong> <span id="question-4-bar-value-display"></span>
+												Bar Option Selected: <strong><span id="question-4-bar-value-display"></span></strong>
 											</div>
 										</div>
 										<!-- Hidden fields to store bar option value and hitch measurement from JavaScript -->
