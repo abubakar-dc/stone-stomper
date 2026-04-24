@@ -387,7 +387,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										?>
 									</div>
 									<div class="grid cols-2 ">
-										<div class="field">
+										<div class="field van-make-group">
 											<label class="req" for="van_make">Caravan Make</label>
 											<select id="van_make" name="caravan_make" required>
 												<?php

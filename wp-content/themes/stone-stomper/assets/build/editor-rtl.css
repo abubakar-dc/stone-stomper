@@ -6105,6 +6105,9 @@ Mixin for transition
 .editor-styles-wrapper .no-border-bottom {
   border-bottom: 0 !important;
 }
+.editor-styles-wrapper .van-make-group select {
+  border-color: var(--ss_black) !important;
+}
 .editor-styles-wrapper .wp-block-button .wp-block-button__link {
   box-sizing: border-box;
   position: relative;

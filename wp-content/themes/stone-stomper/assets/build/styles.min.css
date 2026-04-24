@@ -7534,6 +7534,10 @@ button#bar-options-continue-btn {
   border-bottom: 0 !important;
 }
 
+.van-make-group select {
+  border-color: var(--ss_black) !important;
+}
+
 /*-------------------------------------------------
 >> Styles for Wp Buttons
 -------------------------------------------------*/

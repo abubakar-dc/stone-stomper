@@ -577,3 +577,9 @@ button#bar-options-continue-btn {
 .no-border-bottom {
 	border-bottom: 0 !important;
 }
+
+.van-make-group {
+	select {
+		border-color: var(--ss_black) !important;
+	}
+}
