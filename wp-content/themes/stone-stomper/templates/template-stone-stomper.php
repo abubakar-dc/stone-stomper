@@ -425,7 +425,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 							</div>
 							<!-- Bar Option -->
 							<div id="bar-options-section" class="section-disable  order-form-section-inner d-flex form-bar-options-section justify-content-between align-items-start image-at-left">
-								<div class="form-section-left hide-on-mobile column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
+								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div id="bar-question-image-container" class="bar-question-image-display"
 										data-q1-image="<?php echo esc_attr($sts_var_bar_question_1_image_url); ?>"
 										data-q2-image="<?php echo esc_attr($sts_var_bar_question_2_image_url); ?>"
