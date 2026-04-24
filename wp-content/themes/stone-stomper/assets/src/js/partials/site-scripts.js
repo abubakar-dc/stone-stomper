@@ -8,6 +8,10 @@ import Lity from '../vendors/lity.js';
 let finalSectionsUnlocked = false;
 
 function scrollToSection( id ) {
+	// Skip scrolling if form data is being restored from storage
+	if ( window.isRestoringFormData ) {
+		return;
+	}
 	const target = document.querySelector( id );
 	if ( target ) {
 		requestAnimationFrame( function() {

@@ -369,6 +369,10 @@
 	margin-bottom: 20px;
 	width: max-content;
 	box-sizing: border-box;
+	@include font(open, reg, family weight);
+	font-size: 15px;
+	color : var(--ss_body_color);
+
 
 	p {
 		margin: 0;

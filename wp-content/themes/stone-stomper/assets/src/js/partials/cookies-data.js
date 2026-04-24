@@ -6,6 +6,9 @@ jQuery( function() {
 	const restoreMaxTries = 25;
 	let isRestoring = false;
 
+	// Make isRestoring accessible globally for other scripts
+	window.isRestoringFormData = false;
+
 	function saveData( data ) {
 		const payload = { ts: Date.now(), data };
 		try {
@@ -55,12 +58,10 @@ jQuery( function() {
 						if ( this.checked ) {
 							data.acc_upsells.push( String( el.data( 'product-id' ) ) );
 						}
+					} else if ( name === 'support_pockets' ) {
+						data.support_pockets_checkbox = this.checked ? '1' : '0';
 					} else {
-						if ( name === 'support_pockets' ) {
-							data.support_pockets_checkbox = this.checked ? '1' : '0';
-						} else {
-							data[ name ] = this.checked ? '1' : '0';
-						}
+						data[ name ] = this.checked ? '1' : '0';
 					}
 				} else if ( t === 'radio' ) {
 					if ( el.closest( '.stone-stomper-supports' ).length ) {
@@ -338,6 +339,7 @@ jQuery( function() {
 			return;
 		}
 		isRestoring = true;
+		window.isRestoringFormData = true;
 		Object.keys( savedData ).forEach( ( key ) => {
 			if ( key === 'acc_upsells' || key === 'support_pockets' || key === 'toolbox' || key === 'factory_stoneguard' ) {
 				return;
@@ -367,6 +369,7 @@ jQuery( function() {
 				jQuery( '#caravan-details input, #caravan-details select, #caravan-details textarea' ).trigger( 'change' );
 				jQuery( '#bar-options-section input, #bar-options-section select, #bar-options-section textarea' ).trigger( 'change' );
 				isRestoring = false;
+				window.isRestoringFormData = false;
 				jQuery( '#barwidth, #a_frame_length' ).trigger( 'change' );
 				autosave();
 			}, 800 );

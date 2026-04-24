@@ -5945,6 +5945,10 @@ Mixin for transition
   width: -moz-max-content;
   width: max-content;
   box-sizing: border-box;
+  font-family: "Open Sans", arial, sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  color: var(--ss_body_color);
 }
 .editor-styles-wrapper .image-caption p,
 .editor-styles-wrapper .bar-q-figure figcaption p {
