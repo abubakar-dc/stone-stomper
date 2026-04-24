@@ -365,7 +365,8 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										<?php
 										}
 											}
-										} ?>
+										}
+									?>
 									<div class="vehicle-image  mobile-image" id="caravan-images" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
 										<?php
 											if($sts_var_caravan_detail_factory_stoneguard ){
@@ -465,27 +466,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 									if($sts_var_section_bar_options_description){ ?>
 										<p><?php echo html_entity_decode($sts_var_section_bar_options_description); ?></p>
 									<?php } ?>
-									<!-- Mobile Image -->
-									<div class="vehicle-image mobile-form-image-slider" id="caravan-images" tabindex="0" role="img"  aria-label="Image illustrating the content of this block">
-										<?php if($sts_var_section_bar_options_bar_gallery){ ?>
-											<?php foreach($sts_var_section_bar_options_bar_gallery as $sts_key => $photo){
-												$caption = wp_get_attachment_caption( $photo );
-												?>
-												<div class="slick-slide">
-													<div class="slider-image">
-														<?php StoneStomper::the_attachment_image($photo,1200 ); ?>
-														<?php if ( $caption ) { ?>
-															<div class="image-caption-area">
-																<div class="image-caption">
-																	<p><?php echo esc_html( $caption ); ?></p>
-																</div>
-															</div>
-														<?php } ?>
-													</div>
-												</div>
-											<?php }
-										} ?>
-									</div>
 									<div class="grid cols-2 " data-q1-hitch="<?php echo esc_attr($sts_var_bar_question_1_hitch_measurement); ?>" data-q2-hitch="<?php echo esc_attr($sts_var_bar_question_2_hitch_measurement); ?>" data-q3-hitch="<?php echo esc_attr($sts_var_bar_question_3_hitch_measurement); ?>" data-q4-hitch="<?php echo esc_attr($sts_var_bar_question_4_hitch_measurement); ?>">
 										<div class="field">
 											<label class="req question-label" for="bar_q_shank_41"><?php echo esc_html( $sts_var_bar_question_1_label ); ?></label>
@@ -554,7 +534,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 												Please attach clear photographs in the next section and we will identify the right option for you.
 											</div>
 										<?php } ?>
-										<div class="bar-options-continue-wrapper" style="margin-top: 30px;">
+										<div class="bar-options-continue-wrapper" id="bar-options-continue-wrapper" style="margin-top: 30px; display: none;">
 											<button type="button" id="bar-options-continue-btn" class="wp-block-button__link" style="width: 100%; padding: 20px; cursor: pointer;">
 												Continue
 											</button>

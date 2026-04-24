@@ -1122,6 +1122,7 @@ jQuery( function() {
 		evaluateBarDecisionTree();
 		updateHitchMeasurementVisibility();
 		updateDescriptionNoticesVisibility();
+		updateContinueButtonVisibility();
 		// Reset the unlock flag when any question changes so validation is re-checked
 		finalSectionsUnlocked = false;
 		console.log( 'Question changed - resetting finalSectionsUnlocked' );
@@ -1129,6 +1130,37 @@ jQuery( function() {
 	evaluateBarDecisionTree();
 	updateHitchMeasurementVisibility();
 	updateDescriptionNoticesVisibility();
+
+	// Determine if Continue button should be visible based on decision tree
+	const updateContinueButtonVisibility = () => {
+		const shank41 = jQuery( '#bar_q_shank_41' ).val();
+		const do35 = jQuery( '#bar_q_do35_do45' ).val();
+		const adjustable = jQuery( '#bar_q_adjustable_hitch' ).val();
+		const tongue85 = jQuery( '#bar_q_tongue_85' ).val();
+
+		let shouldShowButton = false;
+
+		// Scenario 1: Q1 = Yes (final answer)
+		if ( shank41 === 'yes' ) {
+			shouldShowButton = true;
+		}
+		// Scenario 2-3: Q1 = No, Q2 = Yes, Q4 has value (final answer)
+		else if ( shank41 === 'no' && do35 === 'yes' && tongue85 !== '' ) {
+			shouldShowButton = true;
+		}
+		// Scenario 4-5: Q1 = No, Q2 = No, Q3 has value (final answer)
+		else if ( shank41 === 'no' && do35 === 'no' && adjustable !== '' ) {
+			shouldShowButton = true;
+		}
+
+		if ( shouldShowButton ) {
+			jQuery( '#bar-options-continue-wrapper' ).slideDown();
+		} else {
+			jQuery( '#bar-options-continue-wrapper' ).slideUp();
+		}
+	};
+
+	updateContinueButtonVisibility();
 
 	// Handle Continue button click for bar options section
 	jQuery( '#bar-options-continue-btn' ).on( 'click', function() {
