@@ -650,7 +650,7 @@ function setupImageUpload( inputId, listId, slot ) {
 
 	input.addEventListener( 'change', function() {
 		const newFiles = Array.from( input.files );
-		allFiles = allFiles.concat( newFiles ); // merge old and new
+		allFiles = newFiles; // replace with new selection
 		showFiles( allFiles, list );
 		autoUpload( allFiles, slot, list );
 	} );
