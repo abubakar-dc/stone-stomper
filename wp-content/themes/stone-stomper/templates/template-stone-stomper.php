@@ -431,25 +431,25 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										data-q2-image="<?php echo esc_attr($sts_var_bar_question_2_image_url); ?>"
 										data-q3-image="<?php echo esc_attr($sts_var_bar_question_3_image_url); ?>"
 										data-q4-image="<?php echo esc_attr($sts_var_bar_question_4_image_url); ?>">
-											<figure id="bar-q-figure-1" class="bar-q-figure bar-q-image--hidden">
+											<figure id="bar-q-figure-1" class="bar-q-figure image-cover bar-q-image--hidden">
 												<img id="bar-q-image-1" class="bar-q-image" data-question="1" src="<?php echo esc_attr($sts_var_bar_question_1_image_url); ?>" alt="Question 1" />
 												<?php if ($sts_var_bar_question_1_image_caption) { ?>
 													<figcaption><?php echo esc_html($sts_var_bar_question_1_image_caption); ?></figcaption>
 												<?php } ?>
 											</figure>
-											<figure id="bar-q-figure-2" class="bar-q-figure bar-q-image--hidden">
+											<figure id="bar-q-figure-2" class="bar-q-figure image-cover bar-q-image--hidden">
 												<img id="bar-q-image-2" class="bar-q-image" data-question="2" src="<?php echo esc_attr($sts_var_bar_question_2_image_url); ?>" alt="Question 2" />
 												<?php if ($sts_var_bar_question_2_image_caption) { ?>
 													<figcaption><?php echo esc_html($sts_var_bar_question_2_image_caption); ?></figcaption>
 												<?php } ?>
 											</figure>
-											<figure id="bar-q-figure-3" class="bar-q-figure bar-q-image--hidden">
+											<figure id="bar-q-figure-3" class="bar-q-figure image-cover bar-q-image--hidden">
 												<img id="bar-q-image-3" class="bar-q-image" data-question="3" src="<?php echo esc_attr($sts_var_bar_question_3_image_url); ?>" alt="Question 3" />
 												<?php if ($sts_var_bar_question_3_image_caption) { ?>
 													<figcaption><?php echo esc_html($sts_var_bar_question_3_image_caption); ?></figcaption>
 												<?php } ?>
 											</figure>
-											<figure id="bar-q-figure-4" class="bar-q-figure bar-q-image--hidden">
+											<figure id="bar-q-figure-4" class="bar-q-figure image-cover bar-q-image--hidden">
 												<img id="bar-q-image-4" class="bar-q-image" data-question="4" src="<?php echo esc_attr($sts_var_bar_question_4_image_url); ?>" alt="Question 4" />
 												<?php if ($sts_var_bar_question_4_image_caption) { ?>
 													<figcaption><?php echo esc_html($sts_var_bar_question_4_image_caption); ?></figcaption>
@@ -554,6 +554,11 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 												Please attach clear photographs in the next section and we will identify the right option for you.
 											</div>
 										<?php } ?>
+										<div class="bar-options-continue-wrapper" style="margin-top: 30px;">
+											<button type="button" id="bar-options-continue-btn" class="wp-block-button__link" style="width: 100%; padding: 20px; cursor: pointer;">
+												Continue
+											</button>
+										</div>
 									</div>
 								</div>
 							</div>

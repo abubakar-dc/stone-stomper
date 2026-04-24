@@ -7,6 +7,15 @@ import Lity from '../vendors/lity.js';
 
 let finalSectionsUnlocked = false;
 
+function scrollToSection( id ) {
+	const target = document.querySelector( id );
+	if ( target ) {
+		requestAnimationFrame( function() {
+			target.scrollIntoView( { behavior: 'smooth', block: 'start' } );
+		} );
+	}
+}
+
 jQuery( document ).on( 'scroll', function() {
 	if ( jQuery( document ).scrollTop() > 0 ) {
 		jQuery( 'header, body' ).addClass( 'shrink' );
@@ -31,15 +40,6 @@ jQuery( document ).ready( function() {
 
 jQuery( document ).ready( function() {
 	const meshOnlyProduct = '712';
-
-	function scrollToSection( id ) {
-		const target = document.querySelector( id );
-		if ( target ) {
-			requestAnimationFrame( function() {
-				target.scrollIntoView( { behavior: 'smooth', block: 'start' } );
-			} );
-		}
-	}
 
 	function allRequiredFilled( section ) {
 		let filled = true;
@@ -97,6 +97,15 @@ jQuery( document ).ready( function() {
 						jQuery( '#bar-options-section' ).addClass( 'section-disable' );
 						jQuery( '#photographs-details, #final-measurements, #final-summary' ).removeClass( 'section-disable' );
 						scrollToSection( '#photographs-details' );
+						return;
+					}
+
+					// Skip auto-scroll for bar options - users will click Continue button
+					if ( currentSection === '#bar-options-section' ) {
+						const section = jQuery( nextSection );
+						if ( section.hasClass( 'section-disable' ) ) {
+							section.removeClass( 'section-disable' );
+						}
 						return;
 					}
 
@@ -269,9 +278,7 @@ jQuery( document ).ready( function() {
 			console.log( 'All sections filled - unlocking photographs section' );
 			const sections = jQuery( '#photographs-details, #final-measurements, #final-summary' );
 			sections.removeClass( 'section-disable' );
-			setTimeout( function() {
-				scrollToSection( '#photographs-details' );
-			}, 300 );
+			// Skip auto-scroll for bar options - users will click Continue button
 		} else if ( ! isFilled ) {
 			console.log( 'Form not complete - blocking progression' );
 		}
@@ -1122,6 +1129,11 @@ jQuery( function() {
 	evaluateBarDecisionTree();
 	updateHitchMeasurementVisibility();
 	updateDescriptionNoticesVisibility();
+
+	// Handle Continue button click for bar options section
+	jQuery( '#bar-options-continue-btn' ).on( 'click', function() {
+		scrollToSection( '#photographs-details' );
+	} );
 
 	// Auto-populate hitch measurement from selected question
 	const handleHitchMeasurementAutoPopulation = () => {
