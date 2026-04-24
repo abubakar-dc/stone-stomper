@@ -90,6 +90,11 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 	$sts_var_bar_question_4_bar_option_value_yes = $sts_var_bar_question_4['bar_option_value_yes'] ?? null;
 	$sts_var_bar_question_4_bar_option_value_no = $sts_var_bar_question_4['bar_option_value_no'] ?? null;
 
+	// Measurement Image (for Option 2 and Option 3)
+	$sts_var_measurement_image = $sts_var_section_bar_options['measurement_image'] ?? null;
+	$sts_var_measurement_image_url = $sts_var_measurement_image ? wp_get_attachment_image_url($sts_var_measurement_image, 'full') : '';
+	$sts_var_measurement_image_caption = $sts_var_measurement_image ? wp_get_attachment_caption($sts_var_measurement_image) : '';
+
 	// Final measurements Video
 
 	$sts_var_cptr_mrmnts_video_btn_text 	   	= $sts_fields['sts_var_cptr_mrmnts_video_btn_text'] ?? null;
@@ -454,6 +459,14 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 												<img id="bar-q-image-4" class="bar-q-image" data-question="4" src="<?php echo esc_attr($sts_var_bar_question_4_image_url); ?>" alt="Question 4" />
 												<?php if ($sts_var_bar_question_4_image_caption) { ?>
 													<figcaption><?php echo esc_html($sts_var_bar_question_4_image_caption); ?></figcaption>
+												<?php } ?>
+											</figure>
+											<figure id="measurement-figure" class="bar-q-figure image-cover bar-q-image--hidden">
+												<img id="measurement-image" class="bar-q-image" src="<?php echo esc_attr($sts_var_measurement_image_url); ?>" alt="Additional Measurement Guide" />
+												<?php if ($sts_var_measurement_image_caption) { ?>
+													<figcaption><?php echo esc_html($sts_var_measurement_image_caption); ?></figcaption>
+												<?php } else { ?>
+													<figcaption>Measurement Guide</figcaption>
 												<?php } ?>
 											</figure>
 									</div>
