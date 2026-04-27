@@ -997,17 +997,20 @@ jQuery( function() {
 			$container.find( '.bar-q-figure' ).addClass( 'bar-q-image--hidden' );
 
 			// Check if we need to show measurement image for scenarios that require additional measurement
-			// Scenario 1: Q1=Yes (Option 1 shank with measurement)
-			// Scenario 3: Q1=No, Q2=No, Q3=Yes (Option 3 adjustable with measurement)
-			// Note: When Q1=No, Q2=Yes, Q4=No (Option 2), show Q4 question image instead
-			const showMeasurementImage = ( shank41 === 'yes' ) || ( shank41 === 'no' && do35 === 'no' && adjustable === 'yes' );
+			// Q1=Yes shows Q1's measurement image
+			// Q1=No, Q2=No, Q3=Yes shows Q3's measurement image
+			const showMeasurementImageQ1 = ( shank41 === 'yes' );
+			const showMeasurementImageQ3 = ( shank41 === 'no' && do35 === 'no' && adjustable === 'yes' );
 
-			if ( showMeasurementImage ) {
-				// For measurement scenarios: hide all question images and show ONLY measurement image
-				$container.find( '#measurement-figure' ).removeClass( 'bar-q-image--hidden' );
+			if ( showMeasurementImageQ1 ) {
+				// Show Q1's measurement image
+				$container.find( '#measurement-figure-q1' ).removeClass( 'bar-q-image--hidden' );
+			} else if ( showMeasurementImageQ3 ) {
+				// Show Q3's measurement image
+				$container.find( '#measurement-figure-q3' ).removeClass( 'bar-q-image--hidden' );
 			} else {
 				// For question scenarios: hide measurement and show appropriate question figure
-				$container.find( '#measurement-figure' ).addClass( 'bar-q-image--hidden' );
+				$container.find( '#measurement-figure-q1, #measurement-figure-q3' ).addClass( 'bar-q-image--hidden' );
 
 				// Show the appropriate question figure
 				let figureId = '#bar-q-figure-1'; // default

@@ -5819,6 +5819,10 @@ Mixin for transition
   margin: 25px 0 30px;
   display: block;
 }
+.editor-styles-wrapper #caravan-details .vehicle-images,
+.editor-styles-wrapper #caravan-details .vehicle-image {
+  width: 100%;
+}
 .editor-styles-wrapper .form-image-slider {
   padding-bottom: 40px;
 }

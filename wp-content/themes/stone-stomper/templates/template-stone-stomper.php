@@ -61,6 +61,9 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 	$sts_var_bar_question_1_image_caption = $sts_var_bar_question_1_image ? wp_get_attachment_caption($sts_var_bar_question_1_image) : '';
 	$sts_var_bar_question_1_hitch_measurement = $sts_var_bar_question_1['hitch_measurement'] ?? null;
 	$sts_var_bar_question_1_bar_option_value = $sts_var_bar_question_1['bar_option_value'] ?? null;
+	$sts_var_bar_question_1_measurement_image = $sts_var_bar_question_1['measurement_image'] ?? null;
+	$sts_var_bar_question_1_measurement_image_url = $sts_var_bar_question_1_measurement_image ? wp_get_attachment_image_url($sts_var_bar_question_1_measurement_image, 'full') : '';
+	$sts_var_bar_question_1_measurement_image_caption = $sts_var_bar_question_1_measurement_image ? wp_get_attachment_caption($sts_var_bar_question_1_measurement_image) : '';
 
 	// Question 2
 	$sts_var_bar_question_2_label = $sts_var_bar_question_2['label'] ?? 'Do you have a DO35 or DO45 hitch?';
@@ -78,6 +81,9 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 	$sts_var_bar_question_3_image_caption = $sts_var_bar_question_3_image ? wp_get_attachment_caption($sts_var_bar_question_3_image) : '';
 	$sts_var_bar_question_3_hitch_measurement = $sts_var_bar_question_3['hitch_measurement'] ?? null;
 	$sts_var_bar_question_3_bar_option_value = $sts_var_bar_question_3['bar_option_value'] ?? null;
+	$sts_var_bar_question_3_measurement_image = $sts_var_bar_question_3['measurement_image'] ?? null;
+	$sts_var_bar_question_3_measurement_image_url = $sts_var_bar_question_3_measurement_image ? wp_get_attachment_image_url($sts_var_bar_question_3_measurement_image, 'full') : '';
+	$sts_var_bar_question_3_measurement_image_caption = $sts_var_bar_question_3_measurement_image ? wp_get_attachment_caption($sts_var_bar_question_3_measurement_image) : '';
 
 	// Question 4
 
@@ -89,11 +95,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 	$sts_var_bar_question_4_bar_option_value = $sts_var_bar_question_4['bar_option_value'] ?? null;
 	$sts_var_bar_question_4_bar_option_value_yes = $sts_var_bar_question_4['bar_option_value_yes'] ?? null;
 	$sts_var_bar_question_4_bar_option_value_no = $sts_var_bar_question_4['bar_option_value_no'] ?? null;
-
-	// Measurement Image (for Option 2 and Option 3)
-	$sts_var_measurement_image = $sts_var_section_bar_options['measurement_image'] ?? null;
-	$sts_var_measurement_image_url = $sts_var_measurement_image ? wp_get_attachment_image_url($sts_var_measurement_image, 'full') : '';
-	$sts_var_measurement_image_caption = $sts_var_measurement_image ? wp_get_attachment_caption($sts_var_measurement_image) : '';
 
 	// Final measurements Video
 
@@ -338,7 +339,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 							<div id="caravan-details" class="section-disable  order-form-section-inner d-flex form-carvan-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="grid cols-2 vehicle-images">
-										<div class="vehicle-images mobile-image-hide" id="caravan-images" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
+										<div class="vehicle-images mobile-image-hide image-cover" id="caravan-images" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 											<?php if ( $sts_var_caravan_detail_factory_stoneguard ) { ?>
 												<div class="vehicle-image">
 													<?php StoneStomper::the_attachment_image( $sts_var_caravan_detail_factory_stoneguard, 1200 ); ?>
@@ -461,10 +462,18 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 													<figcaption><?php echo esc_html($sts_var_bar_question_4_image_caption); ?></figcaption>
 												<?php } ?>
 											</figure>
-											<figure id="measurement-figure" class="bar-q-figure image-cover bar-q-image--hidden">
-												<img id="measurement-image" class="bar-q-image" src="<?php echo esc_attr($sts_var_measurement_image_url); ?>" alt="Additional Measurement Guide" />
-												<?php if ($sts_var_measurement_image_caption) { ?>
-													<figcaption><?php echo esc_html($sts_var_measurement_image_caption); ?></figcaption>
+											<figure id="measurement-figure-q1" class="bar-q-figure image-cover bar-q-image--hidden">
+												<img id="measurement-image-q1" class="bar-q-image" src="<?php echo esc_attr($sts_var_bar_question_1_measurement_image_url); ?>" alt="Additional Measurement Guide" />
+												<?php if ($sts_var_bar_question_1_measurement_image_caption) { ?>
+													<figcaption><?php echo esc_html($sts_var_bar_question_1_measurement_image_caption); ?></figcaption>
+												<?php } else { ?>
+													<figcaption>Measurement Guide</figcaption>
+												<?php } ?>
+											</figure>
+											<figure id="measurement-figure-q3" class="bar-q-figure image-cover bar-q-image--hidden">
+												<img id="measurement-image-q3" class="bar-q-image" src="<?php echo esc_attr($sts_var_bar_question_3_measurement_image_url); ?>" alt="Additional Measurement Guide" />
+												<?php if ($sts_var_bar_question_3_measurement_image_caption) { ?>
+													<figcaption><?php echo esc_html($sts_var_bar_question_3_measurement_image_caption); ?></figcaption>
 												<?php } else { ?>
 													<figcaption>Measurement Guide</figcaption>
 												<?php } ?>

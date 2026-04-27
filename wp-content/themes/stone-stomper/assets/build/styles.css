@@ -7218,6 +7218,11 @@ ul.wc-block-components-totals-discount__coupon-list button.wc-block-components-c
   display: block;
 }
 
+#caravan-details .vehicle-images,
+#caravan-details .vehicle-image {
+  width: 100%;
+}
+
 .form-image-slider {
   padding-bottom: 40px;
 }
