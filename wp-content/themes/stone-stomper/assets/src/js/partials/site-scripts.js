@@ -1079,9 +1079,12 @@ jQuery( function() {
 			// Q4=No also has its own bar option value — prefer it if set
 			const q4NoBarOptionValue = jQuery( '#bar_q_tongue_85 option:selected' ).data( 'bar-option-value' );
 			const finalBarOptionValue = q4NoBarOptionValue || q2BarOptionValue;
+			// Hitch measurement should come from Q4 when it is the final answered question (fallback to Q2 if Q4 has none).
+			const q4HitchMeasurement = jQuery( '#bar_q_tongue_85' ).data( 'hitch-measurement' );
+			const finalHitchMeasurement = q4HitchMeasurement || q2HitchMeasurement;
 			jQuery( '#question_bar_option_value' ).val( finalBarOptionValue );
-			jQuery( '#question_hitch_measurement' ).val( q2HitchMeasurement );
-			jQuery( '#additional_hitch_measurement' ).val( '' ).attr( 'placeholder', q2HitchMeasurement );
+			jQuery( '#question_hitch_measurement' ).val( finalHitchMeasurement );
+			jQuery( '#additional_hitch_measurement' ).val( '' ).attr( 'placeholder', finalHitchMeasurement || 'eg. 300 mm' );
 			setBarOutcome( 'question_2_option', q2Label, finalBarOptionValue );
 			// Show Q4 notice with the No value
 			if ( finalBarOptionValue ) {

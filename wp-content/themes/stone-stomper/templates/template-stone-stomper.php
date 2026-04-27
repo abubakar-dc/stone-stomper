@@ -52,7 +52,8 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 	$sts_var_bar_question_2 = $sts_var_section_bar_options['bar_question_2'] ?? null;
 	$sts_var_bar_question_3 = $sts_var_section_bar_options['bar_question_3'] ?? null;
 	$sts_var_bar_question_4 = $sts_var_section_bar_options['bar_question_4'] ?? null;
-	$sts_var_bar_no_option_message = $sts_var_section_bar_options['bar_no_option_message'] ?? null;
+	$sts_var_bar_no_option_message = $sts_var_section_bar_options['bar_no_option_message']
+		?? ( $sts_var_section_bar_options['bar_additional_measurement_description'] ?? null );
 
 	// Question 1
 	$sts_var_bar_question_1_label = $sts_var_bar_question_1['label'] ?? 'Do you have greater than 41mm on your shank?';
@@ -74,7 +75,6 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 	$sts_var_bar_question_2_bar_option_value = $sts_var_bar_question_2['bar_option_value'] ?? null;
 
 	// Question 3
-
 	$sts_var_bar_question_3_label = $sts_var_bar_question_3['label'] ?? 'Do you have an Adjustable Hitch?';
 	$sts_var_bar_question_3_image = $sts_var_bar_question_3['image'] ?? null;
 	$sts_var_bar_question_3_image_url = $sts_var_bar_question_3_image ? wp_get_attachment_image_url($sts_var_bar_question_3_image, 'full') : '';
