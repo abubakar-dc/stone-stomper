@@ -998,9 +998,9 @@ jQuery( function() {
 
 			// Check if we need to show measurement image for scenarios that require additional measurement
 			// Scenario 1: Q1=Yes (Option 1 shank with measurement)
-			// Scenario 2: Q1=No, Q2=Yes, Q4=No (Option 2 post with measurement)
 			// Scenario 3: Q1=No, Q2=No, Q3=Yes (Option 3 adjustable with measurement)
-			const showMeasurementImage = ( shank41 === 'yes' ) || ( shank41 === 'no' && do35 === 'yes' && tongue85 === 'no' ) || ( shank41 === 'no' && do35 === 'no' && adjustable === 'yes' );
+			// Note: When Q1=No, Q2=Yes, Q4=No (Option 2), show Q4 question image instead
+			const showMeasurementImage = ( shank41 === 'yes' ) || ( shank41 === 'no' && do35 === 'no' && adjustable === 'yes' );
 
 			if ( showMeasurementImage ) {
 				// For measurement scenarios: hide all question images and show ONLY measurement image
