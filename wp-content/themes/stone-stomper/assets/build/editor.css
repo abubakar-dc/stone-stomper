@@ -7221,6 +7221,24 @@ Mixin for transition
   }
 }
 @media only screen and (max-width: 1003px) {
+  .editor-styles-wrapper #bar-options-section {
+    position: relative;
+    padding-bottom: 60px;
+    margin-bottom: 40px;
+  }
+  .editor-styles-wrapper #bar-options-section .form-section-right {
+    padding: 0;
+    margin: 0;
+    border: 0;
+  }
+  .editor-styles-wrapper #bar-options-section .bar-options-continue-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
   .editor-styles-wrapper .video-capture-measurement a.button,
   .editor-styles-wrapper .video-capture-measurement a.button:visited {
     gap: 10px;
