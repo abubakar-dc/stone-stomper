@@ -7499,8 +7499,9 @@ ul.wc-block-components-totals-discount__coupon-list button.wc-block-components-c
   position: relative;
 }
 .bar-q-figure figcaption {
-  margin: 0;
+  max-width: 100%;
   position: absolute;
+  margin: 0;
   bottom: 0;
   left: 0;
   line-height: 1.5;
@@ -7537,10 +7538,6 @@ button#bar-options-continue-btn {
 
 .no-border-bottom {
   border-bottom: 0 !important;
-}
-
-.van-make-group select {
-  border-color: var(--ss_black) !important;
 }
 
 /*-------------------------------------------------
@@ -7745,7 +7742,10 @@ button#bar-options-continue-btn {
   .video-capture-measurement a.button:visited {
     gap: 10px;
   }
-  a.button, a.button:visited, span.button, .is-style-mycustomstyle .wp-element-button {
+  a.button,
+  a.button:visited,
+  span.button,
+  .is-style-mycustomstyle .wp-element-button {
     padding-left: 20px;
     padding-right: 20px;
     font-size: 14px;
@@ -7779,7 +7779,10 @@ button#bar-options-continue-btn {
   .video-capture-measurement a.button:visited {
     gap: 10px;
   }
-  a.button, a.button:visited, span.button, .is-style-mycustomstyle .wp-element-button {
+  a.button,
+  a.button:visited,
+  span.button,
+  .is-style-mycustomstyle .wp-element-button {
     padding-left: 20px;
     padding-right: 20px;
     font-size: 14px;
@@ -7950,7 +7953,10 @@ button#bar-options-continue-btn {
   .video-capture-measurement a.button:visited {
     gap: 10px;
   }
-  a.button, a.button:visited, span.button, .is-style-mycustomstyle .wp-element-button {
+  a.button,
+  a.button:visited,
+  span.button,
+  .is-style-mycustomstyle .wp-element-button {
     padding-left: 20px;
     padding-right: 20px;
     font-size: 14px;
@@ -8012,11 +8018,13 @@ button#bar-options-continue-btn {
 @media only screen and (max-width: 747px) {
   .slider-image {
     max-height: 250px;
+    height: 250px;
     box-sizing: border-box;
-    padding-bottom: 20px;
+    padding-bottom: 30px;
   }
   .slider-image img {
     max-height: 204px;
+    height: 100%;
   }
   .social-icons {
     justify-content: center;
@@ -8218,7 +8226,8 @@ button#bar-options-continue-btn {
   .vehicle-image img {
     aspect-ratio: 382/250 !important;
   }
-  #caravan-details .image-caption-area, #bar-options-section .image-caption-area {
+  #caravan-details .image-caption-area,
+  #bar-options-section .image-caption-area {
     width: -moz-max-content;
     width: max-content;
     margin-bottom: -30px;

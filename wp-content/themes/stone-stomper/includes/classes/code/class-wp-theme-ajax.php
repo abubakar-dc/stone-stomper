@@ -477,7 +477,9 @@ class WP_Theme_Ajax {
 			$caravanMake = $_POST['caravanMake'] ?? null;
 			$caravanPostID = $_POST['caravanPostID'] ?? null;
 
-			$html    = '<option>Select Caravan Model</option>';
+			// Placeholder must have an empty value; otherwise jQuery( el ).val()
+			// becomes the option text and our `.filled` toggler treats it as selected.
+			$html    = '<option value="">Select Caravan Model</option>';
 
 			$query = new \WP_Query( array(
 							'post_type'      => 'caravan', // 🔹 change to your custom post type if needed
@@ -495,7 +497,8 @@ class WP_Theme_Ajax {
 							while ( $query->have_posts() ) {
 								$query->the_post();
 
-								$html .= '<option class="ajax-caravan-model" data-post-id="'.get_the_ID().'">' . esc_html( get_the_title() ) . '</option>';
+								$title = get_the_title();
+								$html .= '<option class="ajax-caravan-model" value="' . esc_attr( $title ) . '" data-post-id="' . esc_attr( get_the_ID() ) . '">' . esc_html( $title ) . '</option>';
 							}
 							wp_reset_postdata();
 						}

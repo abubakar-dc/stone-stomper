@@ -6075,8 +6075,9 @@ Mixin for transition
   position: relative;
 }
 .editor-styles-wrapper .bar-q-figure figcaption {
-  margin: 0;
+  max-width: 100%;
   position: absolute;
+  margin: 0;
   bottom: 0;
   left: 0;
   line-height: 1.5;
@@ -6108,9 +6109,6 @@ Mixin for transition
 }
 .editor-styles-wrapper .no-border-bottom {
   border-bottom: 0 !important;
-}
-.editor-styles-wrapper .van-make-group select {
-  border-color: var(--ss_black) !important;
 }
 .editor-styles-wrapper .wp-block-button .wp-block-button__link {
   box-sizing: border-box;
@@ -7042,7 +7040,10 @@ Mixin for transition
   .editor-styles-wrapper .video-capture-measurement a.button:visited {
     gap: 10px;
   }
-  .editor-styles-wrapper a.button, .editor-styles-wrapper a.button:visited, .editor-styles-wrapper span.button, .editor-styles-wrapper .is-style-mycustomstyle .wp-element-button {
+  .editor-styles-wrapper a.button,
+  .editor-styles-wrapper a.button:visited,
+  .editor-styles-wrapper span.button,
+  .editor-styles-wrapper .is-style-mycustomstyle .wp-element-button {
     padding-left: 20px;
     padding-right: 20px;
     font-size: 14px;
@@ -7076,7 +7077,10 @@ Mixin for transition
   .editor-styles-wrapper .video-capture-measurement a.button:visited {
     gap: 10px;
   }
-  .editor-styles-wrapper a.button, .editor-styles-wrapper a.button:visited, .editor-styles-wrapper span.button, .editor-styles-wrapper .is-style-mycustomstyle .wp-element-button {
+  .editor-styles-wrapper a.button,
+  .editor-styles-wrapper a.button:visited,
+  .editor-styles-wrapper span.button,
+  .editor-styles-wrapper .is-style-mycustomstyle .wp-element-button {
     padding-left: 20px;
     padding-right: 20px;
     font-size: 14px;
@@ -7247,7 +7251,10 @@ Mixin for transition
   .editor-styles-wrapper .video-capture-measurement a.button:visited {
     gap: 10px;
   }
-  .editor-styles-wrapper a.button, .editor-styles-wrapper a.button:visited, .editor-styles-wrapper span.button, .editor-styles-wrapper .is-style-mycustomstyle .wp-element-button {
+  .editor-styles-wrapper a.button,
+  .editor-styles-wrapper a.button:visited,
+  .editor-styles-wrapper span.button,
+  .editor-styles-wrapper .is-style-mycustomstyle .wp-element-button {
     padding-left: 20px;
     padding-right: 20px;
     font-size: 14px;
@@ -7309,11 +7316,13 @@ Mixin for transition
 @media only screen and (max-width: 747px) {
   .editor-styles-wrapper .slider-image {
     max-height: 250px;
+    height: 250px;
     box-sizing: border-box;
-    padding-bottom: 20px;
+    padding-bottom: 30px;
   }
   .editor-styles-wrapper .slider-image img {
     max-height: 204px;
+    height: 100%;
   }
   .editor-styles-wrapper .social-icons {
     justify-content: center;
@@ -7515,7 +7524,8 @@ Mixin for transition
   .editor-styles-wrapper .vehicle-image img {
     aspect-ratio: 382/250 !important;
   }
-  .editor-styles-wrapper #caravan-details .image-caption-area, .editor-styles-wrapper #bar-options-section .image-caption-area {
+  .editor-styles-wrapper #caravan-details .image-caption-area,
+  .editor-styles-wrapper #bar-options-section .image-caption-area {
     width: -moz-max-content;
     width: max-content;
     margin-bottom: -30px;

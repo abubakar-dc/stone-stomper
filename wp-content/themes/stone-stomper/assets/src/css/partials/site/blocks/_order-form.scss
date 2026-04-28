@@ -378,8 +378,7 @@
 	box-sizing: border-box;
 	@include font(open, reg, family weight);
 	font-size: 15px;
-	color : var(--ss_body_color);
-
+	color: var(--ss_body_color);
 
 	p {
 		margin: 0;
@@ -545,8 +544,9 @@
 	position: relative;
 
 	figcaption {
-		margin: 0;
+		max-width: 100%;
 		position: absolute;
+		margin: 0;
 		bottom: 0;
 		left: 0;
 		line-height: 1.5;
@@ -574,19 +574,12 @@ label.question-label {
 }
 
 button#bar-options-continue-btn {
-    max-width: max-content;
-    padding: 0 20px !important;
-    text-align: right;
+	max-width: max-content;
+	padding: 0 20px !important;
+	text-align: right;
 	margin: 0;
 }
 
-
 .no-border-bottom {
 	border-bottom: 0 !important;
-}
-
-.van-make-group {
-	select {
-		border-color: var(--ss_black) !important;
-	}
 }
