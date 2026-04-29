@@ -129,6 +129,7 @@ add_filter('manage_edit-customer_sortable_columns', function($columns){
 	return $columns;
 });
 
+/*
 add_action('pre_get_posts', function($query){
 
 	if (!is_admin() || !$query->is_main_query()) {
@@ -175,6 +176,33 @@ add_action('pre_get_posts', function($query){
 		}
 	}
 
+});
+*/
+add_action('pre_get_posts', function($query){
+
+    if (!is_admin() || !$query->is_main_query()) return;
+
+    if ($query->get('post_type') !== 'customer') return;
+
+    if ($query->get('orderby') !== 'wc_status') return;
+
+    global $wpdb;
+
+    $order = $query->get('order') === 'ASC' ? 'ASC' : 'DESC';
+
+    $ids = $wpdb->get_col("
+        SELECT p.ID
+        FROM {$wpdb->posts} p
+        INNER JOIN {$wpdb->postmeta} pm
+            ON pm.post_id = p.ID AND pm.meta_key = 'order_id'
+        INNER JOIN {$wpdb->prefix}wc_orders o
+            ON o.id = CAST(pm.meta_value AS UNSIGNED)
+        WHERE p.post_type = 'customer'
+        ORDER BY o.status {$order}
+    ");
+
+    $query->set('post__in', $ids ?: [0]);
+    $query->set('orderby', 'post__in');
 });
 
 add_action( 'manage_customer_posts_custom_column', function ( $column, $post_id ) {
@@ -363,56 +391,54 @@ add_filter( 'manage_edit-customer_sortable_columns', function( $columns ) {
  */
 add_filter( 'views_edit-customer', function ( $views ) {
 
-	global $wpdb;
+    global $wpdb;
 
-	// Fetch all customer CPT posts
-	$customer_posts = get_posts( [
-		'post_type'      => 'customer',
-		'posts_per_page' => -1,
-		'fields'         => 'ids',
-	] );
+    $status_counts = get_transient( 'sts_customer_status_counts' );
 
-	if ( empty( $customer_posts ) ) {
-		return $views;
-	}
+    if ( false === $status_counts ) {
 
-	// Collect statuses from linked WooCommerce orders
-	$status_counts = [];
-	foreach ( $customer_posts as $post_id ) {
-		$order_id = get_field( 'order_id', $post_id );
-		if ( ! $order_id ) continue;
+        $results = $wpdb->get_results("
+            SELECT o.status AS wc_status, COUNT(*) AS cnt
+            FROM {$wpdb->postmeta} pm
+            INNER JOIN {$wpdb->prefix}wc_orders o
+                ON o.id = CAST(pm.meta_value AS UNSIGNED)
+            INNER JOIN {$wpdb->posts} p
+                ON p.ID = pm.post_id
+            WHERE pm.meta_key = 'order_id'
+                AND p.post_type = 'customer'
+                AND p.post_status != 'trash'
+            GROUP BY o.status
+        ", ARRAY_A );
 
-		$order = wc_get_order( $order_id );
-		if ( ! $order ) continue;
+        $status_counts = [];
 
-		$status = $order->get_status();
-		if ( ! isset( $status_counts[ $status ] ) ) {
-			$status_counts[ $status ] = 0;
-		}
-		$status_counts[ $status ]++;
-	}
+        foreach ( $results as $row ) {
+            $key = str_replace('wc-', '', $row['wc_status']);
+            $status_counts[$key] = (int) $row['cnt'];
+        }
 
-	if ( empty( $status_counts ) ) {
-		return $views;
-	}
+        set_transient( 'sts_customer_status_counts', $status_counts, 300 );
+    }
 
-	$current_status = isset( $_GET['wc_status'] ) ? sanitize_text_field( $_GET['wc_status'] ) : '';
+    foreach ( $status_counts as $status => $count ) {
 
-	foreach ( $status_counts as $status => $count ) {
-		$label = wc_get_order_status_name( 'wc-' . $status );
-		$url   = add_query_arg( 'wc_status', $status, remove_query_arg( 'paged' ) );
-		$class = ( $current_status === $status ) ? 'class="current"' : '';
-		$views[ 'wc_' . $status ] = sprintf(
-			'<a href="%s" %s>%s <span class="count">(%d)</span></a>',
-			esc_url( $url ),
-			$class,
-			esc_html( $label ),
-			intval( $count )
-		);
-	}
+        $label = wc_get_order_status_name( 'wc-' . $status );
+        $url   = add_query_arg( 'wc_status', $status );
 
-	return $views;
-} );
+        $views['wc_' . $status] = sprintf(
+            '<a href="%s">%s <span class="count">(%d)</span></a>',
+            esc_url( $url ),
+            esc_html( $label ),
+            intval( $count )
+        );
+    }
+
+    return $views;
+});
+
+add_action( 'woocommerce_order_status_changed', function () {
+    delete_transient( 'sts_customer_status_counts' );
+});
 
 /**
  * Filter the CPT query by WooCommerce order status
@@ -420,6 +446,8 @@ add_filter( 'views_edit-customer', function ( $views ) {
 /**
  * Handle sorting logic for custom columns.
  */
+
+/*
 add_action( 'pre_get_posts', function( $query ) {
 	if ( ! is_admin() || ! $query->is_main_query() ) {
 		return;
@@ -464,6 +492,32 @@ add_action( 'pre_get_posts', function( $query ) {
 		}
 	}
 
+});
+*/
+add_action( 'pre_get_posts', function( $query ) {
+
+    if ( ! is_admin() || ! $query->is_main_query() ) {
+        return;
+    }
+
+    if ( empty($_GET['wc_status']) || $_GET['post_type'] !== 'customer' ) {
+        return;
+    }
+
+    global $wpdb;
+
+    $status = sanitize_text_field($_GET['wc_status']);
+
+    $ids = $wpdb->get_col( $wpdb->prepare("
+        SELECT pm.post_id
+        FROM {$wpdb->postmeta} pm
+        INNER JOIN {$wpdb->prefix}wc_orders o
+            ON o.id = CAST(pm.meta_value AS UNSIGNED)
+        WHERE pm.meta_key = 'order_id'
+            AND o.status = %s
+    ", 'wc-' . $status ) );
+
+    $query->set( 'post__in', $ids ?: [0] );
 });
 
 /**
