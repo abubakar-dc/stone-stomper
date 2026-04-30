@@ -2910,7 +2910,7 @@ function sts_materialize_customer_cpt( $order_id ) {
     $barwidth = floatval( $data['barwidth_mm'] ?? 0 );
     $caravan_width = floatval( $data['caravan_width_mm'] ?? 0 );
     $a_frame = floatval( $data['a_frame_length_mm'] ?? 0 );
-    $hitch_measure = intval($data['bar_option_value'] ?? 0);
+    $hitch_measure = intval($data['question_hitch_measurement'] ?? 0);
 
     update_post_meta( $post_id, 'bar_width_mm', $barwidth );
     update_post_meta( $post_id, 'caravan_width_mm', $caravan_width );
