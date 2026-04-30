@@ -2953,8 +2953,9 @@ function sts_materialize_customer_cpt( $order_id ) {
         update_post_meta( $post_id, 'extra_bungee', 'Yes' );
     }
 
-	if ($hitch_measure <= 0) {
-		$hitch_measure = intval($data['additional_hitch_measurement'] ?? 0);
+	// If user manually entered a custom measurement in additional field, it overwrites the question measurement
+	if (!empty($data['additional_hitch_measurement'])) {
+		$hitch_measure = intval($data['additional_hitch_measurement']);
 	}
 
  	update_post_meta( $post_id, 'hitch_measurement_field', $hitch_measure );
