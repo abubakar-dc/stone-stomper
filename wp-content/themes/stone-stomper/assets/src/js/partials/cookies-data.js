@@ -380,23 +380,48 @@ jQuery( function() {
 	jQuery( '#orderForm' ).on( 'submit', function() {
 		autosave();
 	} );
+
 	jQuery( '#clear-order-form' ).on( 'click', function() {
-		try {
-			localStorage.removeItem( storageKey );
-		} catch ( e ) {
-			// ignore
-		}
+		localStorage.removeItem( storageKey );
+
 		const form = document.getElementById( 'orderForm' );
 		if ( form ) {
 			form.reset();
 		}
+
+		// clear decision dropdowns
+		jQuery( '#bar_q_shank_41, #bar_q_do35_do45, #bar_q_adjustable_hitch, #bar_q_tongue_85' )
+			.val( '' )
+			.trigger( 'change' );
+
+		jQuery( '#bar_options' ).val( '' ).trigger( 'change' );
+
+		// clear hidden fields
+		jQuery( '#question_bar_option_value, #question_hitch_measurement, #bar_option_value, #sts_var_caravan_bar_option' )
+			.val( '' );
+
+		// clear measurement
+		jQuery( '#additional_hitch_measurement' )
+			.val( '' )
+			.prop( 'required', false )
+			.attr( 'placeholder', 'eg. 300 mm' );
+
+		jQuery( '.hitch_measurement_dropdown' ).hide();
+
+		// clear result UI
+		jQuery( '#bar-options-result' ).hide().html( '' );
+		jQuery( '#question-4-bar-value-notice' ).hide();
+
+		// reset decision tree state
+		if ( typeof finalSectionsUnlocked !== 'undefined' ) {
+			finalSectionsUnlocked = false;
+		}
+
+		// keep your existing code
 		jQuery( '.veh_make_other, .veh_model_other, .veh_year_other, .van_model_other' ).empty();
 		jQuery( '#veh_model, #veh_year, #van_model' ).show().prop( 'required', true );
 		jQuery( '#list_hitch, #list_rear, #list_front' ).empty();
 		jQuery( '#hitch_ids, #rear_ids, #front_ids' ).val( '' ).trigger( 'change' );
-		jQuery( '#caravan-details input, #caravan-details select, #caravan-details textarea' ).trigger( 'change' );
-		jQuery( '#bar-options-section input, #bar-options-section select, #bar-options-section textarea' ).trigger( 'change' );
-		jQuery( '#photographs-details, #final-measurements, #final-summary' ).removeClass( 'section-disable' );
 	} );
 
 	restoreAll();
