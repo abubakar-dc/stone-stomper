@@ -129,6 +129,53 @@ add_filter('manage_edit-customer_sortable_columns', function($columns){
 	return $columns;
 });
 
+/**
+ * Default admin sorting for SS Orders (customer CPT):
+ * Show most recent items first unless user explicitly chose an order/sort.
+ */
+add_action( 'pre_get_posts', function ( $query ) {
+	if ( ! is_admin() || ! $query->is_main_query() ) {
+		return;
+	}
+
+	// Only affect the admin list table for this CPT.
+	global $pagenow;
+	if ( $pagenow !== 'edit.php' ) {
+		return;
+	}
+
+	// Be strict: only on edit.php?post_type=customer.
+	// (WP_Query::get('post_type') can be empty at this stage.)
+	if ( ( $_GET['post_type'] ?? '' ) !== 'customer' ) {
+		return;
+	}
+
+	// Respect any user-selected ordering (column sorting, etc).
+	// WP may set a default orderby internally, so check the request instead.
+	if ( isset( $_GET['orderby'] ) || isset( $_GET['order'] ) ) {
+		return;
+	}
+
+	// Default to most recent *WooCommerce order* first (not the CPT post date).
+	global $wpdb;
+
+	$ids = $wpdb->get_col(
+		"
+		SELECT p.ID
+		FROM {$wpdb->posts} p
+		LEFT JOIN {$wpdb->postmeta} pm
+			ON pm.post_id = p.ID AND pm.meta_key = 'order_id'
+		LEFT JOIN {$wpdb->prefix}wc_orders o
+			ON o.id = CAST(pm.meta_value AS UNSIGNED)
+		WHERE p.post_type = 'customer'
+		ORDER BY o.date_created_gmt DESC, o.id DESC, p.post_date DESC
+		"
+	);
+
+	$query->set( 'post__in', $ids ?: array( 0 ) );
+	$query->set( 'orderby', 'post__in' );
+}, 50 );
+
 /*
 add_action('pre_get_posts', function($query){
 
@@ -389,6 +436,7 @@ add_filter( 'manage_edit-customer_sortable_columns', function( $columns ) {
 /**
  * Add WooCommerce-like status filter tabs next to default "All | Mine | Published | Trash"
  */
+
 add_filter( 'views_edit-customer', function ( $views ) {
 
     global $wpdb;
@@ -440,60 +488,6 @@ add_action( 'woocommerce_order_status_changed', function () {
     delete_transient( 'sts_customer_status_counts' );
 });
 
-/**
- * Filter the CPT query by WooCommerce order status
- */
-/**
- * Handle sorting logic for custom columns.
- */
-
-/*
-add_action( 'pre_get_posts', function( $query ) {
-	if ( ! is_admin() || ! $query->is_main_query() ) {
-		return;
-	}
-
-	if ( isset( $_GET['post_type'] ) && $_GET['post_type'] === 'customer' ) {
-		if ( empty( $_GET['orderby'] ) ) {
-			$query->set( 'orderby', 'date' );
-			$query->set( 'order', 'DESC' );
-		}
-
-		if ( ! empty( $_GET['wc_status'] ) ) {
-
-			$status_filter = sanitize_text_field( $_GET['wc_status'] );
-
-			$matching_ids = [];
-			$posts = get_posts( [
-				'post_type'      => 'customer',
-				'posts_per_page' => -1,
-				'fields'         => 'ids',
-			] );
-
-			foreach ( $posts as $post_id ) {
-				$order_id = get_field( 'order_id', $post_id );
-				if ( ! $order_id ) continue;
-
-				$order = wc_get_order( $order_id );
-				if ( $order && $order->get_status() === $status_filter ) {
-					$matching_ids[] = $post_id;
-				}
-			}
-
-			$query->set( 'post__in', $matching_ids ?: [0] );
-			// Preserve column sorting if user clicked a column
-			if ( ! empty( $_GET['orderby'] ) ) {
-				$query->set( 'orderby', sanitize_text_field( $_GET['orderby'] ) );
-				$query->set( 'order', sanitize_text_field( $_GET['order'] ?? 'DESC' ) );
-			} else {
-				$query->set( 'orderby', 'date' );
-				$query->set( 'order', 'DESC' );
-			}
-		}
-	}
-
-});
-*/
 add_action( 'pre_get_posts', function( $query ) {
 
     if ( ! is_admin() || ! $query->is_main_query() ) {
