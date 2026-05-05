@@ -133,48 +133,17 @@ add_filter('manage_edit-customer_sortable_columns', function($columns){
  * Default admin sorting for SS Orders (customer CPT):
  * Show most recent items first unless user explicitly chose an order/sort.
  */
-add_action( 'pre_get_posts', function ( $query ) {
-	if ( ! is_admin() || ! $query->is_main_query() ) {
-		return;
-	}
 
-	// Only affect the admin list table for this CPT.
-	global $pagenow;
-	if ( $pagenow !== 'edit.php' ) {
-		return;
-	}
+add_action('pre_get_posts', function($query){
+    if (!is_admin() || !$query->is_main_query()) return;
+    if (($query->get('post_type') ?? '') !== 'customer') return;
+    // do not override manual sorting
+    if (isset($_GET['orderby'])) return;
+    $query->set('meta_key', 'order_id');
+    $query->set('orderby', 'meta_value_num');
+    $query->set('order', 'DESC');
 
-	// Be strict: only on edit.php?post_type=customer.
-	// (WP_Query::get('post_type') can be empty at this stage.)
-	if ( ( $_GET['post_type'] ?? '' ) !== 'customer' ) {
-		return;
-	}
-
-	// Respect any user-selected ordering (column sorting, etc).
-	// WP may set a default orderby internally, so check the request instead.
-	if ( isset( $_GET['orderby'] ) || isset( $_GET['order'] ) ) {
-		return;
-	}
-
-	// Default to most recent *WooCommerce order* first (not the CPT post date).
-	global $wpdb;
-
-	$ids = $wpdb->get_col(
-		"
-		SELECT p.ID
-		FROM {$wpdb->posts} p
-		LEFT JOIN {$wpdb->postmeta} pm
-			ON pm.post_id = p.ID AND pm.meta_key = 'order_id'
-		LEFT JOIN {$wpdb->prefix}wc_orders o
-			ON o.id = CAST(pm.meta_value AS UNSIGNED)
-		WHERE p.post_type = 'customer'
-		ORDER BY o.date_created_gmt DESC, o.id DESC, p.post_date DESC
-		"
-	);
-
-	$query->set( 'post__in', $ids ?: array( 0 ) );
-	$query->set( 'orderby', 'post__in' );
-}, 50 );
+}, 20);
 
 /*
 add_action('pre_get_posts', function($query){
