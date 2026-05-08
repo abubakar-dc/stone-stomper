@@ -451,17 +451,23 @@ function render_towing_diagram($post_id) {
 					<polyline class="st0" points="888 282.37 884.28 286.37 880.55 282.37" fill="#ffffff" stroke="#fa3232"/>
 				</g>
 
-				<text class="st5" text-anchor="start" dominant-baseline="middle" y="0" x="55" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;">
-					<?php echo esc_html( 'S: ' . ( $stoneguard_height_mm ? $stoneguard_height_mm : '-' ) ); ?>
-				</text>
+				<?php if ( $stoneguard_height_mm ) { ?>
+					<text class="st5" text-anchor="start" dominant-baseline="middle" y="0" x="55" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;">
+						<?php echo esc_html( 'S: ' . $stoneguard_height_mm ); ?>
+					</text>
+				<?php } ?>
 
-				<text class="st5" text-anchor="start" dominant-baseline="middle" y="20" x="55" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;">
-					<?php echo esc_html( 'T: ' . ( $toolbox_height_mm ? $toolbox_height_mm : '-' ) ); ?>
-				</text>
+				<?php if($toolbox_height_mm){ ?>
+					<text class="st5" text-anchor="start" dominant-baseline="middle" y="20" x="55" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;">
+						<?php echo esc_html( $toolbox_height_mm ? 'T: '.$toolbox_height_mm : '-' ); ?>
+					</text>
+				<?php } ?>
 
-				<text class="st5" text-anchor="start" dominant-baseline="middle" y="40" x="55" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;">
-					<?php echo esc_html( 'SP: ' . ( $support_pockets_measurement ? $support_pockets_measurement : '-' ) ); ?>
-				</text>
+				<?php if($support_pockets_measurement){ ?>
+					<text class="st5" text-anchor="start" dominant-baseline="middle" y="40" x="55" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;">
+						<?php echo esc_html( $support_pockets_measurement ? 'SP: '.$support_pockets_measurement : '-' ); ?>
+					</text>
+				<?php } ?>
 			</g>
 			<g id="Toolbox" transform="translate(0,30)">
 				<g>
@@ -473,13 +479,16 @@ function render_towing_diagram($post_id) {
 					</g>
 
 					<g transform="translate(555,263.13)">
-						<text class="st5" text-anchor="start" dominant-baseline="middle" y="-20" x="0" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;">
-							<?php echo esc_html( 'S: ' . ( $stoneguard_width_mm ? $stoneguard_width_mm : '-' ) ); ?>
-						</text>
-
-						<text class="st5" text-anchor="start" dominant-baseline="middle" x="0" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;">
-							<?php echo esc_html( 'T: ' . ( $toolbox_width_mm ? $toolbox_width_mm : '-' ) ); ?>
-						</text>
+						<?php if($stoneguard_width_mm){ ?>
+							<text class="st5" text-anchor="start" dominant-baseline="middle" y="-20" x="0" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;">
+								<?php echo esc_html( $stoneguard_width_mm ? 'S: '. $stoneguard_width_mm : '-' ); ?>
+							</text>
+						<?php } ?>
+						<?php if($toolbox_height_mm){ ?>
+							<text class="st5" text-anchor="start" dominant-baseline="middle" x="0" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;">
+								<?php echo esc_html( $toolbox_width_mm ? 'T: '. $toolbox_width_mm : '-' ); ?>
+							</text>
+						<?php } ?>
 					</g>
 				</g>
 			</g>
@@ -612,34 +621,46 @@ function render_towing_diagram($post_id) {
 					<polyline class="st0" points="880.55 185.79 884.28 181.78 888 185.79" fill="#ffffff" stroke="#fa3232"/>
 					<polyline class="st0" points="888 282.37 884.28 286.37 880.55 282.37" fill="#ffffff" stroke="#fa3232"/>
 				</g>
-				<text class="st5" text-anchor="start" dominant-baseline="middle" y="0" x="55" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;">
-					<?php echo esc_html( 'S: ' . ( $stoneguard_height_mm ? $stoneguard_height_mm : '-' ) ); ?>
-				</text>
-				<text class="st5" text-anchor="start" dominant-baseline="middle" y="20" x="55" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;">
-					<?php echo esc_html( 'T: ' . ( $toolbox_height_mm ? $toolbox_height_mm : '-' ) ); ?>
-				</text>
-				<text class="st5" text-anchor="start" dominant-baseline="middle" y="40" x="55" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;">
-					<?php echo esc_html( 'SP: ' . ( $support_pockets_measurement ? $support_pockets_measurement : '-' ) ); ?>
-				</text>
+
+				<?php if ( $stoneguard_height_mm ) { ?>
+					<text class="st5" text-anchor="start" dominant-baseline="middle" y="0" x="55" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;">
+						<?php echo esc_html( 'S: ' . $stoneguard_height_mm ); ?>
+					</text>
+				<?php } ?>
+
+				<?php if($toolbox_height_mm){ ?>
+					<text class="st5" text-anchor="start" dominant-baseline="middle" y="20" x="55" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;">
+						<?php echo esc_html( $toolbox_height_mm ? 'T: '.$toolbox_height_mm : '-' ); ?>
+					</text>
+				<?php } ?>
+
+				<?php if($support_pockets_measurement){ ?>
+					<text class="st5" text-anchor="start" dominant-baseline="middle" y="40" x="55" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;">
+						<?php echo esc_html( $support_pockets_measurement ? 'SP: '.$support_pockets_measurement : '-' ); ?>
+					</text>
+				<?php } ?>
 			</g>
 			<g id="Toolbox" transform="translate(0,30)">
 				<g>
 					<g transform="translate(0,-10)">
 						<line class="st0" x1="352.44" y1="266.29" x2="860.13" y2="266.29" fill="#ffffff" stroke="#fa3232"/>
-						<rect class="st8" x="539.36" y="253.9" width="135.53" height="22.16" fill="#ffffff"  stroke="#ffffff"/>
+						<rect class="st8" x="539.36" y="253.9" width="135.53" height="22.16" fill="#ffffff" stroke="#ffffff"/>
 						<polyline class="st0" points="356.43 270.01 352.42 266.29 356.43 262.56" fill="#ffffff" stroke="#fa3232"/>
 						<polyline class="st0" points="856.13 262.56 860.13 266.29 856.13 270.01" fill="#ffffff" stroke="#fa3232"/>
 					</g>
+
 					<g transform="translate(555,263.13)">
-						<text class="st5" text-anchor="start" dominant-baseline="middle" y="-20" x="0" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;">
-							<?php echo esc_html( 'S: ' . ( $stoneguard_width_mm ? $stoneguard_width_mm : '-' ) ); ?>
-						</text>
-
-						<text class="st5" text-anchor="start" dominant-baseline="middle" x="0" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;">
-							<?php echo esc_html( 'T: ' . ( $toolbox_width_mm ? $toolbox_width_mm : '-' ) ); ?>
-						</text>
+						<?php if($stoneguard_width_mm){ ?>
+							<text class="st5" text-anchor="start" dominant-baseline="middle" y="-20" x="0" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;">
+								<?php echo esc_html( $stoneguard_width_mm ? 'S: '. $stoneguard_width_mm : '-' ); ?>
+							</text>
+						<?php } ?>
+						<?php if($toolbox_height_mm){ ?>
+							<text class="st5" text-anchor="start" dominant-baseline="middle" x="0" fill="#fa3232" stroke="#fa3232" stroke-width="0.3" style="font-size: 20px; font-weight: 500; font-family: Arial, Helvetica, sans-serif;">
+								<?php echo esc_html( $toolbox_width_mm ? 'T: '. $toolbox_width_mm : '-' ); ?>
+							</text>
+						<?php } ?>
 					</g>
-
 				</g>
 			</g>
 		</svg>
