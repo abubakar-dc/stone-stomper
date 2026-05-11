@@ -7229,6 +7229,9 @@ Mixin for transition
   }
 }
 @media only screen and (max-width: 1003px) {
+  .editor-styles-wrapper #photographs-details .form-section-left.column.mobile-hide {
+    display: none;
+  }
   .editor-styles-wrapper #bar-options-section {
     position: relative;
     padding-bottom: 60px;

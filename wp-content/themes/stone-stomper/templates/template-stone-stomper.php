@@ -566,7 +566,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 							</div>
 							<!-- Photographs -->
 							<div id="photographs-details" class=" section-disable order-form-section-inner d-flex form-carvan-section justify-content-between align-items-start image-at-left">
-								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
+								<div class="form-section-left column mobile-hide" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div class="form-image-slider">
 										<?php if($sts_var_example_photographs){ ?>
 											<?php foreach($sts_var_example_photographs as $sts_key => $photo){
@@ -772,7 +772,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										</div>
 										<div class="field">
 											<input id="a_frame_tick" name="a_frame_tick" type="checkbox" required />
-											<label class="req a_frame_tick_label" for="a_frame_tick">I confirm I have measured tight under the A-frame *</label>
+											<label class="req a_frame_tick_label" for="a_frame_tick">I confirm the measurements provided are accurate and accept responsibility for any additional costs arising from errors or changes, including payment in full for products and services supplied *</label>
 											<div class="error-notes-checkbox" >
 												This is a mandatory field - please select to confirm
 											</div>

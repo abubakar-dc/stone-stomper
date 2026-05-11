@@ -7931,6 +7931,9 @@ button#bar-options-continue-btn {
   }
 }
 @media only screen and (max-width: 1003px) {
+  #photographs-details .form-section-left.column.mobile-hide {
+    display: none;
+  }
   #bar-options-section {
     position: relative;
     padding-bottom: 60px;
