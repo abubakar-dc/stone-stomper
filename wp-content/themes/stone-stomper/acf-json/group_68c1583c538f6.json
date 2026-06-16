@@ -866,7 +866,7 @@
                         },
                         {
                             "key": "field_bar_q1_value",
-                            "label": "Bar Option Value",
+                            "label": "Bracket Value",
                             "name": "bar_option_value",
                             "aria-label": "",
                             "type": "text",
@@ -999,7 +999,7 @@
                         },
                         {
                             "key": "field_bar_q2_value",
-                            "label": "Bar Option Value",
+                            "label": "Bracket Value",
                             "name": "bar_option_value",
                             "aria-label": "",
                             "type": "text",
@@ -1106,7 +1106,7 @@
                         },
                         {
                             "key": "field_bar_q3_value",
-                            "label": "Bar Option Value",
+                            "label": "Bracket Value",
                             "name": "bar_option_value",
                             "aria-label": "",
                             "type": "text",
@@ -1239,7 +1239,7 @@
                         },
                         {
                             "key": "field_bar_q4_value",
-                            "label": "Bar Option Value",
+                            "label": "Bracket Value",
                             "name": "bar_option_value",
                             "aria-label": "",
                             "type": "text",
@@ -1260,7 +1260,7 @@
                         },
                         {
                             "key": "field_bar_q4_value_yes",
-                            "label": "Bar Option Value (Yes)",
+                            "label": "Bracket Value (Yes)",
                             "name": "bar_option_value_yes",
                             "aria-label": "",
                             "type": "text",
@@ -1281,7 +1281,7 @@
                         },
                         {
                             "key": "field_bar_q4_value_no",
-                            "label": "Bar Option Value (No)",
+                            "label": "Bracket Value (No)",
                             "name": "bar_option_value_no",
                             "aria-label": "",
                             "type": "text",

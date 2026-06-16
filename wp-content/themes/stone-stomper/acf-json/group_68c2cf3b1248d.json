@@ -549,7 +549,7 @@
         },
         {
             "key": "field_68ecb6b41614c",
-            "label": "Bar Option",
+            "label": "Bracket",
             "name": "sts_var_caravan_bar_option",
             "aria-label": "",
             "type": "text",
@@ -643,7 +643,7 @@
         },
         {
             "key": "field_69458a19e754b",
-            "label": "Tab On Back",
+            "label": "Bar",
             "name": "tab_on_back",
             "aria-label": "",
             "type": "select",

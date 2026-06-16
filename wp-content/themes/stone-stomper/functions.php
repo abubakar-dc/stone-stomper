@@ -1016,7 +1016,7 @@ function show_towing_svg_in_editor( $post ) {
 			</tr>
 
 			<tr>
-				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold; ">Bar Option</span></td>
+				<td style="padding:6px 15px; border:1px solid #ccc; font-weight:bold; ">Bracket</span></td>
 				<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_bar_option); ?></span></td>
 			</tr>
 			<tr>
@@ -1298,7 +1298,7 @@ function show_towing_svg_in_editor( $post ) {
 							<td style="padding:6px 15px; border:1px solid #ccc;"><?php echo esc_html( $toolbox_height_mm ? $toolbox_height_mm : '-' ); ?></td>
 						</tr>
 						<tr>
-							<td style="padding:6px 15px; border:1px solid #ccc;">Bar Option</span></td>
+							<td style="padding:6px 15px; border:1px solid #ccc;">Bracket</span></td>
 							<td style="padding:6px 15px; border:1px solid #ccc;"><span class="clr-red"> <?php echo html_entity_decode($sts_var_caravan_bar_option); ?></td>
 						</tr>
 						<tr>
@@ -1829,10 +1829,10 @@ function generate_customer_order_word_file($post_id) {
 	$row->addCell(4000)->addText("Bar Bend Type:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(6000)->addText("$sts_var_caravan_bar_bend_type", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row = $tableAccessories->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000, $cellGray)->addText("Tab on Back:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000, $cellGray)->addText("Bar:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(6000, $cellGray)->addText("$tab_on_back", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row = $tableAccessories->addRow(200, [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
-	$row->addCell(4000)->addText("Bar Option:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
+	$row->addCell(4000)->addText("Bracket:", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$row->addCell(6000)->addText("$sts_var_caravan_bar_option", [], ['spaceBefore' => 0, 'spaceAfter' => 0]);
 	$section->addTextBreak(1);
 	// Third Section: Order Details
@@ -3073,10 +3073,10 @@ function sts_materialize_customer_cpt( $order_id ) {
     } else {
 		$bar_option_value = isset($data['question_bar_option_value']) && trim($data['question_bar_option_value']) !== ''
 			? sanitize_text_field($data['question_bar_option_value'])
-			: 'Confirm Bar Option';
+			: 'Confirm Bracket';
 		update_post_meta($post_id, 'sts_var_caravan_bar_option', $bar_option_value);
 		update_post_meta($post_id, 'sts_var_question_bar_option_value', $bar_option_value);
-		if ($bar_option_value === 'Confirm Bar Option') {
+		if ($bar_option_value === 'Confirm Bracket') {
 			update_post_meta($post_id, 'sts_var_caravan_cut_out', 250);
 		}
     }
@@ -3171,8 +3171,8 @@ add_action('woocommerce_after_order_itemmeta', function ($item_id, $item, $produ
             'caravan_model' => 'Model',
         ],
 
-        'Bar Option' => [
-            'bar_options'                  => 'Bar Option',
+        'Bracket' => [
+            'bar_options'                  => 'Bracket',
             'additional_hitch_measurement' => 'Hitch Measurement (mm)',
         ],
 
@@ -3355,7 +3355,7 @@ add_action('woocommerce_add_to_cart', function ($cart_item_key, $product_id) {
 
 /*
 |-----------------------------------------
-|  Calculation for the SS length feilds with tab on back and the bar bend values | -30 wen tab on back "Yes" , + bar bend value of dropdown
+|  Calculation for the SS length feilds with Bar and the bar bend values | -30 wen Bar "Yes" , + bar bend value of dropdown
 |-----------------------------------------
 */
 

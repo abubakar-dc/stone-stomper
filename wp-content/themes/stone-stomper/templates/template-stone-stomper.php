@@ -430,7 +430,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 									?>
 								</div>
 							</div>
-							<!-- Bar Option -->
+							<!-- Bracket -->
 							<div id="bar-options-section" class="section-disable  order-form-section-inner d-flex form-bar-options-section justify-content-between align-items-start image-at-left">
 								<div class="form-section-left column" tabindex="0" role="img" aria-label="Image illustrating the content of this block">
 									<div id="bar-question-image-container" class="bar-question-image-display"
@@ -521,7 +521,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 												<option value="no" data-bar-option-value="<?php echo esc_attr($sts_var_bar_question_4_bar_option_value_no); ?>">No</option>
 											</select>
 											<div id="question-4-bar-value-notice" class="note notice-bar" style="display:none;">
-												Bar Option Selected: <strong><span id="question-4-bar-value-display"></span></strong>
+												Bracket Selected: <strong><span id="question-4-bar-value-display"></span></strong>
 											</div>
 										</div>
 										<!-- Hidden fields to store bar option value and hitch measurement from JavaScript -->
