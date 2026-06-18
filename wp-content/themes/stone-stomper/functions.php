@@ -3172,8 +3172,8 @@ add_action('woocommerce_after_order_itemmeta', function ($item_id, $item, $produ
         ],
 
         'Bracket' => [
-            'bar_options'                  => 'Bracket',
-            'additional_hitch_measurement' => 'Hitch Measurement (mm)',
+            'question_bar_option_value'                  => 'Bracket',
+            'question_hitch_measurement' => 'Hitch Measurement (mm)',
         ],
 
         'Measurements' => [
