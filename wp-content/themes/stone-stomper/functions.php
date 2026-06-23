@@ -3374,9 +3374,9 @@ add_action('acf/save_post', function ($post_id) {
 
     $ss_length_adjustment = $hitch - 140;
 
-    if (strtoupper(trim($tab_on_back)) === 'YES') {
-        $ss_length_adjustment -= 30;
-    }
+	if (strtoupper(trim($tab_on_back)) === 'TOB') {
+		$ss_length_adjustment -= 30;
+	}
 
     $ss_length_adjustment += $bar_bend;
 
