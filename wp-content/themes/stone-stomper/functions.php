@@ -2733,6 +2733,14 @@ add_filter('woocommerce_add_cart_item_data', function ($cart_item_data, $product
 
 	$cart_item_data['sts_payload'] = array_map('wc_clean', $_POST['payload']);
 
+	if (
+		( $cart_item_data['sts_payload']['is_vehicle_make_other'] ?? '' ) === 'yes' ||
+		( $cart_item_data['sts_payload']['is_vehicle_model_other'] ?? '' ) === 'yes' ||
+		( $cart_item_data['sts_payload']['is_vehicle_year_other'] ?? '' ) === 'yes'
+	) {
+		$cart_item_data['sts_payload']['barwidth_mm'] = 1800;
+	}
+
 	$cart_item_data['unique_key'] = md5(microtime() . rand());
 
 	return $cart_item_data;
@@ -2976,6 +2984,13 @@ function sts_materialize_customer_cpt( $order_id ) {
 	}
 
     $barwidth = floatval( $data['barwidth_mm'] ?? 0 );
+    if (
+        ( $data['is_vehicle_make_other'] ?? '' ) === 'yes' ||
+        ( $data['is_vehicle_model_other'] ?? '' ) === 'yes' ||
+        ( $data['is_vehicle_year_other'] ?? '' ) === 'yes'
+    ) {
+        $barwidth = 1800;
+    }
     $caravan_width = floatval( $data['caravan_width_mm'] ?? 0 );
     $a_frame = floatval( $data['a_frame_length_mm'] ?? 0 );
     $hitch_measure = intval($data['question_hitch_measurement'] ?? 0);

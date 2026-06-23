@@ -197,6 +197,7 @@ jQuery( document ).ready( function() {
 		const vehModelContainer = jQuery( '.veh_model_other' );
 
 		if ( jQuery( this ).val() === 'other' ) {
+			jQuery( '#barwidth' ).val( '1800' ).trigger( 'change' );
 			jQuery( '#veh_model, #veh_year' ).hide().prop( 'required', false );
 			vehMakeContainer.html( '<input placeholder="Other Make" id="veh_make_other" name="vehicle_make_other" required type="text" />' );
 			vehModelContainer.html( '<input style="margin-top:30px" placeholder="Vehicle Model" id="vehicle_model_other" name="vehicle_model" required type="text" />' );
@@ -215,6 +216,7 @@ jQuery( document ).ready( function() {
 		const vehModelContainer = jQuery( '.veh_model_other' );
 
 		if ( jQuery( this ).val() === 'other' ) {
+			jQuery( '#barwidth' ).val( '1800' ).trigger( 'change' );
 			jQuery( '#veh_year' ).hide().prop( 'required', false );
 			vehModelContainer.html( '<input style="margin-top:30px" placeholder="Vehicle Model" id="vehicle_model_other" name="vehicle_model" required type="text" />' );
 			yearContainer.html( '<input style="margin-top:0px" placeholder="Model Year" id="veh_year_other" name="vehicle_year" required type="text" />' );
@@ -230,6 +232,7 @@ jQuery( document ).ready( function() {
 		const yearContainer = jQuery( '.veh_year_other' );
 
 		if ( jQuery( this ).val() === 'other' ) {
+			jQuery( '#barwidth' ).val( '1800' ).trigger( 'change' );
 			jQuery( '#veh_year' ).prop( 'required', false );
 			yearContainer.html( '<input style="margin-top:30px" placeholder="Model Year" id="veh_year_other" name="vehicle_year" required type="text" />' );
 		} else {

@@ -358,37 +358,7 @@ class WP_Theme_Ajax {
 			}
 		}
 
-			// ✅ Get model selected post ID from AJAX (not the current page)
 		$modelPostID = $_POST['postID'] ?? null;
-
-		// ✅ Default year dropdown placeholder
-		// $year = '<option value="">Select Model Year</option>';
-
-		// if ( $modelPostID ) {
-
-		// 	$years = [];
-
-		// 	// ✅ Read repeater from the selected Model Post only
-		// 	$models = get_field( 'sts_var_car_model_row', $modelPostID );
-
-		// 	if ( $models ) {
-		// 		foreach ( $models as $model ) {
-		// 			if ( ! empty( $model['sts_var_car_year'] ) ) {
-		// 				$years[] = $model['sts_var_car_year'];
-		// 			}
-		// 		}
-		// 	}
-
-		// 	// ✅ Clean & sort
-		// 	$years = array_unique(array_filter($years));
-
-		// 	foreach ( $years as $y ) {
-		// 		$year .= '<option value="' . esc_attr($y) . '">' . esc_html($y) . '</option>';
-		// 	}
-
-		// 	// ✅ Append "Other" option
-		// 	$year .= '<option class="ajax-car-year other">other</option>';
-		// }
 			$modelPostID = $_POST['postID'] ?? null;
 
 			$year = '<option value="">Select Model Year</option>';
@@ -431,8 +401,15 @@ class WP_Theme_Ajax {
 		}
 
 		$barwidth = '';
+		$selected_year = isset( $_POST['selectedYear'] ) && $_POST['selectedYear'] !== ''
+			? sanitize_text_field( wp_unslash( $_POST['selectedYear'] ) )
+			: ( isset( $_POST['yearRequested'] ) ? sanitize_text_field( wp_unslash( $_POST['yearRequested'] ) ) : '' );
 
-		if ( $modelPostID ) {
+		if ( 'other' === strtolower( $selected_year ) ) {
+			$barwidth = 1800;
+		}
+
+		if ( $modelPostID && 1800 !== (int) $barwidth ) {
 
 			$models = get_field('sts_var_car_model_row', $modelPostID);
 

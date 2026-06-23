@@ -735,6 +735,7 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 										<div class="field">
 											<label class="req" for="barwidth">Towing Vehicle Barwidth (mm)</label>
 											<select id="barwidth" name="barwidth_mm">
+												<option value="">Select Bar Width</option>
 												<option value="1700">1700</option>
 												<option value="1800">1800</option>
 												<option value="1850">1850</option>
