@@ -38,12 +38,20 @@ jQuery( function() {
 	}
 	function collect() {
 		const data = {};
+		const excludedFields = [
+			'original_barwidth_mm',
+			'original_caravan_width_mm',
+			'original_a_frame_length_mm',
+		];
 		jQuery( '#orderForm' )
 			.find( ':input[name],input,select,textarea,text' )
 			.each( function() {
 				const el = jQuery( this );
 				const name = el.attr( 'name' ) || el.attr( 'id' );
 				if ( ! name ) {
+					return;
+				}
+				if ( excludedFields.includes( name ) ) {
 					return;
 				}
 				const t = ( el.attr( 'type' ) || '' ).toLowerCase();

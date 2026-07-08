@@ -6,10 +6,23 @@ jQuery( document ).ready( function() {
 	let caravan = true;
 	let caravanMake = '';
 
+	function setOriginalMeasurement( fieldId, value ) {
+		if ( typeof value === 'undefined' || value === null || value === '' ) {
+			return;
+		}
+		jQuery( '#' + fieldId ).val( value );
+	}
+
+	function clearOriginalMeasurement( fieldId ) {
+		jQuery( '#' + fieldId ).val( '' );
+	}
+
 	jQuery( '#van_make' ).on( 'change', function( e ) {
 		if ( e.originalEvent || e.isTrigger ) {
 			caravanMake = jQuery( this ).val();
 			caravan = true;
+			clearOriginalMeasurement( 'original_caravan_width_mm' );
+			clearOriginalMeasurement( 'original_a_frame_length_mm' );
 
 			jQuery( '.van-model-group' ).addClass( 'loading' );
 			setTimeout( () => {
@@ -36,6 +49,7 @@ jQuery( document ).ready( function() {
 			carMake = jQuery( this ).val();
 			yearRequested = true;
 			postID = '';
+			clearOriginalMeasurement( 'original_barwidth_mm' );
 
 			// Add loader
 			jQuery( '.vehicle-model-group' ).addClass( 'loading' );
@@ -52,6 +66,7 @@ jQuery( document ).ready( function() {
 			const selectedOption = jQuery( this ).find( ':selected' );
 			postID = selectedOption.data( 'post-id' );
 			yearRequested = false;
+			clearOriginalMeasurement( 'original_barwidth_mm' );
 
 			jQuery( '.vehicle-year-group' ).addClass( 'loading' );
 			setTimeout( () => {
@@ -72,6 +87,7 @@ jQuery( document ).ready( function() {
 			selectedYear = jQuery( this ).val(); // store selected year
 			console.log( selectedYear );
 			yearRequested = false; // since user manually selected a year
+			clearOriginalMeasurement( 'original_barwidth_mm' );
 
 			jQuery( '.loader-container' ).show();
 
@@ -104,6 +120,9 @@ jQuery( document ).ready( function() {
 
 		        if ( response.barwidth ) {
 		            jQuery( '#barwidth' ).val( response.barwidth ).trigger( 'change' );
+		            if ( postID && selectedYear && selectedYear !== 'other' ) {
+		                setOriginalMeasurement( 'original_barwidth_mm', response.barwidth );
+		            }
 		        }
 
 		        // Update year dropdown BUT preserve any user selection
@@ -167,10 +186,16 @@ jQuery( document ).ready( function() {
 
 					if ( response.barwidth ) {
 						jQuery( '#vanwidth' ).val( response.barwidth ).trigger( 'change' );
+						if ( ! caravan && window.caravanPostID && jQuery( '#van_model' ).val() !== 'other' ) {
+							setOriginalMeasurement( 'original_caravan_width_mm', response.barwidth );
+						}
 					}
 
 					if ( response.barheight ) {
 						jQuery( '#a_frame_length' ).val( response.barheight ).trigger( 'change' );
+						if ( ! caravan && window.caravanPostID && jQuery( '#van_model' ).val() !== 'other' ) {
+							setOriginalMeasurement( 'original_a_frame_length_mm', response.barheight );
+						}
 					}
 					if ( response.stoneguard_width ) {
 						jQuery( '#stoneguard_width' ).val( response.stoneguard_width ).trigger( 'change' );

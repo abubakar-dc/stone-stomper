@@ -1009,6 +1009,9 @@ list( $sts_var_post_id, $sts_fields, $sts_option_fields ) = StoneStomper::defaul
 						<input type="hidden" name="is_vehicle_year_other" id="is_vehicle_year_other" value="no">
 						<input type="hidden" name="is_caravan_make_other" id="is_caravan_make_other" value="no">
 						<input type="hidden" name="is_caravan_model_other" id="is_caravan_model_other" value="no">
+						<input type="hidden" name="original_barwidth_mm" id="original_barwidth_mm" value="">
+						<input type="hidden" name="original_caravan_width_mm" id="original_caravan_width_mm" value="">
+						<input type="hidden" name="original_a_frame_length_mm" id="original_a_frame_length_mm" value="">
 					</form>
 				</div>
 			</div>

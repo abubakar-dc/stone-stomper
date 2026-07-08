@@ -2991,9 +2991,69 @@ function sts_materialize_customer_cpt( $order_id ) {
     ) {
         $barwidth = 1800;
     }
-    $caravan_width = floatval( $data['caravan_width_mm'] ?? 0 );
-    $a_frame = floatval( $data['a_frame_length_mm'] ?? 0 );
-    $hitch_measure = intval($data['question_hitch_measurement'] ?? 0);
+	$caravan_width = floatval( $data['caravan_width_mm'] ?? 0 );
+	$a_frame = floatval( $data['a_frame_length_mm'] ?? 0 );
+	$hitch_measure = intval($data['question_hitch_measurement'] ?? 0);
+
+	$measurement_overrides = [];
+	$add_measurement_override = static function( $key, $label, $original, $customer ) use ( &$measurement_overrides ) {
+		$original = trim( (string) $original );
+		$customer = trim( (string) $customer );
+
+		if ( $original === '' && $customer === '' ) {
+			return;
+		}
+
+		if ( $original !== '' && $customer !== '' && (float) $original === (float) $customer ) {
+			return;
+		}
+
+		$measurement_overrides[ $key ] = [
+			'label'    => $label,
+			'original' => $original,
+			'customer' => $customer,
+		];
+	};
+
+	if (
+		( $data['is_vehicle_make_other'] ?? '' ) !== 'yes' &&
+		( $data['is_vehicle_model_other'] ?? '' ) !== 'yes' &&
+		( $data['is_vehicle_year_other'] ?? '' ) !== 'yes'
+	) {
+		$add_measurement_override(
+			'barwidth_mm',
+			'Towing Vehicle Bar Width',
+			$data['original_barwidth_mm'] ?? '',
+			$data['barwidth_mm'] ?? ''
+		);
+	}
+
+	if (
+		( $data['is_caravan_make_other'] ?? '' ) !== 'yes' &&
+		( $data['is_caravan_model_other'] ?? '' ) !== 'yes'
+	) {
+		$add_measurement_override(
+			'caravan_width_mm',
+			'Caravan Width',
+			$data['original_caravan_width_mm'] ?? '',
+			$data['caravan_width_mm'] ?? ''
+		);
+
+		if ( $product_type !== 'Mesh Only' ) {
+			$add_measurement_override(
+				'a_frame_length_mm',
+				'A-Frame Length',
+				$data['original_a_frame_length_mm'] ?? '',
+				$data['a_frame_length_mm'] ?? ''
+			);
+		}
+	}
+
+	if ( ! empty( $measurement_overrides ) ) {
+		update_post_meta( $post_id, '_sts_measurement_override_used', 'yes' );
+		update_post_meta( $post_id, '_sts_measurement_override_fields', array_keys( $measurement_overrides ) );
+		update_post_meta( $post_id, '_sts_measurement_override_values', $measurement_overrides );
+	}
 
     update_post_meta( $post_id, 'bar_width_mm', $barwidth );
     update_post_meta( $post_id, 'caravan_width_mm', $caravan_width );
@@ -3290,6 +3350,7 @@ add_action('admin_head', function () {
 
 // Notice for other van and other vehicle
 add_action('admin_notices', 'sts_customer_cpt_other_vehicle_notice');
+add_action('admin_notices', 'sts_customer_cpt_measurement_override_notice');
 
 function sts_customer_cpt_other_vehicle_notice() {
 
@@ -3331,6 +3392,56 @@ function sts_customer_cpt_other_vehicle_notice() {
 
     echo '<div class="notice notice-warning notice-alt is-dismissible">';
     echo '<p><strong>Stone Stomper Notice:</strong> This customer order uses an Other ' . $formatted . '. Please review and add it to the vehicle directory.</p>';
+    echo '</div>';
+}
+
+function sts_customer_cpt_measurement_override_notice() {
+
+    if (!is_admin()) {
+        return;
+    }
+
+    $screen = get_current_screen();
+    if (!$screen || $screen->post_type !== 'customer') {
+        return;
+    }
+
+    if (empty($_GET['post'])) {
+        return;
+    }
+
+    $post_id = intval($_GET['post']);
+
+    if (get_post_meta($post_id, '_sts_measurement_override_used', true) !== 'yes') {
+        return;
+    }
+
+    $overrides = get_post_meta($post_id, '_sts_measurement_override_values', true);
+
+    if (empty($overrides) || !is_array($overrides)) {
+        return;
+    }
+
+    echo '<div class="notice notice-warning notice-alt is-dismissible">';
+    echo '<p><strong>Stone Stomper Notice:</strong> Customer modified database measurements.</p>';
+    echo '<ul style="list-style:disc;margin-left:20px;">';
+
+    foreach ($overrides as $override) {
+        if (empty($override['label'])) {
+            continue;
+        }
+
+        $original_value = trim( (string) ( $override['original'] ?? '' ) );
+        $customer_value = trim( (string) ( $override['customer'] ?? '' ) );
+
+        echo '<li style="margin-bottom:8px;">';
+        echo '<strong>' . esc_html($override['label']) . ' </strong>';
+        echo 'Database: ' . esc_html($original_value !== '' ? $original_value . ' mm' : 'Not set') . ' - ';
+        echo 'Customer: ' . esc_html($customer_value !== '' ? $customer_value . ' mm' : 'Not set');
+        echo '</li>';
+    }
+
+    echo '</ul>';
     echo '</div>';
 }
 
